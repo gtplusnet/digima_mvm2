@@ -1,0 +1,29 @@
+body{
+	font-family: 'Open Sans', sans-serif !important;
+	.registration-content{
+		margin-top: 25px;
+		.header{
+			p{
+				font-size: 25px;
+			}
+		}
+		.line-after-header{
+			margin-top: -10px;
+			hr{
+				border-color: #000000;
+			}
+		}
+		.accept-terms{
+			margin-top: 30px;
+		}
+		.line-after-content{
+			margin-top: -10px;
+			hr{
+				border-color: #000000;
+			}
+		}
+		.copyright{
+			padding-bottom: 25px;
+		}
+	}
+}
