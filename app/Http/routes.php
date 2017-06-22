@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+/*Front Page*/
+Route::get('/', 'FrontController@index');
+
+
+/*Merchant Page by Brain*/
+Route::get('/merchant', 			'MerchantController@index');
+Route::get('/merchant/profile', 	'MerchantController@profile');
+Route::get('/merchant/category', 	'MerchantController@category');
+Route::get('/merchant/bills', 		'MerchantController@bills');
+
