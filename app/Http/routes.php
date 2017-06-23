@@ -35,4 +35,4 @@ Route::any('/registration_first_step', 'RegistrationController@registration_firs
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
 
-
+Route::any('/sample', 'MerchantController@sample');

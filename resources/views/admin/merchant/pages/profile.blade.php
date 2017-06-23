@@ -80,7 +80,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <h4>Personal Information</h4>
+                                    <h4>Business Information</h4>
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Business Name</label>
                                         <div class="col-sm-10">
@@ -115,45 +115,37 @@
                                         <label for="input-Default" class="col-sm-2 control-label">Postal</label>
                                         <div class="col-sm-2">
                                             <input type="text" class="form-control input-rounded" id="input-rounded" value="1432" readonly>
-                                        </div>
+                                        </div>           
                                     </div>
+
+                                    <div role="tabpanel">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#tab5" role="tab" data-toggle="tab" aria-expanded="true">Contact Details</a></li>
+                                            <li role="presentation" class=""><a href="#tab6" role="tab" data-toggle="tab" aria-expanded="false">Daily Business Hours</a></li>
+                                            <li role="presentation" class=""><a href="#tab7" role="tab" data-toggle="tab" aria-expanded="false">Payment Methods</a></li>
+                                            <li role="presentation" class=""><a href="#tab8" role="tab" data-toggle="tab" aria-expanded="false">Other Infomation</a></li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade active in" id="tab5">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                                   
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="tab6">
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="tab7">
+                                                <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="tab8">
+                                                <p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.</p>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="panel panel-white">
-                            <div class="panel-heading clearfix">
-                                <h3 class="panel-title"></h3>
-                            </div>
-                            <div class="panel-body">
-
-                                <div role="tabpanel">
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#tab5" role="tab" data-toggle="tab" aria-expanded="true">Contact Details</a></li>
-                                        <li role="presentation" class=""><a href="#tab6" role="tab" data-toggle="tab" aria-expanded="false">Daily Business Hours</a></li>
-                                        <li role="presentation" class=""><a href="#tab7" role="tab" data-toggle="tab" aria-expanded="false">Payment Methods</a></li>
-                                        <li role="presentation" class=""><a href="#tab8" role="tab" data-toggle="tab" aria-expanded="false">Other Infomation</a></li>
-                                    </ul>
-                                    <!-- Tab panes -->
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade active in" id="tab5">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-                                               
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="tab6">
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="tab7">
-                                            <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="tab8">
-                                            <p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
