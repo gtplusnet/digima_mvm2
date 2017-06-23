@@ -12,6 +12,6 @@ class FrontController extends Controller
     public function index()
     {
         $data['page']   = 'Home';
-        return view('front.layout.layout', $data);
+        return view('front.pages.home', $data);
     }
 }
