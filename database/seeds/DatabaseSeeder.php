@@ -16,11 +16,17 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UserTableSeeder::class);
 <<<<<<< HEAD
+<<<<<<< HEAD
            $this->call(CountyTableSeeder::class);
            $this->call(CityTableSeeder::class);
 =======
             $this->call(CityTableSeeder::class);
             $this->call(CountyTableSeeder::class);
+=======
+        $this->call(CityTableSeeder::class);
+        $this->call(CountyTableSeeder::class);
+        $this->call(BusinessCategoryTableSeeder::class);
+>>>>>>> ba4872f69c387eab6c5519cd5957d67799634afc
 
 >>>>>>> 3b3f28f2e9bdb7113be70786f88f738da7e17c46
         Model::reguard();

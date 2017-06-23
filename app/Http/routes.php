@@ -41,8 +41,11 @@ Route::get('/', function () {
     return view('digimamvm.home');
 });
 
+//Renz's Routes
 Route::any('/registration_first_step', 'RegistrationController@registration_first_step');
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
+//End of Renz's Routes
+
 
 
