@@ -66,24 +66,24 @@
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="input-Default" class="col-sm-2 control-label">County</label>
+	                        <label for="county" class="col-sm-2 control-label">County</label>
 	                        <div class="col-sm-2">
 	                        	<select class="form-control" name="county_list" id="county_list" style="width: 190px; border-radius: 20px;">
-						   			<option value="--Select County--" style="border-radius: 20px;">--Select County--</option>
+						   			<option value="--Select County--">--Select County--</option>
 									   @foreach($county_list as $county_list)
 									   	 <option value="{{ $county_list->county_id }}">{{ $county_list->county_name }}</option>
 									   @endforeach
   								</select>
 	                        </div>
-	                        <label for="input-Default" class="col-sm-2 control-label">City</label>
+	                        <label for="city" class="col-sm-2 control-label">City</label>
 	                        <div class="col-sm-2">
 	                            <select class="form-control" name="city_list" id="city_list" style="width: 190px; border-radius: 20px;">
 						   			<option value="--No County Selected--">--No County Selected--</option>
   								</select>
 	                        </div>
-	                        <label for="input-Default" class="col-sm-2 control-label">Postal</label>
+	                        <label for="zip_code" class="col-sm-2 control-label">Postal</label>
 	                        <div class="col-sm-2">
-	                            <input type="text" class="form-control input-rounded" id="input-rounded">
+				   	 			<input type="text" class="form-control" name="postal_code" id="postal_code" placeholder="Postal Code" readonly="true" style="width: 190px;border-radius: 20px;">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
@@ -99,4 +99,6 @@
 	    </div>
 	
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/front/registration.js"></script>
 @endsection

@@ -10,6 +10,7 @@
         <meta name="description" content="Admin Dashboard Template" />
         <meta name="keywords" content="admin,dashboard" />
         <meta name="author" content="Steelcoders" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
@@ -34,6 +35,8 @@
         
         <script src="/assets/admin/merchant/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+        
+       
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -100,6 +103,13 @@
         <script src="/assets/admin/merchant/assets/plugins/metrojs/MetroJs.min.js"></script>
         <script src="/assets/admin/merchant/assets/js/modern.js"></script>
         <script src="/assets/admin/merchant/assets/js/pages/dashboard.js"></script>
-        
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
+
     </body>
 </html>
