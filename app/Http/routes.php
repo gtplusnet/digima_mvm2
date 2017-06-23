@@ -26,13 +26,26 @@ Route::get('/merchant/profile', 	'MerchantController@profile');
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/bills', 		'MerchantController@bills');
 
+/*Agent Page by Joshua*/
+Route::get('/agent', 			'AgentController@index');
+Route::get('/agent/profile', 	'AgentController@profile');
+Route::get('/agent/client', 	'AgentController@client');
+Route::any('/agent/add_client', 	'AgentController@add_client');
+// Route::any('/agent/get_city', 	'AgentController@get_city');
+// Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
+
+
+
 
 // Route::get('/', function () {
 //     return view('digimamvm.home');
 // });
 
+//Renz's Routes
 Route::any('/registration_first_step', 'RegistrationController@registration_first_step');
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
+//End of Renz's Routes
+
 
 
