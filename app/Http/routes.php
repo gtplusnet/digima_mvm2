@@ -38,3 +38,4 @@ Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
 //End of Renz's Routes
 
 
+
