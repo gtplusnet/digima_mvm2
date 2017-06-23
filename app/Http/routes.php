@@ -11,6 +11,28 @@
 |
 */
 
+
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
+
+/*Front Page*/
+Route::get('/', 'FrontController@index');
+
+
+/*Merchant Page by Brain*/
+Route::get('/merchant', 			'MerchantController@index');
+Route::get('/merchant/profile', 	'MerchantController@profile');
+Route::get('/merchant/category', 	'MerchantController@category');
+Route::get('/merchant/bills', 		'MerchantController@bills');
+
+
+Route::get('/', function () {
+    return view('digimamvm.home');
+});
+
 Route::any('/registration_first_step', 'RegistrationController@registration_first_step');
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
+
+
