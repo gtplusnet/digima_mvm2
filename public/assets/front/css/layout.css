@@ -19,6 +19,9 @@ p {
   color: #777;
   font-size: 23px; }
 
+.navbar-default .navbar-nav > .active > a {
+  background-color: rgba(245, 227, 8, 0.82); }
+
 .filter-option {
   text-align: right; }
   .filter-option .filters {
@@ -55,5 +58,25 @@ p {
 .form-holder {
   padding-left: 0px;
   padding-right: 0px; }
+
+.navbar-footer {
+  margin-top: 30px;
+  text-align: center; }
+
+.nav-footer-bar {
+  display: -webkit-inline-box; }
+
+.nav-footer-holder {
+  border-right: 1px solid #333; }
+
+.nav-footer {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px; }
+
+.footer-holder {
+  margin-top: 10px; }
+  .footer-holder .footer {
+    text-align: center; }
 
 /*# sourceMappingURL=layout.css.map */
