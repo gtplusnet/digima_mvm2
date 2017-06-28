@@ -45,6 +45,7 @@ Route::any('/agent/add_client', 	'AgentController@add_client');
 Route::any('/registration', 'RegistrationController@registration');
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
+Route::any('/register_business', 'RegistrationController@register_business');
 //End of Renz's Routes
 
 

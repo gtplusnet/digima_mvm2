@@ -47,12 +47,18 @@ $(document).ready(function(){
 		var email = $('#email_address').val();
 		var atpos = email.indexOf("@");
    	    var dotpos = email.lastIndexOf(".");
+   	    var password = $('#password').val();
+   	    var facebook_url = $('#facebook_url').val();
+   	    var twitter_username = $('#twitter_username').val();
+   	    var retype_password = $('#retype_password').val();
 		var business_name = $('#business_name').val();
-		var business_phone = $('#business_phone').val();
+		var primary_business_phone = $('#primary_business_phone').val();
+		var secondary_business_phone = $('#secondary_business_phone').val();
+		var fax_number = $('#fax_number').val();
 		var business_address = $('#business_address').val();
 		var county_list = $('#county_list').val();
 		var city_list = $('#city_list').val();
-		var postal_code = $('#postal').val();
+		var postal_code = $('#postal_code').val();
 		var agree_checkbox = $('#agree_checkbox').prop('checked');
 
 		if(prefix == '--Select Prefix--')
@@ -70,14 +76,30 @@ $(document).ready(function(){
 		else if (atpos<1 || dotpos<atpos+2) 
 		{
         	$.notify('Please enter a valid Email Address.', 'warn');
+    	}
+    	else if (password == '') 
+		{
+        	$.notify('Please enter password.', 'warn');
+    	}
+    	else if (retype_password == '') 
+		{
+        	$.notify('Please re-type password.', 'warn');
     	}	
+    	else if(password != retype_password)
+    	{
+    		$.notify('Password and Re-type Password must be matched.', 'warn');
+    	}
 		else if(business_name == '')
 		{
 			$.notify('Please enter Business Name.', 'warn');
 		}
-		else if(business_phone == '')
+		else if(primary_business_phone == '')
 		{
-			$.notify('Please enter Business Phone.', 'warn');
+			$.notify('Please enter Primary Business Phone.', 'warn');
+		}
+		else if(secondary_business_phone == '')
+		{
+			$.notify('Please enter Secondary Business Phone.', 'warn');
 		}
 		else if(business_address == '')
 		{
@@ -97,11 +119,18 @@ $(document).ready(function(){
 		}
 		else if(agree_checkbox == false)
 		{
-			$.notify('Checkbox must be checked to proceed in the next step.', 'warn');
+			$.notify('Checkbox must be check if you want to receive offers from us.', 'warn');
 		}
 		else
 		{
-			
+			$.ajax({
+				type: 'POST',
+				url: '/register_business',
+				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username},
+				success:function(data){
+					$.notify("Registered successfully! But your account is pending.", "success");
+				}		
+			});
 		}
 	});
 

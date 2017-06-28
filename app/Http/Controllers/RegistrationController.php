@@ -7,6 +7,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+use App\Models\TblBusinessModel;
+use App\Models\TblBusinessContactPersonModel;
+use Carbon\Carbon;
 
 class RegistrationController extends Controller
 {
@@ -54,6 +57,28 @@ class RegistrationController extends Controller
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
         return $postal_code->postal_code;
+    }
+
+    public function register_business(Request $request)
+    {
+        $data = new TblBusinessModel;
+        $data->business_id = '';
+        $data->business_name = $request->business_name;
+        $data->city_id = $request->city_list;
+        $data->business_complete_address = $request->business_address;
+        $data->business_phone = $request->primary_business_phone;
+        $data->business_alt_phone = $request->secondary_business_phone;
+        $data->business_fax = $request->fax_number;
+        $data->facebook_url = $request->facebook_url;
+        $data->twitter_url = $request->twitter_username;
+        $data->date_created = Carbon::now();
+
+        $data->save();
+
+        $data2 = new TblBusinessContactPersonModel;
+        $data2->business_id = $data->business_id;
+
+        $data2->save();
     }
 
     /**

@@ -68,16 +68,16 @@
 				   	 	<input type="text" class="form-control" name="business_name" id="business_name" placeholder="E.g., Jack's Book Store">
 				  	</div>
 				  	<div class="form-group">
-				    	<label for="business_phone">Business Phone : <span style="color: red; font-weight: normal;">*</span></label>
-				   	 	<input type="text" class="form-control" name="business_phone" id="business_phone" placeholder="E.g., 555-989-7401">
+				    	<label for="primary_business_phone">Primary Business Phone : <span style="color: red; font-weight: normal;">*</span></label>
+				   	 	<input type="text" class="form-control" name="primary_business_phone" id="primary_business_phone" placeholder="E.g., 555-989-7401">
 				  	</div>
 				  	<div class="form-group">
-				    	<label for="alternate_contact">Alternate Contact :</label>
-				   	 	<input type="text" class="form-control" name="alternate_contact" id="alternate_contact" placeholder="E.g., 555-989-7401">
+				    	<label for="secondary_business_phone">Secondary Business Phone : <span style="color: red; font-weight: normal;">*</span></label>
+				   	 	<input type="text" class="form-control" name="secondary_business_phone" id="secondary_business_phone" placeholder="E.g., 555-989-7401">
 				  	</div>
 				  	<div class="form-group">
-				    	<label for="fax_machine_number">Fax Machine Number :</label>
-				   	 	<input type="text" class="form-control" name="fax_machine_number" id="fax_machine_number" placeholder="E.g., 01-2222 8888">
+				    	<label for="fax_machine_number">Fax Number :</label>
+				   	 	<input type="text" class="form-control" name="fax_number" id="fax_number" placeholder="E.g., 01-2222 8888">
 				  	</div>
 				  	<div class="form-group">
 				    	<label for="business_address">Complete Business Address : <span style="color: red; font-weight: normal;">*</span></label>
