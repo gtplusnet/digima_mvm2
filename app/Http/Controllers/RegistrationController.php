@@ -20,11 +20,11 @@ class RegistrationController extends Controller
         //
     }
 
-    public function registration_first_step()
+    public function registration()
     {
         $data['county_list'] = TblCountyModel::get();
 
-        return view('mvm.front.registration_first_step', $data);
+        return view('mvm.front.registration', $data);
     }
 
     public function get_city(Request $request)
