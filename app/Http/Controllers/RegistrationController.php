@@ -55,7 +55,6 @@ class RegistrationController extends Controller
 
         return $postal_code->postal_code;
     }
-
     /**
      * Show the form for creating a new resource.
      *

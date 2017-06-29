@@ -1,0 +1,19 @@
+.login-table {
+  margin-left: auto;
+  margin-right: auto; }
+
+.login-form-holder {
+  width: 350px; }
+
+.login-form {
+  margin-top: 15px; }
+
+.login-btn {
+  border-radius: 0px;
+  width: 317px; }
+
+.forgot-password {
+  margin-top: 5px;
+  text-align: center; }
+
+/*# sourceMappingURL=login.css.map */

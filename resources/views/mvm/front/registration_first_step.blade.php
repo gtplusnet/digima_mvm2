@@ -51,7 +51,7 @@
 			</div>
 
 			<div class="col-md-6">
-				<form>
+				<form action="/success">
 					<h4>Enter Your Business Information :</h4>
 				  	<div class="form-group">
 				    	<label for="business_name">Business Name :</label>
@@ -94,8 +94,8 @@
   							<label><input type="checkbox" value="">I am interested in receiving offers from Croatia Directory and its partners.</label>
 						</div>
 				  	</div>
-				  	<div class="form-group text-center">
-				  		<button type="button" class="btn btn-primary btn-lg">Continue</button>
+				  	<div class="form-group text-center" >
+				  		<button type="submit" class="btn btn-primary btn-lg">Continue</button>
 				  	</div>
 				</form>
 			</div>
