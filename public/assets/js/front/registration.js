@@ -128,7 +128,15 @@ $(document).ready(function(){
 				url: '/register_business',
 				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username, prefix: prefix, first_name: first_name, last_name: last_name, email: email, password: password},
 				success:function(data){
-					$.notify(data, "success");
+					if(data == 'Email has already been used.')
+					{
+						$.notify(data, 'warn');
+					}
+					else
+					{
+						$('form').trigger('reset');
+						$.notify(data, 'success');
+					}
 				}		
 			});
 		}
