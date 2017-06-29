@@ -17,6 +17,9 @@ class CreateTblCity extends Migration
             $table->string('city_name');
             $table->integer('postal_code');
             $table->integer('county_id');
+
+            /*Set foreign key*/            
+            
         });
     }
 
