@@ -50,15 +50,12 @@
 			<div>
 				<p class="title-local-favorites">Local Favorites</p>
 			</div>
-			<div>
-			@yield('favorites')
-			</div>
-<!-- 			<div class="local-favorites-holder">
+			<div class="local-favorites-holder">
 				<div class="container-fluid local-favorites">	
 					<div class="favorites-holder col-md-6">
 						<div class="favorites">							
 							<div>
-								<img class="business-logo-favorites" src="/images/mcdo_logo.jpg">
+								<a href="/business"><img class="business-logo-favorites" src="/images/mcdo_logo.jpg"></a>
 							</div>
 							<div class="business-details">
 								<p class="details-name">McDonald's Restaurant</p>
@@ -155,7 +152,7 @@
 						<li><a href="#">5</a></li>
 					</ul>
 				</div>
-			</div> -->
+			</div>
 		</div>
 	</div>
 </div>

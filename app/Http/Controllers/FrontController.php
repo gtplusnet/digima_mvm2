@@ -24,4 +24,19 @@ class FrontController extends Controller
         $data['page']   = 'Contact';
         return view('front.pages.contact', $data);
     }
+    public function login()
+    {
+        $data['page']   = 'login';
+        return view('front.pages.login', $data);
+    }
+    public function success()
+    {
+        $data['page']   = 'success';
+        return view('front.pages.success', $data);
+    }
+    public function business()
+    {
+        $data['page']   = 'business';
+        return view('front.pages.business', $data);
+    }
 }

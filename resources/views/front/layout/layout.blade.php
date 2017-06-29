@@ -12,12 +12,19 @@
         <meta name="author" content="Steelcoders" />
         
         <!-- Styles -->
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/initializr/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/initializr/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <script src="/initializr/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
         <!-- CSS Ko -->
         <link rel="stylesheet" type="text/css" href="/assets/front/css/layout.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/home.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/login.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
+
     </head>
     <body>
         <div class="container">
@@ -29,12 +36,6 @@
                                 <div class="container-fluid">
                                     <!-- Brand and toggle get grouped for better mobile display -->
                                     <div class="navbar-header">
-                                        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                            <span class="sr-only">Toggle navigation</span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </button> -->
                                         <img src="/images/yellow-finger-logo.jpg">
                                         <a class="company-name" href="#">Croatia Directory</a>
                                     </div>
@@ -47,8 +48,8 @@
                                             <li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}"><a href="/contact">Contact Us</a></li>
                                         </ul>
                                         <ul class="nav navbar-nav navbar-right">
-                                            <li><a href="#">Login</a></li>
-                                            <li><a href="#">Advertise with us</a></li>
+                                            <li><a href="/login">Login</a></li>
+                                            <li><a href="/registration_first_step">Advertise with us</a></li>
                                         </ul>
                                     </div><!-- /.navbar-collapse -->
                                 </div><!-- /.container-fluid -->
@@ -167,8 +168,10 @@
                 <p class="footer">USDIRECTORY LIMITED * Office 3 Unit R1, Imperial Way, Watford WD24 4YY, UK</p>
             </div>
         </div>
-        <!-- Javascripts -->
-       
-        
+        <!-- DITO ANG SCRIPT -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+        <!-- HANGGANG DITO -->
     </body>
 </html>
