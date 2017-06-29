@@ -34,4 +34,8 @@ class MerchantController extends Controller
 		return view ('admin.merchant.pages.bills', $data);		
 	}
 
+	public function sample()
+	{
+		return view ('admin.merchant.pages.sample');	
+	}
 }
