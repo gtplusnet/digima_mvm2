@@ -17,7 +17,7 @@
 
         <!-- CSS Ko -->
         <link rel="stylesheet" type="text/css" href="/assets/front/css/layout.css">
-        
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/home.css">
     </head>
     <body>
         <div class="container">
@@ -29,12 +29,12 @@
                                 <div class="container-fluid">
                                     <!-- Brand and toggle get grouped for better mobile display -->
                                     <div class="navbar-header">
-                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                             <span class="sr-only">Toggle navigation</span>
                                             <span class="icon-bar"></span>
                                             <span class="icon-bar"></span>
                                             <span class="icon-bar"></span>
-                                        </button>
+                                        </button> -->
                                         <img src="/images/yellow-finger-logo.jpg">
                                         <a class="company-name" href="#">Croatia Directory</a>
                                     </div>
@@ -42,9 +42,9 @@
                                     <!-- Collect the nav links, forms, and other content for toggling -->
                                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="#">Home</a></li>
-                                            <li><a href="#">About</a></li>
-                                            <li><a href="#">Contact Us</a></li>
+                                            <li class="{{ Request::segment(1) == '' ? 'active' : '' }}"><a href="/">Home</a></li>
+                                            <li class="{{ Request::segment(1) == 'about' ? 'active' : '' }}"><a href="/about">About</a></li>
+                                            <li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}"><a href="/contact">Contact Us</a></li>
                                         </ul>
                                         <ul class="nav navbar-nav navbar-right">
                                             <li><a href="#">Login</a></li>
@@ -59,7 +59,7 @@
             </table>
         </div> <!-- container -->
         <div class="container">
-            <form class="searchbar-header">
+            <form method="get" action="" class="searchbar-header">
                     <div class="col-md-3 form-holder">
                         <div>
                             <p>Search Businesses</p>
@@ -116,6 +116,57 @@
             </ul>
         </div>
         @yield('content')
+        <div class="container">
+            <div class="navbar-footer">
+                <div>
+                    <ul class="nav-footer-bar">
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Yellow Pages</a></li>
+                        </div>
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">About Us</a></li>
+                        </div>
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Contact Us</a></li>
+                        </div>
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Support</a></li>
+                        </div>
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Term of Use</a></li>
+                        </div>
+                        <div>
+                            <li class="nav-footer"><a href="#">Privacy Policy</a></li>
+                        </div>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="nav-footer-bar">
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Advertise With Us</a></li>
+                        </div>
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Add/ Update Listing</a></li>
+                        </div>
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Business Profile</a></li>
+                        </div>
+                        <div class="nav-footer-holder">
+                            <li class="nav-footer"><a href="#">Login</a></li>
+                        </div>
+                        <div>
+                            <li class="nav-footer"><a href="#">FAQ</a></li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-holder">
+                <p class="footer">© 2017 USdirectory.com. All rights reserved.</p>
+                <p class="footer">No portion of this site may be copied, reproduced, or published without the express written permission of USdirectory.com.</p>
+                <p class="footer">All products and companies mentioned on our site are trademarks and/or registered trademarks of their respective owners.</p>
+                <p class="footer">USDIRECTORY LIMITED * Office 3 Unit R1, Imperial Way, Watford WD24 4YY, UK</p>
+            </div>
+        </div>
         <!-- Javascripts -->
        
         
