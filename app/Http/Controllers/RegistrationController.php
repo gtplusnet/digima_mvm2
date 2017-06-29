@@ -9,6 +9,7 @@ use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
+use App\Models\TblUserAccountModel;
 use Carbon\Carbon;
 
 class RegistrationController extends Controller
@@ -61,24 +62,49 @@ class RegistrationController extends Controller
 
     public function register_business(Request $request)
     {
-        $data = new TblBusinessModel;
-        $data->business_id = '';
-        $data->business_name = $request->business_name;
-        $data->city_id = $request->city_list;
-        $data->business_complete_address = $request->business_address;
-        $data->business_phone = $request->primary_business_phone;
-        $data->business_alt_phone = $request->secondary_business_phone;
-        $data->business_fax = $request->fax_number;
-        $data->facebook_url = $request->facebook_url;
-        $data->twitter_url = $request->twitter_username;
-        $data->date_created = Carbon::now();
+        $check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
 
-        $data->save();
+        if(count($check_email_availability) == 1)
+        {
+            echo 'Email has already been used.';
+        }
+        else
+        {
+        $business_data = new TblBusinessModel;
+        $business_data->business_id = '';
+        $business_data->business_name = $request->business_name;
+        $business_data->city_id = $request->city_list;
+        $business_data->business_complete_address = $request->business_address;
+        $business_data->business_phone = $request->primary_business_phone;
+        $business_data->business_alt_phone = $request->secondary_business_phone;
+        $business_data->business_fax = $request->fax_number;
+        $business_data->facebook_url = $request->facebook_url;
+        $business_data->twitter_url = $request->twitter_username;
+        $business_data->date_created = Carbon::now();
 
-        $data2 = new TblBusinessContactPersonModel;
-        $data2->business_id = $data->business_id;
+        $business_data->save();
 
-        $data2->save();
+        $contact_data = new TblBusinessContactPersonModel;
+        $contact_data->business_contact_person_id = '';
+        $contact_data->contact_prefix = $request->prefix;
+        $contact_data->contact_first_name = $request->first_name;
+        $contact_data->contact_last_name = $request->last_name;
+        $contact_data->business_id = $business_data->business_id;
+
+        $contact_data->save();
+
+        $account_data = new TblUserAccountModel;
+        $account_data->user_email = $request->email;
+        $account_data->user_password = $request->password;
+        $account_data->user_category = 'merchant';
+        $account_data->status = 2;
+        $account_data->business_id = $business_data->business_id;
+        $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
+
+        $account_data->save();
+
+        echo 'Registered successfully ! But your account is pending.';
+        }   
     }
 
     /**
