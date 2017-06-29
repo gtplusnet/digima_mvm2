@@ -57,29 +57,32 @@
       					<label for="terms_of_offer">Terms of Offer:</label>
       					<textarea class="form-control" rows="5" name="terms_of_offer" id="terms_of_offer" readonly="true" style="resize: none;">Lorem ipsum dolor sit amet, quo in quas graeco. Ea nec altera definitiones. At altera postea mea, diceret similique duo ea, ea habemus eligendi mel. Mea mucius sapientem signiferumque ea. Stet appareat vix no, reque meliore ea vis.Viris vivendo pri ea, nonumy soleat vocent cu nec. Inermis appetere usu id, oratio consequat voluptatum est eu, ut sit partem dissentiet. Laboramus constituam necessitatibus no duo. Eos id choro option aperiam.His virtute incorrupte id, ne usu volumus suavitate sadipscing. Decore percipitur reformidans eam in. Eu audiam deserunt pro, vis cu novum salutatus, vim constituam scripserit ea. Ei novum option eam. Bonorum similique at nec.Quod eirmod fuisset ius ad. Neglegentur conclusionemque duo te. Mea iriure placerat at, fabulas petentium ea per. Admodum ceteros pericula at sed, mea te vidit velit democritum. Feugiat dolores pri ex. Ius id erat convenire intellegat, prompta qualisque adipiscing vis et. Eu eum volumus omittam, graece verterem nec ei. Eu agam prima eam, ocurreret maluisset interpretaris quo ut. Per ut ubique doming accommodare, eam in wisi appareat. Est consul doctus delicata ne, no pro eligendi argumentum conclusionemque. In ludus nonumy mea.</textarea>
     				</div>
-				</form>
 			</div>
 
 			<div class="col-md-6">
+<<<<<<< HEAD
 
 				<form action="/success">
 					<h4>Enter Your Business Information :</h4>
 
+=======
+					<h4>Enter Your Business Information : </h4>
+>>>>>>> mod_ren_digima_mvm
 				  	<div class="form-group">
 				    	<label for="business_name">Business Name : <span style="color: red; font-weight: normal;">*</span></label>
 				   	 	<input type="text" class="form-control" name="business_name" id="business_name" placeholder="E.g., Jack's Book Store">
 				  	</div>
 				  	<div class="form-group">
-				    	<label for="business_phone">Business Phone : <span style="color: red; font-weight: normal;">*</span></label>
-				   	 	<input type="text" class="form-control" name="business_phone" id="business_phone" placeholder="E.g., 555-989-7401">
+				    	<label for="primary_business_phone">Primary Business Phone : <span style="color: red; font-weight: normal;">*</span></label>
+				   	 	<input type="text" class="form-control" name="primary_business_phone" id="primary_business_phone" placeholder="E.g., 555-989-7401">
 				  	</div>
 				  	<div class="form-group">
-				    	<label for="alternate_contact">Alternate Contact :</label>
-				   	 	<input type="text" class="form-control" name="alternate_contact" id="alternate_contact" placeholder="E.g., 555-989-7401">
+				    	<label for="secondary_business_phone">Secondary Business Phone : <span style="color: red; font-weight: normal;">*</span></label>
+				   	 	<input type="text" class="form-control" name="secondary_business_phone" id="secondary_business_phone" placeholder="E.g., 555-989-7401">
 				  	</div>
 				  	<div class="form-group">
-				    	<label for="fax_machine_number">Fax Machine Number :</label>
-				   	 	<input type="text" class="form-control" name="fax_machine_number" id="fax_machine_number" placeholder="E.g., 01-2222 8888">
+				    	<label for="fax_machine_number">Fax Number :</label>
+				   	 	<input type="text" class="form-control" name="fax_number" id="fax_number" placeholder="E.g., 01-2222 8888">
 				  	</div>
 				  	<div class="form-group">
 				    	<label for="business_address">Complete Business Address : <span style="color: red; font-weight: normal;">*</span></label>
@@ -118,8 +121,8 @@
 				  		<button type="submit" class="btn btn-primary btn-lg">Continue</button>
 >>>>>>> 21098de849dd28220bfa47f07770715d76718f04:resources/views/mvm/front/registration_first_step.blade.php
 				  	</div>
-				</form>
 			</div>
+		</form>
 		</div>
 	</div>
 @endsection
