@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/registration.js"></script>
+<script src="/assets/js/notification/notify.js"></script>
 <body>
 	<div class="container">
 		<div class="registration-content">

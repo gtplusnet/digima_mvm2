@@ -48,9 +48,10 @@ Route::any('/agent/search_client', 	'AgentController@search_client');
 // });
 
 //Renz's Routes
-Route::any('/registration_first_step', 'RegistrationController@registration_first_step');
+Route::any('/registration', 'RegistrationController@registration');
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
+Route::any('/register_business', 'RegistrationController@register_business');
 //End of Renz's Routes
 
 
