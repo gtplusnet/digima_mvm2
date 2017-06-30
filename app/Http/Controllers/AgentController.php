@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+use App\Models\TblAgent;
+use DB;
 
 class AgentController extends Controller
 {
@@ -63,7 +65,18 @@ class AgentController extends Controller
 
         return $postal_code->postal_code;
     }
-
+    public function search_client(Request $request)
+    {
+    	if($request -> ajax())
+    	{
+    		$clients = TblAgent::where('name','LIKE','%'.$Request->search_client.'%')
+    							->orwhere('date/added','LIKE','%'.$Request->search_client.'%')
+    							->orwhere('Business_Name','LIKE','%'.$Request->search_client.'%')
+    							->orwhere('Description','LIKE','%'.$Request->search_client.'%')
+    							->orwhere('Reference','LIKE','%'.$Request->search_client.'%')
+    							->orwhere('status','LIKE','%'.$Request->search_client.'%')->get();
+    	}
+    }
 
 		public function logout()
 	{

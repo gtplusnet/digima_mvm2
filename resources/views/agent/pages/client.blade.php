@@ -21,7 +21,7 @@
                     <div class="col-md-3">
                     <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-                            <input id="" type="text" class="form-control" name="" placeholder="...Enter Keyword">
+                            <input id="client_search" type="text" class="form-control" name="client_search" placeholder="...Enter Keyword">
                         </div>
                     </div>
 
@@ -39,12 +39,10 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>                       
-                                <tbody>
-                                    <tr>
-                            
-                                    </tr>
-                                </tbody>
                             </table>
+                        </div>
+                        <div class="table-responsive" id="Result">
+                            
                         </div>
                     </div>
                 </div>

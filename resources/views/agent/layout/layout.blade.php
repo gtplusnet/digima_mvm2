@@ -110,6 +110,21 @@
             }
         });
         </script>
+        <script type="text/javascript">
+            $('#client_search').keyup(function(){
+                    $.ajax({
+                        url:{{Url::to('client_search')}},
+                        method:"get",
+                        data:{search:txt},
+                        dataType:"text",
+                        success:function(data)
+                        {
+                            $('#result').html('data');
+                        }
+                    });
+                }
+            });
+        </script>
 
     </body>
 </html>
