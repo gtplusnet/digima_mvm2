@@ -60,14 +60,10 @@
 			</div>
 
 			<div class="col-md-6">
-<<<<<<< HEAD
 
 				<form action="/success">
 					<h4>Enter Your Business Information :</h4>
 
-=======
-					<h4>Enter Your Business Information : </h4>
->>>>>>> mod_ren_digima_mvm
 				  	<div class="form-group">
 				    	<label for="business_name">Business Name : <span style="color: red; font-weight: normal;">*</span></label>
 				   	 	<input type="text" class="form-control" name="business_name" id="business_name" placeholder="E.g., Jack's Book Store">
@@ -113,13 +109,10 @@
   							<label><input type="checkbox" id="agree_checkbox" value="">I am interested in receiving offers from Croatia Directory and its partners.</label>
 						</div>
 				  	</div>
-<<<<<<< HEAD:resources/views/mvm/front/registration.blade.php
-				  	<div class="form-group text-center">
-				  		<button type="button" class="btn btn-primary btn-lg" id="continue">Continue</button>
-=======
+
 				  	<div class="form-group text-center" >
 				  		<button type="submit" class="btn btn-primary btn-lg">Continue</button>
->>>>>>> 21098de849dd28220bfa47f07770715d76718f04:resources/views/mvm/front/registration_first_step.blade.php
+
 				  	</div>
 			</div>
 		</form>
