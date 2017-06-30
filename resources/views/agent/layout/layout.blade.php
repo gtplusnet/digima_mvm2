@@ -119,7 +119,7 @@
                         dataType:"text",
                         success:function(data)
                         {
-                            $('#result').html('data');
+                            $('tbody').html('data');
                         }
                     });
                 }

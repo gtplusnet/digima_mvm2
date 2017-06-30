@@ -39,10 +39,9 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>                       
+                                <tbody>
+                                </tbody>
                             </table>
-                        </div>
-                        <div class="table-responsive" id="Result">
-                            
                         </div>
                     </div>
                 </div>

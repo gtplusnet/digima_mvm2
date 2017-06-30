@@ -67,6 +67,7 @@ class AgentController extends Controller
     }
     public function search_client(Request $request)
     {
+    	$output ="";
     	if($request -> ajax())
     	{
     		$clients = TblAgent::where('name','LIKE','%'.$Request->search_client.'%')
@@ -75,6 +76,20 @@ class AgentController extends Controller
     							->orwhere('Description','LIKE','%'.$Request->search_client.'%')
     							->orwhere('Reference','LIKE','%'.$Request->search_client.'%')
     							->orwhere('status','LIKE','%'.$Request->search_client.'%')->get();
+    		if($clients)
+    		{
+    			foreach ($clients as $key => $client) {
+    				$output.=	'<tr>'.
+                                    '<th>'.$customer->Name.'</th>'
+                                    '<th>'.$customer->Date.'</th>'
+                                    '<th>'.$customer->Business.'</th>'
+                                    '<th>'.$customer->Description.'</th>'
+                                    '<th>'.$customer->Reference.'</th>'
+                                    '<th>'.$customer->Status.'</th>'
+                             	'</tr>'
+    			}
+    		}
+
     	}
     }
 
