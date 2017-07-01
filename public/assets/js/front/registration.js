@@ -73,59 +73,153 @@ $(document).ready(function(){
 		}
 		else if(first_name == '')
 		{
-			$.notify('Please enter First name.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter First Name.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(last_name == '')
 		{
-			$.notify('Please enter Last Name.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter Last Name.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if (atpos<1 || dotpos<atpos+2) 
 		{
-        	$.notify('Please enter a valid Email Address.', 'warn');
+        	iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter a valid Email Address.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
     	}
     	else if (password == '') 
 		{
-        	$.notify('Please enter password.', 'warn');
+        	iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter Password.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
     	}
     	else if (retype_password == '') 
 		{
-        	$.notify('Please re-type password.', 'warn');
+        	iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please re-type Password.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
     	}	
     	else if(password != retype_password)
     	{
-    		$.notify('Password and Re-type Password must be matched.', 'warn');
+    		iziToast.warning({
+			    title: 'Caution',
+			    message: 'Password and Re-type Password must be matched.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
     	}
 		else if(business_name == '')
 		{
-			$.notify('Please enter Business Name.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter Business Name.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(primary_business_phone == '')
 		{
-			$.notify('Please enter Primary Business Phone.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter Primary Business Phone.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(secondary_business_phone == '')
 		{
-			$.notify('Please enter Secondary Business Phone.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter Secondary Business Phone.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
+		}
+		else if(primary_business_phone == secondary_business_phone)
+		{
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Primary and Secondary Business phone must not be the same.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(business_address == '')
 		{
-			$.notify('Please enter Business Address.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter Business Address.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(county_list == '--Select County--')
 		{
-			$.notify('Please select County.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please select County.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(city_list == '--Select City--')
 		{
-			$.notify('Please select City.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please select City.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(postal_code == '')
 		{
-			$.notify('Postal Code is required.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Postal Code is required.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(agree_checkbox == false)
 		{
-			$.notify('Checkbox must be check if you want to receive offers from us.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Checkbox must be check if your agree in the Terms of Offer.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else
 		{
@@ -136,12 +230,24 @@ $(document).ready(function(){
 				success:function(data){
 					if(data == 'Email has already been used.')
 					{
-						$.notify(data, 'warn');
+						iziToast.warning({
+						    title: 'Caution',
+						    message: data,
+						    position: 'topRight',
+						    transitionIn: 'fadeInDown',
+						    transitionOut: 'fadeOutUp'
+						});
 					}
 					else
 					{
 						$('form').trigger('reset');
-						$.notify(data, 'success');
+						iziToast.success({
+						    title: 'OK',
+						    message: data,
+						    position: 'topRight',
+						    transitionIn: 'fadeInDown',
+						    transitionOut: 'fadeOutUp'
+						});
 					}
 				}		
 			});
