@@ -63,7 +63,13 @@ $(document).ready(function(){
 
 		if(prefix == '--Select Prefix--')
 		{
-			$.notify('Please select Prefix.', 'warn');
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please select Prefix.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(first_name == '')
 		{
