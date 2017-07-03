@@ -16,5 +16,16 @@ body {
         border-color: #000000; }
     body .registration-content .copyright {
       padding-bottom: 25px; }
+  body .login-form {
+    width: 700px;
+    margin: 0 auto;
+    border: 1px solid #000000;
+    padding-left: 150px;
+    padding-right: 150px; }
+    body .login-form #label-email, body .login-form #label-password {
+      font-size: 20px;
+      font-weight: normal; }
+    body .login-form a {
+      font-size: 20px; }
 
 /*# sourceMappingURL=main.css.map */

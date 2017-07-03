@@ -36,8 +36,8 @@ Route::get('/agent', 				'AgentController@index');
 Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
 Route::any('/agent/add_client', 	'AgentController@add_client');
-// Route::any('/agent/get_city', 	'AgentController@get_city');
-// Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
+Route::any('/agent/get_city', 	'AgentController@get_city');
+Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 
 
 
@@ -47,10 +47,17 @@ Route::any('/agent/add_client', 	'AgentController@add_client');
 // });
 
 //Renz's Routes
+
+//Routes for Login
+Route::any('/login', 'LoginController@index');
+Route::any('/check_login', 'LoginController@check_login');
+
+//Routes for Registration
 Route::any('/registration', 'RegistrationController@registration');
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
 Route::any('/register_business', 'RegistrationController@register_business');
+
 //End of Renz's Routes
 
 

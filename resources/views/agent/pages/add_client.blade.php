@@ -42,7 +42,7 @@
 	                        </div>
 	                    </div>
 	                    <hr>
-	                    <h4>Personal Information</h4>
+	                    <h4>Business Information</h4>
 	                    <div class="form-group">
 	                        <label for="input-Default" class="col-sm-2 control-label">Business Name</label>
 	                        <div class="col-sm-10">
@@ -62,13 +62,13 @@
 	                    <div class="form-group">
 	                        <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
 	                        <div class="col-sm-10">
-	                            <textarea class="form-control input-rounded" placeholder="Address" rows="4=6" style="border-radius: 20px;"></textarea>
+	                            <textarea class="form-control input-rounded" placeholder="Address" rows="4" style="border-radius: 20px; resize: none;"></textarea>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="county" class="col-sm-2 control-label">County</label>
 	                        <div class="col-sm-2">
-	                        	<select class="form-control" name="county_list" id="county_list" style="width: 190px; border-radius: 20px;">
+	                        	<select class="form-control" name="county_list" id="county_list" style="border-radius: 20px;">
 						   			<option value="--Select County--">--Select County--</option>
 									   @foreach($county_list as $county_list)
 									   	 <option value="{{ $county_list->county_id }}">{{ $county_list->county_name }}</option>
@@ -83,7 +83,7 @@
 	                        </div>
 	                        <label for="zip_code" class="col-sm-2 control-label">Postal</label>
 	                        <div class="col-sm-2">
-				   	 			<input type="text" class="form-control" name="postal_code" id="postal_code" placeholder="Postal Code" readonly="true" style="width: 190px;border-radius: 20px;">
+				   	 			<input type="text" class="form-control" name="postal_code" id="postal_code" placeholder="Postal Code" readonly="true" style="border-radius: 20px;">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">

@@ -26,4 +26,18 @@ body{
 			padding-bottom: 25px;
 		}
 	}
+	.login-form{
+		width: 700px;
+		margin: 0 auto;
+		border: 1px solid #000000;
+		padding-left: 150px;
+		padding-right: 150px;
+		#label-email, #label-password{
+			font-size: 20px;
+			font-weight: normal;
+		}
+		a{
+			font-size: 20px;
+		}
+	}
 }
