@@ -38,4 +38,11 @@ class MerchantController extends Controller
 	{
 		return view ('admin.merchant.pages.sample');	
 	}
+
+	public function mercant()
+	{
+		$data['page'] 		= 'Merchant List';	 
+		$data['_mercant'] 	= Tbl_business::get();
+		return view('admin.agent.merchant_list', $data);
+	}
 }

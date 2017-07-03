@@ -43,7 +43,7 @@
         <![endif]-->
         
     </head>
-    <body class="page-header-fixed">
+    <body class="page-header-fixed  pace-done small-sidebar page-sidebar-fixed">
 
         
        
