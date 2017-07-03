@@ -80,11 +80,16 @@ $(document).ready(function(){
 			    transitionIn: 'fadeInDown',
 			    transitionOut: 'fadeOutUp'
 			});
-			$.growl.warning({ message: "Please select Prefix." });
 		}
 		else if(first_name == '')
 		{
-			$.growl.warning({ message: "Please enter First Name." });
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Please enter First Name.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
 		}
 		else if(last_name == '')
 		{
