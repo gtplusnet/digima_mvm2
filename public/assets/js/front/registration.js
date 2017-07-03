@@ -63,11 +63,11 @@ $(document).ready(function(){
 
 		if(prefix == '--Select Prefix--')
 		{
-			$.notify('Please select Prefix.', 'warn');
+			$.growl.warning({ message: "Please select Prefix." });
 		}
 		else if(first_name == '')
 		{
-			$.notify('Please enter First name.', 'warn');
+			$.growl.warning({ message: "Please enter First Name." });
 		}
 		else if(last_name == '')
 		{
