@@ -1,0 +1,19 @@
+.banner-holder {
+  border: 1px solid #333;
+  height: 200px;
+  width: 550px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.success-message {
+  text-align: center;
+  display: block;
+  margin-top: 100px;
+  margin-bottom: 70px; }
+
+h1 {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 55px; }
+
+/*# sourceMappingURL=success.css.map */

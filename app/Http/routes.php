@@ -18,6 +18,11 @@
 
 /*Front Page*/
 Route::get('/', 'FrontController@index');
+Route::get('/about', 'FrontController@about');
+Route::get('/contact', 'FrontController@contact');
+Route::get('/login', 'FrontController@login');
+Route::get('/success', 'FrontController@success');
+Route::get('/business', 'FrontController@business');
 
 
 /*Merchant Page by Brain*/
@@ -42,9 +47,10 @@ Route::any('/agent/add_client', 	'AgentController@add_client');
 // });
 
 //Renz's Routes
-Route::any('/registration_first_step', 'RegistrationController@registration_first_step');
+Route::any('/registration', 'RegistrationController@registration');
 Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
+Route::any('/register_business', 'RegistrationController@register_business');
 //End of Renz's Routes
 
 
