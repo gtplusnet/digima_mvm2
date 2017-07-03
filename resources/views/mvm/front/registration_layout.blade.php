@@ -7,8 +7,15 @@
 <link rel="stylesheet" href="/assets/css/main.css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
 <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
+=======
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/front/registration.js"></script>
+<script src="/assets/js/jquery_growl/jquery.growl.js" type="text/javascript"></script>
+<link href="/assets/js/jquery_growl/jquery.growl.css" rel="stylesheet" type="text/css" />
+>>>>>>> mod_ren_digima_mvm
 <body>
 	<div class="container">
 		<div class="registration-content">
