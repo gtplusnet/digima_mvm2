@@ -40,6 +40,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/registration.js"></script>
 <script src="/assets/js/front/login.js"></script>
+<script src="/assets/js/front/search.js"></script>
 <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
 <script type="text/javascript">
     $.ajaxSetup({

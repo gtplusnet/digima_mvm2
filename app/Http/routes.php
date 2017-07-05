@@ -58,6 +58,11 @@ Route::any('/get_city', 'RegistrationController@get_city');
 Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
 Route::any('/register_business', 'RegistrationController@register_business');
 
+//Routes for Search
+Route::any('/search', 'SearchController@index');
+Route::any('/search_business_result', 'SearchController@search_business_result');
+Route::any('/hey', 'SearchController@hey');
+
 //End of Renz's Routes
 
 
