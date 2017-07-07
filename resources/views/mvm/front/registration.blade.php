@@ -1,4 +1,4 @@
-@extends('mvm.front.registration_layout')
+@extends('mvm.front.front_layout')
 
 @section('content')
 	<div class="registration-form">
