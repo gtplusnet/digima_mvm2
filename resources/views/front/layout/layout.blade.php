@@ -3,9 +3,10 @@
     <head>
         
         <!-- Title -->
-        <title>CROTIA Directory | {{ $page }}</title>
+        <title>CROTIA Directory | @yield('title')</title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta charset="UTF-8">
         <meta name="description" content="Admin Dashboard Template"/>
         <meta name="keywords" content="admin,dashboard" />
@@ -26,6 +27,9 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/login.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchresult.css">
+
+        <!-- iziToast Plugin CSS -->
+        <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
 
     </head>
     <body>
@@ -121,9 +125,24 @@
             </div>
         </div>
         <!-- DITO ANG SCRIPT -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+
+        <!-- Registration JS -->
+        <script src="/assets/js/front/registration.js"></script>
+
+        <!-- iziToast Plugin JS -->
+        <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
+
+        <!-- X-CSRF-TOKEN JS -->
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
         <!-- HANGGANG DITO -->
     </body>
 </html>

@@ -4,9 +4,9 @@ $(document).ready(function(){
 		var county_id = $('#county_list').val();
 		$('#postal_code').val("");
 
-		if(county_id == "--Select County--")
+		if(county_id == '')
 		{
-			$('#city_list').html('<option value="--No County Selected--">--No County Selected--</option>');
+			$('#city_list').html('<option value=""></option>');
 		}
 
 		$.ajax({
@@ -23,14 +23,14 @@ $(document).ready(function(){
 	$('#city_list').change(function(){
 		var city_id = $('#city_list').val();
 
-		if(city_id == '--Select City--')
+		if(city_id == '')
 		{
 			$('#postal_code').val("");
 		}
 
 		$.ajax({
 			type:'POST',
-			url:'get_zip_code',
+			url:'/get_postal_code',
 			data:{city_id: city_id},
 			dataType:'text',
 			success:function(data){
@@ -61,21 +61,11 @@ $(document).ready(function(){
 		var postal_code = $('#postal_code').val();
 		var agree_checkbox = $('#agree_checkbox').prop('checked');
 
-		if(prefix == '--Select Prefix--')
+		if(prefix == '')
 		{
 			iziToast.warning({
 			    title: 'Caution',
 			    message: 'Please select Prefix.',
-			    position: 'topRight',
-			    transitionIn: 'fadeInDown',
-			    transitionOut: 'fadeOutUp'
-			});
-		}
-		else if(first_name == '')
-		{
-			iziToast.warning({
-			    title: 'Caution',
-			    message: 'Please enter First Name.',
 			    position: 'topRight',
 			    transitionIn: 'fadeInDown',
 			    transitionOut: 'fadeOutUp'
@@ -191,7 +181,7 @@ $(document).ready(function(){
 			    transitionOut: 'fadeOutUp'
 			});
 		}
-		else if(county_list == '--Select County--')
+		else if(county_list == '')
 		{
 			iziToast.warning({
 			    title: 'Caution',
@@ -201,7 +191,7 @@ $(document).ready(function(){
 			    transitionOut: 'fadeOutUp'
 			});
 		}
-		else if(city_list == '--Select City--')
+		else if(city_list == '')
 		{
 			iziToast.warning({
 			    title: 'Caution',
@@ -234,7 +224,7 @@ $(document).ready(function(){
 		else
 		{
 			$.ajax({
-				type: 'POST',
+				method: 'POST',
 				url: '/register_business',
 				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username, prefix: prefix, first_name: first_name, last_name: last_name, email: email, password: password},
 				success:function(data){

@@ -18,13 +18,17 @@
 
 /*Front Page*/
 Route::get('/', 'FrontController@index');
-Route::get('/registration', 'FrontController@registration');
+
+Route::any('/registration', 'FrontController@registration');
+Route::any('/get_city', 'FrontController@get_city');
+Route::any('/get_postal_code', 'FrontController@get_postal_code');
+Route::any('/register_business', 'FrontController@register_business');
 
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
 Route::get('/success', 'FrontController@success');
-Route::get('/business', 'FrontController@business');
+Route::get('/register', 'FrontController@register');
 
 Route::get('/searchresult', 'SearchresultController@index');
 
@@ -57,10 +61,10 @@ Route::any('/login', 'LoginController@index');
 Route::any('/check_login', 'LoginController@check_login');
 
 //Routes for Registration
-Route::any('/registration', 'RegistrationController@registration');
-Route::any('/get_city', 'RegistrationController@get_city');
-Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
-Route::any('/register_business', 'RegistrationController@register_business');
+//Route::any('/registration', 'RegistrationController@registration');
+//Route::any('/get_city', 'RegistrationController@get_city');
+//Route::any('/get_zip_code', 'RegistrationController@get_zip_code');
+//Route::any('/register_business', 'RegistrationController@register_business');
 
 //Routes for Search
 Route::any('/search', 'SearchController@index');
