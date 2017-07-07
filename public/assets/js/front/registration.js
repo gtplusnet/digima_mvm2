@@ -241,13 +241,7 @@ $(document).ready(function(){
 					else
 					{
 						$('form').trigger('reset');
-						iziToast.success({
-						    title: 'OK',
-						    message: data,
-						    position: 'topRight',
-						    transitionIn: 'fadeInDown',
-						    transitionOut: 'fadeOutUp'
-						});
+						window.location = '/success';
 					}
 				}		
 			});

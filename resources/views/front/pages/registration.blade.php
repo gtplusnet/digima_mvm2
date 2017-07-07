@@ -101,15 +101,6 @@
 				    		<input type="text" class="form-control businessname-textbox" name="business_name" id="business_name">
 				 		</div>
 				  		<div class="form-group">
-{{-- <<<<<<< HEAD
-					    	<div class="col-md-6 personal-info">	
-					    		<label for="inputprimaryphone">Primary Business Phone:</label>
-					    		<input type="text" class="form-control" name="primary_business_phone" id="primary_business_phone">
-					    	</div>
-					    	<div class="col-md-6 personal-last-info">
-					    		<label for="inputsecondaryphone">Secondary Business Phone:</label>
-					    		<input type="text" class="form-control" name="secondary_business_phone" id="secondary_business_phone">
-======= --}}
 					    	<div class="col-md-4 personal-info">	
 					    		<label for="inputprimaryphone" class="business-number-label">Primary Business Phone:</label>
 					    		<input type="primaryphone" class="form-control" name="primary_business_phone" id="primary_business_phone">
@@ -117,7 +108,6 @@
 					    	<div class="col-md-4 personal-info">
 					    		<label for="inputsecondaryphone" class="business-number-label">Secondary Business Phone:</label>
 					    		<input type="secondaryphone" class="form-control" name="secondary_business_phone" id="secondary_business_phone">
-{{-- >>>>>>> d47125beafcb10cd4fe8106ca31948fe487680f4 --}}
 					    	</div>
 					    	<div class="col-md-4 personal-last-info">
 					    		<label for="inputfaxnumber">Fax Number:</label>
@@ -151,17 +141,6 @@
 				 		</div>
 		  		</div>
 			</div>
-{{-- <<<<<<< HEAD
-			<div class="accept-terms">
-				<div class="checkbox">
-	  				<label><input type="checkbox" value="" id="agree_checkbox">I Agree in the Terms of Offer.</label>
-				</div>
-			</div>
-			<div class="form-group button-holder" >
-				  	<button type="button" class="btn btn-continue" id="continue">CONTINUE</button>
-			</div>
-======= --}}
-			{{-- <form role="form" action="/success"> --}}
 				<div class="accept-terms">
 					<div class="checkbox">
 		  				<label><input type="checkbox" value="" id="agree_checkbox">I am interested in receiving offers from Croatia Directory and its partners.</label>
@@ -170,7 +149,6 @@
 				<div class="form-group button-holder" >
 				  	<button type="button" class="btn btn-continue" id="continue">CONTINUE</button>
 				</div>
-{{-- >>>>>>> d47125beafcb10cd4fe8106ca31948fe487680f4 --}}
 		</div>
 	</div>
 </form>
