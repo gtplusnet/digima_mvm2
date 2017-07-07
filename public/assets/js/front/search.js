@@ -14,15 +14,7 @@ $(document).ready(function(){
 		}
 		else
 		{
-			$.ajax({
-				method: 'POST',
-				url: '/search_business',
-				data: {search_business: search_business},
-				dataType: 'text',
-				success:function(data){
-					$('#search_business').val('');
-				}
-			});
+			$('#search-form').submit();
 		}
 	});
 });

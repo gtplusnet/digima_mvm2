@@ -16,17 +16,21 @@ class SearchController extends Controller
      */
     public function index()
     {
-        $data['business_result'] = TblBusinessModel::get();
-        return view('mvm.front.search', $data);
+        return view('mvm.front.search');
     }
 
     public function search_business(Request $request)
     {
         $data['business_search'] = TblBusinessModel::where('business_name', 'LIKE', '%'.$request->search_business.'%')->get();
 
-        
-           return view('mvm.front.search_result', $data); 
-        
+        return view('mvm.front.search_result', $data); 
+    }
+
+    public function business_info(Request $request)
+    {
+        $data['business_info'] = TblBusinessModel::where('business_id', '=', $request->business_id)->get();
+
+        return view('mvm.front.business_info', $data); 
     }
 
     /**
