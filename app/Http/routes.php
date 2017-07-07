@@ -18,11 +18,15 @@
 
 /*Front Page*/
 Route::get('/', 'FrontController@index');
+Route::get('/registration', 'FrontController@registration');
+
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
 Route::get('/success', 'FrontController@success');
 Route::get('/business', 'FrontController@business');
+
+Route::get('/searchresult', 'SearchresultController@index');
 
 
 /*Merchant Page by Brain*/
