@@ -18,6 +18,7 @@
 		  			<h2 class="panel-title">ENTER YOUR PERSONAL INFORMATION</h2>
 		  		</div>
 		  		<div class="panel-body">
+
 				  		<div class="form-group">
 				  			<div class="col-md-3 personal-info">
 				  				<label for="inputprefix">Prefix:</label>
@@ -60,6 +61,7 @@
 		  			<h2 class="panel-title">SOCIAL MEDIA</h2>
 		  		</div>
 		  		<div class="panel-body">
+
 				  		<div class="form-group">
 				  			<label class="socialmedia-note">This fields are not mandatory & not applicable to all businesses</label>
 					    	<div class="col-md-6 personal-info">	
@@ -79,6 +81,7 @@
 		  			<h2 class="panel-title">TERMS OF OFFERS</h2>
 		  		</div>
 		  		<div class="panel-body terms-textarea">
+
 				  		<div class="form-group">
 				  			<label for="terms_of_offer">Terms of Offer:</label>
 	      					<textarea class="form-control" rows="5" name="terms_of_offer" id="terms_of_offer" readonly="true" style="resize: none;">Lorem ipsum dolor sit amet, quo in quas graeco. Ea nec altera definitiones. At altera postea mea, diceret similique duo ea, ea habemus eligendi mel. Mea mucius sapientem signiferumque ea. Stet appareat vix no, reque meliore ea vis.Viris vivendo pri ea, nonumy soleat vocent cu nec. Inermis appetere usu id, oratio consequat voluptatum est eu, ut sit partem dissentiet. Laboramus constituam necessitatibus no duo. Eos id choro option aperiam.His virtute incorrupte id, ne usu volumus suavitate sadipscing. Decore percipitur reformidans eam in. Eu audiam deserunt pro, vis cu novum salutatus, vim constituam scripserit ea. Ei novum option eam. Bonorum similique at nec.Quod eirmod fuisset ius ad. Neglegentur conclusionemque duo te. Mea iriure placerat at, fabulas petentium ea per. Admodum ceteros pericula at sed, mea te vidit velit democritum. Feugiat dolores pri ex. Ius id erat convenire intellegat, prompta qualisque adipiscing vis et. Eu eum volumus omittam, graece verterem nec ei. Eu agam prima eam, ocurreret maluisset interpretaris quo ut. Per ut ubique doming accommodare, eam in wisi appareat. Est consul doctus delicata ne, no pro eligendi argumentum conclusionemque. In ludus nonumy mea.</textarea>
@@ -92,11 +95,13 @@
 		  			<h2 class="panel-title">ENTER YOUR BUSINESS INFORMATION</h2>
 		  		</div>
 		  		<div class="panel-body">
+
 				 		<div class="form-group">
 				 			<label for="inputbusinessname">Business Name:</label>
 				    		<input type="text" class="form-control businessname-textbox" name="business_name" id="business_name">
 				 		</div>
 				  		<div class="form-group">
+{{-- <<<<<<< HEAD
 					    	<div class="col-md-6 personal-info">	
 					    		<label for="inputprimaryphone">Primary Business Phone:</label>
 					    		<input type="text" class="form-control" name="primary_business_phone" id="primary_business_phone">
@@ -104,6 +109,19 @@
 					    	<div class="col-md-6 personal-last-info">
 					    		<label for="inputsecondaryphone">Secondary Business Phone:</label>
 					    		<input type="text" class="form-control" name="secondary_business_phone" id="secondary_business_phone">
+======= --}}
+					    	<div class="col-md-4 personal-info">	
+					    		<label for="inputprimaryphone" class="business-number-label">Primary Business Phone:</label>
+					    		<input type="primaryphone" class="form-control" name="primary_business_phone" id="primary_business_phone">
+					    	</div>
+					    	<div class="col-md-4 personal-info">
+					    		<label for="inputsecondaryphone" class="business-number-label">Secondary Business Phone:</label>
+					    		<input type="secondaryphone" class="form-control" name="secondary_business_phone" id="secondary_business_phone">
+{{-- >>>>>>> d47125beafcb10cd4fe8106ca31948fe487680f4 --}}
+					    	</div>
+					    	<div class="col-md-4 personal-last-info">
+					    		<label for="inputfaxnumber">Fax Number:</label>
+					    		<input type="faxnumber" class="form-control" name="fax_number" id="fax_number">
 					    	</div>
 				  		</div>
 				  		<div class="form-group businessadd-holder">
@@ -133,6 +151,7 @@
 				 		</div>
 		  		</div>
 			</div>
+{{-- <<<<<<< HEAD
 			<div class="accept-terms">
 				<div class="checkbox">
 	  				<label><input type="checkbox" value="" id="agree_checkbox">I Agree in the Terms of Offer.</label>
@@ -141,6 +160,17 @@
 			<div class="form-group button-holder" >
 				  	<button type="button" class="btn btn-continue" id="continue">CONTINUE</button>
 			</div>
+======= --}}
+			{{-- <form role="form" action="/success"> --}}
+				<div class="accept-terms">
+					<div class="checkbox">
+		  				<label><input type="checkbox" value="" id="agree_checkbox">I am interested in receiving offers from Croatia Directory and its partners.</label>
+					</div>
+				</div>
+				<div class="form-group button-holder" >
+				  	<button type="button" class="btn btn-continue" id="continue">CONTINUE</button>
+				</div>
+{{-- >>>>>>> d47125beafcb10cd4fe8106ca31948fe487680f4 --}}
 		</div>
 	</div>
 </form>

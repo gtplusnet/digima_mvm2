@@ -24,6 +24,12 @@ class FrontController extends Controller
         $data['county_list'] = TblCountyModel::get();
         return view('front.pages.registration', $data);
     }
+    public function success()
+    {
+        $data['page']   = 'success';
+        return view('front.pages.success', $data);
+    }
+
 
     public function get_city(Request $request)
     {
@@ -62,7 +68,7 @@ class FrontController extends Controller
         $business_data->business_complete_address = $request->business_address;
         $business_data->business_phone = $request->primary_business_phone;
         $business_data->business_alt_phone = $request->secondary_business_phone;
-        //$business_data->business_fax = $request->fax_number;
+        $business_data->business_fax = $request->fax_number;
         $business_data->facebook_url = $request->facebook_url;
         $business_data->twitter_url = $request->twitter_username;
         $business_data->date_created = Carbon::now();
@@ -115,11 +121,6 @@ class FrontController extends Controller
     {
         $data['page']   = 'login';
         return view('front.pages.login', $data);
-    }
-    public function success()
-    {
-        $data['page']   = 'success';
-        return view('front.pages.success', $data);
     }
     public function business()
     {

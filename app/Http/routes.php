@@ -24,11 +24,14 @@ Route::any('/get_city', 'FrontController@get_city');
 Route::any('/get_postal_code', 'FrontController@get_postal_code');
 Route::any('/register_business', 'FrontController@register_business');
 
+
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
+
 Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
+
 
 Route::get('/searchresult', 'SearchresultController@index');
 
