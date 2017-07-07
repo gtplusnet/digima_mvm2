@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="/initializr/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         
         <script src="/initializr/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 

@@ -19,6 +19,12 @@ class FrontController extends Controller
         $data['page']   = 'Registration';
         return view('front.pages.registration', $data);
     }
+    public function success()
+    {
+        $data['page']   = 'success';
+        return view('front.pages.success', $data);
+    }
+
 
 
     public function about()
@@ -35,11 +41,6 @@ class FrontController extends Controller
     {
         $data['page']   = 'login';
         return view('front.pages.login', $data);
-    }
-    public function success()
-    {
-        $data['page']   = 'success';
-        return view('front.pages.success', $data);
     }
     public function business()
     {
