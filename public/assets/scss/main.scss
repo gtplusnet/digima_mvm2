@@ -4,7 +4,7 @@ body{
 		margin-top: 25px;
 		.header{
 			p{
-				font-size: 25px;
+				font-size: 30px;
 			}
 		}
 		.line-after-header{
@@ -24,6 +24,29 @@ body{
 		}
 		.copyright{
 			padding-bottom: 25px;
+		}
+	}
+	.login-form{
+		width: 700px;
+		margin: 0 auto;
+		border: 1px solid #000000;
+		padding-left: 150px;
+		padding-right: 150px;
+		#label-email, #label-password{
+			font-size: 20px;
+			font-weight: normal;
+		}
+		a{
+			font-size: 20px;
+		}
+	}
+	.search-form{
+		margin-top: -10px;
+		background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+		.search-content{
+			margin-left: 330px;
+			padding-top: 200px;
+			padding-bottom: 200px;
 		}
 	}
 }
