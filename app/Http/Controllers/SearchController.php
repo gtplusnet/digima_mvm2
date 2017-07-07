@@ -20,22 +20,13 @@ class SearchController extends Controller
         return view('mvm.front.search', $data);
     }
 
-    public function search_business_result(Request $request)
+    public function search_business(Request $request)
     {
-        $business_search = TblBusinessModel::where('business_name', 'LIKE', '%'.$request->search_business.'%')->get();
+        $data['business_search'] = TblBusinessModel::where('business_name', 'LIKE', '%'.$request->search_business.'%')->get();
 
-        if(count($business_search) > 0)
-        {
-            foreach($business_search as $business_search)
-            {
-                echo '<p>'.$business_search->business_name.'</p>';
-                echo '<hr>';
-            }
-        }
-        else
-        {
-            echo '<p>No Result.</p>';
-        }
+        
+           return view('mvm.front.search_result', $data); 
+        
     }
 
     /**

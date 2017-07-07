@@ -60,8 +60,7 @@ Route::any('/register_business', 'RegistrationController@register_business');
 
 //Routes for Search
 Route::any('/search', 'SearchController@index');
-Route::any('/search_business_result', 'SearchController@search_business_result');
-Route::any('/hey', 'SearchController@hey');
+Route::any('/search_business', 'SearchController@search_business');
 
 //End of Renz's Routes
 

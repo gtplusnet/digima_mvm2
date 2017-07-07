@@ -2,23 +2,13 @@
 
 @section('content')
 	<div class="search-form">
-		<div class="row">
-			<form method="POST">
-				<div class="col-md-4">
-					<label for="search_business">Search Businesses :</label>
-					<input type="text" class="form-control" name="search_business" id="search_business" placeholder="E.g., Mcdo">
+		<div class="search-content">
+			<form class="form-inline" id="search-form" action="/search_business">
+				<div class="form-group">
+				    <input type="text" class="form-control input-lg" name="search_business" id="search_business" style="width: 400px;" placeholder="Enter Business Name.." required>
 				</div>
-				<div class="col-md-2 search-button">
-					<button type="button" class="btn btn-primary form-control" name="search_btn" id="search_btn">Search</button>
-				</div>
-			</form>
-		</div>
-		<br>
-		<div class="search-result-container">
-			@foreach($business_result as $business_result)
-				<p>{{ $business_result->business_name }}</p>
-				<hr>
-			@endforeach
+					<button type="submit" class="btn btn-primary btn-lg" name="search_btn" id="search_btn">SEARCH</button>
+				</form>
 		</div>
 	</div>
 @endsection

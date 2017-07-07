@@ -16,12 +16,11 @@ $(document).ready(function(){
 		{
 			$.ajax({
 				method: 'POST',
-				url: '/search_business_result',
+				url: '/search_business',
 				data: {search_business: search_business},
 				dataType: 'text',
 				success:function(data){
 					$('#search_business').val('');
-					$('.search-result-container').html(data);
 				}
 			});
 		}

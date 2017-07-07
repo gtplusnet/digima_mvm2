@@ -27,11 +27,12 @@ body {
       font-weight: normal; }
     body .login-form a {
       font-size: 20px; }
-  body .search-form .search-button {
-    margin-top: 25px; }
-  body .search-form .search-result-container {
-    width: 555px;
-    background-color: #C0C0C0;
-    padding: 10px 10px; }
+  body .search-form {
+    margin-top: -10px;
+    background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%); }
+    body .search-form .search-content {
+      margin-left: 330px;
+      padding-top: 200px;
+      padding-bottom: 200px; }
 
 /*# sourceMappingURL=main.css.map */
