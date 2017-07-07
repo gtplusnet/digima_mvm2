@@ -11,12 +11,31 @@
 </div>
 <div id="main-wrapper">
     <div class="row">
-        <div class="col-md-4 center">
-            <h1 class="text-xxl f-black text-center"><i class="icon-wrench"></i></h1>
-            <h2 class="text-xl f-black text-center" id="counter"></h2>
-            <div class="details">
-                <h3 class="f-black">OUR WEBSITE IS UNDER CONSTRUCTION.</h3>
-                <p class="f-black">WE ARE COMING SOON.</p>
+        <div class="col-md-6">
+            <div class="panel panel-white">
+               <div class="panel-heading clearfix">
+                <h3 class="panel-title">Basic Tree</h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Category List</h3>
+                            <ul id="tree1">
+                                @foreach($categories as $category)
+                                    <li>
+                                        {{ $category->title }}
+                                        @if(count($category->childs))                                           
+                                            @include('admin.merchant.pages.category.manageChild',['childs' => $category->childs])
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                       
+                    </div>
+
+                </div>
             </div>
         </div>
     </div><!-- Row -->

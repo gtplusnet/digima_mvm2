@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Tbl_payment_method;
+use App\Tbl_business_category;
+
 class MerchantController extends Controller
 {
     
@@ -18,14 +21,20 @@ class MerchantController extends Controller
 
 	public function profile()
 	{
-		$data['page']	= 'Profile';
+		$data['page']				= 'Profile';
+		$data['_payment_method']	= Tbl_payment_method::get();
 		return view ('admin.merchant.pages.profile', $data);		
 	}
 
 	public function category()
 	{
-		$data['page']	= 'Category';
-		return view ('admin.merchant.pages.category', $data);		
+		$data['page']				= 'Category';
+
+		$categories 				= Tbl_business_category::where('parent_id', '=', 0)->get();
+        $allCategories 				= Tbl_business_category::pluck('title','id')->all();
+
+
+		return view('admin.merchant.pages.category', compact('categories', 'allCategories'));		
 	}
 
 	public function bills()

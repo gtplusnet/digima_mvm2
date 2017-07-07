@@ -43,11 +43,11 @@
         <![endif]-->
         
     </head>
-    <body class="page-header-fixed  pace-done small-sidebar page-sidebar-fixed">
+    <body class="page-header-fixed  pace-done small-sidebar hover-menu">
 
         
        
-        <main class="page-content content-wrap">
+        <main class="page-content content-wrap container">
             
             {{-- Header and Nav Bar --}}
             @include('admin.merchant.include.header');
@@ -88,6 +88,8 @@
         <script src="/assets/admin/merchant/assets/plugins/offcanvasmenueffects/js/main.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/waves/waves.min.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/3d-bold-navigation/js/main.js"></script>
+
+        {{-- Dashboard JS --}}
         <script src="/assets/admin/merchant/assets/plugins/waypoints/jquery.waypoints.min.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/jquery-counterup/jquery.counterup.min.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/toastr/toastr.min.js"></script>
@@ -100,6 +102,13 @@
         <script src="/assets/admin/merchant/assets/plugins/metrojs/MetroJs.min.js"></script>
         <script src="/assets/admin/merchant/assets/js/modern.js"></script>
         <script src="/assets/admin/merchant/assets/js/pages/dashboard.js"></script>
-        
+        {{-- End Dashboard JS --}}
+
+        {{-- UI Tree View JS --}}
+        <script src="/assets/admin/merchant/assets/plugins/jstree/jstree.min.js"></script>
+        <script src="/assets/admin/merchant/assets/js/modern.min.js"></script>
+        <script src="/assets/admin/merchant/assets/js/pages/jstree.js"></script>    
+        {{-- End Tree JS --}}
+
     </body>
 </html>
