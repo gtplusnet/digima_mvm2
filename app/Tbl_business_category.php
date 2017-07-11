@@ -12,6 +12,6 @@ class Tbl_business_category extends Model
 
     public function childs() 
     {
-        return $this->hasMany('App\Tbl_business_category','parent_id','id') ;
+        return $this->hasMany('App\Tbl_business_category', 'parent_id', 'business_category_id') ;
     }
 }

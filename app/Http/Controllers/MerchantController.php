@@ -30,11 +30,9 @@ class MerchantController extends Controller
 	{
 		$data['page']				= 'Category';
 
-		$categories 				= Tbl_business_category::where('parent_id', '=', 0)->get();
-        $allCategories 				= Tbl_business_category::pluck('title','id')->all();
+		$data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();	
 
-
-		return view('admin.merchant.pages.category', compact('categories', 'allCategories'));		
+		return view('admin.merchant.pages.category', $data);		
 	}
 
 	public function bills()

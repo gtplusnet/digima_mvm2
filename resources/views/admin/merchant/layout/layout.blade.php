@@ -23,10 +23,17 @@
         <link href="/assets/admin/merchant/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/merchant/assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/merchant/assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/> 
+
+        {{-- Dashboard CSS --}}
         <link href="/assets/admin/merchant/assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet" type="text/css"/>   
         <link href="/assets/admin/merchant/assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet" type="text/css"/>  
         <link href="/assets/admin/merchant/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css"/>    
-            
+        {{-- End Dashboard CSS --}}
+
+        {{-- Tree CSS --}}
+        <link href="/assets/admin/merchant/assets/plugins/jstree/themes/default/style.min.css" rel="stylesheet" type="text/css"/>
+        {{-- End Tree CSS --}}
+
         <!-- Theme Styles -->
         <link href="/assets/admin/merchant/assets/css/modern.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/merchant/assets/css/themes/white.css" class="theme-color" rel="stylesheet" type="text/css"/>
@@ -41,7 +48,7 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
+        <script src="/assets/admin/merchant/assets/plugins/jquery/jquery-2.1.3.min.js"></script>
     </head>
     <body class="page-header-fixed  pace-done small-sidebar hover-menu">
 
@@ -73,10 +80,10 @@
         @include('admin.merchant.include.menu');
 
         <div class="cd-overlay"></div>
-    
-
+        
+     
         <!-- Javascripts -->
-        <script src="/assets/admin/merchant/assets/plugins/jquery/jquery-2.1.3.min.js"></script>
+        
         <script src="/assets/admin/merchant/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/pace-master/pace.min.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/jquery-blockui/jquery.blockui.js"></script>
@@ -109,6 +116,7 @@
         <script src="/assets/admin/merchant/assets/js/modern.min.js"></script>
         <script src="/assets/admin/merchant/assets/js/pages/jstree.js"></script>    
         {{-- End Tree JS --}}
+
 
     </body>
 </html>
