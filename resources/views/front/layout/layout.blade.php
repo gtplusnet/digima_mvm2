@@ -27,6 +27,9 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/login.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchresult.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/business.css">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     </head>
     <body>
@@ -47,7 +50,7 @@
                     <div class="pull-right">
                         <div class="menu-btn">
                             <div class="spacer-btn">
-                                <button class="btn btn-login"><i class="fa fa-power-off"> Log in</i></button>
+                                <a href=""><button class="btn btn-login"><i class="fa fa-power-off"> Log in</i></button></a>
                             </div>
                             <div>
                                 <a href="/registration"><button class="btn btn-register"><i class="fa fa-plus-square"> Register</i></button></a>
@@ -122,9 +125,12 @@
             </div>
         </div>
         <!-- DITO ANG SCRIPT -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        
+        <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+       <!--  <script type="text/javascript" scr="/assets/js/front/rangeslider.js"></script> -->
+
         <!-- HANGGANG DITO -->
     </body>
 </html>
