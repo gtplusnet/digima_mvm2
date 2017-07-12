@@ -16,7 +16,8 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $data['page']   = 'home';
+        $data['one_to_four_list'] = TblBusinessModel::skip(0)->take(4)->get();
+        $data['five_to_eight_list'] = TblBusinessModel::skip(4)->take(4)->get();
         return view('front.pages.home', $data);
     }
     public function registration()
@@ -29,7 +30,6 @@ class FrontController extends Controller
         $data['page']   = 'success';
         return view('front.pages.success', $data);
     }
-
 
     public function get_city(Request $request)
     {

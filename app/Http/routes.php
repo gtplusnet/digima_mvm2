@@ -71,7 +71,8 @@ Route::any('/check_login', 'LoginController@check_login');
 
 //Routes for Search
 Route::any('/search', 'SearchController@index');
-Route::any('/search_business', 'SearchController@search_business');
+Route::any('/search_result', 'SearchController@search_result');
+Route::any('/search_result_list', 'SearchController@search_result_list');
 Route::any('/business_info', 'SearchController@business_info');
 
 //End of Renz's Routes
