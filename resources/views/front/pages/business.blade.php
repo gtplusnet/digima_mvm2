@@ -1,4 +1,5 @@
 @extends('front.layout.layout')
+@section('title', 'Business Info')
 @section('content')
 @foreach($business_info as $business_info)
 <div class="banner-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.jpg')">
@@ -7,7 +8,7 @@
             <img class="business-logo" src="/images/business_logo.png">
         </div>
         <div class="pull-right">
-            <p class="search-text">Search > <a class="search-link" href="">Arabian Night's Hotel</a></p>
+            <p class="search-text">Search ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
         </div>
     </div>
 </div>
@@ -53,13 +54,13 @@
                 <div class="business-details-rightpart-title">
                     <i class="material-icons">location_on</i><p class="title-margin-mi">ADDRESS:</p>
                 </div>
-                <p class="business-details-rightpart-content">167 W 74th St, Upper West Side, New York, NY 10023, United States</p>
+                <p class="business-details-rightpart-content">{{ $business_info->business_complete_address }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
                     <i class="fa fa-phone icon-size"></i><p class="title-margin"> PHONE:</p>
                 </div>
-                <p class="business-details-rightpart-content">+12 345 6789</p>
+                <p class="business-details-rightpart-content">{{ $business_info->business_phone }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
@@ -71,7 +72,7 @@
                 <div class="business-details-rightpart-title">
                     <i class="fa fa-envelope-o icon-size"></i><p class="title-margin"> EMAIL:</p>
                 </div>
-                <p class="business-details-rightpart-content">email@gmail.com</p>
+                <p class="business-details-rightpart-content">{{ $business_info->user_email }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">

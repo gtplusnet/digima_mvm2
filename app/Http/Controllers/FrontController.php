@@ -12,6 +12,7 @@ use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
 use Carbon\Carbon;
 use Redirect;
+use DB;
 
 class FrontController extends Controller
 {
@@ -124,7 +125,7 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-        $data['business_info'] = TblBusinessModel::where('business_id', '=', $request->business_id)->first();
+        $data['business_info'] = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', $request->business_id)->get();
 
         return view('front.pages.business', $data); 
     }
