@@ -49,7 +49,7 @@
 						</div>
 					</div>
 					<div class="col-md-7">
-						<p class="business-title">McDonald's</p>
+						<a href="/business"><p class="business-title">McDonald's</p></a>
 						<div class="business-details-holder">
 							<div class="business-details">
 								<i class="fa fa-phone details"></i><p>123-456-7890</p>
