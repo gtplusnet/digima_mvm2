@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+use App\Models\TblBusinessContactPersonModel;
+use App\Models\TblBusinessModel;
 use App\Models\TblAgent;
 use DB;
 
@@ -29,6 +31,10 @@ class AgentController extends Controller
 	public function client()
 	{
 		$data['page']	= 'Client';
+		$data['_clients'] = TblBusinessModel::contact_person()
+						  ->other_info()
+						  ->user_account()
+						  ->get();
 		return view ('agent.pages.client', $data);		
 	}
 	public function add_client()
@@ -66,8 +72,9 @@ class AgentController extends Controller
         return $postal_code->postal_code;
     }
     public function search_client(Request $request)
-    {
-    	$output ="";
+    { 
+
+    	/*$output ="";
     	if($request -> ajax())
     	{
     		$clients = TblAgent::where('name','LIKE','%'.$Request->search_client.'%')
@@ -79,7 +86,7 @@ class AgentController extends Controller
     		if($clients)
     		{
     			foreach ($clients as $key => $client) {
-    				$output.=	'<tr>'.
+    				$output.=	'<td>'.
                                     '<th>'.$customer->Name.'</th>'
                                     '<th>'.$customer->Date.'</th>'
                                     '<th>'.$customer->Business.'</th>'
@@ -90,10 +97,10 @@ class AgentController extends Controller
     			}
     		}
 
-    	}
+    	}*/
     }
 
-		public function logout()
+	public function logout()
 	{
 		Session::forget('user_email');
 		Session::forget('user_password');

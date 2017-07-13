@@ -34,18 +34,55 @@
                                         <th>Name</th>
                                         <th>Date/Added</th>
                                         <th>Business Name</th>
-                                        <th>Description</th>
-                                        <th>Reference</th>
                                         <th>Status</th>
+                                        <th></th>
                                     </tr>
                                 </thead>                       
                                 <tbody>
+                                @if(count($_clients) != 0)
+                                    @foreach($_clients as $key => $client)
+                                    <tr>
+                                        <td>{{$client->contact_prefix}} {{$client->contact_first_name}} {{$client->contact_last_name}} {{$client->last_name}} {{$client->suffix_name}}</td>
+                                        <td>{{$client->date_created}}</td>
+                                        <td>{{$client->business_name}}</td>
+                                        <td>{{$client->status == 0 ? "Disabled" : $client->status == 1 ? "Active" : "Pending"}}</td>
+                                         <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="border-radius: 20px;">View</button></td>
+                                            <div class="modal fade" id="myModal" role="dialog" style="border-radius: 20px;">
+                                            <div class="modal-dialog">
+
+                                             <!-- Modal content-->
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">View</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                              <p>{{$client->contact_prefix}} {{$client->contact_first_name}} {{$client->contact_last_name}} {{$client->last_name}} {{$client->suffix_name}}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                           </div>
+                                         </div>
+                                    
+                                       </div>
+                                      </div>                                       
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="40"><center>---No Record Found---</center></td>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
     </div><!-- Row -->
-    <!-- Row -->                    
+    <!-- Row -->    
 </div>
+@endsection
+@section('modal')
+    <!-- Modal -->
+    
 @endsection

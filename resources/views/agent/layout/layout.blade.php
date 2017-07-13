@@ -13,6 +13,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         
         <!-- Styles -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="/assets/admin/merchant/assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
         <link href="/assets/admin/merchant/assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
@@ -32,7 +33,8 @@
         <link href="/assets/admin/merchant/assets/css/modern.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/merchant/assets/css/themes/white.css" class="theme-color" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/merchant/assets/css/custom.css" rel="stylesheet" type="text/css"/>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
         
@@ -76,7 +78,7 @@
         @include('agent.include.menu');
 
         <div class="cd-overlay"></div>
-    
+        @yield('modal')
 
         <!-- Javascripts -->
         <script src="/assets/admin/merchant/assets/plugins/jquery/jquery-2.1.3.min.js"></script>
@@ -110,7 +112,7 @@
             }
         });
         </script>
-        <script type="text/javascript">
+        {{-- <script type="text/javascript">
             $('#client_search').keyup(function(){
                     $.ajax({
                         url:{{Url::to('client_search')}},
@@ -125,6 +127,9 @@
                 }
             });
         </script>
+ --}}
 
     </body>
+
+       
 </html>
