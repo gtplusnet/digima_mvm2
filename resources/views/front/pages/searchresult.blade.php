@@ -61,7 +61,7 @@
 						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
 					</div>
 				</div>
-				<div class="search-result-holder">
+				<!-- <div class="search-result-holder">
 					<div class="col-md-5 business-profilepic-holder">
 						<img class="business-profilepic" src="/images/mcdo_pic01.jpg" alt="Image">
 						<div class="icon-container">
@@ -144,7 +144,7 @@
 						</div>
 						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
 					</div>
-				</div>
+				</div> -->
 				<div class="pagination-holder">
 					<ul class="pagination">
 					  <li class="active"><a href="#">1</a></li>
