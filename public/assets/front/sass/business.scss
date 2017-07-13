@@ -1,8 +1,20 @@
+.business-logo-container
+{
+	display: -webkit-inline-box;
+}
 .business-logo
 {
 	width: 100%;
 	height: auto;
     margin-top: 55px;
+}
+.business-logo-name
+{
+	color: #fff;
+    font-size: 30px;
+    margin-bottom: 0px;
+    margin-top: 75px;
+    margin-left: 15px;
 }
 .business-details-container
 {
