@@ -1,4 +1,4 @@
-@extends('mvm.front.registration_layout')
+@extends('mvm.front.front_layout')
 
 @section('content')
 	<div class="registration-form">
@@ -103,7 +103,7 @@
 
 				  	<div class="accept-terms">
 				  		<div class="checkbox">
-  							<label><input type="checkbox" id="agree_checkbox" value="">I am interested in receiving offers from Croatia Directory and its partners.</label>
+  							<label><input type="checkbox" id="agree_checkbox" value="">I agree to the Terms of Offer.</label>
 						</div>
 				  	</div>
 
