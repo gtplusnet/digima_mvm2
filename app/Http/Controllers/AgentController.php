@@ -29,6 +29,10 @@ class AgentController extends Controller
 		$data['page']	= 'Client';
 		return view ('agent.pages.client', $data);		
 	}
+	public function get_client()
+	{
+		
+	}
 	public function add_client()
 	{
 		$data['county_list'] = TblCountyModel::get();

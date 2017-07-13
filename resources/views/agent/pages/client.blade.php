@@ -21,7 +21,7 @@
                     <div class="col-md-3">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-                            <input id="" type="text" class="form-control" name="" placeholder="Enter Keyword Here">
+                            <input id="search" type="text" class="form-control" name="search" placeholder="Enter Keyword Here">
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                     </tr>
                                 </thead>                       
                                 <tbody>
-                                    <tr>
+                                    <tr id="result">
                             
                                     </tr>
                                 </tbody>
@@ -50,4 +50,6 @@
     </div><!-- Row -->
     <!-- Row -->                    
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/agent/agent.js"></script>
 @endsection
