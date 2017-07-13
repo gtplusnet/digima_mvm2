@@ -20,13 +20,13 @@ body
 	display: inline-block;
 	vertical-align: middle;
 	background-color: #fff;
-	padding: 15px 23px;
+	padding: 17px 23px;
 }
 .nav
 {
 	text-decoration: none !important;
 	color: #333;
-	font-size: 17px;
+	font-size: 15px;
 }
 .nav-tab:hover
 {
@@ -43,12 +43,18 @@ body
 }
 .menu-btn
 {
-	margin-top: 10px;
+	margin-top: 12px;
 	display: -webkit-inline-box;
 }
 .spacer-btn
 {
 	margin-right: 15px;
+}
+.nav-buttons
+{
+	display: inline;
+    font-size: 15px;
+    margin-left: 5px;
 }
 .btn-login, .btn-register
 {
