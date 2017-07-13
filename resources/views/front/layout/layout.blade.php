@@ -54,7 +54,7 @@
                     <div class="pull-right">
                         <div class="menu-btn">
                             <div class="spacer-btn">
-                                <a href=""><button class="btn btn-login"><i class="fa fa-power-off"> Log in</i></button></a>
+                                <a href="/login"><button class="btn btn-login"><i class="fa fa-power-off"> Log in</i></button></a>
                             </div>
                             <div>
                                 <a href="/registration"><button class="btn btn-register"><i class="fa fa-plus-square"> Register</i></button></a>

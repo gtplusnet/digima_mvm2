@@ -40,6 +40,7 @@
 				</div>
 			</div>
 			<div class="col-md-12 search-result-container">
+<<<<<<< HEAD
 					@foreach($business_search as $item)
 						<div class="search-result-holder">
 							<div class="col-md-5 business-profilepic-holder">
@@ -50,6 +51,65 @@
 									<a href="{{ $item->facebook_url }}" class="link-style" target="blank"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
 									<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
 								</div>
+{{-- =======
+				<div class="search-result-holder">
+					<div class="col-md-5 business-profilepic-holder">
+						<a href="/business">
+							<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
+						</a>
+						<div class="icon-container">
+							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
+							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<a href="/business"><p class="business-title">McDonald's</p></a>
+						<div class="business-details-holder">
+							<div class="business-details">
+								<i class="fa fa-phone details"></i><p>123-456-7890</p>
+							</div>
+							<div class="business-details">
+								<i class="material-icons details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
+							</div>
+						</div>
+						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
+					</div>
+				</div>
+				<div class="search-result-holder">
+					<div class="col-md-5 business-profilepic-holder">
+						<img class="business-profilepic" src="/images/mcdo_pic01.jpg" alt="Image">
+						<div class="icon-container">
+							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
+							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<p class="business-title">McDonald's</p>
+						<div class="business-details-holder">
+							<div class="business-details">
+								<i class="fa fa-phone details"></i><p>123-456-7890</p>
+							</div>
+							<div class="business-details">
+								<i class="material-icons details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
+							</div>
+						</div>
+						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
+					</div>
+				</div>
+				<div class="search-result-holder">
+					<div class="col-md-5 business-profilepic-holder">
+						<img class="business-profilepic" src="/images/mcdo_pic02.jpg" alt="Image">
+						<div class="icon-container">
+							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
+							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<p class="business-title">McDonald's</p>
+						<div class="business-details-holder">
+							<div class="business-details">
+								<i class="fa fa-phone details"></i><p>123-456-7890</p>
+>>>>>>> a24bc30767abb642cc05996a2843fcaa7b7e8517 --}}
 							</div>
 							<div class="col-md-7">
 								<p class="business-title"><a href="/business_info?business_id={{ $item->business_id }}" style="text-decoration: none; color: #333;">{{ $item->business_name }}</a></p>

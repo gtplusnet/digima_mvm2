@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .business-logo {
   width: 100%;
   height: auto;
@@ -26,4 +27,7 @@
   width: 178px;
   height: 118px; }
 
+=======
+.business-logo{width:100%;height:auto;margin-top:55px}.business-details-container{padding-left:0px;padding-right:15px}.main-pic-container{margin-top:40px;margin-bottom:80px}.main-pic{width:100%}.secondary-pics-container{margin-bottom:80px}.secondary-pics{width:178px;height:118px;margin-right:7px}.secondary-pics-last{width:178px;height:118px}.overview-container{background-color:#333;padding:15px 25px}.overview-title{color:#fed600;font-size:20px;margin:0px}.overview-content{border:1px solid #999;padding-top:25px;padding-left:60px;padding-right:60px;padding-bottom:95px}.overview-content-text{font-size:17.28px;text-align:justify}.category-content{border:1px solid #999;padding-top:25px;padding-left:60px;padding-right:60px;padding-bottom:30px;margin-bottom:300px}.business-details-container-rightpart{padding-left:30px;padding-right:0px}.business-details-rightpart{background-color:#333;padding:25px 30px;margin-bottom:75px;margin-top:40px}.details-container{border-bottom:1px solid #999;height:90px;margin-top:15px}.details-container-last{margin-top:15px;margin-bottom:70px}.business-details-rightpart-title{display:-webkit-inline-box;color:#fed600;font-size:15px}.icon-size{font-size:19px}.title-margin{margin-left:10px}.title-margin-mi{margin-left:4px}.business-details-rightpart-content{color:#fff;font-size:13px;max-width:224px;margin-left:23px}.business-details-paymentmethods{color:#fff;font-size:13px}.sociallinks-holder{text-align:center;margin-bottom:30px}.sociallinks-container{display:-webkit-inline-box}.businesspage-fb-icon{color:#3b5998;font-size:25px;margin-right:5px;display:inline}.businesspage-twitter-icon{color:#3fcdfd;font-size:25px;margin-right:5px;display:inline}.fb-like{color:#fff;font-size:15px;margin-right:40px;display:inline}.twitter-tweet{color:#fff;font-size:15px;display:inline}
+>>>>>>> a24bc30767abb642cc05996a2843fcaa7b7e8517
 /*# sourceMappingURL=business.css.map */
