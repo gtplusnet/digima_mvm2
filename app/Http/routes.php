@@ -74,7 +74,7 @@ Route::any('/check_login', 'LoginController@check_login');
 //Route::any('/register_business', 'RegistrationController@register_business');
 
 //Routes for Search
-Route::any('/search', 'SearchController@index');
+//Route::any('/search', 'SearchController@index');
 //Route::any('/search_result', 'SearchController@search_result');
 //Route::any('/search_result_list', 'SearchController@search_result_list');
 

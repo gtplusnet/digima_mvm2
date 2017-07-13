@@ -1,5 +1,6 @@
 @extends('front.layout.layout')
 @section('content')
+@foreach($business_info as $business_info)
 <div class="banner-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.jpg')">
     <div class="container">
         <div class="pull-left">
@@ -142,4 +143,5 @@
             </div>
     </div>
 </div>
+@endforeach
 @endsection

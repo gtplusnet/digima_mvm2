@@ -124,9 +124,9 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-        //$data['business_info'] = TblBusinessModel::where('business_id', '=', $request->business_id)->get();
+        $data['business_info'] = TblBusinessModel::where('business_id', '=', $request->business_id)->first();
 
-        //return view('front.pages.business', $data); 
+        return view('front.pages.business', $data); 
     }
 
     public function about()
