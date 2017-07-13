@@ -3,7 +3,10 @@
 <div class="banner-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.jpg')">
     <div class="container">
         <div class="pull-left">
-            <img class="business-logo" src="/images/business_logo.png">
+            <div class="business-logo-container">
+                <img class="business-logo" src="/images/business_logo.png">
+                <p class="business-logo-name">ARABIAN NIGHTS HOTEL</p>
+            </div>
         </div>
         <div class="pull-right">
             <p class="search-text">Search > <a class="search-link" href="">Arabian Night's Hotel</a></p>

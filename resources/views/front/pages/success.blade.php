@@ -13,7 +13,7 @@
 			<i class="fa fa-check-circle-o check-icon"></i>
 			<p class="message-intro">Thank you!</p>
 			<p class="success-message">Your submission is received and we will contact you soon.</p>
-			<button class="continue-btn">CONTINUE</button>
+			<a href="/"><button class="continue-btn">CONTINUE</button></a>
 		</div>
 	</div>
 </div>
