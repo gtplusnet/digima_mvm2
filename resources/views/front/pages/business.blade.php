@@ -7,7 +7,7 @@
         <div class="pull-left">
             <div class="business-logo-container">
                 <img class="business-logo" src="/images/business_logo.png">
-                <p class="business-logo-name">ARABIAN NIGHTS HOTEL</p>
+                <p class="business-logo-name">{{ $business_info->business_name }}</p>
             </div>
         </div>
         <div class="pull-right">
