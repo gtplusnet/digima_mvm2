@@ -24,6 +24,10 @@ Route::any('/get_city', 'FrontController@get_city');
 Route::any('/get_postal_code', 'FrontController@get_postal_code');
 Route::any('/register_business', 'FrontController@register_business');
 
+Route::any('/search_result', 'FrontController@search_result');
+Route::any('/search_result_list', 'FrontController@search_result_list');
+Route::any('/business_info', 'FrontController@business_info');
+
 
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
@@ -71,9 +75,9 @@ Route::any('/check_login', 'LoginController@check_login');
 
 //Routes for Search
 Route::any('/search', 'SearchController@index');
-Route::any('/search_result', 'SearchController@search_result');
-Route::any('/search_result_list', 'SearchController@search_result_list');
-Route::any('/business_info', 'SearchController@business_info');
+//Route::any('/search_result', 'SearchController@search_result');
+//Route::any('/search_result_list', 'SearchController@search_result_list');
+
 
 //End of Renz's Routes
 

@@ -1,15 +1,17 @@
 @extends('front.layout.layout')
+@section('title', 'Search Result')
 @section('content')
+@if(count($business_search) > 0)
 <div class="banner-searchresult" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">
 		<div class="pull-right">
-			<p class="search-text">Search > <a class="search-link" href="">Mc'Donalds</a></p>
+			<p class="search-text">Search > <a class="search-link" href="">{{ $business_name }}</a></p>
 		</div>
 	</div>
 </div>
 <div class="container">
 	<div>
-		<p class="searched-business">SEARCH RESULT FOR: MC'DONALDS</p>
+		<p class="searched-business">SEARCH RESULT FOR: {{ $business_name }}</p>
 	</div>
 	<div>
 		<div class="col-md-8 search-table">
@@ -38,122 +40,43 @@
 				</div>
 			</div>
 			<div class="col-md-12 search-result-container">
-				<div class="search-result-holder">
-					<div class="col-md-5 business-profilepic-holder">
-						<a href="/business">
-							<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
-						</a>
-						<div class="icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<p class="business-title">McDonald's</p>
-						<div class="business-details-holder">
-							<div class="business-details">
-								<i class="fa fa-phone details"></i><p>123-456-7890</p>
+					@foreach($business_search as $item)
+						<div class="search-result-holder">
+							<div class="col-md-5 business-profilepic-holder">
+								<a href="/business">
+									<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
+								</a>
+								<div class="icon-container">
+									<a href="{{ $item->facebook_url }}" class="link-style" target="blank"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
+									<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
+								</div>
 							</div>
-							<div class="business-details">
-								<i class="material-icons details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
-							</div>
-						</div>
-						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
-					</div>
-				</div>
-				<div class="search-result-holder">
-					<div class="col-md-5 business-profilepic-holder">
-						<img class="business-profilepic" src="/images/mcdo_pic01.jpg" alt="Image">
-						<div class="icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<p class="business-title">McDonald's</p>
-						<div class="business-details-holder">
-							<div class="business-details">
-								<i class="fa fa-phone details"></i><p>123-456-7890</p>
-							</div>
-							<div class="business-details">
-								<i class="material-icons details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
+							<div class="col-md-7">
+								<p class="business-title"><a href="/business_info?business_id={{ $item->business_id }}" style="text-decoration: none; color: #333;">{{ $item->business_name }}</a></p>
+								<div class="business-details-holder">
+									<div class="business-details">
+										<i class="fa fa-phone details"></i><p>&nbsp;{{ $item->business_phone }}</p>
+									</div>
+									<div class="business-details">
+										<i class="material-icons details">location_on</i><p>{{ $item->business_complete_address }}</p>
+									</div>
+								</div>
+								<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
 							</div>
 						</div>
-						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
-					</div>
-				</div>
-				<div class="search-result-holder">
-					<div class="col-md-5 business-profilepic-holder">
-						<img class="business-profilepic" src="/images/mcdo_pic02.jpg" alt="Image">
-						<div class="icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<p class="business-title">McDonald's</p>
-						<div class="business-details-holder">
-							<div class="business-details">
-								<i class="fa fa-phone details"></i><p>123-456-7890</p>
-							</div>
-							<div class="business-details">
-								<i class="material-icons details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
-							</div>
-						</div>
-						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
-					</div>
-				</div>
-				<div class="search-result-holder">
-					<div class="col-md-5 business-profilepic-holder">
-						<img class="business-profilepic" src="/images/mcdo_pic03.jpg" alt="Image">
-						<div class="icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<p class="business-title">McDonald's</p>
-						<div class="business-details-holder">
-							<div class="business-details">
-								<i class="fa fa-phone details"></i><p>123-456-7890</p>
-							</div>
-							<div class="business-details">
-								<i class="material-icons details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
-							</div>
-						</div>
-						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
-					</div>
-				</div>
-				<div class="search-result-holder">
-					<div class="col-md-5 business-profilepic-holder">
-						<img class="business-profilepic" src="/images/mcdo_pic03.jpg" alt="Image">
-						<div class="icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<p class="business-title">McDonald's</p>
-						<div class="business-details-holder">
-							<div class="business-details">
-								<i class="fa fa-phone details"></i><p>123-456-7890</p>
-							</div>
-							<div class="business-details">
-								<i class="material-icons details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
-							</div>
-						</div>
-						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
-					</div>
-				</div>
+					@endforeach
+				@else
+			@endif
 				<div class="pagination-holder">
-					<ul class="pagination">
+					{!! $business_search->appends(Request::capture()->except('page'))->render() !!}
+					{{-- <ul class="pagination">
 					  <li class="active"><a href="#">1</a></li>
 					  <li><a href="#">2</a></li>
 					  <li><a href="#">3</a></li>
 					  <li><a href="#">4</a></li>
 					  <li><a href="#">5</a></li>
 					  <li class="active"><a href="#">Next</a></li>
-					</ul>
+					</ul> --}}
 				</div>
 			</div>
 		</div>

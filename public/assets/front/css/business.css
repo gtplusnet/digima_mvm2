@@ -1,2 +1,29 @@
-.business-logo{width:100%;height:auto;margin-top:55px}.business-details-container{padding-left:0px;padding-right:0px}.main-pic-container{margin-top:40px;margin-bottom:80px}.main-pic{width:100%}.secondary-pics-container{margin-bottom:80px}.secondary-pics{width:178px;height:118px;margin-right:12px}.secondary-pics-last{width:178px;height:118px}
+.business-logo {
+  width: 100%;
+  height: auto;
+  margin-top: 55px; }
+
+.business-details-container {
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.main-pic-container {
+  margin-top: 40px;
+  margin-bottom: 80px; }
+
+.main-pic {
+  width: 100%; }
+
+.secondary-pics-container {
+  margin-bottom: 80px; }
+
+.secondary-pics {
+  width: 178px;
+  height: 118px;
+  margin-right: 12px; }
+
+.secondary-pics-last {
+  width: 178px;
+  height: 118px; }
+
 /*# sourceMappingURL=business.css.map */

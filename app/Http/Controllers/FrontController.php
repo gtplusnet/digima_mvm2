@@ -11,6 +11,7 @@ use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
 use Carbon\Carbon;
+use Redirect;
 
 class FrontController extends Controller
 {
@@ -27,8 +28,7 @@ class FrontController extends Controller
     }
     public function success()
     {
-        $data['page']   = 'success';
-        return view('front.pages.success', $data);
+        return view('front.pages.success');
     }
 
     public function get_city(Request $request)
@@ -105,6 +105,28 @@ class FrontController extends Controller
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
         return $postal_code->postal_code;
+    }
+
+    public function search_result(Request $request)
+    {
+        $business_name = $request->business_name;
+
+        return Redirect::to("/search_result_list?business_name={$business_name}");
+    }
+
+    public function search_result_list(Request $request)
+    {
+        $business_name = $request->business_name;
+        $business_search = TblBusinessModel::where('business_name', 'LIKE', '%'.$business_name.'%')->paginate(5);
+
+        return view('front.pages.searchresult', compact('business_search', 'business_name')); 
+    }
+
+    public function business_info(Request $request)
+    {
+        //$data['business_info'] = TblBusinessModel::where('business_id', '=', $request->business_id)->get();
+
+        //return view('front.pages.business', $data); 
     }
 
     public function about()

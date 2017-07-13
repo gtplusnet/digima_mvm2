@@ -136,6 +136,9 @@
         <!-- Registration JS -->
         <script src="/assets/js/front/registration.js"></script>
 
+         <!-- Search Business JS -->
+        <script src="/assets/js/front/search.js"></script>
+
         <!-- iziToast Plugin JS -->
         <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
 

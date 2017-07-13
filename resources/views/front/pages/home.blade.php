@@ -13,10 +13,11 @@
 				</tr>
 				<tr>
 					<td>
-						<form class="form-search" action="/searchresult">
+						<form class="form-search" action="/search_result" method="POST">
+							{{ csrf_field() }}
 							<div class="spacer">
 								<div class="form-spacer">
-									<input class="business-name-textbox" type="text" placeholder="Business, Category or Keyword...">
+									<input class="business-name-textbox" type="text" name="business_name" id="business_name" placeholder="Business, Category or Keyword...">
 									<select class="counties-zipcode-selectbox">
 										<option value="" disabled selected>Counties or ZIP Code...</option>
 										<optgroup label="Counties">
@@ -32,7 +33,7 @@
 											<option>-----</option>
 										</optgroup>
 									</select>
-									<button class="btn btn-search" type="submit"><i class="fa fa-search"> Search</i></button>
+									<button class="btn btn-search" type="button" name="search_btn" id="search_btn"><i class="fa fa-search"> Search</i></button>
 								</div>
 							</div>
 						</form>
