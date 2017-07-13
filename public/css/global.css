@@ -43,7 +43,7 @@ body {
         .header-nav .header-right .header-nav-bar ul li a {
           color: #333;
           font-size: 17px; }
-      .header-nav .header-right .header-nav-bar ul li:hover {
+      .header-nav .header-right .header-nav-bar ul .menus:hover {
         background-color: #fed700; }
       .header-nav .header-right .header-nav-bar ul .btn-login {
         background-color: #fff;

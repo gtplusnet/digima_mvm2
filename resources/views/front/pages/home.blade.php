@@ -1,4 +1,5 @@
 @extends('front.layout.layout')
+@section('title', 'Home')
 @section('content')
 <div class="intro" style="background-image: url('/images/background_home.jpg')">	
 	<div class="container">
@@ -12,10 +13,11 @@
 				</tr>
 				<tr>
 					<td>
-						<form class="form-search" action="/searchresult">
+						<form class="form-search" action="/search_result" method="POST">
+							{{ csrf_field() }}
 							<div class="spacer">
 								<div class="form-spacer">
-									<input class="business-name-textbox" type="text" placeholder="Business, Category or Keyword...">
+									<input class="business-name-textbox" type="text" name="business_name" id="business_name" placeholder="Business, Category or Keyword...">
 									<select class="counties-zipcode-selectbox">
 										<option value="" disabled selected>Counties or ZIP Code...</option>
 										<optgroup label="Counties">
@@ -31,7 +33,7 @@
 											<option>-----</option>
 										</optgroup>
 									</select>
-									<button class="btn btn-search" type="submit"><i class="fa fa-search"> Search</i></button>
+									<button class="btn btn-search" type="button" name="search_btn" id="search_btn"><i class="fa fa-search"> Search</i></button>
 								</div>
 							</div>
 						</form>
@@ -61,156 +63,59 @@
                 <div class="item active">
                 	<div class="featured-list-layer">
 	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail">
-		                	  			<img src="/images/walmart_pic.jpg" alt="Image">
-		                	  		</a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
+	                	  	@if(count($one_to_four_list) > 0)
+	                	  		@foreach($one_to_four_list as $one_to_four_list)
+	                	  			<div class="col-md-3">
+			                	  		<div class="business-holder">
+				                	  		<a href="#" class="thumbnail business-thumbnail">
+				                	  			<img src="/images/walmart_pic.jpg" alt="Image">
+				                	  		</a>
+				                	  		<div class="business-location-holder">
+				                            	<i class="material-icons location-icon">location_on</i>
+				                               	<div class="spacer-location-thumbnail">
+				                               		<p class="business-location">{{ $one_to_four_list->business_complete_address}}</p>
+				                            	</div>
+			                            	</div>
+			                            	<div class="rating-holder">
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            	</div>
 		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/mcdo_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">Centar Joker | Put Brodarice 6, <br>Split 21000, Croatia</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/honda_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">4150 Sydney Place<br>Washington, DC 20521-4150</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/hotel_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">7100 Athens Place<br>Washington, DC 20521-7100</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
+	                	  			</div>
+	                	  		@endforeach
+	                	  	@endif
 	                	</div>
                 	</div><!--.row-->
+
                 	<div class="featured-list-layer">
 	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/zara_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2430 Nouakchott Place<br>Washington, DC 20521-2430</p>
+	                	 @if(count($five_to_eight_list) > 0)
+	                	  		@foreach($five_to_eight_list as $five_to_eight_list)
+	                	  			<div class="col-md-3">
+			                	  		<div class="business-holder">
+				                	  		<a href="#" class="thumbnail business-thumbnail">
+				                	  			<img src="/images/walmart_pic.jpg" alt="Image">
+				                	  		</a>
+				                	  		<div class="business-location-holder">
+				                            	<i class="material-icons location-icon">location_on</i>
+				                               	<div class="spacer-location-thumbnail">
+				                               		<p class="business-location">{{ $five_to_eight_list->business_complete_address}}</p>
+				                            	</div>
+			                            	</div>
+			                            	<div class="rating-holder">
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            		<i class="glyphicon glyphicon-star"></i>
+			                            	</div>
 		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/ikea_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">3290 Hermosillo Place<br>Washington, DC 20521-3290</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/honda_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">4150 Sydney Place<br>Washington, DC 20521-4150</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/hotel_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">7100 Athens Place<br>Washington, DC 20521-7100</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
+	                	  			</div>
+	                	  		@endforeach
+	                	  	@endif
 	                	</div>
                 	</div><!--.row-->
                 </div><!--.item-->

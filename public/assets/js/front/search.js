@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	$('#search_btn').click(function(){
-		var search_business = $('#search_business').val();
+		var business_name = $('#business_name').val();
 
-		if($.trim(search_business) == '')
+		if($.trim(business_name) == '')
 		{
 			iziToast.warning({
 			    title: 'Caution',
@@ -14,7 +14,7 @@ $(document).ready(function(){
 		}
 		else
 		{
-			$('#search-form').submit();
+			$('.form-search').submit();
 		}
 	});
 });

@@ -28,6 +28,9 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/login.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchresult.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/business.css">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
         <!-- iziToast Plugin CSS -->
         <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
@@ -51,10 +54,10 @@
                     <div class="pull-right">
                         <div class="menu-btn">
                             <div class="spacer-btn">
-                                <button class="btn btn-login"><i class="fa fa-power-off"> Log in</i></button>
+                                <a href="/login"><button class="btn btn-login"><i class="fa fa-power-off"></i><p class="nav-buttons">Login</p></button></a>
                             </div>
                             <div>
-                                <a href="/registration"><button class="btn btn-register"><i class="fa fa-plus-square"> Register</i></button></a>
+                                <a href="/registration"><button class="btn btn-register"><i class="fa fa-plus-square"></i><p class="nav-buttons">Register</p></button></a>
                             </div>
                         </div>
                     </div>
@@ -132,6 +135,9 @@
 
         <!-- Registration JS -->
         <script src="/assets/js/front/registration.js"></script>
+
+         <!-- Search Business JS -->
+        <script src="/assets/js/front/search.js"></script>
 
         <!-- iziToast Plugin JS -->
         <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>

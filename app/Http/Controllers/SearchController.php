@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblBusinessModel;
+use Redirect;
 
 class SearchController extends Controller
 {
@@ -19,9 +20,17 @@ class SearchController extends Controller
         return view('mvm.front.search');
     }
 
-    public function search_business(Request $request)
+    public function search_result(Request $request)
     {
-        $data['business_search'] = TblBusinessModel::where('business_name', 'LIKE', '%'.$request->search_business.'%')->get();
+        //dd($request->search_business);
+        $business_name = $request->business_name;
+
+        return Redirect::to("/search_result_list?business_name={$business_name}");
+    }
+
+    public function search_result_list(Request $request)
+    {
+        $data['business_search'] = TblBusinessModel::where('business_name', 'LIKE', '%'.$request->business_name.'%')->get();
 
         return view('mvm.front.search_result', $data); 
     }

@@ -240,8 +240,8 @@ $(document).ready(function(){
 					}
 					else
 					{
-						$('form').trigger('reset');
 						window.location = '/success';
+						$('form').trigger('reset');
 					}
 				}		
 			});

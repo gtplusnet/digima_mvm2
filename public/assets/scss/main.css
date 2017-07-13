@@ -1,0 +1,38 @@
+body {
+  font-family: 'Open Sans', sans-serif !important; }
+  body .registration-content {
+    margin-top: 25px; }
+    body .registration-content .header p {
+      font-size: 30px; }
+    body .registration-content .line-after-header {
+      margin-top: -10px; }
+      body .registration-content .line-after-header hr {
+        border-color: #000000; }
+    body .registration-content .accept-terms {
+      margin-top: 30px; }
+    body .registration-content .line-after-content {
+      margin-top: -10px; }
+      body .registration-content .line-after-content hr {
+        border-color: #000000; }
+    body .registration-content .copyright {
+      padding-bottom: 25px; }
+  body .login-form {
+    width: 700px;
+    margin: 0 auto;
+    border: 1px solid #000000;
+    padding-left: 150px;
+    padding-right: 150px; }
+    body .login-form #label-email, body .login-form #label-password {
+      font-size: 20px;
+      font-weight: normal; }
+    body .login-form a {
+      font-size: 20px; }
+  body .search-form {
+    margin-top: -10px;
+    background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%); }
+    body .search-form .search-content {
+      margin-left: 330px;
+      padding-top: 200px;
+      padding-bottom: 200px; }
+
+/*# sourceMappingURL=main.css.map */

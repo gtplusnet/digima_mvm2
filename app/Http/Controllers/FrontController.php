@@ -11,12 +11,15 @@ use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
 use Carbon\Carbon;
+use Redirect;
+use DB;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        $data['page']   = 'home';
+        $data['one_to_four_list'] = TblBusinessModel::skip(0)->take(4)->get();
+        $data['five_to_eight_list'] = TblBusinessModel::skip(4)->take(4)->get();
         return view('front.pages.home', $data);
     }
     public function registration()
@@ -26,10 +29,8 @@ class FrontController extends Controller
     }
     public function success()
     {
-        $data['page']   = 'success';
-        return view('front.pages.success', $data);
+        return view('front.pages.success');
     }
-
 
     public function get_city(Request $request)
     {
@@ -105,6 +106,28 @@ class FrontController extends Controller
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
         return $postal_code->postal_code;
+    }
+
+    public function search_result(Request $request)
+    {
+        $business_name = $request->business_name;
+
+        return Redirect::to("/search_result_list?business_name={$business_name}");
+    }
+
+    public function search_result_list(Request $request)
+    {
+        $business_name = $request->business_name;
+        $business_search = TblBusinessModel::where('business_name', 'LIKE', '%'.$business_name.'%')->paginate(5);
+
+        return view('front.pages.searchresult', compact('business_search', 'business_name')); 
+    }
+
+    public function business_info(Request $request)
+    {
+        $data['business_info'] = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', $request->business_id)->get();
+
+        return view('front.pages.business', $data); 
     }
 
     public function about()
