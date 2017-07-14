@@ -71,35 +71,6 @@ class AgentController extends Controller
 
         return $postal_code->postal_code;
     }
-    public function search_client(Request $request)
-    { 
-
-    	/*$output ="";
-    	if($request -> ajax())
-    	{
-    		$clients = TblAgent::where('name','LIKE','%'.$Request->search_client.'%')
-    							->orwhere('date/added','LIKE','%'.$Request->search_client.'%')
-    							->orwhere('Business_Name','LIKE','%'.$Request->search_client.'%')
-    							->orwhere('Description','LIKE','%'.$Request->search_client.'%')
-    							->orwhere('Reference','LIKE','%'.$Request->search_client.'%')
-    							->orwhere('status','LIKE','%'.$Request->search_client.'%')->get();
-    		if($clients)
-    		{
-    			foreach ($clients as $key => $client) {
-    				$output.=	'<td>'.
-                                    '<th>'.$customer->Name.'</th>'
-                                    '<th>'.$customer->Date.'</th>'
-                                    '<th>'.$customer->Business.'</th>'
-                                    '<th>'.$customer->Description.'</th>'
-                                    '<th>'.$customer->Reference.'</th>'
-                                    '<th>'.$customer->Status.'</th>'
-                             	'</tr>'
-    			}
-    		}
-
-    	}*/
-    }
-
 	public function logout()
 	{
 		Session::forget('user_email');
