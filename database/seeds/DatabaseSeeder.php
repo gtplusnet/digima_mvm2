@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CityTableSeeder::class);
         $this->call(CountyTableSeeder::class);
         $this->call(BusinessCategoryTableSeeder::class);
-        
+        $this->call(tbl_payment_method::class); 
         Model::reguard();
     }
 }

@@ -25,10 +25,6 @@ class CreateTblBusiness extends Migration
             $table->integer('agent_id')->nullable();
             $table->string('date_created');
         });
-
-        Schema::hasTable('city_id', function (Blueprint $table) {
-            $table->foreign('city_id')->references('city_id')->on('tbl_city')->onDelete('cascade');  
-        });
     }
 
     /**
@@ -38,9 +34,6 @@ class CreateTblBusiness extends Migration
      */
     public function down()
     {
-        Schema::hasTable('tbl_business', function (Blueprint $table) {
-            $table->dropForeign('city_id');
-        });
         Schema::drop('tbl_business');
     }
 }
