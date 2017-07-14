@@ -28,6 +28,8 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchresult.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/business.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/about.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/contact.css">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -44,8 +46,8 @@
                     <div class="menu-bar">  
                         <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Home</a></li>
                         <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Category</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">About</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Contact Us</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/about">About</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
                     </div>
                     <div class="pull-right">
                         <div class="menu-btn">
