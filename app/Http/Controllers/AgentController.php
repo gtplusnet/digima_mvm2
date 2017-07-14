@@ -29,6 +29,11 @@ class AgentController extends Controller
 		$data['page']	= 'Profile';
 		return view ('agent.pages.profile', $data);		
 	}
+	public function client()
+	{
+		$data['page']	= 'Client';
+		return view ('agent.pages.client', $data);		
+	}
 	public function get_client(Request $request)
 	{
 		$search = $request->search;
