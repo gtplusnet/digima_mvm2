@@ -27,7 +27,8 @@
         <link href="/assets/admin/merchant/assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/> 
         <link href="/assets/admin/merchant/assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet" type="text/css"/>   
         <link href="/assets/admin/merchant/assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet" type="text/css"/>  
-        <link href="/assets/admin/merchant/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css"/>    
+        <link href="/assets/admin/merchant/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css"/>   
+        <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css"> 
             
         <!-- Theme Styles -->
         <link href="/assets/admin/merchant/assets/css/modern.css" rel="stylesheet" type="text/css"/>
@@ -105,6 +106,7 @@
         <script src="/assets/admin/merchant/assets/plugins/metrojs/MetroJs.min.js"></script>
         <script src="/assets/admin/merchant/assets/js/modern.js"></script>
         <script src="/assets/admin/merchant/assets/js/pages/dashboard.js"></script>
+        <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {
@@ -112,23 +114,6 @@
             }
         });
         </script>
-        {{-- <script type="text/javascript">
-            $('#client_search').keyup(function(){
-                    $.ajax({
-                        url:{{Url::to('client_search')}},
-                        method:"get",
-                        data:{search:txt},
-                        dataType:"text",
-                        success:function(data)
-                        {
-                            $('tbody').html('data');
-                        }
-                    });
-                }
-            });
-        </script>
- --}}
-
     </body>
 
        

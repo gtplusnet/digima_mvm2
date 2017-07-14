@@ -37,6 +37,36 @@ class AgentController extends Controller
 						  ->get();
 		return view ('agent.pages.client', $data);		
 	}
+	public function get_client(Request $request)
+	{
+		$search = $request->search;
+		$output = '';
+		$clients = TblBusinessModel::contact_person()
+						    ->other_info()
+						    ->user_account()
+							->where('contact_prefix','LIKE','%'.$search.'%')
+							->orwhere('date_created','LIKE','%',$search,'%')
+							->orwhere('business_name','LIKE','%',$search,'%')
+							->orwhere('contact_first_name','LIKE','%',$search,'%')
+							->orwhere('contact_last_name','LIKE','%',$search,'%')
+							->orwhere('status','LIKE','%',$search,'%')->get();
+		if(count($clients) > 0 )
+		{
+			foreach ($clients as $client) {
+				$output.=	'<tr>
+                                <td>'.$client->contact_prefix.''.$client->contact_first_name.''.$client->contact_last_name.'</td>
+                               	<td>'.$client->date_created.'</td>
+                               	<td>'.$client->business_name.'</td>
+                               	<td>'.$client->status.'</td>
+                         	</tr>';
+			}
+		}
+		else 
+		{
+			$output.='data not found';
+		}
+		return $output;
+	}
 	public function add_client()
 	{
 		$data['county_list'] = TblCountyModel::get();
