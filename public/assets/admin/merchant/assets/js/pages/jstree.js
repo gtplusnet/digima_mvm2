@@ -63,7 +63,7 @@ $( document ).ready(function() {
 			},
             'data' : {
                 'url' : function (node) {
-                    return node.id === '#' ? 'assets/js/pages/ajax_roots.json' : 'assets/js/pages/ajax_children.json';
+                    return node.id === '#' ? '/assets/admin/merchant/assets/js/pages/ajax_roots.json' : 'assets/js/pages/ajax_children.json';
                 },
                 'data' : function (node) {
                     return { 'id' : node.id };

@@ -1,4 +1,5 @@
 @extends('front.layout.layout')
+@section('title', 'Login')
 @section('content')
 <div class="login-background" style="background-image: url('/images/background_home.jpg')">
 	<div class="container">
@@ -19,7 +20,7 @@
 					</div>
 					<button type="submit" class="login-btn">LOGIN</button>
 					<div class="forgot-password">
-						<a href="">(Forgot Password?)</a>
+						<a href="">Forgot Password ?</a>
 					</div>
 				</form>
 			</div>
