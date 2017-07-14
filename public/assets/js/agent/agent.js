@@ -11,7 +11,7 @@ $(document).ready(function(){
         	$.ajax({
         		url:'/agent/get_client',
         		method:"post",
-        		data: {search:text},
+        		data: {search:search},
         		dataType:"text",
         		success:function(data)
         		{

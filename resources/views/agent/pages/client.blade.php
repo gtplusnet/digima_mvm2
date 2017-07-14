@@ -39,9 +39,7 @@
                                     </tr>
                                 </thead>                       
                                 <tbody>
-                                    <tr id="result">
-                            
-                                    </tr>
+                                 <div id="result"></div>
                                 </tbody>
                             </table>
                         </div>

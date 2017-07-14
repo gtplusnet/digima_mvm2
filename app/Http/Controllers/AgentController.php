@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+use App\Models\TblAgent;
+
 
 class AgentController extends Controller
 {
@@ -29,8 +31,34 @@ class AgentController extends Controller
 		$data['page']	= 'Client';
 		return view ('agent.pages.client', $data);		
 	}
-	public function get_client()
+	public function get_client(Request $request)
 	{
+		$search = $request->search;
+		$output = '';
+		$clients = TblAgent::where('name','LIKE','%',$search,'%')
+							->orwhere('date/added','LIKE','%',$search,'%')
+							->orwhere('Business_Name','LIKE','%',$search,'%')
+							->orwhere('Description','LIKE','%',$search,'%')
+							->orwhere('Reference','LIKE','%',$search,'%')
+							->orwhere('status','LIKE','%',$search,'%')->get();
+		if($clients > 0 )
+		{
+			foreach ($client as $key => $clients) {
+				$output.=	'<tr>.
+                                <td>'.$client->Name.'</td>
+                                <td>'.$client->Date.'</td>
+                                <td>'.$client->Business.'</td>
+                                <td>'.$client->Description.'</td>
+                                <td>'.$client->Reference.'</td>
+                                <td>'.$client->Status.'</td>
+                         	</tr>';
+			}
+		}
+		else 
+		{
+			$output.='data not found';
+		}
+		return $output;
 		
 	}
 	public function add_client()
