@@ -33,7 +33,7 @@
 											<option>-----</option>
 										</optgroup>
 									</select>
-									<button class="btn btn-search" type="button" name="search_btn" id="search_btn"><i class="fa fa-search"> Search</i></button>
+									<button class="btn btn-search" type="button" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
 								</div>
 							</div>
 						</form>
