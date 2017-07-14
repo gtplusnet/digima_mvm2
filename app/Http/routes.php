@@ -49,11 +49,12 @@ Route::get('/merchant/bills', 		'MerchantController@bills');
 /*Agent Page by Joshua*/
 Route::get('/agent', 				'AgentController@index');
 Route::get('/agent/profile', 		'AgentController@profile');
-Route::get('/agent/client', 		'AgentController@client');
+Route::any('/agent/client', 	'AgentController@client');
 Route::any('/agent/get_client', 		'AgentController@get_client');
 Route::any('/agent/add_client', 	'AgentController@add_client');
 Route::any('/agent/get_city', 	'AgentController@get_city');
 Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
+Route::any('/agent/register_business', 	'AgentController@register_business');
 
 
 

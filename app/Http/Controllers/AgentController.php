@@ -6,9 +6,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
-use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblBusinessModel;
-use App\Models\TblAgent;
+use App\Models\TblBusinessContactPersonModel;
+use App\Models\TblUserAccountModel;
+use Carbon\Carbon;
+use Redirect;
 use DB;
 
 class AgentController extends Controller
@@ -26,16 +28,6 @@ class AgentController extends Controller
 	{
 		$data['page']	= 'Profile';
 		return view ('agent.pages.profile', $data);		
-	}
-
-	public function client()
-	{
-		$data['page']	= 'Client';
-		$data['_clients'] = TblBusinessModel::contact_person()
-						  ->other_info()
-						  ->user_account()
-						  ->get();
-		return view ('agent.pages.client', $data);		
 	}
 	public function get_client(Request $request)
 	{
@@ -107,6 +99,49 @@ class AgentController extends Controller
 		Session::forget('user_password');
 		return Redirect::back();
 	}
+	public function register_business(Request $request)
+    {
+        $check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
+
+        if(count($check_email_availability) == 1)
+        {
+            echo 'Email has already been used.';
+        }
+        else
+        {
+        $business_data = new TblBusinessModel;
+        $business_data->business_id = '';
+        $business_data->business_name = $request->business_name;
+        $business_data->city_id = $request->city_list;
+        $business_data->business_complete_address = $request->business_address;
+        $business_data->business_phone = $request->primary_business_phone;
+        $business_data->business_alt_phone = $request->secondary_business_phone;
+        $business_data->date_created = Carbon::now();
+
+        $business_data->save();
+
+        $contact_data = new TblBusinessContactPersonModel;
+        $contact_data->business_contact_person_id = '';
+        $contact_data->contact_prefix = $request->prefix;
+        $contact_data->contact_first_name = $request->first_name;
+        $contact_data->contact_last_name = $request->last_name;
+        $contact_data->business_id = $business_data->business_id;
+
+        $contact_data->save();
+
+        $account_data = new TblUserAccountModel;
+        $account_data->user_email = $request->email;
+        $account_data->user_password ='water123';
+        $account_data->user_category = 'merchant';
+        $account_data->status = 2;
+        $account_data->business_id = $business_data->business_id;
+        $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
+
+        $account_data->save();
+
+        echo 'Registered successfully ! But your account is pending.';
+        }   
+    }
 
 
 
