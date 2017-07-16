@@ -1,7 +1,6 @@
 @extends('front.layout.layout')
 @section('title', 'Search Result')
 @section('content')
-@if(count($business_search) > 0)
 <div class="banner-searchresult" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">
 		<div class="pull-right">
@@ -40,6 +39,7 @@
 				</div>
 			</div>
 			<div class="col-md-12 search-result-container">
+			@if(count($business_search) > 0)
 					@foreach($business_search as $item)
 						<div class="search-result-holder">
 							<div class="col-md-5 business-profilepic-holder">
@@ -66,6 +66,7 @@
 						</div>
 					@endforeach
 				@else
+					<h2><center>No Results Found.</center></h2>
 			@endif
 				<div class="pagination-holder">
 					{!! $business_search->appends(Request::capture()->except('page'))->render() !!}

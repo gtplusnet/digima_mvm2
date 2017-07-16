@@ -64,7 +64,7 @@ Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 //Renz's Routes
 
 //Routes for Login
-Route::any('/login', 'LoginController@index');
+//Route::any('/login', 'LoginController@index');
 Route::any('/check_login', 'LoginController@check_login');
 
 //Routes for Registration
