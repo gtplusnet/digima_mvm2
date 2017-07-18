@@ -1,4 +1,5 @@
 @extends('front.layout.layout')
+@section('title', 'About')
 @section('content')
 <div class="banner-about" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">

@@ -10,6 +10,7 @@ use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
+use App\Models\Tbl_business_hours;
 use Carbon\Carbon;
 use Redirect;
 use DB;
@@ -94,6 +95,25 @@ class FrontController extends Controller
         $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
 
         $account_data->save();
+
+        $business_hours_data = new Tbl_business_hours;
+
+        $business_hours_data->insert(array(
+            array('days' => 'Monday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+            'desc' => 'none', 'business_id' => $business_data->business_id),
+            array('days' => 'Tuesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+            'desc' => 'none', 'business_id' => $business_data->business_id),
+            array('days' => 'Wednesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+            'desc' => 'none', 'business_id' => $business_data->business_id),
+            array('days' => 'Thursday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+            'desc' => 'none', 'business_id' => $business_data->business_id),
+            array('days' => 'Friday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+            'desc' => 'none', 'business_id' => $business_data->business_id),
+            array('days' => 'Saturday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+            'desc' => 'none', 'business_id' => $business_data->business_id),
+            array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+            'desc' => 'none', 'business_id' => $business_data->business_id)
+        ));
 
         echo 'Registered successfully ! But your account is pending.';
         }   
