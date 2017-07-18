@@ -48,9 +48,9 @@
                 <div class="pull-right">
                     <div class="menu-bar">  
                         <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Category</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/about">About</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'category' ? 'active' : '' }}"><a class="nav" href="/">Category</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active' : '' }}"><a class="nav" href="/about">About</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'contact' ? 'active' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
                     </div>
                     <div class="pull-right">
                         <div class="menu-btn">

@@ -65,7 +65,7 @@ Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 
 //Routes for Login
 //Route::any('/login', 'LoginController@index');
-Route::any('/check_login', 'LoginController@check_login');
+//Route::any('/check_login', 'LoginController@check_login');
 
 //Routes for Registration
 //Route::any('/registration', 'RegistrationController@registration');
@@ -78,6 +78,9 @@ Route::any('/check_login', 'LoginController@check_login');
 //Route::any('/search_result', 'SearchController@search_result');
 //Route::any('/search_result_list', 'SearchController@search_result_list');
 
+//Routes for General Admin
+Route::any('/admin', 'AdminController@index');
+Route::any('/admin/report', 'AdminController@report');
 
 //End of Renz's Routes
 
