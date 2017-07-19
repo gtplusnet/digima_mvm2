@@ -40,16 +40,14 @@
 			<div class="col-md-12 category-result-container">
 				<div class="category-result-holder">
 					<div class="col-md-5 category-business-profilepic-holder">
-						<a href="/business">
 							<img class="category-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
-						</a>
 						<div class="category-icon-container">
 							<a href="" class="category-link-style"><i class="fa fa-facebook category-icon-style-fb"></i> Like</a>
 							<a href="" class="category-link-style"><i class="fa fa-twitter category-icon-style-twitter"></i> Tweet</a>
 						</div>
 					</div>
 					<div class="col-md-7">
-						<a href="/business"><p class="category-business-title">McDonald's</p></a>
+						<a href=""><p class="category-business-title">McDonald's</p></a>
 						<div class="category-business-details-holder">
 							<div class="category-business-details">
 								<i class="fa fa-phone category-details"></i><p>123-456-7890</p>

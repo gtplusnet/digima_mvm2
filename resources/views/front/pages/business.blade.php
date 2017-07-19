@@ -1,7 +1,7 @@
 @extends('front.layout.layout')
 @section('title', 'Business Info')
 @section('content')
-@foreach($business_info as $business_info)
+@if($business_info)
 <div class="banner-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.jpg')">
     <div class="container">
         <div class="pull-left">
@@ -75,7 +75,7 @@
                 <div class="business-details-rightpart-title">
                     <i class="fa fa-envelope-o icon-size"></i><p class="title-margin"> EMAIL:</p>
                 </div>
-                <p class="business-details-rightpart-content">{{ $business_info->user_email }}</p>
+                <p class="business-details-rightpart-content">business@email.com</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
@@ -147,5 +147,5 @@
             </div>
     </div>
 </div>
-@endforeach
+@endif
 @endsection

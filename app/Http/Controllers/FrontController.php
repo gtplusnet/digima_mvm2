@@ -127,14 +127,15 @@ class FrontController extends Controller
     {
         $business_name = $request->business_name;
         $business_search = TblBusinessModel::where('business_name', 'LIKE', '%'.$business_name.'%')->paginate(5);
-
+        //dd(count($business_search));
         return view('front.pages.searchresult', compact('business_search', 'business_name')); 
     }
 
     public function business_info(Request $request)
     {
-        $data['business_info'] = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', $request->business_id)->get();
-
+        //dd($request->business_id);
+        $data['business_info'] = DB::table('tbl_business')
+                                    ->where('tbl_business.business_id', '=', $request->business_id)->first();
         return view('front.pages.business', $data); 
     }
 
