@@ -24,7 +24,11 @@ class FrontController extends Controller
         $data['page']   = 'success';
         return view('front.pages.success', $data);
     }
-
+    public function payment()
+    {
+        $data['page']   = 'payment';
+        return view('front.pages.payment', $data);
+    }
 
 
     public function about()

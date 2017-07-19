@@ -14,4 +14,9 @@ class SearchresultController extends Controller
         $data['page']   = 'searchresult';
         return view('front.pages.searchresult', $data);
     }
+    public function category()
+    {
+        $data['page']   = 'category';
+        return view('front.pages.category', $data);
+    }
 }
