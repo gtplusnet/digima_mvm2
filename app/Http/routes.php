@@ -33,11 +33,17 @@ Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
 
+
 Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
 
 
+Route::get('/business', 'FrontController@business');
+Route::get('/payment', 'FrontController@payment');
+
+
 Route::get('/searchresult', 'SearchresultController@index');
+Route::get('/category', 'SearchresultController@category');
 
 
 /*Merchant Page by Brain*/

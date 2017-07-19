@@ -52,6 +52,7 @@ class FrontController extends Controller
         return $city_dropdown_output;
     }
 
+
     public function register_business(Request $request)
     {
         $check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
@@ -82,6 +83,12 @@ class FrontController extends Controller
         $contact_data->contact_first_name = $request->first_name;
         $contact_data->contact_last_name = $request->last_name;
         $contact_data->business_id = $business_data->business_id;
+
+    public function payment()
+    {
+        $data['page']   = 'payment';
+        return view('front.pages.payment', $data);
+    }
 
         $contact_data->save();
 

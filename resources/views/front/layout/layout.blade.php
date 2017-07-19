@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
         <!-- Title -->
         <title>CROTIA Directory | @yield('title')</title>
         
@@ -29,6 +28,10 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/success.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchresult.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/business.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/about.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/contact.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/category.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/payment.css">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -47,9 +50,9 @@
                 <div class="pull-right">
                     <div class="menu-bar">  
                         <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Category</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">About</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Contact Us</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/category">Category</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/about">About</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
                     </div>
                     <div class="pull-right">
                         <div class="menu-btn">
@@ -132,6 +135,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+<<<<<<< HEAD
+=======
+        <!-- FOR GOOGLEMAP -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
+        </script>
+       <!--  <script type="text/javascript" scr="/assets/js/front/rangeslider.js"></script> -->
+>>>>>>> mod_brm_design
 
         <!-- Registration JS -->
         <script src="/assets/js/front/registration.js"></script>

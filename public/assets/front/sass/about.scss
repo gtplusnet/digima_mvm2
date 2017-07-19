@@ -1,0 +1,58 @@
+.banner-about
+{
+	background-size: cover;
+    background-position: center;
+    min-height: 175px;
+    position: relative;
+}
+.about-logo
+{
+	max-width: 100%;
+    margin-top: 49px;
+}
+.about-container
+{
+	width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.about-holder
+{
+	width: 100%;
+}
+.about-title-container
+{
+	background-color: #333;
+    padding: 10px 30px;
+}
+.about-title
+{
+	color: #fed600;
+    margin: 0px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+.about-content-container
+{
+	border: 1px solid #999;
+    padding: 25px 51px;
+}
+.about-content
+{
+	text-align: center;
+    font-size: 15px;
+}
+.bottom-image-container
+{
+	margin-left: -51px;
+    margin-right: -51px;
+    margin-bottom: -25px;
+}
+.bottom-image
+{
+	width: 100%;
+	margin-top: 100px;
+}
