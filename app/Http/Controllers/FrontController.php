@@ -46,9 +46,11 @@ class FrontController extends Controller
         foreach($city_list as $city_list)
         {
             $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
+
+            $city_array = array("html" => $city_dropdown_output);
         }
 
-        echo json_encode(array("html" => $city_dropdown_output));
+        echo json_encode($city_array);
     }
 
     public function get_postal_code(Request $request)
@@ -57,9 +59,9 @@ class FrontController extends Controller
 
         $postal_code_get = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
-        $data["postal_code_result"] = $postal_code_get->postal_code;
+        //$postal_code_array = array("postal_code_result" => $postal_code_get->postal_code);
 
-        echo json_encode($data);
+        echo '{"postal_code_result": "'.$postal_code_get->postal_code.'"}';
     }
 
     public function register_business(Request $request)
@@ -68,7 +70,8 @@ class FrontController extends Controller
 
         if(count($check_email_availability) == 1)
         {
-            echo 'Email has already been used.';
+            $check_email_array = array("status" => 'failed', "message" => 'Email has already been used.');
+            echo json_encode($check_email_array);
         }
         else
         {
@@ -123,8 +126,9 @@ class FrontController extends Controller
             array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
             'desc' => 'none', 'business_id' => $business_data->business_id)
         ));
-
-        echo 'Registered successfully ! But your account is pending.';
+        
+        $success_array = array("status" => 'success', "url" => '/success');
+        echo json_encode($success_array);
         }   
     }
 

@@ -228,22 +228,23 @@ $(document).ready(function(){
 				type: 'POST',
 				url: '/register_business',
 				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username, prefix: prefix, first_name: first_name, last_name: last_name, email: email, password: password},
+				dataType: 'json',
 				success:function(data){
-					if(data == 'Email has already been used.')
+					if(data.status == 'failed')
 					{
 						iziToast.warning({
 						    title: 'Caution',
-						    message: data,
+						    message: data.message,
 						    position: 'topRight',
 						    transitionIn: 'fadeInDown',
 						    transitionOut: 'fadeOutUp'
 						});
 					}
-					else
+					else if(data.status == 'success')
 					{
-						window.location = '/success';
+						window.location = data.url;
 						$('form').trigger('reset');
-					}
+					}	
 				}		
 			});
 		}
