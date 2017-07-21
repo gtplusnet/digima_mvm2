@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="col-md-2"></div>
 		<div class="col-md-8 login-form-container">
-			<div class="col-md-12">
+			<div class="col-md-12 login-form-holder">
 				<div class="col-md-5 login-container-background" style="background-image: url('/images/login_pic.jpg')">
 					<div class="welcoming-container">	
 						<div class="login-text-holder">

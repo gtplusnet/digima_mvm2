@@ -26,10 +26,44 @@
 	margin-top: 40px;
     margin-bottom: 80px;
 }
-.main-pic
+// .main-pic
+// {
+// 	width: 100%;
+// }
+.business-carousel
 {
-	width: 100%;
+    padding: 0px;
+    margin-bottom: 0px;
 }
+.business-carousel-control 
+{
+    visibility: hidden;
+    left: 0px;
+    height: 255px;
+    font-size: 165px;
+    top: 185px;
+    width: 5%;
+}
+.business-carousel-control.carousel-control.right 
+{
+    visibility: hidden;
+    right: 0px;
+    background-image: none;
+}
+.business-indicators
+{
+    visibility: hidden;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    z-index: 15;
+    width: 60%;
+    padding-left: 0;
+    margin-left: -30%;
+    text-align: center;
+    list-style: none;
+}
+
 .secondary-pics-container
 {
 	margin-bottom: 80px;

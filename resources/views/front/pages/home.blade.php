@@ -48,7 +48,15 @@
 	<div class="container">
 		<p class="featured-text">FEATURED <font class="lists-text">LISTS</font></p>
 	</div>
-        <div id="Carousel" class="carousel slide"> 
+        <div id="Carousel" class="carousel slide">
+        
+        <script type="text/javascript">
+        	$(document).ready(function() 
+        	{
+				$('#Carousel').carousel({interval: 5000})
+			});
+        </script>
+
            	<ol class="carousel-indicators">
                 <li data-target="#Carousel" data-slide-to="0" class="active"></li>
                 <li data-target="#Carousel" data-slide-to="1"></li>

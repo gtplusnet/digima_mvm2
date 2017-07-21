@@ -10,6 +10,8 @@
         <meta name="keywords" content="admin,dashboard" />
         <meta name="author" content="Steelcoders" />
         
+        <!-- LIGHTBOX STYLES -->
+        <link rel="stylesheet" href="/initializr/css/lightbox.min.css">
         <!-- Styles -->
         <link rel="stylesheet" href="/initializr/css/bootstrap.min.css">
         <link rel="stylesheet" href="/initializr/css/bootstrap-theme.min.css">
@@ -127,8 +129,9 @@
                 </div>
             </div>
         </div>
-        <!-- DITO ANG SCRIPT -->
-        
+
+
+        <!-- DITO ANG SCRIPT -->        
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
@@ -137,6 +140,8 @@
         </script>
        <!--  <script type="text/javascript" scr="/assets/js/front/rangeslider.js"></script> -->
 
+       <!-- LIGHTBOX SCRIPT -->
+        <script src="/initializr/js/lightbox.min.js"></script>
         <!-- HANGGANG DITO -->
     </body>
 </html>
