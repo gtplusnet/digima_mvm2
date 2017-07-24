@@ -6,6 +6,7 @@
         <title>CROATIA Directory | @yield('title') </title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta charset="UTF-8">
         <meta name="description" content="Admin Dashboard Template" />
         <meta name="keywords" content="admin,dashboard" />
@@ -135,7 +136,9 @@
                         </a>
                     </div>
                     <div class="logo-box">
-                        <a href="index.html" class="logo-text"><span>CROATIA</span></a>
+                        <a href="/general_admin" class="logo-text">
+                            <img class="img-circle avatar" id="croatia-logo" src="/assets/admin/merchant/assets/images/CroatiaLogo.jpg" alt="">
+                        </a>
                     </div><!-- Logo Box -->
                     <div class="search-button">
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>
@@ -357,33 +360,31 @@
             <div class="page-sidebar sidebar">
                 <div class="page-sidebar-inner slimscroll">
                     <ul class="menu accordion-menu">
-                        <li class="{{ (Request::segment(2)=='') ? 'active' : ''  }}"><a href="/admin" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
+                        <li class="{{ (Request::segment(2)=='') ? 'active' : ''  }}"><a href="/general_admin" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
                         <li class="{{ (Request::segment(2)=='agent_calls') ? 'active' : ''  }}"><a href="" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-phone-alt"></span><p>Agent Calls</p></a></li>
                         <li class="{{ (Request::segment(2)=='emailing_invoice') ? 'active' : ''  }}"><a href="" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-envelope"></span><p>Emailing Invoice</p></a></li>
                         <li class="{{ (Request::segment(2)=='payment_monitoring') ? 'active' : ''  }}"><a href="" class="waves-effect waves-button"><span class="menu-icon fa fa-money"></span><p>Payment Monitoring</p></a></li>
                         <li class="{{ (Request::segment(2)=='refund') ? 'active' : ''  }}"><a href="" class="waves-effect waves-button"><span class="menu-icon fa fa-undo"></span><p>Refund</p></a></li>
-                        <li class="{{ (Request::segment(2)=='report') ? 'active' : ''  }}"><a href="/admin/report" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Report</p></a></li>
+                        <li class="{{ (Request::segment(2)=='report') ? 'active' : ''  }}"><a href="/general_admin/report" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Report</p></a></li>
                     </ul>
                 </div><!-- Page Sidebar Inner -->
             </div><!-- Page Sidebar -->
             <div class="page-inner">
                 <div class="page-title">
-                    <h3>Admin - @yield('description')</h3>
+                    <h3>General Admin - @yield('description')</h3>
                     <div class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="/general_admin">Home</a></li>
                             <li class="active">@yield('description')</li>
                         </ol>
                     </div>
                 </div>
                 <div id="main-wrapper">
-                    <div class="row">
-                       @section('content')
-                       @show
-                    </div>
+                    @section('content')
+                    @show
                 </div><!-- Main Wrapper -->
                 <div class="page-footer">
-                    <p class="no-s">2017 &copy; Croatia Directory - Admin.</p>
+                    <p class="no-s">2017 &copy; Croatia Directory - General Admin.</p>
                 </div>
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
@@ -471,6 +472,12 @@
         <script src="/assets/admin/general_admin/assets/js/modern.js"></script>
         <script src="/assets/admin/general_admin/assets/js/pages/dashboard.js"></script>
         <script src="https://use.fontawesome.com/6e78a1b40e.js"></script>
-        
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
     </body>
 </html>
