@@ -39,8 +39,6 @@ class FrontController extends Controller
 
         $city_list = TblCityModel::where('county_id','=',$county_id)->get();
 
-        $county_name = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
-
         $city_dropdown_output = '';
 
         $city_dropdown_output .= '<option value=""></option>';
@@ -50,7 +48,18 @@ class FrontController extends Controller
             $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
         }
 
-        return $city_dropdown_output;
+        echo json_encode(array("html" => $city_dropdown_output));
+    }
+
+    public function get_postal_code(Request $request)
+    {
+        $city_id = $request->city_id;
+
+        $postal_code_get = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
+
+        $data["postal_code_result"] = $postal_code_get->postal_code;
+
+        echo json_encode($data);
     }
 
     public function register_business(Request $request)
@@ -117,15 +126,6 @@ class FrontController extends Controller
 
         echo 'Registered successfully ! But your account is pending.';
         }   
-    }
-
-    public function get_postal_code(Request $request)
-    {
-        $city_id = $request->city_id;
-
-        $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
-
-        return $postal_code->postal_code;
     }
 
     public function search_result(Request $request)
