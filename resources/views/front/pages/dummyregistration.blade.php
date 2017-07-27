@@ -8,7 +8,7 @@
 	</div>
 </div>
 <div class="container">
-	<form role="form">
+	<form role="form" action="/success">
 	<div class="col-md-6 form-leftpart">
 		<div class="col-md-12 registration-title-container">
 			<p class="registration-form-title">ENTER YOUR PERSONAL INFORMATION</p>
