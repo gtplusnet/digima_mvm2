@@ -68,12 +68,20 @@
 		font-size: 18px;
 		margin-left: 10px;
 	    width: 126px;
-	    padding: 9px 19px;
+	    padding-right: 20px;
 	    border: 0px;
 	    border-radius: 0px;
-    	height: 43px;
+    	height: 41px;
     	vertical-align: bottom;
     	color: #333;
+    	margin-bottom: 2px;
+	}
+	.search-btn-text
+	{
+		display: inline;
+    	margin-bottom: 0px;
+    	margin-left: 7px;
+    	font-weight: 700;
 	}
 }
 
@@ -174,6 +182,7 @@ background: #428bca;
 {
     color: #333;
     display: inline;
+    font-size: 14px;
 }
 .glyphicon-star
 {
