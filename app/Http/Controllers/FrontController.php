@@ -19,6 +19,14 @@ class FrontController extends Controller
         $data['page']   = 'Registration';
         return view('front.pages.registration', $data);
     }
+    // THIS IS A DUMMY
+    // STARTS HERE
+    public function dummyregistration()
+    {
+        $data['page']   = 'dummyRegistration';
+        return view('front.pages.dummyregistration', $data);
+    }
+    // ENDS HERE
     public function success()
     {
         $data['page']   = 'success';

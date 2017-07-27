@@ -21,6 +21,10 @@ Route::get('/', 'FrontController@index');
 Route::get('/registration', 'FrontController@registration');
 Route::get('/success', 'FrontController@success');
 
+// ROUTE FOR DUMMY
+Route::get('/dummyregistration', 'FrontController@dummyregistration');
+// ENDS HERE
+
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');

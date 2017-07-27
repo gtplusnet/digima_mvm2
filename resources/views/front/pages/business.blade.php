@@ -96,9 +96,9 @@
             </a>
         </div>
         <!-- LIGHTBOX SCRIPT -->
-        <script>
+        <!-- <script>
             lightbox.option({'resizeDuration': 200,'wrapAround': true});
-        </script>
+        </script> -->
 
         <div>
             <div class="overview-container">

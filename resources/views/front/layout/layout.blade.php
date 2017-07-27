@@ -33,6 +33,9 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/contact.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/category.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/payment.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/globals.css">
+        
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/dummyregistration.css">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -42,7 +45,7 @@
             <div class="container clearfix">
                 <div class="pull-left">
                     <div class="header-logo">
-                        <img src="/images/croatiadirectory_logo.jpg">
+                        <img src="/images/croatia_directory_logo.jpg">
                     </div>
                 </div>
                 <div class="pull-right">
