@@ -59,8 +59,6 @@ class FrontController extends Controller
 
         $postal_code_get = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
-        //$postal_code_array = array("postal_code_result" => $postal_code_get->postal_code);
-
         echo '{"postal_code_result": "'.$postal_code_get->postal_code.'"}';
     }
 
