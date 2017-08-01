@@ -27,45 +27,6 @@ class GeneralAdminController extends Controller
         return view('general_admin.dashboard', $data);
     }
 
-    public function search_business_general_admin(Request $request)
-    {
-        $business_name = $request->search_business_txt;
-
-        $business_search = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_name', 'LIKE', '%'.$business_name.'%')->paginate(5)->appends('business_name', $business_name);
-
-        $business_list_output = '';
-
-        foreach($business_search as $business_result_item)
-        {
-            if($business_result_item->status == 1)
-            {
-                $status_result = "Activated";
-            }
-            else if($business_result_item->status == 2)
-            {
-                $status_result = "Not Activated";
-            }
-            else 
-            {
-                $status_result = "Disabled";
-            }
-
-            $business_list_output .= '
-                <tr>
-                    <td>'.$business_result_item->business_id.'</td>
-                    <td>'.$business_result_item->business_name.'</td>
-                    <td>'.$business_result_item->date_created.'</td>
-                    <td><a href="#">View</a></td>
-                    <td>'.$status_result.'</td>
-                </tr>
-            ';
-
-            $business_result_array = array("html" => $business_list_output);
-        }
-
-        echo json_encode($business_result_array);
-    }
-
     public function report()
     {
         

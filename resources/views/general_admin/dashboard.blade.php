@@ -9,14 +9,15 @@
 		</div>
 	</div>
 	<div class="business-list">
-		<div class="search-business text-center">
-			<form class="form-inline" method="POST">
-  				<div class="form-group">
-    				<label for="search_merchant">Search Business:</label>
-    				<input type="text" class="form-control" id="search_business" name="search_business">
-  				</div>
-  			</form>
-		</div>
+			<div class="search-business">
+				<form class="form-inline" method="POST">
+	  				<div class="form-group">
+	    				<label for="search_merchant">Search Business:</label>
+	    				<input type="text" class="form-control" id="search_business" name="search_business">
+	    				<button type="button" class="btn btn-success" name="search_business_btn" id="search_business_btn">Search</button>
+	  				</div>
+	  			</form>
+			</div>
 		<div class="table-responsive">
 			<table class="table table-bordered" id="business-table">
 			    <thead>
@@ -56,5 +57,5 @@
   		</div>
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/js/general_admin/general_admin.js"></script>
+<script src="/assets/js/general_admin/search_business.js"></script>
 @endsection
