@@ -5,10 +5,29 @@
 }
 #croatia-logo
 {
-	width: 200px; 
-	height: 80px;
+	width: 200px;
+	height: 80px; 
 }
-#merchant-button
+.badge-count
 {
-	background-color: #2b384e;
+   background-color: #FF0000 !important;
+   color: #FFFFFF !important;
+}
+.business-list
+{
+	margin-top: 20px;
+	border: 1px solid #34425A;
+	padding: 10px 10px;
+}
+#business-table
+{
+	margin-top: 10px;
+}
+#business-table thead > tr > th, #business-table tbody > tr > td
+{
+	text-align: center;
+}
+.pagination-container
+{
+	margin-top: -15px;
 }
