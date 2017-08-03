@@ -15,7 +15,6 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-
 /*Front Page*/
 Route::get('/', 'FrontController@index');
 Route::get('/registration', 'FrontController@registration');
@@ -33,6 +32,8 @@ Route::get('/payment', 'FrontController@payment');
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category', 'SearchresultController@category');
+Route::get('/resultsortgrid', 'SearchresultController@resultsortgrid');
+Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 /*Merchant Page by Brain*/

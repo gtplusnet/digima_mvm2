@@ -27,11 +27,11 @@
 				<div class="pull-right">
 					<div class="sort-tabs">
 						<div class="sort-icon-holder">
-							<a class="sort-icon" href=""><i class="glyphicon glyphicon-th-list"></i></a>
+							<a class="sort-icon" href="/searchresult"><i class="glyphicon glyphicon-th-list"></i></a>
 						</div>
 						<div class="pull-right">
 							<div class="sort-icon-holder">
-								<a class="sort-icon" href=""><i class="glyphicon glyphicon-th"></i></a>
+								<a class="sort-icon" href="/searchtabular"><i class="glyphicon glyphicon-th"></i></a>
 							</div>
 						</div>
 					</div>
@@ -145,15 +145,16 @@
 						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
 					</div>
 				</div>
-				<div class="pagination-holder">
-					<ul class="pagination">
-					  <li class="active"><a href="#">1</a></li>
-					  <li><a href="#">2</a></li>
-					  <li><a href="#">3</a></li>
-					  <li><a href="#">4</a></li>
-					  <li><a href="#">5</a></li>
-					  <li class="active"><a href="#">Next</a></li>
-					</ul>
+				<div class="col-md-12 tabularsort-pagination-section">
+					<div class="pagination">
+						<a class="active" href="#">1</a>
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#">5</a>
+						<a href="#">6</a>
+						<a href="#" class="pagination-next-btn">NEXT</a>
+					</div>
 				</div>
 			</div>
 		</div>

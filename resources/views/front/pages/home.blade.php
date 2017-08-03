@@ -2,43 +2,40 @@
 @section('content')
 <div class="intro" style="background-image: url('/images/background_home.jpg')">	
 	<div class="container">
-		<table class="container-searchbox">
-			<tbody>
-				<tr>
-					<td>
-						<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
-						<p class="second-line">FOR BUSINESS</p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<form class="form-search" action="/searchresult">
-							<div class="spacer">
-								<div class="form-spacer">
-									<input class="business-name-textbox" type="text" placeholder="Business, Category or Keyword...">
-									<select class="counties-zipcode-selectbox">
-										<option value="" disabled selected>Counties or ZIP Code...</option>
-										<optgroup label="Counties">
-											<option>Zagreb County</option>
-											<option>Dubrovnik–Neretva County</option>
-											<option>Split-Dalmatia County</option>
-											<option>---------------------</option>
-										</optgroup>
-										<optgroup label="ZIP Codes">
-											<option>10000</option>
-											<option>20000</option>
-											<option>21000</option>
-											<option>-----</option>
-										</optgroup>
-									</select>
-									<button class="btn btn-search" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
-								</div>
-							</div>
-						</form>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="col-md-12">
+			<div class="col-md-12 searchbox-container">
+				<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
+				<p class="second-line">FOR BUSINESS</p>
+			</div>
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-10 searchbox-holder">
+				<form action="/searchresult">
+					<div class="col-md-12 form-spacer">
+						<div class="col-md-4 searchfields-format">
+							<input class="business-name-textbox" type="text" placeholder="Business, Category or Keyword...">
+						</div>
+						<div class="col-md-3 searchfields-format">
+							<select class="counties-selectbox">
+								<option value="" disabled selected>Counties</option>
+								<option>Zagreb County</option>
+								<option>Dubrovnik–Neretva County</option>
+								<option>Split-Dalmatia County</option>
+								<option>---------------------</option>
+							</select>
+						</div>
+						<div class="col-md-3 searchfields-format">
+							<input class="zipcode-textbox" type="text" placeholder="ZIP Code">
+						</div>
+						<div class="col-md-2 searchfields-format">
+							<button class="btn btn-search" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-1">
+			</div>
+		</div>
 	</div>
 </div>
 

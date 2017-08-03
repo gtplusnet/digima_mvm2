@@ -5,15 +5,15 @@
     min-height: 756px;
     position: relative;
 }
-.container-searchbox
+
+
+.searchbox-container
 {
-	margin-left: auto;
-    margin-right: auto;
+	margin-top: 249px;
 }
 .introduction
 {
 	text-align: center;
-    margin-top: 249px;
     font-weight: 700;
     font-size: 58px;
 	color: #fff;
@@ -30,51 +30,51 @@
     font-size: 58px;
 	color: #fff;
 }
-.form-search
+.searchbox-holder
 {
-	text-align: center;
-    .spacer
+	padding: 0px;
+    .form-spacer
     {
-    	.form-spacer
-    	{
-    		background-color: rgba(239, 230, 230, 0.17);
-		    width: auto;
-		    margin-left: auto;
-		    margin-right: auto;
-		    padding: 25px 50px;
-		    border-radius: 0px;
-    	}
+    	background-color: rgba(239, 230, 230, 0.17);
+		padding: 25px 50px;
+		border-radius: 0px;
+    }
+    .searchfields-format
+    {
+    	padding: 0px;
     }
 	.business-name-textbox
 	{
-		width: 400px;
 	    border-radius: 0px;
-	    padding: 10px 32px;
 	    border: 1px solid #ccc;
+	    width: 100%;
+    	padding: 10px 0px 10px 32px;
 	}
-	.counties-zipcode-selectbox
+	.counties-selectbox
 	{
-		display: inline-block;
-		margin-left: -2px;
-	    width: 240px;
-	    padding: 7.5px 23px;
+		width: 100%;
+    	padding: 10px 0px 10px 10px;
 	    border: 1px solid #ccc;
 	    border-radius: 0px;
-	    height: 42px;
+	    height: 43px;
+	}
+	.zipcode-textbox
+	{
+		padding: 10px 25px 10px 32px;
+    	width: 100%;
+	    border-radius: 0px;
+	    border: 1px solid #ccc;
 	}
 	.btn-search
 	{
 		background-color: #fed700;
 		font-size: 18px;
 		margin-left: 10px;
-	    width: 126px;
-	    padding-right: 20px;
 	    border: 0px;
 	    border-radius: 0px;
-    	height: 41px;
-    	vertical-align: bottom;
     	color: #333;
     	margin-bottom: 2px;
+    	padding: 9px 25px 9px 18px;
 	}
 	.search-btn-text
 	{
@@ -84,7 +84,6 @@
     	font-weight: 700;
 	}
 }
-
 
 
 .carousel {
