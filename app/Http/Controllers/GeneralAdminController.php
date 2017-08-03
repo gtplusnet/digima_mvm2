@@ -25,7 +25,7 @@ class GeneralAdminController extends Controller
     {
         if($request->ajax())
         {
-            $business_list = TblBusinessModel::where('business_name','LIKE', '%'.$request['business_name'].'%')->paginate(5);
+            $business_list = $this->business_data($request['business_name']);
 
             if((!empty($request['business_name'])))
             {
@@ -36,9 +36,28 @@ class GeneralAdminController extends Controller
         }
     }
 
+    public function get_business_list_info(Request $request)
+    {
+        if($request->ajax())
+        {
+            $business_list = $this->business_data($request['business_name']);
+    
+            $business_name = $request['business_name'];
+            $view = view('general_admin.business_list', compact('business_list', 'business_name'))->render();
+            return response($view);
+        }
+    }
+
     public function business_data($business_name)
     {
-        //$business_list = TblBusinessModel::where('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
+        $business_list = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', 'tbl_user_account.business_id')->orWhere('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
+
+        return $business_list;
+    }
+
+    public function email_invoice()
+    {
+        return view('general_admin.email_invoice');
     }
 
     public function report()

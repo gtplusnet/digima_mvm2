@@ -81,6 +81,8 @@ Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 //Routes for General Admin
 Route::any('/general_admin', 'GeneralAdminController@index');
 Route::any('/general_admin/get_business_list', 'GeneralAdminController@get_business_list');
+Route::any('/general_admin/get_business_list_info', 'GeneralAdminController@get_business_list_info');
+Route::any('/general_admin/email_invoice', 'GeneralAdminController@email_invoice');
 Route::any('/general_admin/report', 'GeneralAdminController@report');
 //End of Renz's Routes
 
