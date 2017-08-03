@@ -1,33 +1,19 @@
 /* Write your custom CSS here */
-.fa-money, .fa-undo
-{
-	font-size: 24px !important;
-}
 #croatia-logo
 {
 	width: 200px;
 	height: 80px; 
 }
-.badge-count
+.tab-content
 {
-   background-color: #FF0000 !important;
-   color: #FFFFFF !important;
+	background-color: #F1F4F9 !important;
 }
 .business-list
 {
-	margin-top: 20px;
-	border: 1px solid #34425A;
-	padding: 10px 10px;
-}
-#business-table
-{
 	margin-top: 10px;
 }
-#business-table thead > tr > th, #business-table tbody > tr > td
+#no-result-notice 
 {
-	text-align: center;
-}
-.pagination-container
-{
-	margin-top: -15px;
+	margin-top: 100px;
+	color: red;
 }

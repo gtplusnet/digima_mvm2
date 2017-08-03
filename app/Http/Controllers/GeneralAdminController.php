@@ -18,57 +18,31 @@ class GeneralAdminController extends Controller
      */
     public function index()
     {
-        $data["all_business"] = TblBusinessModel::get();
-
-        $data["business_list"] = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->paginate(5);
-
-        $data["business_count"] = count($data["all_business"]);
-
-        return view('general_admin.dashboard', $data);
+        return view('general_admin.dashboard');
     }
 
-    public function search_business_general_admin(Request $request)
+    public function get_business_list(Request $request)
     {
-        $business_name = $request->search_business_txt;
-
-        $business_search = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_name', 'LIKE', '%'.$business_name.'%')->paginate(5)->appends('business_name', $business_name);
-
-        $business_list_output = '';
-
-        foreach($business_search as $business_result_item)
+        if($request->ajax())
         {
-            if($business_result_item->status == 1)
-            {
-                $status_result = "Activated";
-            }
-            else if($business_result_item->status == 2)
-            {
-                $status_result = "Not Activated";
-            }
-            else 
-            {
-                $status_result = "Disabled";
-            }
+            $business_list = TblBusinessModel::where('business_name','LIKE', '%'.$request['business_name'].'%')->paginate(5);
 
-            $business_list_output .= '
-                <tr>
-                    <td>'.$business_result_item->business_id.'</td>
-                    <td>'.$business_result_item->business_name.'</td>
-                    <td>'.$business_result_item->date_created.'</td>
-                    <td><a href="#">View</a></td>
-                    <td>'.$status_result.'</td>
-                </tr>
-            ';
-
-            $business_result_array = array("html" => $business_list_output);
+            if((!empty($request['business_name'])))
+            {
+                $business_name = $request['business_name'];
+                $view = view('general_admin.business_list', compact('business_list', 'business_name'))->render();
+                return response($view);
+            }
         }
+    }
 
-        echo json_encode($business_result_array);
+    public function business_data($business_name)
+    {
+        //$business_list = TblBusinessModel::where('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
     }
 
     public function report()
     {
-        
         return view('general_admin.report');
     }
 
