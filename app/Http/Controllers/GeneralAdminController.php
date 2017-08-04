@@ -48,6 +48,13 @@ class GeneralAdminController extends Controller
         }
     }
 
+    public function get_business_info(Request $request)
+    {
+        $business_info = DB::table('tbl_business')->join('tbl_business_contact_person', 'tbl_business.business_id', '=', 'tbl_business_contact_person.business_id')->where('tbl_business.business_id', '=', $request->business_id)->first();
+
+        return view('general_admin.business_info', compact('business_info'))->render();
+    }
+
     public function business_data($business_name)
     {
         $business_list = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', 'tbl_user_account.business_id')->orWhere('business_name','LIKE', '%'.$business_name.'%')->paginate(5);

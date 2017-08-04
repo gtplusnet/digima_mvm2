@@ -7,10 +7,11 @@ $('#search-business-form').on('submit', function(e){
 	$.ajax({
 		type: type,
 		url: url,
+		dataType: 'html',
 		data: data
 	}).done(function(data){
 		$('.business-result').hide();
-		$('.business-result').fadeIn(1000);
+		$('.business-result').fadeIn(700);
 		$('.business-result').html(data);
 	});
 });
@@ -27,10 +28,11 @@ function GetBusiness(page,business_name)
 	$.ajax({
 		type: 'get',
 		url: url+'?page='+page,
+		dataType: 'html',
 		data: {'business_name': business_name}
 	}).done(function(data){
 		$('.business-result').hide();
-		$('.business-result').fadeIn(1000);
+		$('.business-result').fadeIn(700);
 		$('.business-result').html(data);
 	});	
 }
