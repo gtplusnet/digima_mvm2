@@ -5,13 +5,13 @@ $(document).ready(function(){
 		var business_id = $(this).data('id'); 
 
 		$('.business-info-result').html('');
-		$('#modal-loader').show();;
+		$('#modal-loader').show();
 
 		setTimeout(function(){
 			$.ajax({
 				url: '/general_admin/get_business_info',
 				type: 'GET',
-				dataType: 'html',
+				dataType: 'json',
 				data: {'business_id': business_id}
 			}).done(function(data){
 				$('.business-info-result').html('');

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblBusinessModel;
 use DB;
+use Response;
 
 class GeneralAdminController extends Controller
 {
@@ -31,7 +32,7 @@ class GeneralAdminController extends Controller
             {
                 $business_name = $request['business_name'];
                 $view = view('general_admin.business_list', compact('business_list', 'business_name'))->render();
-                return response($view);
+                return Response::json($view);
             }
         }
     }
@@ -44,7 +45,7 @@ class GeneralAdminController extends Controller
     
             $business_name = $request['business_name'];
             $view = view('general_admin.business_list', compact('business_list', 'business_name'))->render();
-            return response($view);
+            return Response::json($view);
         }
     }
 
@@ -52,7 +53,8 @@ class GeneralAdminController extends Controller
     {
         $business_info = DB::table('tbl_business')->join('tbl_business_contact_person', 'tbl_business.business_id', '=', 'tbl_business_contact_person.business_id')->where('tbl_business.business_id', '=', $request->business_id)->first();
 
-        return view('general_admin.business_info', compact('business_info'))->render();
+        $view = view('general_admin.business_info', compact('business_info'))->render();
+        return Response::json($view);
     }
 
     public function business_data($business_name)

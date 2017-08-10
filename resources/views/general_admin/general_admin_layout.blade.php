@@ -31,6 +31,8 @@
         <link href="/assets/admin/general_admin/assets/css/modern.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/general_admin/assets/css/themes/white.css" class="theme-color" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/general_admin/assets/css/custom.css" rel="stylesheet" type="text/css"/>
+
+        <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
         
         <script src="/assets/admin/general_admin/admin/general_admin/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="/assets/admin/general_admin/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
@@ -472,6 +474,7 @@
         <script src="/assets/admin/general_admin/assets/js/modern.js"></script>
         <script src="/assets/admin/general_admin/assets/js/pages/dashboard.js"></script>
         <script src="https://use.fontawesome.com/6e78a1b40e.js"></script>
+        <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {

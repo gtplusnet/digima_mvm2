@@ -4,16 +4,34 @@ $('#search-business-form').on('submit', function(e){
 	var type = $(this).attr('method');
 	var data = $(this).serializeArray();
 
-	$.ajax({
-		type: type,
-		url: url,
-		dataType: 'html',
-		data: data
-	}).done(function(data){
+	if($('#business_name').val() == '')
+	{
+		iziToast.warning({
+			title: 'Caution',
+			message: 'Please input Business Name.',
+			position: 'topRight',
+			transitionIn: 'fadeInDown',
+			transitionOut: 'fadeOutUp'
+		});
+	}
+	else
+	{
+		$('#ajax-loader').show();
 		$('.business-result').hide();
-		$('.business-result').fadeIn(700);
-		$('.business-result').html(data);
-	});
+
+		setTimeout(function(){
+			$.ajax({
+			type: type,
+			url: url,
+			dataType: 'json',
+			data: data
+			}).done(function(data){
+				$('.business-result').fadeIn(700);
+				$('.business-result').html(data);
+				$('#ajax-loader').hide();
+			});
+		}, 700);
+	}
 });
 
 $(document).on('click', '.pagination a', function(e){
@@ -25,15 +43,21 @@ $(document).on('click', '.pagination a', function(e){
 function GetBusiness(page,business_name)
 {
 	var url = '/general_admin/get_business_list_info';
-	$.ajax({
+
+	$('#ajax-loader').show();
+	$('.business-result').hide();
+
+	setTimeout(function(){
+		$.ajax({
 		type: 'get',
 		url: url+'?page='+page,
-		dataType: 'html',
+		dataType: 'json',
 		data: {'business_name': business_name}
-	}).done(function(data){
-		$('.business-result').hide();
-		$('.business-result').fadeIn(700);
-		$('.business-result').html(data);
-	});	
+		}).done(function(data){
+			$('.business-result').fadeIn(700);
+			$('.business-result').html(data);
+			$('#ajax-loader').hide();
+		});	
+	}, 700);
 }
 

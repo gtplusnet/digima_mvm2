@@ -18,6 +18,10 @@
 				</form>
 			</div>
 
+			<div id="ajax-loader" style="display: none; text-align: center; margin-top: 100px;">
+           		<img src="/assets/img/loading.gif">
+          	</div> 
+
 			<div class="business-result">
 				
 			</div>

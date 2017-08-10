@@ -13,8 +13,8 @@ $(document).ready(function(){
 		$.ajax({
 			type:'POST',
 			url:'/get_city',
-			data:{county_id: county_id},
 			dataType:'json',
+			data:{county_id: county_id},
 			success:function(data){
 				$('#city_list').html(data.html);
 			}
@@ -32,8 +32,8 @@ $(document).ready(function(){
 		$.ajax({
 			type:'POST',
 			url:'/get_postal_code',
-			data:{city_id: city_id},
 			dataType:'json',
+			data:{city_id: city_id},
 			success:function(data){
 				$('#postal_code').val(data.postal_code_result);
 			}
@@ -227,8 +227,8 @@ $(document).ready(function(){
 			$.ajax({
 				type: 'POST',
 				url: '/register_business',
-				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username, prefix: prefix, first_name: first_name, last_name: last_name, email: email, password: password},
 				dataType: 'json',
+				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username, prefix: prefix, first_name: first_name, last_name: last_name, email: email, password: password},
 				success:function(data){
 					if(data.status == 'failed')
 					{
