@@ -21,10 +21,10 @@ class FrontController extends Controller
     }
     // THIS IS A DUMMY
     // STARTS HERE
-    public function dummyregistration()
+    public function dummypage()
     {
-        $data['page']   = 'dummyRegistration';
-        return view('front.pages.dummyregistration', $data);
+        $data['page']   = 'dummypage';
+        return view('front.pages.dummypage', $data);
     }
     // ENDS HERE
     public function success()

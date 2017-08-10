@@ -70,7 +70,12 @@
 {
     padding: 0px;
     margin-bottom: 18px;
-    height: auto;;
+    height: auto;
+    @media screen and (max-width: 992px)
+    {
+        margin-top: 17px;
+    }
+
 }
 .form-firstpart
 {

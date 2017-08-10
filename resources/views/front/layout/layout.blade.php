@@ -36,6 +36,9 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/globals.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/resultsortgrid.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchtabular.css">
+
+
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
         
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

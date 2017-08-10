@@ -21,7 +21,7 @@ Route::get('/registration', 'FrontController@registration');
 Route::get('/success', 'FrontController@success');
 
 // ROUTE FOR DUMMY
-Route::get('/dummyregistration', 'FrontController@dummyregistration');
+Route::get('/dummypage', 'FrontController@dummypage');
 // ENDS HERE
 
 Route::get('/about', 'FrontController@about');
