@@ -18,7 +18,7 @@
 				</form>
 			</div>
 
-			<div id="ajax-loader" style="display: none; text-align: center; margin-top: 100px;">
+			<div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
            		<img src="/assets/img/loading.gif">
           	</div> 
 

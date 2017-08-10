@@ -51,7 +51,7 @@
 		 </div>
 		<div class="modal-body">
 
-		   <div id="modal-loader" style="display: none; text-align: center; margin-top: 20px;">
+		   <div id="modal-loader" style="display: none; text-align: center; margin-top: 5px;">
            		<img src="/assets/img/loading.gif">
            </div>  
 
