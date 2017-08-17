@@ -3,749 +3,952 @@
 @section('content')
 <div class="intro" style="background-image: url('/images/background_home.jpg')">	
 	<div class="container">
-		<table class="container-searchbox">
-			<tbody>
-				<tr>
-					<td>
-						<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
-						<p class="second-line">FOR BUSINESS</p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<form class="form-search" action="/search_result" method="POST">
-							{{ csrf_field() }}
-							<div class="spacer">
-								<div class="form-spacer">
-									<input class="business-name-textbox" type="text" name="business_name" id="business_name" placeholder="Business, Category or Keyword...">
-									<select class="counties-zipcode-selectbox">
-										<option value="" disabled selected>Counties or ZIP Code...</option>
-										<optgroup label="Counties">
-											<option>Zagreb County</option>
-											<option>Dubrovnik–Neretva County</option>
-											<option>Split-Dalmatia County</option>
-											<option>---------------------</option>
-										</optgroup>
-										<optgroup label="ZIP Codes">
-											<option>10000</option>
-											<option>20000</option>
-											<option>21000</option>
-											<option>-----</option>
-										</optgroup>
-									</select>
-									<button class="btn btn-search" type="button" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
-								</div>
-							</div>
-						</form>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="col-md-12">
+			<div class="col-md-12 searchbox-container">
+				<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
+				<p class="second-line">FOR BUSINESS</p>
+			</div>
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-10 searchbox-holder">
+				<form action="/searchresult">
+					<div class="col-md-12 form-spacer">
+						<div class="col-md-4 searchfields-format">
+							<input class="business-name-textbox" type="text" placeholder="Business, Category or Keyword...">
+						</div>
+						<div class="col-md-3 searchfields-format">
+							<select class="counties-selectbox">
+								<option value="" disabled selected>Counties</option>
+								<option>Zagreb County</option>
+								<option>Dubrovnik–Neretva County</option>
+								<option>Split-Dalmatia County</option>
+								<option>---------------------</option>
+							</select>
+						</div>
+						<div class="col-md-3 searchfields-format">
+							<input class="zipcode-textbox" type="text" placeholder="ZIP Code">
+						</div>
+						<div class="col-md-2 searchfields-format">
+							<button class="btn btn-search" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-1">
+			</div>
+		</div>
 	</div>
 </div>
 
 
 <div class="row">
-	<div class="col-md-12 featured-list">
-	<div class="container">
-		<p class="featured-text">FEATURED <font class="lists-text">LISTS</font></p>
+	<div class="homecarousel-list-container">
+	<div class="homecarousel-title-container">
+		<p class="homecarousel-title">FEATURED <font class="homecarousel-title-thin">LIST</font></p>
 	</div>
-        <div id="Carousel" class="carousel slide"> 
-           	<ol class="carousel-indicators">
-                <li data-target="#Carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#Carousel" data-slide-to="1"></li>
-                <li data-target="#Carousel" data-slide-to="2"></li>
-                <li data-target="#Carousel" data-slide-to="3"></li>
-                <li data-target="#Carousel" data-slide-to="4"></li>
-                <li data-target="#Carousel" data-slide-to="5"></li>
-            </ol>     
-            <!-- Carousel items -->
-            <div class="carousel-inner">    
-                <div class="item active">
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	@if(count($one_to_four_list) > 0)
-	                	  		@foreach($one_to_four_list as $one_to_four_list)
-	                	  			<div class="col-md-3">
-			                	  		<div class="business-holder">
-				                	  		<a href="#" class="thumbnail business-thumbnail">
-				                	  			<img src="/images/walmart_pic.jpg" alt="Image">
-				                	  		</a>
-				                	  		<div class="business-location-holder">
-				                            	<i class="material-icons location-icon">location_on</i>
-				                               	<div class="spacer-location-thumbnail">
-				                               		<p class="business-location">{{ $one_to_four_list->business_complete_address}}</p>
-				                            	</div>
-			                            	</div>
-			                            	<div class="rating-holder">
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            	</div>
-		                            	</div>
-	                	  			</div>
-	                	  		@endforeach
-	                	  	@endif
-	                	</div>
-                	</div><!--.row-->
 
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	 @if(count($five_to_eight_list) > 0)
-	                	  		@foreach($five_to_eight_list as $five_to_eight_list)
-	                	  			<div class="col-md-3">
-			                	  		<div class="business-holder">
-				                	  		<a href="#" class="thumbnail business-thumbnail">
-				                	  			<img src="/images/walmart_pic.jpg" alt="Image">
-				                	  		</a>
-				                	  		<div class="business-location-holder">
-				                            	<i class="material-icons location-icon">location_on</i>
-				                               	<div class="spacer-location-thumbnail">
-				                               		<p class="business-location">{{ $five_to_eight_list->business_complete_address}}</p>
-				                            	</div>
-			                            	</div>
-			                            	<div class="rating-holder">
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            		<i class="glyphicon glyphicon-star"></i>
-			                            	</div>
-		                            	</div>
-	                	  			</div>
-	                	  		@endforeach
-	                	  	@endif
-	                	</div>
-                	</div><!--.row-->
-                </div><!--.item-->
-                 
-                <div class="item">
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/mcdo_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">Centar Joker | Put Brodarice 6, <br>Split 21000, Croatia</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/honda_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">4150 Sydney Place<br>Washington, DC 20521-4150</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/hotel_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">7100 Athens Place<br>Washington, DC 20521-7100</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/zara_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2430 Nouakchott Place<br>Washington, DC 20521-2430</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/ikea_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">3290 Hermosillo Place<br>Washington, DC 20521-3290</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/honda_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">4150 Sydney Place<br>Washington, DC 20521-4150</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/hotel_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">7100 Athens Place<br>Washington, DC 20521-7100</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                </div><!--.item-->
-                 
-                <div class="item">
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/mcdo_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">Centar Joker | Put Brodarice 6, <br>Split 21000, Croatia</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/honda_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">4150 Sydney Place<br>Washington, DC 20521-4150</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/hotel_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">7100 Athens Place<br>Washington, DC 20521-7100</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/zara_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2430 Nouakchott Place<br>Washington, DC 20521-2430</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/ikea_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">3290 Hermosillo Place<br>Washington, DC 20521-3290</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/honda_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">4150 Sydney Place<br>Washington, DC 20521-4150</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/hotel_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">7100 Athens Place<br>Washington, DC 20521-7100</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                </div><!--.item-->
-                
-                <div class="item">
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                </div><!--.item-->
 
-                <div class="item">
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                	<div class="featured-list-layer">
-	                	<div class="container">
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	  	<div class="col-md-3">
-	                	  		<div class="business-holder">
-		                	  		<a href="#" class="thumbnail business-thumbnail"><img src="/images/walmart_pic.jpg" alt="Image"></a>
-		                	  		<div class="business-location-holder">
-		                            	<i class="material-icons location-icon">location_on</i>
-		                               	<div class="spacer-location-thumbnail">
-		                               		<p class="business-location">2050 Bamako Place<br>Washington, DC 20521-2050</p>
-		                            	</div>
-	                            	</div>
-	                            	<div class="rating-holder">
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            		<i class="glyphicon glyphicon-star"></i>
-	                            	</div>
-                            	</div>
-	                	  	</div>
-	                	</div>
-                	</div><!--.row-->
-                </div><!--.item-->
-
-            </div><!--.carousel-inner-->
-            <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
-            <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
-        </div><!--.Carousel-->                 
+	<!-- HOME CAROUSEL -->
+	<div id="homeCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+  	<!-- Indicators -->
+	  	<ol class="carousel-indicators home-indicators">
+	    	<li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+	    	<li data-target="#homeCarousel" data-slide-to="1"></li>
+	    	<li data-target="#homeCarousel" data-slide-to="2"></li>
+	  	</ol>
+	  	<!-- Wrapper for slides -->
+	  	<div class="container">
+		  	<div class="carousel-inner">
+		    	<div class="item active">
+		    		<div class="col-md-12">
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+		    		</div>
+		    	</div>
+		    	<div class="item">
+		      		<div class="col-md-12">
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+		    		</div>
+		    	</div>
+		    	<div class="item">
+		    		<div class="col-md-12">
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+			    		<div class="col-md-3">
+				    		<div class="col-md-12 homecarousel-item-container">	
+				    			<div class="col-md-12 homecarousel-overlay-container">
+				    				<img class="img-responsive" src="/images/walmart_pic.jpg">
+				    				<div class="overlay">
+				    					<div class="homecarousel-btn-call-container">
+											<button class="homecarousel-overlay-btn-call">
+												<i class="fa fa-phone"></i><p class="homecarousel-overlay-btn-name">Call Now</p>
+											</button>
+										</div>
+										<div class="homecarousel-btn-send-container">
+											<button class="homecarousel-overlay-btn-send">
+												<i class="fa fa-mobile-phone"></i><p class="homecarousel-overlay-btn-name">Send to Mobile</p>
+											</button>
+										</div>
+									</div>
+				    			</div>
+				    			<div class="col-md-12 homecarousel-details-address-container">
+					    			<div class="col-md-2 homecarousel-details-container">
+					    				<i class="material-icons homecarousel-location-icon">location_on</i>
+					    			</div>
+					    			<div class="col-md-10 homecarousel-details-container">
+					                    <p>2050 Bamako Place Washington, DC 20521-2050</p>
+					    			</div>
+					    		</div>
+					    		<div class="col-md-12 homecarousel-details-container">
+						    		<div class="col-md-12 homecarousel-rating-container">
+						    			<i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                        <i class="glyphicon glyphicon-star"></i>
+				                    </div>
+					    		</div>
+					    	</div>
+			    		</div>
+		    		</div>
+		    	</div>
+		  	</div>
+		</div>
+		<!-- Left and right controls -->
+		<a class="left carousel-control homecarousel-control" href="#homeCarousel" data-slide="prev">
+	    	<span class="glyphicon glyphicon-chevron-left"></span>
+	    	<span class="sr-only">Previous</span>
+	  	</a>
+	  	<a class="right carousel-control homecarousel-control" href="#homeCarousel" data-slide="next">
+	    	<span class="glyphicon glyphicon-chevron-right"></span>
+	    	<span class="sr-only">Next</span>
+	  	</a>
 	</div>
+
+</div>
 </div>
 
 <div class="container">

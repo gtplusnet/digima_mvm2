@@ -1,7 +1,7 @@
 body
 {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 }
 .header-nav
 {
@@ -11,7 +11,11 @@ body
 {
 	img
 	{
-		width: 200px;
+		// max-height: 50px;
+  //   	margin-top: 4px;
+  //   	width: 170px;
+  //   	height: auto;
+    	width: 200px;
     	height: auto;
 	}
 }
@@ -27,6 +31,7 @@ body
 	text-decoration: none !important;
 	color: #333;
 	font-size: 15px;
+	font-weight: 700;
 }
 .nav-tab:hover
 {
@@ -61,6 +66,7 @@ li.active
 	display: inline;
     font-size: 15px;
     margin-left: 5px;
+    font-weight: 700;
 }
 .btn-login, .btn-register
 {

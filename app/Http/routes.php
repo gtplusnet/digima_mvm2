@@ -15,9 +15,9 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-
 /*Front Page*/
 Route::get('/', 'FrontController@index');
+
 
 Route::any('/registration', 'FrontController@registration');
 Route::any('/get_city', 'FrontController@get_city');
@@ -32,12 +32,17 @@ Route::any('/business_info', 'FrontController@business_info');
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
+Route::get('/business', 'FrontController@business');
+Route::get('/payment', 'FrontController@payment');
 
 Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
 
 
 Route::get('/searchresult', 'SearchresultController@index');
+Route::get('/category', 'SearchresultController@category');
+Route::get('/resultsortgrid', 'SearchresultController@resultsortgrid');
+Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 /*Merchant Page by Brain*/

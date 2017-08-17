@@ -15,7 +15,7 @@
 		</div>
 		<div>
 			<form role="form">
-			<div class="contact-form-container">
+			<div class=" col-md-12 contact-form-container">
 				<div class="col-md-12 contact-textfield-holder">
 					<div class="col-md-6 contact-textfield-left-holder">
 						<label for="input-name" class="contact-labels">Name:</label>
@@ -34,7 +34,7 @@
 					<label for="input-help" class="contact-labels">How Can We Help:</label>
 					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield"></textarea>
 				</div>
-				<div class="col-md-12 contact-textfield-holder">
+				<div class="col-md-12 contact-btn-holder">
 					<button class="contact-send-btn">SEND MESSAGE</button>
 				</div>
 			</div>
@@ -50,7 +50,8 @@
 				<div id="map"></div>
 			    <script>
 			      function initMap() {
-			        var uluru = {lat: -25.363, lng: 131.044};
+			      	var uluru = {lat: 45.1000, lng: 15.2000};
+			        // var uluru = {lat: -25.363, lng: 131.044};
 			        var map = new google.maps.Map(document.getElementById('map'), {
 			          zoom: 4,
 			          center: uluru

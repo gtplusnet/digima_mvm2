@@ -28,9 +28,22 @@ class FrontController extends Controller
         $data['county_list'] = TblCountyModel::get();
         return view('front.pages.registration', $data);
     }
+    // THIS IS A DUMMY
+    // STARTS HERE
+    public function dummypage()
+    {
+        $data['page']   = 'dummypage';
+        return view('front.pages.dummypage', $data);
+    }
+    // ENDS HERE
     public function success()
     {
         return view('front.pages.success');
+    }
+    public function payment()
+    {
+        $data['page']   = 'payment';
+        return view('front.pages.payment', $data);
     }
 
     public function get_city(Request $request)
