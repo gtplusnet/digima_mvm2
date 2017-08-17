@@ -19,27 +19,31 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $data['one_to_four_list'] = TblBusinessModel::skip(0)->take(4)->get();
-        $data['five_to_eight_list'] = TblBusinessModel::skip(4)->take(4)->get();
-        return view('front.pages.home', $data);
+        $countyList = TblCountyModel::get();
+        return view('front.pages.home', compact('countyList'));
     }
+
     public function registration()
     {
         $data['county_list'] = TblCountyModel::get();
         return view('front.pages.registration', $data);
     }
+
     // THIS IS A DUMMY
     // STARTS HERE
+
     public function dummypage()
     {
         $data['page']   = 'dummypage';
         return view('front.pages.dummypage', $data);
     }
     // ENDS HERE
+
     public function success()
     {
         return view('front.pages.success');
     }
+
     public function payment()
     {
         $data['page']   = 'payment';

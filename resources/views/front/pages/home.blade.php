@@ -18,11 +18,10 @@
 						</div>
 						<div class="col-md-3 searchfields-format">
 							<select class="counties-selectbox">
-								<option value="" disabled selected>Counties</option>
-								<option>Zagreb County</option>
-								<option>Dubrovnik–Neretva County</option>
-								<option>Split-Dalmatia County</option>
-								<option>---------------------</option>
+								<option value="--County--" disabled selected>--County--</option>
+								@foreach($countyList as $countyListItem)
+									<option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+								@endforeach
 							</select>
 						</div>
 						<div class="col-md-3 searchfields-format">

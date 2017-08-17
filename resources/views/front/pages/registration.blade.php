@@ -19,7 +19,7 @@
 				<div class="col-md-3 form-firstpart">
 				  	<label for="inputprefix" class="registration-form-label">Prefix:</label>
 				    <select type="prefix" class="form-control" name="prefix" id="inputprefix">
-						<option value disabled selected> </option>
+						<option value="--Prefix--" disabled selected>--Prefix--</option>
 						<option>Mr.</option>
 						<option>Ms.</option>
 						<option>Mrs.</option>
