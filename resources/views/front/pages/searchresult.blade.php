@@ -9,6 +9,7 @@
 </div>
 <div class="container">
 	<div>
+	
 		<p class="searched-business">SEARCH RESULT FOR: MC'DONALDS</p>
 	</div>
 	<div>
