@@ -25,10 +25,33 @@ class FrontController extends Controller
 
     public function registration()
     {
-        $data['county_list'] = TblCountyModel::get();
-        return view('front.pages.registration', $data);
+        $countyList = TblCountyModel::get();
+        return view('front.pages.registration', compact('countyList'));
     }
 
+    public function getCity(Request $request)
+    {
+        $cityList = TblCityModel::getCity($request->countyId)->get();
+
+        $cityOutputList = '';
+
+        $cityOutputList .= '<option value="--City--" disabled selected>--City--</option>';
+
+        foreach($cityList as $cityListItem)
+        {
+            $cityOutputList .= '<option value="'.$cityListItem->city_id.'">'.$cityListItem->city_name.'</option>';
+        }
+
+        return response()->json(['html' => $cityOutputList]);
+    }
+
+    public function getPostalCode(Request $request)
+    {
+        $postalCode = TblCityModel::getPostalCode($request->cityId)->first();
+
+        return response()->json(['postalCode' => $postalCode->postal_code]);  
+    }
+    
     // THIS IS A DUMMY
     // STARTS HERE
 
@@ -48,35 +71,6 @@ class FrontController extends Controller
     {
         $data['page']   = 'payment';
         return view('front.pages.payment', $data);
-    }
-
-    public function get_city(Request $request)
-    {
-        $county_id = $request->county_id;
-
-        $city_list = TblCityModel::where('county_id','=',$county_id)->get();
-
-        $city_dropdown_output = '';
-
-        $city_dropdown_output .= '<option value=""></option>';
-
-        foreach($city_list as $city_list)
-        {
-            $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
-
-            $city_array = array("html" => $city_dropdown_output);
-        }
-
-        echo json_encode($city_array);
-    }
-
-    public function get_postal_code(Request $request)
-    {
-        $city_id = $request->city_id;
-
-        $postal_code_get = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
-
-        echo '{"postal_code_result": "'.$postal_code_get->postal_code.'"}';
     }
 
     public function register_business(Request $request)

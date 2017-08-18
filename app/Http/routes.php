@@ -20,8 +20,8 @@ Route::get('/', 'FrontController@index');
 
 
 Route::any('/registration', 'FrontController@registration');
-Route::any('/get_city', 'FrontController@get_city');
-Route::any('/get_postal_code', 'FrontController@get_postal_code');
+Route::get('/get-city', 'FrontController@getCity');
+Route::get('/get-postal-code', 'FrontController@getPostalCode');
 Route::any('/register_business', 'FrontController@register_business');
 
 Route::any('/search_result', 'FrontController@search_result');

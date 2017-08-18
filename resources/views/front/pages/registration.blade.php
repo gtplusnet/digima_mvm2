@@ -9,7 +9,7 @@
 	</div>
 </div>
 <div class="container">
-	<form role="form" action="/success">
+	<form role="form" method="" action="" name="registrationForm" id="registrationForm">
 	<div class="col-md-6 form-leftpart">
 		<div class="col-md-12 registration-title-container">
 			<p class="registration-form-title">ENTER YOUR PERSONAL INFORMATION</p>
@@ -17,8 +17,8 @@
 		<div class="col-md-12 form-upper-container">			
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-3 form-firstpart">
-				  	<label for="inputprefix" class="registration-form-label">Prefix:</label>
-				    <select type="prefix" class="form-control" name="prefix" id="inputprefix">
+				  	<label for="prefix" class="registration-form-label">Prefix:</label>
+				    <select class="form-control" name="prefix" id="prefix">
 						<option value="--Prefix--" disabled selected>--Prefix--</option>
 						<option>Mr.</option>
 						<option>Ms.</option>
@@ -28,26 +28,26 @@
 	  				</select>
 				</div>
 				<div class="col-md-4 form-secondpart">
-				  	<label for="inputfirstname" class="registration-form-label">First Name:</label>
-				   	<input type="firstname" class="form-control" id="inputfirstname">
+				  	<label for="firstName" class="registration-form-label">First Name:</label>
+				   	<input type="text" class="form-control" name="firstName" id="firstName">
 				</div>
 				<div class="col-md-5 form-thirdpart">
-				  	<label for="inputlastname" class="registration-form-label">Last Name:</label>
-				    <input type="lastname" class="form-control" id="inputlastname">
+				  	<label for="lastName" class="registration-form-label">Last Name:</label>
+				    <input type="text" class="form-control" name="lastName" id="lastName">
 				</div>
 			</div>
 			<div class="col-md-12 registration-form-container">
-				<label for="inputemailadd" class="registration-form-label">Email Address:(will be use as login)</label>
-				<input type="emailadd" class="form-control" id="inputemailadd">
+				<label for="emailAddress" class="registration-form-label">Email Address:(will be use as login)</label>
+				<input type="email" class="form-control" name="emailAddress" id="emailAddress">
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-6 dualfield-firstpart">	
-					<label for="inputpassword" class="registration-form-label">Password:</label>
-					<input type="password" class="form-control" id="inputpassword">
+					<label for="password" class="registration-form-label">Password:</label>
+					<input type="password" class="form-control" name="password" id="password">
 				</div>
 				<div class="col-md-6 dualfield-secondpart">
-					<label for="reinputpassword" class="registration-form-label">Re-enter Password:</label>
-					<input type="repassword" class="form-control" id="inputpassword">
+					<label for="rePassword" class="registration-form-label">Re-enter Password:</label>
+					<input type="password" class="form-control" name="rePassword" id="rePassword">
 				</div>
 			</div>
 		</div>
@@ -56,45 +56,46 @@
 		</div>
 		<div class="col-md-12 form-bottom-container">
 			<div class="col-md-12 registration-form-container">
-			 	<label for="inputbusinessname" class="registration-form-label">Business Name:</label>
-			    <input type="businessname" class="form-control" id="inputbusinessname">
+			 	<label for="businessName" class="registration-form-label">Business Name:</label>
+			    <input type="text" class="form-control" name="businessName" id="businessName">
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-4 form-firstpart">
-					<label for="inputprimaryphone" class="registration-form-label">Primary Business Phone:</label>
-				    <input type="primaryphone" class="form-control" id="inputprimaryphone">
+					<label for="primaryPhone" class="registration-form-label">Primary Business Phone:</label>
+				    <input type="text" class="form-control" name="primaryPhone" id="primaryPhone">
 				</div>
 				<div class="col-md-4 form-secondpart">
-					<label for="inputalternatephone" class="registration-form-label">Alternate Business Phone:</label>
-				    <input type="alternatephone" class="form-control" id="inputalternatephone">
+					<label for="alternatePhone" class="registration-form-label">Alternate Business Phone:</label>
+				    <input type="text" class="form-control" name="alternatePhone" id="alternatePhone">
 				</div>
 				<div class="col-md-4 form-thirdpart">
-					<label for="inputfaxnumber" class="registration-form-label">Fax Number:</label>
-				   	<input type="faxnumber" class="form-control" id="inputfaxnumber">
+					<label for="faxNumber" class="registration-form-label">Fax Number:</label>
+				   	<input type="text" class="form-control" name="faxNumber" id="faxNumber">
 				</div>
 			</div>
 			<div class="col-md-12 registration-form-container">
-				<label for="input-completeaddress" class="registration-form-label">Complete Business Address:</label>
-				<textarea rows="5" name="complete-address" id="complete_address_info" class="businessadd-textarea"></textarea>
+				<label for="businessAddress" class="registration-form-label">Complete Business Address:</label>
+				<textarea rows="5" name="businessAddress" id="businessAddress" class="businessadd-textarea"></textarea>
 			</div>
 			<div class="col-md-12 registration-form-container">
-				<div class="col-md-4 form-firstpart">
-					<label for="inputcity" class="registration-form-label">City:</label>
-			    	<input type="city" class="form-control" id="inputcity">
-				</div>
-				<div class="col-md-4 form-secondpart">
-					<label for="inputstate" class="registration-form-label">State:</label>
-			  		<select type="state" class="form-control" name="state" id="inputstate">
-						<option> </option>
-						<option> </option>
-						<option> </option>
-				  		<option> </option>
-						<option> </option>
+				<div class="col-md-5 form-firstpart">
+					<label for="countyDropdown" class="registration-form-label">County:</label>
+			  		<select class="form-control" name="countyDropdown" id="countyDropdown">
+			  			<option value="--County--" disabled selected>--County--</option>
+						@foreach($countyList as $countyListItem)
+							<option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+						@endforeach
 	  				</select>
 				</div>
-				<div class="col-md-4 form-thirdpart">
-					<label for="inputzipcode" class="registration-form-label">ZIP Code:</label>
-			    	<input type="zipcode" class="form-control" id="inputzipcode">
+				<div class="col-md-4 form-secondpart">
+					<label for="cityDropdown" class="registration-form-label">City:</label>
+			  		<select class="form-control" name="cityDropdown" id="cityDropdown">
+						<option value="--City--" disabled selected>--City--</option>
+	  				</select>
+				</div>
+				<div class="col-md-3 form-thirdpart">
+					<label for="postalCode" class="registration-form-label">Postal Code:</label>
+			    	<input type="text" class="form-control" name="postalCode" id="postalCode" disabled="true">
 				</div>
 			</div>
 		</div>
@@ -114,27 +115,38 @@
 		</div>
 		<div class="col-md-12 form-bottom-container">
 			<div class="col-md-12 registration-form-container">
-				<label for="twitter-username" class="registration-form-label">This fields are not mandatory & not applicable to all businesses</label>
+				<label for="" class="registration-form-label">This fields are not mandatory & not applicable to all businesses</label>
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-6 dualfield-firstpart">	
-					<label for="facebook-url" class="registration-form-label">Facebook URL:</label>
-					<input type="facebookurl" class="form-control" id="facebook-url">
+					<label for="facebookUrl" class="registration-form-label">Facebook URL:</label>
+					<input type="text" class="form-control" name="facebookUrl" id="facebookUrl">
 				</div>
 				<div class="col-md-6 dualfield-secondpart">
-					<label for="twitter-username" class="registration-form-label">Twitter Username:</label>
-					<input type="twitterusername" class="form-control" id="twitter-username">
+					<label for="twitterUsername" class="registration-form-label">Twitter Username:</label>
+					<input type="twitterusername" class="form-control" name="twitterUsername" id="twitterUsername">
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-12 form-singleupper-container">
-		<input type="checkbox" value=""> 
+		<input type="checkbox" value="" name="agreeCheckbox" id="agreeCheckbox"> 
 		<label class="registration-form-label">I am interested in receiving special offers from Croatia Directory and its partners.</label>
 	</div>
 	<div class="col-md-12 form-singlebottom-container">
-		<button class="registration-continue-btn">CONTINUE</button>
+		<button type="button" class="registration-continue-btn" name="continueButton" id="continueButton">CONTINUE</button>
 	</div>
 	</form>
 </div>
+
+	{{-- JAVASCRIPTS --}}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/assets/js/front/registration.js"></script>
+	<script>
+		$.ajaxSetup({
+   			headers: {
+   			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   			}
+		});
+	</script>
 @endsection
