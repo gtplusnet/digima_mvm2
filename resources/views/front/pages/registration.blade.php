@@ -9,7 +9,8 @@
 	</div>
 </div>
 <div class="container">
-	<form role="form" method="" action="" name="registrationForm" id="registrationForm">
+	<form role="form" method="POST" action="/register-business" name="registrationForm" id="registrationForm">
+	{{ csrf_field() }}
 	<div class="col-md-6 form-leftpart">
 		<div class="col-md-12 registration-title-container">
 			<p class="registration-form-title">ENTER YOUR PERSONAL INFORMATION</p>
@@ -18,8 +19,8 @@
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-3 form-firstpart">
 				  	<label for="prefix" class="registration-form-label">Prefix:</label>
-				    <select class="form-control" name="prefix" id="prefix">
-						<option value="--Prefix--" disabled selected>--Prefix--</option>
+				    <select class="form-control" name="prefix" id="prefix" required="true">
+						<option value="" disabled selected>--Prefix--</option>
 						<option>Mr.</option>
 						<option>Ms.</option>
 						<option>Mrs.</option>
@@ -29,25 +30,25 @@
 				</div>
 				<div class="col-md-4 form-secondpart">
 				  	<label for="firstName" class="registration-form-label">First Name:</label>
-				   	<input type="text" class="form-control" name="firstName" id="firstName">
+				   	<input type="text" class="form-control" name="firstName" id="firstName" required="true">
 				</div>
 				<div class="col-md-5 form-thirdpart">
 				  	<label for="lastName" class="registration-form-label">Last Name:</label>
-				    <input type="text" class="form-control" name="lastName" id="lastName">
+				    <input type="text" class="form-control" name="lastName" id="lastName" required="true">
 				</div>
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<label for="emailAddress" class="registration-form-label">Email Address:(will be use as login)</label>
-				<input type="email" class="form-control" name="emailAddress" id="emailAddress">
+				<input type="email" class="form-control" name="emailAddress" id="emailAddress" required="true">
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-6 dualfield-firstpart">	
 					<label for="password" class="registration-form-label">Password:</label>
-					<input type="password" class="form-control" name="password" id="password">
+					<input type="password" class="form-control" name="password" id="password" required="true">
 				</div>
 				<div class="col-md-6 dualfield-secondpart">
 					<label for="rePassword" class="registration-form-label">Re-enter Password:</label>
-					<input type="password" class="form-control" name="rePassword" id="rePassword">
+					<input type="password" class="form-control" name="rePassword" id="rePassword" required="true">
 				</div>
 			</div>
 		</div>
@@ -57,31 +58,31 @@
 		<div class="col-md-12 form-bottom-container">
 			<div class="col-md-12 registration-form-container">
 			 	<label for="businessName" class="registration-form-label">Business Name:</label>
-			    <input type="text" class="form-control" name="businessName" id="businessName">
+			    <input type="text" class="form-control" name="businessName" id="businessName" required="true">
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-4 form-firstpart">
 					<label for="primaryPhone" class="registration-form-label">Primary Business Phone:</label>
-				    <input type="text" class="form-control" name="primaryPhone" id="primaryPhone">
+				    <input type="text" class="form-control" name="primaryPhone" id="primaryPhone" required="true">
 				</div>
 				<div class="col-md-4 form-secondpart">
 					<label for="alternatePhone" class="registration-form-label">Alternate Business Phone:</label>
-				    <input type="text" class="form-control" name="alternatePhone" id="alternatePhone">
+				    <input type="text" class="form-control" name="alternatePhone" id="alternatePhone" required="true">
 				</div>
 				<div class="col-md-4 form-thirdpart">
 					<label for="faxNumber" class="registration-form-label">Fax Number:</label>
-				   	<input type="text" class="form-control" name="faxNumber" id="faxNumber">
+				   	<input type="text" class="form-control" name="faxNumber" id="faxNumber" required="true">
 				</div>
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<label for="businessAddress" class="registration-form-label">Complete Business Address:</label>
-				<textarea rows="5" name="businessAddress" id="businessAddress" class="businessadd-textarea"></textarea>
+				<textarea rows="5" name="businessAddress" id="businessAddress" class="businessadd-textarea" required="true"></textarea>
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-5 form-firstpart">
 					<label for="countyDropdown" class="registration-form-label">County:</label>
-			  		<select class="form-control" name="countyDropdown" id="countyDropdown">
-			  			<option value="--County--" disabled selected>--County--</option>
+			  		<select class="form-control" name="countyDropdown" id="countyDropdown" required="true">
+			  			<option value="" disabled selected>--County--</option>
 						@foreach($countyList as $countyListItem)
 							<option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
 						@endforeach
@@ -89,8 +90,8 @@
 				</div>
 				<div class="col-md-4 form-secondpart">
 					<label for="cityDropdown" class="registration-form-label">City:</label>
-			  		<select class="form-control" name="cityDropdown" id="cityDropdown">
-						<option value="--City--" disabled selected>--City--</option>
+			  		<select class="form-control" name="cityDropdown" id="cityDropdown" required="true">
+						<option value="" disabled selected>--City--</option>
 	  				</select>
 				</div>
 				<div class="col-md-3 form-thirdpart">
@@ -130,11 +131,11 @@
 		</div>
 	</div>
 	<div class="col-md-12 form-singleupper-container">
-		<input type="checkbox" value="" name="agreeCheckbox" id="agreeCheckbox"> 
+		<input type="checkbox" value="" name="agreeCheckbox" id="agreeCheckbox" required="true"> 
 		<label class="registration-form-label">I am interested in receiving special offers from Croatia Directory and its partners.</label>
 	</div>
 	<div class="col-md-12 form-singlebottom-container">
-		<button type="button" class="registration-continue-btn" name="continueButton" id="continueButton">CONTINUE</button>
+		<button type="submit" class="registration-continue-btn" name="continueButton" id="continueButton">CONTINUE</button>
 	</div>
 	</form>
 </div>

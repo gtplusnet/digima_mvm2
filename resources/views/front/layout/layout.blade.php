@@ -45,7 +45,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
         <!-- iziToast Plugin CSS -->
-        <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
+        <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
 
     </head>
     <body>
@@ -146,6 +146,7 @@
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+        <script src="/assets/js/toastr/toastr.js"></script>
 
         <!-- FOR GOOGLEMAP -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
