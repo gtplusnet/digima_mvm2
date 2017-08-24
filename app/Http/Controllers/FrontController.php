@@ -115,6 +115,18 @@ class FrontController extends Controller
             } 
         }
     }
+
+    public function searchBusiness(Request $request)
+    {
+        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword");
+    }
+
+    public function searchBusinessResult(Request $request)
+    {
+        $businessKeyword = $request->businessKeyword;
+        $businessResult = TblBusinessModel::where('business_name', 'LIKE', '%'.$businessKeyword.'%')->paginate(5);
+        return view('front.pages.searchresult', compact('businessResult', 'businessKeyword')); 
+    }
     
     // THIS IS A DUMMY
     // STARTS HERE
@@ -135,21 +147,6 @@ class FrontController extends Controller
     {
         $data['page']   = 'payment';
         return view('front.pages.payment', $data);
-    }
-
-    public function search_result(Request $request)
-    {
-        $business_name = $request->business_name;
-
-        return Redirect::to("/search_result_list?business_name={$business_name}");
-    }
-
-    public function search_result_list(Request $request)
-    {
-        $business_name = $request->business_name;
-        $business_search = TblBusinessModel::where('business_name', 'LIKE', '%'.$business_name.'%')->paginate(5);
-
-        return view('front.pages.searchresult', compact('business_search', 'business_name')); 
     }
 
     public function business_info(Request $request)

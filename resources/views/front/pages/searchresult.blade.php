@@ -1,16 +1,17 @@
 @extends('front.layout.layout')
+@section('title', 'Search Result')
 @section('content')
 <div class="banner-searchresult" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">
 		<div class="pull-right">
-			<p class="search-text">Search > <a class="search-link" href="">Mc'Donalds</a></p>
+			<p class="search-text">Search > <a class="search-link" href="">{{ $businessKeyword }}</a></p>
 		</div>
 	</div>
 </div>
 <div class="container">
 	<div>
 	
-		<p class="searched-business">SEARCH RESULT FOR: MC'DONALDS</p>
+		<p class="searched-business">SEARCH RESULT FOR: {{ $businessKeyword }}</p>
 	</div>
 	<div>
 		<div class="col-md-8 search-table">

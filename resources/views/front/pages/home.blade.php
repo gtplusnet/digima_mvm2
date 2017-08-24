@@ -11,24 +11,25 @@
 			<div class="col-md-1">
 			</div>
 			<div class="col-md-10 searchbox-holder">
-				<form action="/searchresult">
+				<form action="/search-business" method="POST" name="searchBusinessForm" id="searchBusinessForm">
+					{{ csrf_field() }}
 					<div class="col-md-12 form-spacer">
 						<div class="col-md-4 searchfields-format">
-							<input class="business-name-textbox" type="text" placeholder="Business, Category or Keyword...">
+							<input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword"placeholder="Business, Category or Keyword..." required="true">
 						</div>
 						<div class="col-md-3 searchfields-format">
-							<select class="counties-selectbox">
-								<option value="--County--" disabled selected>--County--</option>
+							<select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown">
+								<option value="" disabled selected>--County--</option>
 								@foreach($countyList as $countyListItem)
 									<option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
 								@endforeach
 							</select>
 						</div>
 						<div class="col-md-3 searchfields-format">
-							<input class="zipcode-textbox" type="text" placeholder="ZIP Code">
+							<input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode">
 						</div>
 						<div class="col-md-2 searchfields-format">
-							<button class="btn btn-search" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
+							<button type="submit" class="btn btn-search" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
 						</div>
 					</div>
 				</form>

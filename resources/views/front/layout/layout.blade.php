@@ -44,7 +44,7 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-        <!-- iziToast Plugin CSS -->
+        <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
 
     </head>
@@ -58,10 +58,10 @@
                 </div>
                 <div class="pull-right">
                     <div class="menu-bar">  
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/category">Category</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/about">About</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'category' ? 'active-link' : '' }}"><a class="nav" href="/category">Category</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
                     </div>
                     <div class="pull-right">
                         <div class="menu-btn">
@@ -146,6 +146,8 @@
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+
+        <!-- Toastr Plugin JS !-->
         <script src="/assets/js/toastr/toastr.js"></script>
 
         <!-- FOR GOOGLEMAP -->

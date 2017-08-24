@@ -24,8 +24,8 @@ Route::get('/get-city', 'FrontController@getCity');
 Route::get('/get-postal-code', 'FrontController@getPostalCode');
 Route::any('/register-business', 'FrontController@registerBusiness');
 
-Route::any('/search_result', 'FrontController@search_result');
-Route::any('/search_result_list', 'FrontController@search_result_list');
+Route::any('/search-business', 'FrontController@searchBusiness');
+Route::any('/search-business-result', 'FrontController@searchBusinessResult');
 Route::any('/business_info', 'FrontController@business_info');
 
 
