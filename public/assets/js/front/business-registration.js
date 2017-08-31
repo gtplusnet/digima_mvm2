@@ -26,9 +26,9 @@ $(document).ready(function(){
 
 	$("#registrationForm").on('submit', function(e){
 		e.preventDefault();
-		var formData = $("#registrationForm").serialize();
-		var formMethod = $("#registrationForm").attr("method");
-		var formAction = $("#registrationForm").attr("action");
+		var formData = $(this).serialize();
+		var formMethod = $(this).attr("method");
+		var formAction = $(this).attr("action");
 		if(password.value != rePassword.value)
 		{
 			toastr.warning('Password and Re-type Password do not match.');
@@ -76,4 +76,5 @@ $(document).ready(function(){
 		"showMethod": "fadeIn",
 		"hideMethod": "fadeOut"
 	}
+	//End of Toastr Plugin Options
 });

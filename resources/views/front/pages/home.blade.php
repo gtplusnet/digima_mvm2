@@ -11,7 +11,7 @@
 			<div class="col-md-1">
 			</div>
 			<div class="col-md-10 searchbox-holder">
-				<form action="/search-business" method="POST" name="searchBusinessForm" id="searchBusinessForm">
+				<form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
 					{{ csrf_field() }}
 					<div class="col-md-12 form-spacer">
 						<div class="col-md-4 searchfields-format">
@@ -29,7 +29,7 @@
 							<input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode">
 						</div>
 						<div class="col-md-2 searchfields-format">
-							<button type="submit" class="btn btn-search" name="search_btn" id="search_btn"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
+							<button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
 						</div>
 					</div>
 				</form>
@@ -1072,4 +1072,15 @@
 		</div>
 	</div>
 </div>
+	{{-- JAVASCRIPTS --}}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/assets/js/front/search-registered-business.js"></script>
+	<script>
+		$.ajaxSetup({
+   			headers: {
+   			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   			}
+		});
+	</script>
+	{{-- END OF JAVASCRIPTS --}}
 @endsection

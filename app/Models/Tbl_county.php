@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TblCountyModel extends Model
+class Tbl_county extends Model
 {
     protected $table = 'tbl_county';
     protected $primaryKey = 'county_id';

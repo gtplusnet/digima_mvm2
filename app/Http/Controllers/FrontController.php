@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\TblCountyModel;
-use App\Models\TblCityModel;
-use App\Models\TblBusinessModel;
-use App\Models\TblBusinessContactPersonModel;
-use App\Models\TblUserAccountModel;
+use App\Models\Tbl_county;
+use App\Models\Tbl_city;
+use App\Models\Tbl_business;
+use App\Models\Tbl_business_contact_person;
+use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
 use Carbon\Carbon;
 use Redirect;
@@ -19,13 +19,13 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $countyList = TblCountyModel::get();
+        $countyList = Tbl_county::get();
         return view('front.pages.home', compact('countyList'));
     }
 
     public function registration()
     {
-        $countyList = TblCountyModel::get();
+        $countyList = Tbl_county::get();
         return view('front.pages.registration', compact('countyList'));
     }
 
@@ -33,7 +33,7 @@ class FrontController extends Controller
     {
         if($request->ajax())
         {
-            $cityList = TblCityModel::getCity($request->countyId)->get();
+            $cityList = Tbl_city::getCity($request->countyId)->get();
             $cityOutputList = '';
             $cityOutputList .= '<option value="" disabled selected>--City--</option>';
             foreach($cityList as $cityListItem)
@@ -48,7 +48,7 @@ class FrontController extends Controller
     {
         if($request->ajax())
         {
-             $postalCode = TblCityModel::getPostalCode($request->cityId)->first();
+             $postalCode = Tbl_city::getPostalCode($request->cityId)->first();
              return response()->json(['postalCode' => $postalCode->postal_code]);  
         }
     }
@@ -57,16 +57,17 @@ class FrontController extends Controller
     {
         if($request->ajax())
         {
-            $emailAvailability = TblUserAccountModel::checkEmail($request->emailAddress)->first();
+            $emailAvailability = Tbl_user_account::checkEmail($request->emailAddress)->first();
             if(count($emailAvailability) == 1)
             {
                 return response()->json(['status' => 'used', 'message' => 'Email has already been used.']); 
             }
             else
             {
-            $businessData = new TblBusinessModel;
+            $businessData = new Tbl_business;
             $businessData->business_id = '';
             $businessData->business_name = $request->businessName;
+            $businessData->county_id = $request->countyDropdown;
             $businessData->city_id = $request->cityDropdown;
             $businessData->business_complete_address = $request->businessAddress;
             $businessData->business_phone = $request->primaryPhone;
@@ -77,7 +78,7 @@ class FrontController extends Controller
             $businessData->date_created = Carbon::now();
             $businessData->save();
 
-            $contactData = new TblBusinessContactPersonModel;
+            $contactData = new Tbl_business_contact_person;
             $contactData->business_contact_person_id = '';
             $contactData->contact_prefix = $request->prefix;
             $contactData->contact_first_name = $request->firstName;
@@ -85,7 +86,7 @@ class FrontController extends Controller
             $contactData->business_id = $businessData->business_id;
             $contactData->save();
 
-            $accountData = new TblUserAccountModel;
+            $accountData = new Tbl_user_account;
             $accountData->user_email = $request->emailAddress;
             $accountData->user_password = $request->password;
             $accountData->user_category = 'merchant';
@@ -116,15 +117,15 @@ class FrontController extends Controller
         }
     }
 
-    public function searchBusiness(Request $request)
+    public function businessSearch(Request $request)
     {
-        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword");
+        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown");
     }
 
-    public function searchBusinessResult(Request $request)
+    public function businessSearchResult(Request $request)
     {
         $businessKeyword = $request->businessKeyword;
-        $businessResult = TblBusinessModel::where('business_name', 'LIKE', '%'.$businessKeyword.'%')->paginate(5);
+        $businessResult = Tbl_business::searchBusinessResult($businessKeyword, $request->countyId)->paginate(5);
         return view('front.pages.searchresult', compact('businessResult', 'businessKeyword')); 
     }
     

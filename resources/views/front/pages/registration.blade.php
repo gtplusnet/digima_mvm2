@@ -142,7 +142,7 @@
 
 	{{-- JAVASCRIPTS --}}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/assets/js/front/registration.js"></script>
+	<script src="/assets/js/front/business-registration.js"></script>
 	<script>
 		$.ajaxSetup({
    			headers: {
@@ -150,4 +150,5 @@
    			}
 		});
 	</script>
+	{{-- END OF JAVASCRIPTS --}}
 @endsection

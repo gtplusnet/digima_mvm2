@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TblUserAccountModel extends Model
+class Tbl_user_account extends Model
 {
     protected $table = 'tbl_user_account';
     protected $primaryKey = 'user_account_id';
