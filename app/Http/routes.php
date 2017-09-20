@@ -12,6 +12,7 @@
 */
 
 
+
 /*Route::get('/', function () {
     return view('welcome');
 });*/
@@ -39,11 +40,11 @@ Route::get('/register', 'FrontController@register');
 
 
 Route::get('/business', 'FrontController@business');
-Route::get('/payment', 'FrontController@payment');
+Route::get('/payment',	'FrontController@payment');
 
 
 Route::get('/searchresult', 'SearchresultController@index');
-Route::get('/category', 'SearchresultController@category');
+Route::get('/category',		'SearchresultController@category');
 
 
 /*Merchant Page by Brain*/
@@ -59,12 +60,13 @@ Route::any('/admin/', 'MerchantController@index');
 
 
 
+
 /*Agent Page by Joshua*/
 Route::get('/agent', 				'AgentController@index');
 Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
 Route::any('/agent/add_client', 	'AgentController@add_client');
-Route::any('/agent/get_city', 	'AgentController@get_city');
+Route::any('/agent/get_city', 		'AgentController@get_city');
 Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 
 
@@ -95,4 +97,7 @@ Route::any('/check_login', 'LoginController@check_login');
 //End of Renz's Routes
 
 
-Route::any('/sample', 'MerchantController@sample');
+
+
+Route::any('/generaladmin', 'MerchantController@sample');
+
