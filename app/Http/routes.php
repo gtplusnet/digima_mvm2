@@ -48,9 +48,16 @@ Route::get('/category', 'SearchresultController@category');
 
 /*Merchant Page by Brain*/
 Route::get('/merchant', 			'MerchantController@index');
-Route::get('/merchant/profile', 	'MerchantController@profile');
+Route::any('/merchant/profile', 	'MerchantController@profile');
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/bills', 		'MerchantController@bills');
+
+//Eden
+Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
+Route::any('/merchant/view_info', 'MerchantController@view_info');
+Route::any('/admin/', 'MerchantController@index');
+
+
 
 /*Agent Page by Joshua*/
 Route::get('/agent', 				'AgentController@index');
