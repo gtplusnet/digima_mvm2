@@ -56,8 +56,14 @@ Route::get('/merchant/bills', 		'MerchantController@bills');
 //Eden
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
 Route::any('/merchant/view_info', 'MerchantController@view_info');
-Route::any('/admin/', 'MerchantController@index');
 
+Route::get('/admin', 				'AdminController@index');
+Route::get('/admin/profile', 		'AdminController@profile');
+Route::get('/admin/client', 		'AdminController@client');
+Route::any('/admin/add_team', 		'AdminController@add_team');
+Route::any('/admin/add_agent', 		'AdminController@add_agent');
+Route::any('/admin/get_city', 		'AdminController@get_city');
+Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
 
 
 
