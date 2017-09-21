@@ -87,7 +87,7 @@
                 </div>
                 <div class="panel-body">
                     <div id="flot2">
-                    <body>                 
+                    <!-- <body>                 
                     <canvas id="myCanvas" width="450" height="200" 
                     style="border:1px solid #c3c3c3;">
                     Your browser does not support the canvas <element></element>nt.
@@ -101,7 +101,7 @@
                     ctx.stroke();
                     </script>
 
-                    </body>
+                    </body> -->
                     </div>
                 </div>
             </div>

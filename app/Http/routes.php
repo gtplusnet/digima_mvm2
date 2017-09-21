@@ -12,7 +12,6 @@
 */
 
 
-
 /*Route::get('/', function () {
     return view('welcome');
 });*/
@@ -49,14 +48,9 @@ Route::get('/category',		'SearchresultController@category');
 
 /*Merchant Page by Brain*/
 Route::get('/merchant', 			'MerchantController@index');
-Route::any('/merchant/profile', 	'MerchantController@profile');
+Route::get('/merchant/profile', 	'MerchantController@profile');
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/bills', 		'MerchantController@bills');
-
-//Eden
-Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
-Route::any('/merchant/view_info', 'MerchantController@view_info');
-Route::any('/admin/', 'MerchantController@index');
 
 
 
@@ -96,8 +90,5 @@ Route::any('/check_login', 'LoginController@check_login');
 
 //End of Renz's Routes
 
-
-
-
-Route::any('/generaladmin', 'MerchantController@sample');
+Route::any('/generaladmin', 'GeneralAdmin@admin');
 
