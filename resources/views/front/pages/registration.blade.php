@@ -9,7 +9,7 @@
 	</div>
 </div>
 <div class="container">
-<form method="POST">
+<form method="POST" action="/register">
 {{ csrf_field() }}
 	<div class="row">
 		<div class="col-md-6">
@@ -139,6 +139,18 @@
 				    			<input type="text" class="form-control" name="postal_code" id="postal_code" readonly="true">
 				  			</div>
 				 		</div>
+				 		<div class="form-group">
+					    	<div class="col-md-5 personal-info">	
+					    		<label for="inputmembership">Membership</label>
+					    		<select class="form-control" name="membership" id="membership">
+				  					<option value=""></option>
+				  					@foreach($payment_method as $payment_list)
+						   	 			<option value="{{ $payment_list->payment_method_id }}">{{ $payment_list->payment_method_name }}</option>
+						   			@endforeach
+				  				</select>
+					    	</div>
+					    	
+				  		</div>
 		  		</div>
 			</div>
 				<div class="accept-terms">
