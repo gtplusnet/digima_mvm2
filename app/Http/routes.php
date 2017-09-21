@@ -77,9 +77,6 @@ Route::any('/agent/add_client', 	'AgentController@add_client');
 Route::any('/agent/get_city', 		'AgentController@get_city');
 Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 
-
-
-
 // Route::get('/', function () {
 //     return view('digimamvm.home');
 // });
@@ -102,7 +99,8 @@ Route::any('/check_login', 'LoginController@check_login');
 //Route::any('/search_result_list', 'SearchController@search_result_list');
 
 
-//End of Renz's Routes
+//End of Oliver's Routes
 
 Route::any('/generaladmin', 'GeneralAdmin@admin');
+Route::get('/admin_login', 		'AdminController@index');
 

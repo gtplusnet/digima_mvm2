@@ -20,7 +20,7 @@ class GeneralAdmin extends Controller
         return view('front.pages.GeneralAdmin', $data);
     }
 
-    public function check_login(Request $request)
+    public function admin_login(Request $request)
     {
         $validate_login = Tbl_admin::select('admin_id')->where('email','=',$request->login_email)->where('password','=',$request->login_password)->first();
 
