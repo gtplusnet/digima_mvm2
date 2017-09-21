@@ -59,6 +59,7 @@ $(document).ready(function(){
 		var county_list = $('#county_list').val();
 		var city_list = $('#city_list').val();
 		var postal_code = $('#postal_code').val();
+		var membership = $('#membership').val();
 		var agree_checkbox = $('#agree_checkbox').prop('checked');
 
 		if(prefix == '')
@@ -211,6 +212,16 @@ $(document).ready(function(){
 			    transitionOut: 'fadeOutUp'
 			});
 		}
+		else if(membership == '')
+		{
+			iziToast.warning({
+			    title: 'Caution',
+			    message: 'Membership is required.',
+			    position: 'topRight',
+			    transitionIn: 'fadeInDown',
+			    transitionOut: 'fadeOutUp'
+			});
+		}
 		else if(agree_checkbox == false)
 		{
 			iziToast.warning({
@@ -226,7 +237,7 @@ $(document).ready(function(){
 			$.ajax({
 				method: 'POST',
 				url: '/register_business',
-				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username, prefix: prefix, first_name: first_name, last_name: last_name, email: email, password: password},
+				data: {business_name: business_name, city_list: city_list, business_address: business_address, primary_business_phone: primary_business_phone, secondary_business_phone: secondary_business_phone, fax_number: fax_number, facebook_url: facebook_url, twitter_username: twitter_username, prefix: prefix, first_name: first_name, last_name: last_name, email: email, password: password,membership: membership},
 				success:function(data){
 					if(data == 'Email has already been used.')
 					{

@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+use App\Models\TblBusinessModel;
+use App\Models\TblBusinessContactPersonModel;
 
 class AgentController extends Controller
 {
@@ -26,8 +28,13 @@ class AgentController extends Controller
 
 	public function client()
 	{
-		$data['page']	= 'Client';
-		return view ('agent.pages.client', $data);		
+		$data['page']	 = 'Client';
+		$data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business.business_id','=','tbl_business.business_id')
+                                                  ->orderBy('tbl_business.business_id','asc')
+                                                  ->get();
+    // dd($data['clients']);
+		return view ('agent.pages.client', $data);	
+
 	}
 	public function add_client()
 	{

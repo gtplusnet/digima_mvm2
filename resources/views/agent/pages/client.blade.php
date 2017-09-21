@@ -33,15 +33,22 @@
                                         <th>Name</th>
                                         <th>Date/Added</th>
                                         <th>Business Name</th>
-                                        <th>Description</th>
-                                        <th>Reference</th>
-                                        <th>Status</th>
+                                        <th>Business Address</th>
+                                        <th>membership</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>                       
                                 <tbody>
+                                    @foreach($clients as $client)
                                     <tr>
-                            
+                                        <td>{{$client->contact_first_name}}{{$client->contact_last_name}}</td>
+                                        <td>{{date("F j, Y, g:i a",strtotime($client->date_created))}}</td>
+                                        <td>{{$client->business_name}}</td>
+                                        <td>{{$client->business_complete_address}}</td>
+                                        <td>{{$client->membership}}</td>
+                                        <td><button >call</button></td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

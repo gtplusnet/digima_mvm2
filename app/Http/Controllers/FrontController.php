@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+use App\Models\TblPaymentMethod;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
@@ -25,6 +26,7 @@ class FrontController extends Controller
     public function registration()
     {
         $data['county_list'] = TblCountyModel::get();
+        $data['payment_method'] = TblPaymentMethod::get();
         return view('front.pages.registration', $data);
     }
     public function success()
@@ -73,9 +75,9 @@ class FrontController extends Controller
 	        $business_data->business_fax = $request->fax_number;
 	        $business_data->facebook_url = $request->facebook_url;
 	        $business_data->twitter_url = $request->twitter_username;
-	        $business_data->date_created = Carbon::now();
-
-	        $business_data->save();
+            $business_data->membership = $request->membership;
+            $business_data->date_created = Carbon::now();
+            $business_data->save();
 
 	        $contact_data = new TblBusinessContactPersonModel;
 	        $contact_data->business_contact_person_id = '';
@@ -83,6 +85,9 @@ class FrontController extends Controller
 	        $contact_data->contact_first_name = $request->first_name;
 	        $contact_data->contact_last_name = $request->last_name;
 	        $contact_data->business_id = $business_data->business_id;
+
+            $contact_data->save();
+            
     	}
 	}
 
@@ -91,7 +96,7 @@ class FrontController extends Controller
         $data['page']   = 'payment';
         return view('front.pages.payment', $data);
 
-        $contact_data->save();
+        
 
         $account_data = new TblUserAccountModel;
         $account_data->user_email = $request->email;
