@@ -30,8 +30,8 @@ class AgentController extends Controller
 	{
 		$data['page']	 = 'Client';
 		$data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business.business_id','=','tbl_business.business_id')
-                                                  ->orderBy('tbl_business.business_id','asc')
-                                                  ->get();
+			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+			                              ->get();
     // dd($data['clients']);
 		return view ('agent.pages.client', $data);	
 
