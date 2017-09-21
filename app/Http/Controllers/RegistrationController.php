@@ -24,13 +24,13 @@ class RegistrationController extends Controller
         //
     }
 
-    public function registration()
+   /* public function registration()
     {
         $data['county_list'] = TblCountyModel::get();
 
         return view('mvm.front.registration', $data);
     }
-
+*/
     public function get_city(Request $request)
     {
         $county_id = $request->county_id;

@@ -17,6 +17,7 @@ class MerchantController extends Controller
 	{
 		$data['page']	= 'Dashboard';
 		return view ('admin.merchant.pages.dashboard', $data);		
+		
 	}
 
 	public function profile()
@@ -25,7 +26,6 @@ class MerchantController extends Controller
 		$data['_payment_method']	= Tbl_payment_method::get();
 		return view ('admin.merchant.pages.profile', $data);		
 	}
-
 	public function category()
 	{
 		$data['page']				= 'Category';
@@ -52,4 +52,10 @@ class MerchantController extends Controller
 		$data['_mercant'] 	= Tbl_business::get();
 		return view('admin.agent.merchant_list', $data);
 	}
+
+	public function generaladmin()
+	{
+		return view ('admin.merchant.pages.generaladmin');	
+	}
+	
 }

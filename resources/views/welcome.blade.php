@@ -21,7 +21,7 @@
 
             .container {
                 text-align: center;
-                display: table-cell;
+                display: table-cell;<p></p>
                 vertical-align: middle;
             }
 

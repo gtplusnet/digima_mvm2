@@ -75,7 +75,6 @@
                                         </div>        
                                     </div> 
                                 </form>
-
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="tab10">
                                 
@@ -83,34 +82,36 @@
                                     <div class="form-group">
                                         <label for="business_name" class="col-sm-2 control-label">Company Information</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" rows="5" id="comment">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+                                            <textarea class="form-control" rows="5" id="comment">Our goal is to provide and build professional websites, mobile applications with a specific design that best suit to your company specifications, a uniform graphic set with eye catchy details. We are good at building brands and improving your global presence so that we develop meaningful and long term relationships with you.
                                             </textarea>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Business Website</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="input-default" value="www.sample.com" readonly>
                                         </div>                                        
                                     </div>
-                                    <div class="form-group">
+                                    <div    class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Year Establish</label>
                                         <div class="col-sm-2">
                                             <input type="text" class="form-control" id="input-default" value="1990" readonly>
-                                        </div>                                        
-                                    </div>                                    
+                                        </div>  
+                                        <button class="group">Submit</button>
+                                    </div>  
                                 </form> 
-
                             </div>
+
                             <div role="tabpanel" class="tab-pane fade" id="tab11">
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Monday</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
+                                            <input type="text" class="form-control" id="input-default" value="08:00 AM" readonly>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
+                                            <input type="text" class="form-control" id="input-default" value="05:00 PM" readonly>
                                         </div>                                 
                                     </div> 
 
@@ -125,7 +126,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Wensday</label>
+                                        <label for="input-Default" class="col-sm-2 control-label">Wednesday</label>
                                         <div class="col-sm-3">
                                             <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
                                         </div>
