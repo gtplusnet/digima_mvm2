@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin.layout.layouts')
 @section('content')
 <div class="page-title">
     <h3>{{ $page }}</h3>
@@ -9,6 +9,7 @@
         </ol>
     </div>
 </div>
+
 <div id="main-wrapper">
     <div class="row">
         <div class="col-md-4 center">
