@@ -59,7 +59,11 @@ Route::get('/merchant/bills', 		'MerchantController@bills');
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
 Route::any('/merchant/view_info', 'MerchantController@view_info');
 
-Route::get('/admin', 				'AdminController@index');
+Route::get('/admin', 				'AdminController@admin_login');
+Route::post('/admin/dashboard', 	'AdminController@admin_login_submit');
+Route::any('/admin/logout', 		'AdminController@admin_logout');
+
+Route::get('/admin/dashboard', 		'AdminController@dashboard');
 Route::get('/admin/profile', 		'AdminController@profile');
 Route::get('/admin/client', 		'AdminController@client');
 Route::any('/admin/add_team', 		'AdminController@add_team');
@@ -104,3 +108,7 @@ Route::any('/check_login', 'LoginController@check_login');
 Route::any('/generaladmin', 'GeneralAdmin@admin');
 Route::get('/admin_login', 		'AdminController@index');
 
+// Route::any('/admin_login', 'GeneralAdmin@admin');
+// Route::any('/generaladmin', 'GeneralAdmin@generaladmin');
+// Route::any('/admin/logout', 'GeneralAdmin@logout');
+// Route::any('/admin', 'GeneralAdmin@index');
