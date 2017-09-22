@@ -14,7 +14,7 @@
             </div>
         </div> --}}
         <ul class="menu accordion-menu">
-            <li class="{{ (Request::segment(2)=='') ? 'active' : ''  }}"><a href="/admin" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
+            <li class="{{ (Request::segment(2)=='') ? 'active' : ''  }}"><a href="/admin/dashboard" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
             <li class="{{ (Request::segment(2) == 'profile') ? 'active' : ''  }}"><a href="/admin/profile" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-user"></span><p>Profile</p></a></li>
             <li class="{{ (Request::segment(2) == 'client') ? 'active' : ''  }}"><a href="/admin/client" class="waves-effect waves-button"><span class="menu-icon fa fa-group"></span><p>Clients</p></a></li>
             <li class="{{ (Request::segment(2) == 'add_team') ? 'active' : ''  }}"><a href="/admin/add_team" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>Add Team</p></a></li>

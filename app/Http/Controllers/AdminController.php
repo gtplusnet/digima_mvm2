@@ -6,18 +6,21 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+use App\Models\Tbl_admin;
+use Session;
+use Redirect;
 
 class AdminController extends Controller
 {
 
-	public function index()
+	/*public function index()
 	{
 
 		$data['page']	= 'Dashboard';
 		$data['county_list'] = TblCountyModel::get();
 		return view ('admin.pages.dashboard', $data);		
 	}
-
+*/
 	public function profile()
 	{
 		$data['page']	= 'Profile';
@@ -70,15 +73,43 @@ class AdminController extends Controller
 
         return $postal_code->postal_code;
     }
+    public function admin_login ()
+    {
+    	$data['page']   = 'Admin Login';
+        return view('front.pages.adminlogin', $data);
+    }
+
+    public function admin_login_submit (Request $request)
+    {
+    	$validate_login = Tbl_admin::where('email','=',$request->email)->first();
+        if($validate_login)
+        {
+
+        	if (password_verify($request->password, $validate_login->password)) 
+				{
+    				/*Session::put("login", true);*/
+					$data['page']	= 'Dashboard';
+					return view ('admin.pages.dashboard', $data);					
+				}
+		}
+        else
+        {
+            echo 'Incorrect Email/Password.';
+        }
+    }
+
+    public function dashboard()
+    {
+    	$data['page']	= 'Dashboard';
+		return view ('admin.pages.dashboard', $data);	
+    }
 
 
-		public function logout()
+		public function admin_logout ()
 	{
-		Session::forget('user_email');
-		Session::forget('user_password');
-		return Redirect::back();
+		Session::put("login", true);
+		$data['page']   = 'Admin Login';
+        return view('front.pages.adminlogin', $data);
+
 	}
-
-
-
 }
