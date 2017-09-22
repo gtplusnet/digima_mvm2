@@ -70,12 +70,16 @@ Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
 
 
 /*Agent Page by Joshua*/
-Route::get('/agent', 				'AgentController@index');
+Route::get('/agent/dashboard', 		'AgentController@index');
+Route::post('/agent/dashboard', 	'AgentController@agent_login');
+
 Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
 Route::any('/agent/add_client', 	'AgentController@add_client');
 Route::any('/agent/get_city', 		'AgentController@get_city');
 Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
+//james agent//
+Route::any('/agent',          'AgentController@login');
 
 
 
@@ -105,4 +109,7 @@ Route::any('/check_login', 'LoginController@check_login');
 //End of Renz's Routes
 
 Route::any('/generaladmin', 'GeneralAdmin@admin');
+
+
+
 

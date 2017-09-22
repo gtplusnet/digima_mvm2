@@ -8,9 +8,34 @@ use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
+use App\Models\TblAgentModels;
+
 
 class AgentController extends Controller
 {
+
+	public function login()
+	{
+		$data['page']	= 'Agent Login';
+		return view ('agent.pages.login', $data);
+	}
+
+	public function agent_login(Request $request)
+	{
+		$validate = TblAgentModels::where('email',$request->email)->first();
+		if($validate)
+		{
+			if (password_verify($request->password, $validate->password)) 
+				{
+				    $data['page']	= 'Dashboard';
+					return view ('agent.pages.dashboard', $data);
+				}
+		}
+		else
+		{
+			echo "HULI KA!";
+		}
+	}
 
 	public function index()
 	{
@@ -29,7 +54,8 @@ class AgentController extends Controller
 	public function client()
 	{
 		$data['page']	 = 'Client';
-		$data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business.business_id','=','tbl_business.business_id')
+		$data['clients'] = TblBusinessModel::
+										    join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
 			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
 			                              ->get();
     // dd($data['clients']);
