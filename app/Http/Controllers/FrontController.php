@@ -59,4 +59,5 @@ class FrontController extends Controller
         $data['page']   = 'business';
         return view('front.pages.business', $data);
     }
+     
 }

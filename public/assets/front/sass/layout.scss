@@ -5,16 +5,14 @@ body
 }
 .header-nav
 {
-	padding: 10px 0px;
+	/*padding: 10px 0px;*/
 }
 .header-logo
 {
 	img
 	{
-		// max-height: 50px;
-  //   	margin-top: 4px;
-  //   	width: 170px;
-  //   	height: auto;
+		max-height: 50px;
+     	margin-top: 4px;
     	width: 200px;
     	height: auto;
 	}
@@ -31,7 +29,7 @@ body
 	text-decoration: none !important;
 	color: #333;
 	font-size: 15px;
-	font-weight: 700;
+	font-family: "Source Sans Pro",sans-serif;
 }
 .nav-tab:hover
 {
@@ -60,7 +58,7 @@ body
 	display: inline;
     font-size: 15px;
     margin-left: 5px;
-    font-weight: 700;
+   	font-family: "Source Sans Pro", sans-serif;
 }
 .btn-login, .btn-register
 {
@@ -81,7 +79,8 @@ body
 }
 .footer-title
 {
-	font-size: 17px;
+	font-family: "Poppins Regular",sans-serif;
+    font-size: 20.52px;
     color: #fec601;
     margin-top: 20px;
 }
@@ -91,11 +90,14 @@ body
 }
 .footer-text
 {
+	font-family: "Source Sans Pro",sans-serif;
+    font-size: 16.32px;
 	color: #6e6e6e;
-	margin-top: 17px;
 }
 .email-add-textbox
 {
+	font-family: "Roboto Thin",sans-serif;
+    font-size: 15.39px;
 	width: 330px;
     padding: 5px 15px;
 }
@@ -152,6 +154,8 @@ body
 }
 .footer-contact
 {
+	font-family: "Source Sans Pro Regular",sans-serif;
+    font-size: 16.59px;
 	color: #6e6e6e;
     display: inline;
 }
