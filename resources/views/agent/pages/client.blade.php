@@ -25,27 +25,23 @@
                    
                         <div class="col-md-4 ">
                             <div class="col-md-6">
-                            <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">
-                                   <option>Dr.</option>
-                                   <option>Miss</option>
-                                   <option>Mr.</option>
-                                   <option>Mrs.</option>
-                                   <option>Ms.</option>
+                            <select class="form-control " name="start_date" id="start_date" style="width: 150px; border-radius: 20px;">
+                                   @foreach($clients as $client_date)
+                                   <option value="{{$client_date->date_created}}">{{date("F j, Y",strtotime($client_date->date_created))}}</option>
+                                   @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6">
-                            <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">
-                                   <option>Dr.</option>
-                                   <option>Miss</option>
-                                   <option>Mr.</option>
-                                   <option>Mrs.</option>
-                                   <option>Ms.</option>
+                            <select class="form-control " name="end_date" id="end_date" style="width: 150px; border-radius: 20px;">
+                                   @foreach($clients as $client_date)
+                                   <option value="{{$client_date->date_created}}">{{date("F j, Y",strtotime($client_date->date_created))}}</option>
+                                   @endforeach
                                 </select>
                             </div>
                         </div>
                 </div>
                     <div class="panel-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive show_here">
                             <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                 <thead>
                                     <tr>
@@ -61,7 +57,7 @@
                                     @foreach($clients as $client)
                                     <tr>
                                         <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
-                                        <td>{{date("F j, Y, g:i a",strtotime($client->date_created))}}</td>
+                                        <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                         <td>{{$client->business_name}}</td>
                                         <td>{{$client->business_complete_address}}</td>
                                         <td>{{$client->payment_method_name}}</td>
@@ -183,4 +179,6 @@
     font-size:20px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/agent/agent_client.js"></script>
 @endsection
