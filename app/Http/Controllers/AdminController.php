@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
@@ -27,7 +27,7 @@ class AdminController extends Controller
 		$data['page']	= 'Client';
 		return view ('admin.pages.client', $data);		
 	}
-	public function team()
+	public function add_team()
 	{
 
 		$data['county_list'] = TblCountyModel::get();
@@ -76,6 +76,7 @@ class AdminController extends Controller
     public function admin_login_submit (Request $request)
     {
     	$validate_login = Tbl_admin::where('email','=',$request->email)->first();
+        // dd("2352");
         if($validate_login)
         {
 
@@ -146,14 +147,15 @@ class AdminController extends Controller
 	}
 
 	//Eden 
-	/*public function add_team()
-	{
-		$data['page']	= 'Team';
-        $insert["team_name"] = Request::input("team_name"); 
-        $insert["team_information"] = Request::input("team_information"); 
-        TblTeamModel::insert($insert); 
-        Redirect::to('/admin/view_team')->send();
-	}
+	// public function add_team()
+	// {
+	// 	$data['page']	= 'Team';
+ //        $insert["team_name"] = Request::input("team_name"); 
+ //        $insert["team_information"] = Request::input("team_information"); 
+ //        TblTeamModel::insert($insert); 
+ //        Redirect::to('/admin/view_team')->send();
+	// }
+    /*
 	public function view_team()
 	{
 		$data['page']	= 'View Team';
