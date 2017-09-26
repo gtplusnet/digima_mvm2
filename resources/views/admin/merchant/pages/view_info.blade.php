@@ -80,9 +80,7 @@
 
                             </div>
 
-                            <div role="tabpanel" class="tab-pane fade" id="tab10">
-
-                                
+                            <div role="tabpanel" class="tab-pane fade" id="tab10">    
                                 <form class="form-horizontal" method="POST" action="/merchant/profile">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     @foreach ($other_info as $business_other_info)
@@ -115,9 +113,6 @@
                                             </div>
                                         </div>
                                     </div>                                    
-
-
-
                                 </form> 
 
                             </div>

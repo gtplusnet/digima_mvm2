@@ -33,7 +33,7 @@
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
-                <p>Add Team</p>
+                <p>Team</p>
             </a>
         </li>
         <li data-menu="profile">
@@ -41,7 +41,7 @@
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
-                <p>Add Agent</p>
+                <p>View Team</p>
             </a>
         </li>
     </ul>
