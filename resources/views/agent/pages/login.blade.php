@@ -21,8 +21,11 @@
 				</div>
 				<div style="align-content: center;" class="col-md-7 login-container-rightpart">
 					<div class="col-md-12 login-form">	
-						<form role="form" action="/agent/dashboard" method="post" >
-						{{csrf_field()}}	
+						<form role="form" action="/agent_login" method="post" >
+						{{csrf_field()}}
+							@if($errors->any())
+							<p><font color="red"><center>{{$errors->first()}}</center></font></p>
+							@endif	
 							<div class="col-md-12 login-textfield-container">
 								<label for="input-username" class="login-label">USERNAME or EMAIL:</label>
 								<input type="text" name="email" class="form-control login-textfield">

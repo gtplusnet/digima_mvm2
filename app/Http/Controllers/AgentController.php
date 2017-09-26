@@ -9,6 +9,11 @@ use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblAgentModels;
+use App\Models\TblPaymentMethod;
+use App\Models\TblUserAccountModel;
+use Redirect;
+use Carbon\Carbon;
+
 
 
 class AgentController extends Controller
@@ -28,12 +33,19 @@ class AgentController extends Controller
 			if (password_verify($request->password, $validate->password)) 
 				{
 				    $data['page']	= 'Dashboard';
-					return view ('agent.pages.dashboard', $data);
+				     return Redirect::to('/agent/dashboard');
 				}
+			else
+			{
+				$data['page']	= 'Agent Login';
+				return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+			}
+
 		}
 		else
 		{
-			echo "HULI KA!";
+			$data['page']	= 'Agent Login';
+			return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
 		}
 	}
 
@@ -60,11 +72,61 @@ class AgentController extends Controller
 			                              ->get();
     // dd($data['clients']);
 		return view ('agent.pages.client', $data);	
+	}
+	public function add_client_submit(Request $request)
+	{
 
+		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
+
+        if(count($check_email_availability) == 1)
+        {
+            echo 'Email has already been used.';
+        }
+        else
+        {
+	        $business_data = new TblBusinessModel;
+	        $business_data->business_id = '';
+	        $business_data->business_name = $request->business_name;
+	        $business_data->city_id = $request->city_list;
+	        $business_data->business_complete_address = $request->business_address;
+	        $business_data->business_phone = $request->primary_business_phone;
+	        $business_data->business_alt_phone = $request->secondary_business_phone;
+	        $business_data->business_fax = $request->fax_number;
+	        $business_data->facebook_url = $request->facebook_url;
+	        $business_data->twitter_url = $request->twitter_username;
+            $business_data->membership = $request->membership;
+            $business_data->date_created = Carbon::now();
+            $business_data->save();
+
+	        $contact_data = new TblBusinessContactPersonModel;
+	        $contact_data->business_contact_person_id = '';
+	        $contact_data->contact_prefix = $request->prefix;
+	        $contact_data->contact_first_name = $request->first_name;
+	        $contact_data->contact_last_name = $request->last_name;
+	        $contact_data->business_id = $business_data->business_id;
+            $contact_data->save();
+
+
+            $account_data = new TblUserAccountModel;
+            $account_data->user_email = $request->email_address;
+            $account_data->user_password = "123";
+            $account_data->user_category = 'merchant';
+            $account_data->status = 'registered';
+            $account_data->business_id = $business_data->business_id;
+            $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
+            $account_data->save();
+
+            // dd($business_data."<br>james" .$contact_data."<br>james" .$account_data);
+
+           return Redirect::to('/agent/client');
+
+  
+    	}
 	}
 	public function add_client()
 	{
 		$data['county_list'] = TblCountyModel::get();
+		$data['membership_list'] = TblPaymentMethod::get();
 		$data['page']	= 'Add Client';
 		return view ('agent.pages.add_client', $data);		
 	}

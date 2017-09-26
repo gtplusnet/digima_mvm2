@@ -17,6 +17,21 @@ use DB;
 
 class FrontController extends Controller
 {
+    // public static function allow_logged_in_users_only()
+    // {
+    //     if(session("login") != true)
+    //     {
+    //       return Redirect::to("/login")->send();
+    //     }
+    // }
+
+    // public static function allow_logged_out_users_only()
+    // {
+    //     if(session("login") == true)
+    //     {
+    //       return Redirect::to("/home")->send();
+    //     }
+    // }
     public function index()
     {
         $data['one_to_four_list'] = TblBusinessModel::skip(0)->take(4)->get();
@@ -85,9 +100,18 @@ class FrontController extends Controller
 	        $contact_data->contact_first_name = $request->first_name;
 	        $contact_data->contact_last_name = $request->last_name;
 	        $contact_data->business_id = $business_data->business_id;
-
             $contact_data->save();
-            
+
+
+            $account_data = new TblUserAccountModel;
+            $account_data->user_email = $request->email;
+            $account_data->user_password = $request->password;
+            $account_data->user_category = 'merchant';
+            $account_data->status = 'registered';
+            $account_data->business_id = $business_data->business_id;
+            $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
+            $account_data->save();
+  
     	}
 	}
 
@@ -96,8 +120,6 @@ class FrontController extends Controller
         $data['page']   = 'payment';
         return view('front.pages.payment', $data);
 
-        
-
         $account_data = new TblUserAccountModel;
         $account_data->user_email = $request->email;
         $account_data->user_password = $request->password;
@@ -105,8 +127,10 @@ class FrontController extends Controller
         $account_data->status = 2;
         $account_data->business_id = $business_data->business_id;
         $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
-
         $account_data->save();
+        
+
+        
 
         echo 'Registered successfully ! But your account is pending.';
   
@@ -157,6 +181,28 @@ class FrontController extends Controller
     {
         $data['page']   = 'login';
         return view('front.pages.login', $data);
+    }
+    public function login_submit(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        $check_login = TblUserAccountModel::where('user_email',$email)->where('user_password',$password)->first();
+        if($check_login)
+        {
+            if($check_login ->status=='activated')
+            {
+                return Redirect::to('/merchant');
+            }
+            else
+            {
+                return "MAGBAYAD KA MUNA";
+            }
+        }
+        else
+        {
+            return "INVALID CREDENTIALS";
+        }
+        
     }
     public function business()
     {

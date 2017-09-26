@@ -22,7 +22,7 @@
 				</div>
 				<div style="align-content: center;" class="col-md-7 login-container-rightpart">
 					<div class="col-md-12 login-form">	
-						<form method="post" action="/admin/dashboard" role="form"  >
+						<form method="post" action="/admin_login" role="form"  >
 						{{ csrf_field() }}
 							<div class="col-md-12 login-textfield-container">
 								<label for="input-username" class="login-label">USERNAME:</label>

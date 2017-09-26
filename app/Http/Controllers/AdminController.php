@@ -7,8 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\Tbl_admin;
+use App\Models\TblTeamModel;
+use App\Models\TblAgentModels;
 use Session;
 use Redirect;
+use Input;
 
 class AdminController extends Controller
 {
@@ -41,6 +44,7 @@ class AdminController extends Controller
 	public function add_agent()
 	{
 		$data['county_list'] = TblCountyModel::get();
+		$data['team_list'] = TblTeamModel::get();
 		$data['page']	= 'Add Agent';
 		return view ('admin.pages.add_agent', $data);		
 	}
@@ -89,20 +93,20 @@ class AdminController extends Controller
 				{
     				/*Session::put("login", true);*/
 					$data['page']	= 'Dashboard';
-					return view ('admin.pages.dashboard', $data);					
+					return Redirect::to('/admin/dashboard');
 				}
+			else
+	        {
+	            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+	        }
 		}
         else
         {
-            echo 'Incorrect Email/Password.';
+            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
         }
     }
 
-    public function dashboard()
-    {
-    	$data['page']	= 'Dashboard';
-		return view ('admin.pages.dashboard', $data);	
-    }
+    
 
 
 		public function admin_logout ()
@@ -111,5 +115,39 @@ class AdminController extends Controller
 		$data['page']   = 'Admin Login';
         return view('front.pages.adminlogin', $data);
 
+	}
+
+	public function dashboard()
+    {
+    	$data['page']	= 'Dashboard';
+		return view ('admin.pages.dashboard', $data);	
+    }
+
+	public function add_team_submit(Request $request)
+	{
+		
+      
+		$data['team_name'] = $request->team_name;
+		$data['team_information'] = $request->team_description;
+		TblTeamModel::insert($data);
+		return Redirect::to('/admin/add/team')->with('warning', 'testing');
+	}
+
+	public function add_agent_submit(Request $request)
+	{
+		
+      
+		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
+		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
+		$data['email'] = $request->email;
+		$data['position'] = 'agent';
+		$data['team_id'] = $request->team;
+		$data['primary_phone'] = $request->primary_phone;
+		$data['secondary_phone'] = $request->secondary_phone;
+		$data['other_info'] = $request->other_info;
+		// dd($data);
+		TblAgentmodels::insert($data);
+		return Redirect::to('/admin/add/agent')->with('warning', 'testing');
 	}
 }

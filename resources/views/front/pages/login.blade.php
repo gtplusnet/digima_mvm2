@@ -21,10 +21,11 @@
 				</div>
 				<div class="col-md-7 login-container-rightpart">
 					<div class="col-md-12 login-form">	
-						<form role="form">	
+						<form role="form" method="post" action="/login">
+							{{csrf_field()}}	
 							<div class="col-md-12 login-textfield-container">
 								<label for="input-username" class="login-label">USERNAME or EMAIL:</label>
-								<input type="text" name="username" class="form-control login-textfield">
+								<input type="text" name="email" class="form-control login-textfield">
 							</div>
 							<div class="col-md-12 login-textfield-container">
 								<label for="input-password" class="login-label">PASSWORD:</label>

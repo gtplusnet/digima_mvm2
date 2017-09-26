@@ -22,17 +22,27 @@
         <div class="row">
             <div class="pane panel-primary">
                 <div class="panel-heading clearfix">
-                    <div class="col-md-6" style=" padding-top: 10px; padding-bottom: 5px;">
-                        <h4 class="panel-title" style="font-size: 1.15em; color: white;">List</h4>
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-                            <input id="" type="text" class="form-control" name="" placeholder="Enter Keyword Here">
+                   
+                        <div class="col-md-4 ">
+                            <div class="col-md-6">
+                            <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">
+                                   <option>Dr.</option>
+                                   <option>Miss</option>
+                                   <option>Mr.</option>
+                                   <option>Mrs.</option>
+                                   <option>Ms.</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                            <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">
+                                   <option>Dr.</option>
+                                   <option>Miss</option>
+                                   <option>Mr.</option>
+                                   <option>Mrs.</option>
+                                   <option>Ms.</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
                 </div>
                     <div class="panel-body">
                         <div class="table-responsive">
