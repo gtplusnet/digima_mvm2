@@ -180,45 +180,63 @@
             </div>
         </div>
         <div class="search-listing-holder">
-                <div class="search-listing-container">
-                    <p class="searchlisting-title">SEARCH LISTING</p>
-                    <form>
-                        <div class="form-container">
-                            <label class="form-label">Keyword</label>
-                            <input class="box-format" type="text" name="keyword" placeholder="Search">
-                        </div>
-                        <div class="form-container">
-                            <label class="form-label">Category</label>
-                            <select class="box-format">
-                                <option value="" disabled selected>Select Category</option>
-                                <option></option>
-                                <option>Most Like</option>
-                                <option>Most Popular</option>
-                                <option>Newest</option>
-                                <option>---------------------</option>
-                            </select>
-                        </div>
-                        <div class="form-container">
-                            <label class="form-label">Counties</label>
-                            <select class="box-format">
-                                <option value="" disabled selected>Select County</option>
-                                <option></option>
-                                <option>Bjelovar-Bilogora</option>
-                                <option>Brod-Posavina</option>
-                                <option>Dubrovnik-Neretva</option>
-                                <option>---------------------</option>
-                            </select>
-                        </div>
-                        <div class="form-container">
-                            <label class="form-label">ZIP Code</label>
-                            <input class="box-format" type="text" name="zip_code" placeholder="Search">
-                        </div>
-                        <div>
-                            <input type="submit" value="Search" class="searchlisting-btn">
-                        </div>
-                    </form>
-                </div>
+            <div class="search-listing-container">
+                <p class="searchlisting-title">SEARCH LISTING</p>
+                <form>
+                    <div class="form-container">
+                        <label class="form-label">Keyword</label>
+                        <input class="box-format" type="text" name="keyword" placeholder="Search">
+                    </div>
+                    <div class="form-container">
+                        <label class="form-label">Category</label>
+                        <select class="box-format">
+                            <option value="" disabled selected>Select Category</option>
+                            <option></option>
+                            <option>Most Like</option>
+                            <option>Most Popular</option>
+                            <option>Newest</option>
+                            <option>---------------------</option>
+                        </select>
+                    </div>
+                    <div class="form-container">
+                        <label class="form-label">Counties</label>
+                        <select class="box-format">
+                            <option value="" disabled selected>Select County</option>
+                            <option></option>
+                            <option>Bjelovar-Bilogora</option>
+                            <option>Brod-Posavina</option>
+                            <option>Dubrovnik-Neretva</option>
+                            <option>---------------------</option>
+                        </select>
+                    </div>
+                    <div class="form-container">
+                        <label class="form-label">ZIP Code</label>
+                        <input class="box-format" type="text" name="zip_code" placeholder="Search">
+                    </div>
+                    <div>
+                        <input type="submit" value="Search" class="searchlisting-btn">
+                    </div>
+                </form>
             </div>
+        </div>
+        <div class="business-map-container">
+            <div id="business-map"></div>
+                <script>
+                  function initMap() {
+                    var uluru = {lat: 40.779962, lng: -73.980304};
+                    // 40.779962, -73.980304
+                    // var uluru = {lat: -25.363, lng: 131.044};
+                    var map = new google.maps.Map(document.getElementById('business-map'), {
+                      zoom: 4,
+                      center: uluru
+                    });
+                    var marker = new google.maps.Marker({
+                      position: uluru,
+                      map: map
+                    });
+                  }
+                </script>
+        </div>
     </div>
 </div>
 @endsection
