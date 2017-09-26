@@ -9,10 +9,9 @@
 		</ol>
 	</div>
 </div>
-<<<<<<< HEAD
 <div id="main-wrapper">
-=======
-	<div id="main-wrapper">
+
+<!-- 	<div id="main-wrapper">
 	    <div class="row">
 	        <div class="panel panel-primary">
 	            <div class="panel-heading clearfix">
@@ -103,8 +102,7 @@
 	                </form>
 	            </div>
 	        </div>
-	    </div>
->>>>>>> sub_master
+	    </div> -->
 	
 	<div class="row">
 		<div class="panel panel-primary">
