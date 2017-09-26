@@ -72,6 +72,7 @@
                 <div class="page-footer">
                     <p class="no-s">2017 &copy; Modern by DigimaHouse.dev</p>
                 </div>
+                
         @if(session("login") == true)
             <div>
             Click here to  <a style="font-size:15px",  href='/admin/logout'>LOGOUT</a>

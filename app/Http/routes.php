@@ -112,10 +112,3 @@ Route::any('/check_login', 'LoginController@check_login');
 //Route::any('/search_result', 'SearchController@search_result');
 //Route::any('/search_result_list', 'SearchController@search_result_list');
 
-
-//End of Oliver's Routes
-
-Route::any('/generaladmin', 'GeneralAdmin@admin');
-Route::get('/admin_login', 		'AdminController@index');
-
-
