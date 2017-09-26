@@ -54,17 +54,21 @@
 	                        <div class="col-sm-4">
 	                            <input type="text" class="form-control input-rounded" id="input-rounded">
 	                        </div>
+
 	                         <label for="input-Default" class="col-sm-2 control-label">Business Alternate Phone</label>
 	                        <div class="col-sm-4">
 	                            <input type="text" class="form-control input-rounded" id="input-rounded">
 	                        </div>
 	                    </div>
+
 	                    <div class="form-group">
 	                        <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
 	                        <div class="col-sm-10">
 	                            <textarea class="form-control input-rounded" placeholder="Address" rows="4" style="border-radius: 20px; resize: none;"></textarea>
 	                        </div>
 	                    </div>
+
+	                    
 	                    <div class="form-group">
 	                        <label for="county" class="col-sm-2 control-label">County</label>
 	                        <div class="col-sm-2">

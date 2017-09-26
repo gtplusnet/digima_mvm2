@@ -87,7 +87,7 @@ class AdminController extends Controller
 
         	if (password_verify($request->password, $validate_login->password)) 
 				{
-    				/*Session::put("login", true);*/
+    				Session::put("login", true);
 					$data['page']	= 'Dashboard';
 					return view ('admin.pages.dashboard', $data);					
 				}
@@ -112,4 +112,5 @@ class AdminController extends Controller
         return view('front.pages.adminlogin', $data);
 
 	}
+	
 }
