@@ -58,19 +58,19 @@
                                         <div class="form-group">
                                             <label for="input-Default" class="col-sm-2 control-label">User Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-default" name="agent_username" value="">
+                                                <input type="text" class="form-control" id="input-default" name="agent_username" value="{{$_edit->agent_lname}}">
                                             </div>                                        
                                         </div>
                                         <div class="form-group">
                                             <label for="input-Default" class="col-sm-2 control-label">Password</label>
                                             <div class="col-sm-10">
-                                                <input type="Password" class="form-control" id="input-default" name="agent_password" value="">
+                                                <input type="Password" class="form-control" id="input-default" name="agent_password" value="{{$_edit->agent_lname}}">
                                             </div>                                        
                                         </div>
                                         <div class="form-group">
                                             <label for="input-Default" class="col-sm-2 control-label">Confirm Password</label>
                                             <div class="col-sm-10">
-                                                <input type="password" class="form-control" id="input-default" name="agent_confirm_password" value="">
+                                                <input type="password" class="form-control" id="input-default" name="agent_confirm_password" value="{{$_edit->agent_lname}}">
                                             </div>                                        
                                         </div>                                                                        
                                         <div class="col-md-4">

@@ -36,7 +36,7 @@
         <script src="/assets/admin/merchant/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
         
-       
+          
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,16 +51,19 @@
         
        
         <main class="page-content content-wrap">
+
+   
             
             {{-- Header and Nav Bar --}}
-            @include('agent.include.header');
+            @include('admin.include.header');
             <!-- Navbar -->
 
             {{-- Sidebar --}}
-            @include('agent.include.sidebar');
+            @include('admin.include.sidebar');
             {{-- End Sidebar --}}    
 
-            <div class="page-inner">               
+            <div class="page-inner"> 
+                        
                 
                 {{-- Main Wrapper --}} 
                 @yield('content')    
@@ -69,13 +72,23 @@
                 <div class="page-footer">
                     <p class="no-s">2017 &copy; Modern by DigimaHouse.dev</p>
                 </div>
+                
+        @if(session("login") == true)
+            <div>
+            Click here to  <a style="font-size:15px",  href='/admin/logout'>LOGOUT</a>
+            </div>
+        @else
+            <div>Hi, guest!</div>
+        @endif       
+
 
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
 
-        @include('agent.include.menu');
+        @include('admin.include.menu');
 
         <div class="cd-overlay"></div>
+
     
 
         <!-- Javascripts -->
@@ -103,10 +116,6 @@
         <script src="/assets/admin/merchant/assets/plugins/metrojs/MetroJs.min.js"></script>
         <script src="/assets/admin/merchant/assets/js/modern.js"></script>
         <script src="/assets/admin/merchant/assets/js/pages/dashboard.js"></script>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        {{-- <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
-        <script src="/assets/js/front/add_client.js"></script> --}}
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {

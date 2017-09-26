@@ -5,19 +5,16 @@ use Request;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
+
+use App\Models\Tbl_admin;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentModel;
-use Redirect;
+use App\Models\TblAgentModels;
 use Session;
+use Redirect;
+use Input;
 
 class AdminController extends Controller
 {
-	public function index()
-	{
-		$data['page']	= 'Dashboard';
-		$data['county_list'] = TblCountyModel::get();
-		return view ('admin.pages.dashboard', $data);		
-	}
 
 	public function profile()
 	{
@@ -32,9 +29,22 @@ class AdminController extends Controller
 	}
 	public function team()
 	{
-		$data['page']	= 'Team';
+
+		$data['county_list'] = TblCountyModel::get();
+		$data['page']	= 'Add Team';
+		return view ('admin.pages.add_team', $data);
+	}
+	public function add_agent()
+	{
+		$data['county_list'] = TblCountyModel::get();
+		$data['team_list'] = TblTeamModel::get();
+		$data['page']	= 'Add Agent';
+		return view ('admin.pages.add_agent', $data);		
+
+/*		$data['page']	= 'Team';
         $data['_team'] = TblTeamModel::get();
-		return view ('admin.pages.team', $data);		
+		return view ('admin.pages.team', $data);*/		
+
 	}
 
 	public function get_city(Request $request)
@@ -57,17 +67,86 @@ class AdminController extends Controller
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
         return $postal_code->postal_code;
     }
+    public function admin_login ()
+    {
+    	$data['page']   = 'Admin Login';
+        return view('front.pages.adminlogin', $data);
+    }
 
-	public function logout()
+    public function admin_login_submit (Request $request)
+    {
+    	$validate_login = Tbl_admin::where('email','=',$request->email)->first();
+        if($validate_login)
+        {
+
+        	if (password_verify($request->password, $validate_login->password)) 
+				{
+    				Session::put("login", true);
+					$data['page']	= 'Dashboard';
+					return Redirect::to('/admin/dashboard');
+				}
+			else
+	        {
+	            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+	        }
+		}
+        else
+        {
+            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+        }
+    }
+
+    
+
+
+		public function admin_logout ()
+
+/*	public function logout()*/
 	{
-		Session::forget('user_email');
-		Session::forget('user_password');
-		return Redirect::back();
+		Session::put("login", true);
+		$data['page']   = 'Admin Login';
+        return view('front.pages.adminlogin', $data);
+
 	}
 
 
+
+	public function dashboard()
+    {
+    	$data['page']	= 'Dashboard';
+		return view ('admin.pages.dashboard', $data);	
+    }
+
+	public function add_team_submit(Request $request)
+	{
+		
+      
+		$data['team_name'] = $request->team_name;
+		$data['team_information'] = $request->team_description;
+		TblTeamModel::insert($data);
+		return Redirect::to('/admin/add/team')->with('warning', 'testing');
+	}
+
+	public function add_agent_submit(Request $request)
+	{
+		
+      
+		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
+		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
+		$data['email'] = $request->email;
+		$data['position'] = 'agent';
+		$data['team_id'] = $request->team;
+		$data['primary_phone'] = $request->primary_phone;
+		$data['secondary_phone'] = $request->secondary_phone;
+		$data['other_info'] = $request->other_info;
+		// dd($data);
+		TblAgentmodels::insert($data);
+		return Redirect::to('/admin/add/agent')->with('warning', 'testing');
+	}
+
 	//Eden 
-	public function add_team()
+	/*public function add_team()
 	{
 		$data['page']	= 'Team';
         $insert["team_name"] = Request::input("team_name"); 
@@ -136,7 +215,7 @@ class AdminController extends Controller
 		$data['page']	= 'View Agent';
 		$data['viewagent']	= TblAgentModel::get();
 		return view ('admin.pages.view_team', $data);	
-	}*/
+	}
     
 	public function edit_agent($id)
     {
@@ -154,6 +233,6 @@ class AdminController extends Controller
         TblAgentModel::where('team_id', $id)->update($update);
        Redirect::to("/admin/view_team")->send();
     }
-
+*/
 
 }

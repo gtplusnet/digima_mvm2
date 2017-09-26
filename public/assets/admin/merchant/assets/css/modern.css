@@ -1284,7 +1284,8 @@ h5 {
 }
 
 .panel-primary .panel-heading {
-    background: #7a6fbe;
+    /*background: #7a6fbe;*/
+    background: rgb(233, 237, 242);
     color: #fff;
 }
 
@@ -1620,7 +1621,7 @@ h5 {
 /* Tabs */
 
 .tab-content {
-    padding: 15px;
+    padding: 0px 15px 15px 15px;
     background: #fff;
     
 }
