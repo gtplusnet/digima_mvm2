@@ -61,7 +61,7 @@
             {{-- End Sidebar --}}    
 
             <div class="page-inner">               
-                
+            
                 {{-- Main Wrapper --}} 
                 @yield('content')    
                 <!-- Main Wrapper -->
@@ -71,6 +71,7 @@
                 </div>
 
             </div><!-- Page Inner -->
+
         </main><!-- Page Content -->
 
         @include('admin.include.menu');

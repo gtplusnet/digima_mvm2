@@ -9,6 +9,7 @@ use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblAgentModels;
+use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
 use App\Models\TblUserAccountModel;
 use Redirect;
@@ -27,7 +28,7 @@ class AgentController extends Controller
 
 	public function agent_login(Request $request)
 	{
-		$validate = TblAgentModels::where('email',$request->email)->first();
+		$validate = Tbl_Agent::where('email',$request->email)->first();
 		if($validate)
 		{
 			if (password_verify($request->password, $validate->password)) 
@@ -40,7 +41,6 @@ class AgentController extends Controller
 				$data['page']	= 'Agent Login';
 				return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
 			}
-
 		}
 		else
 		{
@@ -49,9 +49,15 @@ class AgentController extends Controller
 		}
 	}
 
+		public function agentlogout()
+	{
+		Session::put("login", true);
+		$data['page']   = 'Agent logout';
+        return view('front.pages.agentlogout', $data);
+	}
+
 	public function index()
 	{
-
 		$data['page']	= 'Dashboard';
 		$data['county_list'] = TblCountyModel::get();
 		return view ('agent.pages.dashboard', $data);		
@@ -173,7 +179,4 @@ class AgentController extends Controller
 		Session::forget('user_password');
 		return Redirect::back();
 	}
-
-
-
 }
