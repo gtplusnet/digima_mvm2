@@ -52,7 +52,7 @@ class AgentController extends Controller
 		public function agentlogout()
 	{
 		Session::put("login", true);
-		$data['page']   = 'Agent logout';
+		$data['page'] = 'Agent logout';
         return view('front.pages.agentlogout', $data);
 	}
 

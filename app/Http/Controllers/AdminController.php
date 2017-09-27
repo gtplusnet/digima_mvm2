@@ -81,14 +81,15 @@ class AdminController extends Controller
         {
 
         	if (password_verify($request->password, $validate_login->password)) 
-				{
-    				Session::put("login", true);
-					$data['page']	= 'Dashboard';
-					return Redirect::to('/admin/dashboard');
-				}
+			{
+    			Session::put("login", true);
+				$data['page']	= 'Dashboard';
+				return Redirect::to('/admin/dashboard');
+			}
 			else
 	        {
-	            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+	            $data['page']  = 'Admin login';
+                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
 	        }
 		}
         else
@@ -104,10 +105,7 @@ class AdminController extends Controller
 		Session::put("login", true);
 		$data['page']   = 'Admin Login';
         return view('front.pages.adminlogin', $data);
-
 	}
-
-
 
 	public function dashboard()
     {
