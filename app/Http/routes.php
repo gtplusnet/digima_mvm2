@@ -31,10 +31,15 @@ Route::any('/search_result_list', 'FrontController@search_result_list');
 Route::any('/business_info', 'FrontController@business_info');
 
 
+
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
 Route::post('/login', 'FrontController@login_submit');
+
+/*Route::get('/about', 	'FrontController@about');
+Route::get('/contact', 	'FrontController@contact');
+Route::get('/login', 	'FrontController@login');*/
 
 
 Route::get('/success', 'FrontController@success');
@@ -51,14 +56,14 @@ Route::get('/category',		'SearchresultController@category');
 
 /*Merchant Page by Brain*/
 Route::get('/merchant', 			'MerchantController@index');
-Route::get('/merchant/profile', 	'MerchantController@profile');
+Route::get('/merchant/profile',		'MerchantController@profile');
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/bills', 		'MerchantController@bills');
 
 
 //Eden
-Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
-Route::any('/merchant/view_info', 'MerchantController@view_info');
+Route::any('/merchant/add_other_info', 	'MerchantController@add_other_info'); 
+Route::any('/merchant/view_info', 		'MerchantController@view_info');
 
 Route::get('/admin', 				'AdminController@admin_login');
 Route::post('/admin_login', 	'AdminController@admin_login_submit');
@@ -67,8 +72,10 @@ Route::any('/admin/logout', 		'AdminController@admin_logout');
 Route::get('/admin/dashboard', 		'AdminController@dashboard');
 Route::get('/admin/profile', 		'AdminController@profile');
 Route::get('/admin/client', 		'AdminController@client');
+
 Route::any('/admin/add/team', 		'AdminController@add_team');
 Route::any('/admin/add/agent', 		'AdminController@add_agent');
+
 Route::any('/admin/get_city', 		'AdminController@get_city');
 Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
 //james
@@ -76,7 +83,16 @@ Route::post('/admin/add_team_submit', 	'AdminController@add_team_submit');
 Route::post('/admin/add_agent_submit', 	'AdminController@add_agent_submit');
 
 
+Route::any('/admin/team', 			'AdminController@team');
+Route::any('/admin/add_team', 		'AdminController@add_team');
+Route::any('/admin/view_team', 		'AdminController@view_team');
+Route::any('/admin/edit_team/{team_id}', 	'AdminController@edit_team');
+Route::any('/admin/update_team/{team_id}', 	'AdminController@update_team');
+Route::any('/admin/delete_team/{team_id}', 	'AdminController@delete_team');
 
+Route::any('/admin/add_agent', 		'AdminController@add_agent');
+Route::any('/admin/delete_agent/{agent_id}', 	'AdminController@delete_agent');
+//Route::any('/admin/view_agent', 		'AdminController@view_agent');
 
 /*Agent Page by Joshua*/
 Route::get('/agent/dashboard', 		'AgentController@index');
@@ -92,6 +108,7 @@ Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 //james agent//
 Route::any('/agent',          'AgentController@login');
 Route::any('/agent/logout',          'AgentController@login');
+
 
 // Route::get('/', function () {
 //     return view('digimamvm.home');
