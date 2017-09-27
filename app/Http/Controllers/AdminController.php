@@ -106,9 +106,6 @@ class AdminController extends Controller
         }
     }
 
-    
-
-
 		public function admin_logout ()
 	{
 		Session::put("login", true);

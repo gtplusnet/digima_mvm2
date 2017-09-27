@@ -88,8 +88,10 @@ Route::any('/agent/add/client', 	'AgentController@add_client');
 Route::post('/add_client_submit',   'AgentController@add_client_submit');
 Route::any('/agent/get_city', 		'AgentController@get_city');
 Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
+
 //james agent//
 Route::any('/agent',          'AgentController@login');
+Route::any('/agent/logout',          'AgentController@login');
 
 // Route::get('/', function () {
 //     return view('digimamvm.home');
@@ -97,7 +99,7 @@ Route::any('/agent',          'AgentController@login');
 
 //Renz's Routes
 
-//Routes for Login
+//Routes for LoginController
 //Route::any('/login', 'LoginController@index');
 Route::any('/check_login', 'LoginController@check_login');
 
