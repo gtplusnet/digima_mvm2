@@ -1,5 +1,5 @@
 @extends('front.layout.layout')
-@section('title', 'generaladmin')
+@section('title', 'agent_login')
 @section('content')
 <div class="login-background" style="background-image: url('/images/background_login.jpg')">
 	<div class="container">

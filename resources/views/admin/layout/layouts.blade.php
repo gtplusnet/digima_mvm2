@@ -63,6 +63,13 @@
             {{-- End Sidebar --}}    
 
             <div class="page-inner"> 
+        @if(session("login") == true)
+        <div>
+        Click here to  <a style="font-size:15px",  href='/admin/logout'>LOGOUT</a>
+            </div>
+        @else
+            <div>Hi, guest!</div>
+        @endif 
                         
                 
                 {{-- Main Wrapper --}} 
@@ -72,14 +79,6 @@
                 <div class="page-footer">
                     <p class="no-s">2017 &copy; Modern by DigimaHouse.dev</p>
                 </div>
-        @if(session("login") == true)
-            <div>
-            Click here to  <a style="font-size:15px",  href='/admin/logout'>LOGOUT</a>
-            </div>
-        @else
-            <div>Hi, guest!</div>
-        @endif       
-
 
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
