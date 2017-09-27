@@ -32,9 +32,9 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                     <ul class="nav nav-tabs">
-                        <li ><a data-toggle="tab" href="#customer">Customer</a></li>
-                        <li ><a data-toggle="tab" href="#pendingCustomer">Pending Customer</a></li>
-                        <li ><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
+                        <li class="active li_style"><a data-toggle="tab" href="#customer">Customer</a></li>
+                        <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Customer</a></li>
+                        <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
                     </ul>
                     </div>
                 </div>
@@ -159,13 +159,13 @@
             </div>
             
             <style>
-            li{
+            .li_style{
                 padding:0px;
                 width:33.5%;
                 margin-right:0px;
                 margin-left:-1px;
             }
-            .call
+           .call
             {
             color:green;
             margin-right: 5px;
