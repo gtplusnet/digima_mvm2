@@ -10,7 +10,7 @@
     </div>
 </div>
 <div id="main-wrapper">
-    <div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
