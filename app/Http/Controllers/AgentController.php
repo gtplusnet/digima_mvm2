@@ -66,12 +66,23 @@ class AgentController extends Controller
 	public function client()
 	{
 		$data['page']	 = 'Client';
-		$data['clients'] = TblBusinessModel::
-										    join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+		$data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
 			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+			                              ->orderBy('tbl_business.date_created',"asc")
 			                              ->get();
-    // dd($data['clients']);
-		return view ('agent.pages.client', $data);	
+    	return view ('agent.pages.client', $data);	
+	}
+
+	public function get_client(Request $request)
+	{
+		$s_date = $request->date_start;
+		$e_date = $request->date_end;
+		$data['clients'] = TblBusinessModel::whereBetween('date_created',[$s_date,$e_date])
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+		return view('agent.pages.filtered',$data);
 	}
 	public function add_client_submit(Request $request)
 	{
