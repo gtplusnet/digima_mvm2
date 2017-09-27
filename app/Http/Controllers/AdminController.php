@@ -21,7 +21,11 @@ class AdminController extends Controller
 		$data['page']	= 'Profile';
 		return view ('admin.pages.profile', $data);		
 	}
-
+    public function sample()
+    {
+        $data['page']   = 'Profile';
+        return view ('admin.pages.sample', $data);     
+    }
 	public function client()
 	{
 		$data['page']	= 'Client';
