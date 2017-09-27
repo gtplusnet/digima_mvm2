@@ -60,8 +60,9 @@
 
             <div class="page-inner">  
 
-        @if(session("login") == true)
+        @if(session("email"))
         <div>
+            {{session("email")}}
         Click here to  <a style="font-size:15px",  href='/agent/logout'>LOGOUT</a>
             </div>
         @else
