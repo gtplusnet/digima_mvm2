@@ -62,25 +62,31 @@ Route::get('/merchant/bills', 		'MerchantController@bills');
 
 
 //Eden
-Route::any('/merchant/add_other_info', 	'MerchantController@add_other_info'); 
-Route::any('/merchant/view_info', 		'MerchantController@view_info');
+Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
+Route::any('/merchant/view_info', 'MerchantController@view_info');
 
 Route::get('/admin', 				'AdminController@admin_login');
 Route::post('/admin_login', 	'AdminController@admin_login_submit');
 Route::any('/admin/logout', 		'AdminController@admin_logout');
-
 Route::get('/admin/dashboard', 		'AdminController@dashboard');
 Route::get('/admin/profile', 		'AdminController@profile');
 Route::get('/admin/client', 		'AdminController@client');
 
+Route::get('/admin/user', 		'AdminController@user');
 Route::any('/admin/add/team', 		'AdminController@add_team');
 Route::any('/admin/add/agent', 		'AdminController@add_agent');
+Route::any('/admin/add/supervisor', 		'AdminController@add_supervisor');
+Route::any('/admin/add/admin', 		'AdminController@add_admin');
+
+
 
 Route::any('/admin/get_city', 		'AdminController@get_city');
 Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
+
 //james
 Route::post('/admin/add_team_submit', 	'AdminController@add_team_submit');
 Route::post('/admin/add_agent_submit', 	'AdminController@add_agent_submit');
+
 
 
 Route::any('/admin/team', 			'AdminController@team');
@@ -89,6 +95,10 @@ Route::any('/admin/view_team', 		'AdminController@view_team');
 Route::any('/admin/edit_team/{team_id}', 	'AdminController@edit_team');
 Route::any('/admin/update_team/{team_id}', 	'AdminController@update_team');
 Route::any('/admin/delete_team/{team_id}', 	'AdminController@delete_team');
+
+Route::any('/admin/add_supervisor_submit', 		'AdminController@add_supervisor_submit');
+Route::post('/admin/add_admin_submit', 	'AdminController@add_admin_submit');
+
 
 Route::any('/admin/add_agent', 		'AdminController@add_agent');
 Route::any('/admin/delete_agent/{agent_id}', 	'AdminController@delete_agent');
@@ -111,7 +121,8 @@ Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 
 //james agent//
 Route::any('/agent',          'AgentController@login');
-Route::any('/agent/logout',          'AgentController@login');
+
+Route::any('/agent/logout', 		'AgentController@agent_logout');
 
 
 // Route::get('/', function () {
