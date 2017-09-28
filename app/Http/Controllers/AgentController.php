@@ -15,7 +15,11 @@ use App\Models\TblUserAccountModel;
 use Session;
 use Redirect;
 use Carbon\Carbon;
+
 use Mail;
+
+use Session;
+
 
 
 class AgentController extends Controller
@@ -60,12 +64,15 @@ class AgentController extends Controller
 	public function agent_login(Request $request)
 	{
 
+
 		$validate_login = TblAgentModels::where('email',$request->email)->first();
 		if($validate_login)
+
 
 		{
 			if (password_verify($request->password, $validate_login->password)) 
 				{
+
 					Session::put("login",true);
     				Session::put("agent_id",$validate_login->agent_id);
     				Session::put("full_name",$validate_login->full_name);
@@ -73,6 +80,7 @@ class AgentController extends Controller
     				Session::put("position",$validate_login->position);
 					// Session::put("login", $validate->email);
 				    $data['page']	= 'Dashboard';
+
 				    return Redirect::to('/agent/dashboard');
 				}
 			else
@@ -109,7 +117,8 @@ class AgentController extends Controller
 		$data['page']	 = 'Client';
 		$data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
 			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-
+			                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+			                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
 			                              ->orderBy('tbl_business.date_created',"asc")
 
 			                              ->get();
@@ -118,15 +127,42 @@ class AgentController extends Controller
 
 	public function get_client(Request $request)
 	{
+		dd("123");
 		$s_date = $request->date_start;
 		$e_date = $request->date_end;
-		$data['clients'] = TblBusinessModel::whereBetween('date_created',[$s_date,$e_date])
+		$data['clients'] = TblBusinessModel::wherewhereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 		return view('agent.pages.filtered',$data);
 	}
+
+	public function get_client_transaction(Request $request)
+	{
+		$trans_id = $request->transaction_id;
+		// dd($request->transaction_id);
+		$update['transaction_status'] = 'call in progress'; 
+		$update['agent_id'] = '1'; 
+		$update['business_status'] = '1'; 
+		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+		
+
+			return Redirect::to('agent.pages.client')->send();
+		
+	}
+
+	public function get_client_transaction_reload(Request $request)
+	{
+		$trans_id = $request->transaction_id;
+		// dd($request->transaction_id);
+		$update['transaction_status'] = 'called'; 
+		$update['business_status'] = '2'; 
+		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+		return '';
+		
+	}
+
 	public function add_client_submit(Request $request)
 	{
 

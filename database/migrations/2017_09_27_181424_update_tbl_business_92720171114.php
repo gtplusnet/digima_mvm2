@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTblTeam extends Migration
+class UpdateTblBusiness92720171114 extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,8 @@ class CreateTblTeam extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_team', function (Blueprint $table) {
-            $table->increments('team_id');
-            $table->string('team_name');
-            $table->string('team_information')->nullable();
+        Schema::table('tbl_business', function (Blueprint $table) {
+            $table->string('business_status');
         });
     }
 
@@ -26,6 +24,6 @@ class CreateTblTeam extends Migration
      */
     public function down()
     {
-        Schema::drop('tbl_team');
+        //
     }
 }
