@@ -5,10 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
-
 use App\Models\TblAdminModels;
 use App\Models\TblSupervisorModels;
-
 use App\Models\TblTeamModel;
 use App\Models\TblAgentModels;
 use App\Models\TblBusinessModel;
@@ -35,7 +33,6 @@ class AdminController extends Controller
 		}
 	}
 
-
 	public function profile()
 	{
 		$data['page']	= 'Profile';
@@ -46,17 +43,15 @@ class AdminController extends Controller
         $data['page']   = 'User';
         return view ('admin.pages.user', $data);        
     }
-	public function client()
-
+	public function client ()
     {
         $data['page']    = 'Client';
-        $data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-                                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                          ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                          ->orderBy('tbl_business.date_created',"asc")
-
-                                          ->get();
+        $data['client'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+            ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+            ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+            ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+            ->orderBy('tbl_business.date_created',"asc")
+            ->get();
         return view ('admin.pages.client', $data);  
     }
 

@@ -1,7 +1,7 @@
 
 <div class="page-sidebar sidebar">
     <div class="page-sidebar-inner slimscroll">
-       {{--  <div class="sidebar-header">
+     <div class="sidebar-header">
             <div class="sidebar-profile">
                 <a href="javascript:void(0);" id="profile-menu-link">
                     <div class="sidebar-profile-image">
@@ -12,7 +12,7 @@
                     </div>
                 </a>
             </div>
-        </div> --}}
+        </div> 
         <ul class="menu accordion-menu">
             <li class="{{ (Request::segment(2)=='') ? 'active' : ''  }}"><a href="/admin/dashboard" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
             <li class="{{ (Request::segment(2) == 'profile') ? 'active' : ''  }}"><a href="/admin/profile" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-user"></span><p>Profile</p></a></li>
@@ -22,5 +22,6 @@
             <li class="{{ (Request::segment(2) == 'user') ? 'active' : ''  }}"><a href="/admin/user" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>User</p></a></li>
 
         </ul>
+
     </div><!-- Page Sidebar Inner -->
 </div>
