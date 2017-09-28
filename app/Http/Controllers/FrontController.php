@@ -106,7 +106,7 @@ class FrontController extends Controller
 
             $account_data = new TblUserAccountModel;
             $account_data->user_email = $request->email;
-            $account_data->user_password = $request->password;
+            $account_data->user_password = password_hash($request->password, PASSWORD_DEFAULT);
             $account_data->user_category = 'merchant';
             $account_data->status = 'registered';
             $account_data->business_id = $business_data->business_id;

@@ -14,6 +14,7 @@ use App\Models\TblPaymentMethod;
 use App\Models\TblUserAccountModel;
 use Redirect;
 use Carbon\Carbon;
+use Mail;
 
 
 
@@ -23,7 +24,22 @@ class AgentController extends Controller
 	public function login()
 	{
 		$data['page']	= 'Agent Login';
+
+		// $data = array('name'=>"Virat Gandhi");
+   
+  //     Mail::send(['text'=>'mail'], $data, function($message) {
+  //        $message->to('sample35836@gmail.com', 'Tutorials Point')->subject
+  //           ('Laravel Basic Testing Mail');
+  //        $message->from('guardians35836@gmail.com','Guard');
+  //     });
+  //     echo "Basic Email Sent. Check your inbox.";
+
+
+
+
+
 		return view ('agent.pages.login', $data);
+
 	}
 
 	public function agent_login(Request $request)
