@@ -75,7 +75,7 @@
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
 
-        @include('admin.include.menu');
+        @include('agent.include.menu');
 
         <div class="cd-overlay"></div>
     

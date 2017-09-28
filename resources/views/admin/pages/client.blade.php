@@ -1,4 +1,4 @@
-@extends('agent.layout.layout')
+@extends('admin.layout.layout')
 @section('content')
 <div class="page-title">
     <h3>{{ $page }}</h3>

@@ -29,7 +29,7 @@
             </a>
         </li>
 
-        <li data-menu="USER">
+        <li data-menu="User">
 
             <a href="javsacript:void(0);">
                 <span>
@@ -42,3 +42,4 @@
         </li>
     </ul>
 </nav>
+

@@ -21,8 +21,7 @@
 
 
             <li class="{{ (Request::segment(2) == 'user') ? 'active' : ''  }}"><a href="/admin/user" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>User</p></a></li>
-<!-- 
-            <li class="{{ (Request::segment(2) == 'add_agent') ? 'active' : ''  }}"><a href="/admin/add/agent" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>Add Agent</p></a></li> -->
+
 
 
         </ul>

@@ -18,12 +18,12 @@ use Carbon\Carbon;
 
 use Mail;
 
-use Session;
 
 
 
 class AgentController extends Controller
 {
+
 	public static function allow_logged_in_users_only()
 	{
 		if(session("login") != true)
@@ -37,6 +37,13 @@ class AgentController extends Controller
 		{
 			return Redirect::to("/agent/dashboard")->send();
 		}
+	}
+
+	public function index()
+	{
+
+		$data['page']	= 'Dashboard';
+		return view('agent.pages.dashboard',$data);
 	}
 
 	public function login()
