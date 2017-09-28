@@ -62,25 +62,15 @@
             @include('admin.include.sidebar');
             {{-- End Sidebar --}}    
 
-            <div class="page-inner"> 
-                        
-                
+            <div class="page-inner">
+            
                 {{-- Main Wrapper --}} 
                 @yield('content')    
                 <!-- Main Wrapper -->
 
                 <div class="page-footer">
                     <p class="no-s">2017 &copy; Modern by DigimaHouse.dev</p>
-                </div>
-                
-        @if(session("login") == true)
-            <div>
-            Click here to  <a style="font-size:15px",  href='/admin/logout'>LOGOUT</a>
-            </div>
-        @else
-            <div>Hi, guest!</div>
-        @endif       
-
+                </div>      
 
             </div><!-- Page Inner -->
         </main><!-- Page Content -->

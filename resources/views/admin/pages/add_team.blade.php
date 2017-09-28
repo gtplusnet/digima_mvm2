@@ -1,15 +1,19 @@
 @extends('admin.layout.layout')
 @section('content')
 <div class="page-title clearfix">
-	<h3>{{ $page }}</h3>
 	<div class="page-breadcrumb">
-		<ol class="breadcrumb">
-			<li><a href="/admin">Home</a></li>
-			<li class="active">{{ $page }}</li>
-		</ol>
+		<h3>USER</h3>
+		<br>
+		<nav>
+			<a style="font-size: 15px;" href="/admin/add/team">ADD TEAM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="font-size: 15px;" href="/admin/add/agent">ADD AGENT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="font-size: 15px;" href="/admin/add/supervisor">ADD SUPERVISOR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="font-size: 15px;" href="/admin/add/admin">ADD ADMIN</a>
+		</nav>	
+		</br>
 	</div>
 </div>
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD
 <div id="main-wrapper">
 =======
 	<div id="main-wrapper">
@@ -104,13 +108,13 @@
 	            </div>
 	        </div>
 	    </div>
->>>>>>> sub_master
+>>>>>>> sub_master -->
 	
 	<div class="row">
 		<div class="panel panel-primary">
-			<div class="panel-heading clearfix">
-				<h3 class="panel-title" style="color: white;">Profile</h3>
-			</div>
+	            <div class="panel-heading clearfix">
+	                <h3 class="panel-title" style="color: white;">TEAM</h3>
+	            </div>
 			<div class="panel-body">
 				<h4>Team Information</h4>
 				@if(session()->has('warning'))
@@ -136,7 +140,7 @@
 						<div class="col-sm-9">
 						</div>
 						<div class="col-sm-3">
-							<button  class="btn btn-primary btn-lg" style="border-radius: 20px; float: right;">Add Team</button>
+							<button  class="btn btn-primary btn-lg" style="border-radius: 20px; float: right;">ADD TEAM</button>
 						</div>
 					</div>
 				</form>
@@ -153,7 +157,7 @@
 		</div>
 		
 		
-	</div>
+	</div>	
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/registration.js"></script>

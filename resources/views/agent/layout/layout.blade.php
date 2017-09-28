@@ -60,8 +60,8 @@
             @include('agent.include.sidebar');
             {{-- End Sidebar --}}    
 
-            <div class="page-inner">               
-                
+            <div class="page-inner"> 
+
                 {{-- Main Wrapper --}} 
                 @yield('content')    
                 <!-- Main Wrapper -->
@@ -103,10 +103,6 @@
         <script src="/assets/admin/merchant/assets/plugins/metrojs/MetroJs.min.js"></script>
         <script src="/assets/admin/merchant/assets/js/modern.js"></script>
         <script src="/assets/admin/merchant/assets/js/pages/dashboard.js"></script>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        {{-- <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
-        <script src="/assets/js/front/add_client.js"></script> --}}
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {
