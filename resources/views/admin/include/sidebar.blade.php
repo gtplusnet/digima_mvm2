@@ -20,7 +20,6 @@
             <li class="{{ (Request::segment(2) == 'client') ? 'active' : ''  }}"><a href="/admin/client" class="waves-effect waves-button"><span class="menu-icon fa fa-group"></span><p>Clients</p></a></li>
 
             <li class="{{ (Request::segment(2) == 'user') ? 'active' : ''  }}"><a href="/admin/user" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>User</p></a></li>
-
-        </ul>
+      </ul>
     </div><!-- Page Sidebar Inner -->
 </div>
