@@ -37,16 +37,16 @@
 						</div>
 						<div class="col-md-5 payment-right-area">
 							<label for="proof-of-payment" class="payment-label">Upload Proof of Payment:</label>
-							<input type="text" name="proof-of-payment" class="payment-textfield">
+							<input id="uploadFile" placeholder="Choose File" disabled="disabled" />
 						</div>
 						<div class="col-md-1 payment-upload-icon-container">
-							<a href="">	
-								<div class="payment-upload-holder">
-									<i class="fa fa-upload payment-upload-icon"></i>
-								</div>
-							</a>
+							<div class="fileUpload payment-upload-holder fa fa-upload payment-upload-icon">
+						    <input id="uploadBtn" type="file" class="upload" />
 						</div>
-					</div>			
+						</div>
+
+					</div>
+							
 			</div>
 			<div class="col-md-12 payment-title-container">
 				<p class="payment-title">INVOICE</p>
@@ -115,4 +115,42 @@
 	</div>
 	<div class="col-md-3"></div>
 </div>
+<style>
+#uploadBtn {
+    position: relative;
+    overflow: hidden;
+    margin: 2px;
+    height:23px;
+    width:100px;
+    margin-top:-20px;
+    padding-right: 50px;
+}
+
+#uploadFile {
+    position: relative;
+    overflow: hidden;
+    margin: 2px;
+    margin-top: -1px;
+    height:26px;
+    width:200px;
+    /*padding-right: px;*/
+}
+.fileUpload input.upload {  
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    margin-top: -1px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+</style>
+<script language="javascript">
+	document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.value;
+};
+</script>
 @endsection

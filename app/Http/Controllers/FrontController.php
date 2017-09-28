@@ -91,7 +91,8 @@ class FrontController extends Controller
 	        $business_data->facebook_url = $request->facebook_url;
 	        $business_data->twitter_url = $request->twitter_username;
             $business_data->membership = $request->membership;
-            $business_data->date_created = Carbon::now();
+            // $business_data->date_created = Carbon::now();
+            $business_data->date_created = date("Y/m/d");
             $business_data->save();
 
 	        $contact_data = new TblBusinessContactPersonModel;

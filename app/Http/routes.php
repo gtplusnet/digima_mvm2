@@ -100,6 +100,10 @@ Route::post('/agent_login', 	    'AgentController@agent_login');
 
 Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
+
+Route::post('/agent/get_client', 		'AgentController@get_client');
+
+
 Route::any('/agent/add/client', 	'AgentController@add_client');
 Route::post('/add_client_submit',   'AgentController@add_client_submit');
 Route::any('/agent/get_city', 		'AgentController@get_city');

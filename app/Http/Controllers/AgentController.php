@@ -72,12 +72,25 @@ class AgentController extends Controller
 	public function client()
 	{
 		$data['page']	 = 'Client';
-		$data['clients'] = TblBusinessModel::
-										    join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+		$data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
 			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+
+			                              ->orderBy('tbl_business.date_created',"asc")
+
 			                              ->get();
-    // dd($data['clients']);
-		return view ('agent.pages.client', $data);	
+    	return view ('agent.pages.client', $data);	
+	}
+
+	public function get_client(Request $request)
+	{
+		$s_date = $request->date_start;
+		$e_date = $request->date_end;
+		$data['clients'] = TblBusinessModel::whereBetween('date_created',[$s_date,$e_date])
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+		return view('agent.pages.filtered',$data);
 	}
 	public function add_client_submit(Request $request)
 	{
@@ -101,7 +114,8 @@ class AgentController extends Controller
 	        $business_data->facebook_url = $request->facebook_url;
 	        $business_data->twitter_url = $request->twitter_username;
             $business_data->membership = $request->membership;
-            $business_data->date_created = Carbon::now();
+            // $business_data->date_created = Carbon::now();
+            $business_data->date_created = date("Y/m/d");
             $business_data->save();
 
 	        $contact_data = new TblBusinessContactPersonModel;
@@ -122,8 +136,6 @@ class AgentController extends Controller
             $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
             $account_data->save();
 
-            // dd($business_data."<br>james" .$contact_data."<br>james" .$account_data);
-
            return Redirect::to('/agent/client');
 
   
@@ -135,6 +147,13 @@ class AgentController extends Controller
 		$data['membership_list'] = TblPaymentMethod::get();
 		$data['page']	= 'Add Client';
 		return view ('agent.pages.add_client', $data);		
+	}
+
+	public function filter_clients(request $request)
+	{
+		$sdate = $request->start_date;
+		$edate = $request->end_date;
+		dd($sdate.$edate);
 	}
 	public function get_city(Request $request)
     {
