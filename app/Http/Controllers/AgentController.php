@@ -41,6 +41,12 @@ class AgentController extends Controller
 		return view ('agent.pages.login', $data);
 	}
 
+	public function dashboard()
+    {
+    	$data['page']	= 'Dashboard';
+		return view ('agent.pages.dashboard', $data);	
+    }
+
 	public function agent_login(Request $request)
 	{
 
@@ -156,8 +162,6 @@ class AgentController extends Controller
             $account_data->save();
 
            return Redirect::to('/agent/client');
-
-  
     	}
 	}
 	public function add_client()

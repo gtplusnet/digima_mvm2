@@ -151,7 +151,6 @@ class AdminController extends Controller
 
 		public function admin_logout ()
 
-/*	public function logout()*/
 	{
 
 		Session::forget("login");
@@ -159,7 +158,6 @@ class AdminController extends Controller
         return Redirect::to("/admin");
 	}
 	
-
 	public function dashboard()
     {
     	$data['page']	= 'Dashboard';
@@ -194,6 +192,31 @@ class AdminController extends Controller
 		return Redirect::to('/admin/add/agent')->with('warning', 'testing');
 	}
 
+	public function add_supervisor_submit(Request $request)
+	{
+		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
+		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
+		$data['email'] = $request->email;
+		$data['position'] = 'supervisor';
+		
+		// dd($data);
+		TblSupervisorModels::insert($data);
+		return Redirect::to('/admin/add/supervisor')->with('warning', 'testing');
+
+	}
+	public function add_admin_submit(Request $request)
+	{
+		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
+		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
+		$data['email'] = $request->email;
+		
+		// dd($data);
+		TblAdminModels::insert($data);
+		return Redirect::to('/admin/add/admin')->with('warning', 'testing');
+
+	}
 
 	//Eden 
 	// public function add_team()
@@ -259,8 +282,6 @@ class AdminController extends Controller
         Redirect::to("/admin/view_team")->send();
     }
     
-
-	
     /*public function view_agent()
 	{
 		$data['page']	= 'View Agent';
@@ -285,32 +306,4 @@ class AdminController extends Controller
        Redirect::to("/admin/view_team")->send();
     }
 */
-
-	public function add_supervisor_submit(Request $request)
-	{
-		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
-		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-
-		$data['email'] = $request->email;
-		$data['position'] = 'supervisor';
-		
-		// dd($data);
-		TblSupervisorModels::insert($data);
-		return Redirect::to('/admin/add/supervisor')->with('warning', 'testing');
-
-	}
-	public function add_admin_submit(Request $request)
-	{
-		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
-		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-
-		$data['email'] = $request->email;
-		
-		// dd($data);
-		TblAdminModels::insert($data);
-		return Redirect::to('/admin/add/admin')->with('warning', 'testing');
-
-	}
-
-
 }
