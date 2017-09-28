@@ -35,8 +35,7 @@
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
-
-                <p>USER</p>
+                <p>Users</p>
 
             </a>
         </li>

@@ -15,10 +15,7 @@ use App\Models\TblUserAccountModel;
 use Session;
 use Redirect;
 use Carbon\Carbon;
-
 use Mail;
-
-
 
 
 class AgentController extends Controller
@@ -50,23 +47,14 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
-
-		// $data = array('name'=>"Virat Gandhi");
-   
-  //     Mail::send(['text'=>'mail'], $data, function($message) {
-  //        $message->to('sample35836@gmail.com', 'Tutorials Point')->subject
-  //           ('Laravel Basic Testing Mail');
-  //        $message->from('guardians35836@gmail.com','Guard');
-  //     });
-  //     echo "Basic Email Sent. Check your inbox.";
-
-
-
-
-
 		return view ('agent.pages.login', $data);
-
 	}
+
+	public function dashboard()
+    {
+    	$data['page']	= 'Dashboard';
+		return view ('agent.pages.dashboard', $data);	
+    }
 
 	public function agent_login(Request $request)
 	{
@@ -215,8 +203,6 @@ class AgentController extends Controller
             $account_data->save();
 
            return Redirect::to('/agent/client');
-
-  
     	}
 	}
 	public function add_client()

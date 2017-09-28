@@ -112,9 +112,6 @@
 =======
 	    </div>
 >>>>>>> sub_master -->
->>>>>>> sub_master
-	
-
 	<div class="row">
 		<div class="panel panel-primary">
 	            <div class="panel-heading clearfix">

@@ -77,9 +77,6 @@ Route::any('/admin/add/team', 		'AdminController@add_team');
 Route::any('/admin/add/agent', 		'AdminController@add_agent');
 Route::any('/admin/add/supervisor', 		'AdminController@add_supervisor');
 Route::any('/admin/add/admin', 		'AdminController@add_admin');
-
-
-
 Route::any('/admin/get_city', 		'AdminController@get_city');
 Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
 
@@ -101,19 +98,16 @@ Route::any('/admin/delete_team/{team_id}', 	'AdminController@delete_team');
 
 Route::any('/admin/add_supervisor_submit', 		'AdminController@add_supervisor_submit');
 Route::post('/admin/add_admin_submit', 	'AdminController@add_admin_submit');
-
-
 Route::any('/admin/add_agent', 		'AdminController@add_agent');
 Route::any('/admin/delete_agent/{agent_id}', 	'AdminController@delete_agent');
 //Route::any('/admin/view_agent', 		'AdminController@view_agent');
 
 /*Agent Page by Joshua*/
-Route::get('/agent/dashboard', 		'AgentController@index');
+Route::get('/agent/dashboard', 		'AgentController@dashboard');
 Route::post('/agent_login', 	    'AgentController@agent_login');
 
 Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
-
 Route::post('/agent/get_client', 		'AgentController@get_client');
 Route::post('/agent/get_client_transaction', 		'AgentController@get_client_transaction');
 Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_transaction_reload');
@@ -127,7 +121,6 @@ Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
 
 //james agent//
 Route::any('/agent',          'AgentController@login');
-
 Route::any('/agent/logout', 		'AgentController@agent_logout');
 
 

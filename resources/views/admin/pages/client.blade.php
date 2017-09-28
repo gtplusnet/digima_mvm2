@@ -4,7 +4,7 @@
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="/agent">Home</a></li>
+            <li><a href="/admin">Home</a></li>
             <li class="active">{{ $page }}</li>
         </ol>
     </div>

@@ -7,7 +7,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:'POST',
-			url:'/agent/get_client',
+			url:'/admin/get_client',
 			data:{date_start: date_start,date_end: date_end},
 			dataType:'text',
 		}).done(function(data){
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:'POST',
-			url:'/agent/get_client_transaction',
+			url:'/admin/get_client_transaction',
 			data:{transaction_id: transaction_id},
 			dataType:'text',
 		}).done(function(data){
@@ -41,7 +41,7 @@ $(document).ready(function(){
 		var transaction_id = $(this).data("id");
 		$.ajax({
 			type:'POST',
-			url:'/agent/get_client_transaction_reload',
+			url:'/admin/get_client_transaction_reload',
 			data:{transaction_id: transaction_id},
 			dataType:'text',
 		}).done(function(data){
