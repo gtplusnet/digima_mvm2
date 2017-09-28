@@ -12,17 +12,32 @@ use App\Models\TblAgentModels;
 use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
 use App\Models\TblUserAccountModel;
+use Session;
 use Redirect;
 use Carbon\Carbon;
 use Mail;
 
 
-
 class AgentController extends Controller
 {
+	public static function allow_logged_in_users_only()
+	{
+		if(session("login") != true)
+		{
+			return Redirect::to("/agent")->send();
+		}
+	}
+	public static function allow_logged_out_users_only()
+	{
+		if(session("login") )
+		{
+			return Redirect::to("/agent/dashboard")->send();
+		}
+	}
 
 	public function login()
 	{
+		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
 
 		// $data = array('name'=>"Virat Gandhi");
@@ -44,13 +59,21 @@ class AgentController extends Controller
 
 	public function agent_login(Request $request)
 	{
-		$validate = Tbl_Agent::where('email',$request->email)->first();
-		if($validate)
+
+		$validate_login = TblAgentModels::where('email',$request->email)->first();
+		if($validate_login)
+
 		{
-			if (password_verify($request->password, $validate->password)) 
+			if (password_verify($request->password, $validate_login->password)) 
 				{
+					Session::put("login",true);
+    				Session::put("agent_id",$validate_login->agent_id);
+    				Session::put("full_name",$validate_login->full_name);
+    				Session::put("email",$validate_login->email);
+    				Session::put("position",$validate_login->position);
+					// Session::put("login", $validate->email);
 				    $data['page']	= 'Dashboard';
-				     return Redirect::to('/agent/dashboard');
+				    return Redirect::to('/agent/dashboard');
 				}
 			else
 			{
@@ -65,19 +88,15 @@ class AgentController extends Controller
 		}
 	}
 
-		public function agentlogout()
-	{
-		Session::put("login", true);
-		$data['page']   = 'Agent logout';
-        return view('front.pages.agentlogout', $data);
-	}
+	// 	public function agentlogout()
+	// {
 
-	public function index()
-	{
-		$data['page']	= 'Dashboard';
-		$data['county_list'] = TblCountyModel::get();
-		return view ('agent.pages.dashboard', $data);		
-	}
+	// 	Self::allow_logged_in_users_only();
+
+	// 	$data['page']	= 'Dashboard';
+	// 	$data['county_list'] = TblCountyModel::get();
+	// 	return view ('agent.pages.dashboard', $data);		
+	// }
 
 	public function profile()
 	{
@@ -200,11 +219,9 @@ class AgentController extends Controller
         return $postal_code->postal_code;
     }
 
-
-		public function logout()
+	public function agent_logout()
 	{
-		Session::forget('user_email');
-		Session::forget('user_password');
-		return Redirect::back();
+		Session::forget("login");
+        return Redirect::to("/agent");
 	}
 }

@@ -133,7 +133,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
-                            <span class="user-name">First Name<i class="fa fa-angle-down"></i></span>
+                            <span class="user-name">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
@@ -145,9 +145,17 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="login.html" class="log-out waves-effect waves-button waves-classic">
-                            <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
-                        </a>
+                    @if(session("login") == true)
+                    <a style="font-size:15px",  href='/agent/logout'>
+                    <span><i class="fa fa-sign-out m-r-xs"></i>Log out
+                    </span></a>
+                    @else
+                    <a style="font-size:15px",  href="">
+                    <span>
+                    <i class="fa fa-sign-out m-r-xs"></i>
+                    Hi Guest
+                    </span></a>             
+                    @endif 
                     </li>
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->

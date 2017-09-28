@@ -58,16 +58,10 @@
             @include('agent.include.sidebar');
             {{-- End Sidebar --}}    
 
-            <div class="page-inner">  
 
-        @if(session("login") == true)
-        <div>
-        Click here to  <a style="font-size:15px",  href='/agent/logout'>LOGOUT</a>
-            </div>
-        @else
-            <div>Hi, guest!</div>
-        @endif             
-                
+            <div class="page-inner"> 
+
+
                 {{-- Main Wrapper --}} 
                 @yield('content')    
                 <!-- Main Wrapper -->
