@@ -59,7 +59,9 @@
             {{-- End Sidebar --}}    
 
 
+
             <div class="page-inner"> 
+
 
 
                 {{-- Main Wrapper --}} 

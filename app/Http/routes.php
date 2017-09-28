@@ -83,6 +83,9 @@ Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
 //james
 Route::post('/admin/add_team_submit', 	'AdminController@add_team_submit');
 Route::post('/admin/add_agent_submit', 	'AdminController@add_agent_submit');
+Route::post('/admin/get_client', 		'AdminController@get_client');
+Route::post('/admin/get_client_transaction', 		'AdminController@get_client_transaction');
+Route::post('/admin/get_client_transaction_reload', 'AdminController@get_client_transaction_reload');
 
 
 
@@ -107,6 +110,9 @@ Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
 
 Route::post('/agent/get_client', 		'AgentController@get_client');
+Route::post('/agent/get_client_transaction', 		'AgentController@get_client_transaction');
+Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_transaction_reload');
+
 
 
 Route::any('/agent/add/client', 	'AgentController@add_client');

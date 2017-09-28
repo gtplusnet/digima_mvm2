@@ -10,32 +10,16 @@
     </div>
 </div>
 <div id="main-wrapper">
-<div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Headergfdg</h4>
-                </div>
-                <div class="modal-body">
-                    <p>This is a large modal.fdsfdsf</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tab-content">
-        <div class="pane panel-primary">
-            <div class="panel-heading clearfix">
+    <div class="tab-content ">
+        <div class=" panel-primary">
+            <div class="panel-heading row clearfix">
                 <div class="col-md-8">
                     <div class="col-md-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active li_style"><a data-toggle="tab" href="#customer">Customer</a></li>
-                        <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Customer</a></li>
-                        <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
-                    </ul>
+                        <ul class="nav nav-tabs">
+                            <li class="active li_style"><a data-toggle="tab" href="#customer">Customer</a></li>
+                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Customer</a></li>
+                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-4 ">
@@ -66,8 +50,8 @@
                                     <th>Name</th>
                                     <th>Date/Added</th>
                                     <th>Business Name</th>
-                                    <th>Business Address</th>
                                     <th>membership</th>
+                                    <th>Transaction</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -77,13 +61,102 @@
                                     <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->business_name}}</td>
-                                    <td>{{$client->business_complete_address}}</td>
                                     <td>{{$client->payment_method_name}}</td>
-                                    <td><button class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
+                                    <td>{{$client->transaction_status}}</td>
+                                    <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
+
+                                <div class="modal fade" id="myModal{{$client->business_id}}" role="dialog" >
+                                    <div class="modal-lg modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close closed" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Personal Information</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="panel panel-primary col-md-12">
+
+                                                  <div class="panel-body">
+                                                        <form class="form-horizontal">
+                                                        <div class="col-md-12 distance">
+                                                            <div class="form-group">
+                                                                <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="Mr." readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 distance">
+                                                            <div class="form-group">
+                                                                <label for="input-Default" class="col-sm-2 control-label">First Name</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_first_name}}" readonly>
+                                                                </div>
+                                                                <label for="input-Default" class="col-sm-2 control-label">Last Name</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_last_name}}" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 distance">
+                                                            <div class="form-group">
+                                                                <label for="input-Default" class="col-sm-2 control-label">Business Name</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_name}}" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 distance">
+                                                            <div class="form-group">
+                                                                <label for="input-Default" class="col-sm-2 control-label">Business Primary Phone</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_phone}}" readonly>
+                                                                </div>
+                                                                 <label for="input-Default" class="col-sm-2 control-label">Business Alternate Phone</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_alt_phone}}" readonly>
+                                                                </div>
+                                                            </div>
+                                                         </div>
+                                                        <div class="col-md-12 distance">
+                                                            <div class="form-group">
+                                                                <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
+                                                                <div class="col-sm-10">
+                                                                    <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$client->business_complete_address}}</textarea>
+                                                                </div>
+                                                            </div>
+                                                         </div>
+                                                        <div class="col-md-12 distance">
+                                                            <div class="form-group">
+                                                                <label for="input-Default" class="col-sm-2 control-label">County</label>
+                                                                <div class="col-sm-2">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->county_name}}" readonly>
+                                                                </div>
+                                                                <label for="input-Default" class="col-sm-2 control-label">City</label>
+                                                                <div class="col-sm-2">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->city_name}}" readonly>
+                                                                </div>
+                                                                <label for="input-Default" class="col-sm-2 control-label">Postal</label>
+                                                                <div class="col-sm-2">
+                                                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_code}}" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer" style="border:none;">
+                                                <button type="button" data-id="{{$client->business_id}}" class="closed btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endforeach
                             </tbody>
                         </table>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -159,20 +232,32 @@
             </div>
             
             <style>
+            
+            .distance
+             {
+                margin:10px 0px 10px 0px;
+             }
             .li_style{
-                padding:0px;
-                width:33.5%;
-                margin-right:0px;
-                margin-left:-1px;
+            padding:0px;
+            width:33.31%;
+            margin-right:0px;
+            margin-left:-1px;
             }
-           .call
+            .modal-header
+            {
+                background-color: #24292E;
+                color:#fff;
+                /*border-radius: 10px;*/
+            }
+            .call
             {
             color:green;
             margin-right: 5px;
             font-size:20px;
             }
             </style>
-            <link rel="stylesheet" href="/assets/css/mvm.css">
+            <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="/assets/js/agent/agent_client.js"></script>
+            <script src="/assets/js/agent/jquery.min.js"></script>
             @endsection
