@@ -108,7 +108,6 @@ Route::post('/agent_login', 	    'AgentController@agent_login');
 
 Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
-
 Route::post('/agent/get_client', 		'AgentController@get_client');
 Route::post('/agent/get_client_transaction', 		'AgentController@get_client_transaction');
 Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_transaction_reload');

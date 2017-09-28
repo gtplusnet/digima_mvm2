@@ -94,10 +94,8 @@ class AdminController extends Controller
         $update['transaction_status'] = 'called'; 
         $update['business_status'] = '2'; 
         $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-        return '';
-        
+        return '';  
     }
-
 
 	public function add_team()
 	{

@@ -29,12 +29,12 @@
             </a>
         </li>
 
-        <li data-menu="USER">
+        <li data-menu="User">
             <a href="javsacript:void(0);">
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
-                <p>USER</p>
+                <p>Users</p>
 
             </a>
         </li>
