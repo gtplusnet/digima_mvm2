@@ -210,13 +210,12 @@ class FrontController extends Controller
 
         echo 'Registered successfully ! But your account is pending.';
   
-// =======
-//     }
 
-//     public function businessSearch(Request $request)
-//     {
-//         return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown");
-// >>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+    }
+
+    public function businessSearch(Request $request)
+    {
+        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown");
     }
 
     public function businessSearchResult(Request $request)
