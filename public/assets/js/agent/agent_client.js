@@ -3,8 +3,6 @@ $(document).ready(function(){
 	$('#date_end').change(function(){
 		var date_start = $('#date_start').val();
 		var date_end = $('#date_end').val();
-		alert("123");
-		
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client',
@@ -21,7 +19,7 @@ $(document).ready(function(){
 
 	$('.transaction').click(function(){
 		var transaction_id = $(this).data("id");
-		alert(transaction_id);
+		
 		$('.modal').hide();
 		
 		$.ajax({

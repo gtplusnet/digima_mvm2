@@ -103,15 +103,6 @@ class AgentController extends Controller
 		}
 	}
 
-	// 	public function agentlogout()
-	// {
-
-	// 	Self::allow_logged_in_users_only();
-
-	// 	$data['page']	= 'Dashboard';
-	// 	$data['county_list'] = TblCountyModel::get();
-	// 	return view ('agent.pages.dashboard', $data);		
-	// }
 
 	public function profile()
 	{
@@ -122,7 +113,9 @@ class AgentController extends Controller
 	public function client()
 	{
 		$data['page']	 = 'Client';
-		$data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+		$data['clients'] = TblUserAccountModel::where('status','registered')
+										  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
+			                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
 			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
 			                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
 			                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
@@ -134,10 +127,10 @@ class AgentController extends Controller
 
 	public function get_client(Request $request)
 	{
-		dd("123");
+		
 		$s_date = $request->date_start;
 		$e_date = $request->date_end;
-		$data['clients'] = TblBusinessModel::wherewhereBetween('date_created',[$s_date,$e_date])
+		$data['clients'] = TblBusinessModel::whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
@@ -207,7 +200,14 @@ class AgentController extends Controller
 
             $account_data = new TblUserAccountModel;
             $account_data->user_email = $request->email_address;
-            $account_data->user_password = "123";
+
+            $myStr=$request->first_name;
+            $myStrs=$request->primary_business_phone;
+            $result = substr($myStr, 0, 3);
+            $results = substr($myStrs, 0, 3);
+            $final_result = $result.$results;
+
+            $account_data->user_password = password_hash($final_result, PASSWORD_DEFAULT);
             $account_data->user_category = 'merchant';
             $account_data->status = 'registered';
             $account_data->business_id = $business_data->business_id;
