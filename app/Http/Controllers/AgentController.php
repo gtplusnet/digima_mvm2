@@ -15,7 +15,7 @@ use App\Models\TblUserAccountModel;
 use Session;
 use Redirect;
 use Carbon\Carbon;
-
+use Input;
 use Mail;
 
 
@@ -50,19 +50,6 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
-
-		// $data = array('name'=>"Virat Gandhi");
-   
-  //     Mail::send(['text'=>'mail'], $data, function($message) {
-  //        $message->to('sample35836@gmail.com', 'Tutorials Point')->subject
-  //           ('Laravel Basic Testing Mail');
-  //        $message->from('guardians35836@gmail.com','Guard');
-  //     });
-  //     echo "Basic Email Sent. Check your inbox.";
-
-
-
-
 
 		return view ('agent.pages.login', $data);
 
@@ -130,7 +117,8 @@ class AgentController extends Controller
 		
 		$s_date = $request->date_start;
 		$e_date = $request->date_end;
-		$data['clients'] = TblBusinessModel::whereBetween('date_created',[$s_date,$e_date])
+		$data['clients'] = TblBusinessModel::
+		whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
@@ -213,6 +201,15 @@ class AgentController extends Controller
             $account_data->business_id = $business_data->business_id;
             $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
             $account_data->save();
+
+            $pass="1234";
+   			Mail::raw('password'.$final_result, function ($message) {
+  			$message->to('sample35836@gmail.com', 'Tutorials Point')->subject
+          ('Laravel Basic Testing Mail');
+         $message->from('guardians35836@gmail.com','Guard');
+    });
+
+ echo "Basic Email Sent. Check your inbox.";
 
            return Redirect::to('/agent/client');
 
