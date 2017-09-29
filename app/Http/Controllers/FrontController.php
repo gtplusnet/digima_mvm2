@@ -148,42 +148,42 @@ class FrontController extends Controller
             } 
         }
 
-        else
-        {
-	        $business_data = new TblBusinessModel;
-	        $business_data->business_id = '';
-	        $business_data->business_name = $request->business_name;
-	        $business_data->city_id = $request->city_list;
-	        $business_data->business_complete_address = $request->business_address;
-	        $business_data->business_phone = $request->primary_business_phone;
-	        $business_data->business_alt_phone = $request->secondary_business_phone;
-	        $business_data->business_fax = $request->fax_number;
-	        $business_data->facebook_url = $request->facebook_url;
-	        $business_data->twitter_url = $request->twitter_username;
-            $business_data->membership = $request->membership;
-            // $business_data->date_created = Carbon::now();
-            $business_data->date_created = date("Y/m/d");
-            $business_data->save();
+     //    else
+     //    {
+	    //     $business_data = new TblBusinessModel;
+	    //     $business_data->business_id = '';
+	    //     $business_data->business_name = $request->business_name;
+	    //     $business_data->city_id = $request->city_list;
+	    //     $business_data->business_complete_address = $request->business_address;
+	    //     $business_data->business_phone = $request->primary_business_phone;
+	    //     $business_data->business_alt_phone = $request->secondary_business_phone;
+	    //     $business_data->business_fax = $request->fax_number;
+	    //     $business_data->facebook_url = $request->facebook_url;
+	    //     $business_data->twitter_url = $request->twitter_username;
+     //        $business_data->membership = $request->membership;
+     //        // $business_data->date_created = Carbon::now();
+     //        $business_data->date_created = date("Y/m/d");
+     //        $business_data->save();
 
-	        $contact_data = new TblBusinessContactPersonModel;
-	        $contact_data->business_contact_person_id = '';
-	        $contact_data->contact_prefix = $request->prefix;
-	        $contact_data->contact_first_name = $request->first_name;
-	        $contact_data->contact_last_name = $request->last_name;
-	        $contact_data->business_id = $business_data->business_id;
-            $contact_data->save();
+	    //     $contact_data = new TblBusinessContactPersonModel;
+	    //     $contact_data->business_contact_person_id = '';
+	    //     $contact_data->contact_prefix = $request->prefix;
+	    //     $contact_data->contact_first_name = $request->first_name;
+	    //     $contact_data->contact_last_name = $request->last_name;
+	    //     $contact_data->business_id = $business_data->business_id;
+     //        $contact_data->save();
 
 
-            $account_data = new TblUserAccountModel;
-            $account_data->user_email = $request->email;
-            $account_data->user_password = password_hash($request->password, PASSWORD_DEFAULT);
-            $account_data->user_category = 'merchant';
-            $account_data->status = 'registered';
-            $account_data->business_id = $business_data->business_id;
-            $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
-            $account_data->save();
+     //        $account_data = new TblUserAccountModel;
+     //        $account_data->user_email = $request->email;
+     //        $account_data->user_password = password_hash($request->password, PASSWORD_DEFAULT);
+     //        $account_data->user_category = 'merchant';
+     //        $account_data->status = 'registered';
+     //        $account_data->business_id = $business_data->business_id;
+     //        $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
+     //        $account_data->save();
   
-    	}
+    	// }
 	}
     //   public function payment()
     // {
