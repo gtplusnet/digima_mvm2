@@ -35,22 +35,19 @@ Route::any('/business_info', 'FrontController@business_info');
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
-<<<<<<< HEAD
-Route::post('/login', 'FrontController@login_submit');
 
-/*Route::get('/about', 	'FrontController@about');
-Route::get('/contact', 	'FrontController@contact');
-Route::get('/login', 	'FrontController@login');*/
+Route::post('/login1', 'FrontController@login_submit');
 
-=======
-Route::get('/business', 'FrontController@business');
-Route::get('/payment', 'FrontController@payment');
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+
+
+
+
+
 
 Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
 
-<<<<<<< HEAD
+
 
 Route::get('/business', 'FrontController@business');
 Route::get('/payment',	'FrontController@payment');
@@ -58,13 +55,12 @@ Route::get('/payment',	'FrontController@payment');
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category',		'SearchresultController@category');
-=======
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category', 'SearchresultController@category');
 Route::get('/resultsortgrid', 'SearchresultController@resultsortgrid');
 Route::get('/searchtabular', 'SearchresultController@searchtabular');
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+
 
 
 /*Merchant Page by Brain*/
@@ -88,7 +84,7 @@ Route::get('/admin/client', 		'AdminController@client');
 Route::get('/admin/user', 		'AdminController@user');
 Route::any('/admin/add/team', 		'AdminController@add_team');
 Route::any('/admin/add/agent', 		'AdminController@add_agent');
-Route::any('/admin/add/supervisor', 		'AdminController@add_supervisor');
+Route::any('/admin/add/supervisor', 'AdminController@add_supervisor');
 Route::any('/admin/add/admin', 		'AdminController@add_admin');
 
 
@@ -136,7 +132,7 @@ Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_
 Route::any('/agent/add/client', 	'AgentController@add_client');
 Route::post('/add_client_submit',   'AgentController@add_client_submit');
 Route::any('/agent/get_city', 		'AgentController@get_city');
-Route::any('/agent/get_zip_code', 	'AgentController@get_zip_code');
+Route::any('/agent/get_postal_code', 	'AgentController@get_zip_code');
 
 //james agent//
 Route::any('/agent',          'AgentController@login');
@@ -165,8 +161,7 @@ Route::any('/agent/logout', 		'AgentController@agent_logout');
 //Route::any('/search_result', 'SearchController@search_result');
 //Route::any('/search_result_list', 'SearchController@search_result_list');
 
-<<<<<<< HEAD
-=======
+
 //Routes for General Admin
 Route::any('/general_admin', 'GeneralAdminController@index');
 Route::any('/general_admin/get_business_list', 'GeneralAdminController@get_business_list');
@@ -178,4 +173,3 @@ Route::any('/general_admin/report', 'GeneralAdminController@report');
 
 
 Route::any('/sample', 'MerchantController@sample');
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333

@@ -12,6 +12,7 @@ use App\Models\TblAgentModels;
 use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
 use App\Models\TblUserAccountModel;
+
 use Session;
 use Redirect;
 use Carbon\Carbon;
@@ -109,6 +110,7 @@ class AgentController extends Controller
 			                              ->orderBy('tbl_business.date_created',"asc")
 
 			                              ->get();
+
     	return view ('agent.pages.client', $data);	
 	}
 
@@ -202,14 +204,14 @@ class AgentController extends Controller
             $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
             $account_data->save();
 
-            $pass="1234";
-   			Mail::raw('password'.$final_result, function ($message) {
-  			$message->to('sample35836@gmail.com', 'Tutorials Point')->subject
-          ('Laravel Basic Testing Mail');
-         $message->from('guardians35836@gmail.com','Guard');
-    });
+ //            $pass="1234";
+ //   			Mail::raw('password'.$final_result, function ($message) {
+ //  			$message->to('sample35836@gmail.com', 'Tutorials Point')->subject
+ //          ('Laravel Basic Testing Mail');
+ //         $message->from('guardians35836@gmail.com','Guard');
+ //    });
 
- echo "Basic Email Sent. Check your inbox.";
+ // echo "Basic Email Sent. Check your inbox.";
 
            return Redirect::to('/agent/client');
 
@@ -234,6 +236,7 @@ class AgentController extends Controller
     {
         $county_id = $request->county_id;
 
+
         $city_list = TblCityModel::where('county_id','=',$county_id)->get();
 
         $county_name = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
@@ -253,7 +256,6 @@ class AgentController extends Controller
     public function get_zip_code(Request $request)
     {
         $city_id = $request->city_id;
-
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
         return $postal_code->postal_code;

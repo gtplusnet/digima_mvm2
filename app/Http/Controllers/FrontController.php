@@ -5,21 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
+
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblPaymentMethod;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
-=======
+
 use App\Models\Tbl_county;
 use App\Models\Tbl_city;
 use App\Models\Tbl_business;
 use App\Models\Tbl_business_contact_person;
 use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+
 use Carbon\Carbon;
 use Redirect;
 use DB;
@@ -49,14 +49,16 @@ class FrontController extends Controller
 
     public function registration()
     {
-<<<<<<< HEAD
+
         $data['county_list'] = TblCountyModel::get();
+        // dd($data);
         $data['payment_method'] = TblPaymentMethod::get();
+        $data['countyList'] = Tbl_county::get();
         return view('front.pages.registration', $data);
-=======
-        $countyList = Tbl_county::get();
-        return view('front.pages.registration', compact('countyList'));
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+
+       
+       
+
     }
 
     public function getCity(Request $request)
@@ -82,10 +84,6 @@ class FrontController extends Controller
              return response()->json(['postalCode' => $postalCode->postal_code]);  
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 
     public function registerBusiness(Request $request)
     {
@@ -149,7 +147,7 @@ class FrontController extends Controller
             return response()->json(['status' => 'success', 'url' => '/success']); 
             } 
         }
-<<<<<<< HEAD
+
         else
         {
 	        $business_data = new TblBusinessModel;
@@ -187,6 +185,11 @@ class FrontController extends Controller
   
     	}
 	}
+    //   public function payment()
+    // {
+    //     $data['page']   = 'payment';
+    //     return view('front.pages.payment', $data);
+    // }
 
     public function payment()
     {
@@ -207,13 +210,13 @@ class FrontController extends Controller
 
         echo 'Registered successfully ! But your account is pending.';
   
-=======
-    }
+// =======
+//     }
 
-    public function businessSearch(Request $request)
-    {
-        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown");
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+//     public function businessSearch(Request $request)
+//     {
+//         return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown");
+// >>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
     }
 
     public function businessSearchResult(Request $request)
@@ -238,11 +241,7 @@ class FrontController extends Controller
         return view('front.pages.success');
     }
 
-    public function payment()
-    {
-        $data['page']   = 'payment';
-        return view('front.pages.payment', $data);
-    }
+  
 
     public function business_info(Request $request)
     {

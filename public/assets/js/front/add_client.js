@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('#county_list').change(function(){
 		var county_id = $('#county_list').val();
 		$('#postal_code').val("");
+		alert("123");
 
 		if(county_id == '')
 		{
@@ -11,7 +12,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type:'POST',
-			url:'/get_city',
+			url:'/agent/get_city',
 			data:{county_id: county_id},
 			dataType:'text',
 			success:function(data){
@@ -23,6 +24,7 @@ $(document).ready(function(){
 	$('#city_list').change(function(){
 		var city_id = $('#city_list').val();
 
+			alert("123");
 		if(city_id == '')
 		{
 			$('#postal_code').val("");
@@ -30,7 +32,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type:'POST',
-			url:'/get_postal_code',
+			url:'/agent/get_postal_code',
 			data:{city_id: city_id},
 			dataType:'text',
 			success:function(data){
