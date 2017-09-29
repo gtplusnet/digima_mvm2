@@ -14,6 +14,7 @@ class CreateTblBusinessHours extends Migration
     {
         Schema::create('tbl_business_hours', function (Blueprint $table) {
             $table->increments('business_hours_id');
+            $table->string('days');
             $table->time('business_hours_from')->nullable();
             $table->time('business_hours_to')->nullable();
             $table->string('desc', 100)->nullable();

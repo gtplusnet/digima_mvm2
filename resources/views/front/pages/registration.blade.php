@@ -9,6 +9,7 @@
 	</div>
 </div>
 <div class="container">
+<<<<<<< HEAD
 <form method="POST" action="/register">
 {{ csrf_field() }}
 	<div class="row">
@@ -55,40 +56,52 @@
 					    	</div>
 				  		</div>
 		  		</div>
+=======
+	<form role="form" method="POST" action="/register-business" name="registrationForm" id="registrationForm">
+	{{ csrf_field() }}
+	<div class="col-md-6 form-leftpart">
+		<div class="col-md-12 registration-title-container">
+			<p class="registration-form-title">ENTER YOUR PERSONAL INFORMATION</p>
+		</div>	
+		<div class="col-md-12 form-upper-container">			
+			<div class="col-md-12 registration-form-container">
+				<div class="col-md-3 form-firstpart">
+				  	<label for="prefix" class="registration-form-label">Prefix:</label>
+				    <select class="form-control" name="prefix" id="prefix" required="true">
+						<option value="" disabled selected>--Prefix--</option>
+						<option>Mr.</option>
+						<option>Ms.</option>
+						<option>Mrs.</option>
+						<option>Dr.</option>
+						<option>Dra.</option>
+	  				</select>
+				</div>
+				<div class="col-md-4 form-secondpart">
+				  	<label for="firstName" class="registration-form-label">First Name:</label>
+				   	<input type="text" class="form-control" name="firstName" id="firstName" required="true">
+				</div>
+				<div class="col-md-5 form-thirdpart">
+				  	<label for="lastName" class="registration-form-label">Last Name:</label>
+				    <input type="text" class="form-control" name="lastName" id="lastName" required="true">
+				</div>
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 			</div>
-			<div class="panel panel-default socialmedia-part">
-		  		<div class="panel-info-heading">
-		  			<h2 class="panel-title">SOCIAL MEDIA</h2>
-		  		</div>
-		  		<div class="panel-body">
-
-				  		<div class="form-group">
-				  			<label class="socialmedia-note">This fields are not mandatory & not applicable to all businesses</label>
-					    	<div class="col-md-6 personal-info">	
-					    		<label for="inputfacebook">Facebook URL:</label>
-					    		<input type="text" class="form-control" name="facebook_url" id="facebook_url">
-					    	</div>
-					    	<div class="col-md-6 personal-last-info">
-					    		<label for="inputtwitter">Twitter Username:</label>
-					    		<input type="text" class="form-control" name="twitter_username" id="twitter_username">
-					    	</div>
-				  		</div>
-		  		</div>
+			<div class="col-md-12 registration-form-container">
+				<label for="emailAddress" class="registration-form-label">Email Address:(will be use as login)</label>
+				<input type="email" class="form-control" name="emailAddress" id="emailAddress" required="true">
 			</div>
-
-			<div class="panel panel-default terms-part">
-		  		<div class="panel-info-heading">
-		  			<h2 class="panel-title">TERMS OF OFFERS</h2>
-		  		</div>
-		  		<div class="panel-body terms-textarea">
-
-				  		<div class="form-group">
-				  			<label for="terms_of_offer">Terms of Offer:</label>
-	      					<textarea class="form-control" rows="5" name="terms_of_offer" id="terms_of_offer" readonly="true" style="resize: none;">Lorem ipsum dolor sit amet, quo in quas graeco. Ea nec altera definitiones. At altera postea mea, diceret similique duo ea, ea habemus eligendi mel. Mea mucius sapientem signiferumque ea. Stet appareat vix no, reque meliore ea vis.Viris vivendo pri ea, nonumy soleat vocent cu nec. Inermis appetere usu id, oratio consequat voluptatum est eu, ut sit partem dissentiet. Laboramus constituam necessitatibus no duo. Eos id choro option aperiam.His virtute incorrupte id, ne usu volumus suavitate sadipscing. Decore percipitur reformidans eam in. Eu audiam deserunt pro, vis cu novum salutatus, vim constituam scripserit ea. Ei novum option eam. Bonorum similique at nec.Quod eirmod fuisset ius ad. Neglegentur conclusionemque duo te. Mea iriure placerat at, fabulas petentium ea per. Admodum ceteros pericula at sed, mea te vidit velit democritum. Feugiat dolores pri ex. Ius id erat convenire intellegat, prompta qualisque adipiscing vis et. Eu eum volumus omittam, graece verterem nec ei. Eu agam prima eam, ocurreret maluisset interpretaris quo ut. Per ut ubique doming accommodare, eam in wisi appareat. Est consul doctus delicata ne, no pro eligendi argumentum conclusionemque. In ludus nonumy mea.</textarea>
-				  		</div>
-		  		</div>
+			<div class="col-md-12 registration-form-container">
+				<div class="col-md-6 dualfield-firstpart">	
+					<label for="password" class="registration-form-label">Password:</label>
+					<input type="password" class="form-control" name="password" id="password" required="true">
+				</div>
+				<div class="col-md-6 dualfield-secondpart">
+					<label for="rePassword" class="registration-form-label">Re-enter Password:</label>
+					<input type="password" class="form-control" name="rePassword" id="rePassword" required="true">
+				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 		<div class="col-md-6">
 	    	<div class="panel panel-default businessinfo-part">
 		  		<div class="panel-info-heading">
@@ -152,17 +165,105 @@
 					    	
 				  		</div>
 		  		</div>
+=======
+		<div class="col-md-12 registration-title-container">
+			<p class="registration-form-title">ENTER YOUR BUSINESS INFORMATION</p>
+		</div>
+		<div class="col-md-12 form-bottom-container">
+			<div class="col-md-12 registration-form-container">
+			 	<label for="businessName" class="registration-form-label">Business Name:</label>
+			    <input type="text" class="form-control" name="businessName" id="businessName" required="true">
 			</div>
-				<div class="accept-terms">
-					<div class="checkbox">
-		  				<label><input type="checkbox" value="" id="agree_checkbox">I am interested in receiving offers from Croatia Directory and its partners.</label>
-					</div>
+			<div class="col-md-12 registration-form-container">
+				<div class="col-md-4 form-firstpart">
+					<label for="primaryPhone" class="registration-form-label">Primary Business Phone:</label>
+				    <input type="text" class="form-control" name="primaryPhone" id="primaryPhone" required="true">
 				</div>
-				<div class="form-group button-holder" >
-				  	<button type="button" class="btn btn-continue" id="continue">CONTINUE</button>
+				<div class="col-md-4 form-secondpart">
+					<label for="alternatePhone" class="registration-form-label">Alternate Business Phone:</label>
+				    <input type="text" class="form-control" name="alternatePhone" id="alternatePhone" required="true">
 				</div>
+				<div class="col-md-4 form-thirdpart">
+					<label for="faxNumber" class="registration-form-label">Fax Number:</label>
+				   	<input type="text" class="form-control" name="faxNumber" id="faxNumber" required="true">
+				</div>
+			</div>
+			<div class="col-md-12 registration-form-container">
+				<label for="businessAddress" class="registration-form-label">Complete Business Address:</label>
+				<textarea rows="5" name="businessAddress" id="businessAddress" class="businessadd-textarea" required="true"></textarea>
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+			</div>
+			<div class="col-md-12 registration-form-container">
+				<div class="col-md-5 form-firstpart">
+					<label for="countyDropdown" class="registration-form-label">County:</label>
+			  		<select class="form-control" name="countyDropdown" id="countyDropdown" required="true">
+			  			<option value="" disabled selected>--County--</option>
+						@foreach($countyList as $countyListItem)
+							<option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+						@endforeach
+	  				</select>
+				</div>
+				<div class="col-md-4 form-secondpart">
+					<label for="cityDropdown" class="registration-form-label">City:</label>
+			  		<select class="form-control" name="cityDropdown" id="cityDropdown" required="true">
+						<option value="" disabled selected>--City--</option>
+	  				</select>
+				</div>
+				<div class="col-md-3 form-thirdpart">
+					<label for="postalCode" class="registration-form-label">Postal Code:</label>
+			    	<input type="text" class="form-control" name="postalCode" id="postalCode" disabled="true">
+				</div>
+			</div>
 		</div>
 	</div>
-</form>
+	<div class="col-md-6 form-rightpart">
+		<div class="col-md-12 registration-title-container">
+			<p class="registration-form-title">TERMS OF OFFERS</p>
+		</div>
+		<div class="col-md-12 form-upper-container">
+			<div class="col-md-12 registration-textarea-container">
+				<textarea readonly rows="22" name="terms-of-offers" id="terms_of_offers" class="registration-terms-textarea">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</textarea>
+			</div>
+		</div>
+		<div class="col-md-12 registration-title-container">
+			<p class="registration-form-title">SOCIAL MEDIA</p>
+		</div>
+		<div class="col-md-12 form-bottom-container">
+			<div class="col-md-12 registration-form-container">
+				<label for="" class="registration-form-label">This fields are not mandatory & not applicable to all businesses</label>
+			</div>
+			<div class="col-md-12 registration-form-container">
+				<div class="col-md-6 dualfield-firstpart">	
+					<label for="facebookUrl" class="registration-form-label">Facebook URL:</label>
+					<input type="text" class="form-control" name="facebookUrl" id="facebookUrl">
+				</div>
+				<div class="col-md-6 dualfield-secondpart">
+					<label for="twitterUsername" class="registration-form-label">Twitter Username:</label>
+					<input type="twitterusername" class="form-control" name="twitterUsername" id="twitterUsername">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12 form-singleupper-container">
+		<input type="checkbox" value="" name="agreeCheckbox" id="agreeCheckbox" required="true"> 
+		<label class="registration-form-label">I am interested in receiving special offers from Croatia Directory and its partners.</label>
+	</div>
+	<div class="col-md-12 form-singlebottom-container">
+		<button type="submit" class="registration-continue-btn" name="continueButton" id="continueButton">CONTINUE</button>
+	</div>
+	</form>
 </div>
+
+	{{-- JAVASCRIPTS --}}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/assets/js/front/business-registration.js"></script>
+	<script>
+		$.ajaxSetup({
+   			headers: {
+   			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   			}
+		});
+	</script>
+	{{-- END OF JAVASCRIPTS --}}
 @endsection

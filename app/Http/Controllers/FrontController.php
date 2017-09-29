@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblPaymentMethod;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
+=======
+use App\Models\Tbl_county;
+use App\Models\Tbl_city;
+use App\Models\Tbl_business;
+use App\Models\Tbl_business_contact_person;
+use App\Models\Tbl_user_account;
+use App\Models\Tbl_business_hours;
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 use Carbon\Carbon;
 use Redirect;
 use DB;
@@ -34,50 +43,113 @@ class FrontController extends Controller
     // }
     public function index()
     {
-        $data['one_to_four_list'] = TblBusinessModel::skip(0)->take(4)->get();
-        $data['five_to_eight_list'] = TblBusinessModel::skip(4)->take(4)->get();
-        return view('front.pages.home', $data);
+        $countyList = Tbl_county::get();
+        return view('front.pages.home', compact('countyList'));
     }
+
     public function registration()
     {
+<<<<<<< HEAD
         $data['county_list'] = TblCountyModel::get();
         $data['payment_method'] = TblPaymentMethod::get();
         return view('front.pages.registration', $data);
+=======
+        $countyList = Tbl_county::get();
+        return view('front.pages.registration', compact('countyList'));
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
     }
-    public function success()
+
+    public function getCity(Request $request)
     {
-        return view('front.pages.success');
-    }
-
-    public function get_city(Request $request)
-    {
-        $county_id = $request->county_id;
-
-        $city_list = TblCityModel::where('county_id','=',$county_id)->get();
-
-        $county_name = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
-
-        $city_dropdown_output = '';
-
-        $city_dropdown_output .= '<option value=""></option>';
-
-        foreach($city_list as $city_list)
+        if($request->ajax())
         {
-            $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
+            $cityList = Tbl_city::getCity($request->countyId)->get();
+            $cityOutputList = '';
+            $cityOutputList .= '<option value="" disabled selected>--City--</option>';
+            foreach($cityList as $cityListItem)
+            {
+                $cityOutputList .= '<option value="'.$cityListItem->city_id.'">'.$cityListItem->city_name.'</option>';
+            }
+            return response()->json(['html' => $cityOutputList]);
         }
-
-        return $city_dropdown_output;
     }
 
-
-    public function register_business(Request $request)
+    public function getPostalCode(Request $request)
     {
-        $check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
-
-        if(count($check_email_availability) == 1)
+        if($request->ajax())
         {
-            echo 'Email has already been used.';
+             $postalCode = Tbl_city::getPostalCode($request->cityId)->first();
+             return response()->json(['postalCode' => $postalCode->postal_code]);  
         }
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+
+    public function registerBusiness(Request $request)
+    {
+        if($request->ajax())
+        {
+            $emailAvailability = Tbl_user_account::checkEmail($request->emailAddress)->first();
+            if(count($emailAvailability) == 1)
+            {
+                return response()->json(['status' => 'used', 'message' => 'Email has already been used.']); 
+            }
+            else
+            {
+            $businessData = new Tbl_business;
+            $businessData->business_id = '';
+            $businessData->business_name = $request->businessName;
+            $businessData->county_id = $request->countyDropdown;
+            $businessData->city_id = $request->cityDropdown;
+            $businessData->business_complete_address = $request->businessAddress;
+            $businessData->business_phone = $request->primaryPhone;
+            $businessData->business_alt_phone = $request->alternatePhone;
+            $businessData->business_fax = $request->faxNumber;
+            $businessData->facebook_url = $request->facebookUrl;
+            $businessData->twitter_url = $request->twitterUsername;
+            $businessData->date_created = Carbon::now();
+            $businessData->save();
+
+            $contactData = new Tbl_business_contact_person;
+            $contactData->business_contact_person_id = '';
+            $contactData->contact_prefix = $request->prefix;
+            $contactData->contact_first_name = $request->firstName;
+            $contactData->contact_last_name = $request->lastName;
+            $contactData->business_id = $businessData->business_id;
+            $contactData->save();
+
+            $accountData = new Tbl_user_account;
+            $accountData->user_email = $request->emailAddress;
+            $accountData->user_password = $request->password;
+            $accountData->user_category = 'merchant';
+            $accountData->status = 2;
+            $accountData->business_id = $businessData->business_id;
+            $accountData->business_contact_person_id = $contactData->business_contact_person_id;
+            $accountData->save();
+
+            $businessHoursData = new Tbl_business_hours;
+            $businessHoursData->insert(array(
+                array('days' => 'Monday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Tuesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Wednesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Thursday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Friday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Saturday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id)
+            ));
+            return response()->json(['status' => 'success', 'url' => '/success']); 
+            } 
+        }
+<<<<<<< HEAD
         else
         {
 	        $business_data = new TblBusinessModel;
@@ -135,30 +207,41 @@ class FrontController extends Controller
 
         echo 'Registered successfully ! But your account is pending.';
   
+=======
     }
 
-    public function get_postal_code(Request $request)
+    public function businessSearch(Request $request)
     {
-        $city_id = $request->city_id;
-
-        $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
-
-        return $postal_code->postal_code;
+        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown");
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
     }
 
-    public function search_result(Request $request)
+    public function businessSearchResult(Request $request)
     {
-        $business_name = $request->business_name;
+        $businessKeyword = $request->businessKeyword;
+        $businessResult = Tbl_business::searchBusinessResult($businessKeyword, $request->countyId)->paginate(5);
+        return view('front.pages.searchresult', compact('businessResult', 'businessKeyword')); 
+    }
+    
+    // THIS IS A DUMMY
+    // STARTS HERE
 
-        return Redirect::to("/search_result_list?business_name={$business_name}");
+    public function dummypage()
+    {
+        $data['page']   = 'dummypage';
+        return view('front.pages.dummypage', $data);
+    }
+    // ENDS HERE
+
+    public function success()
+    {
+        return view('front.pages.success');
     }
 
-    public function search_result_list(Request $request)
+    public function payment()
     {
-        $business_name = $request->business_name;
-        $business_search = TblBusinessModel::where('business_name', 'LIKE', '%'.$business_name.'%')->paginate(5);
-
-        return view('front.pages.searchresult', compact('business_search', 'business_name')); 
+        $data['page']   = 'payment';
+        return view('front.pages.payment', $data);
     }
 
     public function business_info(Request $request)

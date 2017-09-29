@@ -17,17 +17,17 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-
 /*Front Page*/
 Route::get('/', 'FrontController@index');
 
-Route::any('/registration', 'FrontController@registration');
-Route::any('/get_city', 'FrontController@get_city');
-Route::any('/get_postal_code', 'FrontController@get_postal_code');
-Route::any('/register_business', 'FrontController@register_business');
 
-Route::any('/search_result', 'FrontController@search_result');
-Route::any('/search_result_list', 'FrontController@search_result_list');
+Route::any('/registration', 'FrontController@registration');
+Route::get('/get-city', 'FrontController@getCity');
+Route::get('/get-postal-code', 'FrontController@getPostalCode');
+Route::any('/register-business', 'FrontController@registerBusiness');
+
+Route::any('/business-search', 'FrontController@businessSearch');
+Route::any('/search-business-result', 'FrontController@businessSearchResult');
 Route::any('/business_info', 'FrontController@business_info');
 
 
@@ -35,16 +35,22 @@ Route::any('/business_info', 'FrontController@business_info');
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::get('/login', 'FrontController@login');
+<<<<<<< HEAD
 Route::post('/login', 'FrontController@login_submit');
 
 /*Route::get('/about', 	'FrontController@about');
 Route::get('/contact', 	'FrontController@contact');
 Route::get('/login', 	'FrontController@login');*/
 
+=======
+Route::get('/business', 'FrontController@business');
+Route::get('/payment', 'FrontController@payment');
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 
 Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
 
+<<<<<<< HEAD
 
 Route::get('/business', 'FrontController@business');
 Route::get('/payment',	'FrontController@payment');
@@ -52,6 +58,13 @@ Route::get('/payment',	'FrontController@payment');
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category',		'SearchresultController@category');
+=======
+
+Route::get('/searchresult', 'SearchresultController@index');
+Route::get('/category', 'SearchresultController@category');
+Route::get('/resultsortgrid', 'SearchresultController@resultsortgrid');
+Route::get('/searchtabular', 'SearchresultController@searchtabular');
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 
 
 /*Merchant Page by Brain*/
@@ -139,7 +152,7 @@ Route::any('/agent/logout', 		'AgentController@agent_logout');
 
 //Routes for LoginController
 //Route::any('/login', 'LoginController@index');
-Route::any('/check_login', 'LoginController@check_login');
+//Route::any('/check_login', 'LoginController@check_login');
 
 //Routes for Registration
 //Route::any('/registration', 'RegistrationController@registration');
@@ -152,3 +165,17 @@ Route::any('/check_login', 'LoginController@check_login');
 //Route::any('/search_result', 'SearchController@search_result');
 //Route::any('/search_result_list', 'SearchController@search_result_list');
 
+<<<<<<< HEAD
+=======
+//Routes for General Admin
+Route::any('/general_admin', 'GeneralAdminController@index');
+Route::any('/general_admin/get_business_list', 'GeneralAdminController@get_business_list');
+Route::any('/general_admin/get_business_list_info', 'GeneralAdminController@get_business_list_info');
+Route::any('/general_admin/get_business_info', 'GeneralAdminController@get_business_info');
+Route::any('/general_admin/email_invoice', 'GeneralAdminController@email_invoice');
+Route::any('/general_admin/report', 'GeneralAdminController@report');
+//End of Renz's Routes
+
+
+Route::any('/sample', 'MerchantController@sample');
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333

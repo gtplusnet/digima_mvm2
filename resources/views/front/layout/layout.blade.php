@@ -11,6 +11,8 @@
         <meta name="keywords" content="admin,dashboard" />
         <meta name="author" content="Steelcoders" />
         
+        <!-- LIGHTBOX STYLES -->
+        <link rel="stylesheet" href="/initializr/css/lightbox.min.css">
         <!-- Styles -->
         <link rel="stylesheet" href="/initializr/css/bootstrap.min.css">
         <link rel="stylesheet" href="/initializr/css/bootstrap-theme.min.css">
@@ -32,11 +34,18 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/contact.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/category.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/payment.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/globals.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/resultsortgrid.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/searchtabular.css">
+
+
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
+        
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-        <!-- iziToast Plugin CSS -->
-        <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
+        <!-- Toastr Plugin CSS -->
+        <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
 
     </head>
     <body>
@@ -44,15 +53,15 @@
             <div class="container clearfix">
                 <div class="pull-left">
                     <div class="header-logo">
-                        <img src="/images/croatiadirectory_logo.jpg">
+                        <img src="/images/croatia_directory_logo.jpg">
                     </div>
                 </div>
                 <div class="pull-right">
                     <div class="menu-bar">  
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/category">Category</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/about">About</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'category' ? 'active-link' : '' }}"><a class="nav" href="/category">Category</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
                     </div>
                     <div class="pull-right">
                         <div class="menu-btn">
@@ -131,6 +140,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"></script>')</script>
@@ -144,21 +154,25 @@
 
         <!-- Registration JS -->
         <script src="/assets/js/front/registration.js"></script>
+=======
 
-         <!-- Search Business JS -->
-        <script src="/assets/js/front/search.js"></script>
 
-        <!-- iziToast Plugin JS -->
-        <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
+        <!-- DITO ANG SCRIPT -->        
+        <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="/initializr/js/vendor/bootstrap.min.js"></script>
 
-        <!-- X-CSRF-TOKEN JS -->
-        <script type="text/javascript">
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        <!-- Toastr Plugin JS !-->
+        <script src="/assets/js/toastr/toastr.js"></script>
+
+        <!-- FOR GOOGLEMAP -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
         </script>
+ 
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+
+       <!-- LIGHTBOX SCRIPT -->
+        <script src="/initializr/js/lightbox.min.js"></script>
         <!-- HANGGANG DITO -->
     </body>
 </html>

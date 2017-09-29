@@ -19,4 +19,14 @@ class SearchresultController extends Controller
         $data['page']   = 'category';
         return view('front.pages.category', $data);
     }
+    public function resultsortgrid()
+    {
+        $data['page']   = 'resultsortgrid';
+        return view('front.pages.resultsortgrid', $data);
+    }
+    public function searchtabular()
+    {
+        $data['page']   = 'searchtabular';
+        return view('front.pages.searchtabular', $data);
+    }
 }
