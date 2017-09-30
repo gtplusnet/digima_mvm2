@@ -2,44 +2,88 @@
 @section('title', 'Dashboard')
 @section('description', 'Dashboard')
 @section('content')
-	<ul class="nav nav-tabs">
-	   <li class="active"><a data-toggle="pill" href="#home">Merchants</a></li>
-       <li><a data-toggle="pill" href="#menu1">Agents</a></li>
-	</ul>
-	<div class="tab-content" style="">
-	    <div id="home" class="tab-pane fade in active">
-	    	<div class="text-center">
-			     <form class="form-inline" action="{{ url('general_admin/get_business_list') }}" method="GET" id="search-business-form">
-					<div class="form-group">
-					  <label for="business_name">Business Name:</label>
-					  <input type="text" class="form-control" name="business_name" id="business_name">
-					</div>
-					<button type="submit" class="btn btn-success" name="search_business_btn" id="search_business_btn">Search</button>
-				</form>
-			</div>
+	<link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+<div id="main-wrapper">
+</div>
+<div class="wrapper">
+   <div class="main-panel">
+        
 
-			<div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
-           		<img src="/assets/img/loading.gif">
-          	</div> 
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Merchant Statistics</h4>
+                                <p class="category">Registered</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
 
-			<div class="business-result">
-				
-			</div>
-	    </div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Registered
+                                        <i class="fa fa-circle text-warning"></i>Pending
+                                        <i class="fa fa-circle text-success"></i> Activated
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-	    <div id="menu1" class="tab-pane fade">
-	     	<div class="text-center">
-			     <form class="form-inline">
-					<div class="form-group">
-					  <label for="agent_name">Agent Name:</label>
-					  <input type="text" class="form-control" name="agent_name" id="agent_name">
-					</div>
-					<button type="submit" class="btn btn-success" name="search_agent_btn" id="search_agent_btn">Search</button>
-				</form>
-			</div>
-	    </div>
-  </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/js/general_admin/search_business.js"></script>
-<script src="/assets/js/general_admin/business_info.js"></script>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Users Behavior</h4>
+                                <p class="category">24 Hours performance</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartHours" class="ct-chart"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Open
+                                        <i class="fa fa-circle text-danger"></i> Click
+                                        <i class="fa fa-circle text-warning"></i> Click Second Time
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
+    
+    <script src="/assets/agent/assets1/js/chartist.min.js"></script>
+
+    <script src="/assets/agent/assets1/js/demo.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            demo.initChartist();
+
+           
+
+        });
+    </script>
 @endsection

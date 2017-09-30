@@ -147,7 +147,7 @@
                         </ul>
                     </li>
                     <li>
-                    @if(session("login") == true)
+                    @if(session("agent_login") == true)
                     <a style="font-size:15px",  href='/agent/logout'>
                     <span><i class="fa fa-sign-out m-r-xs"></i>Log out
                     </span></a>

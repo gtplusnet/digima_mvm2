@@ -19,7 +19,7 @@ use App\Models\Tbl_business;
 use App\Models\Tbl_business_contact_person;
 use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
-
+use Session;
 use Carbon\Carbon;
 use Redirect;
 use DB;
@@ -55,10 +55,6 @@ class FrontController extends Controller
         $data['payment_method'] = TblPaymentMethod::get();
         $data['countyList'] = Tbl_county::get();
         return view('front.pages.registration', $data);
-
-       
-       
-
     }
 
     public function getCity(Request $request)
@@ -259,33 +255,7 @@ class FrontController extends Controller
         $data['page']   = 'Contact';
         return view('front.pages.contact', $data);
     }
-    public function login()
-    {
-        $data['page']   = 'login';
-        return view('front.pages.login', $data);
-    }
-    public function login_submit(Request $request)
-    {
-        $email = $request->email;
-        $password = $request->password;
-        $check_login = TblUserAccountModel::where('user_email',$email)->where('user_password',$password)->first();
-        if($check_login)
-        {
-            if($check_login ->status=='activated')
-            {
-                return Redirect::to('/merchant');
-            }
-            else
-            {
-                return "MAGBAYAD KA MUNA";
-            }
-        }
-        else
-        {
-            return "INVALID CREDENTIALS";
-        }
-        
-    }
+    
     public function business()
     {
         $data['page']   = 'business';

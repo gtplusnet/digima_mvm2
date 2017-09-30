@@ -27,14 +27,14 @@ class AgentController extends Controller
 
 	public static function allow_logged_in_users_only()
 	{
-		if(session("login") != true)
+		if(session("agent_login") != true)
 		{
 			return Redirect::to("/agent")->send();
 		}
 	}
 	public static function allow_logged_out_users_only()
 	{
-		if(session("login") )
+		if(session("agent_login") )
 		{
 			return Redirect::to("/agent/dashboard")->send();
 		}
@@ -42,7 +42,7 @@ class AgentController extends Controller
 
 	public function index()
 	{
-
+		Self::allow_logged_in_users_only();
 		$data['page']	= 'Dashboard';
 		return view('agent.pages.dashboard',$data);
 	}
@@ -58,8 +58,6 @@ class AgentController extends Controller
 
 	public function agent_login(Request $request)
 	{
-
-
 		$validate_login = TblAgentModels::where('email',$request->email)->first();
 		if($validate_login)
 
@@ -68,7 +66,7 @@ class AgentController extends Controller
 			if (password_verify($request->password, $validate_login->password)) 
 				{
 
-					Session::put("login",true);
+					Session::put("agent_login",true);
     				Session::put("agent_id",$validate_login->agent_id);
     				Session::put("full_name",$validate_login->full_name);
     				Session::put("email",$validate_login->email);
@@ -94,12 +92,14 @@ class AgentController extends Controller
 
 	public function profile()
 	{
+		Self::allow_logged_in_users_only();
 		$data['page']	= 'Profile';
 		return view ('agent.pages.profile', $data);		
 	}
 
 	public function client()
 	{
+		Self::allow_logged_in_users_only();
 		$data['page']	 = 'Client';
 		$data['clients'] = TblUserAccountModel::where('status','registered')
 										  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
@@ -116,7 +116,7 @@ class AgentController extends Controller
 
 	public function get_client(Request $request)
 	{
-		
+		Self::allow_logged_in_users_only();
 		$s_date = $request->date_start;
 		$e_date = $request->date_end;
 		$data['clients'] = TblBusinessModel::
@@ -127,9 +127,36 @@ class AgentController extends Controller
                           ->get();
 		return view('agent.pages.filtered',$data);
 	}
+	public function get_client1(Request $request)
+	{
+		Self::allow_logged_in_users_only();
+		$s_date = $request->date_start1;
+		$e_date = $request->date_end1;
+		$data['clients'] = TblBusinessModel::
+		whereBetween('date_created',[$s_date,$e_date])
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+		return view('agent.pages.filtered1',$data);
+	}
+	public function get_client2(Request $request)
+	{
+		Self::allow_logged_in_users_only();
+		$s_date = $request->date_start2;
+		$e_date = $request->date_end2;
+		$data['clients'] = TblBusinessModel::
+		whereBetween('date_created',[$s_date,$e_date])
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+		return view('agent.pages.filtered2',$data);
+	}
 
 	public function get_client_transaction(Request $request)
 	{
+		Self::allow_logged_in_users_only();
 		$trans_id = $request->transaction_id;
 		// dd($request->transaction_id);
 		$update['transaction_status'] = 'call in progress'; 
@@ -144,8 +171,8 @@ class AgentController extends Controller
 
 	public function get_client_transaction_reload(Request $request)
 	{
+		Self::allow_logged_in_users_only();
 		$trans_id = $request->transaction_id;
-		// dd($request->transaction_id);
 		$update['transaction_status'] = 'called'; 
 		$update['business_status'] = '2'; 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
@@ -155,7 +182,7 @@ class AgentController extends Controller
 
 	public function add_client_submit(Request $request)
 	{
-
+		Self::allow_logged_in_users_only();
 		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
 
         if(count($check_email_availability) == 1)
@@ -204,22 +231,13 @@ class AgentController extends Controller
             $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
             $account_data->save();
 
- //            $pass="1234";
- //   			Mail::raw('password'.$final_result, function ($message) {
- //  			$message->to('sample35836@gmail.com', 'Tutorials Point')->subject
- //          ('Laravel Basic Testing Mail');
- //         $message->from('guardians35836@gmail.com','Guard');
- //    });
-
- // echo "Basic Email Sent. Check your inbox.";
-
            return Redirect::to('/agent/client');
 
-  
-    	}
+  		}
 	}
 	public function add_client()
 	{
+		Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
 		$data['membership_list'] = TblPaymentMethod::get();
 		$data['page']	= 'Add Client';
@@ -228,6 +246,7 @@ class AgentController extends Controller
 
 	public function filter_clients(request $request)
 	{
+	    Self::allow_logged_in_users_only();
 		$sdate = $request->start_date;
 		$edate = $request->end_date;
 		dd($sdate.$edate);
@@ -263,7 +282,8 @@ class AgentController extends Controller
 
 	public function agent_logout()
 	{
-		Session::forget("login");
+	
+		Session::forget("agent_login");
         return Redirect::to("/agent");
 	}
 }

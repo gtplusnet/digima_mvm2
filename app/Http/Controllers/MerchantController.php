@@ -2,25 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TblBusinessOtherInfoModel;
 use App\Tbl_payment_method;
 use App\Tbl_business_category;
+use App\Models\TblUserAccountModel;
+use App\Models\TblBusinessContactPersonModel;
 use Redirect;
+use Session;
+// use Request;
 
 class MerchantController extends Controller
 {
-    
-	public function index()
+	public static function allow_logged_in_users_only()
 	{
+		if(session("merchant_login") != true)
+		{
+			return Redirect::to("/login")->send();
+		}
+	}
+	public static function allow_logged_out_users_only()
+	{
+		if(session("merchant_login") )
+		{
+			return Redirect::to("/merchant")->send();
+		}
+	}
+
+	public function login()
+    {
+    	Self::allow_logged_out_users_only();
+        $data['page']   = 'login';
+        return view('front.pages.login', $data);
+    }
+    public function login_submit(Request $request)
+    {
+        $validate_login = TblUserAccountModel::where('user_email',$request->email)->first();
+                       
+        if($validate_login)
+        {
+            if (password_verify($request->password, $validate_login->user_password)) 
+                {
+                    $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
+                                // ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                                ->first();
+                    // dd($user_info);
+
+                    Session::put("merchant_login",true);
+                    Session::put("email",$validate_login->user_email);
+                    Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
+                    $data['page']   = 'Dashboard';
+
+                    return Redirect::to('/merchant');
+                }
+            else
+            {
+                $data['page']   = 'Merchant Login';
+                return Redirect::back()->withErrors(['User Login is Incorect!'.$request->email.$request->password, 'User Login is Incorect!']);
+            }
+        }
+        else
+        {
+            $data['page']   = 'Merchant Login';
+            return Redirect::back()->withErrors(['User Login is Incorect!'.$request->email.$request->password, 'User Login is Incorect!']);
+        }
+    }
+
+    public function logout()
+	{
+		Session::forget("merchant_login");
+        return Redirect::to("/login");
+	}
+
+	public function index()
+	{	
+		Self::allow_logged_in_users_only();
 		$data['page']	= 'Dashboard';
-		return view ('admin.merchant.pages.dashboard', $data);		
+		return view ('admin.merchant.pages.dashboard', $data);	
 		
 	}
 
 	public function profile()
 	{
+		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
 		//$data['_payment_method']	= Tbl_payment_method::get();
 		return view ('admin.merchant.pages.profile', $data);		
@@ -28,6 +93,7 @@ class MerchantController extends Controller
 
 	public function view_info()
 	{
+		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
 		$data['other_info']	= TblBusinessOtherInfoModel::get();
 		return view ('admin.merchant.pages.view_info', $data);		
@@ -37,6 +103,7 @@ class MerchantController extends Controller
     public function add_other_info()//
     {
     	//dd(Request::input());
+    	Self::allow_logged_in_users_only();
     	$data['page']				= 'Profile';
         $insert["company_information"] = Request::input("company_information"); 
         $insert["business_website"] = Request::input("business_website"); 
@@ -68,6 +135,7 @@ class MerchantController extends Controller
 
 	public function category()
 	{
+		Self::allow_logged_in_users_only();
 		$data['page']				= 'Category';
 
 		$data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();	
@@ -77,6 +145,7 @@ class MerchantController extends Controller
 
 	public function bills()
 	{
+		Self::allow_logged_in_users_only();
 		$data['page']	= 'Bills';
 		return view ('admin.merchant.pages.bills', $data);		
 	}
@@ -86,16 +155,7 @@ class MerchantController extends Controller
 		return view ('admin.merchant.pages.sample');	
 	}
 
-	public function mercant()
-	{
-		$data['page'] 		= 'Merchant List';	 
-		$data['_mercant'] 	= Tbl_business::get();
-		return view('admin.agent.merchant_list', $data);
-	}
+	
 
-	public function generaladmin()
-	{
-		return view ('admin.merchant.pages.generaladmin');	
-	}
 	
 }

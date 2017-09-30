@@ -1,5 +1,7 @@
 @extends('admin.merchant.layout.layout')
 @section('content')
+<link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 <div class="page-title">
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
@@ -10,7 +12,7 @@
     </div>
 </div>
 <div id="main-wrapper">
-    <div class="row">       
+    <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="panel info-box panel-white">
                 <div class="panel-body">
@@ -30,9 +32,8 @@
                 </div>
             </div>
         </div>
-
-      <!--   Facebook
- -->
+        <!--   Facebook
+        -->
         <div class="col-lg-3 col-md-6">
             <div class="panel info-box panel-white">
                 <div class="panel-body">
@@ -41,7 +42,7 @@
                         <span class="info-box-title">Page Likes</span>
                     </div>
                     <div class="info-box-icon">
-                         <i style="color: royalblue ;"" class="fa fa-facebook"></i>
+                        <i style="color: royalblue ;"" class="fa fa-facebook"></i>
                     </div>
                     <div class="info-box-progress">
                         <div class="progress progress-xs progress-squared bs-n">
@@ -52,11 +53,8 @@
                 </div>
             </div>
         </div>
-
-
-      <!--   TWITTER-->
-
-      
+        <!--   TWITTER-->
+        
         <div class="col-lg-3 col-md-6">
             <div class="panel info-box panel-white">
                 <div class="panel-body">
@@ -65,8 +63,7 @@
                         <span class="info-box-title">Page tweet</span>
                     </div>
                     <div class="info-box-icon">
-                         <i style="color:#00aced;" class="fa fa-twitter"></i>
-
+                        <i style="color:#00aced;" class="fa fa-twitter"></i>
                     </div>
                     <div class="info-box-progress">
                         <div class="progress progress-xs progress-squared bs-n">
@@ -78,84 +75,93 @@
             </div>
         </div>
 
-
-
-        <div class="col-md-6">
-            <div class="panel panel-white">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Line Chart</h3>
-                </div>
+        <!--   Others-->
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="panel info-box panel-white">
                 <div class="panel-body">
-                    <div id="chartContainer">
-                    {{-- <body>                 
-                    <canvas id="myCanvas" width="450" height="200" 
-                    style="border:1px solid #c3c3c3;">
-                    Your browser does not support the canvas <element></element>nt.
-                    </canvas>
-
-                    <script>
-                    var canvas = document.getElementById("myCanvas");
-                    var ctx = canvas.getContext("2d");
-                    ctx.moveTo(0,0);
-                    ctx.lineTo(500,200);
-                    ctx.stroke();
-                    </script>
-
-                    </body> --}}
+                    <div class="info-box-stats">
+                        <p class="counter">200,000{{session('email')}}</p>
+                        <span class="info-box-title">Page tweet</span>
+                    </div>
+                    <div class="info-box-icon">
+                        <i style="color:#00aced;" class="fa fa-twitter"></i>
+                    </div>
+                    <div class="info-box-progress">
+                        <div class="progress progress-xs progress-squared bs-n">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <div class="col-md-6">
-            <div class="panel panel-white">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Pie Chart</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="flot3"></div>   
+        
+        {{-- mula dito james --}}
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Merchant Statistics</h4>
+                                <p class="category">Registered</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Registered
+                                        <i class="fa fa-circle text-warning"></i>Pending
+                                        <i class="fa fa-circle text-success"></i> Activated
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Users Behavior</h4>
+                                <p class="category">24 Hours performance</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartHours" class="ct-chart"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Open
+                                        <i class="fa fa-circle text-danger"></i> Click
+                                        <i class="fa fa-circle text-warning"></i> Click Second Time
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-    </div><!-- Row -->
-    <!-- Row -->                    
-</div>
-<!--akin to-->
-  <script type="text/javascript">
-  window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-
-      title:{
-      text: "Earthquakes - per month"
-      },
-       data: [
-      {
-        type: "line",
-
-        dataPoints: [
-        { x: new Date(2012, 00, 1), y: 450 },
-        { x: new Date(2012, 01, 1), y: 414 },
-        { x: new Date(2012, 02, 1), y: 520 },
-        { x: new Date(2012, 03, 1), y: 460 },
-        { x: new Date(2012, 04, 1), y: 450 },
-        { x: new Date(2012, 05, 1), y: 500 },
-        { x: new Date(2012, 06, 1), y: 480 },
-        { x: new Date(2012, 07, 1), y: 480 },
-        { x: new Date(2012, 08, 1), y: 410 },
-        { x: new Date(2012, 09, 1), y: 500 },
-        { x: new Date(2012, 10, 1), y: 480 },
-        { x: new Date(2012, 11, 1), y: 510 }
-        ]
-      }
-      ]
+        {{-- hanggang dito nalang --}}
+        </div><!-- Row -->
+        <!-- Row -->
+    </div>
+    
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script></head>
+    <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
+    
+    <script src="/assets/agent/assets1/js/chartist.min.js"></script>
+    <script src="/assets/agent/assets1/js/demo.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    demo.initChartist();
+    
     });
-
-    chart.render();
-  }
-  </script>
- <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script></head>
-
-@endsection
+    </script>
+    @endsection

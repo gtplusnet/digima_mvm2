@@ -140,11 +140,13 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
+
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"></script>')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+        
+
 
         <!-- FOR GOOGLEMAP -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
@@ -154,22 +156,13 @@
 
         <!-- Registration JS -->
         <script src="/assets/js/front/registration.js"></script>
-=======
 
 
-        <!-- DITO ANG SCRIPT -->        
-        <script src="/initializr/js/vendor/bootstrap.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-        <script src="/initializr/js/vendor/bootstrap.min.js"></script>
-
+  
+        
         <!-- Toastr Plugin JS !-->
         <script src="/assets/js/toastr/toastr.js"></script>
 
-        <!-- FOR GOOGLEMAP -->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
-        </script>
- 
->>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 
        <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>

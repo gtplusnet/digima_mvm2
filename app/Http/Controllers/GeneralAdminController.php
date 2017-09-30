@@ -7,17 +7,80 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblBusinessModel;
+use App\Models\TblAdminModels;
 use DB;
 use Response;
+use Session;
+use Redirect;
+
 
 class GeneralAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public static function allow_logged_in_users_only()
+    {
+        if(session("general_admin_login") != true)
+        {
+            return Redirect::to("/admin")->send();
+        }
+    }
+    public static function allow_logged_out_users_only()
+    {
+        if(session("general_admin_login") == true)
+        {
+            return Redirect::to("/admin/dashboard")->send();
+        }
+    }
+
+
+      public function index()
+    {
+        return view('general_admin.general_admin_login');
+    }
+    public function general_admin_login_submit(Request $request)
+    {
+        $validate_login = TblAdminModels::where('email','=',$request->email)->first();
+
+        if($validate_login)
+        {
+
+            if (password_verify($request->password, $validate_login->password)) 
+
+                {
+                    Session::put("general_admin_login",true);
+                    Session::put("admin_id",$validate_login->admin_id);
+                    Session::put("full_name",$validate_login->full_name);
+                    Session::put("email",$validate_login->email);
+                    Session::put("position",$validate_login->position);
+                    // Session::put("login",$validate_login->email);
+                    $data['page']   = 'Dashboard';
+                    return Redirect::to('/general_admin/dashboard');
+                }
+
+            else
+            {
+                $data['page']  = 'Admin login';
+                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+            }
+        }
+        else
+        {
+            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+        }
+    }
+
+    public function general_admin_logout()
+    {
+
+        Session::forget("general_admin_login");
+        return Redirect::to("/general_admin");
+   
+    }
+
+    public function general_admin_business_list()
+    {
+        return view('general_admin.business');
+    }
+    public function general_admin_dashboard()
     {
         return view('general_admin.dashboard');
     }

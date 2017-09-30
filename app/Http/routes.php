@@ -34,9 +34,7 @@ Route::any('/business_info', 'FrontController@business_info');
 
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
-Route::get('/login', 'FrontController@login');
 
-Route::post('/login1', 'FrontController@login_submit');
 
 
 
@@ -68,7 +66,10 @@ Route::get('/merchant', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/bills', 		'MerchantController@bills');
-
+//james
+Route::get('/merchant/logout', 'MerchantController@logout');
+Route::get('/login', 'MerchantController@login');
+Route::post('/login', 'MerchantController@login_submit');
 
 //Eden
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
@@ -124,6 +125,8 @@ Route::get('/agent/profile', 		'AgentController@profile');
 Route::get('/agent/client', 		'AgentController@client');
 
 Route::post('/agent/get_client', 		'AgentController@get_client');
+Route::post('/agent/get_client1', 		'AgentController@get_client1');
+Route::post('/agent/get_client2', 		'AgentController@get_client2');
 Route::post('/agent/get_client_transaction', 		'AgentController@get_client_transaction');
 Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_transaction_reload');
 
@@ -164,12 +167,18 @@ Route::any('/agent/logout', 		'AgentController@agent_logout');
 
 //Routes for General Admin
 Route::any('/general_admin', 'GeneralAdminController@index');
+Route::any('/general_admin/general_admin_login_submit', 'GeneralAdminController@general_admin_login_submit');
+
 Route::any('/general_admin/get_business_list', 'GeneralAdminController@get_business_list');
 Route::any('/general_admin/get_business_list_info', 'GeneralAdminController@get_business_list_info');
 Route::any('/general_admin/get_business_info', 'GeneralAdminController@get_business_info');
 Route::any('/general_admin/email_invoice', 'GeneralAdminController@email_invoice');
 Route::any('/general_admin/report', 'GeneralAdminController@report');
 //End of Renz's Routes
+//james
+Route::any('/general_admin/dashboard', 'GeneralAdminController@general_admin_dashboard');
+Route::any('/general_admin/business_list', 'GeneralAdminController@general_admin_business_list');
+Route::any('/general_admin/logout', 'GeneralAdminController@general_admin_logout');
 
 
 Route::any('/sample', 'MerchantController@sample');
