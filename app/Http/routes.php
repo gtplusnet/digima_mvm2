@@ -62,7 +62,7 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 /*Merchant Page by Brain*/
-Route::get('/merchant', 			'MerchantController@index');
+Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/bills', 		'MerchantController@bills');
