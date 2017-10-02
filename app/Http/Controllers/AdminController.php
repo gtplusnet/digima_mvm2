@@ -41,13 +41,21 @@ class AdminController extends Controller
 		$data['page']	= 'Profile';
 		return view ('admin.pages.profile', $data);		
 	}
+/*<<<<<<< HEAD
+    public function sample()
+    {
+        $data['page']   = 'Profile';
+        return view ('admin.pages.sample', $data);     
+=======
     public function user()
     {
         $data['page']   = 'User';
         return view ('admin.pages.user', $data);        
-    }
+>>>>>>> 0cf5c707a29209462be292258d0a3f824f67daca
+    }*/
 	public function client()
 
+<<<<<<< HEAD
     {
         $data['page']    = 'Client';
         $data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -99,6 +107,12 @@ class AdminController extends Controller
     }
 
 
+=======
+	{
+		$data['page']	= 'Client';
+		return view ('admin.pages.client', $data);		
+	}
+>>>>>>> sub_master
 	public function add_team()
 	{
 
@@ -196,13 +210,17 @@ class AdminController extends Controller
     }
 
 		public function admin_logout ()
-
-/*	public function logout()*/
 	{
+<<<<<<< HEAD
 
 		Session::forget("login");
 		
         return Redirect::to("/admin");
+=======
+		Session::put("login", true);
+		$data['page']   = 'Admin Login';
+        return view('front.pages.adminlogin', $data);
+>>>>>>> sub_master
 	}
 	
 

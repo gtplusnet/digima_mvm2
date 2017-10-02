@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTblAgentTable9252017 extends Migration
+class UpdateTblAgent092820170517pm extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class UpdateTblAgentTable9252017 extends Migration
     public function up()
     {
         Schema::table('tbl_agent', function (Blueprint $table) {
-            $table->string('team_id');
-            $table->string('primary_phone');  
-            $table->string('secondary_phone');    
-            $table->string('other_info'); 
-        });
+            $table->string('last_name')->after('agent_id');  
+            $table->string('first_name')->after('agent_id'); 
+            $table->renameColumn('full_name', 'prefix')->after('agent_id');
+           });
     }
 
     /**
@@ -27,6 +26,8 @@ class UpdateTblAgentTable9252017 extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tbl_agent', function (Blueprint $table) {
+            //
+        });
     }
 }
