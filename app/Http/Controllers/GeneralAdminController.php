@@ -34,7 +34,7 @@ class GeneralAdminController extends Controller
 
       public function index()
     {
-        return view('general_admin.general_admin_login');
+        return view('general_admin.pages.general_admin_login');
     }
     public function general_admin_login_submit(Request $request)
     {
@@ -78,7 +78,7 @@ class GeneralAdminController extends Controller
 
     public function general_admin_business_list()
     {
-        return view('general_admin.business');
+        return view('general_admin.pages.business');
     }
     public function general_admin_dashboard()
     {
@@ -98,6 +98,11 @@ class GeneralAdminController extends Controller
                 return Response::json($view);
             }
         }
+    }
+
+    public function general_admin_merchants()
+    {
+        return view('general_admin.pages.merchants');
     }
 
     public function get_business_list_info(Request $request)

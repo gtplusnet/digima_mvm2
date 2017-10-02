@@ -1,11 +1,23 @@
 @extends('general_admin.pages.general_admin_layout')
-@section('title', 'Business List')
-@section('description', 'Business List')
+@section('title', 'merchants')
+@section('description', 'merchants')
 @section('content')
-	<ul class="nav nav-tabs">
-	   <li class="active"><a data-toggle="pill" href="#home">Merchants</a></li>
-       <li><a data-toggle="pill" href="#menu1">Agents</a></li>
-	</ul>
+<style>
+	.li_me
+	{
+		width:25%;
+	}
+</style>
+<div class="container">
+	<div class="col-md-12">
+
+		<ul class="nav nav-tabs">
+		   <li class="active li_me"><a data-toggle="pill" href="#home">Merchants</a></li>
+	       <li class="li_me"><a data-toggle="pill" href="#menu1">Pending</a></li>
+	       <li class="li_me"><a data-toggle="pill" href="#menu1">Pending Approval</a></li>
+		</ul>
+	</div>
+
 	<div class="tab-content" style="">
 	    <div id="home" class="tab-pane fade in active">
 	    	<div class="text-center">
@@ -39,6 +51,7 @@
 			</div>
 	    </div>
   </div>
+ </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/general_admin/search_business.js"></script>
 <script src="/assets/js/general_admin/business_info.js"></script>
