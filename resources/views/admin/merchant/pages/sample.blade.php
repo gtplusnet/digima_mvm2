@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
+{{-- <html>
 <head>
+<<<<<<< HEAD
 <title>Top Categories of New Year Resolution</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -148,6 +148,21 @@ chart.render();
 </body>
 </html>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+=======
+  <title>Your Website Title</title>
+    <!-- You can use open graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+  <meta property="og:url"           content="https://www.facebook.com/JollibeePhilippines/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <!-- <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" /> -->
+</head>
+<body>
+<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FJollibeePhilippines%2F&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+>>>>>>> a36e410408239af7aa093c9406bdb3ae2b317af1
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -156,12 +171,26 @@ chart.render();
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
+<<<<<<< HEAD
 <script type="text/javascript">
 	
+=======
+  <!-- Your like button code -->
+<div class="fb-like" 
+data-href="https://www.facebook.com/JollibeePhilippines/" 
+data-layout="standard" 
+data-action="like" 
+data-size="small" 
+data-show-faces="true" 
+data-share="true"></div>
 
-	$('.onEdit').unbind('click');
-	$('.onEdit').bind('click', function(){
-		$('.my-form input').removeAttr('readonly');	
-	});
+>>>>>>> a36e410408239af7aa093c9406bdb3ae2b317af1
 
-</script>
+<!-- twitter -->
+<a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet">
+Tweet</a>
+
+
+</body>
+</html> --}}
