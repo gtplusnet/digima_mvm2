@@ -55,6 +55,7 @@ class AdminController extends Controller
     }*/
 	public function client()
 
+<<<<<<< HEAD
     {
         $data['page']    = 'Client';
         $data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -106,6 +107,12 @@ class AdminController extends Controller
     }
 
 
+=======
+	{
+		$data['page']	= 'Client';
+		return view ('admin.pages.client', $data);		
+	}
+>>>>>>> sub_master
 	public function add_team()
 	{
 
@@ -203,13 +210,17 @@ class AdminController extends Controller
     }
 
 		public function admin_logout ()
-
-/*	public function logout()*/
 	{
+<<<<<<< HEAD
 
 		Session::forget("login");
 		
         return Redirect::to("/admin");
+=======
+		Session::put("login", true);
+		$data['page']   = 'Admin Login';
+        return view('front.pages.adminlogin', $data);
+>>>>>>> sub_master
 	}
 	
 
