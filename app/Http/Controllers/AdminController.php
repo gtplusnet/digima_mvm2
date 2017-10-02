@@ -23,6 +23,7 @@ class AdminController extends Controller
 	}
 
 	public function client()
+
 	{
 		$data['page']	= 'Client';
 		return view ('admin.pages.client', $data);		
@@ -101,13 +102,10 @@ class AdminController extends Controller
 
 
 		public function admin_logout ()
-
-/*	public function logout()*/
 	{
 		Session::put("login", true);
 		$data['page']   = 'Admin Login';
         return view('front.pages.adminlogin', $data);
-
 	}
 
 
