@@ -34,7 +34,7 @@ class GeneralAdminController extends Controller
 
       public function index()
     {
-        return view('general_admin.general_admin_login');
+        return view('general_admin.pages.general_admin_login');
     }
     public function general_admin_login_submit(Request $request)
     {
@@ -78,11 +78,11 @@ class GeneralAdminController extends Controller
 
     public function general_admin_business_list()
     {
-        return view('general_admin.business');
+        return view('general_admin.pages.business');
     }
     public function general_admin_dashboard()
     {
-        return view('general_admin.dashboard');
+        return view('general_admin.pages.dashboard');
     }
 
     public function get_business_list(Request $request)
@@ -94,10 +94,15 @@ class GeneralAdminController extends Controller
             if((!empty($request['business_name'])))
             {
                 $business_name = $request['business_name'];
-                $view = view('general_admin.business_list', compact('business_list', 'business_name'))->render();
+                $view = view('general_admin.pages.business_list', compact('business_list', 'business_name'))->render();
                 return Response::json($view);
             }
         }
+    }
+
+    public function general_admin_merchants()
+    {
+        return view('general_admin.pages.merchants');
     }
 
     public function get_business_list_info(Request $request)
@@ -107,7 +112,7 @@ class GeneralAdminController extends Controller
             $business_list = $this->business_data($request['business_name']);
     
             $business_name = $request['business_name'];
-            $view = view('general_admin.business_list', compact('business_list', 'business_name'))->render();
+            $view = view('general_admin.pages.business_list', compact('business_list', 'business_name'))->render();
             return Response::json($view);
         }
     }
@@ -116,7 +121,7 @@ class GeneralAdminController extends Controller
     {
         $business_info = DB::table('tbl_business')->join('tbl_business_contact_person', 'tbl_business.business_id', '=', 'tbl_business_contact_person.business_id')->where('tbl_business.business_id', '=', $request->business_id)->first();
 
-        $view = view('general_admin.business_info', compact('business_info'))->render();
+        $view = view('general_admin.pages.business_info', compact('business_info'))->render();
         return Response::json($view);
     }
 
@@ -129,12 +134,12 @@ class GeneralAdminController extends Controller
 
     public function email_invoice()
     {
-        return view('general_admin.email_invoice');
+        return view('general_admin.pages.email_invoice');
     }
 
     public function report()
     {
-        return view('general_admin.report');
+        return view('general_admin.pages.report');
     }
 
     /**

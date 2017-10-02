@@ -1,4 +1,4 @@
-@extends('admin.merchant.layout.layout')
+@extends('merchant.layout.layout')
 @section('content')
 <div class="page-title">
     <h3>{{ $page }}</h3>
@@ -77,53 +77,54 @@
                                         </div>        
                                     </div> 
                                 </form>
+
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab10">
-                                
-                                <form class="form-horizontal" method="POST" action="/merchant/add_other_info">
+
+                            <div role="tabpanel" class="tab-pane fade" id="tab10">    
+                                <form class="form-horizontal" method="POST" action="/merchant/profile">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                   
+                                    @foreach ($other_info as $business_other_info)
+
                                     <div class="form-group">
                                         <label for="business_name" class="col-sm-2 control-label">Company Information</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" rows="5" name="company_information" id="comment" value="">
-                                                
+                                            <textarea class="form-control" rows="5" name="company_information" id="comment" value="{{ $business_other_info-> company_information }}" readonly>                                                
                                             </textarea>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Business Website</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-default" name="business_website" value="">
+                                            <input type="text" class="form-control" id="input-default" name="business_website" value="{{ $business_other_info-> business_website }}" readonly>
                                         </div>                                        
                                     </div>
-                                    <div    class="form-group">
+                                    <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Year Establish</label>
                                         <div class="col-sm-2">
-
-                                            <input type="text" class="form-control" id="input-default"  name="year_established" value="" >
+                                            <input type="text" class="form-control" id="input-default"  name="year_established" value="{{ $business_other_info-> year_established }}" readonly>
                                         </div>                                        
                                     </div>  
-                                    
-                                    <div class="col-md-4">
-                                        <div class="text-right">
-                                            <button class="btn btn-primary">Save</button>
+                                    @endforeach 
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <div class="text-right">
+                                                <a href="/merchant/profile"><button class="btn btn-primary">Edit</button></a>
+                                                <a href="#"><button class="btn btn-primary">Save</button></a>
+                                            </div>
                                         </div>
-                                    </div>
-
+                                    </div>                                    
                                 </form> 
-                            </div>
 
+                            </div>
                             <div role="tabpanel" class="tab-pane fade" id="tab11">
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Monday</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="08:00 AM" readonly>
+                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="05:00 PM" readonly>
+                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
                                         </div>                                 
                                     </div> 
 
@@ -138,7 +139,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Wednesday</label>
+                                        <label for="input-Default" class="col-sm-2 control-label">Wensday</label>
                                         <div class="col-sm-3">
                                             <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
                                         </div>
@@ -187,21 +188,11 @@
                                         </div>                                 
                                     </div>
 
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <div class="text-right">
-                                                <button class="btn btn-primary">Edit</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="text-right">
-                                                <button class="btn btn-primary">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </form>
-
                             </div>
+
+
 
                         </div>
                     </div>

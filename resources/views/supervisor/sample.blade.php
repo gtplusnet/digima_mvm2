@@ -1,4 +1,4 @@
-<html>
+{{-- <html>
 <head>
   <title>Your Website Title</title>
     <!-- You can use open graph tags to customize link previews.
@@ -38,4 +38,4 @@ Tweet</a>
 
 
 </body>
-</html>
+</html> --}}

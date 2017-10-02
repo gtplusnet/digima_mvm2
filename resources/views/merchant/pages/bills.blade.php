@@ -1,4 +1,4 @@
-@extends('admin.merchant.layout.layout')
+@extends('merchant.layout.layout')
 @section('content')
 <div class="page-title">
     <h3>{{ $page }}</h3>

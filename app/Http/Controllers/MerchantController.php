@@ -26,7 +26,7 @@ class MerchantController extends Controller
 	{
 		if(session("merchant_login") )
 		{
-			return Redirect::to("/merchant")->send();
+			return Redirect::to("/merchant/dashboard")->send();
 		}
 	}
 
@@ -54,7 +54,7 @@ class MerchantController extends Controller
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     $data['page']   = 'Dashboard';
 
-                    return Redirect::to('/merchant');
+                    return Redirect::to('/merchant/dashboard');
                 }
             else
             {
@@ -79,7 +79,7 @@ class MerchantController extends Controller
 	{	
 		Self::allow_logged_in_users_only();
 		$data['page']	= 'Dashboard';
-		return view ('admin.merchant.pages.dashboard', $data);	
+		return view ('merchant.pages.dashboard', $data);	
 		
 	}
 
@@ -88,7 +88,7 @@ class MerchantController extends Controller
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
 		//$data['_payment_method']	= Tbl_payment_method::get();
-		return view ('admin.merchant.pages.profile', $data);		
+		return view ('merchant.pages.profile', $data);		
 	}
 
 	public function view_info()
@@ -96,7 +96,7 @@ class MerchantController extends Controller
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
 		$data['other_info']	= TblBusinessOtherInfoModel::get();
-		return view ('admin.merchant.pages.view_info', $data);		
+		return view ('merchant.pages.view_info', $data);		
 	}
 
 	
@@ -140,19 +140,19 @@ class MerchantController extends Controller
 
 		$data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();	
 
-		return view('admin.merchant.pages.category', $data);		
+		return view('merchant.pages.category', $data);		
 	}
 
 	public function bills()
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	= 'Bills';
-		return view ('admin.merchant.pages.bills', $data);		
+		return view ('merchant.pages.bills', $data);		
 	}
 
 	public function sample()
 	{
-		return view ('admin.merchant.pages.sample');	
+		return view ('merchant.pages.sample');	
 	}
 
 	

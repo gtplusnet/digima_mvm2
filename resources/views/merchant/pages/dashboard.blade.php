@@ -1,4 +1,4 @@
-@extends('admin.merchant.layout.layout')
+@extends('merchant.layout.layout')
 @section('content')
 <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
@@ -81,7 +81,7 @@
             <div class="panel info-box panel-white">
                 <div class="panel-body">
                     <div class="info-box-stats">
-                        <p class="counter">200,000{{session('email')}}</p>
+                        <p class="counter">200,000</p>
                         <span class="info-box-title">Page tweet</span>
                     </div>
                     <div class="info-box-icon">

@@ -1,4 +1,4 @@
-@extends('general_admin.general_admin_layout')
+@extends('general_admin.pages.general_admin_layout')
 @section('title', 'Business List')
 @section('description', 'Business List')
 @section('content')

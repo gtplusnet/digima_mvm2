@@ -57,11 +57,11 @@
         <main class="page-content content-wrap container">
             
             {{-- Header and Nav Bar --}}
-            @include('admin.merchant.include.header');
+            @include('merchant.include.header');
             <!-- Navbar -->
 
             {{-- Sidebar --}}
-            @include('admin.merchant.include.sidebar');
+            @include('merchant.include.sidebar');
             {{-- End Sidebar --}}    
 
             <div class="page-inner">               
@@ -79,7 +79,7 @@
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
 
-        @include('admin.merchant.include.menu');
+        @include('merchant.include.menu');
 
         <div class="cd-overlay"></div>
         

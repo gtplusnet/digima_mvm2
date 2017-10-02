@@ -57,8 +57,10 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 /*Merchant Page by Brain*/
-Route::get('/merchant', 			'MerchantController@index');
-Route::get('/merchant/profile', 	'MerchantController@profile');
+
+Route::get('/merchant/dashboard', 			'MerchantController@index');
+Route::get('/merchant/profile',		'MerchantController@profile');
+
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/bills', 		'MerchantController@bills');
 //james
@@ -205,6 +207,8 @@ Route::any('/general_admin/report', 'GeneralAdminController@report');
 Route::any('/general_admin/dashboard', 'GeneralAdminController@general_admin_dashboard');
 Route::any('/general_admin/business_list', 'GeneralAdminController@general_admin_business_list');
 Route::any('/general_admin/logout', 'GeneralAdminController@general_admin_logout');
+Route::any('/general_admin/merchants', 'GeneralAdminController@general_admin_merchants');
+
 
 
 Route::any('/sample', 'MerchantController@sample');
