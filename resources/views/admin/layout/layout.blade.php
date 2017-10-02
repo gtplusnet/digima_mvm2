@@ -60,8 +60,9 @@
             @include('admin.include.sidebar');
             {{-- End Sidebar --}}    
 
-            <div class="page-inner">               
-            
+            <div class="page-inner"> 
+
+
                 {{-- Main Wrapper --}} 
                 @yield('content')    
                 <!-- Main Wrapper -->

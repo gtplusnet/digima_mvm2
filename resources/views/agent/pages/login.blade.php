@@ -27,7 +27,7 @@
 							<p><font color="red"><center>{{$errors->first()}}</center></font></p>
 							@endif	
 							<div class="col-md-12 login-textfield-container">
-								<label for="input-username" class="login-label">USERNAME or EMAIL:</label>
+								<label for="input-username" class="login-label">USERNAME:</label>
 								<input type="text" name="email" class="form-control login-textfield">
 							</div>
 							<div class="col-md-12 login-textfield-container">

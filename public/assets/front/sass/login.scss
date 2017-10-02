@@ -1,6 +1,6 @@
 .login-background
 {
-	background-size: cover;
+    background-size: cover;
     background-position: center;
     min-height: 756px;
     position: relative;
@@ -31,6 +31,13 @@
     font-size: 50px;
     margin: 0px;
     text-align: center;
+<<<<<<< HEAD
+=======
+    @media screen and (max-width: 992px)
+    {
+        font-size: 35px;
+    }
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 }
 .login-text-holder
 {
@@ -42,9 +49,43 @@
     color: #fff;
     text-align: justify;
     font-size: 15px;
+<<<<<<< HEAD
+=======
 }
 .learn-more-btn-container
 {
+    margin-top: 130px;
+    margin-bottom: 15px;
+    text-align: right;
+}
+.learn-more-btn
+{
+    border: 2px solid #fec600;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fec600;
+    font-weight: 700;
+    padding: 5px;
+}
+.login-container-rightpart
+{
+    padding: 0px;
+    background-color: #fff;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.login-form
+{
+    padding: 76px 50px;
+}
+.login-form-container
+{
+    padding: 0px;
+    margin-top: 135px;
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
+}
+.learn-more-btn-container
+{
+<<<<<<< HEAD
     margin-top: 130px;
     margin-bottom: 15px;
     text-align: right;
@@ -72,6 +113,10 @@
 {
     padding: 0px;
     margin-top: 135px;
+=======
+    width: 100%;
+    display: -webkit-box;
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 }
 .login-textfield-container
 {
@@ -87,6 +132,10 @@
 {
     width: 100%;
     font-size: 15px;
+<<<<<<< HEAD
+=======
+    border: 1px solid #999;
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
     background-color: #fff!important;
 }
 .login-label
@@ -99,6 +148,10 @@
 }
 .login-btn
 {
+<<<<<<< HEAD
+=======
+    font-weight: 700;
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
     font-size: 20px;
     color: #333;
     background-color: #fed600;
@@ -113,7 +166,11 @@
     color: #fed600;
     background-color: #333;
     border-radius: 50px;
+<<<<<<< HEAD
     font-weight: 700;
+=======
+    // font-weight: 700;
+>>>>>>> 245b49384bf4ece8de00379e433ee9a14258e333
 }
 .forgot-password-label
 {

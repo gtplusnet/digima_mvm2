@@ -15,6 +15,7 @@ class CreateTblBusiness extends Migration
         Schema::create('tbl_business', function (Blueprint $table) {
             $table->increments('business_id');
             $table->string('business_name');  
+            $table->integer('county_id');
             $table->integer('city_id');           
             $table->string('business_complete_address');            
             $table->string('business_phone', 50);            

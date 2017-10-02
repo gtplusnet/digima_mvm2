@@ -15,15 +15,15 @@
         </div> --}}
         <ul class="menu accordion-menu">
             <li class="{{ (Request::segment(2)=='') ? 'active' : ''  }}"><a href="/admin/dashboard" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
+
             <li class="{{ (Request::segment(2) == 'profile') ? 'active' : ''  }}"><a href="/admin/profile" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-user"></span><p>Profile</p></a></li>
             <li class="{{ (Request::segment(2) == 'client') ? 'active' : ''  }}"><a href="/admin/client" class="waves-effect waves-button"><span class="menu-icon fa fa-group"></span><p>Clients</p></a></li>
 
-            <li class="{{ (Request::segment(2) == 'add_team') ? 'active' : ''  }}"><a href="/admin/add/team" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>Add Team</p></a></li>
-            <li class="{{ (Request::segment(2) == 'add_agent') ? 'active' : ''  }}"><a href="/admin/add/agent" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>Add Agent</p></a></li>
 
-<!--             <li class="{{ (Request::segment(2) == 'team') ? 'active' : ''  }}"><a href="/admin/team" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>Add Team/ Agent</p></a></li>
-            <li class="{{ (Request::segment(2) == 'view_team') ? 'active' : ''  }}"><a href="/admin/view_team" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>View Team/ Agent</p></a></li>
->>>>>>> sub_master -->
+            <li class="{{ (Request::segment(2) == 'user') ? 'active' : ''  }}"><a href="/admin/user" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>User</p></a></li>
+
+
+
         </ul>
     </div><!-- Page Sidebar Inner -->
 </div>

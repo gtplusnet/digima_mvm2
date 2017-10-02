@@ -20,7 +20,7 @@
                 <p>Profile</p>
             </a>
         </li>
-        <li data-menu="profile">
+        <li data-menu="Clients">
             <a href="javsacript:void(0);">
                 <span>
                     <i class="fa fa-group"></i>
@@ -28,21 +28,18 @@
                 <p>Clients</p>
             </a>
         </li>
-        <li data-menu="profile">
+
+        <li data-menu="User">
+
             <a href="javsacript:void(0);">
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
-                <p>Team</p>
-            </a>
-        </li>
-        <li data-menu="profile">
-            <a href="javsacript:void(0);">
-                <span>
-                    <i class="fa fa-user-plus"></i>
-                </span>
-                <p>View Team</p>
+
+                <p>USER</p>
+
             </a>
         </li>
     </ul>
 </nav>
+

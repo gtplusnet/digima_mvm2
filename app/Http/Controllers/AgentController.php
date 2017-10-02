@@ -12,29 +12,71 @@ use App\Models\TblAgentModels;
 use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
 use App\Models\TblUserAccountModel;
+
+use Session;
 use Redirect;
 use Carbon\Carbon;
+use Input;
+use Mail;
+
 
 
 
 class AgentController extends Controller
 {
 
+	public static function allow_logged_in_users_only()
+	{
+		if(session("login") != true)
+		{
+			return Redirect::to("/agent")->send();
+		}
+	}
+	public static function allow_logged_out_users_only()
+	{
+		if(session("login") )
+		{
+			return Redirect::to("/agent/dashboard")->send();
+		}
+	}
+
+	public function index()
+	{
+
+		$data['page']	= 'Dashboard';
+		return view('agent.pages.dashboard',$data);
+	}
+
 	public function login()
 	{
+		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
+
 		return view ('agent.pages.login', $data);
+
 	}
 
 	public function agent_login(Request $request)
 	{
-		$validate = Tbl_Agent::where('email',$request->email)->first();
-		if($validate)
+
+
+		$validate_login = TblAgentModels::where('email',$request->email)->first();
+		if($validate_login)
+
+
 		{
-			if (password_verify($request->password, $validate->password)) 
+			if (password_verify($request->password, $validate_login->password)) 
 				{
+
+					Session::put("login",true);
+    				Session::put("agent_id",$validate_login->agent_id);
+    				Session::put("full_name",$validate_login->full_name);
+    				Session::put("email",$validate_login->email);
+    				Session::put("position",$validate_login->position);
+					// Session::put("login", $validate->email);
 				    $data['page']	= 'Dashboard';
-				     return Redirect::to('/agent/dashboard');
+
+				    return Redirect::to('/agent/dashboard');
 				}
 			else
 			{
@@ -49,19 +91,6 @@ class AgentController extends Controller
 		}
 	}
 
-		public function agentlogout()
-	{
-		Session::put("login", true);
-		$data['page']   = 'Agent logout';
-        return view('front.pages.agentlogout', $data);
-	}
-
-	public function index()
-	{
-		$data['page']	= 'Dashboard';
-		$data['county_list'] = TblCountyModel::get();
-		return view ('agent.pages.dashboard', $data);		
-	}
 
 	public function profile()
 	{
@@ -72,13 +101,58 @@ class AgentController extends Controller
 	public function client()
 	{
 		$data['page']	 = 'Client';
-		$data['clients'] = TblBusinessModel::
-										    join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+		$data['clients'] = TblUserAccountModel::where('status','registered')
+										  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
+			                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
 			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+			                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+			                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+			                              ->orderBy('tbl_business.date_created',"asc")
+
 			                              ->get();
-    // dd($data['clients']);
-		return view ('agent.pages.client', $data);	
+
+    	return view ('agent.pages.client', $data);	
 	}
+
+	public function get_client(Request $request)
+	{
+		
+		$s_date = $request->date_start;
+		$e_date = $request->date_end;
+		$data['clients'] = TblBusinessModel::
+		whereBetween('date_created',[$s_date,$e_date])
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+		return view('agent.pages.filtered',$data);
+	}
+
+	public function get_client_transaction(Request $request)
+	{
+		$trans_id = $request->transaction_id;
+		// dd($request->transaction_id);
+		$update['transaction_status'] = 'call in progress'; 
+		$update['agent_id'] = '1'; 
+		$update['business_status'] = '1'; 
+		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+		
+
+			return Redirect::to('agent.pages.client')->send();
+		
+	}
+
+	public function get_client_transaction_reload(Request $request)
+	{
+		$trans_id = $request->transaction_id;
+		// dd($request->transaction_id);
+		$update['transaction_status'] = 'called'; 
+		$update['business_status'] = '2'; 
+		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+		return '';
+		
+	}
+
 	public function add_client_submit(Request $request)
 	{
 
@@ -101,7 +175,8 @@ class AgentController extends Controller
 	        $business_data->facebook_url = $request->facebook_url;
 	        $business_data->twitter_url = $request->twitter_username;
             $business_data->membership = $request->membership;
-            $business_data->date_created = Carbon::now();
+            // $business_data->date_created = Carbon::now();
+            $business_data->date_created = date("Y/m/d");
             $business_data->save();
 
 	        $contact_data = new TblBusinessContactPersonModel;
@@ -115,14 +190,28 @@ class AgentController extends Controller
 
             $account_data = new TblUserAccountModel;
             $account_data->user_email = $request->email_address;
-            $account_data->user_password = "123";
+
+            $myStr=$request->first_name;
+            $myStrs=$request->primary_business_phone;
+            $result = substr($myStr, 0, 3);
+            $results = substr($myStrs, 0, 3);
+            $final_result = $result.$results;
+
+            $account_data->user_password = password_hash($final_result, PASSWORD_DEFAULT);
             $account_data->user_category = 'merchant';
             $account_data->status = 'registered';
             $account_data->business_id = $business_data->business_id;
             $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
             $account_data->save();
 
-            // dd($business_data."<br>james" .$contact_data."<br>james" .$account_data);
+ //            $pass="1234";
+ //   			Mail::raw('password'.$final_result, function ($message) {
+ //  			$message->to('sample35836@gmail.com', 'Tutorials Point')->subject
+ //          ('Laravel Basic Testing Mail');
+ //         $message->from('guardians35836@gmail.com','Guard');
+ //    });
+
+ // echo "Basic Email Sent. Check your inbox.";
 
            return Redirect::to('/agent/client');
 
@@ -136,9 +225,17 @@ class AgentController extends Controller
 		$data['page']	= 'Add Client';
 		return view ('agent.pages.add_client', $data);		
 	}
+
+	public function filter_clients(request $request)
+	{
+		$sdate = $request->start_date;
+		$edate = $request->end_date;
+		dd($sdate.$edate);
+	}
 	public function get_city(Request $request)
     {
         $county_id = $request->county_id;
+
 
         $city_list = TblCityModel::where('county_id','=',$county_id)->get();
 
@@ -159,17 +256,14 @@ class AgentController extends Controller
     public function get_zip_code(Request $request)
     {
         $city_id = $request->city_id;
-
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
         return $postal_code->postal_code;
     }
 
-
-		public function logout()
+	public function agent_logout()
 	{
-		Session::forget('user_email');
-		Session::forget('user_password');
-		return Redirect::back();
+		Session::forget("login");
+        return Redirect::to("/agent");
 	}
 }
