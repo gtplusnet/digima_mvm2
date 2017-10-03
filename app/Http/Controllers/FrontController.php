@@ -243,4 +243,22 @@ class FrontController extends Controller
         $data['page']   = 'generaladmin';
         return view('generaladmin');
     }
+
+    public function sampleUpload() {
+        return view('practice-page.upload');
+    }
+
+    public function uploadFile(Request $request) {
+        $file = $request->file("file");
+        if ($file == "") {
+            echo "File is empty.";
+        }
+        else if($file->getClientOriginalExtension() != "mp3") {
+            echo "File is not an audio, please select audio file.";
+        }
+        else {
+            $file->move('uploads', $file->getClientOriginalName());
+            echo '<audio controls><source src="/uploads/'.$file->getClientOriginalName().'" type="audio/mpeg"></audio>';
+        }
+    }
 }
