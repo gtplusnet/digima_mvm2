@@ -13,35 +13,45 @@
 		<div class="payment-title-container">
 			<p class="payment-title">ENTER YOUR PROOF OF PAYMENT</p>
 		</div>
-		<form role="form">
+		<form action="/merchant/upload_payment" method="post" enctype="multipart/form-data">
+			{{csrf_field()}}
+			{{-- <div class="col-md-5">
+			@foreach($picture as $pictures)
+			<div class="profile-images" style="margin-top: 50px;">
+                        <img src="{{$pictures->payment_file_name}}" alt="Nadia Ali"/>
+                    </div>
+			
+			@endforeach
+		</div> --}}
 			<div class="col-md-12 payment-form-container">		
 					<div class="col-md-12 payment-form-upperpart">
 						<div class="col-md-6 payment-left-area">
 							<label for="input-reference-number" class="payment-label">Reference Number:</label>
-							<input type="text" name="reference-number" class="payment-textfield">
+							<input type="text" name="payment_reference_number" class="payment-textfield">
 						</div>
 						<div class="col-md-6 payment-right-area">
-							<label for="input-method" class="payment-label">Method of Payment:</label>
-							<select class="payment-dropdown">
-								<option></option>
-								<option></option>
-								<option></option>
-								<option>---------------------</option>
+							<label for="input-method"class="payment-label">Method of Payment:</label>
+							<select class="payment-dropdown"  name="payment_method">
+								@foreach($method as $methods)
+
+								<option value="{{$methods->payment_method_id}}">{{$methods->payment_method_name}}</option>
+								@endforeach
+							
 							</select>
 						</div>
 					</div>
 					<div class="col-md-12 payment-form-bottompart">
 						<div class="col-md-6 payment-left-area">
 							<label for="input-amount" class="payment-label">Amount:</label>
-							<input type="text" name="amount" class="payment-textfield">
+							<input type="text" name="payment_amount" class="payment-textfield">
 						</div>
 						<div class="col-md-5 payment-right-area">
 							<label for="proof-of-payment" class="payment-label">Upload Proof of Payment:</label>
-							<input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+							<input id="uploadFile"  value="No File" placeholder="Choose File" disabled="disabled" />
 						</div>
 						<div class="col-md-1 payment-upload-icon-container">
 							<div class="fileUpload payment-upload-holder fa fa-upload payment-upload-icon">
-						    <input id="uploadBtn" type="file" class="upload" />
+						    <input id="uploadBtn" name="payment_file_name" type="file" class="upload" />
 						</div>
 						</div>
 
@@ -57,7 +67,7 @@
 						<p class="payment-invoice-label">Invoice No:00000</p>
 					</div>
 					<div class="col-md-8 payment-email-right-area">
-						<p class="payment-invoice-label">your@gmail.com</p>
+						<p class="payment-invoice-label">{{session('email')}}</p>
 					</div>
 				</div>
 				<div class="col-md-12 payment-form-seperator">
@@ -71,12 +81,12 @@
 							<p class="payment-invoice-content-label">Date  if Issue:</p>
 						</div>
 						<div class="col-md-6 payment-right-area">
-							<p class="payment-invoice-content-label"> </p>
-							<p class="payment-invoice-content-label"> </p>
-							<p class="payment-invoice-content-label"> </p>
-							<p class="payment-invoice-content-label"> </p>
-							<p class="payment-invoice-content-label"> </p>
-							<p class="payment-invoice-content-label"> </p>
+							<p class="payment-invoice-content-label">{{session('full_name')}} </p>
+							<p class="payment-invoice-content-label">{{session('business_name')}} </p>
+							<p class="payment-invoice-content-label">{{session('business_address')}} </p>
+							<p class="payment-invoice-content-label">{{session('city_state')}} </p>
+							<p class="payment-invoice-content-label">{{session('zip_code')}} </p>
+							<p class="payment-invoice-content-label">Sept 31,2017 </p>
 						</div>
 					</div>
 				</div>

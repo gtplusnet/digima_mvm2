@@ -43,7 +43,7 @@ Route::get('/register', 'FrontController@register');
 
 
 Route::get('/business', 'FrontController@business');
-Route::get('/payment',	'FrontController@payment');
+
 
 
 Route::get('/searchresult', 'SearchresultController@index');
@@ -67,6 +67,8 @@ Route::get('/merchant/bills', 		'MerchantController@bills');
 Route::get('/merchant/logout', 'MerchantController@logout');
 Route::get('/login', 'MerchantController@login');
 Route::post('/login', 'MerchantController@login_submit');
+Route::get('/merchant/payment',	'MerchantController@payment');
+Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
 
 //Eden
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
@@ -208,7 +210,7 @@ Route::any('/general_admin/dashboard', 'GeneralAdminController@general_admin_das
 Route::any('/general_admin/business_list', 'GeneralAdminController@general_admin_business_list');
 Route::any('/general_admin/logout', 'GeneralAdminController@general_admin_logout');
 Route::any('/general_admin/merchants', 'GeneralAdminController@general_admin_merchants');
-
+Route::any('/general_admin/payment_monitoring', 'GeneralAdminController@general_admin_payment_monitoring');
 
 
 Route::any('/sample', 'MerchantController@sample');

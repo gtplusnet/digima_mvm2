@@ -10,7 +10,7 @@
             <li class="active">{{ $page }}</li>
         </ol>
     </div>
-</div>
+</div> 
 <div id="main-wrapper">
 </div>
 <div class="wrapper">

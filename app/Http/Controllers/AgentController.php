@@ -165,7 +165,7 @@ class AgentController extends Controller
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 		
 
-			return Redirect::to('agent.pages.client')->send();
+			return '';
 		
 	}
 

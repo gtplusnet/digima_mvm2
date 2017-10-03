@@ -75,7 +75,7 @@ $(document).ready(function(){
 			data:{transaction_id: transaction_id},
 			dataType:'text',
 		}).done(function(data){
-				// window.location.reload();
+				window.location.reload();
 			});
 	});
 
