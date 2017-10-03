@@ -74,21 +74,71 @@
 					<div class="col-md-12 payment-form-upperpart">	
 						<div class="col-md-6 payment-left-area">
 							<p class="payment-invoice-content-label">Client Name:</p>
-							<p class="payment-invoice-content-label">Business Name:</p>
-							<p class="payment-invoice-content-label">Business Address:</p>
-							<p class="payment-invoice-content-label">City, State:</p>
-							<p class="payment-invoice-content-label">ZIP Code:</p>
-							<p class="payment-invoice-content-label">Date  if Issue:</p>
+							
 						</div>
 						<div class="col-md-6 payment-right-area">
 							<p class="payment-invoice-content-label">{{session('full_name')}} </p>
+							
+						</div>
+					</div>
+					<div class="col-md-12 payment-form-upperpart">	
+						<div class="col-md-6 payment-left-area">
+							
+							<p class="payment-invoice-content-label">Business Name:</p>
+							
+						</div>
+						<div class="col-md-6 payment-right-area">
+							
 							<p class="payment-invoice-content-label">{{session('business_name')}} </p>
+							
+						</div>
+					</div>
+					<div class="col-md-12 payment-form-upperpart">	
+						<div class="col-md-6 payment-left-area">
+							
+							<p class="payment-invoice-content-label">Business Address:</p>
+							
+						</div>
+						<div class="col-md-6 payment-right-area">
 							<p class="payment-invoice-content-label">{{session('business_address')}} </p>
+							
+						</div>
+					</div>
+					<div class="col-md-12 payment-form-upperpart">	
+						<div class="col-md-6 payment-left-area">
+							
+							<p class="payment-invoice-content-label">City, State:</p>
+							
+						</div>
+						<div class="col-md-6 payment-right-area">
+							
 							<p class="payment-invoice-content-label">{{session('city_state')}} </p>
+							
+						</div>
+					</div>
+					<div class="col-md-12 payment-form-upperpart">	
+						<div class="col-md-6 payment-left-area">
+							
+							<p class="payment-invoice-content-label">ZIP Code:</p>
+							
+						</div>
+						<div class="col-md-6 payment-right-area">
+							
 							<p class="payment-invoice-content-label">{{session('zip_code')}} </p>
+							
+						</div>
+					</div>
+					<div class="col-md-12 payment-form-upperpart">	
+						<div class="col-md-6 payment-left-area">
+							
+							<p class="payment-invoice-content-label">Date  if Issue:</p>
+						</div>
+						<div class="col-md-6 payment-right-area">
+							
 							<p class="payment-invoice-content-label">Sept 31,2017 </p>
 						</div>
 					</div>
+					
 				</div>
 				<div class="col-md-12 payment-form-seperator">	
 					<div class="col-md-12 payment-form-upperpart">
