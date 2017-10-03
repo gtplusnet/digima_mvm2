@@ -176,8 +176,14 @@
             </div>
             <div class="sociallinks-holder">
                 <div class="sociallinks-container">
-                    <a href=""><i class="fa fa-facebook businesspage-fb-icon"></i><p class="fb-like">Like</p></a>
-                    <a href=""><i class="fa fa-twitter businesspage-twitter-icon"></i><p class="twitter-tweet">Tweet</p></a>
+                    <div class="links-holder">
+                        <a href=""><i class="fa fa-facebook businesspage-fb-icon"></i><p class="fb-like">Like</p></a>
+                        <a href=""><i class="fa fa-twitter businesspage-twitter-icon"></i><p class="twitter-tweet">Tweet</p></a>
+                    </div>
+                    <div class="links-holder">
+                        <a href=""><i class="fa fa-skype business-skype-icon"></i><p class="go-skype">Skype</p></a>
+                        <a href="/sendemail"><i class="fa fa-paper-plane business-sendemail-icon"></i><p class="send-mail">Send Email</p></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -221,7 +227,7 @@
                 </form>
             </div>
         </div>
-        <!-- <div class="business-map-container">
+        <div class="business-map-container">
             <div id="business-map"></div>
             <script>
                 function initMap() {
@@ -237,7 +243,7 @@
                     });
                 }
             </script>
-        </div> -->
+        </div>
 
     </div>
 </div>

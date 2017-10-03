@@ -59,15 +59,22 @@ $(document).ready(function(){
 			url:'/agent/get_client_transaction',
 			data:{transaction_id: transaction_id},
 			dataType:'text',
-		}).done(function(data){
-				$('.modal').show();
-				$('#showHere').html(data);
-				// window.location.reload();
-				
-			});
+		});
 	});
 
 	$('.closed').click(function(){
+		var transaction_id = $(this).data("id");
+		$.ajax({
+			type:'POST',
+			url:'/agent/get_client_transaction_reload',
+			data:{transaction_id: transaction_id},
+			dataType:'text',
+		}).done(function(data){
+				window.location.reload();
+			});
+	});
+
+	$('#closed').click(function(){
 		var transaction_id = $(this).data("id");
 		$.ajax({
 			type:'POST',

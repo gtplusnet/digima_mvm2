@@ -37,6 +37,7 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/globals.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/resultsortgrid.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchtabular.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/sendemail.css">
 
 
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
