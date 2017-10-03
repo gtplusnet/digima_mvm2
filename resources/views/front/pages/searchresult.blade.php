@@ -53,7 +53,7 @@
 								</div>
 							</div>
 							<div class="col-md-7">
-								<a href="/business?business_id={{ $businessResultItem->business_id }}"><p class="business-title">{{ $businessResultItem->business_name }}</p></a>
+								<a href="/business_info?business_id={{ $businessResultItem->business_id }}"><p class="business-title">{{ $businessResultItem->business_name }}</p></a>
 								<div class="business-details-holder">
 									<div class="business-details">
 										<i class="fa fa-phone details"></i><p>{{ $businessResultItem->business_phone }}</p>
