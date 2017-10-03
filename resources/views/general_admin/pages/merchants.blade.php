@@ -12,8 +12,7 @@
 	<div class="col-md-12">
 
 		<ul class="nav nav-tabs">
-		   <li class="active li_me"><a data-toggle="pill" href="#home">Merchants</a></li>
-	       <li class="li_me"><a data-toggle="pill" href="#menu1">Invoice Approval</a></li>
+		   <li class="active li_me"><a data-toggle="pill" href="#home">Invoice Approval</a></li>
 	       <li class="li_me"><a data-toggle="pill" href="#menu1">Pending </a></li>
 	       <li class="li_me"><a data-toggle="pill" href="#menu1">Activated</a></li>
 		</ul>
@@ -60,102 +59,65 @@
                                     <td>{{$client->business_name}}</td>
                                     <td>{{$client->payment_method_name}}</td>
                                     <td>{{$client->transaction_status}}</td>
-                                    <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
+                                    <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice</button></td>
                                 </tr>
-                                <div class="modal fade" id="myModal{{$client->business_id}}" role="dialog" >
-                                    <div class="modal-lg modal-dialog">
+                                  <div class="modal fade" id="myModal{{$client->business_id}}" role="dialog" >
+                                    <div class="modal-md modal-dialog">
                                         <div class="modal-content">
                                             
                                             <div class="modal-header">
                                                 <button type="button" class="close closed" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Personal Information</h4>
+                                                <h4 class="modal-title">Send Invoice</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="panel panel-primary col-md-12">
-                                                    <div >
-                                                        <div>
-                                                            <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                        <div>
-                                                           <p ><center>1:23:08 Call Duration</center></p>
-                                                           <center><button type="button" class="btn btn-default" data-dismiss="modal" ><i class="fa fa-play call" aria-hidden="true"></i>Play</button></center>
-                                                        </div>
-                                                    
-                                                    <div style="margin-top:20px;">
-                                                        <div>
-                                                            <center><button type="button" class="btn btn-success closed" data-dismiss="modal" ><i class="fa fa-phone callme"aria-hidden="true"></i>APPROVED</button>
-                                                            <button type="button" class="btn btn-danger closed" data-dismiss="modal" ><i class="fa fa-phone callme"aria-hidden="true"></i>DECLINED</button></center>
-                                                        </div>
-                                                    </div>
+                                              <div class="panel panel-white">
                                                     <div class="panel-body">
-                                                        <form class="form-horizontal">
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
-                                                                    <div class="col-md-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="Mr." readonly>
-                                                                    </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <h1 class="m-b-md"><b>CROATIA Directory</b></h1>
+                                                                <address>
+                                                                    Zagreb, Croatia<br>
+                                                                    P: (123) 456-7890
+                                                                </address>
+                                                            </div>
+                                                            <div class="col-md-8 text-right pull-right" >
+                                                                <h3>INVOICE NUMBER:</h3>
+                                                                <div class="col-md-10" style="margin-left:100px;">
+                                                                <input type="text" class="form-control"  />
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">First Name</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_first_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Last Name</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_last_name}}" readonly>
-                                                                    </div>
+                                                            <div class="col-md-12">
+                                                                <hr>
+                                                                <p>
+                                                                    <strong>Invoice to</strong><br>
+                                                                    John Doe<br>
+                                                                    795 Folsom Ave, Suite 600<br>
+                                                                    San Francisco, CA 94107
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <h3>Thank you !</h3>
+                                                                <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                                                <img src="/assets/admin/merchant/assets/images/signature.png" height="150" class="m-t-lg" alt="">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="text-right">
+                                                                    <h4 class="no-m m-t-sm">Subtotal</h4>
+                                                                    <h2 class="no-m">$7282</h2>
+                                                                    <hr>
+                                                                    <h4 class="no-m m-t-sm">Shipping</h4>
+                                                                    <h2 class="no-m">$240</h2>
+                                                                    <hr>
+                                                                    <h4 class="no-m m-t-md text-success">Total</h4>
+                                                                    <h1 class="no-m text-success">$7522</h1>
+                                                                    <hr>
+                                                                    <button class="btn btn-primary">Send Invoice</button>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Name</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_name}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Primary Phone</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_phone}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Alternate Phone</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_alt_phone}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
-                                                                    <div class="col-sm-10">
-                                                                        <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$client->business_complete_address}}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">County</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->county_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">City</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->city_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Postal</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_code}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                        </div><!--row-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,6 +128,8 @@
                                     </div>
                                 </div>
                                 @endforeach
+
+
                             </tbody>
                         </table>
                         
@@ -188,7 +152,7 @@
 {
 margin:10px 0px 10px 0px;
 }
-.li_style{
+.li_me{
 padding:0px;
 width:33.31%;
 margin-right:0px;
@@ -200,19 +164,7 @@ background-color: #24292E;
 color:#fff;
 /*border-radius: 10px;*/
 }
-.call
-{
-color:green;
-margin-right: 5px;
-font-size:20px;
-}
-.callme
-{
-color:white;
-margin-right: 0px;
-width:35px;
-font-size:20px;
-}
+
 </style>
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

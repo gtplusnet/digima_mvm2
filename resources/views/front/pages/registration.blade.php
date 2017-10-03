@@ -61,6 +61,18 @@
 			    <input type="text" class="form-control" name="businessName" id="businessName" required="true">
 			</div>
 			<div class="col-md-12 registration-form-container">
+				<div class="col-md-12 dualfield-firstpart">	
+					<label for="password" class="registration-form-label">Membership</label>
+					<select class="form-control" name="membership"  required="true">
+			  			@foreach($payment_method as $payment_methods)
+							<option value="{{ $payment_methods->payment_method_id }}">{{ $payment_methods->payment_method_name }}</option>
+						@endforeach
+	  				</select>
+				</div>
+				<div class="col-md-6 dualfield-secondpart">
+				</div>
+			</div>
+			<div class="col-md-12 registration-form-container">
 				<div class="col-md-4 form-firstpart">
 					<label for="primaryPhone" class="registration-form-label">Primary Business Phone:</label>
 				    <input type="text" class="form-control" name="primaryPhone" id="primaryPhone" required="true">

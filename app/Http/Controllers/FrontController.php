@@ -103,8 +103,9 @@ class FrontController extends Controller
             $businessData->business_fax = $request->faxNumber;
             $businessData->facebook_url = $request->facebookUrl;
             $businessData->twitter_url = $request->twitterUsername;
+            $businessData->membership = $request->membership;
             $businessData->business_status = '1';
-            $businessData->date_created = Carbon::now();
+            $businessData->date_created = date("Y/m/d");
             $businessData->save();
 
             $contactData = new Tbl_business_contact_person;
@@ -117,9 +118,9 @@ class FrontController extends Controller
 
             $accountData = new Tbl_user_account;
             $accountData->user_email = $request->emailAddress;
-            $accountData->user_password = $request->password;
+            $accountData->user_password =  password_hash($request->password, PASSWORD_DEFAULT);
             $accountData->user_category = 'merchant';
-            $accountData->status = 2;
+            $accountData->status = 'registered';
             $accountData->business_id = $businessData->business_id;
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();
