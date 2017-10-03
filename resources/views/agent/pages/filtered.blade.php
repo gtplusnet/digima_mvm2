@@ -28,22 +28,19 @@
                                                 <h4 class="modal-title">Personal Information</h4>
                                             </div>
                                             <div class="modal-body">
+                                               <div>
+                                                    <div>
+                                                        <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
+                                                    </div>
+                                                    <div>
+                                                        <p ><center>1:23:08 Call Duration</center></p>
+                                                    </div>
+                                                    <div >
+                                                        <center><button type="button" class="btn btn-danger closed" data-dismiss="modal" ><i class="fa fa-phone callme" aria-hidden="true"></i>End Call</button></center>
+                                                    </div>
+                                                </div>
                                                 <div class="panel panel-primary col-md-12">
-                                                    <div >
-                                                        <div>
-                                                            <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
-                                                        </div>
-                                                    </div>
                                                     
-                                                        <div>
-                                                           <p ><center>1:23:08 Call Duration</center></p>
-                                                        </div>
-                                                    
-                                                    <div >
-                                                        <div>
-                                                            <center><button type="button" class="btn btn-danger closed" data-dismiss="modal" ><i class="fa fa-phone callme"aria-hidden="true"></i>End Call</button></center>
-                                                        </div>
-                                                    </div>
                                                     <div class="panel-body">
                                                         <form class="form-horizontal">
                                                             <div class="col-md-12 distance">

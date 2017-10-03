@@ -103,6 +103,7 @@ class FrontController extends Controller
             $businessData->business_fax = $request->faxNumber;
             $businessData->facebook_url = $request->facebookUrl;
             $businessData->twitter_url = $request->twitterUsername;
+            $businessData->business_status = '1';
             $businessData->date_created = Carbon::now();
             $businessData->save();
 
