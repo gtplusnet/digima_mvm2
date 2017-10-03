@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblBusinessModel;
 use App\Models\TblAdminModels;
+use App\Models\TblUserAccountModel;
+use App\Models\TblPaymentModel;
 use DB;
 use Response;
 use Session;
@@ -102,7 +104,28 @@ class GeneralAdminController extends Controller
 
     public function general_admin_merchants()
     {
-        return view('general_admin.pages.merchants');
+        $data['page']    = 'Merchant';
+        $data['clients'] = TblUserAccountModel::where('status','registered')
+                                          ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
+                                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                          ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+                                          ->orderBy('tbl_business.date_created',"asc")
+
+                                          ->get();
+        return view('general_admin.pages.merchants',$data);
+    }
+
+    public function general_admin_payment_monitoring()
+    {
+      
+      $data['business_list'] = TblPaymentModel::join('tbl_business','tbl_business.business_id','=','tbl_payment.business_id')
+                                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
+                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_payment.payment_method')
+                                          ->get();
+         // dd($data);
+         return view('general_admin.pages.payment_monitoring',$data);
     }
 
     public function get_business_list_info(Request $request)

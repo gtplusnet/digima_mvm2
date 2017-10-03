@@ -64,7 +64,7 @@
                                     <td>{{$client->business_name}}</td>
                                     <td>{{$client->payment_method_name}}</td>
                                     <td>{{$client->transaction_status}}</td>
-                                    <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
+                                    <td><button class=" btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
                                 <div class="modal fade" id="myModal{{$client->business_id}}" role="dialog" >
                                     <div class="modal-lg modal-dialog">
@@ -75,22 +75,20 @@
                                                 <h4 class="modal-title">Personal Information</h4>
                                             </div>
                                             <div class="modal-body">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" ><i class="fa fa-phone callme" aria-hidden="true"></i>End Call</button>
+                                                <div >
+                                                    <div>
+                                                        <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
+                                                    </div>
+                                                    <div>
+                                                        <p ><center>1:23:08 Call Duration</center></p>
+                                                    </div>
+                                                    <div >
+                                                        <center><button type="button" class="btn btn-danger" data-dismiss="modal" ><i class="fa fa-phone callme" aria-hidden="true"></i>End Call</button></center>
+                                                    </div>
+                                                </div>
+                                                 
                                                 <div class="panel panel-primary col-md-12">
-                                                    <div >
-                                                        <div>
-                                                            <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                        <div>
-                                                           <p ><center>1:23:08 Call Duration</center></p>
-                                                        </div>
-                                                    
-                                                    <div >
-                                                        <div>
-                                                            <center><button type="button" class="btn btn-danger closed" data-dismiss="modal" ><i class="fa fa-phone callme"aria-hidden="true"></i>End Call</button></center>
-                                                        </div>
-                                                    </div>
                                                     <div class="panel-body">
                                                         <form class="form-horizontal">
                                                             <div class="col-md-12 distance">
