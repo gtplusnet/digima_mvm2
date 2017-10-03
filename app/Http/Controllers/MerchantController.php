@@ -9,8 +9,12 @@ use App\Tbl_payment_method;
 use App\Tbl_business_category;
 use App\Models\TblUserAccountModel;
 use App\Models\TblBusinessContactPersonModel;
+use App\Models\TblPaymentMethod;
+use App\Models\TblPaymentModel;
 use Redirect;
 use Session;
+// use Request;
+use Input;
 // use Request;
 
 class MerchantController extends Controller
@@ -44,6 +48,8 @@ class MerchantController extends Controller
         {
             if (password_verify($request->password, $validate_login->user_password)) 
                 {
+                   if($validate_login->status=="activated")
+                   {
                     $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
                                 // ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                                 ->first();
@@ -55,6 +61,31 @@ class MerchantController extends Controller
                     $data['page']   = 'Dashboard';
 
                     return Redirect::to('/merchant/dashboard');
+                   }
+                   else
+                   {
+                    $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
+                                          ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
+                                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                          ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+                                         ->first();
+                                          // dd($user_info);
+                    Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
+                    Session::put("email",$user_info->user_email);
+                    Session::put("business_name",$user_info->business_name);
+                    Session::put("business_id",$user_info->business_id);
+                    Session::put("business_contact_person_id",$user_info->business_contact_person_id);
+                    Session::put("business_address",$user_info->business_complete_address);
+                    Session::put("city_state",$user_info->city_name.", ".$user_info->county_name);
+                    Session::put("zip_code",$user_info->postal_code);
+                   
+                    $data['page']   = 'Dashboard';
+
+                    return Redirect::to('/merchant/payment');
+                   }
+                    
                 }
             else
             {
@@ -82,6 +113,61 @@ class MerchantController extends Controller
 		return view ('merchant.pages.dashboard', $data);	
 		
 	}
+     public function payment()
+    {
+        $data['page']   = 'payment';
+        $data['method'] = TblPaymentMethod::get();
+        $data['picture'] = TblPaymentModel::get();
+        return view('front.pages.payment', $data);
+
+        // $account_data = new TblUserAccountModel;
+        // $account_data->user_email = $request->email;
+        // $account_data->user_password = $request->password;
+        // $account_data->user_category = 'merchant';
+        // $account_data->status = 2;
+        // $account_data->business_id = $business_data->business_id;
+        // $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
+        // $account_data->save();
+        // echo 'Registered successfully ! But your account is pending.';
+   }
+    public function upload_payment(Request $request)
+    {
+       
+        // dd($data);
+        $file = $request->payment_file_name;
+        if($file==null||$file=='')
+        {
+           echo "mag browse ka muna ng picture!!!" ; 
+        }
+        else
+        {
+            $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
+            $file_ext = $file->getClientOriginalExtension();
+            $destinationPath = public_path('/payment_upload');
+            $check=$file->move($destinationPath, $filename);   
+            if($check)
+                {
+
+                    $data['payment_reference_number'] = $request->payment_reference_number;
+                    $data['payment_amount'] = $request->payment_amount;
+                    $data['payment_method'] = $request->payment_method;
+                    $data['payment_file_name'] = $filename;
+                    $data['business_contact_person_id'] = session('business_contact_person_id');
+                    $data['business_id'] = session('business_id');
+                    $check_insert = TblPaymentModel::insert($data);
+                    if($check_insert)
+                    {
+                        echo "tama ka";
+                    }
+                    else
+                    {
+                        echo "mali ka";
+                    }
+                }
+        }
+       
+       
+    }
 
 	public function profile()
 	{

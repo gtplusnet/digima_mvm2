@@ -187,27 +187,7 @@ class FrontController extends Controller
     //     return view('front.pages.payment', $data);
     // }
 
-    public function payment()
-    {
-        $data['page']   = 'payment';
-        return view('front.pages.payment', $data);
-
-        $account_data = new TblUserAccountModel;
-        $account_data->user_email = $request->email;
-        $account_data->user_password = $request->password;
-        $account_data->user_category = 'merchant';
-        $account_data->status = 2;
-        $account_data->business_id = $business_data->business_id;
-        $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
-        $account_data->save();
-        
-
-        
-
-        echo 'Registered successfully ! But your account is pending.';
-  
-
-    }
+   
 
     public function businessSearch(Request $request)
     {

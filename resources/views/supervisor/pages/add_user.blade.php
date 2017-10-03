@@ -12,16 +12,26 @@
 <div id="main-wrapper">
     <div class="row">
         <div class="panel panel-primary">
+            <!-- Nav tabs -->
+                    
             <div class="panel-body">
-                <div role="tabpanel">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-pills" role="tablist">
-                        <li role="presentation" class="{{Session::has('warning_agent') || Session::has('error_agent') ? '' : 'active'}}"><a href="#tab9" role="tab" data-toggle="tab" aria-expanded="true">Team</a></li>
-                         <li role="presentation" class="{{Session::has('warning_agent') || Session::has('error_agent') ? 'active' : ''}}"><a href="#tab10" role="tab" data-toggle="tab" aria-expanded="false">Agent</a></li>
-                    </ul>
+               
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade {{Session::has('warning_agent') || Session::has('error_agent') ? '' : 'active in'}} " id="tab9">
+                        <div class=" panel-primary">
+                         <div class="panel-heading row clearfix">
+                            <div class="col-md-8">
+                                <div class="col-md-12">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active li_style"><a data-toggle="tab" href="#tab9">Customer</a></li>
+                                        <li class="li_style"><a data-toggle="tab" href="#tab10">Pending Customer</a></li>
+                                        <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                          </div>  
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade active" id="tab9">
                             <form class="form-horizontal" method="post" action="/supervisor/add_team_submit">
                                 {{csrf_field()}}
                                 @if(session()->has('warning_team'))
@@ -33,7 +43,7 @@
                                 <div class="alert alert-danger">
                                   <strong>Warning!</strong> {!! session('error_team') !!}
                                 </div>
-                            @endif
+                                @endif
                                 <h4>Team Information</h4>
                                 <div class="form-group">
                                     <label for="input-Default" class="col-sm-2 control-label">Team Name</label>
@@ -144,10 +154,18 @@
                     </div>
 
                 </div>
-            </div>
+           
         </div>
     </div>
 </div>
+<style>
+.li_style{
+padding-bottom: 0px;
+width:33.31%;
+margin-right:0px;
+margin-left:-1px;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/registration.js"></script>
 @endsection
