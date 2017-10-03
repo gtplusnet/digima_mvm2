@@ -32,7 +32,7 @@
 				</div>
 				<div class="col-md-12 contact-textfield-holder">
 					<label for="input-help" class="contact-labels">How Can We Help:</label>
-					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield"></textarea>
+					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea"></textarea>
 				</div>
 				<div class="col-md-12 contact-btn-holder">
 					<button class="contact-send-btn">SEND MESSAGE</button>
