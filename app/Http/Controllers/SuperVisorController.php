@@ -7,13 +7,55 @@ use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblTeamModel;
 use App\Models\TblAgentModels;
+use App\Models\TblSupervisorModels;
+use App\Models\TblBusinessModel;
 use Session;
 use Redirect;
 use Validator;
 class SuperVisorController extends Controller
 {
 
-	public function profile()
+	public function index()
+    {
+        // Self::allow_logged_out_users_only();
+        $data['page']   = 'Supervisor Login';
+
+        return view ('supervisor.pages.supervisor_login', $data);
+
+    }
+    public function supervisor_login_submit(Request $request)
+    {
+        $validate_login = TblSupervisorModels::where('email',$request->email)->first();
+        if($validate_login)
+
+
+        {
+            if (password_verify($request->password, $validate_login->password)) 
+                {
+
+                    Session::put("supervisor_login",true);
+                    Session::put("supervisor_id",$validate_login->agent_id);
+                    Session::put("full_name",$validate_login->first_name." ".$validate_login->last_name);
+                    Session::put("email",$validate_login->email);
+                    Session::put("position",$validate_login->position);
+                    // Session::put("login", $validate->email);
+                    $data['page']   = 'Dashboard';
+
+                    return Redirect::to('/supervisor/dashboard');
+                }
+            else
+            {
+                $data['page']   = 'supervisor Login';
+                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+            }
+        }
+        else
+        {
+            $data['page']   = 'supervisor Login';
+            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+        }
+    }
+    public function profile()
 	{
 		$data['page']	= 'Profile';
 		return view ('supervisor.pages.profile', $data);		
@@ -22,6 +64,14 @@ class SuperVisorController extends Controller
 	public function client()
 	{
 		$data['page']	= 'Client';
+
+        $data['clients'] = TblBusinessModel::Where('business_status',2)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+
+
 		return view ('supervisor.pages.client', $data);		
 	}
 	public function add_team()

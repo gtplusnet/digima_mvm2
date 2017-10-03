@@ -111,7 +111,9 @@ Route::post('/admin/get_client_transaction_reload', 'AdminController@get_client_
 
 
 
-Route::get('/supervisor', 				'SupervisorController@dashboard');
+Route::get('/supervisor', 				'SupervisorController@index');
+Route::post('/supervisor_login_submit', 	'SupervisorController@supervisor_login_submit');
+
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
 Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
