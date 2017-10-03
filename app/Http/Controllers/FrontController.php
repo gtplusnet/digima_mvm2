@@ -104,7 +104,7 @@ class FrontController extends Controller
             $businessData->business_fax = $request->faxNumber;
             $businessData->facebook_url = $request->facebookUrl;
             $businessData->twitter_url = $request->twitterUsername;
-            $businessData->business_status = '1';
+            $businessData->business_status = '2';
             $businessData->date_created = Carbon::now();
             $businessData->save();
 
@@ -249,6 +249,7 @@ class FrontController extends Controller
     public function sampleUpload() {
         return view('practice-page.upload');
     }
+
     //UPLOAD FILE SAMPLE
     public function uploadFile(Request $request) {
         $file = $request->file("file");
@@ -265,6 +266,8 @@ class FrontController extends Controller
             $audioInfo->audio_path = '/uploads/'.$file->getClientOriginalName().'';
             $audioInfo->save();
         }
+    }
+
     // SEND EMAIL
     public function sendemail()
     {
