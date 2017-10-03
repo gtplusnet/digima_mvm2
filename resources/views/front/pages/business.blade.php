@@ -221,8 +221,8 @@
         </div>
         <div class="business-map-container">
             <div id="business-map"></div>
-                <script>
-                  function initMap() {
+            <script>
+                function initMap() {
                     var uluru = {lat: 40.779962, lng: -73.980304};
                     // var uluru = {lat: -25.363, lng: 131.044};
                     var map = new google.maps.Map(document.getElementById('business-map'), {
@@ -233,8 +233,8 @@
                       position: uluru,
                       map: map
                     });
-                  }
-                </script>
+                }
+            </script>
         </div>
     </div>
 </div>
