@@ -182,7 +182,7 @@
                     </div>
                     <div class="links-holder">
                         <a href=""><i class="fa fa-skype business-skype-icon"></i><p class="go-skype">Skype</p></a>
-                        <a href=""><i class="fa fa-paper-plane business-sendemail-icon"></i><p class="send-mail">Send Email</p></a>
+                        <a href="/sendemail"><i class="fa fa-paper-plane business-sendemail-icon"></i><p class="send-mail">Send Email</p></a>
                     </div>
                 </div>
             </div>

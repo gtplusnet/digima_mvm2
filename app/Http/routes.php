@@ -36,7 +36,7 @@ Route::get('/contact', 'FrontController@contact');
 
 
 // SEND EMAIL ROUTE
-Route::get('/contact', 'FrontController@sendemail');
+Route::get('/sendemail', 'FrontController@sendemail');
 
 
 
