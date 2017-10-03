@@ -169,12 +169,17 @@
 }
 .sociallinks-holder
 {
-	text-align: center;
 	margin-bottom: 30px;
+    margin-left: 25px;
 }
 .sociallinks-container
 {
 	display: -webkit-inline-box;
+}
+.links-holder
+{
+    display: inline-block;
+    width: 100%;
 }
 .businesspage-fb-icon
 {
@@ -182,6 +187,7 @@
     font-size: 25px;
     margin-right: 5px;
     display: inline;
+    margin-left: 7px;
 }
 .businesspage-twitter-icon
 {
@@ -190,11 +196,38 @@
     margin-right: 5px;
     display: inline;
 }
+.business-skype-icon
+{
+    color: #3fcdfd;
+    font-size: 25px;
+    margin-right: 5px;
+    display: inline;
+}
+.business-sendemail-icon
+{
+    color: #3b5998;
+    font-size: 25px;
+    margin-right: 5px;
+    display: inline;
+}
+.go-skype
+{
+    color: #fff;
+    font-size: 15px;
+    margin-right: 40px;
+    display: inline;
+}
+.send-mail
+{
+    color: #fff;
+    font-size: 15px;
+    display: inline;
+}
 .fb-like
 {
 	color: #fff;
     font-size: 15px;
-    margin-right: 40px;
+    margin-right: 55px;
     display: inline;
 }
 .twitter-tweet
@@ -204,8 +237,12 @@
     display: inline;
 }
 
-// #business-map
-// {
-//     height: 320px;
-//     width: 100%;
-// }
+.business-map-container
+{
+    margin-top: 153px;
+}
+#business-map
+{
+    height: 320px;
+    width: 100%;
+}

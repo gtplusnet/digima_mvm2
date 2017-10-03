@@ -35,6 +35,10 @@ Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 
 
+// SEND EMAIL ROUTE
+Route::get('/contact', 'FrontController@sendemail');
+
+
 
 
 Route::get('/success', 'FrontController@success');
