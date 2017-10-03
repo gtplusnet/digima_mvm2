@@ -67,6 +67,7 @@
 						</div>
 					@endforeach
 				@else
+					<h1><center>No Results Found.</center></h1>
 				@endif
 				<div class="col-md-12 tabularsort-pagination-section">
 					<div class="pagination">

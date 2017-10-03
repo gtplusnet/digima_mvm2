@@ -220,3 +220,7 @@ Route::any('/general_admin/payment_monitoring', 'GeneralAdminController@general_
 
 
 Route::any('/sample', 'MerchantController@sample');
+
+Route::any('/sample-upload', 'FrontController@sampleUpload');
+Route::any('/upload-file', 'FrontController@uploadFile');
+

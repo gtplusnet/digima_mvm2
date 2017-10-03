@@ -19,6 +19,7 @@ use App\Models\Tbl_business;
 use App\Models\Tbl_business_contact_person;
 use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
+use App\Models\Tbl_audio;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -103,7 +104,7 @@ class FrontController extends Controller
             $businessData->business_fax = $request->faxNumber;
             $businessData->facebook_url = $request->facebookUrl;
             $businessData->twitter_url = $request->twitterUsername;
-            $businessData->business_status = '1';
+            $businessData->business_status = '2';
             $businessData->date_created = Carbon::now();
             $businessData->save();
 
@@ -243,6 +244,28 @@ class FrontController extends Controller
     {
         $data['page']   = 'generaladmin';
         return view('generaladmin');
+    }
+
+    public function sampleUpload() {
+        return view('practice-page.upload');
+    }
+
+    //UPLOAD FILE SAMPLE
+    public function uploadFile(Request $request) {
+        $file = $request->file("file");
+        if ($file == "") {
+            echo "File is empty.";
+        }
+        else if($file->getClientOriginalExtension() != "mp3") {
+            echo "File is not an audio, please select audio file.";
+        }
+        else {
+            $file->move('uploads', $file->getClientOriginalName());
+            $audioInfo = new Tbl_audio;
+            $audioInfo ->audio_name = $file->getClientOriginalName();
+            $audioInfo->audio_path = '/uploads/'.$file->getClientOriginalName().'';
+            $audioInfo->save();
+        }
     }
 
     // SEND EMAIL

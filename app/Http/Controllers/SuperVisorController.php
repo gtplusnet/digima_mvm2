@@ -65,7 +65,7 @@ class SuperVisorController extends Controller
 	{
 		$data['page']	= 'Client';
 
-        $data['clients'] = TblBusinessModel::Where('business_status',2)
+        $data['clients'] = TblBusinessModel::where('business_status', 2)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
