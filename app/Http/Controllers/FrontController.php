@@ -19,6 +19,7 @@ use App\Models\Tbl_business;
 use App\Models\Tbl_business_contact_person;
 use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
+use App\Models\Tbl_audio;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -258,7 +259,10 @@ class FrontController extends Controller
         }
         else {
             $file->move('uploads', $file->getClientOriginalName());
-            echo '<audio controls><source src="/uploads/'.$file->getClientOriginalName().'" type="audio/mpeg"></audio>';
+            $audioInfo = new Tbl_audio;
+            $audioInfo ->audio_name = $file->getClientOriginalName();
+            $audioInfo->audio_path = '/uploads/'.$file->getClientOriginalName().'';
+            $audioInfo->save();
         }
     }
 }
