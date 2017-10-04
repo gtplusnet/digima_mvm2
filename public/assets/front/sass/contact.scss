@@ -37,9 +37,9 @@
 }
 .contact-form-container
 {
-    height: 500px;
     width: auto;
     padding: 10px 20px;
+    border: 1px solid #999;
 }
 .contact-labels
 {
@@ -50,6 +50,11 @@
 .contact-textfield
 {
     width: 100%;
+}
+.message-textarea
+{
+    max-width: 498px;
+    min-height: 237px;
 }
 .contact-textfield-left-holder
 {
@@ -65,12 +70,19 @@
     margin-top: 15px;
     margin-bottom: 5px;
 }
+.contact-btn-holder
+{
+    padding: 0px;
+    margin-top: 15px;
+    margin-bottom: 38px;
+}
 .contact-send-btn
 {
     border: 0px;
     background-color: #fed600;
     font-size: 15px;
     padding: 13px 20px;
+    font-weight: 700;
 }
 .map-container
 {

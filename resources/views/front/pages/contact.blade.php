@@ -1,4 +1,5 @@
 @extends('front.layout.layout')
+@section('title', 'Contact Us')
 @section('content')
 <div class="banner-contact" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">
@@ -14,7 +15,7 @@
 		</div>
 		<div>
 			<form role="form">
-			<div class="contact-form-container">
+			<div class=" col-md-12 contact-form-container">
 				<div class="col-md-12 contact-textfield-holder">
 					<div class="col-md-6 contact-textfield-left-holder">
 						<label for="input-name" class="contact-labels">Name:</label>
@@ -31,9 +32,9 @@
 				</div>
 				<div class="col-md-12 contact-textfield-holder">
 					<label for="input-help" class="contact-labels">How Can We Help:</label>
-					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield"></textarea>
+					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea"></textarea>
 				</div>
-				<div class="col-md-12 contact-textfield-holder">
+				<div class="col-md-12 contact-btn-holder">
 					<button class="contact-send-btn">SEND MESSAGE</button>
 				</div>
 			</div>

@@ -6,8 +6,12 @@
             </a>
         </div>
         <div class="logo-box">
-            <a href="index.html" class="logo-text"><span>CROATIA</span></a>
+            
+            <a href="/agent/dashboard" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
         </div><!-- Logo Box -->
+        {{-- <div class="logo-box">
+            <a href="index.html" class="logo-text"><span>CROATIA</span></a>
+        </div><!-- Logo Box --> --}}
         <div class="topmenu-outer">
             <div class="top-menu">
                 <ul class="nav navbar-nav navbar-left">
@@ -147,7 +151,7 @@
                         </ul>
                     </li>
                     <li>
-                    @if(session("login") == true)
+                    @if(session("agent_login") == true)
                     <a style="font-size:15px",  href='/agent/logout'>
                     <span><i class="fa fa-sign-out m-r-xs"></i>Log out
                     </span></a>
