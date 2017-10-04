@@ -84,8 +84,8 @@ Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
 Route::post('/admin/add_team_submit', 	'AdminController@add_team_submit');
 Route::post('/admin/add_agent_submit', 	'AdminController@add_agent_submit');
 Route::post('/admin/get_client', 		'AdminController@get_client');
-Route::post('/admin/get_client_transaction', 		'AdminController@get_client_transaction');
-Route::post('/admin/get_client_transaction_reload', 'AdminController@get_client_transaction_reload');
+Route::post('/admin/get_client_transaction','AdminController@get_client_transaction');
+Route::post('/admin/get_client_transaction_reload','AdminController@get_client_transaction_reload');
 
 
 
@@ -144,4 +144,3 @@ Route::any('/check_login', 'LoginController@check_login');
 //Route::any('/search', 'SearchController@index');
 //Route::any('/search_result', 'SearchController@search_result');
 //Route::any('/search_result_list', 'SearchController@search_result_list');
-

@@ -24,7 +24,7 @@
                 <div class="col-md-4 ">
                     <div class="col-md-6">
                         <select class="form-control " name="date_start" id="date_start" style="width: 150px; border-radius: 20px;">
-                            @foreach($client as $client_list)
+                            @foreach($clients as $client_list)
                             <option value="{{$client_list->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
                             @endforeach
                         </select>
@@ -191,7 +191,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($client as $client)
+                                    @foreach($clients as $client)
                                     <tr>
                                         <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
                                         <td>{{date("F j, Y, g:i a",strtotime($client->date_created))}}</td>
@@ -200,7 +200,8 @@
                                         <td>{{$client->payment_method_name}}</td>
                                         <td><button class="btn btn-default"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                     </tr>
-                                    @endforeach
+                          
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -238,4 +239,4 @@
             <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="/assets/js/admin/admin_client.js"></script>
-            @endsection -->
+            @endsection
