@@ -182,11 +182,117 @@
                     </div>
                     <div class="links-holder">
                         <a href=""><i class="fa fa-skype business-skype-icon"></i><p class="go-skype">Skype</p></a>
-                        <a href="/sendemail"><i class="fa fa-paper-plane business-sendemail-icon"></i><p class="send-mail">Send Email</p></a>
+                        <button class="btn-sendemail" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-paper-plane business-sendemail-icon"></i>
+                            <p class="send-mail">Send Email</p>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- MODAL CSS STYLE -->
+        <style type="text/css">
+            .modal-header
+            {
+                background-color: #333;
+                padding: 7px 20px;
+                border-bottom: unset;
+            }
+            .modal-header .close
+            {
+                margin-top: -2px;
+            }
+            button.close
+            {
+                color: #fed600;
+            }
+            .close
+            {
+                font-size: 30px;
+                opacity: unset;
+            }
+            .sendemail-title
+            {
+                color: #fed600;
+                 margin: 0px;
+                font-size: 20px;
+            }
+            .modal-body
+            {
+                padding: 10px 40px;
+                border: 1px solid #999;
+            }
+            .sendemail-textfield-holder
+            {
+                padding: 0px;
+                margin-top: 15px;
+                margin-bottom: 5px;
+            }
+            .sendemail-labels
+            {
+                font-size: 15px;
+                font-weight: 100;
+                color: #999;
+            }
+            .sendemail-textfield
+            {
+                width: 100%;
+            }
+            .message-textarea
+            {
+                max-width: 516px;
+                min-height: 237px;
+            }
+            .sendemail-btn-holder
+            {
+                padding: 0px;
+                margin-top: 15px;
+                margin-bottom: 38px;
+            }
+            .sendemail-send-btn
+            {
+                border: 0px;
+                background-color: #fed600;
+                font-size: 15px;
+                padding: 13px 20px;
+                font-weight: 700;
+            }
+        </style>
+        <!-- MODAL -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">    
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p class="sendemail-title">MESSAGE US</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="sendemail-textfield-holder">
+                            <label for="input-email" class="sendemail-labels">Email:</label>
+                            <input type="text" name="email_add" class="sendemail-textfield">
+                        </div>
+                        <div class="sendemail-textfield-holder">
+                            <label for="input-subject" class="sendemail-labels">Subject:</label>
+                            <input type="text" name="subject" class="sendemail-textfield">
+                        </div>
+                        <div class="sendemail-textfield-holder">
+                            <label for="input-help" class="sendemail-labels">How Can We Help:</label>
+                            <textarea rows="11" name="help_message" id="we_can_help" class="sendemail-textfield message-textarea"></textarea>
+                        </div>
+                        <div class="sendemail-btn-holder">
+                            <button class="sendemail-send-btn" data-toggle="modal" data-target="#myModal">SEND MESSAGE</button>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div> -->
+                </div>  
+            </div>
+        </div>
+
+
         <div class="search-listing-holder">
             <div class="search-listing-container">
                 <p class="searchlisting-title">SEARCH LISTING</p>
