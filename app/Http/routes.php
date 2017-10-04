@@ -217,6 +217,15 @@ Route::any('/general_admin/business_list', 'GeneralAdminController@general_admin
 Route::any('/general_admin/logout', 'GeneralAdminController@general_admin_logout');
 Route::any('/general_admin/merchants', 'GeneralAdminController@general_admin_merchants');
 Route::any('/general_admin/payment_monitoring', 'GeneralAdminController@general_admin_payment_monitoring');
+Route::any('/general_admin/manage_user', 'GeneralAdminController@general_admin_manage_user');
+Route::any('/general_admin/manage_categories', 'GeneralAdminController@general_admin_manage_categories');
+Route::any('/general_admin/add_category', 'GeneralAdminController@general_admin_add_category');
+Route::any('/general_admin/edit_category', 'GeneralAdminController@general_admin_edit_category');
+Route::any('/general_admin/search_category', 'GeneralAdminController@general_admin_search_category');
+Route::any('/general_admin/delete_category/{id}', 'GeneralAdminController@general_admin_delete_category');
+
+
+
 
 
 Route::any('/sample', 'MerchantController@sample');

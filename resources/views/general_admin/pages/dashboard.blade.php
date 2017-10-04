@@ -2,8 +2,17 @@
 @section('title', 'Dashboard')
 @section('description', 'Dashboard')
 @section('content')
-	<link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+<div class="page-title">
+    <h3>categories</h3>
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/admin">Home</a></li>
+            <li class="active">categories</li>
+        </ol>
+    </div>
+</div>
 <div id="main-wrapper">
 </div>
 <div class="wrapper">

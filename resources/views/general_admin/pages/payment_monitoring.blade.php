@@ -2,12 +2,20 @@
 @section('title', 'Payment Monitoring')
 @section('description', 'Payment Monitoring')
 @section('content')
-
+<div class="page-title">
+    <h3>categories</h3>
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/admin">Home</a></li>
+            <li class="active">categories</li>
+        </ol>
+    </div>
+</div>
 
 <ul class="nav nav-tabs">
 	   <li class="active"><a data-toggle="pill" href="#home">Merchants</a></li>
        <li><a data-toggle="pill" href="#menu1">Agents</a></li>
-	</ul>
+</ul>
 	<div class="tab-content" style="">
 	    <div id="home" class="tab-pane fade in active">
 	    	<div class="text-center">
