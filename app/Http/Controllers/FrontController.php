@@ -222,7 +222,10 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-        $data['business_info'] = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', $request->business_id)->get();
+        $data['business_info'] = DB::table('tbl_business')
+        ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
+        ->where('tbl_business.business_id', '=', $request->business_id)
+        ->get();
         return view('front.pages.business', $data); 
     }
 

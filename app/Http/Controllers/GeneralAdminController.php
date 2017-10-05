@@ -10,6 +10,7 @@ use App\Models\TblBusinessModel;
 use App\Models\TblAdminModels;
 use App\Models\TblUserAccountModel;
 use App\Models\TblPaymentModel;
+use App\Models\TblBusinessCategoryModel;
 use DB;
 use Response;
 use Session;
@@ -158,6 +159,43 @@ class GeneralAdminController extends Controller
     public function email_invoice()
     {
         return view('general_admin.pages.email_invoice');
+    }
+    public function general_admin_manage_user()
+    {
+      return view('general_admin.pages.manage_user');
+    }
+
+    public function general_admin_manage_categories()
+    {
+      $data['category'] = TblBusinessCategoryModel::get();
+      return view('general_admin.pages.manage_categories',$data);
+    }
+    public function general_admin_add_category(Request $request)
+    {
+      $data['business_category_name'] = $request->cat_name;
+      $data['business_category_information'] = $request->cat_info;
+      TblBusinessCategoryModel::insert($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Category Added.</div>";
+    }
+
+    public function general_admin_edit_category(Request $request)
+    {
+      $data['business_category_name'] = $request->cat_name;
+      $data['business_category_information'] = $request->cat_info;
+      TblBusinessCategoryModel::where('business_category_id',$request->cat_id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Category Updated.</div>";
+    }
+    public function general_admin_search_category(Request $request)
+    {
+      $search_key = $request->search_key;
+      $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->orWhere('business_category_information','like','%'.$search_key.'%')->get();
+      return view('general_admin.pages.search_blade',$data);
+    }
+    public function general_admin_delete_category($id)
+    {
+      TblBusinessCategoryModel::where('business_category_id',$id)->delete();
+      Session::flash('message', "Category Deleted");
+      return Redirect::back();
     }
 
     public function report()
