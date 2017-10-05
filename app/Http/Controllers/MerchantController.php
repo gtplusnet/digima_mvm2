@@ -11,6 +11,8 @@ use App\Models\TblUserAccountModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblPaymentMethod;
 use App\Models\TblPaymentModel;
+use App\Models\TblBusinessModel;
+use App\Models\TblBusinessHoursmodels;
 use Redirect;
 use Session;
 // use Request;
@@ -56,6 +58,7 @@ class MerchantController extends Controller
                     // dd($user_info);
 
                     Session::put("merchant_login",true);
+                    Session::put("business_id",$user_info->business_id);
                     Session::put("email",$validate_login->user_email);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     $data['page']   = 'Dashboard';
@@ -172,10 +175,28 @@ class MerchantController extends Controller
 	public function profile()
 	{
 		Self::allow_logged_in_users_only();
-		$data['page']				= 'Profile';
-		//$data['_payment_method']	= Tbl_payment_method::get();
-		return view ('merchant.pages.profile', $data);		
+        $data['page']               = 'Profile';
+        $business_id = session('business_id');
+        $data['business_hours'] = TblBusinessHoursmodels::where('business_id',$business_id)->get();
+        $data['business'] = TblBusinessModel::where('business_id',$business_id)
+                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                          ->first();
+
+        return view ('merchant.pages.profile', $data);		
 	}
+
+     public function add_other_info(Request $request)//
+    {
+        //dd(Request::input());
+        Self::allow_logged_in_users_only();
+
+        $file = $request->company_profile;
+        // echo "james";
+        //        dd($file);
+        return "james";
+  
+    }
 
 	public function view_info()
 	{
@@ -184,19 +205,6 @@ class MerchantController extends Controller
 		$data['other_info']	= TblBusinessOtherInfoModel::get();
 		return view ('merchant.pages.view_info', $data);		
 	}
-
-	
-    public function add_other_info()//
-    {
-    	//dd(Request::input());
-    	Self::allow_logged_in_users_only();
-    	$data['page']				= 'Profile';
-        $insert["company_information"] = Request::input("company_information"); 
-        $insert["business_website"] = Request::input("business_website"); 
-        $insert["year_established"] = Request::input("year_established");
-        TblBusinessOtherInfoModel::insert($insert); 
-        Redirect::to('/merchant/view_info')->send();
-    }
 
 /**
     public function edit($id)
@@ -238,10 +246,42 @@ class MerchantController extends Controller
 
 	public function sample()
 	{
+       
 		return view ('merchant.pages.sample');	
 	}
+   
 
-	
+    public function sample1()
+    {
+       
+        $address = '1700 Parañaque City Philippines';
+        $data['coordinates']  = Self::getCoordinates_long($address);
+        $data['coordinates1'] = Self::getCoordinates_lat($address);
+        return view ('merchant.pages.sample1',$data);
+    }
+
+    function getCoordinates_long($address){
+    $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+    $response = file_get_contents($url);
+    $json = json_decode($response,TRUE); //generate array object from the response from the web
+    $lat = $json['results'][0]['geometry']['location']['lat'];
+    $long = $json['results'][0]['geometry']['location']['lng'];
+    return $long;
+    }
+    function getCoordinates_lat($address){
+    $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+    $response = file_get_contents($url);
+    $json = json_decode($response,TRUE); //generate array object from the response from the web
+    $lat = $json['results'][0]['geometry']['location']['lat'];
+    return $lat;
+    }
+
+    
+   
+
+    	
 
 	
 }

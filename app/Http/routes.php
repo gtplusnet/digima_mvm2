@@ -18,6 +18,13 @@
     return view('welcome');
 });*/
 /*Front Page*/
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');
+
+
+
+
 Route::get('/', 'FrontController@index');
 
 
@@ -73,9 +80,10 @@ Route::get('/login', 'MerchantController@login');
 Route::post('/login', 'MerchantController@login_submit');
 Route::get('/merchant/payment',	'MerchantController@payment');
 Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
+Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
 
 //Eden
-Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
+
 Route::any('/merchant/view_info', 'MerchantController@view_info');
 Route::any('/merchant/sample', 'MerchantController@sample');
 
@@ -229,6 +237,8 @@ Route::any('/general_admin/delete_category/{id}', 'GeneralAdminController@genera
 
 
 Route::any('/sample', 'MerchantController@sample');
+Route::any('/sample1', 'MerchantController@sample1');
+Route::any('/sample_invoice', 'GeneralAdminController@sample_invoice');
 
 Route::any('/sample-upload', 'FrontController@sampleUpload');
 Route::any('/upload-file', 'FrontController@uploadFile');

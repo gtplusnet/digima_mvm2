@@ -13,7 +13,7 @@
 	</div>
 </div>
 <div class="tab-content" style="">
-	<div class="col-md=-12">
+	<div class="col-md-12">
 		<div class="pull-left" style="margin:20px 0px 20px 20px">
 			<button type="button"  data-toggle="modal" data-target="#myModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
 		</div>

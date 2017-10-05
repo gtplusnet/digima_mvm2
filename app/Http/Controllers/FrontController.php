@@ -12,7 +12,7 @@ use App\Models\TblPaymentMethod;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
-
+use App\Models\TblBusinessOtherInfoModel;
 use App\Models\Tbl_county;
 use App\Models\Tbl_city;
 use App\Models\Tbl_business;
@@ -126,6 +126,15 @@ class FrontController extends Controller
             $accountData->business_id = $businessData->business_id;
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();
+
+            $otherData = new TblBusinessOtherInfoModel;
+            $otherData->business_other_info_id = '';
+            $otherData->company_information = 'none';
+            $otherData->business_website = 'none';
+            $otherData->year_established = 'none';
+            $otherData->company_profile = '';
+            $otherData->business_id = $businessData->business_id;
+            $otherData->save();
 
             $businessHoursData = new Tbl_business_hours;
             $businessHoursData->insert(array(

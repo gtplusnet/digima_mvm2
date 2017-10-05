@@ -11,6 +11,7 @@ use App\Models\TblAdminModels;
 use App\Models\TblUserAccountModel;
 use App\Models\TblPaymentModel;
 use App\Models\TblBusinessCategoryModel;
+use App\Models\TblAgentModels;
 use DB;
 use Response;
 use Session;
@@ -162,7 +163,9 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_manage_user()
     {
-      return view('general_admin.pages.manage_user');
+      $data['viewagent']  = TblAgentModels::Team()->get();
+      $data['category'] = TblBusinessCategoryModel::get();
+      return view('general_admin.pages.manage_user',$data);
     }
 
     public function general_admin_manage_categories()
@@ -201,6 +204,11 @@ class GeneralAdminController extends Controller
     public function report()
     {
         return view('general_admin.pages.report');
+    }
+
+    public function sample_invoice()
+    {
+      return view('general_admin.pages.invoice');
     }
 
     /**
