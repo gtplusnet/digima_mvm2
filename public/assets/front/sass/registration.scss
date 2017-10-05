@@ -58,7 +58,6 @@
 {
     color: #fed600;
     font-size: 20px;
-    font-weight: 700;
     margin: 0px;
 }
 .registration-form-container
@@ -69,8 +68,9 @@
 .registration-textarea-container
 {
     padding: 0px;
-    margin-bottom: 18px;
+    margin-bottom: 74px;
     height: auto;
+    margin-top: 20px;
     @media screen and (max-width: 992px)
     {
         margin-top: 17px;
@@ -124,5 +124,4 @@
     background-color: #fed600;
     border: 0px;
     padding: 15px 30px;
-    font-weight: 700;
 }
