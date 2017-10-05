@@ -52,7 +52,7 @@
                                     <th>Business Name</th>
                                     <th>membership</th>
                                     <th>Transaction</th>
-                                    <th></th>
+                                    <th>Upload Conversation</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,7 +74,8 @@
                                                 <h4 class="modal-title"><font size="5px"><i class="fa fa-file-audio-o" aria-hidden="true"></i></font> Upload MP3</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal">
+                                                <form class="form-horizontal" id="uploadForm" action="/agent/upload-convo" method="post" enctype="multipart/form-data">
+                                                {{ csrf_field() }}
                                                  <div class="container" >
                                                    <div class=" col-lg-8" style="margin: 10px 10px 10px 20px">
                                                             <h4> Select MP3 to Upload</h4>
@@ -82,12 +83,7 @@
                                                                Only MP3 is Allowed
                                                             </span>
                                                             <div class="input-group">
-                                                                <label class="input-group-btn">
-                                                                    <span class="btn btn-default">
-                                                                        Select MP3&hellip; <input type="file" id="uploadBtn" style="display: none;" multiple>
-                                                                    </span>
-                                                                </label>
-                                                                <input id="uploadFile" type="text" class="form-control" readonly>
+                                                                <input type="file" name="convoFile" id="convoFile">
                                                             </div>
 
                                                     </div>
@@ -103,6 +99,8 @@
                                                                     <label for="input-Default" class="col-sm-2 control-label">Contact Person Name</label>
                                                                     <div class="col-sm-4">
                                                                         <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_first_name}}" readonly>
+                                                                        <input type="hidden" class="form-control input-rounded" id="businessId" value="{{ $client->business_id }}" name="businessId">
+                                                                        <input type="hidden" class="form-control input-rounded" id="contactId" value="{{ $client->business_contact_person_id }}" name="contactId">
                                                                     </div>
                                                                     <label for="input-Default" class="col-sm-2 control-label">Agent Name</label>
                                                                     <div class="col-sm-4">
@@ -135,11 +133,13 @@
                                                 {{-- <div class="form-control">
                                                                 <button type="button" class="btn btn-success">Submit</button>
                                                 </div> --}}
+                                                
                                                 </form>
                                             </div>
                                             
                                             <div class="modal-footer" style="border:none;">
-                                                <button type="button" data-id="{{$client->business_id}}" class="closed btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" id="uploadButton">Upload</button>
+                                                <button type="submit" data-id="{{$client->business_id}}" class="closed btn btn-danger" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -185,4 +185,5 @@ color:#fff;
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/agent/agent_client.js"></script>
+<script src="/assets/js/agent/upload-conversation.js"></script>
 @endsection

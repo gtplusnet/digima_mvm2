@@ -163,6 +163,7 @@ Route::post('/agent/get_client1', 		'AgentController@get_client1');
 Route::post('/agent/get_client2', 		'AgentController@get_client2');
 Route::post('/agent/get_client_transaction', 		'AgentController@get_client_transaction');
 Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_transaction_reload');
+Route::any('/agent/upload-convo', 'SuperVisorController@uploadConvo');
 
 
 
