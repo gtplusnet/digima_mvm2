@@ -89,8 +89,9 @@
 .overview-title
 {
 	color: #fed600;
-    font-size: 20px;
-    margin: 0px;
+    font-size: 15px;
+    margin-left: 35px;
+    margin-bottom: 0px;
 }
 .overview-content
 {
@@ -102,7 +103,7 @@
 }
 .overview-content-text
 {
-	font-size: 17.28px;
+	font-size: 13px;
     text-align: justify;
 }
 .category-content
@@ -123,19 +124,19 @@
 {
 	background-color: #333;
 	padding: 25px 30px;
-    margin-bottom: 75px;
+    margin-bottom: 78px;
     margin-top: 40px;
 }
 .details-container
 {
 	border-bottom: 1px solid #999;
-	height: 90px;
-	margin-top: 15px;
+	height: 73px;
+	margin-top: 5px;
 }
 .details-container-last
 {
 	margin-top: 15px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
 }
 .business-details-rightpart-title
 {
@@ -169,7 +170,6 @@
 }
 .sociallinks-holder
 {
-	margin-bottom: 30px;
     margin-left: 25px;
 }
 .sociallinks-container
@@ -180,66 +180,72 @@
 {
     display: inline-block;
     width: 100%;
+    margin-bottom: 14px;
+}
+.btn-sendemail
+{
+    border: 0px;
+    background-color: transparent;
 }
 .businesspage-fb-icon
 {
-	color: #3b5998;
-    font-size: 25px;
+    color: #fff;
+    font-size: 20px;
     margin-right: 5px;
     display: inline;
     margin-left: 7px;
 }
 .businesspage-twitter-icon
 {
-	color: #3fcdfd;
-    font-size: 25px;
+    color: #fff;
+    font-size: 20px;
     margin-right: 5px;
     display: inline;
 }
 .business-skype-icon
 {
-    color: #3fcdfd;
-    font-size: 25px;
+    color: #fff;
+    font-size: 20px;
     margin-right: 5px;
     display: inline;
 }
 .business-sendemail-icon
 {
-    color: #3b5998;
-    font-size: 25px;
+    color: #fff;
+    font-size: 20px;
     margin-right: 5px;
     display: inline;
 }
 .go-skype
 {
     color: #fff;
-    font-size: 15px;
+    font-size: 13px;
     margin-right: 40px;
     display: inline;
 }
 .send-mail
 {
     color: #fff;
-    font-size: 15px;
+    font-size: 13px;
     display: inline;
 }
 .fb-like
 {
 	color: #fff;
-    font-size: 15px;
-    margin-right: 55px;
+    font-size: 13px;
+    margin-right: 65px;
     display: inline;
 }
 .twitter-tweet
 {
 	color: #fff;
-    font-size: 15px;
+    font-size: 13px;
     display: inline;
 }
 
 .business-map-container
 {
-    margin-top: 153px;
+    margin-top: 22px;
 }
 #business-map
 {

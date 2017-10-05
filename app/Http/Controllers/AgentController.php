@@ -199,7 +199,7 @@ class AgentController extends Controller
 
 	public function add_client_submit(Request $request)
 	{
-		Self::allow_logged_in_users_only();
+		// Self::allow_logged_in_users_only();
 		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
 
         if(count($check_email_availability) == 1)
@@ -254,7 +254,7 @@ class AgentController extends Controller
 	}
 	public function add_client()
 	{
-		Self::allow_logged_in_users_only();
+		// Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
 		$data['membership_list'] = TblPaymentMethod::get();
 		$data['page']	= 'Add Client';
@@ -299,8 +299,8 @@ class AgentController extends Controller
 
 	public function agent_logout()
 	{
-	
 		Session::forget("agent_login");
         return Redirect::to("/agent");
 	}
+
 }

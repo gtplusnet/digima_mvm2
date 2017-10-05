@@ -9,6 +9,7 @@ use App\Models\TblTeamModel;
 use App\Models\TblAgentModels;
 use App\Models\TblSupervisorModels;
 use App\Models\TblBusinessModel;
+use App\Models\Tbl_conversation;
 use Session;
 use Redirect;
 use Validator;
@@ -276,6 +277,19 @@ class SuperVisorController extends Controller
 
 
     }
+
+    public function uploadConvo(Request $request) {
+		if($request->ajax()) {
+			$fileConvo = $request->file("file");
+            $fileConvo->move('conversations', $fileConvo->getClientOriginalName());
+            $convoInfo = new Tbl_conversation;
+            $convoInfo->file_path = '/conversations/'.$fileConvo->getClientOriginalName().'';
+            $convoInfo->file_name = $fileConvo->getClientOriginalName();
+            $convoInfo->business_id = $request->input("businessId");
+            $convoInfo->business_contact_person_id = $request->input("contactId");
+            $convoInfo->save();
+		}
+	}
 /*
     public function add_agent()
 	{

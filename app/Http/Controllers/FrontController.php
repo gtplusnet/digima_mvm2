@@ -281,11 +281,4 @@ class FrontController extends Controller
             $audioInfo->save();
         }
     }
-
-    // SEND EMAIL
-    public function sendemail()
-    {
-        $data['page']   = 'sendemail';
-        return view('front.pages.sendemail', $data);
-    }
 }
