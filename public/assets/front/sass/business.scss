@@ -89,8 +89,9 @@
 .overview-title
 {
 	color: #fed600;
-    font-size: 20px;
-    margin: 0px;
+    font-size: 15px;
+    margin-left: 35px;
+    margin-bottom: 0px;
 }
 .overview-content
 {
@@ -102,7 +103,7 @@
 }
 .overview-content-text
 {
-	font-size: 17.28px;
+	font-size: 13px;
     text-align: justify;
 }
 .category-content
@@ -169,7 +170,6 @@
 }
 .sociallinks-holder
 {
-	margin-bottom: 30px;
     margin-left: 25px;
 }
 .sociallinks-container
@@ -180,6 +180,7 @@
 {
     display: inline-block;
     width: 100%;
+    margin-bottom: 15px;
 }
 .btn-sendemail
 {
@@ -188,7 +189,7 @@
 }
 .businesspage-fb-icon
 {
-	color: #3b5998;
+    color: #fff;
     font-size: 25px;
     margin-right: 5px;
     display: inline;
@@ -196,21 +197,21 @@
 }
 .businesspage-twitter-icon
 {
-	color: #3fcdfd;
+    color: #fff;
     font-size: 25px;
     margin-right: 5px;
     display: inline;
 }
 .business-skype-icon
 {
-    color: #3fcdfd;
+    color: #fff;
     font-size: 25px;
     margin-right: 5px;
     display: inline;
 }
 .business-sendemail-icon
 {
-    color: #3b5998;
+    color: #fff;
     font-size: 25px;
     margin-right: 5px;
     display: inline;
