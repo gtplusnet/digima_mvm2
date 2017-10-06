@@ -32,12 +32,14 @@
         <link href="/assets/admin/merchant/assets/css/modern.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/merchant/assets/css/themes/white.css" class="theme-color" rel="stylesheet" type="text/css"/>
         <link href="/assets/admin/merchant/assets/css/custom.css" rel="stylesheet" type="text/css"/>
+
+         <!-- Toastr Plugin CSS -->
+        <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
+        
         
         <script src="/assets/admin/merchant/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="/assets/admin/merchant/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-        
-       
-        
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -110,6 +112,9 @@
             }
         });
         </script>
+
+        <!-- Toastr Plugin JS !-->
+        <script src="/assets/js/toastr/toastr.js"></script>
 
     </body>
 </html>
