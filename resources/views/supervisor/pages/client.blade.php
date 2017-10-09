@@ -16,7 +16,7 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
-                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Upload</a></li>
+                            <li class="li_style active"><a data-toggle="tab" href="#pendingCustomer">Pending Upload</a></li>
                             <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">upload Completed</a></li>
                         </ul>
                     </div>
@@ -116,7 +116,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                           
+                                                           <input type="hidden" id="business_id_upload" value="{{$client->business_id}}">
                                                             <div class="col-md-12 distance">
                                                                 <div class="form-group">
                                                                     <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
@@ -125,9 +125,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
-                                                      
-                                                    </div>
+                                                     </div>
                                                 </div>
                                                
                                                 {{-- <div class="form-control">
@@ -138,7 +136,7 @@
                                             </div>
                                             
                                             <div class="modal-footer" style="border:none;">
-                                                <button type="button" class="btn btn-primary" id="uploadButton">Upload</button>
+                                                <button  class="btn btn-primary" id="uploadButton">Upload</button>
                                                 <button type="submit" data-id="{{$client->business_id}}" class="closed btn btn-danger" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
@@ -176,14 +174,14 @@ color:#fff;
 }
 
 </style>
-<script language="javascript">
+{{-- <script language="javascript">
   document.getElementById("uploadBtn").onchange = function () {
     document.getElementById("uploadFile").value = this.value;
 };
 
-</script>
+</script> --}}
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/js/agent/agent_client.js"></script>
+{{-- <script src="/assets/supervisor/supervisor_client.js"></script> --}}
 <script src="/assets/js/agent/upload-conversation.js"></script>
 @endsection

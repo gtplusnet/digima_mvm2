@@ -47,7 +47,7 @@ class SuperVisorController extends Controller
             else
             {
                 $data['page']   = 'supervisor Login';
-                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+                return Redirect::back()->withErrors(['User Login is Incorectsdfsd!', 'User Login is Incorect!fdsf']);
             }
         }
         else

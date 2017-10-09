@@ -35,7 +35,7 @@
 								<input type="password" name="password" class="form-control login-textfield">
 							</div>
 							<div class="col-md-12 login-textfield-container-lastpart">
-								<button class="login-btn">AGENT LOGIN</button>
+								<button class="login-btn">SUPERVISOR LOGIN</button>
 								<a href=""><p class="forgot-password-label">Forgot Password?</p></a>
 							</div>
 						</form>
