@@ -11,6 +11,8 @@
 |
 */
 // 
+// Route::get('pdfview',array('as'=>'pdfview','uses'=>'GeneralAdminController@pdfview'));
+Route::get('/pdfview','GeneralAdminController@pdfview');
 
 
 
@@ -121,9 +123,17 @@ Route::post('/supervisor_login_submit', 	'SupervisorController@supervisor_login_
 
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
+
 Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
 Route::get('/supervisor/profile', 		'SupervisorController@profile');
 Route::get('/supervisor/client', 		'SupervisorController@client');
+//james
+Route::post('/supervisor/get_client', 		'SupervisorController@get_client');
+Route::post('/supervisor/get_client1', 		'SupervisorController@get_client1');
+Route::post('/supervisor/get_client2', 		'SupervisorController@get_client2');
+Route::post('/supervisor/get_client_transaction', 		'SupervisorController@get_client_transaction');
+Route::post('/supervisor/get_client_transaction_reload', 'SupervisorController@get_client_transaction_reload');
+//james
 Route::any('/supervisor/add/user', 		'SupervisorController@add_team');
 
 
@@ -137,7 +147,7 @@ Route::any('/supervisor/update_agent', 'SupervisorController@update_agent');
 
 Route::any('/supervisor/get_city', 		'SupervisorController@get_city');
 Route::any('/supervisor/get_zip_code', 	'SupervisorController@get_zip_code');
-Route::any('/agent/upload-convo', 'SuperVisorController@uploadConvo');
+Route::any('/supervisor/upload-convo', 'SuperVisorController@uploadConvo');
 
 
 Route::any('/admin/add_supervisor_submit', 		'AdminController@add_supervisor_submit');
@@ -230,6 +240,10 @@ Route::any('/general_admin/add_category', 'GeneralAdminController@general_admin_
 Route::any('/general_admin/edit_category', 'GeneralAdminController@general_admin_edit_category');
 Route::any('/general_admin/search_category', 'GeneralAdminController@general_admin_search_category');
 Route::any('/general_admin/delete_category/{id}', 'GeneralAdminController@general_admin_delete_category');
+Route::any('/general_admin/send_invoice/{id}', 'GeneralAdminController@general_admin_send_invoice');
+Route::any('/general_admin/send_save_invoice', 'GeneralAdminController@general_admin_send_save_invoice');
+Route::any('/general_admin/send_save_invoice_v2/{id}', 'GeneralAdminController@general_admin_send_save_invoice_v2');
+
 
 
 

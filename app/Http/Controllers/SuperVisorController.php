@@ -71,10 +71,66 @@ class SuperVisorController extends Controller
                           ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
 
 
 		return view ('supervisor.pages.client', $data);		
 	}
+    public function get_client(Request $request)
+    {
+        $s_date = $request->date_start;
+        $e_date = $request->date_end;
+        $data['clients'] = TblBusinessModel::where('business_status', 2)
+                          ->whereBetween('date_created',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.filtered',$data);
+    }
+    public function get_client1(Request $request)
+    {
+        $s_date = $request->date_start1;
+        $e_date = $request->date_end1;
+        $data['clients'] = TblBusinessModel::
+        whereBetween('date_created',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.filtered1',$data);
+    }
+    
+
+    public function get_client_transaction(Request $request)
+    {
+        $trans_id = $request->transaction_id;
+        // dd($request->transaction_id);
+        $update['transaction_status'] = 'call in progress'; 
+        $update['agent_id'] = session('agent_id'); 
+        $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+        
+
+            return '';
+        
+    }
+
+    public function get_client_transaction_reload(Request $request)
+    {
+        $trans_id = $request->transaction_id;
+        $update['transaction_status'] = 'called'; 
+        $update['business_status'] = '2'; 
+        $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+                 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
+        return '';
+        
+    }
+
+
 	public function add_team()
     {
 		$data['county_list'] = TblCountyModel::get();
@@ -288,6 +344,12 @@ class SuperVisorController extends Controller
             $convoInfo->business_id = $request->input("businessId");
             $convoInfo->business_contact_person_id = $request->input("contactId");
             $convoInfo->save();
+
+            $update['business_status'] = "3";
+            TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
+
+
+
 		}
 	}
 /*

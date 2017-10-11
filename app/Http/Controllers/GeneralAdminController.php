@@ -12,10 +12,13 @@ use App\Models\TblUserAccountModel;
 use App\Models\TblPaymentModel;
 use App\Models\TblBusinessCategoryModel;
 use App\Models\TblAgentModels;
+use App\Models\TblBusinessContactPersonModel;
 use DB;
 use Response;
 use Session;
 use Redirect;
+use PDF2;
+use \PDF;
 
 
 class GeneralAdminController extends Controller
@@ -107,16 +110,63 @@ class GeneralAdminController extends Controller
     public function general_admin_merchants()
     {
         $data['page']    = 'Merchant';
-        $data['clients'] = TblUserAccountModel::where('status','registered')
-                                          ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-                                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-                                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                          ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                          ->orderBy('tbl_business.date_created',"asc")
-
-                                          ->get();
+         $data['clients'] = TblBusinessModel::where('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
         return view('general_admin.pages.merchants',$data);
+    }
+    public function general_admin_send_invoice($id)
+    {
+        
+         $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                          ->first();
+        $data['id']=$id;
+        // dd($data);
+         return view('general_admin.pages.invoice',$data);
+    }
+
+    public function general_admin_send_save_invoice(Request $request)
+    {
+      $business_id = $request->business_id;
+      $business_contact_person_id = $request->business_contact_person_id;
+      $data['invoice_number'] = $request->invoice_number;
+      $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                          ->first();
+      $format["title"] = "A4";
+      $format["format"] = "A4";
+      $format["default_font"] = "sans-serif";
+      $pdf = PDF::loadView('mail', $data, [], $format);
+      return $pdf->stream('document.pdf');
+    }
+    public function general_admin_send_save_invoice_v2(Request $request,$id)
+    {
+      $business_id = $request->business_id;
+      $business_contact_person_id = $request->business_contact_person_id;
+      $data['invoice_number'] = $request->invoice_number;
+      $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                          ->first();
+      $format["title"] = "A4";
+      $format["format"] = "A4";
+      $format["default_font"] = "sans-serif";
+      $pdf = PDF::loadView('mail', $data, [], $format);
+      return $pdf->stream('document.pdf');
+      // $pdf = PDF::loadView('mail',$data);
+      // return $pdf->download('pdfview.pdf');
     }
 
     public function general_admin_payment_monitoring()
@@ -275,5 +325,18 @@ class GeneralAdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+      public function pdfview(Request $request)
+    {
+        // $items = DB::table("tbl_business")->get();
+        // view()->share('items',$items);
+
+        // if($request->has('download')){
+            $pdf = PDF::loadView('pdfview');
+            return $pdf->download('pdfview.pdf');
+        // }
+
+        return view('pdfview');
     }
 }
