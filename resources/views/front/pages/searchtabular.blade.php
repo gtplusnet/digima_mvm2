@@ -64,8 +64,8 @@
 							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
 						</div>
 						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 				</div>
@@ -97,8 +97,8 @@
 							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
 						</div>
 						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 				</div>
@@ -130,109 +130,9 @@
 							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
 						</div>
 						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 searchtabular-result-container">
-				<div class="col-md-4 searchtabular-result-holder">
-					<div class="col-md-12 searchtabular-padding-format">
-						<div class="col-md-12">
-							<img class="img-responsive searchtabular-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
-						</div>
-						<div class="col-md-12 searchtabular-title-container">
-							<a href="/business"><p class="searchtabular-business-title">Mc'Donalds</p></a>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<div class="col-md-2 searchtabular-padding-format">
-								<i class="fa fa-phone searchtabular-contact-icon"></i>
-							</div>
-							<div class="col-md-10 searchtabular-padding-format">
-								<p class="searchtabular-contact-details">123-456-7890</p>	
-							</div>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<div class="col-md-2 searchtabular-padding-format">
-								<i class="material-icons">location_on</i>
-							</div>
-							<div class="col-md-10 searchtabular-padding-format">
-								<p class="searchtabular-address-details">167 W 74th St, Upper West Side, New York, NY 10023, United States</p>	
-							</div>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
-						</div>
-						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 searchtabular-result-holder">
-					<div class="col-md-12 searchtabular-padding-format">
-						<div class="col-md-12">
-							<img class="img-responsive searchtabular-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
-						</div>
-						<div class="col-md-12 searchtabular-title-container">
-							<a href="/business"><p class="searchtabular-business-title">Mc'Donalds</p></a>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<div class="col-md-2 searchtabular-padding-format">
-								<i class="fa fa-phone searchtabular-contact-icon"></i>
-							</div>
-							<div class="col-md-10 searchtabular-padding-format">
-								<p class="searchtabular-contact-details">123-456-7890</p>	
-							</div>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<div class="col-md-2 searchtabular-padding-format">
-								<i class="material-icons">location_on</i>
-							</div>
-							<div class="col-md-10 searchtabular-padding-format">
-								<p class="searchtabular-address-details">167 W 74th St, Upper West Side, New York, NY 10023, United States</p>	
-							</div>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
-						</div>
-						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 searchtabular-result-holder">
-					<div class="col-md-12 searchtabular-padding-format">
-						<div class="col-md-12">
-							<img class="img-responsive searchtabular-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
-						</div>
-						<div class="col-md-12 searchtabular-title-container">
-							<a href="/business"><p class="searchtabular-business-title">Mc'Donalds</p></a>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<div class="col-md-2 searchtabular-padding-format">
-								<i class="fa fa-phone searchtabular-contact-icon"></i>
-							</div>
-							<div class="col-md-10 searchtabular-padding-format">
-								<p class="searchtabular-contact-details">123-456-7890</p>	
-							</div>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<div class="col-md-2 searchtabular-padding-format">
-								<i class="material-icons">location_on</i>
-							</div>
-							<div class="col-md-10 searchtabular-padding-format">
-								<p class="searchtabular-address-details">167 W 74th St, Upper West Side, New York, NY 10023, United States</p>	
-							</div>
-						</div>
-						<div class="col-md-12 searchtabular-detail-container">
-							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
-						</div>
-						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 				</div>
@@ -266,8 +166,8 @@
 							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
 						</div>
 						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 				</div>
@@ -299,8 +199,9 @@
 							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
 						</div>
 						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 				</div>
@@ -332,8 +233,109 @@
 							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
 						</div>
 						<div class="col-md-12 searchtabular-socialnetwork-container">
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-facebook searchtabular-fb-icon"></i> Like</a>
-							<a href="" class="searchtabular-socialnetwork-link"><i class="fa fa-twitter searchtabular-twitter-icon"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 searchtabular-result-container">
+				<div class="col-md-4 searchtabular-result-holder">
+					<div class="col-md-12 searchtabular-padding-format">
+						<div class="col-md-12">
+							<img class="img-responsive searchtabular-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
+						</div>
+						<div class="col-md-12 searchtabular-title-container">
+							<a href="/business"><p class="searchtabular-business-title">Mc'Donalds</p></a>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<div class="col-md-2 searchtabular-padding-format">
+								<i class="fa fa-phone searchtabular-contact-icon"></i>
+							</div>
+							<div class="col-md-10 searchtabular-padding-format">
+								<p class="searchtabular-contact-details">123-456-7890</p>	
+							</div>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<div class="col-md-2 searchtabular-padding-format">
+								<i class="material-icons">location_on</i>
+							</div>
+							<div class="col-md-10 searchtabular-padding-format">
+								<p class="searchtabular-address-details">167 W 74th St, Upper West Side, New York, NY 10023, United States</p>	
+							</div>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
+						</div>
+						<div class="col-md-12 searchtabular-socialnetwork-container">
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 searchtabular-result-holder">
+					<div class="col-md-12 searchtabular-padding-format">
+						<div class="col-md-12">
+							<img class="img-responsive searchtabular-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
+						</div>
+						<div class="col-md-12 searchtabular-title-container">
+							<a href="/business"><p class="searchtabular-business-title">Mc'Donalds</p></a>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<div class="col-md-2 searchtabular-padding-format">
+								<i class="fa fa-phone searchtabular-contact-icon"></i>
+							</div>
+							<div class="col-md-10 searchtabular-padding-format">
+								<p class="searchtabular-contact-details">123-456-7890</p>	
+							</div>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<div class="col-md-2 searchtabular-padding-format">
+								<i class="material-icons">location_on</i>
+							</div>
+							<div class="col-md-10 searchtabular-padding-format">
+								<p class="searchtabular-address-details">167 W 74th St, Upper West Side, New York, NY 10023, United States</p>	
+							</div>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
+						</div>
+						<div class="col-md-12 searchtabular-socialnetwork-container">
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 searchtabular-result-holder">
+					<div class="col-md-12 searchtabular-padding-format">
+						<div class="col-md-12">
+							<img class="img-responsive searchtabular-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
+						</div>
+						<div class="col-md-12 searchtabular-title-container">
+							<a href="/business"><p class="searchtabular-business-title">Mc'Donalds</p></a>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<div class="col-md-2 searchtabular-padding-format">
+								<i class="fa fa-phone searchtabular-contact-icon"></i>
+							</div>
+							<div class="col-md-10 searchtabular-padding-format">
+								<p class="searchtabular-contact-details">123-456-7890</p>	
+							</div>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<div class="col-md-2 searchtabular-padding-format">
+								<i class="material-icons">location_on</i>
+							</div>
+							<div class="col-md-10 searchtabular-padding-format">
+								<p class="searchtabular-address-details">167 W 74th St, Upper West Side, New York, NY 10023, United States</p>	
+							</div>
+						</div>
+						<div class="col-md-12 searchtabular-detail-container">
+							<p class="searchtabular-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
+						</div>
+						<div class="col-md-12 searchtabular-socialnetwork-container">
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 				</div>

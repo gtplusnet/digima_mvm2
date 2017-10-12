@@ -121,8 +121,7 @@ class AdminController extends Controller
 
 	public function add_supervisor()
 	{
-		// $data['team_list'] = Tbl_supervisor::get();
-		$data['page']	= 'Add Agent';
+		$data['page']	= 'Add supervisor';
 		return view ('admin.pages.add_supervisor ', $data);		
 	}
 
@@ -196,21 +195,13 @@ class AdminController extends Controller
     }
 
 		public function admin_logout ()
-// <<<<<<< HEAD
-
-// =======
-// >>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
 	{
-// <<<<<<< HEAD
 
-		Session::forget("login");
-		
+		Session::forget("login");	
         return Redirect::to("/admin");
-// =======
 		Session::put("login", true);
 		$data['page']   = 'Admin Login';
         return view('front.pages.adminlogin', $data);
-// >>>>>>> sub_master
 	}
 	
 	public function dashboard()

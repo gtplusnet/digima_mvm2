@@ -85,7 +85,10 @@
 						<td>{{$categories->business_category_name}}</td>
 						<td>{{$categories->business_category_information}}</td>
 						<td><a href="#"><button type="button" class="btn btn-warning" data-toggle="modal"  id="view_btn" data-target="#myModalEdit{{$categories->business_category_id}}"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
+
+
 						<a href="/general_admin/delete_category/{{$categories->business_category_id}}"><button type="button" class="btn btn-danger" ><i class="fa fa-trash" aria-hidden="true"></i>Delete</button></td>
+
 					</tr>
 					<div class="modal fade" id="myModalEdit{{$categories->business_category_id}}" role="dialog">
 						<div class="modal-dialog modal-md">
@@ -116,9 +119,7 @@
 									</div>
 									<div class="col-sm-12">
 										<center><button type="submit" class="update_category btn btn-primary" name="update_category" id="update_category">Update</button></center>
-									</div>
-									
-									
+									</div>				
 								</div>
 								<div class="modal-footer" style="border:0px;">
 									

@@ -1,4 +1,4 @@
-@extends('front.layout.layout')
+f@extends('front.layout.layout')
 @section('title', 'Business Info')
 @section('content')
 @foreach($business_info as $business_info)
@@ -177,7 +177,10 @@
             <div class="sociallinks-holder">
                 <div class="sociallinks-container">
                     <div class="links-holder">
+                        
                         <a href=""><i class="fa fa-facebook businesspage-fb-icon"></i><p class="fb-like">Like</p></a>
+
+
                         <a href=""><i class="fa fa-twitter businesspage-twitter-icon"></i><p class="twitter-tweet">Tweet</p></a>
                     </div>
                     <div class="links-holder">
