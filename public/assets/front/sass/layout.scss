@@ -9,6 +9,7 @@ body
 }
 .header-logo
 {
+	margin-top: 2px;
 	img
 	{
 		// max-height: 50px;
@@ -24,21 +25,25 @@ body
 	display: inline-block;
 	vertical-align: middle;
 	background-color: #fff;
-	padding: 17px 23px;
+	padding: 18px 23px;
 }
 .nav
 {
 	text-decoration: none !important;
 	color: #333;
 	font-size: 15px;
-	font-weight: 700;
+	font-family: "Poppins Regular", sans-serif;
 }
 .nav-tab:hover
 {
-	background-color: #fed700;
+	background-color: #e8e8e8;
 }
 
-li.active
+li.active-link
+{
+  background-color: #fed700; 
+}
+li.active-link:hover
 {
   background-color: #fed700; 
 }
@@ -66,7 +71,7 @@ li.active
 	display: inline;
     font-size: 15px;
     margin-left: 5px;
-    font-weight: 700;
+    font-family: "Poppins Regular", sans-serif;
 }
 .btn-login, .btn-register
 {

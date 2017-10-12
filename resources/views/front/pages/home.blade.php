@@ -41,7 +41,7 @@
 </div>
 
 
-<div class="row">
+<div>
 	<div class="homecarousel-list-container">
 	<div class="homecarousel-title-container">
 		<p class="homecarousel-title">FEATURED <font class="homecarousel-title-thin">LIST</font></p>
