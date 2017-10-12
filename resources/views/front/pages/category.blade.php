@@ -44,9 +44,13 @@
 						<a href="/business">
 							<img class="category-business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
 						</a>
+
 						<div class="category-icon-container">
-							<a href="" class="category-link-style"><i class="fa fa-facebook category-icon-style-fb"></i> Like</a>
-							<a href="" class="category-link-style"><i class="fa fa-twitter category-icon-style-twitter"></i> Tweet</a>
+
+							
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 					<div class="col-md-7">
@@ -60,14 +64,15 @@
 							</div>
 						</div>
 						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
-					</div>
+					    </div>
 				</div>
 				<div class="category-result-holder">
 					<div class="col-md-5 category-business-profilepic-holder">
 						<img class="category-business-profilepic" src="/images/chowking_pic.jpg" alt="Image">
 						<div class="category-icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook category-icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter category-icon-style-twitter"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 					<div class="col-md-7">
@@ -87,8 +92,9 @@
 					<div class="col-md-5 category-business-profilepic-holder">
 						<img class="category-business-profilepic" src="/images/kfc_pic.jpg" alt="Image">
 						<div class="category-icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook category-icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter category-icon-style-twitter"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 					<div class="col-md-7">
@@ -100,7 +106,7 @@
 							<div class="category-business-details">
 								<i class="material-icons category-details">location_on</i><p>167 W 74th St, Upper West Side, <br>New York, NY 10023, United States</p>
 							</div>
-						</div>
+							</div>
 						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
 					</div>
 				</div>
@@ -108,8 +114,9 @@
 					<div class="col-md-5 category-business-profilepic-holder">
 						<img class="category-business-profilepic" src="/images/wendy_pic.jpg" alt="Image">
 						<div class="category-icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook category-icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter category-icon-style-twitter"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 					<div class="col-md-7">
@@ -129,8 +136,9 @@
 					<div class="col-md-5 category-business-profilepic-holder">
 						<img class="category-business-profilepic" src="/images/max_pic.jpg" alt="Image">
 						<div class="category-icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook category-icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter category-icon-style-twitter"></i> Tweet</a>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 						</div>
 					</div>
 					<div class="col-md-7">

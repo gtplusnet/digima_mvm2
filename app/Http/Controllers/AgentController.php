@@ -16,11 +16,11 @@ use App\Models\TblUserAccountModel;
 use Session;
 use Redirect;
 use Carbon\Carbon;
-<<<<<<< HEAD
-=======
-use Input;
->>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
-use Mail;
+// <<<<<<< HEAD
+// =======
+// use Input;
+// >>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
+// use Mail;
 
 
 class AgentController extends Controller
@@ -52,10 +52,6 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
-<<<<<<< HEAD
-=======
-
->>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
 		return view ('agent.pages.login', $data);
 	}
 
@@ -258,12 +254,7 @@ class AgentController extends Controller
             $account_data->save();
 
            return Redirect::to('/agent/client');
-<<<<<<< HEAD
-    	}
-=======
-
-  		}
->>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
+       }
 	}
 	public function add_client()
 	{

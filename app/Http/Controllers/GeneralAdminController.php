@@ -11,10 +11,15 @@ use App\Models\TblAdminModels;
 use App\Models\TblUserAccountModel;
 use App\Models\TblPaymentModel;
 use App\Models\TblBusinessCategoryModel;
+use App\Models\TblCountyModel;
+use App\Models\TblTeamModel;
+use App\Models\TblAgentmodels;
+use App\Models\TblSupervisorModels;
 use DB;
 use Response;
 use Session;
 use Redirect;
+use insert;
 
 
 class GeneralAdminController extends Controller
@@ -23,24 +28,27 @@ class GeneralAdminController extends Controller
     {
         if(session("general_admin_login") != true)
         {
-            return Redirect::to("/admin")->send();
+            return Redirect::to("/general_admin")->send();
         }
     }
+
     public static function allow_logged_out_users_only()
     {
         if(session("general_admin_login") == true)
         {
-            return Redirect::to("/admin/dashboard")->send();
+            return Redirect::to("/general_admin/dashboard'")->send();
         }
     }
 
 
-    public function index()
+      public function index()
+
     {
         return view('general_admin.pages.general_admin_login');
     }
     public function general_admin_login_submit(Request $request)
     {
+
         $validate_login = TblAdminModels::where('email','=',$request->email)->first();
 
         if($validate_login)
@@ -73,18 +81,19 @@ class GeneralAdminController extends Controller
 
     public function general_admin_logout()
     {
-
         Session::forget("general_admin_login");
         return Redirect::to("/general_admin");
-   
     }
 
     public function general_admin_business_list()
     {
+        Self::allow_logged_in_users_only();
         return view('general_admin.pages.business');
     }
+
     public function general_admin_dashboard()
     {
+         Self::allow_logged_in_users_only();
         return view('general_admin.pages.dashboard');
     }
 
@@ -105,6 +114,7 @@ class GeneralAdminController extends Controller
 
     public function general_admin_merchants()
     {
+        Self::allow_logged_in_users_only();
         $data['page']    = 'Merchant';
         $data['clients'] = TblUserAccountModel::where('status','registered')
                                           ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
@@ -158,15 +168,20 @@ class GeneralAdminController extends Controller
 
     public function email_invoice()
     {
+      Self::allow_logged_in_users_only();
         return view('general_admin.pages.email_invoice');
     }
     public function general_admin_manage_user()
     {
-      return view('general_admin.pages.manage_user');
+      Self::allow_logged_in_users_only();
+      $data['_data'] = TblAdminModels::get();
+      $data['page'] = 'Add Admin';
+      return view('general_admin.pages.manage_user', $data);
     }
 
     public function general_admin_manage_categories()
     {
+      Self::allow_logged_in_users_only();
       $data['category'] = TblBusinessCategoryModel::get();
       return view('general_admin.pages.manage_categories',$data);
     }
@@ -198,8 +213,10 @@ class GeneralAdminController extends Controller
       return Redirect::back();
     }
 
+
     public function report()
     {
+      Self::allow_logged_in_users_only();
         return view('general_admin.pages.report');
     }
 
@@ -266,6 +283,158 @@ class GeneralAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+ 
     }
+
+    public function add_team()
+  {
+     $data['_data'] = TblTeamModel::get();
+    $data['county_list'] = TblCountyModel::get();
+    $data['page'] = 'Add Team';
+    return view ('general_admin.pages.add_team', $data);
+  }
+
+    public function add_generaladmin()
+  {
+    $data['_data'] = TblAdminModels::get();
+    $data['page'] = 'Add Admin';
+    return view ('general_admin.pages.add_generaladmin ', $data);    
+  }
+
+   public function add_agent()
+  {
+    $data['_data'] = TblAgentmodels::get();
+    $data['county_list'] = TblCountyModel::get();
+    $data['team_list'] = TblTeamModel::get();
+    $data['page'] = 'Add Agent';
+    return view ('general_admin.pages.add_agent', $data);   
+  }
+
+  public function add_supervisor()
+  {
+    $data['_data'] = TblSupervisorModels::get();
+    $data['page'] = 'Add supervisor';
+    return view ('general_admin.pages.add_supervisor ', $data);   
+  }
+
+  public function add_admin_submit(Request $request)
+  {
+    $data['full_name'] = $request->full_name;
+    $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+    $data['email'] = $request->email;
+    TblAdminModels::insert($data);
+   return "<div class='alert alert-success'  ><center>
+  <span >SUCCESS! </span>
+   </center></div>";
+  }
+
+    public function edit_admin_submit(Request $request)
+  {
+    // dd($request->all());
+    $data['full_name'] = $request->full_name;
+    $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+    $data['email'] = $request->email;
+    TblAdminModels::where('admin_id',$request->admin_id)->update($data);
+    return view ('general_admin.pages.add_generaladmin ', $data);
+   }
+
+    public function delete_admin_submit($id)
+    {
+      TblAdminModels::where('admin_id',$id)->delete();
+      Session::flash('message', "Admin Deleted");
+      return Redirect::back();
+    }
+
+
+
+  public function add_team_submit(Request $request)
+  {  
+    $data['team_name'] = $request->team_name;
+    $data['team_information'] = $request->team_information;
+    TblTeamModel::insert($data);
+    return "<div class='alert alert-success'  ><center>
+  <span >SUCCESS! </span>
+   </center></div>";
+  }
+  public function edit_team_submit(Request $request)
+  {
+    $data['team_name'] = $request->team_name;
+    $data['team_information'] = $request->team_information;
+    TblTeamModel::where('team_id',$request->team_id)->update($data);
+      return"Update Success";
+   }
+
+  public function delete_team_submit($id)
+  {
+     TblTeamModel::where('team_id',$id)->delete();
+     Session::flash('message', "Team Deleted");
+     return Redirect::back();
+  }
+
+
+  public function add_agent_submit(Request $request)
+  {
+    $data['first_name'] = $request->first_name;
+    $data['last_name'] = $request->last_name;
+    $data['email'] = $request->email;
+    $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+    $data['primary_phone'] = $request->primary_phone;
+    $data['secondary_phone'] = $request->secondary_phone;
+    $data['other_info'] = $request->other_info;
+    TblAgentmodels::insert($data);
+    return "<div class='alert alert-success'  ><center>
+  <span >SUCCESS! </span>
+   </center></div>";
+  }
+
+   public function edit_agent_submit(Request $request)
+  {
+     $data['first_name'] = $request->first_name;
+     $data['last_name'] = $request->last_name;
+     $data['email'] = $request->email;
+     $data['primary_phone'] = $request->primary_phone;
+     $data['secondary_phone'] = $request->secondary_phone;
+     $data['other_info'] = $request->other_info;
+    TblAgentmodels::where('agent_id',$request->agent_id)->update($data);
+    return "<div class='alert alert-success'  ><center>
+  <span >SUCCESS! </span>
+   </center></div>";
+   }
+
+  public function delete_agent_submit($id)
+  {
+      TblAgentmodels::where('agent_id',$id)->delete();
+      Session::flash('message', "Agent Deleted");
+      return Redirect::back();
+  }
+
+  public function add_supervisor_submit(Request $request)
+  {
+    $data['first_name'] = $request->first_name;
+    $data['last_name'] = $request->last_name;
+    $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+    $data['email'] = $request->email;
+    $data['position'] = 'supervisor';
+    TblSupervisorModels::insert($data);
+    return "<div class='alert alert-success'  ><center>
+  <span >SUCCESS! </span>
+   </center></div>";
+  }
+
+   public function edit_supervisor_submit(Request $request)
+  {
+    $data['first_name'] = $request->first_name;
+    $data['last_name'] = $request->last_name;
+    $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+    $data['email'] = $request->email;
+    TblSupervisorModels::where('supervisor_id',$request->supervisor_id)->update($data);
+      return"Success";
+   }
+    public function delete_supervisor_submit($id)
+    {
+      TblSupervisorModels::where('supervisor_id',$id)->delete();
+      Session::flash('message', "Supervisor Deleted");
+      return Redirect::back();
+    }
+  
 }

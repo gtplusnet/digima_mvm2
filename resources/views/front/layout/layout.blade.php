@@ -86,20 +86,21 @@
                         <p class="footer-text">Join today to recieve latest offers</p>
                         <input class="email-add-textbox" type="text" name="email-add" placeholder="Your Email Address">
                         <div class="social-links">
+
                             <div class="holder-facebook">
-                                <a href=""><i class="fa fa-facebook social-icon"></i></a>
+                                <a href="https://www.facebook.com"><i class="fa fa-facebook social-icon"></i></a>
                             </div>
                             <div class="holder-twitter">
-                                <a href=""><i class="fa fa-twitter social-icon"></i></a>
+                                <a href="https://www.twitter.com"><i class="fa fa-twitter social-icon"></i></a>
                             </div>
                             <div class="holder-instagram">
-                                <a href=""><i class="fa fa-instagram social-icon"></i></a>
+                                <a href="https://www.instagram.com"><i class="fa fa-instagram social-icon"></i></a>
                             </div>
                             <div class="holder-pinterest">
-                                <a href=""><i class="fa fa-pinterest-p social-icon"></i></a>
+                                <a href="https://www.pinterest.com"><i class="fa fa-pinterest-p social-icon"></i></a>
                             </div>
                             <div class="holder-googleplus">
-                                <a href=""><i class="fa fa-google-plus social-icon"></i></a>
+                                <a href="https://plus.google.com"><i class="fa fa-google-plus social-icon"></i></a>
                             </div>
                         </div>
                     </div>

@@ -12,10 +12,14 @@ use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblPaymentMethod;
 use App\Models\TblPaymentModel;
 use Redirect;
+use insert;
+use DB;
 use Session;
-// use Request;
 use Input;
-// use Request;
+use flash;
+use where;
+use id;
+
 
 class MerchantController extends Controller
 {
@@ -166,14 +170,13 @@ class MerchantController extends Controller
                 }
         }
        
-       
     }
 
 	public function profile()
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
-		//$data['_payment_method']	= Tbl_payment_method::get();
+		$data['_payment_method']	= Tbl_payment_method::get();
 		return view ('merchant.pages.profile', $data);		
 	}
 
@@ -186,16 +189,33 @@ class MerchantController extends Controller
 	}
 
 	
-    public function add_other_info()//
+    public function add_other_info(Request $request)//
     {
     	//dd(Request::input());
     	Self::allow_logged_in_users_only();
-    	$data['page']				= 'Profile';
-        $insert["company_information"] = Request::input("company_information"); 
-        $insert["business_website"] = Request::input("business_website"); 
-        $insert["year_established"] = Request::input("year_established");
-        TblBusinessOtherInfoModel::insert($insert); 
-        Redirect::to('/merchant/view_info')->send();
+        $data["company_information"] = $request->company_information;
+        $data["business_website"] = $request->business_website;
+        $data["year_established"] = $request->year_established;
+        TblBusinessOtherInfoModel::insert($data); 
+        Session::flash('add_info', "Other Information Save");
+        return Redirect::back();
+    }
+
+
+     public function add_payment_method(Request $request)
+    {
+      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_name"] = $request->payment_method_name;
+      TblPaymentMethod::insert($data); 
+      Session::flash('message', "Payment Save");
+      return Redirect::back();
+    }
+
+     public function delete_payment_method($id)
+    {
+      TblPaymentMethod::where('payment_method_id',$id)->delete();
+      Session::flash('danger', "Payment Deleted");
+      return Redirect::back();
     }
 
 /**

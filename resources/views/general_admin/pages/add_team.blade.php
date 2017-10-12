@@ -9,13 +9,12 @@
         </ol>
     </div>
     <ul class="nav nav-tabs">
-		   <li class="active li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/general_admin">GENERAL ADMIN</a></li>
-	       <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/team">TEAM</a></li>
+		   <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/general_admin">GENERAL ADMIN</a></li>
+	       <li class="active li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/team">TEAM</a></li>
 	       <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/agent">AGENT</a></li>
 	        <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/supervisor">SUPERVISOR</a></li>
 	</ul>
-
-	<div id="showHereSuccess">
+	<div id="showHereSuccess2">
 	</div>
 
 	 @if (Session::has('message'))
@@ -35,45 +34,35 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">ADMIN</h4>
+						<h4 class="modal-title">TEAM</h4>
 					</div>
-					<div class="modal-body" style="margin-bottom: 200px;width: 110%">
+					<div class="modal-body" style="margin-bottom: 150px;width: 115%" >
 						<div id="showHere1">
 						</div>
 
 						<div class="col-sm-12">
 							<div class="form-group col-md-2">
-								<label for="full_name" >Full name</label>
+								<label for="team_name" >Team Name</label>
 							</div>
 							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="full_name" id="full_name"  style="width:100%;margin-bottom: 5px;"/>
+								<input type="text" class="form-control" name="team_name" id="team_name"  style="width:100%;margin-bottom: 5px;"/>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="form-group col-md-2">
-								<label for="email" >Email</label>
+								<label for="team_information" >Team Information</label>
 							</div>
 							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="email" id="email" style="width:100%;margin-bottom: 5px;"/>
+								<input type="text" class="form-control" name="team_information" id="team_information" style="width:100%;margin-bottom: 5px;"/>
 							</div>
 						</div>
+						
 						<div class="col-sm-12">
-							<div class="form-group col-md-2">
-								<label for="password" >Password</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="password" id="password" style="width:100%;margin-bottom: 5px;"/>
-							</div>
-						</div>
-
-
-						<div class="col-sm-12">
-							<center><button type="submit" class="save_admin btn btn-primary" name="save_admin" id="save_admin">Save</button></center>
+							<center><button type="submit" class="save_team btn btn-primary" name="save_team" id="save_team">Save</button></center>
 						</div>
 						
 					</div>
-					<div class="modal-footer" style="border:0px;">
-						
+					<div class="modal-footer" style="border:0px;">			
 					</div>
 				</div>
 			</div>
@@ -82,31 +71,28 @@
 
 	<div id="home" class=" col-md-12 tab-pane fade in active">
 		<div class="table-responsive" id="showHere3">
-			<table class="display table admin_container" style="width: 100%; cellspacing: 0;">
+			<table class="display table team_container" style="width: 100%; cellspacing: 0;">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Full Name</th>
-						<th>Email</th>
+						<th>Team Name</th>
+						<th>Team Information</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($_data as $data)
 					<tr>
-						<td>{{$data->admin_id}}</td>
-						<td>{{$data->full_name}}</td>
-						<td>{{$data->email}}</td>
-						<td><a href="#"><button type="button" admin_id="{{$data->admin_id}}" class="btn btn-warning edit_admin_btn" data-toggle="modal"  id="view_btn" data-target="#myModalEdit{{$data->admin_id}}"><i class="fa fa-pencil" aria-hidden="true" ></i>Edit</button>
+						<td>{{$data->team_id}}</td>
+						<td>{{$data->team_name}}</td>
+						<td>{{$data->team_information}}</td>
+						<td><a href="#"><button type="button" team_id="{{$data->team_id}}" class="btn btn-warning edit_team_btn" data-toggle="modal"  id="view_btn" data-target="#myModalEdit{{$data->team_id}}"><i class="fa fa-pencil" aria-hidden="true" ></i>Edit</button>
 
-						<a href="/general_admin/manage_user/delete_admin_submit/{{$data->admin_id}}">		<button type="button" class="btn btn-danger" >
-						<i class="fa fa-trash" aria-hidden="true"></i>Delete</button></td>
-
-
+						<a href="/general_admin/manage_user/delete_team_submit/{{$data->team_id}}"><button type="button" class="btn btn-danger" ><i class="fa fa-trash" aria-hidden="true"></i>Delete</button></td>
 					</tr>
-					<div class="modal fade" id="myModalEdit{{$data->admin_id}}" role="dialog">
+					<div class="modal fade" id="myModalEdit{{$data->team_id}}" role="dialog">
 						<div class="modal-dialog modal-md">
-						<form method="POST" class="edit_admin_form">
+						<form method="POST" class="edit_team_form">
 							{{ csrf_field() }}
 							<div class="modal-content">
 								<div class="modal-header">
@@ -118,25 +104,24 @@
 									</div>
 									<div class="col-sm-12">
 										<div class="form-group col-md-3">
-											<label for="full_name" >Full Name</label>
+										<label for="team_name" >Team Name</label>
 										</div>
 										<div class="form-group col-md-9">
-											<input value="{{$data->full_name}}" type="text" class="form-control" name="full_name" id="full_name{{$data->admin_id}}"  style="width:100%;margin-bottom: 20px;"/>
+											<input value="{{$data->team_name}}" type="text" class="form-control" name="team_name" id="team_name{{$data->team_id}}"  style="width:100%;margin-bottom: 20px;"/>
 										</div>
 									</div>
 									<div class="col-sm-12">
 										<div class="form-group col-md-3">
-											<label for="email" >Email</label>
+											<label for="team_information" >Team Information</label>
 										</div>
 										<div class="form-group col-md-9">
-											<input value="{{$data->email}}" type="text" class="form-control" name="email" id="email{{$data->admin_id}}" style="width:100%"/>
-											<input value="{{$data->admin_id}}" type="hidden" id="admin_id"/>
+											<input value="{{$data->team_information}}" type="text" class="form-control" name="team_information" id="team_information{{$data->team_id}}" style="width:100%"/>
+											<input value="{{$data->team_id}}" type="hidden" id="team_id"/>
 										</div>
-										<input type="hidden" name="admin_id" value="{{$data->admin_id}}"> 
+										<input type="hidden" name="team_id" value="{{$data->team_id}}"> 
 									</div>
-									
 									<div class="col-sm-12">
-										<center><button type="submit" class="update_admin btn btn-primary" name="admin_id" id="admin_id_btn">Update</button></center>
+										<center><button type="submit" class="update_team btn btn-primary" name="team_id" id="team_id_btn">Update</button></center>
 									</div>							
 								</div>
 
@@ -156,5 +141,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/registration.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin.js"></script>
-
 @endsection
