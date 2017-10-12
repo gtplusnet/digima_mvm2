@@ -42,6 +42,7 @@ Route::any('/business_info', 'FrontController@business_info');
 
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
+Route::any('/contact_send', 'FrontController@contact_send');
 
 
 
@@ -53,11 +54,7 @@ Route::get('/register', 'FrontController@register');
 
 
 Route::get('/business', 'FrontController@business');
-
-
-
-Route::get('/searchresult', 'SearchresultController@index');
-Route::get('/category',		'SearchresultController@category');
+Route::get('/business/details', 'FrontController@business_details');
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category', 'SearchresultController@category');
@@ -66,8 +63,10 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 
-/*Merchant Page by Brain*/
 
+
+/*Merchant Page by Brain*/
+Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
 
@@ -120,6 +119,8 @@ Route::post('/admin/get_client_transaction_reload', 'AdminController@get_client_
 
 Route::get('/supervisor', 				'SupervisorController@index');
 Route::post('/supervisor_login_submit', 	'SupervisorController@supervisor_login_submit');
+Route::any('/supervisor_logout', 	'SupervisorController@supervisor_logout');
+
 
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
@@ -241,9 +242,8 @@ Route::any('/general_admin/edit_category', 'GeneralAdminController@general_admin
 Route::any('/general_admin/search_category', 'GeneralAdminController@general_admin_search_category');
 Route::any('/general_admin/delete_category/{id}', 'GeneralAdminController@general_admin_delete_category');
 Route::any('/general_admin/send_invoice/{id}', 'GeneralAdminController@general_admin_send_invoice');
-Route::any('/general_admin/send_save_invoice', 'GeneralAdminController@general_admin_send_save_invoice');
-Route::any('/general_admin/send_save_invoice_v2/{id}', 'GeneralAdminController@general_admin_send_save_invoice_v2');
-
+Route::any('/general_admin/send_save_invoice/{id}', 'GeneralAdminController@general_admin_send_save_invoice');
+Route::any('/general_admin/manage_invoice', 'GeneralAdminController@general_admin_manage_invoice');
 
 
 
@@ -251,6 +251,7 @@ Route::any('/general_admin/send_save_invoice_v2/{id}', 'GeneralAdminController@g
 
 Route::any('/sample', 'MerchantController@sample');
 Route::any('/sample1', 'MerchantController@sample1');
+Route::any('/sample2', 'MerchantController@sample2');
 Route::any('/sample_invoice', 'GeneralAdminController@sample_invoice');
 
 Route::any('/sample-upload', 'FrontController@sampleUpload');

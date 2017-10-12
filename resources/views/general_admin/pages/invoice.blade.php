@@ -5,7 +5,8 @@
 <div id="main-wrapper">
     <div class="row">
         <div class="invoice" style="margin:0% 20% 10% 20%">
-            <form method="post" action="/general_admin/send_save_invoice_v2/{{$id}}">
+            <form method="post" id="form_print" action="/general_admin/send_save_invoice/{{$id}}">
+            
                 {{csrf_field()}}
                 <div class="panel panel-white">
                     <div class="panel-body">
@@ -21,7 +22,7 @@
                             </div>
                             <div class="col-md-4 text-center"  >
                                 <h4>Invoice Number</h4>
-                                <input type="number" class="form-control" name="invoice_number" id="invoice_number"/>
+                                <input type="number" class="form-control" name="invoice_number" id="invoice_number" required/>
                                 <input type="hidden" value="{{$invoice_info->business_id}}" name="business_id" id="business_id">
                                 <input type="hidden" value="{{$invoice_info->business_contact_person_id}}" name="business_contact_person_id" id="business_contact_person_id">
                             </div>
@@ -93,9 +94,9 @@
                     <div class="col-md-4">
                     </div>
                     <div class="col-md-8">
-                        <button type="button" class="btn btn-default but" id="save_send"><i class="fa fa-print"></i> Save & Send</button>
-                        <button type="submit" class="btn btn-default but"><i class="fa fa-print"></i> Print</button>
-                        <button type="submit" class="btn btn-default but"><i class="fa fa-pdf"></i> Download</button>
+                        <input value="send & save" type="submit" name="submit" class="btn btn-default but" />
+                        <input value="Print" type="submit" name="submit" class="btn btn-default but" />
+                        <input value="Download" type="submit" name="submit" class="btn btn-default but" />
                     </div>
                 </div>
             </form>
@@ -108,6 +109,6 @@
 margin:10px 10px 10px 10px;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_invoice.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/admin/general_admin/assets/js/general_admin_invoice.js"></script> --}}
 @endsection

@@ -8,18 +8,38 @@
 		width:25%;
 	}
 </style>
+<div class="page-title" style="margin-bottom:20px;">
+    <h3>Merchant</h3>
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/admin">Home</a></li>
+            <li class="active">Merchant</li>
+        </ol>
+    </div>
+</div>
 <div class="container">
+
+   
 	<div class="col-md-12">
 
 		<ul class="nav nav-tabs">
-		   <li class="active li_me"><a data-toggle="pill" href="#home">Invoice Approval</a></li>
-	       <li class="li_me"><a data-toggle="pill" href="#menu1">Pending </a></li>
-	       <li class="li_me"><a data-toggle="pill" href="#menu1">Activated</a></li>
+		   <li class="active li_me"><a data-toggle="pill" href="#customer">Send Invoice</a></li>
+	       <li class="li_me"><a data-toggle="pill" href="#pending">Pending</a></li>
+	       <li class="li_me"><a data-toggle="pill" href="#activated">Activated</a></li>
 		</ul>
 	
 
 	<div class="tab-content" style="">
 	      <div id="customer" class="tab-pane fade in active">
+             @if (session('success'))
+           <div class="alert alert-success">
+                Thank you!. Invoice Save and Send Successfully!
+            </div>
+            @elseif(session('error'))
+            <div class="alert alert-danger">
+                Transaction Failed! The file was save but failed to send. Note: goto Invoice to Resend the invoice!
+            </div>
+           @endif
             <div class="row">
                 <div class="panel-body">
                 	<div class="row col-md-6 date" style="margin-right:-20px">
@@ -72,8 +92,55 @@
                     </div>
                 </div>
             </div>
-            
-            
+        </div>
+        <div id="pending" class="tab-pane fade">
+            <div class="row">
+                <div class="panel-body">
+                    <div class="row col-md-6 date" style="margin-right:-20px">
+
+                       <div class="col-md-6" style="padding:1px;">
+                            <select class="form-control" name="date_start" id="date_start">
+                                @foreach($pending_clients as $pending_client)
+                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+                                @endforeach
+                            </select>
+                       </div>
+                       <div class="col-md-6" style="padding:0px">
+                            <select class="form-control" name="date_end" id="date_end">
+                                @foreach($clients as $client_list)
+                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive col-md-12"  id="showHere">
+                        <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date/Added</th>
+                                    <th>Business Name</th>
+                                    <th>membership</th>
+                                    <th>Transaction</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($pending_clients as $pendingclient)
+                                <tr>
+                                    <td>{{$pendingclient->contact_first_name}}  {{$pendingclient->contact_last_name}}</td>
+                                    <td>{{date("F j, Y",strtotime($pendingclient->date_created))}}</td>
+                                    <td>{{$pendingclient->business_name}}</td>
+                                    <td>{{$pendingclient->payment_method_name}}</td>
+                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$client->last_name}}</td>
+                                    <td><a target="_blank" href="/general_admin/send_invoice/{{$pendingclient->business_id}}"><button class="transaction btn btn-default ">Resend Invoice</button></a></td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                     </div>
+                </div>
+            </div>
         </div>
   </div>
  </div>

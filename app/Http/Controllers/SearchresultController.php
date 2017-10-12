@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class SearchresultController extends Controller
 {
-	public function index()
+	public function index(Request $request)
     {
         $data['page']   = 'searchresult';
         return view('front.pages.searchresult', $data);

@@ -5,11 +5,11 @@
 <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 <div class="page-title">
-    <h3>categories</h3>
+    <h3>Dashboard</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/admin">Home</a></li>
-            <li class="active">categories</li>
+            <li class="active">Dashboard</li>
         </ol>
     </div>
 </div>

@@ -64,8 +64,8 @@
 				<div class="col-md-12 dualfield-firstpart">	
 					<label for="password" class="registration-form-label">Membership</label>
 					<select class="form-control" name="membership"  required="true">
-			  			@foreach($payment_method as $payment_methods)
-							<option value="{{ $payment_methods->payment_method_id }}">{{ $payment_methods->payment_method_name }}</option>
+			  			@foreach($membership as $membership)
+							<option value="{{ $membership->membership_id }}">{{ $membership->membership_name }}</option>
 						@endforeach
 	  				</select>
 				</div>

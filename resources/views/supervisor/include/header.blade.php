@@ -145,11 +145,11 @@
                             <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href="/supervisor_logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="login.html" class="log-out waves-effect waves-button waves-classic">
+                        <a href="/supervisor_logout" class="log-out waves-effect waves-button waves-classic">
                             <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
                         </a>
                     </li>

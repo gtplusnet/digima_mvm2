@@ -70,7 +70,7 @@ class MerchantController extends Controller
                     $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
                                           ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
                                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                                           ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
                                          ->first();
@@ -86,7 +86,7 @@ class MerchantController extends Controller
                    
                     $data['page']   = 'Dashboard';
 
-                    return Redirect::to('/merchant/payment');
+                    return Redirect::to('/merchant/redirect');
                    }
                     
                 }
@@ -116,6 +116,10 @@ class MerchantController extends Controller
 		return view ('merchant.pages.dashboard', $data);	
 		
 	}
+    public function merchant_redirect()
+    {
+       return view ('merchant.pages.merchant_redirect');
+    }
      public function payment()
     {
         $data['page']   = 'payment';
@@ -249,7 +253,11 @@ class MerchantController extends Controller
        
 		return view ('merchant.pages.sample');	
 	}
-   
+   public function sample2()
+    {
+       
+        return view ('sample2');  
+    }
 
     public function sample1()
     {
