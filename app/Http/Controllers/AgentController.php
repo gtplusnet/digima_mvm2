@@ -58,6 +58,16 @@ class AgentController extends Controller
 	public function dashboard()
     {
     	$data['page']	= 'Dashboard';
+         $count_merchant_signup = TblBusinessModel::get();
+    	 $count_merchant_signup = TblBusinessModel::where('business_status',1)->get();
+         $count_merchant_pending = TblBusinessModel::where('business_status',2)->get();
+         $count_merchant_activated = TblBusinessModel::where('business_status',3)->get();
+         $data['countSignup'] = $count_merchant_signup->count();
+         $data['countPending'] = $count_merchant_pending->count();
+         $data['countActivated'] = $count_merchant_activated->count();
+         
+
+
 		return view ('agent.pages.dashboard', $data);	
     }
 
@@ -106,28 +116,19 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	 = 'Client';
-		// $data['clients'] = TblUserAccountModel::where('status','registered')
-		// 								  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-		// 	                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-		// 	                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-		// 	                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-		// 	                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-		// 	                              ->orderBy('tbl_business.date_created',"asc")
-
-		// 	                              ->get();
 		$data['clients'] = TblBusinessModel::Where('business_status',1)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
         $data['clients_pending'] = TblBusinessModel::Where('business_status',3)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
         $data['clients_activated'] = TblBusinessModel::Where('business_status',4)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
@@ -144,7 +145,7 @@ class AgentController extends Controller
 		$data['clients'] = TblBusinessModel::Where('business_status',1)
 						  ->whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 		return view('agent.pages.filtered',$data);
@@ -157,7 +158,7 @@ class AgentController extends Controller
 		$data['clients'] = TblBusinessModel::
 		whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 		return view('agent.pages.filtered1',$data);
@@ -170,7 +171,7 @@ class AgentController extends Controller
 		$data['clients'] = TblBusinessModel::
 		whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 		return view('agent.pages.filtered2',$data);

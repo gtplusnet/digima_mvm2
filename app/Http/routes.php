@@ -11,6 +11,8 @@
 |
 */
 // 
+// Route::get('pdfview',array('as'=>'pdfview','uses'=>'GeneralAdminController@pdfview'));
+Route::get('/pdfview','GeneralAdminController@pdfview');
 
 
 
@@ -18,6 +20,13 @@
     return view('welcome');
 });*/
 /*Front Page*/
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');
+
+
+
+
 Route::get('/', 'FrontController@index');
 
 
@@ -33,6 +42,7 @@ Route::any('/business_info', 'FrontController@business_info');
 
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
+Route::any('/contact_send', 'FrontController@contact_send');
 
 
 
@@ -41,11 +51,7 @@ Route::get('/register', 'FrontController@register');
 
 
 Route::get('/business', 'FrontController@business');
-
-
-
-Route::get('/searchresult', 'SearchresultController@index');
-Route::get('/category',		'SearchresultController@category');
+Route::get('/business/details', 'FrontController@business_details');
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category', 'SearchresultController@category');
@@ -54,8 +60,10 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 	
 
-/*Merchant Page by Brain*/
 
+
+/*Merchant Page by Brain*/
+Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
 
@@ -67,6 +75,9 @@ Route::get('/login', 'MerchantController@login');
 Route::post('/login', 'MerchantController@login_submit');
 Route::get('/merchant/payment',	'MerchantController@payment');
 Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
+Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
+
+//Eden
 
 //Eden/oliver
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info');
@@ -110,12 +121,26 @@ Route::post('/admin/get_client_transaction_reload', 'AdminController@get_client_
 
 Route::get('/supervisor', 				'SupervisorController@index');
 Route::post('/supervisor_login_submit', 	'SupervisorController@supervisor_login_submit');
+Route::any('/supervisor_logout', 	'SupervisorController@supervisor_logout');
+
+
+
 
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
+
 Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
 Route::get('/supervisor/profile', 		'SupervisorController@profile');
 Route::get('/supervisor/client', 		'SupervisorController@client');
+//james
+
+Route::post('/supervisor/get_client', 		'SupervisorController@get_client');
+Route::post('/supervisor/get_client1', 		'SupervisorController@get_client1');
+Route::post('/supervisor/get_client2', 		'SupervisorController@get_client2');
+Route::post('/supervisor/get_client_transaction', 		'SupervisorController@get_client_transaction');
+Route::post('/supervisor/get_client_transaction_reload', 'SupervisorController@get_client_transaction_reload');
+Route::get('/supervisor/manage/merchant', 'SupervisorController@manage_merchant');
+//james
 Route::any('/supervisor/add/user', 		'SupervisorController@add_team');
 
 
@@ -129,6 +154,7 @@ Route::any('/supervisor/update_agent', 'SupervisorController@update_agent');
 
 Route::any('/supervisor/get_city', 		'SupervisorController@get_city');
 Route::any('/supervisor/get_zip_code', 	'SupervisorController@get_zip_code');
+Route::any('/supervisor/upload-convo', 'SuperVisorController@uploadConvo');
 
 
 Route::any('/admin/add_supervisor_submit', 		'AdminController@add_supervisor_submit');
@@ -217,6 +243,9 @@ Route::any('/general_admin/add_category', 'GeneralAdminController@general_admin_
 Route::any('/general_admin/edit_category', 'GeneralAdminController@general_admin_edit_category');
 Route::any('/general_admin/search_category', 'GeneralAdminController@general_admin_search_category');
 Route::any('/general_admin/delete_category/{id}', 'GeneralAdminController@general_admin_delete_category');
+Route::any('/general_admin/send_invoice/{id}', 'GeneralAdminController@general_admin_send_invoice');
+Route::any('/general_admin/send_save_invoice/{id}', 'GeneralAdminController@general_admin_send_save_invoice');
+Route::any('/general_admin/manage_invoice', 'GeneralAdminController@general_admin_manage_invoice');
 
 Route::any('/sample', 'MerchantController@sample');
 
@@ -231,7 +260,10 @@ Route::any('/general_admin/manage_user/add/supervisor', 'GeneralAdminController@
 
 Route::post('/general_admin/manage_user/add_admin_submit', 	'GeneralAdminController@add_admin_submit');
 
+
+
 Route::post('/general_admin/manage_user/edit_admin_submit', 	'GeneralAdminController@edit_admin_submit');
+
 
 Route::any('/general_admin/manage_user/delete_admin_submit/{id}', 	'GeneralAdminController@delete_admin_submit');
 
@@ -256,3 +288,8 @@ Route::post('/general_admin/manage_user/edit_supervisor_submit', 	'GeneralAdminC
 
 Route::any('/general_admin/manage_user/delete_supervisor_submit/{id}', 	'GeneralAdminController@delete_supervisor_submit');
 
+
+Route::any('/sample', 'MerchantController@sample');
+Route::any('/sample1', 'MerchantController@sample1');
+Route::any('/sample2', 'MerchantController@sample2');
+Route::any('/sample_invoice', 'GeneralAdminController@sample_invoice');

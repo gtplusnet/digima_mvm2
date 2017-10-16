@@ -1,4 +1,4 @@
-f@extends('front.layout.layout')
+@extends('front.layout.layout')
 @section('title', 'Business Info')
 @section('content')
 @foreach($business_info as $business_info)
