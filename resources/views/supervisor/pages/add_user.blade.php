@@ -25,12 +25,13 @@
                                     <ul class="nav nav-tabs">
                                         <li class="active li_style"><a data-toggle="tab" href="#tab9">Customer</a></li>
                                         <li class="li_style"><a data-toggle="tab" href="#tab10">Pending Customer</a></li>
-                                        <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
+                                        <li class="li_style marg"><a data-toggle="tab11" href="#activatedCustomer">Activated Customer</a></li>
                                     </ul>
                                 </div>
                             </div>
                           </div>  
                         </div>
+
                         <div role="tabpanel" class="tab-pane fade active" id="tab9">
                             <form class="form-horizontal" method="post" action="/supervisor/add_team_submit">
                                 {{csrf_field()}}
@@ -66,6 +67,8 @@
                                 </div>
                             </form>
                         </div>
+
+
                     <div role="tabpanel" class="tab-pane fade {{Session::has('warning_agent') || Session::has('error_agent') || Session::has('error_agent')? 'active in' : ''}}" id="tab10">
                          <form class="form-horizontal" method="post" action="/supervisor/add_agent_submit">
                         {{csrf_field()}}

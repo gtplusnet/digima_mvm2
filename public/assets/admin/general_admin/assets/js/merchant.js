@@ -20,24 +20,24 @@ $(document).ready(function()
 	});
 });
 
-// $(document).ready(function()
-// {
-// 	$(".tab-content").on("submit",".edit_payment_form",function()
-// 	{
-// 		var serialized_data = $(this).serialize();
-// 		console.log(serialized_data);
+$(document).ready(function()
+{
+	$(".tab-content").on("submit",".edit_payment_form",function()
+	{
+		var serialized_data = $(this).serialize();
+		console.log(serialized_data);
 		
-// 		$.ajax({
-// 			type:'POST',
-// 			url:'/merchant/edit_payment_method',
-// 			data:serialized_data,
-// 			dataType:'text',
-// 		}).done(function(data)
-// 		{
-// 			$(".edit_container").load("/merchant/edit_payment_method .edit_container");	
-// 			$(".alert_container").show();
-// 			$("#myModalEdit").modal("hide");
-// 		});
-// 		// return false;
-// 	});
-// });
+		$.ajax({
+			type:'POST',
+			url:'/merchant/edit_payment_method',
+			data:serialized_data,
+			dataType:'text',
+		}).done(function(data)
+		{
+			$(".edit_container").load("/merchant/edit_payment_method .edit_container");	
+			$(".alert_container").show();
+			$("#myModalEdit").modal("hide");
+		});
+		// return false;
+	});
+});

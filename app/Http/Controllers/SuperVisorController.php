@@ -29,17 +29,17 @@ class SuperVisorController extends Controller
         $validate_login = TblSupervisorModels::where('email',$request->email)->first();
         if($validate_login)
 
-
         {
             if (password_verify($request->password, $validate_login->password)) 
                 {
 
                     Session::put("supervisor_login",true);
                     Session::put("supervisor_id",$validate_login->agent_id);
-                    Session::put("full_name",$validate_login->first_name." ".$validate_login->last_name);
+                    Session::put("first_name",$validate_login->first_name);
+                    Session::put("last_name",$validate_login->last_name);
                     Session::put("email",$validate_login->email);
                     Session::put("position",$validate_login->position);
-                    // Session::put("login", $validate->email);
+                    // Session::put("login", $validate_login->email);
                     $data['page']   = 'Dashboard';
 
                     return Redirect::to('/supervisor/dashboard');
@@ -52,10 +52,19 @@ class SuperVisorController extends Controller
         }
         else
         {
-            $data['page']   = 'supervisor Login';
+            
             return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
         }
     }
+
+    public function supervisor_logout()
+    {
+        Session::forget("supervisor_login_submit");
+        return Redirect::to("/supervisor");
+    }
+
+
+
     public function profile()
 	{
 		$data['page']	= 'Profile';

@@ -67,6 +67,22 @@
                             <li role="presentation"><a href="/merchant/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
                     </li>
+                     @if(session("merchant_login"))
+                    <a style="font-size:15px",  href='/merchant/logout'>
+                    <span>
+                    <i class="fa fa-sign-out m-r-xs"></i>
+                    Log out
+                    </span>
+                    </a>
+                    @else
+                    <a style="font-size:15px",  href="">
+                    <span>
+                    <i class="fa fa-sign-out m-r-xs"></i>
+                    Hi Guest
+                    </span>
+                    </a>                       
+                    @endif 
+                    </li>
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->
         </div>

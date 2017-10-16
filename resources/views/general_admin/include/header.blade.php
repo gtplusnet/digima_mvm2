@@ -6,7 +6,10 @@
             </a>
         </div>
         
-        <div class="logo-box">
+       {{--  <div class="logo-box">
+            <a href="index.html" class="logo-text"><span>CROATIA</span></a>
+        </div><!-- Logo Box --> --}}
+         <div class="logo-box">
             
             <a href="/general_admin/dashboard" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
         </div><!-- Logo Box -->
@@ -138,6 +141,8 @@
                             <span class="user-name">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>
+
+                        
                         <ul class="dropdown-menu dropdown-list" role="menu">
                             <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
                             <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>

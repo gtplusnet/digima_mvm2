@@ -13,15 +13,15 @@
             </a>
         </li>
         <li data-menu="profile">
-            <a href="javsacript:void(0);">
+            <a href="/merchant/profile">
                 <span>
                     <i class="glyphicon glyphicon-user"></i>
                 </span>
                 <p>Profile</p>
             </a>
         </li>
-        <li data-menu="profile">
-            <a href="javsacript:void(0);">
+        <li data-menu="Category">
+            <a href="/merchant/category">
                 <span>
                     <i class="glyphicon glyphicon-th-list"></i>
                 </span>
@@ -29,7 +29,7 @@
             </a>
         </li>
         <li data-menu="profile">
-            <a href="javsacript:void(0);">
+            <a href="/merchant/bills">
                 <span>
                     <i class="glyphicon glyphicon-barcode"></i>
                 </span>

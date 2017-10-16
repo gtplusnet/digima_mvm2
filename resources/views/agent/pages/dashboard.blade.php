@@ -31,9 +31,8 @@
 
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Registered
-                                        <i class="fa fa-circle text-warning"></i>Pending
-                                        <i class="fa fa-circle text-success"></i> Activated
+                                        <i class="fa fa-circle text-info"></i> Sign Up Merchant
+                                        <i class="fa fa-circle text-success"></i> Registered Merchant
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -41,10 +40,34 @@
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Users Behavior</h4>
+                                <p class="category">1  performance</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartHours" class="ct-chart"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Date
+                                        <i class="fa fa-circle text-warning"></i> Quantity Sign-up
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!-- 
+                    <div class="col-md-10">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Users Behavior</h4>
@@ -65,7 +88,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
+
+
                 </div>
             </div>
         </div>
@@ -84,8 +110,6 @@
         $(document).ready(function(){
 
             demo.initChartist();
-
-           
 
         });
     </script>

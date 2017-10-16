@@ -226,7 +226,6 @@
                 <div class="alert alert-danger"><center>{{ Session::get('danger') }}</center></div>
                 @endif 
 
-
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="1" cellspacing="1"  border="2">
                          <thead>
@@ -241,13 +240,14 @@
                             <td>{{$data->payment_method_id}}</td>
                             <td>{{$data->payment_method_name}}</td>
                             <td>
-                            <a href="#"><button type="button" " class="btn btn-warning"  id="">
+                            <a href="#"><button type="button" data-toggle="modal" class="btn btn-warning"  id="myModalEdit{{$data->payment_method_id}}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
 
                             <a href="/merchant/delete_payment_method/{{$data->payment_method_id}}"><button type="button" class="btn btn-danger">
                             <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
                             </td>
                             </tr>
+
                             @endforeach
                         </table>  
 
@@ -267,6 +267,10 @@
                             <label for="input-Default" class="col-sm-4 control-label" style="text-align: left;">  </label>
                             <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="save_payment" class="save_payment btn btn-primary" id="save_payment";>ADD</button>
                      </form>
+                       
+
+                     <div class="modal fade" id="myModalEdit{{$data->payment_method_id}}" role="dialog">
+                     
                     </div>
                     </div>
                   </div>

@@ -1,11 +1,10 @@
 @extends('agent.layout.layout')
 @section('content')
 <div class="page-title">
-    <h3>{{ $page }}</h3>
+    <h3>Merchant</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/agent">Home</a></li>
-            <li class="active">{{ $page }}</li>
         </ol>
     </div>
 </div>
@@ -16,9 +15,9 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
-                            <li class="active li_style"><a data-toggle="tab" href="#customer">Customer</a></li>
-                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Customer</a></li>
-                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
+                            <li class="active li_style"><a data-toggle="tab" href="#customer">Sign-Up Merchant</a></li>
+                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Merchant</a></li>
+                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Registered Merchant</a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,21 +47,27 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Date/Added</th>
+                                    <th>ID</th>
                                     <th>Business Name</th>
-                                    <th>membership</th>
-                                    <th>Transaction</th>
+                                    <th>Contact Person</th>
+                                    <th>Phone 1</th>
+                                    <th>Phone 2</th>
+                                    <th>Membership</th>
+                                    <th>Date Register</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients as $client)
                                 <tr>
-                                    <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
+                                    <td>{{$client->business_id}}</td>
                                     <td>{{$client->business_name}}</td>
+                                    <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
+                                    <td>{{$client->business_phone}}</td>
+                                    <td>{{$client->business_alt_phone}}</td>
                                     <td>{{$client->payment_method_name}}</td>
+                                    <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->transaction_status}}</td>
                                     <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
@@ -199,23 +204,29 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Date/Added</th>
+                                    <th>ID</th>
                                     <th>Business Name</th>
-                                    <th>membership</th>
-                                    <th>Transaction</th>
-                                    <th>Action</th>
+                                    <th>Contact Person</th>
+                                    <th>Phone 1</th>
+                                    <th>Phone 2</th>
+                                    <th>Membership</th>
+                                    <th>Date Register</th>
+                                    <!-- <th>Status</th>
+                                    <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients_pending as $clients_pendingss)
                                 <tr>
-                                    <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
+                                     <td>{{$clients_pendingss->business_id}}</td>
                                     <td>{{$clients_pendingss->business_name}}</td>
+                                    <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
+                                    <td>{{$client->business_phone}}</td>
+                                    <td>{{$client->business_alt_phone}}</td>
                                     <td>{{$clients_pendingss->payment_method_name}}</td>
+                                     <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
                                     <td>{{$clients_pendingss->transaction_status}}</td>
-                                    <td><button class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" data-toggle="modal"  data-target="#myModal1{{$clients_pendingss->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
+                                   <!--  <td><button class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" data-toggle="modal"  data-target="#myModal1{{$clients_pendingss->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td> -->
                                 </tr>
                                 <div class="modal fade" id="myModal1{{$clients_pendingss->business_id}}" role="dialog" >
                                     <div class="modal-lg modal-dialog">
@@ -334,22 +345,28 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Date/Added</th>
+                                    <th>ID</th>
                                     <th>Business Name</th>
-                                    <th>membership</th>
-                                    <th>Transaction</th>
-                                    <th>Action</th>
+                                    <th>Contact Person</th>
+                                    <th>Phone 1</th>
+                                    <th>Phone 2</th>
+                                    <th>Membership</th>
+                                    <th>Date Register</th>
+                                    <!-- <th>Status</th>
+                                    <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients_activated as $clients_activate)
                                 <tr>
-                                    <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>
+                                    <td>{{$clients_activate->business_id}}</td>
                                     <td>{{$clients_activate->business_name}}</td>
+                                    <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
+                                    <td>{{$client->business_phone}}</td>
+                                    <td>{{$client->business_alt_phone}}</td>
                                     <td>{{$clients_activate->payment_method_name}}</td>
                                     <td>{{$clients_activate->transaction_status}}</td>
+                                    <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>  
                                     <td><button class="transaction btn btn-default "  data-id="{{$clients_activate->business_id}}" data-toggle="modal"  data-target="#myModal2{{$clients_activate->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
                                 <div class="modal fade" id="myModal2{{$clients_activate->business_id}}" role="dialog" >
@@ -445,38 +462,7 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            
-            <style>
-            
-            .distance
-             {
-                margin:10px 0px 10px 0px;
-             }
-            .li_style{
-            padding:0px;
-            width:33.31%;
-            margin-right:0px;
-            margin-left:-1px;
-            }
-            .modal-header
-            {
-                background-color: #24292E;
-                color:#fff;
-                /*border-radius: 10px;*/
-            }
-            .call
-            {
-            color:green;
-            margin-right: 5px;
-            font-size:20px;
-            }
-            </style>
-            <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="/assets/js/agent/agent_client.js"></script>
-            @endsection
-=======
+
         </div>
     </div>
 </div>
@@ -517,4 +503,4 @@ font-size:20px;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/agent/agent_client.js"></script>
 @endsection
->>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
+

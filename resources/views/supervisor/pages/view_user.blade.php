@@ -93,10 +93,9 @@
                                 <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                     <thead> 
                                         <tr>
-                                            <th>Team</th>
-                                            <th></th>
-                                            <th>Full Name</th>
-                                            <th></th>
+                                            
+                                            <th>First name</th>
+                                            <th>Last name</th>
                                             <th>Email</th>
                                             <th>Contact No</th>
                                             <th>Alternative No</th>
@@ -107,8 +106,7 @@
                                     <tbody>
                                         @foreach ($viewagent as $newagent) 
                                         <tr>
-                                            <td>{{ $newagent-> team_name}}</td>
-                                            <td>{{ $newagent-> prefix}}</td>
+                                            
                                             <td>{{ $newagent-> first_name}}</td>
                                             <td>{{ $newagent-> last_name}}</td>
                                             <td>{{ $newagent-> email}}</td>

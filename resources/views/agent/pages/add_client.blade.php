@@ -1,11 +1,11 @@
 @extends('agent.layout.layout')
 @section('content')
 <div class="page-title clearfix">
-    <h3>{{ $page }}</h3>
+    <h3>Add Merchant</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/agent">Home</a></li>
-            <li class="active">{{ $page }}</li>
+            
         </ol>
     </div>
 </div>
@@ -16,7 +16,12 @@
 	                <h3 class="panel-title" style="color: white;">Profile</h3>
 	            </div>
 
+				@if (Session::has('add_merchant'))
+                <div class="alert alert-success"><center>{{ Session::get('add_merchant') }}</center></div>
+                @endif 
+
 	            <div class="panel-body">
+
 	                <h4>Personal Information</h4>
 	                <form class="form-horizontal" role="form" method="post" action="/add_client_submit">
 	                    {{csrf_field()}}
@@ -88,14 +93,17 @@
 	                            <input type="text" class="form-control input-rounded" name="twitter_username" id="twitter_username">
 	                        </div>
 	                    </div>
+
 	                    <div class="form-group">
 	                        <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
 	                        <div class="col-sm-10">
 	                            <textarea class="form-control input-rounded" name="business_address" id="business_address" placeholder="Address" rows="4" style="border-radius: 20px; resize: none;"  required></textarea>
 	                        </div>
 						</div>
+
 	                    <div class="form-group">
-	                        <label for="county" class="col-sm-2 control-label">County</label>
+
+	                        <label for="county" class="col-sm-2 control-label">Country</label>
 	                        <div class="col-sm-2">
 	                        	<select class="form-control" name="county_list" id="county_list" style="border-radius: 20px;">
 						   				<option value="--Select County--">--Select County--</option>
@@ -104,16 +112,19 @@
 									    @endforeach
   								</select>
 	                        </div>
+	                        
 	                        <label for="city" class="col-sm-2 control-label">City</label>
 	                        <div class="col-sm-2">
 	                            <select class="form-control" name="city_list" id="city_list" style="width: 190px; border-radius: 20px;">
 						   			<option value="--No County Selected--">--No County Selected--</option>
   								</select>
 	                        </div>
+
 	                        <label for="zip_code" class="col-sm-2 control-label">Postal</label>
 	                        <div class="col-sm-2">
 				   	 			<input type="text" class="form-control" name="postal_code" id="postal_code" placeholder="Postal Code" readonly="true" style="border-radius: 20px;">
 	                        </div>
+
 	                    </div>
 	                   
 	                    <div class="form-group">
@@ -123,6 +134,7 @@
 	                        	<button  class="btn btn-primary btn-lg"  style="border-radius: 20px; float: right;">Continue</button>
 	                        </div>
 	                    </div>
+
 	                </form>
 	            </div>
 	        </div>

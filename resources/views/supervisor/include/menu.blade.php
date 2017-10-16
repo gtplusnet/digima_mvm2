@@ -5,7 +5,7 @@
     </header>
     <ul class="cd-nav list-unstyled">
         <li class="cd-selected" data-menu="index">
-            <a href="javsacript:void(0);">
+            <a href="/supervisor/dashboard">
                 <span>
                     <i class="glyphicon glyphicon-home"></i>
                 </span>
@@ -13,31 +13,31 @@
             </a>
         </li>
         <li data-menu="profile">
-            <a href="javsacript:void(0);">
+            <a href="/supervisor/profile">
                 <span>
                     <i class="glyphicon glyphicon-user"></i>
                 </span>
                 <p>Profile</p>
             </a>
         </li>
-        <li data-menu="profile">
-            <a href="javsacript:void(0);">
+        <li data-menu="Client">
+            <a href="/supervisor/client">
                 <span>
                     <i class="fa fa-group"></i>
                 </span>
-                <p>Clients</p>
+                <p>Client</p>
             </a>
         </li>
-        <li data-menu="profile">
-            <a href="javsacript:void(0);">
+        <li data-menu="Manage">
+            <a href="/supervisor/add/user">
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
-                <p>Add User</p>
+                <p>Manage Team/Agent</p>
             </a>
         </li>
-        <li data-menu="profile">
-            <a href="javsacript:void(0);">
+        <li data-menu="view user">
+            <a href="/supervisor/view/user">
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>

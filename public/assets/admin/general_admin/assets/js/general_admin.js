@@ -67,7 +67,7 @@ $(document).ready(function()
 		{
 			$(".admin_container").load("/general_admin/manage_user/add/general_admin .admin_container");	
 			$(".alert_container").show();
-			$("#myModal").modal("hide");
+			// $("#myModal").modal("hide");
 			$('#showHereSuccess').html(data);
 		});
 	});
@@ -113,7 +113,7 @@ $(document).ready(function(){
 		{
 			$(".supervisor_container").load("/general_admin/manage_user/add/supervisor .supervisor_container");	
 			$(".alert_supervisor").show();
-			$("#myModal").modal("hide");
+			// $("#myModal").modal("hide");
 			$('#showHereSuccess1').html(data);
 		});
 	});
@@ -139,11 +139,12 @@ $(document).ready(function()
 			dataType:'text',
 		}).done(function(data)
 		{
-			$(".supervisor_container").load("/general_admin/manage_user/add/supervisor .supervisor_container");	
-			$(".alert_supervisor").show();
-			$("#myModal").modal("hide");
+			// $(".supervisor_container").load("/general_admin/manage_user/add/supervisor .supervisor_container");	
+			// $(".alert_supervisor").show();
+			// // $("#myModal").modal("hide");
+			$('#showHere2').html(data);
 		});
-		// return false;
+		
 	});
 });
 $(document).ready(function(){
@@ -162,7 +163,7 @@ $(document).ready(function(){
 		{
 			$(".team_container").load("/general_admin/manage_user/add/team .team_container");	
 			$(".alert_container").show();
-			$("#myModal").modal("hide");
+			// $("#myModal").modal("hide");
 			$('#showHereSuccess2').html(data);
 		});
 	});
@@ -209,7 +210,7 @@ $(document).ready(function(){
 		{
 			$(".agent_container").load("/general_admin/manage_user/add/agent .agent_container");	
 			$(".alert_team").show();
-			$("#myModal").modal("hide");
+			// $("#myModal").modal("hide");
 			$('#showHereSuccess').html(data);
 		});
 	});

@@ -25,17 +25,17 @@ class MerchantController extends Controller
 {
 	public static function allow_logged_in_users_only()
 	{
-		if(session("merchant_login") != true)
-		{
-			return Redirect::to("/login")->send();
-		}
+		// if(session("merchant_login") != true)
+		// {
+		// 	return Redirect::to("/login")->send();
+		// }
 	}
 	public static function allow_logged_out_users_only()
 	{
-		if(session("merchant_login") )
-		{
-			return Redirect::to("/merchant/dashboard")->send();
-		}
+		// if(session("merchant_login") )
+		// {
+		// 	return Redirect::to("/merchant/dashboard")->send();
+		// }
 	}
 
 	public function login()
@@ -218,6 +218,16 @@ class MerchantController extends Controller
       return Redirect::back();
     }
 
+      public function edit_payment_method(Request $request)
+    {
+      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_name"] = $request->payment_method_name;
+      TblPaymentMethod::where($data)->update($data);
+      // Session::flash('message', "Payment Save");
+      return Redirect::back();
+
+    }
+
 /**
     public function edit($id)
     {
@@ -260,8 +270,5 @@ class MerchantController extends Controller
 	{
 		return view ('merchant.pages.sample');	
 	}
-
-	
-
 	
 }
