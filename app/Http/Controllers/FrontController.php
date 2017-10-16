@@ -12,7 +12,7 @@ use App\Models\TblPaymentMethod;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblUserAccountModel;
-
+use App\Models\TblBusinessOtherInfoModel;
 use App\Models\Tbl_county;
 use App\Models\Tbl_city;
 use App\Models\Tbl_business;
@@ -20,10 +20,12 @@ use App\Models\Tbl_business_contact_person;
 use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
 use App\Models\Tbl_audio;
+use App\Models\TblMembeshipModel;
 use Session;
 use Carbon\Carbon;
 use Redirect;
 use DB;
+use Mail;
 
 class FrontController extends Controller
 {
@@ -44,8 +46,9 @@ class FrontController extends Controller
     // }
     public function index()
     {
-        $countyList = Tbl_county::get();
-        return view('front.pages.home', compact('countyList'));
+        $data['countyList'] = TblCountyModel::get();
+        $data['cityList'] = TblCityModel::get();
+        return view('front.pages.home',$data);
     }
 
     public function registration()
@@ -53,7 +56,7 @@ class FrontController extends Controller
 
         $data['county_list'] = TblCountyModel::get();
         // dd($data);
-        $data['payment_method'] = TblPaymentMethod::get();
+        $data['membership'] = TblMembeshipModel::get();
         $data['countyList'] = Tbl_county::get();
         return view('front.pages.registration', $data);
     }
@@ -127,6 +130,15 @@ class FrontController extends Controller
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();
 
+            $otherData = new TblBusinessOtherInfoModel;
+            $otherData->business_other_info_id = '';
+            $otherData->company_information = 'none';
+            $otherData->business_website = 'none';
+            $otherData->year_established = 'none';
+            $otherData->company_profile = '';
+            $otherData->business_id = $businessData->business_id;
+            $otherData->save();
+
             $businessHoursData = new Tbl_business_hours;
             $businessHoursData->insert(array(
                 array('days' => 'Monday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
@@ -195,15 +207,43 @@ class FrontController extends Controller
 
     public function businessSearch(Request $request)
     {
-        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown");
+        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown&cityId=$request->cityDropdown");
     }
 
     public function businessSearchResult(Request $request)
     {
-        $businessKeyword = $request->businessKeyword;
-        $businessResult = Tbl_business::searchBusinessResult($businessKeyword, $request->countyId)->paginate(5);
-        return view('front.pages.searchresult', compact('businessResult', 'businessKeyword')); 
+        $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
+        $data['countyID'] = $countyID = $request->countyId;
+        $data['cityID'] = $cityID = $request->cityId;
+        $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
+        return view('front.pages.searchresult',$data); 
     }
+
+    public function business_details(Request $request)
+    {
+        $address = '1700 Parañaque City Philippines';
+        $data['coordinates']  = Self::getCoordinates_long($address);
+        $data['coordinates1'] = Self::getCoordinates_lat($address);
+        return view('front.pages.business_details',$data); 
+    }
+    function getCoordinates_long($address){
+        $address = str_replace(" ", "+", $address); 
+        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+        $response = file_get_contents($url);
+        $json = json_decode($response,TRUE); 
+        $lat = $json['results'][0]['geometry']['location']['lat'];
+        $long = $json['results'][0]['geometry']['location']['lng'];
+        return $long;
+    }
+    function getCoordinates_lat($address){
+        $address = str_replace(" ", "+", $address); 
+        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+        $response = file_get_contents($url);
+        $json = json_decode($response,TRUE); 
+        $lat = $json['results'][0]['geometry']['location']['lat'];
+        return $lat;
+    }
+    
     
     // THIS IS A DUMMY
     // STARTS HERE
@@ -239,10 +279,40 @@ class FrontController extends Controller
         $data['page']   = 'Contact';
         return view('front.pages.contact', $data);
     }
+    public function contact_send(Request $request)
+    {
+        $contact_name= $request->name;
+        $contact_email_add = $request->email_add;
+        $contact_subject = $request->subject;
+        $contact_help_message = $request->help_message;
+        $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
+
+        $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
+        $check_mail = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
+         $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
+            ('THE RIGHT PLACE FOR BUSINESS');
+         $message->from('guardians35836@gmail.com','Croatia Customer');
+        });
+        if($check_mail)
+        {
+            Session::flash('success', 'Thank you!. Your Message Send Successfully!');
+            return Redirect::to('/contact');
+        }
+        else
+        {
+            Session::flash('error', 'Sorry!. Network error, Transaction Fail!');
+            return Redirect::to('/contact');
+        }
+        
+    }
     
-    public function business()
+    public function business(Request $request)
     {
         $data['page']   = 'business';
+         $data['business_info'] = DB::table('tbl_business')
+        ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
+        ->where('tbl_business.business_id', '=', $request->business_id)
+        ->get();
         return view('front.pages.business', $data);
     }
     public function admin()

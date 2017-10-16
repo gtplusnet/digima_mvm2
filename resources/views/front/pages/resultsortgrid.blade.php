@@ -66,10 +66,9 @@
 							<p class="tabled-business-description">Description of the store Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...</p>
 						</div>
 						<div class="col-md-12 tabled-socialnetwork-container">
-
-							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
-
-							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+							<?php $fb = "facebook.com/AngDiaryNgLoyal/"; $twit = "twitter.com/iAmJames_35836"; ?>
+							<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2F{{$fb}}&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="88" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+							<a href="https://{{$twit}}" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false"  data-size="large">Tweet</a>
 						</div>
 					</div>
 				</div>

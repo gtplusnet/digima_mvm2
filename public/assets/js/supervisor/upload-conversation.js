@@ -32,7 +32,7 @@ $(document).ready(function () {
                 form_data.append("businessId", businessId);
                 form_data.append("contactId", contactId);
                 $.ajax({
-                    url: "/agent/upload-convo",
+                    url: "/supervisor/upload-convo",
                     method: "POST",
                     data: form_data,
                     contentType: false,
@@ -41,6 +41,12 @@ $(document).ready(function () {
                     success: function (data) {
                         $('#uploadModal').modal('hide');
                         toastr.success("Audio file uploaded successfully!");
+                        setTimeout(function(){location.reload();},3000);
+                        // if(toastr.success())
+                        // {
+                        //      window.location.reload();
+                        // }
+                       
                         $("*#selAudioBtn*").html("Select Audio File..");
                         $("*#selAudioBtn*").attr("class", "btn btn-primary btn-rounded");
                     }

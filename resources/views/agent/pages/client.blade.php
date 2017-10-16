@@ -445,38 +445,7 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            
-            <style>
-            
-            .distance
-             {
-                margin:10px 0px 10px 0px;
-             }
-            .li_style{
-            padding:0px;
-            width:33.31%;
-            margin-right:0px;
-            margin-left:-1px;
-            }
-            .modal-header
-            {
-                background-color: #24292E;
-                color:#fff;
-                /*border-radius: 10px;*/
-            }
-            .call
-            {
-            color:green;
-            margin-right: 5px;
-            font-size:20px;
-            }
-            </style>
-            <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="/assets/js/agent/agent_client.js"></script>
-            @endsection
-=======
+
         </div>
     </div>
 </div>
@@ -517,4 +486,4 @@ font-size:20px;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/agent/agent_client.js"></script>
 @endsection
->>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
+
