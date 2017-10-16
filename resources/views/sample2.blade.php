@@ -1,3 +1,58 @@
+<?php
+function getPageFanCount() {
+    $pageData = @file_get_contents('https://graph.facebook.com/AngDiaryNgLoyal/');
+    if($pageData) { // if valid json object
+        $pageData = json_decode($pageData); // decode json object
+        if(isset($pageData->likes)) { // get likes from the json object
+           return $pageData->likes;
+        }
+    } else {
+        echo 'page is not a valid FB Page';
+    }
+}
+echo getPageFanCount();
+
+function wds_post_like_count( $post_id ='https://www.facebook.com/AngDiaryNgLoyal/') {
+ 
+  // Check for transient
+  if ( ! ( $count = get_transient( 'wds_post_like_count' . $post_id ) ) ) {
+ 
+    // Setup query arguments based on post permalink
+    $fql  = "SELECT url, ";
+    //$fql .= "share_count, "; // total shares
+    //$fql .= "like_count, "; // total likes
+    //$fql .= "comment_count, "; // total comments
+    $fql .= "total_count "; // summed total of shares, likes, and comments (fastest query)
+    $fql .= "FROM link_stat WHERE url = '" . get_permalink( $post_id ) . "'";
+ 
+    // Do API call
+    $response = wp_remote_retrieve_body( wp_remote_get( 'https://api.facebook.com/method/fql.query?format=json&query=' . urlencode( $fql ) ) );
+ 
+    // If error in API call, stop and don't store transient
+    if ( is_wp_error( $response ) )
+      return 'error';
+ 
+    // Decode JSON
+    $json = json_decode( $response );
+ 
+    // Set total count
+    $count = absint( $json[0]->total_count );
+ 
+    // Set transient to expire every 30 minutes
+    set_transient( 'wds_post_like_count' . $post_id, absint( $count ), 30 * MINUTE_IN_SECONDS );
+ 
+  }
+ 
+ return absint( $count );
+ 
+}
+echo wds_post_like_count();
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
   <head>

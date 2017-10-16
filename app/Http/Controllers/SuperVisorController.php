@@ -154,6 +154,16 @@ class SuperVisorController extends Controller
         return '';
         
     }
+    public function manage_merchant()
+    {
+        $data['page'] = 'Manage Merchant';
+       $data['clients'] = TblBusinessModel::where('business_status', 2)->orWhere('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.manage_merchant',$data);
+    }
 
 
 	public function add_team()

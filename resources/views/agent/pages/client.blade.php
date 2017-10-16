@@ -445,6 +445,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -485,3 +486,4 @@ font-size:20px;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/agent/agent_client.js"></script>
 @endsection
+

@@ -11,62 +11,64 @@
 </div>
 <div id="main-wrapper">
     
-    <div class=" panel-primary">
-        <div class="panel-heading row clearfix">
-            <div class="col-md-8">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active li_style"><a data-toggle="tab" href="#team">Team</a></li>
-                        <li class="li_style"><a data-toggle="tab" href="#agent">Agent</a></li>
-                        <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
-                    </ul>
+    
+    <div class="tab-content">
+        <div class=" panel-primary">
+            <div class="panel-heading row clearfix">
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active li_style"><a data-toggle="tab" href="#team">Team</a></li>
+                            <li class="li_style"><a data-toggle="tab" href="#agent">Agent</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade" id="team">
-            <div class="panel-body">
-                
-                <form class="form-horizontal" method="post" action="/supervisor/add_team_submit">
-                    {{csrf_field()}}
-                    @if(session()->has('warning_team'))
-                    <div class="alert alert-success">
-                        <strong>Success!</strong> Team Added Successfully!.
-                    </div>
-                    @endif
-                    @if(session()->has('error_team'))
-                    <div class="alert alert-danger">
-                        <strong>Warning!</strong> {!! session('error_team') !!}
-                    </div>
-                    @endif
-                    <h4>Team Information</h4>
-                    <div class="form-group">
-                        <label for="input-Default" class="col-sm-2 control-label">Team Name</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control input-rounded" name="team_name"  id="team_name" required>
+        <div  class="tab-pane fade in active" id="team">
+            <div class="row">
+                <div class="panel-body">
+                    
+                    <form class="form-horizontal" method="post" action="/supervisor/add_team_submit">
+                        {{csrf_field()}}
+                        @if(session()->has('warning_team'))
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Team Added Successfully!.
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="input-Default" class="col-sm-2 control-label">Team Description</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control input-rounded" name="team_information" id="team_information" placeholder="Description" rows="4" style="border-radius: 20px; resize: none;" required></textarea>
+                        @endif
+                        @if(session()->has('error_team'))
+                        <div class="alert alert-danger">
+                            <strong>Warning!</strong> {!! session('error_team') !!}
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-9">
+                        @endif
+                        <h4>Team Information</h4>
+                        <div class="form-group">
+                            <label for="input-Default" class="col-sm-2 control-label">Team Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control input-rounded" name="team_name"  id="team_name" required>
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <button  class="btn btn-primary btn-lg" style="border-radius: 20px; float: right;">Add Team</button>
+                        <div class="form-group">
+                            <label for="input-Default" class="col-sm-2 control-label">Team Description</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control input-rounded" name="team_information" id="team_information" placeholder="Description" rows="4" style="border-radius: 20px; resize: none;" required></textarea>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <div class="col-sm-9">
+                            </div>
+                            <div class="col-sm-3">
+                                <button  class="btn btn-primary btn-lg" style="border-radius: 20px; float: right;">Add Team</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="agent">
+        <div  class="tab-pane fade" id="agent">
             <form class="form-horizontal" method="post" action="/supervisor/add_agent_submit">
                 {{csrf_field()}}
-                @if(session()->has('warning_agent'))
+               {{--  @if(session()->has('warning_agent'))
                 <div class="alert alert-success">
                     <strong>Success!</strong> Agent Updated Successfully!.
                 </div>
@@ -75,7 +77,7 @@
                 <div class="alert alert-danger">
                     <strong>Warning!</strong> {!! session('error_agent') !!}
                 </div>
-                @endif
+                @endif --}}
                 <h4>Personal Information</h4>
                 <div class="form-group">
                     <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
@@ -151,12 +153,10 @@
     </div>
     
 </div>
-</div>
-</div>
 <style>
 .li_style{
 padding-bottom: 0px;
-width:33.31%;
+width:50%;
 margin-right:0px;
 margin-left:-1px;
 }

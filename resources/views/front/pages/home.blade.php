@@ -28,7 +28,7 @@
 						<div class="col-md-3 searchfields-format">
 							{{-- <input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode"> --}}
 							<select class="counties-selectbox" required="true" name="cityDropdown" id="cityDropdown">
-								<option value="" disabled selected>--County--</option>
+								<option value="" disabled selected>--City--</option>
 								@foreach($cityList as $cityListItem)
 									<option value="{{ $cityListItem->city_id }}">{{ $cityListItem->city_name }}</option>
 								@endforeach

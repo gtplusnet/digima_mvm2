@@ -44,7 +44,7 @@
 						<td>{{ $invoice->contact_first_name }} {{ $invoice->contact_last_name }}</td>
 						<td>{{ $invoice->invoice_number }}</td>
 						<td><a target="blank" href="{{$invoice->invoice_path}}" >{{ $invoice->invoice_name }}</a></td>
-						<td>{{ $invoice->payment_method_name }}</td>
+						<td>{{ $invoice->membership_name }}</td>
 						<td>{{ $invoice->date_created }}</td>
 						<td>
 							 <div class="form-group">

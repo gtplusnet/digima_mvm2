@@ -5,10 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
-
 use App\Models\TblAdminModels;
 use App\Models\TblSupervisorModels;
-
 use App\Models\TblTeamModel;
 use App\Models\TblAgentModels;
 use App\Models\TblBusinessModel;
@@ -35,36 +33,32 @@ class AdminController extends Controller
 		}
 	}
 
-
 	public function profile()
 	{
 		$data['page']	= 'Profile';
 		return view ('admin.pages.profile', $data);		
 	}
-/*<<<<<<< HEAD
+
     public function sample()
     {
         $data['page']   = 'Profile';
         return view ('admin.pages.sample', $data);     
-=======
+    }
     public function user()
     {
         $data['page']   = 'User';
         return view ('admin.pages.user', $data);        
->>>>>>> 0cf5c707a29209462be292258d0a3f824f67daca
-    }*/
-	public function client()
 
-<<<<<<< HEAD
+    }
+	public function client()
     {
         $data['page']    = 'Client';
-        $data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-                                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                          ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                          ->orderBy('tbl_business.date_created',"asc")
-
-                                          ->get();
+        $data['client'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+            ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+            ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+            ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+            ->orderBy('tbl_business.date_created',"asc")
+            ->get();
         return view ('admin.pages.client', $data);  
     }
 
@@ -102,17 +96,9 @@ class AdminController extends Controller
         $update['transaction_status'] = 'called'; 
         $update['business_status'] = '2'; 
         $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-        return '';
-        
+        return '';  
     }
 
-
-=======
-	{
-		$data['page']	= 'Client';
-		return view ('admin.pages.client', $data);		
-	}
->>>>>>> sub_master
 	public function add_team()
 	{
 
@@ -135,8 +121,7 @@ class AdminController extends Controller
 
 	public function add_supervisor()
 	{
-		// $data['team_list'] = Tbl_supervisor::get();
-		$data['page']	= 'Add Agent';
+		$data['page']	= 'Add supervisor';
 		return view ('admin.pages.add_supervisor ', $data);		
 	}
 
@@ -211,19 +196,14 @@ class AdminController extends Controller
 
 		public function admin_logout ()
 	{
-<<<<<<< HEAD
 
-		Session::forget("login");
-		
+		Session::forget("login");	
         return Redirect::to("/admin");
-=======
 		Session::put("login", true);
 		$data['page']   = 'Admin Login';
         return view('front.pages.adminlogin', $data);
->>>>>>> sub_master
 	}
 	
-
 	public function dashboard()
     {
     	$data['page']	= 'Dashboard';
@@ -258,6 +238,31 @@ class AdminController extends Controller
 		return Redirect::to('/admin/add/agent')->with('warning', 'testing');
 	}
 
+	public function add_supervisor_submit(Request $request)
+	{
+		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
+		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
+		$data['email'] = $request->email;
+		$data['position'] = 'supervisor';
+		
+		// dd($data);
+		TblSupervisorModels::insert($data);
+		return Redirect::to('/admin/add/supervisor')->with('warning', 'testing');
+
+	}
+	public function add_admin_submit(Request $request)
+	{
+		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
+		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
+		$data['email'] = $request->email;
+		
+		// dd($data);
+		TblAdminModels::insert($data);
+		return Redirect::to('/admin/add/admin')->with('warning', 'testing');
+
+	}
 
 	//Eden 
 	// public function add_team()
@@ -323,8 +328,6 @@ class AdminController extends Controller
         Redirect::to("/admin/view_team")->send();
     }
     
-
-	
     /*public function view_agent()
 	{
 		$data['page']	= 'View Agent';
@@ -349,32 +352,4 @@ class AdminController extends Controller
        Redirect::to("/admin/view_team")->send();
     }
 */
-
-	public function add_supervisor_submit(Request $request)
-	{
-		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
-		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-
-		$data['email'] = $request->email;
-		$data['position'] = 'supervisor';
-		
-		// dd($data);
-		TblSupervisorModels::insert($data);
-		return Redirect::to('/admin/add/supervisor')->with('warning', 'testing');
-
-	}
-	public function add_admin_submit(Request $request)
-	{
-		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
-		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-
-		$data['email'] = $request->email;
-		
-		// dd($data);
-		TblAdminModels::insert($data);
-		return Redirect::to('/admin/add/admin')->with('warning', 'testing');
-
-	}
-
-
 }

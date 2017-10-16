@@ -227,19 +227,19 @@ class FrontController extends Controller
         return view('front.pages.business_details',$data); 
     }
     function getCoordinates_long($address){
-        $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+        $address = str_replace(" ", "+", $address); 
         $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
         $response = file_get_contents($url);
-        $json = json_decode($response,TRUE); //generate array object from the response from the web
+        $json = json_decode($response,TRUE); 
         $lat = $json['results'][0]['geometry']['location']['lat'];
         $long = $json['results'][0]['geometry']['location']['lng'];
         return $long;
     }
     function getCoordinates_lat($address){
-        $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+        $address = str_replace(" ", "+", $address); 
         $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
         $response = file_get_contents($url);
-        $json = json_decode($response,TRUE); //generate array object from the response from the web
+        $json = json_decode($response,TRUE); 
         $lat = $json['results'][0]['geometry']['location']['lat'];
         return $lat;
     }
@@ -306,9 +306,13 @@ class FrontController extends Controller
         
     }
     
-    public function business()
+    public function business(Request $request)
     {
         $data['page']   = 'business';
+         $data['business_info'] = DB::table('tbl_business')
+        ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
+        ->where('tbl_business.business_id', '=', $request->business_id)
+        ->get();
         return view('front.pages.business', $data);
     }
     public function admin()

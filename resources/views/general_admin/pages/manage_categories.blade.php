@@ -104,7 +104,9 @@ table tr td:first-child::before {
 						<td>{{$categories->business_category_name}}</td>
 						<td>{{$categories->business_category_information}}</td>
 						<td><a href="#"><button type="button" class="btn btn-warning" data-toggle="modal"  id="view_btn" data-target="#myModalEdit{{$categories->business_category_id}}"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
+
 					    <button type="button" class="btn btn-danger"  data-toggle="modal"  id="deleteModal" data-target="#deleteModal{{$categories->business_category_id}}"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button></td>
+
 					</tr>
 					<div style="margin-top: 150px;" class="modal fade" id="myModalEdit{{$categories->business_category_id}}" role="dialog">
 						<div class="modal-dialog modal-md">
@@ -133,12 +135,14 @@ table tr td:first-child::before {
 										</div>
 									</div>
 									<div class="col-sm-12">
+
 										<center><button type="submit" class="update_category btn btn-primary" name="update_category" id="update_category">Update</button>
 										       <button type="button" class="btn btn-default" onClick="window.location.reload();" data-dismiss="modal">Close</button>
 									    </center>
 									</div>
 									
 									
+
 								</div>
 								<div class="modal-footer" style="border:0px;">
 									

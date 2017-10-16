@@ -48,9 +48,9 @@
 						<td>{{ $business_item->payment_reference_number }}</td>
 						<td>₱ {{ $business_item->payment_amount }}</td>
 						<td>{{ $business_item->date_created }}</td>
-						<td><a href="#"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong" data-id={{ $business_item->business_id}} ><i class="fa fa-eye" aria-hidden="true"></i> View</button></td>
+						<td><a href="#"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong{{ $business_item->business_id}}" data-id="{{ $business_item->business_id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button></td>
 					</tr>
-					<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+					<div class="modal fade" id="exampleModalLong{{ $business_item->business_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">

@@ -45,8 +45,10 @@
 									<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
 								</a>
 								<div class="icon-container">
-									<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-									<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
+
+									<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+									
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 								</div>
 							</div>
 							<div class="col-md-7">

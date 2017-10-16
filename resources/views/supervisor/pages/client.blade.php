@@ -70,7 +70,7 @@
                                     <td style="text-align: center;">{{$client->contact_first_name}} {{$client->contact_last_name}}</td>
                                     <td style="text-align: center;">{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td style="text-align: center;">{{$client->business_name}}</td>
-                                    <td style="text-align: center;">{{$client->payment_method_name}}</td>
+                                    <td style="text-align: center;">{{$client->membership_name}}</td>
                                     <td style="text-align: center;">
                                         <button class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target="#uploadModal" data-bid="{{ $client->business_id }}" data-cid="{{ $client->business_contact_person_id }}" id="selAudioBtn">
                                             Select Audio File
@@ -148,14 +148,14 @@
                                 <td style="text-align: center;">{{$clients_activate->contact_first_name}} {{$clients_activate->contact_last_name}}</td>
                                 <td style="text-align: center;">{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>
                                 <td style="text-align: center;">{{$clients_activate->business_name}}</td>
-                                <td style="text-align: center;">{{$clients_activate->payment_method_name}}</td>
+                                <td style="text-align: center;">{{$clients_activate->membership_name}}</td>
                                 <td style="text-align: center;">
                                     <button class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target="#viewModal{{$clients_activate->business_id}}" data-bid="{{ $clients_activate->business_id }}" data-cid="{{ $clients_activate->business_contact_person_id }}" id="playAudioBtn">
                                     Play Audio
                                     </button>
                                 </td>
                             </tr>
-                            <div style="margin-top:160px;" class="modal fade" id="viewModal{{$clients_activate->business_id}}" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <div style="margin-top:160px;" class="modal fade in" id="viewModal{{$clients_activate->business_id}}" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -173,7 +173,6 @@
                                              </div>
                                         </div>
                                         <div class="modal-footer" style="background-color: #34425A; padding-top: 20px;">
-                                            <button type="button" class="btn btn-info btn-rounded"  data-dismiss="">Upload</button>
                                             <button type="button" class="btn btn-danger btn-rounded closeBtn" name="closeBtn" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>

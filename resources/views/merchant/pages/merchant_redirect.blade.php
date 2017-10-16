@@ -11,9 +11,11 @@
 <div class="container">
 	<div style="margin-bottom: 50px;">
 		<div class="banner-holder" >
-			<i class="fa fa-check-circle-o check-icon"></i>
+			
 			<p class="message-intro">Hello {{session('full_name')}},</p>
 			<p class="success-message">You are redirected to this page due to unpaid transaction.<br>Please wait for the agent to call you.</p>
+			<p class="success-message">If you have now the invoice and already paid.<br>Please click <a href="/merchant/payment">here</a>. </p>
+			
 			<a href="/"><button class="continue-btn">CONTINUE</button></a>
 		</div>
 	</div>

@@ -6,210 +6,148 @@
 		
 	</div>
 </div>
+
+
 <div class="container">
-	<div>
-	    <p class="searched-business">SEARCH RESULT FOR: <a class="search-link" href=""></a></p>
-	</div>
-	<div>
-		<div class="col-md-8 search-table">
-			<div class="sort-holder">
-				<div class="pull-left">
-					<select class="sort-select">
-						<option value="" disabled selected>Sort By</option>
-						<option></option>
-						<option>Most Like</option>
-						<option>Most Popular</option>
-						<option>Newest</option>
-						<option>---------------------</option>
-					</select>
+	<div class="col-md-6 contact-container-left">
+		 @if (session('success'))
+           <div class="alert alert-success">
+                Thank you!. Your Message Send Successfully!
+            </div>
+            @elseif(session('error'))
+            <div class="alert alert-danger">
+                Sorry!. Network error, Transaction Fail!
+            </div>
+           @endif
+        <div class="contact-title-container">
+			<p class="contact-title">Business Information</p>
+		</div>
+		<div class="contact-details">
+			<div class="details-info-holder">
+				<a href="/business">
+									<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
+								</a>
+			</div>
+			<div class="details-info-holder">
+				<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+									
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+								
+			</div>
+			<div class="details-info-holder">
+			<a href="/business_info?business_id=m"><p class="business-title">m</p></a>
+								</div>
+								<div class="details-info-holder">
+				<div class="details-icon-holder">
+					<i class="material-icons details-icon">location_on</i>
 				</div>
-				<div class="pull-right">
-					<div class="sort-tabs">
-						<div class="sort-icon-holder">
-							<a class="sort-icon" href="/searchresult"><i class="glyphicon glyphicon-th-list"></i></a>
-						</div>
-						<div class="pull-right">
-							<div class="sort-icon-holder">
-								<a class="sort-icon" href="/searchtabular"><i class="glyphicon glyphicon-th"></i></a>
-							</div>
-						</div>
-					</div>
+				<div class="details-info-container">
+					<p class="details-info">8871 Spruce Street, Elizabeth City, NC 27909</p>
 				</div>
 			</div>
-			<div class="col-md-12 search-result-container">
-				
-				<div class="search-result-holder">
-					<div class="col-md-5 business-profilepic-holder">
-						<a href="/business">
-							<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
-						</a>
-						<div class="icon-container">
-							<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-							<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<a href="/business_info?business_id="><p class="business-title"></p></a>
-						<div class="business-details-holder">
-							<div class="business-details">
-								<i class="fa fa-phone details"></i><p></p>
-							</div>
-							<div class="business-details">
-								<i class="material-icons details">location_on</i><p></p>
-							</div>
-						</div>
-						<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...<a target="blank" href="/business_location">Read More</a></p>
-					</div>
+			<div class="details-info-holder">
+				<div class="details-icon-holder">
+					<i class="material-icons details-icon">phone_iphone</i>
 				</div>
-				<div class="col-md-12">
-				<div class="map-container">
-			     <div id="map"></div>
-			    <script>
-			      function initMap() {
-			      	
-			      	var uluru = {lat: {{$coordinates1}}, lng: {{$coordinates}}};
-			        // var uluru = {lat: -25.363, lng: 131.044};
-			        var map = new google.maps.Map(document.getElementById('map'), {
-			          zoom: 4,
-			          center: uluru
-			        });
-			        var marker = new google.maps.Marker({
-			          position: uluru,
-			          map: map
-			        });
-			      }
-			    </script>
-		        </div>
-	          </div>
-
-				
+				<div class="details-info-container">
+					<p class="details-info">0123-456-789</p>
+				</div>
+			</div>
+			<div class="details-info-holder">
+				<div class="details-icon-holder">
+					<i class="material-icons details-icon">mail_outline</i>
+				</div>
+				<div class="details-info-container">
+					<p class="details-info">email@gmail.com</p>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
-			
-			<div class="featuredlist-holder">
-				<div class="featuredlist-title-holder">
-					<p class="featuredlist-title">FEATURED LIST</p>
+		<div class="contact-title-container">
+			<p class="contact-title">MESSAGE US</p>
+		</div>
+		<div>
+			<form role="form" action="/contact_send" method="post">
+				{{csrf_field()}}
+			<div class=" col-md-12 contact-form-container">
+				<div class="col-md-12 contact-textfield-holder">
+					<div class="col-md-6 contact-textfield-left-holder">
+						<label for="input-name" class="contact-labels">Name:</label>
+						<input type="text" name="name" class="contact-textfield" required/>
+					</div>
+					<div class="col-md-6 contact-textfield-right-holder">
+						<label for="input-email" class="contact-labels">Email:</label>
+						<input type="email" name="email_add" class="contact-textfield" required/>
+					</div>
 				</div>
-				<div class="featuredlist-container">
-			        <div id="carousel-pager" class="carousel slide featured-carousel" data-ride="carousel" data-interval="3000">
-			            <!-- Carousel items -->
-			            <div class="carousel-inner vertical inner-vertical-carousel">
-			                <div class="active item">
-			                	<div class="featured-details-container">
-			                		<div class="detail-picture-container">
-			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
-			                    	</div>
-			                    	<div class="detail-name-container">	
-			                    		<p class="detail-name-title">Name of Business</p>
-			                    	</div>
-			                    </div>
-			                </div>
-			                <div class="item">
-			                    <div class="featured-details-container">
-			                    	<div class="detail-picture-container">
-			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
-			                    	</div>
-			                    	<div class="detail-name-container">	
-			                    		<p class="detail-name-title">Name of Business</p>
-			                    	</div>
-			                    </div>
-			                </div>
-			                <div class="item">
-			                    <div class="featured-details-container">
-			                    	<div class="detail-picture-container">
-			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
-			                    	</div>
-			                    	<div class="detail-name-container">	
-			                    		<p class="detail-name-title">Name of Business</p>
-			                    	</div>
-			                    </div>
-			                </div>
-			                <div class="item">
-			                    <div class="featured-details-container">
-			                    	<div class="detail-picture-container">
-			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
-			                    	</div>
-			                    	<div class="detail-name-container">	
-			                    		<p class="detail-name-title">Name of Business</p>
-			                    	</div>
-			                    </div>
-			                </div>
-			                <div class="item">
-			                    <div class="featured-details-container">
-			                    	<div class="detail-picture-container">
-			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
-			                    	</div>
-			                    	<div class="detail-name-container">	
-			                    		<p class="detail-name-title">Name of Business</p>
-			                    	</div>
-			                    </div>
-			                </div>
-			                <div class="item">
-			                    <div class="featured-details-container">
-			                    	<div class="detail-picture-container">
-			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
-			                    	</div>
-			                    	<div class="detail-name-container">	
-			                    		<p class="detail-name-title">Name of Business</p>
-			                    	</div>
-			                    </div>
-			                </div>
-			                <div class="item">
-			                    <div class="featured-details-container">
-			                    	<div class="detail-picture-container">
-			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="2">
-			                    	</div>
-			                    	<div class="detail-name-container">	
-			                    		<p class="detail-name-title">Name of Business</p>
-			                    	</div>
-			                    </div>
-			                </div>
-			            </div>			                
-			            <!-- Controls -->
-			            <a style="margin-top:40px;" class="left carousel-control features-control" href="#carousel-pager" role="button" data-slide="prev">
-			                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-			                <span class="sr-only">Previous</span>
-			            </a>
-			            <a style="margin-top:20px;" class="right carousel-control features-control" href="#carousel-pager" role="button" data-slide="next">
-			                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-			                <span class="sr-only">Next</span>
-			            </a>
-			        </div>
+				<div class="col-md-12 contact-textfield-holder">
+					<label for="input-subject" class="contact-labels">Subject:</label>
+					<input type="text" name="subject" class="contact-textfield" required/>
+				</div>
+				<div class="col-md-12 contact-textfield-holder">
+					<label for="input-help" class="contact-labels">How Can We Help:</label>
+					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea" required/></textarea>
+				</div>
+				<div class="col-md-12 contact-btn-holder">
+					<button class="contact-send-btn">SEND MESSAGE</button>
 				</div>
 			</div>
-			<script type="text/javascript">
-
-				// function smyMap() {
-				// 	var lat={{$coordinates1}};
-				// 	var long={{$coordinates}};
-				//   var myCenter = new google.maps.LatLng(lat,long);
-				//   var mapCanvas = document.getElementById("googleMap");
-				//   var mapOptions = {center: myCenter, zoom: 5};
-				//   var map = new google.maps.Map(mapCanvas, mapOptions);
-				//   var marker = new google.maps.Marker({position:myCenter});
-				//   marker.setMap(map);
-				// }
-
-				$('.carousel .vertical .item').each(function(){
-				  var next = $(this).next();
-				  if (!next.length) {
-				    next = $(this).siblings(':first');
-				  }
-				  next.children(':first-child').clone().appendTo($(this));
-				  
-				  for (var i=1;i<8;i++) {
-				    next=next.next();
-				    if (!next.length) {
-				    	next = $(this).siblings(':first');
-				  	}
-				    
-				    next.children(':first-child').clone().appendTo($(this));
-				  }
-				});
+			</form>
+		</div>
+	</div>
+	<div class="col-md-6 contact-container-right">
+		<div class="contact-title-container">
+			<p class="contact-title">Business Location</p>
+		</div>
+		<div class="map-container">
+			<!-- <img src="/images/example_googlemap.jpg" class="google-map"> -->
+				<div id="map"></div>
+			    <script>
+			function initMap() {
+				
+				var uluru = {lat: {{$coordinates1}}, lng: {{$coordinates}}};
+			// var uluru = {lat: -25.363, lng: 131.044};
+			var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 4,
+			center: uluru
+			});
+			var marker = new google.maps.Marker({
+			position: uluru,
+			map: map
+			});
+			}
 			</script>
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr0DttJQ2kkNjyughGhLAF8UfsMjI2WHY&callback=myMap"></script>
+		</div>
+		<div class="contact-title-container">
+			<p class="contact-title">DETAILS</p>
+		</div>
+		<div class="contact-details">
+			<div class="details-info-holder">
+				<div class="details-icon-holder">
+					<i class="material-icons details-icon">location_on</i>
+				</div>
+				<div class="details-info-container">
+					<p class="details-info">8871 Spruce Street, Elizabeth City, NC 27909</p>
+				</div>
+			</div>
+			<div class="details-info-holder">
+				<div class="details-icon-holder">
+					<i class="material-icons details-icon">phone_iphone</i>
+				</div>
+				<div class="details-info-container">
+					<p class="details-info">0123-456-789</p>
+				</div>
+			</div>
+			<div class="details-info-holder">
+				<div class="details-icon-holder">
+					<i class="material-icons details-icon">mail_outline</i>
+				</div>
+				<div class="details-info-container">
+					<p class="details-info">email@gmail.com</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr0DttJQ2kkNjyughGhLAF8UfsMjI2WHY&callback=myMap"></script>
 @endsection

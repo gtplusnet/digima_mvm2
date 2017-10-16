@@ -14,10 +14,14 @@ use App\Models\TblPaymentModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessHoursmodels;
 use Redirect;
+use insert;
+use DB;
 use Session;
-// use Request;
 use Input;
-// use Request;
+use flash;
+use where;
+use id;
+
 
 class MerchantController extends Controller
 {
@@ -112,7 +116,18 @@ class MerchantController extends Controller
 	public function index()
 	{	
 		Self::allow_logged_in_users_only();
-		$data['page']	= 'Dashboard';
+        $fb_page = '742953982442308'; 
+        $access_token = 'EAAD6rZBdEZBzABALWYhj5EtQIYLedACll6rwjOQwgbauhb0o34lPWOqzhd6FK6qs1qNo73KvIJZAHBCJVTe3eM05AMDpXsH1zkt5zZAj48bEBzVL6rAKupxJwMFxnZA8OB9vaPz1fybkBQNg1JuoPn08dvnTRDQ44ez43vySolQT4VzNMiocRZBaVjdVtw33HqqHt0NK2fagZDZD';
+        $url = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($curl);  
+        curl_close($curl);
+        $details = json_decode($result,true);
+        $data['fb'] = $details['fan_count'];
+        $data['page']	= 'Dashboard';
+
 		return view ('merchant.pages.dashboard', $data);	
 		
 	}
@@ -173,34 +188,19 @@ class MerchantController extends Controller
                 }
         }
        
-       
     }
 
 	public function profile()
 	{
 		Self::allow_logged_in_users_only();
-        $data['page']               = 'Profile';
-        $business_id = session('business_id');
-        $data['business_hours'] = TblBusinessHoursmodels::where('business_id',$business_id)->get();
-        $data['business'] = TblBusinessModel::where('business_id',$business_id)
-                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                          ->first();
 
-        return view ('merchant.pages.profile', $data);		
+		$data['page']				= 'Profile';
+		$data['_payment_method']	= Tbl_payment_method::get();
+		return view ('merchant.pages.profile', $data);		
+
 	}
 
-     public function add_other_info(Request $request)//
-    {
-        //dd(Request::input());
-        Self::allow_logged_in_users_only();
-
-        $file = $request->company_profile;
-        // echo "james";
-        //        dd($file);
-        return "james";
-  
-    }
+   
 
 	public function view_info()
 	{
@@ -209,6 +209,37 @@ class MerchantController extends Controller
 		$data['other_info']	= TblBusinessOtherInfoModel::get();
 		return view ('merchant.pages.view_info', $data);		
 	}
+
+	
+    public function add_other_info(Request $request)//
+    {
+    	//dd(Request::input());
+    	Self::allow_logged_in_users_only();
+        $data["company_information"] = $request->company_information;
+        $data["business_website"] = $request->business_website;
+        $data["year_established"] = $request->year_established;
+        TblBusinessOtherInfoModel::insert($data); 
+        Session::flash('add_info', "Other Information Save");
+        return Redirect::back();
+    }
+
+
+     public function add_payment_method(Request $request)
+    {
+      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_name"] = $request->payment_method_name;
+      TblPaymentMethod::insert($data); 
+      Session::flash('message', "Payment Save");
+      return Redirect::back();
+    }
+
+     public function delete_payment_method($id)
+    {
+      TblPaymentMethod::where('payment_method_id',$id)->delete();
+      Session::flash('danger', "Payment Deleted");
+      return Redirect::back();
+    }
+
 
 /**
     public function edit($id)
@@ -273,7 +304,7 @@ class MerchantController extends Controller
     $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
     $response = file_get_contents($url);
     $json = json_decode($response,TRUE); //generate array object from the response from the web
-    $lat = $json['results'][0]['geometry']['location']['lat'];
+    // $lat = $json['results'][0]['geometry']['location']['lat'];
     $long = $json['results'][0]['geometry']['location']['lng'];
     return $long;
     }

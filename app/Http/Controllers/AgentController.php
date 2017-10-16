@@ -16,10 +16,11 @@ use App\Models\TblUserAccountModel;
 use Session;
 use Redirect;
 use Carbon\Carbon;
-use Input;
-use Mail;
-
-
+// <<<<<<< HEAD
+// =======
+// use Input;
+// >>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
+// use Mail;
 
 
 class AgentController extends Controller
@@ -51,10 +52,24 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
-
 		return view ('agent.pages.login', $data);
-
 	}
+
+	public function dashboard()
+    {
+    	$data['page']	= 'Dashboard';
+         $count_merchant_signup = TblBusinessModel::get();
+    	 $count_merchant_signup = TblBusinessModel::where('business_status',1)->get();
+         $count_merchant_pending = TblBusinessModel::where('business_status',2)->get();
+         $count_merchant_activated = TblBusinessModel::where('business_status',3)->get();
+         $data['countSignup'] = $count_merchant_signup->count();
+         $data['countPending'] = $count_merchant_pending->count();
+         $data['countActivated'] = $count_merchant_activated->count();
+         
+
+
+		return view ('agent.pages.dashboard', $data);	
+    }
 
 	public function agent_login(Request $request)
 	{
@@ -240,8 +255,7 @@ class AgentController extends Controller
             $account_data->save();
 
            return Redirect::to('/agent/client');
-
-  		}
+       }
 	}
 	public function add_client()
 	{

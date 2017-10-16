@@ -68,6 +68,7 @@
                                     <th>Business Name</th>
                                     <th>membership</th>
                                     <th>Transaction</th>
+                                    <th>Conversation</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -77,8 +78,9 @@
                                     <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->business_name}}</td>
-                                    <td>{{$client->payment_method_name}}</td>
+                                    <td>{{$client->membership_name}}</td>
                                     <td>{{$client->transaction_status}} by: {{$client->first_name}} {{$client->last_name}}</td>
+                                    <td><a target="blank" href="{{$client->file_path}}">{{$client->file_name}}</a></td>
                                     <td><a target="_blank" href="/general_admin/send_invoice/{{$client->business_id}}"><button class="transaction btn btn-default "><i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice</button></a></td>
                                 </tr>
 
@@ -131,7 +133,7 @@
                                     <td>{{$pendingclient->contact_first_name}}  {{$pendingclient->contact_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($pendingclient->date_created))}}</td>
                                     <td>{{$pendingclient->business_name}}</td>
-                                    <td>{{$pendingclient->payment_method_name}}</td>
+                                    <td>{{$pendingclient->membership_name}}</td>
                                     <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$client->last_name}}</td>
                                     <td><a target="_blank" href="/general_admin/send_invoice/{{$pendingclient->business_id}}"><button class="transaction btn btn-default ">Resend Invoice</button></a></td>
                                 </tr>
