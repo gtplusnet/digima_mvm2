@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+        
         <div  class="tab-pane fade in active" id="team">
             <div class="row">
                 <div class="panel-body">

@@ -109,6 +109,7 @@ class FrontController extends Controller
             $businessData->twitter_url = $request->twitterUsername;
             $businessData->membership = $request->membership;
             $businessData->business_status = '1';
+            $businessData->date_transact = date("Y/m/d");
             $businessData->date_created = date("Y/m/d");
 
             $businessData->save();

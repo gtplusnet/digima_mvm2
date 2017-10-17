@@ -1,5 +1,5 @@
-$(document).ready(function(){
 
+$(document).ready(function(){
 	$('#date_end').change(function(){
 		var date_start = $('#date_start').val();
 		var date_end = $('#date_end').val();
@@ -14,10 +14,6 @@ $(document).ready(function(){
 				$('#showHere').html(data);
 			});
 	});
-});
-
-
-$(document).ready(function(){
 
 	$('.transaction').click(function(){
 		var transaction_id = $(this).data("id");

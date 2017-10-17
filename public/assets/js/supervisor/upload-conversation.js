@@ -1,4 +1,19 @@
 $(document).ready(function () {
+    //jamess
+    $(document).on("click", "#forceBtn", function () {
+
+        var businessId = document.getElementById("businessId").value;
+        var contactId = document.getElementById("contactId").value;
+        $.ajax({
+            type:'POST',
+            url:'/supervisor/force_activate',
+            data:{businessId: businessId,contactId: contactId},
+            dataType:'text',
+        }).done(function(data){
+                $('#forceSuccess').html(data);
+            });
+    });
+    //james
     
     $(document).on("click", "#selAudioBtn", function () {
         var bId = $(this).data("bid");

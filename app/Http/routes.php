@@ -140,12 +140,15 @@ Route::post('/supervisor/get_client2', 		'SupervisorController@get_client2');
 Route::post('/supervisor/get_client_transaction', 		'SupervisorController@get_client_transaction');
 Route::post('/supervisor/get_client_transaction_reload', 'SupervisorController@get_client_transaction_reload');
 Route::get('/supervisor/manage/merchant', 'SupervisorController@manage_merchant');
+Route::any('/supervisor/manage_user', 	'SupervisorController@manage_user');
+Route::post('/supervisor/add_team', 'SupervisorController@supervisor_add_team');
+Route::post('/supervisor/add_agent', 'SupervisorController@supervisor_add_agent');
+Route::post('/supervisor/get_agent_info', 'SupervisorController@get_agent_info');//wala
+Route::post('/supervisor/assign_agent', 'SupervisorController@supervisor_assign_agent');
+
+Route::any('/supervisor/delete_team/{id}', 'SupervisorController@supervisor_delete_team');
+
 //james
-Route::any('/supervisor/add/user', 		'SupervisorController@add_team');
-
-
-Route::any('/supervisor/view/user', 	'SupervisorController@view_user');
-Route::any('/supervisor/delete_team', 'SupervisorController@delete_team');
 Route::any('/supervisor/delete_agent', 'SupervisorController@delete_agent');
 Route::any('/supervisor/edit_team', 'SupervisorController@edit_team');
 Route::any('/supervisor/update_team', 'SupervisorController@update_team');
@@ -155,6 +158,9 @@ Route::any('/supervisor/update_agent', 'SupervisorController@update_agent');
 Route::any('/supervisor/get_city', 		'SupervisorController@get_city');
 Route::any('/supervisor/get_zip_code', 	'SupervisorController@get_zip_code');
 Route::any('/supervisor/upload-convo', 'SuperVisorController@uploadConvo');
+Route::any('/supervisor/force_activate', 'SuperVisorController@force_activate');
+
+
 
 
 Route::any('/admin/add_supervisor_submit', 		'AdminController@add_supervisor_submit');
