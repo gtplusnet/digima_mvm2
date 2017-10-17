@@ -12,6 +12,7 @@ use App\Models\TblAgentModels;
 use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
 use App\Models\TblUserAccountModel;
+use App\Models\TblMembeshipModel;
 use Session;
 use Redirect;
 use Carbon\Carbon;
@@ -104,6 +105,7 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	= 'Profile';
+		$data['profile'] = TblAgentModels::get();
 		$data['agent_info'] = TblAgentModels::where('agent_id',session('agent_id'))->first();
 		return view ('agent.pages.profile', $data);		
 
@@ -128,11 +130,12 @@ class AgentController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
-        $data['clients_pending'] = TblBusinessModel::Where('business_status',3)
+        $data['clients_pending'] = TblBusinessModel::Where('business_status',2)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
+
         $data['clients_activated'] = TblBusinessModel::Where('business_status',4)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -272,7 +275,7 @@ class AgentController extends Controller
 	{
 		// Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
-		$data['membership_list'] = TblPaymentMethod::get();
+		$data['membership_list'] = TblMembeshipModel::get();
 		$data['page']	= 'Add Client';
 		return view ('agent.pages.add_client', $data);		
 	}

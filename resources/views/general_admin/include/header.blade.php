@@ -141,8 +141,6 @@
                             <span class="user-name">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>
-
-                        
                         <ul class="dropdown-menu dropdown-list" role="menu">
                             <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
                             <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
@@ -173,3 +171,4 @@
         </div>
     </div>
 </div>
+

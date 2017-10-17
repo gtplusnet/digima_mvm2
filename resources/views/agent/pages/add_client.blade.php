@@ -78,7 +78,7 @@
 	                        <div class="col-sm-4">
 	                        	<select class="form-control" name="membership" id="membership" style="border-radius: 20px;" >
 						   				@foreach($membership_list as $membership_lists)
-									   	 <option value="{{ $membership_lists->payment_method_id }}">{{ $membership_lists->payment_method_name }}</option>
+									   	 <option value="{{ $membership_lists->payment_method_id }}">{{ $membership_lists->membership_name }}</option>
 									    @endforeach
   								</select>
 	                        </div>
@@ -105,6 +105,7 @@
 
 	                        <label for="county" class="col-sm-2 control-label">Country</label>
 	                        <div class="col-sm-2">
+	                        	
 	                        	<select class="form-control" name="county_list" id="county_list" style="border-radius: 20px;">
 						   				<option value="--Select County--">--Select County--</option>
 						   				@foreach($county_list as $county_list)

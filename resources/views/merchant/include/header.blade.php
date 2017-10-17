@@ -56,8 +56,9 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">                            
-                            <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                             <span class="user-name">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
+                            <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
+                           
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
                             <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
@@ -66,12 +67,10 @@
                             <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
                             <li role="presentation"><a href="/merchant/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
-                    </li>
-                     @if(session("merchant_login"))
+                      <li>
+                    @if(session("merchant_login") == true)
                     <a style="font-size:15px",  href='/merchant/logout'>
-                    <span>
-                    <i class="fa fa-sign-out m-r-xs"></i>
-                    Log out
+                    <span><i class="fa fa-sign-out m-r-xs"></i>Log out
                     </span>
                     </a>
                     @else
@@ -80,9 +79,10 @@
                     <i class="fa fa-sign-out m-r-xs"></i>
                     Hi Guest
                     </span>
-                    </a>                       
+                    </a>             
                     @endif 
                     </li>
+
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->
         </div>

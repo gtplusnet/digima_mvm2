@@ -150,7 +150,7 @@
                         </ul>
                     </li>
                     <li>
-<<<<<<< HEAD
+
                     @if(session("supervisor_login"))
                     <a style="font-size:15px",  href='/supervisor/logout'>
                     <span>
@@ -166,11 +166,8 @@
                     </span>
                     </a>  
                      @endif        
-=======
-                        <a href="/supervisor_logout" class="log-out waves-effect waves-button waves-classic">
-                            <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
-                        </a>
->>>>>>> 373df8a79dd0633eacf5846e0b73f36e9efd47c4
+
+                 
                     </li>
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->

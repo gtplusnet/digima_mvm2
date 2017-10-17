@@ -5,7 +5,7 @@
     </header>
     <ul class="cd-nav list-unstyled">
         <li class="cd-selected" data-menu="index">
-            <a href="javsacript:void(0);">
+            <a href="/merchant/dashboard">
                 <span>
                     <i class="glyphicon glyphicon-home"></i>
                 </span>
@@ -36,5 +36,6 @@
                 <p>Bills</p>
             </a>
         </li>
+        
     </ul>
 </nav>

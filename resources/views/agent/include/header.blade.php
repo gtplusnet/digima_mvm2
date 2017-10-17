@@ -5,13 +5,14 @@
                 <i class="fa fa-bars"></i>
             </a>
         </div>
-        <div class="logo-box">
+
+        {{--  <div class="logo-box">
+            <a href="index.html" class="logo-text"><span>CROATIA</span></a>
+        </div><!-- Logo Box --> --}}
+         <div class="logo-box">
             
             <a href="/agent/dashboard" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
         </div><!-- Logo Box -->
-        {{-- <div class="logo-box">
-            <a href="index.html" class="logo-text"><span>CROATIA</span></a>
-        </div><!-- Logo Box --> --}}
         <div class="topmenu-outer">
             <div class="top-menu">
                 <ul class="nav navbar-nav navbar-left">
@@ -138,28 +139,29 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                             <span class="user-name">{{session('first_name')}}<i class="fa fa-angle-down"></i></span>
-                            
-                            <img class="img-circle avatar" src="/assets/admin/agent/assets/images/avatar1.png" width="40" height="40" alt="">
+                            <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
-                            <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
+                            <li role="presentation"><a href="profile"><i class="fa fa-user"></i>Profile</a></li>
                             <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href="profile"><i class="fa fa-lock"></i>Lock screen</a></li>
+                            <li role="presentation"><a href="/agent/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
                     </li>
                     <li>
                     @if(session("agent_login") == true)
                     <a style="font-size:15px",  href='/agent/logout'>
                     <span><i class="fa fa-sign-out m-r-xs"></i>Log out
-                    </span></a>
+                    </span>
+                    </a>
                     @else
                     <a style="font-size:15px",  href="">
                     <span>
                     <i class="fa fa-sign-out m-r-xs"></i>
                     Hi Guest
-                    </span></a>             
+                    </span>
+                    </a>             
                     @endif 
                     </li>
                 </ul><!-- Nav -->

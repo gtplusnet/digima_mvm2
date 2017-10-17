@@ -117,7 +117,7 @@ class MerchantController extends Controller
 	{	
 		Self::allow_logged_in_users_only();
         $fb_page = '742953982442308'; 
-        $access_token = 'EAAD6rZBdEZBzABALWYhj5EtQIYLedACll6rwjOQwgbauhb0o34lPWOqzhd6FK6qs1qNo73KvIJZAHBCJVTe3eM05AMDpXsH1zkt5zZAj48bEBzVL6rAKupxJwMFxnZA8OB9vaPz1fybkBQNg1JuoPn08dvnTRDQ44ez43vySolQT4VzNMiocRZBaVjdVtw33HqqHt0NK2fagZDZD';
+        $access_token = 'EAAD6rZBdEZBzABAEtkhSRii35ZA2mNBDCtHGqRdfuYN8VAqngHPBlkh0fCPFQiUmq5wWVQpnFkZAixgi2JZCw8306PLlaBlWIm7VhtZAIgL78GpRR6k8QZBzF5oKbOZCgW7fYCHRlSC6vwrUSTxFOBVKyXxqE0DTvVCsCEN7h3gp3uZCliojvU4GKKDG2bZAJvQ78ZD';
         $url = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
@@ -196,8 +196,8 @@ class MerchantController extends Controller
 
 		$data['page']				= 'Profile';
 		$data['_payment_method']	= Tbl_payment_method::get();
+        $data['merchant_info'] = TblBusinessModel::where('business_id',session('business_id'))->first();
 		return view ('merchant.pages.profile', $data);		
-
 	}
 
    
@@ -206,7 +206,6 @@ class MerchantController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
-		$data['other_info']	= TblBusinessOtherInfoModel::get();
 		return view ('merchant.pages.view_info', $data);		
 	}
 
