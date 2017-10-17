@@ -21,7 +21,7 @@ $(document).ready(function()
     $('#agentAssigned').click(function(){
 		var agent_id_assign = $('#agent_id_assign').val();
 		var teamAssigned = $('#teamAssigned').val();
-		alert();
+		
 		
 		$.ajax({
 			type:'POST',
@@ -30,7 +30,7 @@ $(document).ready(function()
 			dataType:'text',
 
 		}).done(function(data){
-				$('#team_success').html(data);
+				$('#assign_success').html(data);
 			});
 	});
 

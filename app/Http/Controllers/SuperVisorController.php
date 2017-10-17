@@ -197,9 +197,13 @@ class SuperVisorController extends Controller
         $data['james'] = 'james';
         return $data;
     }
-    public function supervisor_assign_agent()
+    public function supervisor_assign_agent(Request $request)
     {
-        dd("james");
+        $agent_id = $request->agent_id_assign;
+        $update['team_id'] = $request->teamAssigned;
+        TblAgentModels::where('agent_id',$agent_id)->update($update);
+        return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
+
     }	
 	public function get_city(Request $request)
     {
