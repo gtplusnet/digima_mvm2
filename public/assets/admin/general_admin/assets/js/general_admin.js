@@ -40,6 +40,9 @@ $(document).ready(function(){
 
 	$('#search_button').click(function(){
 		var search_key = $('#search_key').val();
+		$('#ajax-loader').show();
+		$('#showHere3').hide();
+		
 		$.ajax({
 			type:'POST',
 			url:'/general_admin/search_category',
@@ -47,6 +50,8 @@ $(document).ready(function(){
 			dataType:'text',
 		}).done(function(data){
 				$('#showHere3').html(data);
+				$('#showHere3').show();
+				$('#ajax-loader').hide();
 			});
 	});
 });

@@ -11,6 +11,8 @@ use App\Models\TblUserAccountModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblPaymentMethod;
 use App\Models\TblPaymentModel;
+use App\Models\TblBusinessModel;
+use App\Models\TblBusinessHoursmodels;
 use Redirect;
 use insert;
 use DB;
@@ -60,6 +62,7 @@ class MerchantController extends Controller
                     // dd($user_info);
 
                     Session::put("merchant_login",true);
+                    Session::put("business_id",$user_info->business_id);
                     Session::put("email",$validate_login->user_email);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     $data['page']   = 'Dashboard';
@@ -71,7 +74,7 @@ class MerchantController extends Controller
                     $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
                                           ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
                                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                                           ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
                                          ->first();
@@ -87,7 +90,7 @@ class MerchantController extends Controller
                    
                     $data['page']   = 'Dashboard';
 
-                    return Redirect::to('/merchant/payment');
+                    return Redirect::to('/merchant/redirect');
                    }
                     
                 }
@@ -113,10 +116,25 @@ class MerchantController extends Controller
 	public function index()
 	{	
 		Self::allow_logged_in_users_only();
-		$data['page']	= 'Dashboard';
+        $fb_page = '742953982442308'; 
+        $access_token = 'EAAD6rZBdEZBzABALWYhj5EtQIYLedACll6rwjOQwgbauhb0o34lPWOqzhd6FK6qs1qNo73KvIJZAHBCJVTe3eM05AMDpXsH1zkt5zZAj48bEBzVL6rAKupxJwMFxnZA8OB9vaPz1fybkBQNg1JuoPn08dvnTRDQ44ez43vySolQT4VzNMiocRZBaVjdVtw33HqqHt0NK2fagZDZD';
+        $url = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($curl);  
+        curl_close($curl);
+        $details = json_decode($result,true);
+        $data['fb'] = $details['fan_count'];
+        $data['page']	= 'Dashboard';
+
 		return view ('merchant.pages.dashboard', $data);	
 		
 	}
+    public function merchant_redirect()
+    {
+       return view ('merchant.pages.merchant_redirect');
+    }
      public function payment()
     {
         $data['page']   = 'payment';
@@ -175,10 +193,14 @@ class MerchantController extends Controller
 	public function profile()
 	{
 		Self::allow_logged_in_users_only();
+
 		$data['page']				= 'Profile';
 		$data['_payment_method']	= Tbl_payment_method::get();
 		return view ('merchant.pages.profile', $data);		
+
 	}
+
+   
 
 	public function view_info()
 	{
@@ -228,6 +250,7 @@ class MerchantController extends Controller
 
     }
 
+
 /**
     public function edit($id)
     {
@@ -268,7 +291,41 @@ class MerchantController extends Controller
 
 	public function sample()
 	{
+       
 		return view ('merchant.pages.sample');	
 	}
-	
+
+   public function sample2()
+    {
+       
+        return view ('sample2');  
+    }
+
+    public function sample1()
+    {
+       
+        $address = '1700 Parañaque City Philippines';
+        $data['coordinates']  = Self::getCoordinates_long($address);
+        $data['coordinates1'] = Self::getCoordinates_lat($address);
+        return view ('merchant.pages.sample1',$data);
+    }
+
+    function getCoordinates_long($address){
+    $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+    $response = file_get_contents($url);
+    $json = json_decode($response,TRUE); //generate array object from the response from the web
+    // $lat = $json['results'][0]['geometry']['location']['lat'];
+    $long = $json['results'][0]['geometry']['location']['lng'];
+    return $long;
+    }
+    function getCoordinates_lat($address){
+    $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+    $response = file_get_contents($url);
+    $json = json_decode($response,TRUE); //generate array object from the response from the web
+    $lat = $json['results'][0]['geometry']['location']['lat'];
+    return $lat;
+    }
+
 }

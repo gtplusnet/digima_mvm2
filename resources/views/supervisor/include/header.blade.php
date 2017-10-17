@@ -146,10 +146,11 @@
                             <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href="/supervisor_logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
                     </li>
                     <li>
+<<<<<<< HEAD
                     @if(session("supervisor_login"))
                     <a style="font-size:15px",  href='/supervisor/logout'>
                     <span>
@@ -165,6 +166,11 @@
                     </span>
                     </a>  
                      @endif        
+=======
+                        <a href="/supervisor_logout" class="log-out waves-effect waves-button waves-classic">
+                            <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
+                        </a>
+>>>>>>> 373df8a79dd0633eacf5846e0b73f36e9efd47c4
                     </li>
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->

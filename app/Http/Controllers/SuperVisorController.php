@@ -15,14 +15,36 @@ use Redirect;
 use Validator;
 class SuperVisorController extends Controller
 {
+    public static function allow_logged_in_users_only()
+    {
+        if(session("supervisor_login") != true)
+        {
+            return Redirect::to("/supervisor")->send();
+        }
+    }
+    public static function allow_logged_out_users_only()
+    {
+        if(session("supervisor_login") == true)
+        {
+            return Redirect::to("/supervisor/dashboard")->send();
+        }
+    }
+
 
 	public function index()
     {
-        // Self::allow_logged_out_users_only();
+        Self::allow_logged_out_users_only();
         $data['page']   = 'Supervisor Login';
 
         return view ('supervisor.pages.supervisor_login', $data);
 
+    }
+    public function supervisor_logout()
+    {
+
+        Session::forget("supervisor_login");
+        return Redirect::to("/supervisor");
+   
     }
     public function supervisor_login_submit(Request $request)
     {
@@ -47,7 +69,7 @@ class SuperVisorController extends Controller
             else
             {
                 $data['page']   = 'supervisor Login';
-                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+                return Redirect::back()->withErrors(['User Login is Incorectsdfsd!', 'User Login is Incorect!fdsf']);
             }
         }
         else
@@ -67,25 +89,95 @@ class SuperVisorController extends Controller
 
     public function profile()
 	{
+        Self::allow_logged_in_users_only();
 		$data['page']	= 'Profile';
 		return view ('supervisor.pages.profile', $data);		
 	}
 
 	public function client()
 	{
+        Self::allow_logged_in_users_only();
 		$data['page']	= 'Client';
 
         $data['clients'] = TblBusinessModel::where('business_status', 2)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
 
 		return view ('supervisor.pages.client', $data);		
 	}
+    public function get_client(Request $request)
+    {
+        $s_date = $request->date_start;
+        $e_date = $request->date_end;
+        $data['clients'] = TblBusinessModel::where('business_status', 2)
+                          ->whereBetween('date_created',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.filtered',$data);
+    }
+    public function get_client1(Request $request)
+    {
+        $s_date = $request->date_start1;
+        $e_date = $request->date_end1;
+        $data['clients'] = TblBusinessModel::
+        whereBetween('date_created',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.filtered1',$data);
+    }
+    
+
+    public function get_client_transaction(Request $request)
+    {
+        $trans_id = $request->transaction_id;
+        // dd($request->transaction_id);
+        $update['transaction_status'] = 'call in progress'; 
+        $update['agent_id'] = session('agent_id'); 
+        $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+        
+
+            return '';
+        
+    }
+
+    public function get_client_transaction_reload(Request $request)
+    {
+        $trans_id = $request->transaction_id;
+        $update['transaction_status'] = 'called'; 
+        $update['business_status'] = '2'; 
+        $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+                 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
+        return '';
+        
+    }
+    public function manage_merchant()
+    {
+        $data['page'] = 'Manage Merchant';
+       $data['clients'] = TblBusinessModel::where('business_status', 2)->orWhere('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.manage_merchant',$data);
+    }
+
+
 	public function add_team()
     {
+        Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
 		$data['page']	= 'Add User';
         $data['team_list'] = TblTeamModel::get();
@@ -94,6 +186,7 @@ class SuperVisorController extends Controller
 	}
 	public function add_agent()
 	{
+        Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
 		$data['team_list'] = TblTeamModel::get();
 		$data['page']	= 'Add Agent';
@@ -120,6 +213,7 @@ class SuperVisorController extends Controller
     }
 	public function dashboard()
     {
+        Self::allow_logged_in_users_only();
     	$data['page']	= 'Dashboard';
 		return view ('supervisor.pages.dashboard', $data);	
     }
@@ -154,6 +248,7 @@ class SuperVisorController extends Controller
 	}
 	public function add_agent_submit(Request $request)
 	{ 
+
         $ins['prefix'] = $request->prefix;
         $ins['first_name'] = $request->first_name;
         $ins['last_name'] = $request->last_name;
@@ -196,6 +291,7 @@ class SuperVisorController extends Controller
     //Eden
     public function view_user()
     {
+        Self::allow_logged_in_users_only();
         $data['page']   = 'View User';
         $data['team_list'] = TblTeamModel::get();
         $data['viewteam']   = TblTeamModel::get();
@@ -288,6 +384,7 @@ class SuperVisorController extends Controller
     }
 
     public function uploadConvo(Request $request) {
+        Self::allow_logged_in_users_only();
 		if($request->ajax()) {
 			$fileConvo = $request->file("file");
             $fileConvo->move('conversations', $fileConvo->getClientOriginalName());
@@ -297,6 +394,12 @@ class SuperVisorController extends Controller
             $convoInfo->business_id = $request->input("businessId");
             $convoInfo->business_contact_person_id = $request->input("contactId");
             $convoInfo->save();
+
+            $update['business_status'] = "3";
+            TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
+
+
+
 		}
 	}
 /*

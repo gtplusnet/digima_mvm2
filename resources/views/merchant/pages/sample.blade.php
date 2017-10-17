@@ -142,7 +142,7 @@ chart.render();
 <br>
 <br>
 <br>
-	<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAngDiaryNgLoyal%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe><div id="fb-root"></div>
+	<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%james.omosora%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="500" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe><div id="fb-root"></div>
 <div class="fb-page" data-href="https://www.facebook.com/AngDiaryNgLoyal/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/AngDiaryNgLoyal/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/AngDiaryNgLoyal/">Funny Earth</a></blockquote></div>
 </div>
 </body>
@@ -165,3 +165,10 @@ chart.render();
 	});
 
 </script>
+
+
+
+
+<iframe src="
+https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId" 
+width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>

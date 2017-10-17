@@ -10,29 +10,39 @@
 </div>
 <div class="container">
 	<div class="col-md-6 contact-container-left">
+		 @if (session('success'))
+           <div class="alert alert-success">
+                Thank you!. Your Message Send Successfully!
+            </div>
+            @elseif(session('error'))
+            <div class="alert alert-danger">
+                Sorry!. Network error, Transaction Fail!
+            </div>
+           @endif
 		<div class="contact-title-container">
 			<p class="contact-title">MESSAGE US</p>
 		</div>
 		<div>
-			<form role="form">
+			<form role="form" action="/contact_send" method="post">
+				{{csrf_field()}}
 			<div class=" col-md-12 contact-form-container">
 				<div class="col-md-12 contact-textfield-holder">
 					<div class="col-md-6 contact-textfield-left-holder">
 						<label for="input-name" class="contact-labels">Name:</label>
-						<input type="text" name="name" class="contact-textfield">
+						<input type="text" name="name" class="contact-textfield" required/>
 					</div>
 					<div class="col-md-6 contact-textfield-right-holder">
 						<label for="input-email" class="contact-labels">Email:</label>
-						<input type="text" name="email_add" class="contact-textfield">
+						<input type="email" name="email_add" class="contact-textfield" required/>
 					</div>
 				</div>
 				<div class="col-md-12 contact-textfield-holder">
 					<label for="input-subject" class="contact-labels">Subject:</label>
-					<input type="text" name="subject" class="contact-textfield">
+					<input type="text" name="subject" class="contact-textfield" required/>
 				</div>
 				<div class="col-md-12 contact-textfield-holder">
 					<label for="input-help" class="contact-labels">How Can We Help:</label>
-					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea"></textarea>
+					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea" required/></textarea>
 				</div>
 				<div class="col-md-12 contact-btn-holder">
 					<button class="contact-send-btn">SEND MESSAGE</button>
