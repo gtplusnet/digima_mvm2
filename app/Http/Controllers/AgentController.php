@@ -196,7 +196,8 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$trans_id = $request->transaction_id;
 		$update['transaction_status'] = 'called'; 
-		$update['business_status'] = '2'; 
+		$update['business_status'] = '2';
+		$update['date_transact'] = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 				 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
 		return '';
@@ -225,27 +226,37 @@ class AgentController extends Controller
 	        $business_data->facebook_url = $request->facebook_url;
 	        $business_data->twitter_url = $request->twitter_username;
             $business_data->membership = $request->membership;
-            // $business_data->date_created = Carbon::now();
-            $business_data->date_created = date("Y/m/d");
-            $business_data->save();
+            $businessData->business_status = '1';
+            $businessData->agent_id = session('agent_id');
+            $businessData->date_transact = date("Y/m/d");
+            $businessData->date_created = date("Y/m/d");
+            $businessData->save();
 
-	        $contact_data = new TblBusinessContactPersonModel;
-	        $contact_data->business_contact_person_id = '';
-	        $contact_data->contact_prefix = $request->prefix;
-	        $contact_data->contact_first_name = $request->first_name;
-	        $contact_data->contact_last_name = $request->last_name;
-	        $contact_data->business_id = $business_data->business_id;
-            $contact_data->save();
+	        $contactData = new Tbl_business_contact_person;
+            $contactData->business_contact_person_id = '';
+            $contactData->contact_prefix = $request->prefix;
+            $contactData->contact_first_name = $request->firstName;
+            $contactData->contact_last_name = $request->lastName;
+            $contactData->business_id = $businessData->business_id;
+            $contactData->save();
 
+            $accountData = new Tbl_user_account;
+            $accountData->user_email = $request->emailAddress;
+            $accountData->user_password =  password_hash($request->password, PASSWORD_DEFAULT);
+            $accountData->user_category = 'merchant';
+            $accountData->status = 'registered';
+            $accountData->business_id = $businessData->business_id;
+            $accountData->business_contact_person_id = $contactData->business_contact_person_id;
+            $accountData->save();
 
-            $account_data = new TblUserAccountModel;
-            $account_data->user_email = $request->email_address;
-
-            $myStr=$request->first_name;
-            $myStrs=$request->primary_business_phone;
-            $result = substr($myStr, 0, 3);
-            $results = substr($myStrs, 0, 3);
-            $final_result = $result.$results;
+            $otherData = new TblBusinessOtherInfoModel;
+            $otherData->business_other_info_id = '';
+            $otherData->company_information = 'none';
+            $otherData->business_website = 'none';
+            $otherData->year_established = 'none';
+            $otherData->company_profile = '';
+            $otherData->business_id = $businessData->business_id;
+            $otherData->save();
 
             $account_data->user_password = password_hash($final_result, PASSWORD_DEFAULT);
             $account_data->user_category = 'merchant';
@@ -254,6 +265,23 @@ class AgentController extends Controller
             $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
             $account_data->save();
 
+            $businessHoursData = new Tbl_business_hours;
+            $businessHoursData->insert(array(
+                array('days' => 'Monday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Tuesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Wednesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Thursday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Friday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Saturday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id),
+                array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $businessData->business_id)
+            ));
            return Redirect::to('/agent/client');
        }
 	}
