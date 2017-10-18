@@ -25,13 +25,10 @@
 		<ul class="nav nav-tabs">
 		   <li class="active li_me"><a data-toggle="pill" href="#customer">Send Invoice</a></li>
            <li class="li_me"><a data-toggle="pill" href="#agentAdded">Agent Added</a></li>
-<<<<<<< HEAD
-	       <li class="li_me"><a data-toggle="pill" href="#pending">Pending Merchants</a></li>
-	       <li class="li_me"><a data-toggle="pill" href="#activated">Activated</a></li>
-=======
+
 	       <li class="li_me"><a data-toggle="pill" href="#pending">Pending Merchant</a></li>
 	       <li class="li_me"><a data-toggle="pill" href="#registered">Registered Merchant</a></li>
->>>>>>> sub_master
+
 		</ul>
 	
 
@@ -101,36 +98,28 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
+
           <div id="agentAdded" class="tab-pane fade">
-=======
-            <div id="agentAdded" class="tab-pane fade">
->>>>>>> sub_master
+
             <div class="row">
                 <div class="panel-body">
                     <div class="row col-md-6 date" style="margin-right:-20px">
 
                        <div class="col-md-6" style="padding:1px;">
                             <select class="form-control" name="date_start" id="date_start">
-<<<<<<< HEAD
+
                                 @foreach($pending_clients as $pending_client)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
-=======
-                                @foreach($agentAdded as $agent_client)
-                                <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
->>>>>>> sub_master
+                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($pending_client->date_created))}}</option>
+
                                 @endforeach
                             </select>
                        </div>
                        <div class="col-md-6" style="padding:0px">
                             <select class="form-control" name="date_end" id="date_end">
-<<<<<<< HEAD
+
                                 @foreach($clients as $client_list)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
-=======
-                                @foreach($agentAdded as $agent_client)
-                                <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
->>>>>>> sub_master
+                                <option value="{{$client_list->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+
                                 @endforeach
                             </select>
                         </div>
@@ -144,18 +133,7 @@
                                     <th>Business Name</th>
                                     <th>membership</th>
                                     <th>Transaction</th>
-<<<<<<< HEAD
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($pending_clients as $pendingclient)
-                                <tr>
-                                    <td>{{$pendingclient->contact_first_name}}  {{$pendingclient->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($pendingclient->date_created))}}</td>
-                                    <td>{{$pendingclient->business_name}}</td>
-                                    <td>{{$pendingclient->membership_name}}</td>
-                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$client->last_name}}</td>
-=======
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -168,7 +146,7 @@
                                     <td>{{$agentAdd->membership_name}}</td>
                                     <td>{{$agentAdd->transaction_status}} by: {{$agentAdd->first_name}} {{$agentAdd->last_name}}</td>
                                     <td><a target="_blank" href="/general_admin/send_invoice/{{$agentAdd->business_id}}"><button class="transaction btn btn-default "><i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice</button></a></td>
->>>>>>> sub_master
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -215,7 +193,7 @@
                                     <td>{{date("F j, Y",strtotime($pendingclient->date_transact))}}</td>
                                     <td>{{$pendingclient->business_name}}</td>
                                     <td>{{$pendingclient->membership_name}}</td>
-<<<<<<< HEAD
+
                                     <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$client->last_name}}</td>
                                 </tr>
                                 @endforeach
@@ -233,14 +211,14 @@
                        <div class="col-md-6" style="padding:1px;">
                             <select class="form-control" name="date_start" id="date_start">
                                 @foreach($pending_clients as $pending_client)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($pending_client->date_created))}}</option>
                                 @endforeach
                             </select>
                        </div>
                        <div class="col-md-6" style="padding:0px">
                             <select class="form-control" name="date_end" id="date_end">
-                                @foreach($clients as $client_list)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+                                @foreach($pending_clients as $pending_client)
+                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($pending_client->date_created))}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -264,10 +242,7 @@
                                     <td>{{$pendingclient->business_name}}</td>
                                     <td>{{$pendingclient->membership_name}}</td>
                                     <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$client->last_name}}</td>
-=======
-                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$pendingclient->last_name}}</td>
-                                    <td><a target="_blank" href="/general_admin/send_invoice/{{$pendingclient->business_id}}"><button class="transaction btn btn-default ">Resend Invoice</button></a></td>
->>>>>>> sub_master
+
                                 </tr>
                                 @endforeach
                             </tbody>
