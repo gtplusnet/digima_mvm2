@@ -13,10 +13,27 @@ $(document).ready(function()
         $('#assignAgent').modal('show');
       }
     if ($(this).val() == "delete") {
+    	var agent_id = $(this).data("id");
+        $("#delete_agent_id").val(agent_id);
         $('#deleteAgent').modal('show');
       }
    });
 	//modal act
+    $('#agentDeleted').click(function(){
+		var delete_agent_id = $('#delete_agent_id').val();
+		alert();
+		
+		$.ajax({
+			type:'POST',
+			url:'/supervisor/delete_agent',
+			data:{delete_agent_id: delete_agent_id},
+			dataType:'text',
+
+		}).done(function(data){
+			    $('#deleteAgent').modal('hide');
+				$('#agent_delete_success').html(data);
+			});
+	});
 
     $('#agentAssigned').click(function(){
 		var agent_id_assign = $('#agent_id_assign').val();

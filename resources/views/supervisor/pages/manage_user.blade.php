@@ -281,7 +281,7 @@
             <form class="form-horizontal">
                 {{csrf_field()}}
                 
-                <div class="table-responsive">
+                <div class="table-responsive" id="agent_delete_success">
                     <div class="col-md-12">
                         <div class="pull-left" style="margin:20px 0px 20px 20px">
                             <button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
@@ -386,9 +386,10 @@
                     </div>
                     <div class="col-sm-12">
                         <center>
-                        <a href="/supervisor/delete_team/{{$newteam->team_id}}">
-                            <button type="button" class="save_category btn btn-danger">Delete</button>
-                        </a>
+
+                       <input type="hidden" id="delete_agent_id" value=""/>
+                            <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
+                        
                         <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
                     </div>
                 </div>

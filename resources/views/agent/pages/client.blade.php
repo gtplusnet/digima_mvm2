@@ -62,7 +62,7 @@
                                     <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->business_name}}</td>
-                                    <td>{{$client->payment_method_name}}</td>
+                                    <td>{{$client->membership_name}}</td>
                                     <td>{{$client->transaction_status}}</td>
                                     <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
@@ -71,7 +71,7 @@
                                         <div class="modal-content">
                                             
                                             <div class="modal-header">
-                                                <button type="button" class="close closed" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
+                                                <button type="button" class="close" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
                                                 <h4 class="modal-title">Personal Information</h4>
                                             </div>
                                             <div class="modal-body">
@@ -213,7 +213,7 @@
                                     <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
                                     <td>{{$clients_pendingss->business_name}}</td>
-                                    <td>{{$clients_pendingss->payment_method_name}}</td>
+                                    <td>{{$clients_pendingss->membership_name}}</td>
                                     <td>{{$clients_pendingss->transaction_status}}</td>
                                     <td><button class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" data-toggle="modal"  data-target="#myModal1{{$clients_pendingss->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
@@ -348,7 +348,7 @@
                                     <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>
                                     <td>{{$clients_activate->business_name}}</td>
-                                    <td>{{$clients_activate->payment_method_name}}</td>
+                                    <td>{{$clients_activate->membership_name}}</td>
                                     <td>{{$clients_activate->transaction_status}}</td>
                                     <td><button class="transaction btn btn-default "  data-id="{{$clients_activate->business_id}}" data-toggle="modal"  data-target="#myModal2{{$clients_activate->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>

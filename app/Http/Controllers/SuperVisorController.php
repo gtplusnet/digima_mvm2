@@ -330,10 +330,11 @@ class SuperVisorController extends Controller
         TblTeamModel:: where ('team_id',$id)->delete();
         return Redirect::to("/supervisor/manage_user")->with('delete_team', 'testing');
     }
-    public function delete_agent(Request $request)
-    {
-        TblAgentModels:: where ('agent_id',$request->agent_id)->delete();
-        return Redirect::to("/supervisor/view/user")->with('warning_agent', 'testing');
+    public function supervisor_delete_agent(Request $request)
+    {   
+
+        TblAgentModels:: where ('agent_id',$request->delete_agent_id)->delete();
+        return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted</div>";
     }
     public function edit_team(Request $request)
     {
@@ -423,6 +424,7 @@ class SuperVisorController extends Controller
             $convoInfo->save();
 
             $update['business_status'] = "3";
+            $update['date_transact'] = date("Y/m/d"); 
             TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
         }
 	}
@@ -438,6 +440,7 @@ class SuperVisorController extends Controller
             $convoInfo->save();
 
             $update['business_status'] = "3";
+            $update['date_transact'] = date("Y/m/d");
             TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
             return "<div class='alert alert-success'><strong>Success!</strong>Procedure OverRide!</div>";
         }

@@ -23,7 +23,7 @@
 		</form>
 	</div>
 	<div  class="tab-pane fade in active col-md-12">
-		<div class="table-responsive">
+		<div class="table-responsive" id="success_activation">
 			<table class="table table-bordered" style="background-color: #FFFFFF;">
 				<thead>
 					<tr>
@@ -44,7 +44,7 @@
 						<td>{{ $business_item->payment_id}}</td>
 						<td>{{ $business_item->business_name }}</td>
 						<td>{{ $business_item->business_complete_address }}</td>
-						<td>{{ $business_item->payment_method_name }}</td>
+						<td>{{ $business_item->membership_name }}</td>
 						<td>{{ $business_item->payment_reference_number }}</td>
 						<td>₱ {{ $business_item->payment_amount }}</td>
 						<td>{{ $business_item->date_created }}</td>
@@ -74,6 +74,7 @@
 									</div>
 									<div class="form-group col-md-9">
 										<input value="{{ $business_item->business_complete_address }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
+										<input value="{{ $business_item->business_id }}" type="hidden" name="action_business_id" id="action_business_id" />
 									</div>
 								</div>
 								<div class="col-sm-12">
@@ -81,12 +82,12 @@
 										<label for="business_name" >Business Membership</label>
 									</div>
 									<div class="form-group col-md-9">
-										<input value="{{ $business_item->payment_method_name }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
+										<input value="{{ $business_item->membership_name }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
 									</div>
 								</div>
 								<div class="col-sm-12">
 									<div class="form-group col-md-3">
-										<label for="business_name" >Payment Amount</label>
+										<label for="business_name" >Payment Reference number</label>
 									</div>
 									<div class="form-group col-md-9">
 										<input value="{{ $business_item->payment_reference_number }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
@@ -94,7 +95,7 @@
 								</div>
 								<div class="col-sm-12">
 									<div class="form-group col-md-3">
-										<label for="business_name" >Payment Reference number</label>
+										<label for="business_name" >Payment Amount</label>
 									</div>
 									<div class="form-group col-md-9">
 										<input value="{{ $business_item->payment_amount }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
@@ -120,8 +121,8 @@
 								</div>
 								<div class="col-sm-12">
 									<center>
-										<button type="submit" class="btn btn-primary" id="save_category">Accept Payment</button>
-										<button type="submit" class="btn btn-danger"  id="save_category">Declined Payment</button>
+										<button type="submit" class="btn btn-primary" id="acceptBtn">Accept Payment</button>
+										<button type="submit" class="btn btn-danger"  id="declinedBtn">Declined Payment</button>
 									</center>
 								</div>
 						    </div>
@@ -137,4 +138,64 @@
 		</div>
 	</div>
 </div>
+{{-- modal --}}
+<div style="margin-top: 150px;" class="modal fade" id="acceptUser" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body" style="margin-bottom: 150px;" >
+                    <div class="col-sm-12">
+                        <h4 class="modal-title">Are You sure You want to accept this payment and activate this user's account?</h4>
+                    </div>
+                    <div class="col-sm-12" style="margin-top:30px;">
+                        <center>
+
+                        <input type="hidden" id="accept_business_id"/>
+                            <button type="button" class=" btn btn-success" id="acceptUserBtn">Yes</button>
+                        
+                        <button type="button" class="btn btn-danger"  data-dismiss="modal">No</button></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div style="margin-top: 150px;" class="modal fade" id="declinedUser" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body" style="margin-bottom: 150px;" >
+                    <div class="col-sm-12">
+                        <h4 class="modal-title">Are You sure You want to accept this payment and activate this user's account?</h4>
+                    </div>
+                    <div class="col-sm-12" style="margin-top:30px;">
+                        <center>
+
+                        <input type="hidden" id="decline_business_id"/>
+                            <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
+                        
+                        <button type="button" class="btn btn-warning"  data-dismiss="modal">Close</button></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 150px;" class="modal fade" id="success" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body" style="margin-bottom: 150px;" >
+                    <div class="col-sm-12" id="success_message">
+                        
+                    </div>
+                    <div class="col-sm-12" style="margin-top:30px;">
+                        <center>
+
+                        <input type="hidden" id="decline_business_id"/>
+                        <button type="button" class="btn btn-default"  data-dismiss="modal">Okay</button></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{-- Modal --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/admin/general_admin/assets/js/general_admin_payment_monitoring.js"></script>
 @endsection
