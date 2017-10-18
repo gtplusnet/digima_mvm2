@@ -71,6 +71,9 @@ Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
 
 Route::get('/merchant/category', 	'MerchantController@category');
+Route::get('/merchant/messages', 	'MerchantController@messages');
+Route::any('/merchant/add_messages', 'MerchantController@add_messages');
+Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');
 Route::get('/merchant/bills', 		'MerchantController@bills');
 //james
 Route::get('/merchant/logout', 'MerchantController@logout');

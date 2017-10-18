@@ -275,8 +275,8 @@
                                     <td>{{$clients_activate->business_id}}</td>
                                     <td>{{$clients_activate->business_name}}</td>
                                     <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
-                                    <td>{{$client->business_phone}}</td>
-                                    <td>{{$client->business_alt_phone}}</td>
+                                    <td>{{$clients_activate->business_phone}}</td>
+                                    <td>{{$clients_activate->business_alt_phone}}</td>
                                     <td>{{$clients_activate->payment_method_name}}</td>
                                     <td>{{$clients_activate->transaction_status}}</td>
                                     <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>  

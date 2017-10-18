@@ -28,6 +28,15 @@
                 <p>Category & Keywords</p>
             </a>
         </li>
+        <li data-menu="Category">
+            <a href="/merchant/messages">
+                <span>
+                    <i class="menu-icon glyphicon glyphicon-envelope"></i>
+                </span>
+                <p>Messages</p>
+            </a>
+        </li>
+
         <li data-menu="profile">
             <a href="/merchant/bills">
                 <span>

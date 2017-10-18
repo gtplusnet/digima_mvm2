@@ -1,4 +1,3 @@
-
 @extends('merchant.layout.layout')
 @section('content')
 <div class="page-title">
@@ -12,7 +11,7 @@
 </div>
 <div id="main-wrapper">
     <div class="row">
-        <div class="col-md-12">        
+        <div class="col-md-12">     
             <div class="panel">
                 <div class="panel-body">
                     <div role="tabpanel">
@@ -39,23 +38,23 @@
                                     <div class="form-group">
                                         <label for="business_name" class="col-sm-2 control-label">Business Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="business_name" value="Jolibee" readonly>
+                                            <input type="text" class="form-control" id="business_name" value="{{$merchant_info->business_name}}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Business Primary Phone</label>
+                                        <label for="business_phone" class="col-sm-2 control-label">Business Primary Phone</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="input-default" value="095678923" readonly>
+                                            <input type="text" class="form-control" id="business_phone" value="{{$merchant_info->business_phone}}" readonly>
                                         </div>
-                                         <label for="input-Default" class="col-sm-2 control-label">Business Alternate Phone</label>
+                                         <label for="business_alt_phone" class="col-sm-2 control-label">Business Alternate Phone</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="input-default" value="095678923" readonly>
+                                            <input type="text" class="form-control" id="business_alt_phone" value="{{$merchant_info->business_alt_phone}}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" placeholder="" rows="4=6" readonly>Marcos St. Pandi, Bulacan</textarea>
+                                            <textarea class="form-control" placeholder="" rows="4=6" readonly>{{$merchant_info->business_complete_address}}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -73,19 +72,17 @@
                                         </div>           
                                     </div> 
                                     <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Twitter</label>
+                                        <label for="twitter_url" class="col-sm-2 control-label">Twitter</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="input-default" value="Twitter Account" readonly>
+                                            <input type="text" class="form-control" id="twitter_url" value="{{$merchant_info->twitter_url}}" readonly>
                                         </div>
-                                        <label for="input-Default" class="col-sm-2 control-label">Facebook</label>
+                                        <label for="facebook_url" class="col-sm-2 control-label">Facebook</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="input-default" value="Facebook Account" readonly>
-                                        </div>        
+                                            <input type="text" class="form-control" id="facebook_url" value="{{$merchant_info->facebook_url}}" readonly>
+                                        </div>
                                     </div> 
                                 </form>
                             </div>
-
-
                             
                          <div role="tabpanel" class="tab-pane fade" id="tab15">
                           <form class="form-horizontal" method="POST" action="/merchant/add_other_info">
@@ -120,96 +117,107 @@
                                         <div class="text-right">
                                         <button class="btn btn-primary" style="padding: 5px 18px;">Save</button>
                                         </div>
-                                    </div>
-
+                                    </div>         
                                  </div>
                                 </form> 
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab11">
+                            <div role="tabpanel" class="tab-pane fade" method="POST" id="tab11">
                                 <form class="form-horizontal" action="">
+                                    
+                @if (Session::has('message'))
+                <div class="alert alert-success"><center>{{ Session::get('message') }}</center></div>
+                @endif
 
                                     <div class="form-group">
+                                         <label for="input-Default" class="col-sm-3 control-label">START</label>
+
+                                        <label for="input-Default" class="col-sm-3 control-label">END</label>
+                                        
+                                    </div>
+                       
+
+                                    <div class="form-group">
+
                                         <label for="input-Default" class="col-sm-2 control-label">Monday</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="08:00 AM" readonly>
+
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" name="Monday" id="time" value="00:00" required="true">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="05:00 PM" readonly>
-                                        </div>                                 
+
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                        </div>  
+
                                     </div> 
 
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Tuesday</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" name="Tuesday" id="time" value="00:00" required="true">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
-                                        </div>                                 
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                        </div>  
                                     </div>
 
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Wednesday</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" name="Wednesday" id="time" value="00:00" required="true">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
-                                        </div>                                 
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                        </div>  
                                     </div>
 
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Thursday</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" name="Thursday" id="time" value="00:00" required="true">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
-                                        </div>                                 
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                        </div>                                
                                     </div>
 
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Friday</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" name="Friday" id="time" value="00:00" required="true">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
-                                        </div>                                 
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                        </div>                                  
                                     </div>
 
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Saturday</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" name="Saturday" id="time" value="00:00" required="true">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
-                                        </div>                                 
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                        </div>                               
                                     </div>
 
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Sunday</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 AM" readonly>
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" name="Sunday" id="time" value="00:00" required="true">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="input-default" value="00:00 PM" readonly>
-                                        </div>                                 
+                                        <div class="col-sm-3 searchfields-format">
+                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                        </div>                               
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="col-md-4">
-                                            <div class="text-right">
-                                                <button class="btn btn-primary">Edit</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-8">
                                             <div class="text-right">
                                                 <button class="btn btn-primary">Save</button>
                                             </div>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
 
@@ -268,19 +276,16 @@
                             <label for="input-Default" class="col-sm-4 control-label" style="text-align: left;">  </label>
                             <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="save_payment" class="save_payment btn btn-primary" id="save_payment";>ADD</button>
                      </form>
-                       
-
-                     <div class="modal fade" id="myModalEdit{{$data->payment_method_id}}" role="dialog">
-                     
-                    </div>
                     </div>
                   </div>
                </div>
             </div>
+         
         </div>
     </div><!-- Row -->
     <!-- Row -->                        
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/registration.js"></script>
 @endsection

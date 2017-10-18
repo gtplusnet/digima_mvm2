@@ -11,7 +11,7 @@
 </div>
 <div id="main-wrapper">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="panel panel-white">
                <div class="panel-heading clearfix">
                 <h3 class="panel-title">Basic Tree</h3>
@@ -33,6 +33,32 @@
                             </ul>
                         </div>                       
                     </div>
+
+                <form class="form-horizontal" method="POST" action="/merchant/category" style="">
+
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="1" cellspacing="1"  border="2">
+                 <thead>
+                            <tr>
+                            <th style="text-align: center;font-size: 13px">Business ID</th>
+                            <th style="text-align: center;font-size: 13px">Business Name</th>
+                            <th style="text-align: center;font-size: 13px">Business Information</th>
+                            <th style="text-align: center;font-size: 13px">Action</th>
+                         
+                            </tr>   
+                            </thead>
+                            @foreach($categories as $data)
+                            <tr>
+                            <td>{{$data->business_category_id}}</td>
+                            <td>{{$data->business_category_name}}</td>
+                            <td>{{$data->business_category_information}}</td>
+                            <td>
+                            <a href="/merchant/delete_messages/{{$data->guest_messages_id}}"><button type="button" class="btn btn-danger">
+                            <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
+                            </td>
+                            </tr>
+                            @endforeach
+                        </table> 
 
                 </div>
             </div>

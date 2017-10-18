@@ -303,7 +303,6 @@ class FrontController extends Controller
             Session::flash('error', 'Sorry!. Network error, Transaction Fail!');
             return Redirect::to('/contact');
         }
-        
     }
     
     public function business(Request $request)
