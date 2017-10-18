@@ -230,6 +230,47 @@
                                     </div>
                                 </div>
                             </div>
+                            <div style="margin-top: 150px;" class="modal fade" id="myModalEdit{{$newteam->team_id}}" role="dialog">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Edit Team</h4>
+                                        </div>
+                                        <div class="modal-body" style="margin-bottom: 150px;" >
+                                            <div id="team_success">
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group col-md-3">
+                                                    <label for="business_name" >Team Name</label>
+                                                </div>
+                                                <div class="form-group col-md-9">
+                                                    <input type="text" class="form-control" value="{{$newteam->team_name}}" name="team_name_update" id="team_name_update"  style="width:100%;margin-bottom: 20px;"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group col-md-3">
+                                                    <label for="business_name" >Team Description</label>
+                                                </div>
+                                                <div class="form-group col-md-9">
+                                                    <input type="text" class="form-control" value="{{$newteam->team_information}}" name="team_des_update" id="team_des_update" style="width:100%"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <center>
+                                                <button type="submit" class="btn btn-primary" name="edit_team" id="edit_team">Update Team</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </center>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        <div class="modal-footer" style="border:0px;">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -240,7 +281,7 @@
             <form class="form-horizontal">
                 {{csrf_field()}}
                 
-                <div class="table-responsive">
+                <div class="table-responsive" id="agent_delete_success">
                     <div class="col-md-12">
                         <div class="pull-left" style="margin:20px 0px 20px 20px">
                             <button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
@@ -298,7 +339,7 @@
                     <h4 class="modal-title">Assign Agent</h4>
                 </div>
                 <div class="modal-body" style="margin-bottom: 150px;" >
-                    <div id="team_success">
+                    <div id="assign_success">
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group col-md-3">
@@ -345,9 +386,10 @@
                     </div>
                     <div class="col-sm-12">
                         <center>
-                        <a href="/supervisor/delete_team/{{$newteam->team_id}}">
-                            <button type="button" class="save_category btn btn-danger">Delete</button>
-                        </a>
+
+                       <input type="hidden" id="delete_agent_id" value=""/>
+                            <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
+                        
                         <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
                     </div>
                 </div>
