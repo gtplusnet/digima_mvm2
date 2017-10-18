@@ -60,6 +60,10 @@ class FrontController extends Controller
         $data['countyList'] = Tbl_county::get();
         return view('front.pages.registration', $data);
     }
+    public function redirect_deactivated()
+    {
+        return view('front.pages.deactivated_account');
+    }
 
     public function getCity(Request $request)
     {
