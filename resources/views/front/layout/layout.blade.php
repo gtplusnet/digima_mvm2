@@ -18,7 +18,10 @@
         <link rel="stylesheet" href="/initializr/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- FONT FAMILY -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
         
         <script src="/initializr/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
@@ -50,103 +53,86 @@
 
     </head>
     <body>
+        <!-- HEADER NAVBAR HERE -->
         <div class="header-nav">
-            <div class="container clearfix">
-                <div class="pull-left">
-                    <div class="header-logo">
-                        <img src="/images/croatia_directory_logo.jpg">
+            <div class="container">
+                <img class="pull-left" src="/images/croatia_directory_logo.png">
+                <div class="pull-right menu-bar">
+                    <!-- TAB BAR -->  
+                    <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
+                    <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
+                    <li class="nav-tab last {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+                    <!-- BUTTONS -->
+                    <div class="btn-login">
+                        <a href="/login">Log in</a>    
                     </div>
-                </div>
-                <div class="pull-right">
-                    <div class="menu-bar">  
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'category' ? 'active-link' : '' }}"><a class="nav" href="/category">Category</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+                    <div class="btn-register">
+                        <a href="/registration">Register</a>
                     </div>
-                    <div class="pull-right">
-                        <div class="menu-btn">
-                            <div class="spacer-btn">
-                                <a href="/login"><button class="btn btn-login"><i class="fa fa-power-off"></i><p class="nav-buttons">Login</p></button></a>
-                            </div>
-                            <div>
-                                <a href="/registration"><button class="btn btn-register"><i class="fa fa-plus-square"></i><p class="nav-buttons">Register</p></button></a>
-                            </div>
-                        </div>
+                    <div class="btn-english">
+                        <a class="active" href="">English</a>    
+                    </div>
+                    <div class="btn-croatian">
+                        <a href="">Croatian</a>
                     </div>
                 </div>
             </div>
         </div><!-- header-nav -->
-        @yield('content')       
-        <div class="footer">
-            <div class="container clearfix">
-                <div class="footer-top">
+
+        @yield('content')
+
+        <!-- FOOTER HERE -->
+        <div class="footer-upper">
+            <div class="container">
+                <div class="col-md-12 no-padding footer-body">
                     <div class="col-md-5">
                         <p class="footer-title">SUBSCRIBE TO OUR NEWSLETTER</p>
-                        <p class="footer-text">Join today to recieve latest offers</p>
-                        <input class="email-add-textbox" type="text" name="email-add" placeholder="Your Email Address">
-                        <div class="social-links">
-                            <div class="holder-facebook">
-                                <a href=""><i class="fa fa-facebook social-icon"></i></a>
-                            </div>
-                            <div class="holder-twitter">
-                                <a href=""><i class="fa fa-twitter social-icon"></i></a>
-                            </div>
-                            <div class="holder-instagram">
-                                <a href=""><i class="fa fa-instagram social-icon"></i></a>
-                            </div>
-                            <div class="holder-pinterest">
-                                <a href=""><i class="fa fa-pinterest-p social-icon"></i></a>
-                            </div>
-                            <div class="holder-googleplus">
-                                <a href=""><i class="fa fa-google-plus social-icon"></i></a>
-                            </div>
-                        </div>
+                        <p class="footer-content newsletter-content">Join today to recieve latest offers</p>
+                        <input type="text" class="input-emailadd" placeholder="Your Email Address">
                     </div>
                     <div class="col-md-4">
                         <p class="footer-title">CONTACT US</p>
-                        <div class="contactus-holder">
-                            <i class="material-icons contact-icon">location_on</i>
-                            <div class="spacer-contact">
-                                <p class="footer-contact">8871 Spruce Street,<br>Elizabeth City, NC 27909</p>
+                        <div class="contact-content">
+                            <div class="img-holder">
+                                <img src="/images/map_icon.png">
                             </div>
+                            <p class="footer-content">8871 Spruce Street, Elizabeth City, NC 27909</p>
                         </div>
-                        <div class="contactus-holder">
-                            <i class="material-icons contact-icon">phone_iphone</i>
-                            <div class="spacer-contact">
-                                <p class="footer-contact">0926-536-0045</p>
+                        <div class="contact-content">
+                            <div class="img-holder">
+                                <img src="/images/mobile_icon.png">
                             </div>
+                            <p class="footer-content">0926-536-0045</p>
                         </div>
-                        <div class="contactus-holder">
-                            <i class="material-icons contact-icon">mail_outline</i>
-                            <div class="spacer-contact">
-                                <p class="footer-contact">contact@yoursite.com</p>
+                        <div class="contact-content">
+                            <div class="img-holder">
+                                <img src="/images/mail_icon.png">
                             </div>
+                            <p class="footer-content">contact@yoursite.com</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <p class="footer-title">ABOUT US</p>
-                        <img src="/images/invert_croatiadirectory_logo.png" class="invert-logo">
-                        <p class="footer-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <img src="/images/footer_logo.png">
+                        <p class="footer-content aboutus-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- footer-upper -->
         <div class="footer-bottom">
-            <div class="container clearfix">
-                <div class="footer-bottom">
-                    <div class="col-md-12">
-                        <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
-                    </div>
-                </div>
+            <div class="container">
+                <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
             </div>
-        </div>
+        </div><!-- footer-bottom -->
+
+
+
 
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js">'</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
-        
+
 
 
         <!-- FOR GOOGLEMAP -->
