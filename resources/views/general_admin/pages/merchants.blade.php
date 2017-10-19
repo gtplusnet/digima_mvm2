@@ -85,12 +85,8 @@
                                 </tr>
 
                                 @endforeach
-
-
                             </tbody>
-                        </table>
-                        
-                        
+                        </table> 
                     </div>
                 </div>
             </div>
@@ -110,7 +106,7 @@
                        <div class="col-md-6" style="padding:0px">
                             <select class="form-control" name="date_end" id="date_end">
                                 @foreach($clients as $client_list)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+                                <option value="{{$client_list->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
                                 @endforeach
                             </select>
                         </div>
