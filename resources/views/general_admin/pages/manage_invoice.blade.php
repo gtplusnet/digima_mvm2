@@ -51,10 +51,15 @@
 						<td>
 							 <div class="form-group">
 							      <select id="invoice_action" data-name="{{ $invoice->invoice_name }}" data-email="{{ $invoice->user_email }}" data-path="{{$invoice->invoice_path}}" class="form-control invoice_action" id="sel1" style="width:90px;">
+							        
 							        <option>Action</option>
+							        @if($invoice->invoice_status=='Paid')
+							        <option value="view">View</option>
+							        @else
 							        <option value="view">View</option>
 							        <option value="resend">Resend</option>
-							      </select>
+							        @endif
+							     </select>
 							  </div>
 						</td>
 					</tr>

@@ -98,8 +98,8 @@
                 </div>
             </div>
         </div>
+            <div id="agentAdded" class="tab-pane fade">
 
-          <div id="agentAdded" class="tab-pane fade">
 
             <div class="row">
                 <div class="panel-body">
@@ -108,8 +108,10 @@
                        <div class="col-md-6" style="padding:1px;">
                             <select class="form-control" name="date_start" id="date_start">
 
-                                @foreach($pending_clients as $pending_client)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($pending_client->date_created))}}</option>
+
+                                @foreach($agentAdded as $agent_client)
+                                <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
+e
 
                                 @endforeach
                             </select>
@@ -117,8 +119,10 @@
                        <div class="col-md-6" style="padding:0px">
                             <select class="form-control" name="date_end" id="date_end">
 
-                                @foreach($clients as $client_list)
-                                <option value="{{$client_list->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+
+                                @foreach($agentAdded as $agent_client)
+                                <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
+
 
                                 @endforeach
                             </select>
@@ -194,54 +198,10 @@
                                     <td>{{$pendingclient->business_name}}</td>
                                     <td>{{$pendingclient->membership_name}}</td>
 
-                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$client->last_name}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                     </div>
-                </div>
-            </div>
-        </div>
-          <div id="activated" class="tab-pane fade">
-            <div class="row">
-                <div class="panel-body">
-                    <div class="row col-md-6 date" style="margin-right:-20px">
 
-                       <div class="col-md-6" style="padding:1px;">
-                            <select class="form-control" name="date_start" id="date_start">
-                                @foreach($pending_clients as $pending_client)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($pending_client->date_created))}}</option>
-                                @endforeach
-                            </select>
-                       </div>
-                       <div class="col-md-6" style="padding:0px">
-                            <select class="form-control" name="date_end" id="date_end">
-                                @foreach($pending_clients as $pending_client)
-                                <option value="{{$pending_client->date_created}}">{{date("F j, Y",strtotime($pending_client->date_created))}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="table-responsive col-md-12"  id="showHere">
-                        <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Date/Added</th>
-                                    <th>Business Name</th>
-                                    <th>membership</th>
-                                    <th>Transaction</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($pending_clients as $pendingclient)
-                                <tr>
-                                    <td>{{$pendingclient->contact_first_name}}  {{$pendingclient->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($pendingclient->date_created))}}</td>
-                                    <td>{{$pendingclient->business_name}}</td>
-                                    <td>{{$pendingclient->membership_name}}</td>
-                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$client->last_name}}</td>
+                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$pendingclient->last_name}}</td>
+                                    <td><a target="_blank" href="/general_admin/send_invoice/{{$pendingclient->business_id}}"><button class="transaction btn btn-default ">Resend Invoice</button></a></td>
+
 
                                 </tr>
                                 @endforeach
