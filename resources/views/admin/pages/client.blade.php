@@ -5,7 +5,7 @@
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="/agent">Home</a></li>
+            <li><a href="/admin">Home</a></li>
             <li class="active">{{ $page }}</li>
         </ol>
     </div>
@@ -25,7 +25,7 @@
                 <div class="col-md-4 ">
                     <div class="col-md-6">
                         <select class="form-control " name="date_start" id="date_start" style="width: 150px; border-radius: 20px;">
-                            @foreach($clients as $client_list)
+                            @foreach($client as $client_list)
                             <option value="{{$client_list->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
                             @endforeach
                         </select>
@@ -174,7 +174,7 @@
             </div>
             
             
-            </div><!-- Row -->
+            </div><!-- Row
             
             <div id="approvedCustomer" class="tab-pane fade">
                 <div class="row">
@@ -192,7 +192,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($clients as $client)
+                                    @foreach($client as $client)
                                     <tr>
                                         <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
                                         <td>{{date("F j, Y, g:i a",strtotime($client->date_created))}}</td>
@@ -238,5 +238,5 @@
             </style>
             <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="/assets/js/agent/admin_client.js"></script>
-            @endsection
+            <script src="/assets/js/admin/admin_client.js"></script>
+            @endsection -->

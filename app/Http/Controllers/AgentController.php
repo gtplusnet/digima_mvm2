@@ -9,17 +9,20 @@ use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblAgentModels;
+use App\Models\TblBusinessOtherInfoModel;
 use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
+use App\Models\Tbl_business_hours;
 use App\Models\TblUserAccountModel;
 
 use Session;
 use Redirect;
 use Carbon\Carbon;
-use Input;
-use Mail;
-
-
+// <<<<<<< HEAD
+// =======
+// use Input;
+// >>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
+// use Mail;
 
 
 class AgentController extends Controller
@@ -51,10 +54,24 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
-
 		return view ('agent.pages.login', $data);
-
 	}
+
+	public function dashboard()
+    {
+    	$data['page']	= 'Dashboard';
+         $count_merchant_signup = TblBusinessModel::get();
+    	 $count_merchant_signup = TblBusinessModel::where('business_status',1)->get();
+         $count_merchant_pending = TblBusinessModel::where('business_status',2)->get();
+         $count_merchant_activated = TblBusinessModel::where('business_status',3)->get();
+         $data['countSignup'] = $count_merchant_signup->count();
+         $data['countPending'] = $count_merchant_pending->count();
+         $data['countActivated'] = $count_merchant_activated->count();
+         
+
+
+		return view ('agent.pages.dashboard', $data);	
+    }
 
 	public function agent_login(Request $request)
 	{
@@ -101,28 +118,19 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	 = 'Client';
-		// $data['clients'] = TblUserAccountModel::where('status','registered')
-		// 								  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-		// 	                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-		// 	                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-		// 	                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-		// 	                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-		// 	                              ->orderBy('tbl_business.date_created',"asc")
-
-		// 	                              ->get();
 		$data['clients'] = TblBusinessModel::Where('business_status',1)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
         $data['clients_pending'] = TblBusinessModel::Where('business_status',3)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
         $data['clients_activated'] = TblBusinessModel::Where('business_status',4)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
@@ -139,7 +147,7 @@ class AgentController extends Controller
 		$data['clients'] = TblBusinessModel::Where('business_status',1)
 						  ->whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 		return view('agent.pages.filtered',$data);
@@ -152,7 +160,7 @@ class AgentController extends Controller
 		$data['clients'] = TblBusinessModel::
 		whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 		return view('agent.pages.filtered1',$data);
@@ -165,7 +173,7 @@ class AgentController extends Controller
 		$data['clients'] = TblBusinessModel::
 		whereBetween('date_created',[$s_date,$e_date])
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 		return view('agent.pages.filtered2',$data);
@@ -178,6 +186,7 @@ class AgentController extends Controller
 		// dd($request->transaction_id);
 		$update['transaction_status'] = 'call in progress'; 
 		$update['agent_id'] = session('agent_id'); 
+		$update['date_transact'] = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 		
 
@@ -190,7 +199,8 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$trans_id = $request->transaction_id;
 		$update['transaction_status'] = 'called'; 
-		$update['business_status'] = '2'; 
+		$update['business_status'] = '2';
+		$update['date_transact'] = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 				 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
 		return '';
@@ -219,38 +229,60 @@ class AgentController extends Controller
 	        $business_data->facebook_url = $request->facebook_url;
 	        $business_data->twitter_url = $request->twitter_username;
             $business_data->membership = $request->membership;
-            // $business_data->date_created = Carbon::now();
+            $business_data->transaction_status = 'Added';
+            $business_data->business_status = '20';
+            $business_data->agent_id = session('agent_id');
+            $business_data->date_transact = date("Y/m/d");
             $business_data->date_created = date("Y/m/d");
             $business_data->save();
 
-	        $contact_data = new TblBusinessContactPersonModel;
-	        $contact_data->business_contact_person_id = '';
-	        $contact_data->contact_prefix = $request->prefix;
-	        $contact_data->contact_first_name = $request->first_name;
-	        $contact_data->contact_last_name = $request->last_name;
-	        $contact_data->business_id = $business_data->business_id;
-            $contact_data->save();
+	        $contactData = new TblBusinessContactPersonModel;
+            $contactData->business_contact_person_id = '';
+            $contactData->contact_prefix = $request->prefix;
+            $contactData->contact_first_name = $request->first_name;
+            $contactData->contact_last_name = $request->last_name;
+            $contactData->business_id = $business_data->business_id;
+            $contactData->save();
 
+            $accountData = new TblUserAccountModel;
+            $accountData->user_email = $request->email_address;
+            $accountData->user_password =  password_hash('habagat', PASSWORD_DEFAULT);
+            $accountData->user_category = 'merchant';
+            $accountData->status = 'registered';
+            $accountData->business_id = $business_data->business_id;
+            $accountData->business_contact_person_id = $contactData->business_contact_person_id;
+            $accountData->save();
 
-            $account_data = new TblUserAccountModel;
-            $account_data->user_email = $request->email_address;
+            $otherData = new TblBusinessOtherInfoModel;
+            $otherData->business_other_info_id = '';
+            $otherData->company_information = 'none';
+            $otherData->business_website = 'none';
+            $otherData->year_established = 'none';
+            $otherData->company_profile = '';
+            $otherData->business_id = $business_data->business_id;
+            $otherData->save();
 
-            $myStr=$request->first_name;
-            $myStrs=$request->primary_business_phone;
-            $result = substr($myStr, 0, 3);
-            $results = substr($myStrs, 0, 3);
-            $final_result = $result.$results;
+            
 
-            $account_data->user_password = password_hash($final_result, PASSWORD_DEFAULT);
-            $account_data->user_category = 'merchant';
-            $account_data->status = 'registered';
-            $account_data->business_id = $business_data->business_id;
-            $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
-            $account_data->save();
-
+            $businessHoursData = new Tbl_business_hours;
+            $businessHoursData->insert(array(
+                array('days' => 'Monday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $business_data->business_id),
+                array('days' => 'Tuesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $business_data->business_id),
+                array('days' => 'Wednesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $business_data->business_id),
+                array('days' => 'Thursday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $business_data->business_id),
+                array('days' => 'Friday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $business_data->business_id),
+                array('days' => 'Saturday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $business_data->business_id),
+                array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                'desc' => 'none', 'business_id' => $business_data->business_id)
+            ));
            return Redirect::to('/agent/client');
-
-  		}
+       }
 	}
 	public function add_client()
 	{

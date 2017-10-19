@@ -3,6 +3,18 @@
 @section('description', 'manage categories')
 @section('content')
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+table {
+  
+  counter-reset: row-num;
+}
+.count {
+  counter-increment: row-num;
+}
+table tr td:first-child::before {
+    content: counter(row-num) ". ";
+}
+</style>
 <div class="page-title">
 	<h3>categories</h3>
 	<div class="page-breadcrumb">
@@ -13,11 +25,11 @@
 	</div>
 </div>
 <div class="tab-content" style="">
-	<div class="col-md=-12">
+	<div class="col-md-12">
 		<div class="pull-left" style="margin:20px 0px 20px 20px">
 			<button type="button"  data-toggle="modal" data-target="#myModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
 		</div>
-		<div class="modal fade" id="myModal" role="dialog">
+		<div style="margin-top: 150px;" class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog modal-md">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -44,7 +56,10 @@
 							</div>
 						</div>
 						<div class="col-sm-12">
-							<center><button type="submit" class="save_category btn btn-primary" name="save_category" id="save_category">Save</button></center>
+							<center>
+								<button type="submit" class="save_category btn btn-primary" name="save_category" id="save_category">Save</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</center>
 						</div>
 						
 						
@@ -64,8 +79,12 @@
 			</form>
 		</div>
 	</div>
+	<div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
+           		<img src="/assets/img/loading.gif">
+     </div> 
 	<div id="home" class=" col-md-12 tab-pane fade in active">
-		<div class="table-responsive" id="showHere3">
+
+	   <div class="table-responsive" id="showHere3">
 			@if (Session::has('message'))
 			   <div class="alert alert-danger"><center>{{ Session::get('message') }}</center></div>
 			@endif
@@ -80,18 +99,19 @@
 				</thead>
 				<tbody>
 					@foreach($category as $categories)
-					<tr>
-						<td>{{$categories->business_category_id}}</td>
+					<tr class="count">
+						<td></td>
 						<td>{{$categories->business_category_name}}</td>
 						<td>{{$categories->business_category_information}}</td>
 						<td><a href="#"><button type="button" class="btn btn-warning" data-toggle="modal"  id="view_btn" data-target="#myModalEdit{{$categories->business_category_id}}"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
-						<a href="/general_admin/delete_category/{{$categories->business_category_id}}"><button type="button" class="btn btn-danger" ><i class="fa fa-trash" aria-hidden="true"></i>Delete</button></td>
+
+					    <button type="button" class="btn btn-danger"  data-toggle="modal"  id="deleteModal" data-target="#deleteModal{{$categories->business_category_id}}"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button></td>
+
 					</tr>
-					<div class="modal fade" id="myModalEdit{{$categories->business_category_id}}" role="dialog">
+					<div style="margin-top: 150px;" class="modal fade" id="myModalEdit{{$categories->business_category_id}}" role="dialog">
 						<div class="modal-dialog modal-md">
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close reload" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Edit Category</h4>
 								</div>
 								<div class="modal-body" style="margin-bottom: 150px;" >
@@ -115,10 +135,14 @@
 										</div>
 									</div>
 									<div class="col-sm-12">
-										<center><button type="submit" class="update_category btn btn-primary" name="update_category" id="update_category">Update</button></center>
+
+										<center><button type="submit" class="update_category btn btn-primary" name="update_category" id="update_category">Update</button>
+										       <button type="button" class="btn btn-default" onClick="window.location.reload();" data-dismiss="modal">Close</button>
+									    </center>
 									</div>
 									
 									
+
 								</div>
 								<div class="modal-footer" style="border:0px;">
 									
@@ -126,12 +150,30 @@
 							</div>
 						</div>
 					</div>
+					<div style="margin-top: 150px;" class="modal fade" id="deleteModal{{$categories->business_category_id}}" role="dialog">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-body" style="margin-bottom: 80px;" >
+									<div class="col-sm-12">
+									<h4 class="modal-title">Are You sure You want to delete this item?</h4>
+								    </div>
+									<div class="col-sm-12">
+										<center>
+										<a href="/general_admin/delete_category/{{$categories->business_category_id}}">
+											<button type="submit" class="save_category btn btn-danger" name="save_category" id="save_category">Delete</button>
+										</a>
+										<button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					@endforeach
 				</tbody>
 			</table>
+			{!! $category->render() !!}
 		</div>
 	</div>
-	
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin.js"></script>

@@ -11,7 +11,7 @@ class TblAgentModels extends Model
 
     public function scopeTeam($query)
     {
-    	$query->leftjoin('tbl_team', 'tbl_agent.team_id', '=', 'tbl_team.team_id');
+    	$query->join('tbl_team', 'tbl_team.team_id', '=', 'tbl_agent.team_id');
     	return $query;
     }
 }

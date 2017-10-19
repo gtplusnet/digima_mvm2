@@ -37,12 +37,12 @@
         <div class="col-lg-3 col-md-6">
             <div class="panel info-box panel-white">
                 <div class="panel-body">
-                    <div class="info-box-stats">
-                        <p class="counter">150,000</p>
-                        <span class="info-box-title">Page Likes</span>
-                    </div>
-                    <div class="info-box-icon">
+                     <div class="info-box-icon">
                         <i style="color: royalblue ;"" class="fa fa-facebook"></i>
+                    </div>
+                    <div class="info-box-stats">
+                        <p class="counter">{{$fb}}</p>
+                        <span class="info-box-title">Page Likes</span>
                     </div>
                     <div class="info-box-progress">
                         <div class="progress progress-xs progress-squared bs-n">

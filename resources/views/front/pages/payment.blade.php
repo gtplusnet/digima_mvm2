@@ -15,23 +15,15 @@
 		</div>
 		<form action="/merchant/upload_payment" method="post" enctype="multipart/form-data">
 			{{csrf_field()}}
-			{{-- <div class="col-md-5">
-			@foreach($picture as $pictures)
-			<div class="profile-images" style="margin-top: 50px;">
-                        <img src="{{$pictures->payment_file_name}}" alt="Nadia Ali"/>
-                    </div>
-			
-			@endforeach
-		</div> --}}
 			<div class="col-md-12 payment-form-container">		
 					<div class="col-md-12 payment-form-upperpart">
 						<div class="col-md-6 payment-left-area">
 							<label for="input-reference-number" class="payment-label">Reference Number:</label>
-							<input type="text" name="payment_reference_number" class="payment-textfield">
+							<input type="text" name="payment_reference_number" class="payment-textfield" required/>
 						</div>
 						<div class="col-md-6 payment-right-area">
 							<label for="input-method"class="payment-label">Method of Payment:</label>
-							<select class="payment-dropdown"  name="payment_method">
+							<select class="payment-dropdown"  name="payment_method" required/>
 								@foreach($method as $methods)
 
 								<option value="{{$methods->payment_method_id}}">{{$methods->payment_method_name}}</option>
@@ -43,7 +35,7 @@
 					<div class="col-md-12 payment-form-bottompart">
 						<div class="col-md-6 payment-left-area">
 							<label for="input-amount" class="payment-label">Amount:</label>
-							<input type="text" name="payment_amount" class="payment-textfield">
+							<input type="text" name="payment_amount" class="payment-textfield" required/>
 						</div>
 						<div class="col-md-5 payment-right-area">
 							<label for="proof-of-payment" class="payment-label">Upload Proof of Payment:</label>
@@ -51,7 +43,7 @@
 						</div>
 						<div class="col-md-1 payment-upload-icon-container">
 							<div class="fileUpload payment-upload-holder fa fa-upload payment-upload-icon">
-						    <input id="uploadBtn" name="payment_file_name" type="file" class="upload" />
+						    <input id="uploadBtn" name="payment_file_name" type="file" class="upload" required/>
 						</div>
 						</div>
 

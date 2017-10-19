@@ -25,16 +25,15 @@
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-md-3 user-profile">
-                    <h3 class="text-center">Amily Lee</h3>
-                    <p class="text-center">UI/UX Designer</p>
+                    <h3 class="text-center">{{$profile->prefix}} {{$profile->first_name}}{{$profile->last_name}}</h3>
+                    <p class="text-center">{{$profile->position}}</p>
                     <hr>
                     <ul class="list-unstyled text-center">
-                        <li><p><i class="fa fa-map-marker m-r-xs"></i>Melbourne, Australia</p></li>
-                        <li><p><i class="fa fa-envelope m-r-xs"></i><a href="#">example@mail.com</a></p></li>
-                        <li><p><i class="fa fa-link m-r-xs"></i><a href="#">www.themeforest.net</a></p></li>
+                        <li><p><i class="fa fa-map-marker m-r-xs"></i>{{$profile->address}}</p></li>
+                        <li><p><i class="fa fa-envelope m-r-xs"></i><a href="#">{{$profile->email}}</a></p></li>
+                        <li><p><i class="fa fa-link m-r-xs"></i><a href="#">www.CroatiaDirectory.com</a></p></li>
                     </ul>
                     <hr>
-                    <button class="btn btn-primary btn-block"><i class="fa fa-plus m-r-xs"></i>Follow</button>
                 </div>
 
 
@@ -52,97 +51,44 @@
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="Mr." readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$profile->prefix}}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">First Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="Juan" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$profile->first_name}}" readonly>
                                         </div>
                                         <label for="input-Default" class="col-sm-2 control-label">Last Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="Dela Cruz" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$profile->last_name}}" readonly>
                                         </div>
                                     </div>
                                     <hr>
                                     <h4>Personal Information</h4>
+                                    
                                     <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Business Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="Jolibee" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Business Primary Phone</label>
+                                        <label for="input-Default" class="col-sm-2 control-label">Primary Phone</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="095678923" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$profile->primary_phone}}" readonly>
                                         </div>
-                                         <label for="input-Default" class="col-sm-2 control-label">Business Alternate Phone</label>
+                                         <label for="input-Default" class="col-sm-2 control-label">Alternate Phone</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="095678923" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$profile->secondary_phone}}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>Marcos St. Pandi, Bulacan</textarea>
+                                            <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$profile->address}}</textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">County</label>
-                                        <div class="col-sm-2">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="Bulacan" readonly>
-                                        </div>
-                                        <label for="input-Default" class="col-sm-2 control-label">City</label>
-                                        <div class="col-sm-2">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="Pandi" readonly>
-                                        </div>
-                                        <label for="input-Default" class="col-sm-2 control-label">Postal</label>
-                                        <div class="col-sm-2">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="1432" readonly>
-                                        </div>
-                                    </div>
+                                   
                                 </form>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="panel panel-white">
-                            <div class="panel-heading clearfix">
-                                <h3 class="panel-title"></h3>
-                            </div>
-                            <div class="panel-body">
-
-                                <div role="tabpanel">
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#tab5" role="tab" data-toggle="tab" aria-expanded="true">Contact Details</a></li>
-                                        <li role="presentation" class=""><a href="#tab6" role="tab" data-toggle="tab" aria-expanded="false">Daily Business Hours</a></li>
-                                        <li role="presentation" class=""><a href="#tab7" role="tab" data-toggle="tab" aria-expanded="false">Payment Methods</a></li>
-                                        <li role="presentation" class=""><a href="#tab8" role="tab" data-toggle="tab" aria-expanded="false">Other Infomation</a></li>
-                                    </ul>
-                                    <!-- Tab panes -->
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade active in" id="tab5">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-                                               
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="tab6">
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="tab7">
-                                            <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="tab8">
-                                            <p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div> 

@@ -3,15 +3,12 @@
 @section('content')
 <div class="banner-searchresult" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">
-		<div class="pull-right">
-			<p class="search-text">Search > <a class="search-link" href="">{{ $businessKeyword }}</a></p>
-		</div>
+		
 	</div>
 </div>
 <div class="container">
 	<div>
-	
-		<p class="searched-business">SEARCH RESULT FOR: {{ $businessKeyword }}</p>
+	    <p class="searched-business">SEARCH RESULT FOR: <a class="search-link" href="">{{ $businessKeyword }}</a></p>
 	</div>
 	<div>
 		<div class="col-md-8 search-table">
@@ -48,8 +45,10 @@
 									<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
 								</a>
 								<div class="icon-container">
-									<a href="" class="link-style"><i class="fa fa-facebook icon-style-fb"></i> Like</a>
-									<a href="" class="link-style"><i class="fa fa-twitter icon-style-twitter"></i> Tweet</a>
+
+									<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
+									
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 								</div>
 							</div>
 							<div class="col-md-7">
@@ -62,10 +61,11 @@
 										<i class="material-icons details">location_on</i><p>{{ $businessResultItem->business_complete_address }}</p>
 									</div>
 								</div>
-								<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...</p>
+								<p>Description of the store Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nulla urna nunc,  ultrices venenatis acilisis ut,...<a target="blank" href="/business/details">Read More</a></p>
 							</div>
 						</div>
 					@endforeach
+					
 				@else
 					<h1><center>No Results Found.</center></h1>
 				@endif
@@ -175,6 +175,46 @@
 			                <div class="item">
 			                    <div class="featured-details-container">
 			                    	<div class="detail-picture-container">
+			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
+			                    	</div>
+			                    	<div class="detail-name-container">	
+			                    		<p class="detail-name-title">Name of Business</p>
+			                    	</div>
+			                    </div>
+			                </div>
+			                <div class="item">
+			                    <div class="featured-details-container">
+			                    	<div class="detail-picture-container">
+			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
+			                    	</div>
+			                    	<div class="detail-name-container">	
+			                    		<p class="detail-name-title">Name of Business</p>
+			                    	</div>
+			                    </div>
+			                </div>
+			                <div class="item">
+			                    <div class="featured-details-container">
+			                    	<div class="detail-picture-container">
+			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
+			                    	</div>
+			                    	<div class="detail-name-container">	
+			                    		<p class="detail-name-title">Name of Business</p>
+			                    	</div>
+			                    </div>
+			                </div>
+			                <div class="item">
+			                    <div class="featured-details-container">
+			                    	<div class="detail-picture-container">
+			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
+			                    	</div>
+			                    	<div class="detail-name-container">	
+			                    		<p class="detail-name-title">Name of Business</p>
+			                    	</div>
+			                    </div>
+			                </div>
+			                <div class="item">
+			                    <div class="featured-details-container">
+			                    	<div class="detail-picture-container">
 			                    		<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="2">
 			                    	</div>
 			                    	<div class="detail-name-container">	
@@ -184,11 +224,11 @@
 			                </div>
 			            </div>			                
 			            <!-- Controls -->
-			            <a class="left carousel-control features-control" href="#carousel-pager" role="button" data-slide="prev">
+			            <a style="margin-top:40px;" class="left carousel-control features-control" href="#carousel-pager" role="button" data-slide="prev">
 			                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 			                <span class="sr-only">Previous</span>
 			            </a>
-			            <a class="right carousel-control features-control" href="#carousel-pager" role="button" data-slide="next">
+			            <a style="margin-top:20px;" class="right carousel-control features-control" href="#carousel-pager" role="button" data-slide="next">
 			                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 			                <span class="sr-only">Next</span>
 			            </a>
@@ -203,7 +243,7 @@
 				  }
 				  next.children(':first-child').clone().appendTo($(this));
 				  
-				  for (var i=1;i<2;i++) {
+				  for (var i=1;i<8;i++) {
 				    next=next.next();
 				    if (!next.length) {
 				    	next = $(this).siblings(':first');

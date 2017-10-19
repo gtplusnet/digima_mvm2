@@ -15,14 +15,36 @@ use Redirect;
 use Validator;
 class SuperVisorController extends Controller
 {
+    public static function allow_logged_in_users_only()
+    {
+        if(session("supervisor_login") != true)
+        {
+            return Redirect::to("/supervisor")->send();
+        }
+    }
+    public static function allow_logged_out_users_only()
+    {
+        if(session("supervisor_login") == true)
+        {
+            return Redirect::to("/supervisor/dashboard")->send();
+        }
+    }
+
 
 	public function index()
     {
-        // Self::allow_logged_out_users_only();
+        Self::allow_logged_out_users_only();
         $data['page']   = 'Supervisor Login';
 
         return view ('supervisor.pages.supervisor_login', $data);
 
+    }
+    public function supervisor_logout()
+    {
+
+        Session::forget("supervisor_login");
+        return Redirect::to("/supervisor");
+   
     }
     public function supervisor_login_submit(Request $request)
     {
@@ -35,7 +57,7 @@ class SuperVisorController extends Controller
                 {
 
                     Session::put("supervisor_login",true);
-                    Session::put("supervisor_id",$validate_login->agent_id);
+                    Session::put("supervisor_id",$validate_login->supervisor_id);
                     Session::put("full_name",$validate_login->first_name." ".$validate_login->last_name);
                     Session::put("email",$validate_login->email);
                     Session::put("position",$validate_login->position);
@@ -47,7 +69,7 @@ class SuperVisorController extends Controller
             else
             {
                 $data['page']   = 'supervisor Login';
-                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+                return Redirect::back()->withErrors(['User Login is Incorectsdfsd!', 'User Login is Incorect!fdsf']);
             }
         }
         else
@@ -58,25 +80,104 @@ class SuperVisorController extends Controller
     }
     public function profile()
 	{
+        Self::allow_logged_in_users_only();
 		$data['page']	= 'Profile';
+        $data['profile'] = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();
 		return view ('supervisor.pages.profile', $data);		
 	}
 
 	public function client()
 	{
+        Self::allow_logged_in_users_only();
 		$data['page']	= 'Client';
 
         $data['clients'] = TblBusinessModel::where('business_status', 2)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
 
 		return view ('supervisor.pages.client', $data);		
 	}
+    public function get_client(Request $request)
+    {
+        $s_date = $request->date_start;
+        $e_date = $request->date_end;
+        $data['clients'] = TblBusinessModel::where('business_status', 2)
+                          ->whereBetween('date_created',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.filtered',$data);
+    }
+    public function get_client1(Request $request)
+    {
+        $s_date = $request->date_start1;
+        $e_date = $request->date_end1;
+        $data['clients'] = TblBusinessModel::
+        whereBetween('date_created',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.filtered1',$data);
+    }
+    
+
+    public function get_client_transaction(Request $request)
+    {
+        $trans_id = $request->transaction_id;
+        // dd($request->transaction_id);
+        $update['transaction_status'] = 'call in progress'; 
+        $update['agent_id'] = session('agent_id'); 
+        $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+        
+
+            return '';
+        
+    }
+
+    public function get_client_transaction_reload(Request $request)
+    {
+        $trans_id = $request->transaction_id;
+        $update['transaction_status'] = 'called'; 
+        $update['business_status'] = '2'; 
+        $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+                 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
+        return '';
+        
+    }
+    public function manage_merchant()
+    {
+        $data['page'] = 'Manage Merchant';
+       $data['clients'] = TblBusinessModel::where('business_status', 2)->orWhere('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('supervisor.pages.manage_merchant',$data);
+    }
+    public function supervisor_add_team(Request $request)
+    {
+        $data['team_name']  = $request->team_name;
+        $data['team_information']  = $request->team_des;
+        TblTeamModel::insert($data);
+        return "<div class='alert alert-success'><strong>Success!</strong>Team Added.</div>";
+
+    }
+
+
 	public function add_team()
     {
+        Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
 		$data['page']	= 'Add User';
         $data['team_list'] = TblTeamModel::get();
@@ -85,10 +186,24 @@ class SuperVisorController extends Controller
 	}
 	public function add_agent()
 	{
+        Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
 		$data['team_list'] = TblTeamModel::get();
 		$data['page']	= 'Add Agent';
 		return view ('supervisor.pages.add_user', $data);	
+    }
+    public function get_agent_info()
+    {
+        $data['james'] = 'james';
+        return $data;
+    }
+    public function supervisor_assign_agent(Request $request)
+    {
+        $agent_id = $request->agent_id_assign;
+        $update['team_id'] = $request->teamAssigned;
+        TblAgentModels::where('agent_id',$agent_id)->update($update);
+        return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
+
     }	
 	public function get_city(Request $request)
     {
@@ -111,6 +226,7 @@ class SuperVisorController extends Controller
     }
 	public function dashboard()
     {
+        Self::allow_logged_in_users_only();
     	$data['page']	= 'Dashboard';
 		return view ('supervisor.pages.dashboard', $data);	
     }
@@ -143,65 +259,82 @@ class SuperVisorController extends Controller
         }
 
 	}
-	public function add_agent_submit(Request $request)
+    // supervisor_add_agent
+	public function supervisor_add_agent(Request $request)
 	{ 
+
         $ins['prefix'] = $request->prefix;
         $ins['first_name'] = $request->first_name;
         $ins['last_name'] = $request->last_name;
-		$ins['password'] = $request->password;
 		$ins['email'] = $request->email;
 		$ins['position'] = 'agent';
-		$ins['team_id'] = $request->team;
-		$ins['primary_phone'] = $request->primary_phone;
-		$ins['secondary_phone'] = $request->secondary_phone;
+		$ins['team_id'] = $request->team_id;
+		$ins['primary_phone'] = $request->primary;
+		$ins['secondary_phone'] = $request->secondary;
 		$ins['other_info'] = $request->other_info;
-
-        $rules['first_name'] = 'required';
-        $rules['last_name'] = 'required';
-        $rules['password'] = 'required';
-        $rules['email'] = 'email';
-        $rules['team_id'] = 'required';
-        $rules['primary_phone'] = 'required|numeric';
-        $rules['secondary_phone'] = 'required|numeric';
-
-        $validator = validator::make($ins, $rules);
+        $ins['date_created'] = date("Y/m/d");
+        $ins['agent_call'] = '0';
 
         $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-        $return_message = '';
-        if($validator->fails())
+        if($ins['password']=='')
         {
-            foreach ($validator->messages()->all('<li style=`list-style:none`>:message</li>')as $keys => $message)
-            {
-                $return_message .= $message;
-            }
-
-            return Redirect::to('/supervisor/add/user')->with('error_agent', $return_message);
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
         }
+        else if($ins['first_name']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input First Name.</div>";
+        }
+        else if($ins['last_name']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Last Name.</div>";
+        }
+        else if($ins['email']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
+        }
+        else if($ins['primary_phone']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Primary Phone.</div>";
+        }
+        
         else
         {
-            TblAgentmodels::insert($ins);
-            return Redirect::to('/supervisor/add/user')->with('warning_agent', 'testing');
+            $check_insert = TblAgentmodels::insert($ins);
+            if($check_insert)
+            {
+              return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
+            }
+            else
+            {
+                return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
+            }
         }
+         
+        
+        
 	}
 
     //Eden
-    public function view_user()
+    public function manage_user()
     {
-        $data['page']   = 'View User';
-        $data['team_list'] = TblTeamModel::get();
+        Self::allow_logged_in_users_only();
+        $data['page']   = 'Manage Team/Agent';
         $data['viewteam']   = TblTeamModel::get();
-        $data['viewagent']  = TblAgentModels::team()->get();
-        return view ('supervisor.pages.view_user', $data); 
+        $data['viewagent']  = TblAgentModels::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+                             ->get();
+        return view ('supervisor.pages.manage_user', $data); 
     }
-    public function delete_team(Request $request)
+    public function supervisor_delete_team(Request $request,$id)
     {
-        TblTeamModel:: where ('team_id',$request->team_id)->delete();
-        return Redirect::to("/supervisor/view/user")->with('delete_team', 'testing');
+
+        TblTeamModel:: where ('team_id',$id)->delete();
+        return Redirect::to("/supervisor/manage_user")->with('delete_team', 'testing');
     }
-    public function delete_agent(Request $request)
-    {
-        TblAgentModels:: where ('agent_id',$request->agent_id)->delete();
-        return Redirect::to("/supervisor/view/user")->with('warning_agent', 'testing');
+    public function supervisor_delete_agent(Request $request)
+    {   
+
+        TblAgentModels:: where ('agent_id',$request->delete_agent_id)->delete();
+        return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted</div>";
     }
     public function edit_team(Request $request)
     {
@@ -279,6 +412,7 @@ class SuperVisorController extends Controller
     }
 
     public function uploadConvo(Request $request) {
+        Self::allow_logged_in_users_only();
 		if($request->ajax()) {
 			$fileConvo = $request->file("file");
             $fileConvo->move('conversations', $fileConvo->getClientOriginalName());
@@ -288,8 +422,29 @@ class SuperVisorController extends Controller
             $convoInfo->business_id = $request->input("businessId");
             $convoInfo->business_contact_person_id = $request->input("contactId");
             $convoInfo->save();
-		}
+
+            $update['business_status'] = "3";
+            $update['date_transact'] = date("Y/m/d"); 
+            TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
+        }
 	}
+    public function force_activate(Request $request)
+    {
+        Self::allow_logged_in_users_only();
+        if($request->ajax()) {
+            $convoInfo = new Tbl_conversation;
+            $convoInfo->file_path = 'not available';
+            $convoInfo->file_name = 'not available';
+            $convoInfo->business_id = $request->input("businessId");
+            $convoInfo->business_contact_person_id = $request->input("contactId");
+            $convoInfo->save();
+
+            $update['business_status'] = "3";
+            $update['date_transact'] = date("Y/m/d");
+            TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
+            return "<div class='alert alert-success'><strong>Success!</strong>Procedure OverRide!</div>";
+        }
+    }
 /*
     public function add_agent()
 	{

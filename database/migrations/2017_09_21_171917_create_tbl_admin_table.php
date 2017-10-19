@@ -21,7 +21,6 @@ class CreateTblAdminTable extends Migration
             $table->string('date_created');
         });
     }
-
     /**
      * Reverse the migrations.
      *

@@ -2,6 +2,15 @@
 @section('title', 'Business List')
 @section('description', 'Business List')
 @section('content')
+<div class="page-title" style="margin-bottom:20px;">
+    <h3>Business List</h3>
+    <div class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/admin">Home</a></li>
+            <li class="active">Business List</li>
+        </ol>
+    </div>
+</div>
 	<ul class="nav nav-tabs">
 	   <li class="active"><a data-toggle="pill" href="#home">Merchants</a></li>
        <li><a data-toggle="pill" href="#menu1">Agents</a></li>
@@ -23,7 +32,7 @@
           	</div> 
 
 			<div class="business-result">
-				
+			hjgh
 			</div>
 	    </div>
 
