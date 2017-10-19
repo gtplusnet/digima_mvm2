@@ -30,7 +30,67 @@
             <div class="row">
                 <div class="panel-body">
                     
+
+            <div class="panel-body">
+               
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class=" panel-primary">
+                         <div class="panel-heading row clearfix">
+                            <div class="col-md-8">
+                                <div class="col-md-12">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active li_style"><a data-toggle="tab" href="#tab9">Customer</a></li>
+                                        <li class="li_style"><a data-toggle="tab" href="#tab10">Pending Customer</a></li>
+                                        <li class="li_style marg"><a data-toggle="tab11" href="#activatedCustomer">Activated Customer</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                          </div>  
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade active" id="tab9">
+                            <form class="form-horizontal" method="post" action="/supervisor/add_team_submit">
+                                {{csrf_field()}}
+                                @if(session()->has('warning_team'))
+                                <div class="alert alert-success">
+                                  <strong>Success!</strong> Team Added Successfully!.
+                                </div>
+                                @endif
+                                @if(session()->has('error_team'))
+                                <div class="alert alert-danger">
+                                  <strong>Warning!</strong> {!! session('error_team') !!}
+                                </div>
+                                @endif
+                                <h4>Team Information</h4>
+                                <div class="form-group">
+                                    <label for="input-Default" class="col-sm-2 control-label">Team Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control input-rounded" name="team_name"  id="team_name" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-Default" class="col-sm-2 control-label">Team Description</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control input-rounded" name="team_information" id="team_information" placeholder="Description" rows="4" style="border-radius: 20px; resize: none;" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button  class="btn btn-primary btn-lg" style="border-radius: 20px; float: right;">Add Team</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    <div role="tabpanel" class="tab-pane fade {{Session::has('warning_agent') || Session::has('error_agent') || Session::has('error_agent')? 'active in' : ''}}" id="tab10">
+                         <form class="form-horizontal" method="post" action="/supervisor/add_agent_submit">
+
                     <form class="form-horizontal" method="post" action="/supervisor/add_team_submit">
+
                         {{csrf_field()}}
                         @if(session()->has('warning_team'))
                         <div class="alert alert-success">

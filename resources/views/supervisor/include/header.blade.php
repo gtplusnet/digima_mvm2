@@ -5,6 +5,7 @@
                 <i class="fa fa-bars"></i>
             </a>
         </div>
+        
        {{--  <div class="logo-box">
             <a href="index.html" class="logo-text"><span>CROATIA</span></a>
         </div><!-- Logo Box --> --}}
@@ -137,7 +138,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
-                            <span class="user-name">First Name<i class="fa fa-angle-down"></i></span>
+                            <span class="user-name">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
@@ -149,9 +150,24 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/supervisor_logout" class="log-out waves-effect waves-button waves-classic">
-                            <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
-                        </a>
+
+                    @if(session("supervisor_login"))
+                    <a style="font-size:15px",  href='/supervisor/logout'>
+                    <span>
+                    <i class="fa fa-sign-out m-r-xs"></i>
+                    Log out
+                    </span>
+                    </a>
+                    @else
+                    <a style="font-size:15px",  href="">
+                    <span>
+                    <i class="fa fa-sign-out m-r-xs"></i>
+                    Hi Guest
+                    </span>
+                    </a>  
+                     @endif        
+
+                 
                     </li>
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->

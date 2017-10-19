@@ -4,42 +4,80 @@
         <a href="#0" class="cd-close-nav">Close</a>
     </header>
     <ul class="cd-nav list-unstyled">
+
         <li class="cd-selected" data-menu="index">
-            <a href="javsacript:void(0);">
+            <a href="/general_admin/dashboard">
                 <span>
                     <i class="glyphicon glyphicon-home"></i>
                 </span>
                 <p>Dashboard</p>
             </a>
         </li>
-        <li data-menu="profile">
-            <a href="javsacript:void(0);">
+
+        <li data-menu="Business list">
+            <a href="/general_admin/business_list">
                 <span>
                     <i class="glyphicon glyphicon-user"></i>
                 </span>
-                <p>Profile</p>
+                <p>Business list</p>
             </a>
         </li>
-        <li data-menu="Clients">
-            <a href="javsacript:void(0);">
+
+        <li data-menu="Merchant">
+            <a href="/general_admin/merchants">
                 <span>
                     <i class="fa fa-group"></i>
                 </span>
-                <p>Clients</p>
+                <p>Merchant</p>
             </a>
         </li>
 
-        <li data-menu="User">
-
-            <a href="javsacript:void(0);">
+        <li data-menu="Emailing invoice">
+            <a href="/general_admin/email_invoice">
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
-
-                <p>USER</p>
-
+                <p>Emailing Invoice</p>
             </a>
         </li>
+
+         <li data-menu="Payment monitoring">
+            <a href="/general_admin/payment_monitoring">
+                <span>
+                    <i class="fa fa-user-plus"></i>
+                </span>
+                <p>Payment Monitoring</p>
+            </a>
+        </li>
+
+         <li data-menu="Manage user">
+            <a href="/general_admin/manage_user">
+                <span>
+                    <i class="fa fa-user-plus"></i>
+                </span>
+                <p>Manage User</p>
+            </a>
+        </li>
+
+         <li data-menu="Manage categories">
+            <a href="/general_admin/manage_categories">
+                <span>
+                    <i class="fa fa-user-plus"></i>
+                </span>
+                <p>Manage Categories</p>
+            </a>
+        </li>
+
+
+        <li data-menu="Report">
+            <a href="/general_admin/report">
+                <span>
+                    <i class="fa fa-user-plus"></i>
+                </span>
+                <p>Report</p>
+            </a>    
+        </li>
+        
     </ul>
 </nav>
 

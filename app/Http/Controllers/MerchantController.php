@@ -13,6 +13,8 @@ use App\Models\TblPaymentMethod;
 use App\Models\TblPaymentModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessHoursmodels;
+use App\Models\TblCountyModel;
+use App\Models\TblGuestMessages;
 use Redirect;
 use insert;
 use DB;
@@ -32,6 +34,7 @@ class MerchantController extends Controller
 			return Redirect::to("/login")->send();
 		}
 	}
+
 	public static function allow_logged_out_users_only()
 	{
 		if(session("merchant_login") )
@@ -122,7 +125,9 @@ class MerchantController extends Controller
 	{	
 		Self::allow_logged_in_users_only();
         // $fb_page = '742953982442308'; 
+
         // $access_token = 'EAAD6rZBdEZBzABAIf5b2ZC4MNedpKRM1DC7XiUaqxkDSYBqxA8s4lutvB9az0BZBd3BhLPqDOZBwqxlbsuucm11rafaEaCIMRXFtPl9cdzcyUOZCdgQiHWU8N5TxJMz9K9WOiz4pE5hA7ivLJUIy1g9rjKHvarE4pQkWqFScBwBZAu9cXUhlfvWU57xuWNqSNsZD';
+
         // $url = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
         // $curl = curl_init($url);
         // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
@@ -130,6 +135,7 @@ class MerchantController extends Controller
         // $result = curl_exec($curl);  
         // curl_close($curl);
         // $details = json_decode($result,true);
+
         // // dd($details);
         // $data['fb'] = $details['fan_count'];
         $data['fb']="james";
@@ -142,10 +148,12 @@ class MerchantController extends Controller
     {
        return view ('merchant.pages.merchant_redirect');
     }
+
     public function merchant_redirect_exist()
     {
        return view('merchant.pages.merchant_redirect_exist');
     }
+
      public function payment()
     
     {
@@ -215,24 +223,19 @@ class MerchantController extends Controller
 	public function profile()
 	{
 		Self::allow_logged_in_users_only();
-
 		$data['page']				= 'Profile';
-		$data['_payment_method']	= Tbl_payment_method::get();
+        $data['merchant_info'] = TblBusinessModel::where('business_id',session('business_id'))->first();
+		$data['_payment_method']	= Tbl_payment_method::get();   
 		return view ('merchant.pages.profile', $data);		
-
 	}
-
-   
 
 	public function view_info()
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
-		$data['other_info']	= TblBusinessOtherInfoModel::get();
 		return view ('merchant.pages.view_info', $data);		
 	}
 
-	
     public function add_other_info(Request $request)//
     {
     	//dd(Request::input());
@@ -244,7 +247,6 @@ class MerchantController extends Controller
         Session::flash('add_info', "Other Information Save");
         return Redirect::back();
     }
-
 
      public function add_payment_method(Request $request)
     {
@@ -263,6 +265,51 @@ class MerchantController extends Controller
     }
 
 
+    public function add_messages(Request $request)
+    {
+      $data["guest_messages_id"] = $request->guest_messages_id;
+      $data["full_name"] = $request->full_name;
+      $data["email"] = $request->email;
+      $data["subject"] = $request->subject;
+      $data["messages"] = $request->messages;
+      TblGuestMessages::insert($data); 
+      Session::flash('message', "Message Information Added");
+      return Redirect::back();
+    }
+
+    public function delete_messages($id)
+    {
+      TblGuestMessages::where('guest_messages_id',$id)->delete();
+      Session::flash('danger', "Message Information Deleted");
+      return Redirect::back();
+    }
+
+
+      public function edit_payment_method(Request $request)
+    {
+      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_name"] = $request->payment_method_name;
+      TblPaymentMethod::where($data)->update($data);
+      // Session::flash('message', "Payment Save");
+      return Redirect::back();
+    }
+
+     public function add_business_category(Request $request)
+    {
+      $data["business_category_id"] = $request->business_category_id;
+      $data["business_category_name"] = $request->business_category_name;
+      Tbl_business_category::insert($data); 
+      Session::flash('message', "Category Added");
+      return Redirect::back();
+    }
+
+      public function delete_business_category($id)
+    {
+      Tbl_business_category::where('business_category_id',$id)->delete();
+      Session::flash('danger', "Category Deleted");
+      return Redirect::back();
+    }
+     
 /**
     public function edit($id)
     {
@@ -288,11 +335,20 @@ class MerchantController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Category';
-
-		$data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();	
-
+		// $data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();
+    $data['categories']    = Tbl_business_category::get();
+   
 		return view('merchant.pages.category', $data);		
 	}
+
+    public function messages(Request $request)
+    {
+        Self::allow_logged_in_users_only();
+        $data['page'] = 'Messages';
+        $data['guest_messages']    = TblGuestMessages::get(); 
+        return view ('merchant.pages.messages', $data);  
+    }
+
 
 	public function bills()
 	{
@@ -303,9 +359,9 @@ class MerchantController extends Controller
 
 	public function sample()
 	{
-       
 		return view ('merchant.pages.sample');	
 	}
+
    public function sample2()
     {
        
@@ -339,10 +395,4 @@ class MerchantController extends Controller
     return $lat;
     }
 
-    
-   
-
-    	
-
-	
 }

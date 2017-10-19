@@ -5,7 +5,7 @@
     </header>
     <ul class="cd-nav list-unstyled">
         <li class="cd-selected" data-menu="index">
-            <a href="javsacript:void(0);">
+            <a href="/merchant/dashboard">
                 <span>
                     <i class="glyphicon glyphicon-home"></i>
                 </span>
@@ -13,28 +13,38 @@
             </a>
         </li>
         <li data-menu="profile">
-            <a href="javsacript:void(0);">
+            <a href="/merchant/profile">
                 <span>
                     <i class="glyphicon glyphicon-user"></i>
                 </span>
                 <p>Profile</p>
             </a>
         </li>
-        <li data-menu="profile">
-            <a href="javsacript:void(0);">
+        <li data-menu="Category">
+            <a href="/merchant/category">
                 <span>
                     <i class="glyphicon glyphicon-th-list"></i>
                 </span>
                 <p>Category & Keywords</p>
             </a>
         </li>
+        <li data-menu="Category">
+            <a href="/merchant/messages">
+                <span>
+                    <i class="menu-icon glyphicon glyphicon-envelope"></i>
+                </span>
+                <p>Messages</p>
+            </a>
+        </li>
+
         <li data-menu="profile">
-            <a href="javsacript:void(0);">
+            <a href="/merchant/bills">
                 <span>
                     <i class="glyphicon glyphicon-barcode"></i>
                 </span>
                 <p>Bills</p>
             </a>
         </li>
+        
     </ul>
 </nav>

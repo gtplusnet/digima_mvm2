@@ -53,7 +53,7 @@ class AdminController extends Controller
 	public function client()
     {
         $data['page']    = 'Client';
-        $data['client'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+        $data['clients'] = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
             ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
             ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
             ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
@@ -112,11 +112,6 @@ class AdminController extends Controller
 		$data['team_list'] = TblTeamModel::get();
 		$data['page']	= 'Add Agent';
 		return view ('admin.pages.add_agent', $data);		
-
-/*		$data['page']	= 'Team';
-        $data['_team'] = TblTeamModel::get();
-		return view ('admin.pages.team', $data);*/		
-
 	}
 
 	public function add_supervisor()
@@ -154,6 +149,7 @@ class AdminController extends Controller
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
         return $postal_code->postal_code;
     }
+
     public function admin_login ()
     {
     	Self::allow_logged_out_users_only();
@@ -163,12 +159,11 @@ class AdminController extends Controller
 
     public function admin_login_submit (Request $request)
     {
-
-    	$validate_login = TblAdminModels::where('email','=',$request->email)->first();
+        
+    $validate_login = TblAdminModels::where('email',$request->email)->first();
 
         if($validate_login)
         {
-
         	if (password_verify($request->password, $validate_login->password)) 
 
 				{
@@ -181,22 +176,21 @@ class AdminController extends Controller
 					$data['page']	= 'Dashboard';
 					return Redirect::to('/admin/dashboard');
 				}
-
 			else
-	        {
-	            $data['page']  = 'Admin login';
+            {
+                $data['page']   = 'Admin Login';
                 return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-	        }
-		}
+            }
+        }
         else
         {
+            $data['page']   = 'Admin Login';
             return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
         }
     }
 
 		public function admin_logout ()
 	{
-
 		Session::forget("login");	
         return Redirect::to("/admin");
 		Session::put("login", true);
@@ -212,8 +206,6 @@ class AdminController extends Controller
 
 	public function add_team_submit(Request $request)
 	{
-		
-      
 		$data['team_name'] = $request->team_name;
 		$data['team_information'] = $request->team_description;
 		TblTeamModel::insert($data);
@@ -221,9 +213,7 @@ class AdminController extends Controller
 	}
 
 	public function add_agent_submit(Request $request)
-	{
-		
-      
+	{ 
 		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
 		$data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
 
@@ -249,8 +239,8 @@ class AdminController extends Controller
 		// dd($data);
 		TblSupervisorModels::insert($data);
 		return Redirect::to('/admin/add/supervisor')->with('warning', 'testing');
-
 	}
+
 	public function add_admin_submit(Request $request)
 	{
 		$data['full_name'] = $request->prefix." ".$request->first_name." ".$request->last_name;
@@ -261,17 +251,15 @@ class AdminController extends Controller
 		// dd($data);
 		TblAdminModels::insert($data);
 		return Redirect::to('/admin/add/admin')->with('warning', 'testing');
-
 	}
-
 	//Eden 
 	// public function add_team()
 	// {
 	// 	$data['page']	= 'Team';
- //        $insert["team_name"] = Request::input("team_name"); 
- //        $insert["team_information"] = Request::input("team_information"); 
- //        TblTeamModel::insert($insert); 
- //        Redirect::to('/admin/view_team')->send();
+    //  $insert["team_name"] = Request::input("team_name"); 
+    //  $insert["team_information"] = Request::input("team_information"); 
+    //   TblTeamModel::insert($insert); 
+    //   Redirect::to('/admin/view_team')->send();
 	// }
     /*
 	public function view_team()

@@ -28,6 +28,8 @@ $(document).click(function(){
 });
 
 
+
+
 // $(document).ready(function() {
 //         $("#company_profile").on('change', function() {
 //           //Get count of selected files

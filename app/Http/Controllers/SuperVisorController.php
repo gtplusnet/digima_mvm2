@@ -13,6 +13,7 @@ use App\Models\Tbl_conversation;
 use Session;
 use Redirect;
 use Validator;
+
 class SuperVisorController extends Controller
 {
     public static function allow_logged_in_users_only()
@@ -46,22 +47,29 @@ class SuperVisorController extends Controller
         return Redirect::to("/supervisor");
    
     }
+    //   public function supervisor_logout()
+    // {
+    //     Session::forget("supervisor_login_submit");
+    //     return Redirect::to("/supervisor");
+    // }
+
     public function supervisor_login_submit(Request $request)
     {
         $validate_login = TblSupervisorModels::where('email',$request->email)->first();
         if($validate_login)
-
 
         {
             if (password_verify($request->password, $validate_login->password)) 
                 {
 
                     Session::put("supervisor_login",true);
+
                     Session::put("supervisor_id",$validate_login->supervisor_id);
                     Session::put("full_name",$validate_login->first_name." ".$validate_login->last_name);
+
                     Session::put("email",$validate_login->email);
                     Session::put("position",$validate_login->position);
-                    // Session::put("login", $validate->email);
+                    // Session::put("login", $validate_login->email);
                     $data['page']   = 'Dashboard';
 
                     return Redirect::to('/supervisor/dashboard');
@@ -74,10 +82,12 @@ class SuperVisorController extends Controller
         }
         else
         {
-            $data['page']   = 'supervisor Login';
+            
             return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
         }
     }
+
+
     public function profile()
 	{
         Self::allow_logged_in_users_only();

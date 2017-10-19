@@ -14,8 +14,6 @@
 	       <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/agent">AGENT</a></li>
 	        <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/supervisor">SUPERVISOR</a></li>
 	</ul>
-	<div id="showHereSuccess2">
-	</div>
 
 	 @if (Session::has('message'))
 	 <div class="alert alert-danger"><center>{{ Session::get('message') }}</center></div>
@@ -35,6 +33,9 @@
 					<div class="modal-header">
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">TEAM</h4>
+					</div>
+
+					<div id="showHereSuccess2">
 					</div>
 					<div class="modal-body" style="margin-bottom: 150px;width: 115%" >
 						<div id="showHere1">
