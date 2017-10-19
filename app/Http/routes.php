@@ -48,6 +48,7 @@ Route::any('/contact_send', 'FrontController@contact_send');
 
 Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
+Route::get('/redirect', 'FrontController@redirect_deactivated');
 
 
 Route::get('/business', 'FrontController@business');
@@ -67,6 +68,7 @@ Route::get('/merchant/dashboard',	'MerchantController@index');
 
 /*Merchant Page by Brain*/
 Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
+Route::get('/merchant/redirect/exist', 			'MerchantController@merchant_redirect_exist');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
 
@@ -149,13 +151,15 @@ Route::post('/supervisor/get_client2', 		'SupervisorController@get_client2');
 Route::post('/supervisor/get_client_transaction', 		'SupervisorController@get_client_transaction');
 Route::post('/supervisor/get_client_transaction_reload', 'SupervisorController@get_client_transaction_reload');
 Route::get('/supervisor/manage/merchant', 'SupervisorController@manage_merchant');
+Route::any('/supervisor/manage_user', 	'SupervisorController@manage_user');
+Route::post('/supervisor/add_team', 'SupervisorController@supervisor_add_team');
+Route::post('/supervisor/add_agent', 'SupervisorController@supervisor_add_agent');
+Route::post('/supervisor/get_agent_info', 'SupervisorController@get_agent_info');//wala
+Route::post('/supervisor/assign_agent', 'SupervisorController@supervisor_assign_agent');
+Route::any('/supervisor/delete_team/{id}', 'SupervisorController@supervisor_delete_team');
+Route::post('/supervisor/delete_agent', 'SupervisorController@supervisor_delete_agent');
 //james
-Route::any('/supervisor/add/user', 		'SupervisorController@add_team');
 
-
-Route::any('/supervisor/view/user', 	'SupervisorController@view_user');
-Route::any('/supervisor/delete_team', 'SupervisorController@delete_team');
-Route::any('/supervisor/delete_agent', 'SupervisorController@delete_agent');
 Route::any('/supervisor/edit_team', 'SupervisorController@edit_team');
 Route::any('/supervisor/update_team', 'SupervisorController@update_team');
 Route::any('/supervisor/edit_agent/{id}', 'SupervisorController@edit_agent');
@@ -164,6 +168,9 @@ Route::any('/supervisor/update_agent', 'SupervisorController@update_agent');
 Route::any('/supervisor/get_city', 		'SupervisorController@get_city');
 Route::any('/supervisor/get_zip_code', 	'SupervisorController@get_zip_code');
 Route::any('/supervisor/upload-convo', 'SuperVisorController@uploadConvo');
+Route::any('/supervisor/force_activate', 'SuperVisorController@force_activate');
+
+
 
 
 Route::any('/admin/add_supervisor_submit', 		'AdminController@add_supervisor_submit');
@@ -252,6 +259,11 @@ Route::any('/general_admin/delete_category/{id}', 'GeneralAdminController@genera
 Route::any('/general_admin/send_invoice/{id}', 'GeneralAdminController@general_admin_send_invoice');
 Route::any('/general_admin/send_save_invoice/{id}', 'GeneralAdminController@general_admin_send_save_invoice');
 Route::any('/general_admin/manage_invoice', 'GeneralAdminController@general_admin_manage_invoice');
+Route::any('/general_admin/resend_invoice', 'GeneralAdminController@general_admin_resend_invoice');
+Route::post('/general_admin/accept_and_activate', 'GeneralAdminController@general_admin_accept_and_activate');
+Route::post('/general_admin/decline_and_deactivate', 'GeneralAdminController@general_admin_decline_and_deactivate');
+
+
 
 Route::any('/sample', 'MerchantController@sample');
 

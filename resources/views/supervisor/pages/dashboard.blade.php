@@ -45,14 +45,14 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Users Behavior</h4>
                                 <p class="category">24 Hours performance</p>
                             </div>
                             <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
+                                <div id="chartActivity" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Open
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <!--others-->
-              
+
             </div>
         </div>
 

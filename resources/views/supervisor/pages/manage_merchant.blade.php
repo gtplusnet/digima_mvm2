@@ -3,11 +3,11 @@
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 <div class="page-title">
-	<h3>categories</h3>
+	<h3>{{$page}}</h3>
 	<div class="page-breadcrumb">
 		<ol class="breadcrumb">
 			<li><a href="/admin">Home</a></li>
-			<li class="active">categories</li>
+			<li class="active">{{$page}}</li>
 		</ol>
 	</div>
 </div>

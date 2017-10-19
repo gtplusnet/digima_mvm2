@@ -71,7 +71,7 @@ class MerchantController extends Controller
 
                     return Redirect::to('/merchant/dashboard');
                    }
-                   else
+                   elseif($validate_login->status=="registered")
                    {
                     $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
                                           ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
@@ -93,6 +93,11 @@ class MerchantController extends Controller
                     $data['page']   = 'Dashboard';
 
                     return Redirect::to('/merchant/redirect');
+                   }
+                   else
+                   {
+                     $data['page']   = 'Merchant Login';
+                     return Redirect::to('/redirect');
                    }
                     
                 }
@@ -119,7 +124,9 @@ class MerchantController extends Controller
 	{	
 		Self::allow_logged_in_users_only();
         // $fb_page = '742953982442308'; 
-        // $access_token = 'EAAD6rZBdEZBzABAJBHS0mB1XKq9jqgN2KeyjaxElAXKmlME4Vt28LgwTNlbYtB6zvjf2BDmYOcAn9v6tOi4lU1iqRPYZCCDPOZAUNVhEsdgH9zrFK7ouAldBZCc64FHXOZBKYmviWmwRgVcTCNU1lJtaRXoVbtgZCQUmV9wn8vuoxhhvnrdATgRMOuyk59IrYcZD';
+
+        // $access_token = 'EAAD6rZBdEZBzABAIf5b2ZC4MNedpKRM1DC7XiUaqxkDSYBqxA8s4lutvB9az0BZBd3BhLPqDOZBwqxlbsuucm11rafaEaCIMRXFtPl9cdzcyUOZCdgQiHWU8N5TxJMz9K9WOiz4pE5hA7ivLJUIy1g9rjKHvarE4pQkWqFScBwBZAu9cXUhlfvWU57xuWNqSNsZD';
+
         // $url = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
         // $curl = curl_init($url);
         // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
@@ -127,8 +134,11 @@ class MerchantController extends Controller
         // $result = curl_exec($curl);  
         // curl_close($curl);
         // $details = json_decode($result,true);
+
+        // // dd($details);
         // $data['fb'] = $details['fan_count'];
-        $data['fb'] = 'james';
+        $data['fb']="james";
+
         $data['page']	= 'Dashboard';
 
 		return view ('merchant.pages.dashboard', $data);	
@@ -139,12 +149,27 @@ class MerchantController extends Controller
        return view ('merchant.pages.merchant_redirect');
     }
 
+    public function merchant_redirect_exist()
+    {
+       return view('merchant.pages.merchant_redirect_exist');
+    }
+
      public function payment()
+    
     {
         $data['page']   = 'payment';
         $data['method'] = TblPaymentMethod::get();
         $data['picture'] = TblPaymentModel::get();
-        return view('front.pages.payment', $data);
+        $check = TblPaymentModel::where('business_id',session('business_id'))->first();
+        if($check)
+        {
+            return Redirect::to('/merchant/redirect/exist');
+        }
+        else
+        {
+            return view('front.pages.payment', $data);
+        }
+        
 
         // $account_data = new TblUserAccountModel;
         // $account_data->user_email = $request->email;
@@ -180,10 +205,11 @@ class MerchantController extends Controller
                     $data['payment_file_name'] = $filename;
                     $data['business_contact_person_id'] = session('business_contact_person_id');
                     $data['business_id'] = session('business_id');
+                    $data['payment_status'] = 'submitted';
                     $check_insert = TblPaymentModel::insert($data);
                     if($check_insert)
                     {
-                        echo "tama ka";
+                        return Redirect::to('/merchant/redirect/exist');
                     }
                     else
                     {

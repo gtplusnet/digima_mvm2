@@ -76,7 +76,7 @@
                                         <div class="modal-content">
                                             
                                             <div class="modal-header">
-                                                <button type="button" class="close closed" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
+                                                <button type="button" class="close" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
                                                 <h4 class="modal-title">Personal Information</h4>
                                             </div>
                                             <div class="modal-body">
@@ -219,11 +219,13 @@
                                 <tr>
                                      <td>{{$clients_pendingss->business_id}}</td>
                                     <td>{{$clients_pendingss->business_name}}</td>
+
                                     <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
                                     <td>{{$clients_pendingss->business_phone}}</td>
                                     <td>{{$clients_pendingss->business_alt_phone}}</td>
                                     <td>{{$clients_pendingss->membership_name}}</td>
                                      <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
+
                                     <td>{{$clients_pendingss->transaction_status}}</td>
                              </tr>
                  
@@ -274,10 +276,12 @@
                                 <tr>
                                     <td>{{$clients_activate->business_id}}</td>
                                     <td>{{$clients_activate->business_name}}</td>
+
                                     <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
                                     <td>{{$clients_activate->business_phone}}</td>
                                     <td>{{$clients_activate->business_alt_phone}}</td>
-                                    <td>{{$clients_activate->payment_method_name}}</td>
+                                    <td>{{$clients_activate->membership_name}}</td>
+
                                     <td>{{$clients_activate->transaction_status}}</td>
                                     <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>  
                               </tr>
