@@ -244,7 +244,6 @@ Route::any('/general_admin/logout', 'GeneralAdminController@general_admin_logout
 Route::any('/general_admin/merchants', 'GeneralAdminController@general_admin_merchants');
 Route::any('/general_admin/payment_monitoring', 'GeneralAdminController@general_admin_payment_monitoring');
 Route::any('/general_admin/manage_user', 'GeneralAdminController@general_admin_manage_user');
-
 Route::any('/general_admin/manage_categories', 'GeneralAdminController@general_admin_manage_categories');
 Route::any('/general_admin/add_category', 'GeneralAdminController@general_admin_add_category');
 Route::any('/general_admin/edit_category', 'GeneralAdminController@general_admin_edit_category');
@@ -256,8 +255,12 @@ Route::any('/general_admin/manage_invoice', 'GeneralAdminController@general_admi
 Route::any('/general_admin/resend_invoice', 'GeneralAdminController@general_admin_resend_invoice');
 Route::post('/general_admin/accept_and_activate', 'GeneralAdminController@general_admin_accept_and_activate');
 Route::post('/general_admin/decline_and_deactivate', 'GeneralAdminController@general_admin_decline_and_deactivate');
-
-
+Route::post('/general_admin/manage_user/add_agent', 'GeneralAdminController@general_admin_add_agent');
+Route::post('/general_admin/manage_user/add_team', 'GeneralAdminController@general_admin_add_team');
+Route::post('/general_admin/manage_user/add_supervisor', 'GeneralAdminController@general_admin_add_supervisor');
+Route::post('/general_admin/manage_user/add_admin', 'GeneralAdminController@general_admin_add_generaladmin');
+Route::any('/general_admin/manage_user/delete_agent', 	'GeneralAdminController@general_admin_delete_agent');
+Route::any('/general_admin/manage_user/delete_team', 	'GeneralAdminController@general_admin_delete_team');
 
 Route::any('/sample', 'MerchantController@sample');
 
@@ -265,10 +268,10 @@ Route::any('/sample-upload', 'FrontController@sampleUpload');
 Route::any('/upload-file', 'FrontController@uploadFile');
 
 //oliver route
-Route::any('/general_admin/manage_user/add/team', 'GeneralAdminController@add_team');
-Route::any('/general_admin/manage_user/add/general_admin', 'GeneralAdminController@add_generaladmin');
-Route::any('/general_admin/manage_user/add/agent', 'GeneralAdminController@add_agent');
-Route::any('/general_admin/manage_user/add/supervisor', 'GeneralAdminController@add_supervisor');
+
+
+
+
 
 Route::post('/general_admin/manage_user/add_admin_submit', 	'GeneralAdminController@add_admin_submit');
 
@@ -285,13 +288,13 @@ Route::post('/general_admin/manage_user/add_team_submit', 	'GeneralAdminControll
 
 Route::post('/general_admin/manage_user/edit_team_submit', 	'GeneralAdminController@edit_team_submit');
 
-Route::any('/general_admin/manage_user/delete_team_submit/{id}', 	'GeneralAdminController@delete_team_submit');
+
 
 Route::post('/general_admin/manage_user/add_agent_submit', 	'GeneralAdminController@add_agent_submit');
 
 Route::post('/general_admin/manage_user/edit_agent_submit', 	'GeneralAdminController@edit_agent_submit');
 
-Route::any('/general_admin/manage_user/delete_agent_submit/{id}', 	'GeneralAdminController@delete_agent_submit');
+
 
 
 Route::post('/general_admin/manage_user/add_supervisor_submit',	'GeneralAdminController@add_supervisor_submit');

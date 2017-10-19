@@ -458,8 +458,11 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data'] = TblAdminModels::get();
-      $data['page'] = 'Add Admin';
+      $data['_data_agent'] = TblAgentmodels::get();
+      $data['_data_team'] = TblTeamModel::get();
+      $data['_data_supervisor'] = TblSupervisorModels::get();
+      $data['_data_admin'] = TblAdminModels::get();
+      $data['page'] = 'Manage Users';
       return view('general_admin.pages.manage_user', $data);
 
     }
@@ -577,48 +580,168 @@ class GeneralAdminController extends Controller
  
     }
 
-    public function add_team()
-  {
-     $data['_data'] = TblTeamModel::get();
-    $data['county_list'] = TblCountyModel::get();
-    $data['page'] = 'Add Team';
-    return view ('general_admin.pages.add_team', $data);
+  
+  
+
+  
+
+  
+  public function general_admin_add_agent(Request $request)
+  { 
+
+    $ins['prefix'] = $request->prefix;
+    $ins['first_name'] = $request->first_name;
+    $ins['last_name'] = $request->last_name;
+    $ins['email'] = $request->email;
+    $ins['position'] = 'agent';
+    $ins['team_id'] = $request->team_id;
+    $ins['primary_phone'] = $request->primary;
+    $ins['secondary_phone'] = $request->secondary;
+    $ins['other_info'] = $request->other_info;
+    $ins['date_created'] = date("Y/m/d");
+    $ins['agent_call'] = '0';
+    $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+        if($ins['password']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
+        }
+        else if($ins['first_name']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input First Name.</div>";
+        }
+        else if($ins['last_name']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Last Name.</div>";
+        }
+        else if($ins['email']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
+        }
+        else if($ins['primary_phone']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Primary Phone.</div>";
+        }
+        
+        else
+        {
+            $check_insert = TblAgentmodels::insert($ins);
+            if($check_insert)
+            {
+              return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
+            }
+            else
+            {
+                return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
+            }
+        }
+  }
+  public function general_admin_add_team(Request $request)
+  {  
+    $data['team_name'] = $request->team_name;
+    $data['team_information'] = $request->team_information;
+    if($data['team_name']=='')
+    {
+        return "<div class='alert alert-danger'><strong>Please!</strong>Input Team Name.</div>";
+    }
+    else if($data['team_information']=='')
+    {
+        return "<div class='alert alert-danger'><strong>Please!</strong>Input Team Information.</div>";
+    }
+    
+    else
+    {
+      TblTeamModel::insert($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Team Added Successfully!</div>";
+    }
   }
 
-    public function add_generaladmin()
+  public function general_admin_add_supervisor(Request $request)
   {
-    $data['_data'] = TblAdminModels::get();
-    $data['page'] = 'Add Admin';
-    return view ('general_admin.pages.add_generaladmin ', $data);    
+    $ins['prefix'] = $request->prefix;
+    $ins['first_name'] = $request->first_name;
+    $ins['last_name'] = $request->last_name;
+    $ins['email'] = $request->email;
+    $ins['position'] = 'supervisor';
+    $ins['primary_phone'] = $request->primary;
+    $ins['secondary_phone'] = $request->secondary;
+    $ins['address'] = $request->address;
+    $ins['other_info'] = $request->other_info;
+    $ins['date_created'] = date("Y/m/d");
+    $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+        if($ins['password']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
+        }
+        else if($ins['first_name']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input First Name.</div>";
+        }
+        else if($ins['last_name']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Last Name.</div>";
+        }
+        else if($ins['email']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
+        }
+        else if($ins['primary_phone']=='')
+        {
+            return "<div class='alert alert-danger'><strong>Please!</strong>Input Primary Phone.</div>";
+        }
+        
+        else
+        {
+            $check_insert = TblSupervisorModels::insert($ins);
+            if($check_insert)
+            {
+              return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Added Successfully!</div>";  
+            }
+            else
+            {
+                return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
+            }
+        }  
   }
-
-   public function add_agent()
-  {
-    $data['_data'] = TblAgentmodels::get();
-    $data['county_list'] = TblCountyModel::get();
-    $data['team_list'] = TblTeamModel::get();
-    $data['page'] = 'Add Agent';
-    return view ('general_admin.pages.add_agent', $data);   
-  }
-
-  public function add_supervisor()
-  {
-    $data['_data'] = TblSupervisorModels::get();
-    $data['page'] = 'Add supervisor';
-    return view ('general_admin.pages.add_supervisor ', $data);   
-  }
-
-  public function add_admin_submit(Request $request)
+  public function general_admin_add_generaladmin(Request $request)
   {
     $data['full_name'] = $request->full_name;
     $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
     $data['email'] = $request->email;
-    TblAdminModels::insert($data);
-   return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    if($data['full_name']=='')
+    {
+        return "<div class='alert alert-danger'><strong>Please!</strong>Input Full Name.</div>";
+    }
+    else if($data['password']=='')
+    {
+        return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
+    }
+    else if($data['email']=='')
+    {
+        return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
+    }
+    
+    else
+    {
+        
+        $check_insert = TblAdminModels::insert($data);
+        if($check_insert)
+        {
+          return "<div class='alert alert-success'><strong>Success!</strong>Admin Added Successfully!</div>";  
+        }
+        else
+        {
+            return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
+        }
+    }
+
   }
 
+  public function general_admin_delete_team(Request $request)
+  {
+     $team_id = $request->delete_team_id;
+     TblTeamModel::where('team_id',$team_id)->delete();
+     return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted Successfully!</div>";
+  }
     public function edit_admin_submit(Request $request)
   {
     // dd($request->all());
@@ -638,15 +761,7 @@ class GeneralAdminController extends Controller
 
 
 
-  public function add_team_submit(Request $request)
-  {  
-    $data['team_name'] = $request->team_name;
-    $data['team_information'] = $request->team_information;
-    TblTeamModel::insert($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
-  }
+  
   public function edit_team_submit(Request $request)
   {
     $data['team_name'] = $request->team_name;
@@ -655,12 +770,7 @@ class GeneralAdminController extends Controller
       return"Update Success";
    }
 
-  public function delete_team_submit($id)
-  {
-     TblTeamModel::where('team_id',$id)->delete();
-     Session::flash('message', "Team Deleted");
-     return Redirect::back();
-  }
+  
 
 
   public function add_agent_submit(Request $request)
@@ -692,11 +802,11 @@ class GeneralAdminController extends Controller
    </center></div>";
    }
 
-  public function delete_agent_submit($id)
+  public function general_admin_delete_agent(Request $request)
   {
-      TblAgentmodels::where('agent_id',$id)->delete();
-      Session::flash('message', "Agent Deleted");
-      return Redirect::back();
+      $agent_id = $request->delete_agent_id;
+      TblAgentmodels::where('agent_id',$agent_id)->delete();
+      return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
   }
 
   public function add_supervisor_submit(Request $request)
