@@ -132,7 +132,7 @@
 	                    	<div class="col-sm-9">
 	                    	</div>
 	                        <div class="col-sm-3">
-	                        	<button  class="btn btn-primary btn-lg"  style="border-radius: 20px; float: right;">Continue</button>
+	                        	<button  class="btn btn-primary btn-lg"  style="border-radius: 20px; float: right;">Add Merchant</button>
 	                        </div>
 	                    </div>
 

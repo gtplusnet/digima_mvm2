@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('#county_id').change(function(){
 		var county_id = $('#county_id').val();
 		$('#postal_code').val("");
-		alert("");
+		// alert("");
 
 		if(county_id == '')
 		{

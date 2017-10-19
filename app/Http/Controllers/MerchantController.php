@@ -34,6 +34,7 @@ class MerchantController extends Controller
 			return Redirect::to("/login")->send();
 		}
 	}
+
 	public static function allow_logged_out_users_only()
 	{
 		if(session("merchant_login") )
@@ -138,7 +139,6 @@ class MerchantController extends Controller
         // // dd($details);
         // $data['fb'] = $details['fan_count'];
         $data['fb']="james";
-
         $data['page']	= 'Dashboard';
 
 		return view ('merchant.pages.dashboard', $data);	
@@ -229,8 +229,6 @@ class MerchantController extends Controller
 		return view ('merchant.pages.profile', $data);		
 	}
 
-   
-
 	public function view_info()
 	{
 		Self::allow_logged_in_users_only();
@@ -238,7 +236,6 @@ class MerchantController extends Controller
 		return view ('merchant.pages.view_info', $data);		
 	}
 
-	
     public function add_other_info(Request $request)//
     {
     	//dd(Request::input());
@@ -250,7 +247,6 @@ class MerchantController extends Controller
         Session::flash('add_info', "Other Information Save");
         return Redirect::back();
     }
-
 
      public function add_payment_method(Request $request)
     {
@@ -340,7 +336,8 @@ class MerchantController extends Controller
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Category';
 		// $data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();
-    $data['categories']    = Tbl_business_category::get();   	
+    $data['categories']    = Tbl_business_category::get();
+   
 		return view('merchant.pages.category', $data);		
 	}
 
