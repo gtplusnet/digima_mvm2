@@ -88,18 +88,14 @@
                                 </tr>
 
                                 @endforeach
-
-
                             </tbody>
-                        </table>
-                        
-                        
+                        </table> 
                     </div>
                 </div>
             </div>
         </div>
-
             <div id="agentAdded" class="tab-pane fade">
+
 
             <div class="row">
                 <div class="panel-body">
@@ -108,8 +104,10 @@
                        <div class="col-md-6" style="padding:1px;">
                             <select class="form-control" name="date_start" id="date_start">
 
+
                                 @foreach($agentAdded as $agent_client)
                                 <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
+e
 
                                 @endforeach
                             </select>
@@ -117,8 +115,10 @@
                        <div class="col-md-6" style="padding:0px">
                             <select class="form-control" name="date_end" id="date_end">
 
+
                                 @foreach($agentAdded as $agent_client)
                                 <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
+
 
                                 @endforeach
                             </select>
@@ -169,8 +169,10 @@
                        </div>
                        <div class="col-md-6" style="padding:0px">
                             <select class="form-control" name="date_end" id="date_end">
+
                                 @foreach($pending_clients as $pending_client)
                                 <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
+
                                 @endforeach
                             </select>
                         </div>
@@ -194,8 +196,10 @@
                                     <td>{{$pendingclient->business_name}}</td>
                                     <td>{{$pendingclient->membership_name}}</td>
 
+
                                     <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$pendingclient->last_name}}</td>
                                     <td><a target="_blank" href="/general_admin/send_invoice/{{$pendingclient->business_id}}"><button class="transaction btn btn-default ">Resend Invoice</button></a></td>
+
 
                                 </tr>
                                 @endforeach

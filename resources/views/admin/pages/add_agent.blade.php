@@ -30,12 +30,12 @@
 	                    <div class="form-group">
 	                        <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
 	                        <div class="col-sm-2">
-	                           <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">
-							   <option>Dr.</option>
-							   <option>Miss</option>
+	                           <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">							   
 							   <option>Mr.</option>
+							   <option>Miss</option>
 							   <option>Mrs.</option>
 							   <option>Ms.</option>
+							    <option>Dr.</option>
 	  						</select>
 	                        </div>
 	                    </div>
@@ -64,7 +64,7 @@
 	                    <div class="form-group">
 	                        <label for="input-Default" class="col-sm-2 control-label">Team</label>
 	                        <div class="col-sm-2">
-	                           <select class="form-control " name="team" id="prefix" style="width: 150px; border-radius: 20px;">
+	                        <select class="form-control " name="team" id="prefix" style="width: 150px; border-radius: 20px;">
 							   @foreach($team_list as $teams)
 							   <option value="{{$teams->team_id}}">{{$teams->team_name}}</option>
 							   @endforeach

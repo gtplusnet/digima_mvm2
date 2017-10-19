@@ -30,10 +30,10 @@
 	                    <div class="form-group">
 	                        <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
 	                        <div class="col-sm-2">
-	                           <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">
-							   <option>Dr.</option>
-							   <option>Miss</option>
+	                           <select class="form-control " name="prefix" id="prefix" style="width: 150px; border-radius: 20px;">  
 							   <option>Mr.</option>
+							   <option>Miss</option>
+							   <option>Dr.</option>
 							   <option>Mrs.</option>
 							   <option>Ms.</option>
 	  						</select>
@@ -59,8 +59,6 @@
 	                            <input type="text" class="form-control input-rounded" name="password" id="input-rounded">
 	                        </div>
 	                    </div>
-	                
-	               
 	                    <div class="form-group">
 	                    	<div class="col-sm-9">
 	                    	</div>
