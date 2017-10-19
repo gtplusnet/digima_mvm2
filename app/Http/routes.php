@@ -63,13 +63,23 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 
+
+
 /*Merchant Page by Brain*/
 Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
 Route::get('/merchant/redirect/exist', 			'MerchantController@merchant_redirect_exist');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
-
 Route::get('/merchant/category', 	'MerchantController@category');
+Route::any('/merchant/add_business_category', 'MerchantController@add_business_category');
+Route::any('/merchant/delete_business_category/{id}', 'MerchantController@delete_business_category');
+
+
+
+
+Route::get('/merchant/messages', 	'MerchantController@messages');
+Route::any('/merchant/add_messages', 'MerchantController@add_messages');
+Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');
 Route::get('/merchant/bills', 		'MerchantController@bills');
 //james
 Route::get('/merchant/logout', 'MerchantController@logout');
@@ -85,6 +95,7 @@ Route::any('/merchant/add_other_info', 'MerchantController@add_other_info');
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info');
 Route::any('/merchant/add_payment_method', 'MerchantController@add_payment_method');
 Route::any('/merchant/delete_payment_method/{id}', 'MerchantController@delete_payment_method');
+Route::any('/merchant/edit_payment_method', 'MerchantController@edit_payment_method');
 
 
 Route::any('/merchant/view_info', 'MerchantController@view_info');
@@ -115,10 +126,8 @@ Route::any('/admin/get_zip_code', 	'AdminController@get_zip_code');
 Route::any('/admin/add_team_submit', 	'AdminController@add_team_submit');
 Route::post('/admin/add_agent_submit', 	'AdminController@add_agent_submit');
 Route::post('/admin/get_client', 		'AdminController@get_client');
-Route::post('/admin/get_client_transaction', 		'AdminController@get_client_transaction');
-Route::post('/admin/get_client_transaction_reload', 'AdminController@get_client_transaction_reload');
-
-
+Route::post('/admin/get_client_transaction','AdminController@get_client_transaction');
+Route::post('/admin/get_client_transaction_reload','AdminController@get_client_transaction_reload');
 
 
 Route::get('/supervisor', 				'SupervisorController@index');
@@ -129,7 +138,11 @@ Route::any('/supervisor_logout', 	'SupervisorController@supervisor_logout');
 
 
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
+
+Route::any('/supervisor/logout', 		'SupervisorController@supervisor_logout');
+
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
+
 
 Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
 Route::get('/supervisor/profile', 		'SupervisorController@profile');
@@ -169,9 +182,6 @@ Route::post('/admin/add_admin_submit', 	'AdminController@add_admin_submit');
 Route::any('/admin/add_agent', 		'AdminController@add_agent');
 Route::any('/admin/delete_agent/{agent_id}', 	'AdminController@delete_agent');
 //Route::any('/admin/view_agent', 		'AdminController@view_agent');
-
-
-
 
 
 //james
@@ -224,6 +234,7 @@ Route::any('/agent/logout', 		'AgentController@agent_logout');
 //Routes for Search
 //Route::any('/search', 'SearchController@index');
 //Route::any('/search_result', 'SearchController@search_result');
+
 //Route::any('/search_result_list', 'SearchController@search_result_list');
 
 
@@ -304,7 +315,10 @@ Route::post('/general_admin/manage_user/edit_supervisor_submit', 	'GeneralAdminC
 Route::any('/general_admin/manage_user/delete_supervisor_submit/{id}', 	'GeneralAdminController@delete_supervisor_submit');
 
 
+//Route::any('/search_result_list', 'SearchController@search_result_list');
+
 Route::any('/sample', 'MerchantController@sample');
 Route::any('/sample1', 'MerchantController@sample1');
 Route::any('/sample2', 'MerchantController@sample2');
 Route::any('/sample_invoice', 'GeneralAdminController@sample_invoice');
+

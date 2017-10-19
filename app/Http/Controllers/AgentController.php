@@ -19,11 +19,8 @@ use App\Models\TblMembeshipModel;
 use Session;
 use Redirect;
 use Carbon\Carbon;
-// <<<<<<< HEAD
-// =======
-// use Input;
-// >>>>>>> 780a4b04454cb25afca7d5d6774592ae26a24f7e
-// use Mail;
+use Input;
+use Mail;
 
 
 class AgentController extends Controller
@@ -77,9 +74,8 @@ class AgentController extends Controller
 	public function agent_login(Request $request)
 	{
 		$validate_login = TblAgentModels::where('email',$request->email)->first();
+		
 		if($validate_login)
-
-
 		{
 			if (password_verify($request->password, $validate_login->password)) 
 				{
@@ -112,23 +108,37 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	= 'Profile';
+		$data['profile'] = TblAgentModels::get();
+		$data['agent_info'] = TblAgentModels::where('agent_id',session('agent_id'))->first();
 		return view ('agent.pages.profile', $data);		
+
 	}
 
 	public function client()
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	 = 'Client';
+
+		$data['clients'] = TblUserAccountModel::where('status','registered')
+										  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
+			                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+			                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+			                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+			                              ->orderBy('tbl_business.date_created',"asc")
+			                              ->get();
+
 		$data['clients'] = TblBusinessModel::Where('business_status',1)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
-        $data['clients_pending'] = TblBusinessModel::Where('business_status',3)
+        $data['clients_pending'] = TblBusinessModel::Where('business_status',2)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
+
         $data['clients_activated'] = TblBusinessModel::Where('business_status',4)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -211,6 +221,7 @@ class AgentController extends Controller
 	public function add_client_submit(Request $request)
 	{
 		// Self::allow_logged_in_users_only();
+		// dd($request->city_list);
 		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
 
         if(count($check_email_availability) == 1)
@@ -223,7 +234,9 @@ class AgentController extends Controller
 	        $business_data->business_id = '';
 	        $business_data->business_name = $request->business_name;
 	        $business_data->city_id = $request->city_list;
-	        $business_data->county_id = $request->county_list;
+
+	        $business_data->county_id = $request->county_id;
+
 	        $business_data->business_complete_address = $request->business_address;
 	        $business_data->business_phone = $request->primary_business_phone;
 	        $business_data->business_alt_phone = $request->secondary_business_phone;
@@ -231,6 +244,7 @@ class AgentController extends Controller
 	        $business_data->facebook_url = $request->facebook_url;
 	        $business_data->twitter_url = $request->twitter_username;
             $business_data->membership = $request->membership;
+
             $business_data->transaction_status = 'Added';
             $business_data->business_status = '20';
             $business_data->agent_id = session('agent_id');
@@ -283,7 +297,9 @@ class AgentController extends Controller
                 array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id)
             ));
-           return Redirect::to('/agent/client');
+           Session::flash('add_merchant', "New Merchant Added");
+           return Redirect::to('/agent/add/client');
+
        }
 	}
 	public function add_client()
