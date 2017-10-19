@@ -88,12 +88,8 @@
                                 </tr>
 
                                 @endforeach
-
-
                             </tbody>
-                        </table>
-                        
-                        
+                        </table> 
                     </div>
                 </div>
             </div>
@@ -173,8 +169,10 @@ e
                        </div>
                        <div class="col-md-6" style="padding:0px">
                             <select class="form-control" name="date_end" id="date_end">
+
                                 @foreach($pending_clients as $pending_client)
                                 <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
+
                                 @endforeach
                             </select>
                         </div>

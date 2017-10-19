@@ -1,11 +1,10 @@
 @extends('agent.layout.layout')
 @section('content')
 <div class="page-title">
-    <h3>{{ $page }}</h3>
+    <h3>Merchant</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/agent">Home</a></li>
-            <li class="active">{{ $page }}</li>
         </ol>
     </div>
 </div>
@@ -16,9 +15,9 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
-                            <li class="active li_style"><a data-toggle="tab" href="#customer">Customer</a></li>
-                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Customer</a></li>
-                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Customer</a></li>
+                            <li class="active li_style"><a data-toggle="tab" href="#customer">Sign-Up Merchant</a></li>
+                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Merchant</a></li>
+                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Registered Merchant</a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,21 +47,27 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Date/Added</th>
+                                    <th>ID</th>
                                     <th>Business Name</th>
-                                    <th>membership</th>
-                                    <th>Transaction</th>
+                                    <th>Contact Person</th>
+                                    <th>Phone 1</th>
+                                    <th>Phone 2</th>
+                                    <th>Membership</th>
+                                    <th>Date Register</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients as $client)
                                 <tr>
-                                    <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
+                                    <td>{{$client->business_id}}</td>
                                     <td>{{$client->business_name}}</td>
+                                    <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
+                                    <td>{{$client->business_phone}}</td>
+                                    <td>{{$client->business_alt_phone}}</td>
                                     <td>{{$client->membership_name}}</td>
+                                    <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->transaction_status}}</td>
                                     <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
@@ -80,7 +85,7 @@
                                                         <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
                                                     </div>
                                                     <div>
-                                                        <p ><center>1:23:08 Call Duration</center></p>
+                                                        <p ><center>{{session('_Timer')}}</center></p>
                                                     </div>
                                                     <div >
                                                         <center><button type="button" class="closed btn btn-danger " data-id="{{$client->business_id}}"  data-dismiss="modal" ><i class="fa fa-phone callme" aria-hidden="true"></i>End Call</button></center>
@@ -150,7 +155,7 @@
                                                                     </div>
                                                                     <label for="input-Default" class="col-sm-2 control-label">Postal</label>
                                                                     <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_code}}" readonly>
+                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_id}}" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -172,10 +177,9 @@
                     </div>
                 </div>
             </div>
-            
-            
         </div>
-        
+
+
         <div id="pendingCustomer" class="tab-pane fade">
             <div class="row">
                 <div class="panel-body">
@@ -199,109 +203,30 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Date/Added</th>
-                                    <th>Business Name</th>
-                                    <th>membership</th>
-                                    <th>Transaction</th>
-                                    <th>Action</th>
+                                <th>ID</th>
+                                <th>Business Name</th>
+                                <th>Contact Person</th>
+                                <th>Phone 1</th>
+                                <th>Phone 2</th>
+                                <th>Membership</th>
+                                <th>Date Pending</th>
+                                <th>Status</th>
+                                  <!--   <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients_pending as $clients_pendingss)
                                 <tr>
-                                    <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
-                                    <td>{{$clients_pendingss->business_name}}</td>
-                                    <td>{{$clients_pendingss->membership_name}}</td>
-                                    <td>{{$clients_pendingss->transaction_status}}</td>
-                                    <td><button class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" data-toggle="modal"  data-target="#myModal1{{$clients_pendingss->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
+                                <td>{{$clients_pendingss->business_id}}</td>
+                                <td>{{$clients_pendingss->business_name}}</td>
+                                <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
+                                <td>{{$clients_pendingss->business_phone}}</td>
+                                <td>{{$clients_pendingss->business_alt_phone}}</td>
+                                <td>{{$clients_pendingss->membership_name}}</td>
+                                <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
+                                <td>{{$clients_pendingss->transaction_status}}</td>
                                 </tr>
-                                <div class="modal fade" id="myModal1{{$clients_pendingss->business_id}}" role="dialog" >
-                                    <div class="modal-lg modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close closed" data-id="{{$clients_pendingss->business_id}}" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Personal Information</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="panel panel-primary col-md-12">
-                                                    <div class="panel-body">
-                                                        <form class="form-horizontal">
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
-                                                                    <div class="col-md-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="Mr." readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">First Name</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->contact_first_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Last Name</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->contact_last_name}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Name</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->business_name}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Primary Phone</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->business_phone}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Alternate Phone</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->business_alt_phone}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
-                                                                    <div class="col-sm-10">
-                                                                        <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$clients_pendingss->business_complete_address}}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">County</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->county_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">City</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->city_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Postal</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_pendingss->postal_code}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer" style="border:none;">
-                                                <button type="button" data-id="{{$clients_pendingss->business_id}}" class="closed btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                 
                                 @endforeach
                             </tbody>
                         </table>
@@ -311,6 +236,7 @@
                 </div>
             </div>
         </div>
+
         <div id="activatedCustomer" class="tab-pane fade">
             <div class="row">
                 <div class="panel-body">
@@ -334,114 +260,33 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Date/Added</th>
-                                    <th>Business Name</th>
-                                    <th>membership</th>
-                                    <th>Transaction</th>
-                                    <th>Action</th>
+                                <th>ID</th>
+                                <th>Business Name</th>
+                                <th>Contact Person</th>
+                                <th>Phone 1</th>
+                                <th>Phone 2</th>
+                                <th>Membership</th>
+                                <th>Date Register</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients_activated as $clients_activate)
                                 <tr>
-                                    <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
+                                <td>{{$clients_activate->business_id}}</td>
+                                <td>{{$clients_activate->business_name}}</td>
+                                <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
+                                <td>{{$clients_activate->business_phone}}</td>
+                                <td>{{$clients_activate->business_alt_phone}}</td>
+                                <td>{{$clients_activate->membership_name}}</td>
+
+                                <!--     <td>{{$clients_activate->transaction_status}}</td> -->
                                     <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>
-                                    <td>{{$clients_activate->business_name}}</td>
-                                    <td>{{$clients_activate->membership_name}}</td>
-                                    <td>{{$clients_activate->transaction_status}}</td>
-                                    <td><button class="transaction btn btn-default "  data-id="{{$clients_activate->business_id}}" data-toggle="modal"  data-target="#myModal2{{$clients_activate->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
-                                </tr>
-                                <div class="modal fade" id="myModal2{{$clients_activate->business_id}}" role="dialog" >
-                                    <div class="modal-lg modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close closed" data-id="{{$clients_activate->business_id}}" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Personal Information</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="panel panel-primary col-md-12">
-                                                    <div class="panel-body">
-                                                        <form class="form-horizontal">
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
-                                                                    <div class="col-md-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="Mr." readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">First Name</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->contact_first_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Last Name</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->contact_last_name}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Name</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->business_name}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Primary Phone</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->business_phone}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Alternate Phone</label>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->business_alt_phone}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
-                                                                    <div class="col-sm-10">
-                                                                        <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$clients_activate->business_complete_address}}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 distance">
-                                                                <div class="form-group">
-                                                                    <label for="input-Default" class="col-sm-2 control-label">County</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->county_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">City</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->city_name}}" readonly>
-                                                                    </div>
-                                                                    <label for="input-Default" class="col-sm-2 control-label">Postal</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$clients_activate->postal_code}}" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer" style="border:none;">
-                                                <button type="button" data-id="{{$clients_activate->business_id}}" class="closed btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                              </tr>
+                               
                                 @endforeach
                             </tbody>
                         </table>
-                        
-                        
+                                    
                     </div>
                 </div>
             </div>
@@ -449,7 +294,6 @@
         </div>
     </div>
 </div>
-
 <style>
 
 .distance

@@ -13,7 +13,8 @@ $(document).ready(function(){
 			url:'/agent/get_city',
 			data:{county_id: county_id},
 			dataType:'text',
-			success:function(data){
+			success:function(data)
+			{
 			$('#city_list').html(data);
 			}
 		});

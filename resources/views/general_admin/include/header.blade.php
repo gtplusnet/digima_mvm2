@@ -6,7 +6,10 @@
             </a>
         </div>
         
-        <div class="logo-box">
+       {{--  <div class="logo-box">
+            <a href="index.html" class="logo-text"><span>CROATIA</span></a>
+        </div><!-- Logo Box --> --}}
+         <div class="logo-box">
             
             <a href="/general_admin/dashboard" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
         </div><!-- Logo Box -->
@@ -168,3 +171,4 @@
         </div>
     </div>
 </div>
+

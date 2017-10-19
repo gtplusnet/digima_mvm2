@@ -15,9 +15,6 @@
 	        <li class="active li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/supervisor">SUPERVISOR</a></li>
 	</ul>
 
-	<div id="showHereSuccess1">
-	</div>
-
 	 @if (Session::has('message'))
 	<div class="alert alert-danger"><center>{{ Session::get('message') }}</center></div>
 	@endif
@@ -35,6 +32,8 @@
 					<div class="modal-header">
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">SUPERVISOR</h4>
+					</div>
+					<div id="showHereSuccess1">
 					</div>
 					<div class="modal-body" style="margin-bottom: 220px;width: 110%" >
 						<div id="showHere1">
@@ -121,9 +120,9 @@
 									<button type="button" class="close reload" data-dismiss="modal">&times;</button>
 									<h4 class="modal-title">Edit Category</h4>
 								</div>
-								<div class="modal-body" style="margin-bottom: 200px;" >
-									<div id="showHere2">
+								<div id="showHere2">
 									</div>
+								<div class="modal-body" style="margin-bottom: 200px;" >
 									<div class="col-sm-12">
 										<div class="form-group col-md-3">
 											<label for="first_name" >First Name</label>

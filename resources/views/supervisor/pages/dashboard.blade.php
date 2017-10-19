@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <!--others-->
-          
+
             </div>
         </div>
 
@@ -83,13 +83,5 @@
 
     <script src="/assets/agent/assets1/js/demo.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
 
-            demo.initChartist();
-
-           
-
-        });
-    </script>
 @endsection
