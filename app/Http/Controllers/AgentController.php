@@ -14,6 +14,7 @@ use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
 use App\Models\Tbl_business_hours;
 use App\Models\TblUserAccountModel;
+use App\Models\TblMembeshipModel;
 
 use Session;
 use Redirect;
@@ -222,6 +223,7 @@ class AgentController extends Controller
 	        $business_data->business_id = '';
 	        $business_data->business_name = $request->business_name;
 	        $business_data->city_id = $request->city_list;
+	        $business_data->county_id = $request->county_list;
 	        $business_data->business_complete_address = $request->business_address;
 	        $business_data->business_phone = $request->primary_business_phone;
 	        $business_data->business_alt_phone = $request->secondary_business_phone;
@@ -288,7 +290,7 @@ class AgentController extends Controller
 	{
 		// Self::allow_logged_in_users_only();
 		$data['county_list'] = TblCountyModel::get();
-		$data['membership_list'] = TblPaymentMethod::get();
+		$data['membership_list'] = TblMembeshipModel::get();
 		$data['page']	= 'Add Client';
 		return view ('agent.pages.add_client', $data);		
 	}

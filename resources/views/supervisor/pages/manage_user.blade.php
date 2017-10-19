@@ -323,7 +323,6 @@
                                 </select>
                             </td>
                         </tr>
-                        
                         @endforeach
                     </tbody>
                 </table>
@@ -386,9 +385,8 @@
                     </div>
                     <div class="col-sm-12">
                         <center>
-
-                       <input type="hidden" id="delete_agent_id" value=""/>
-                            <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
+                        <input type="hidden" id="delete_agent_id" value=""/>
+                        <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
                         
                         <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
                     </div>
