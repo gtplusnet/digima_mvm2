@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
-	$('#county_list').change(function(){
-		var county_id = $('#county_list').val();
+	$('#county_id').change(function(){
+		var county_id = $('#county_id').val();
 		$('#postal_code').val("");
-		alert("123");
+		alert("");
 
 		if(county_id == '')
 		{
@@ -24,7 +24,7 @@ $(document).ready(function(){
 	$('#city_list').change(function(){
 		var city_id = $('#city_list').val();
 
-			alert("123");
+			// alert("123");
 		if(city_id == '')
 		{
 			$('#postal_code').val("");
@@ -43,7 +43,7 @@ $(document).ready(function(){
 	});
 
 	$('#continue').click(function(){
-		alert("123");
+		// alert("123");
 		var prefix = $('#prefix').val();
 		var first_name = $('#first_name').val();
 		var last_name = $('#last_name').val();

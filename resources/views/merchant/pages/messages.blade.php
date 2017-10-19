@@ -11,7 +11,7 @@
 </div>
 <div id="main-wrapper">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-13">
             <div class="panel panel-white">
                <div class="panel-heading clearfix">
                 <h3 class="panel-title">Messages</h3>
@@ -29,7 +29,6 @@
                 @if (Session::has('danger'))
                 <div class="alert alert-danger"><center>{{ Session::get('danger') }}</center></div>
                 @endif 
-
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="1" cellspacing="1"  border="2">
@@ -53,10 +52,9 @@
                             <td>
                             <a href="/merchant/delete_messages/{{$data->guest_messages_id}}"><button type="button" class="btn btn-danger">
                             <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
-
-                            <a href="#"><button type="button" data-toggle="modal" class="btn btn-success"  id="">
+                           <!--  <a href="#"><button type="button" data-toggle="modal" class="btn btn-success"  id="">
                             <i class="fa fa-pencil" aria-hidden="true"></i>Email</button>
-                            </td>
+                            </td> -->
                             </tr>
                             @endforeach
                         </table> 
@@ -90,8 +88,9 @@
                             </div>
                         </div>
                         <div>
-                        <label for="input-Default" class="col-sm-4 control-label" style="text-align: right;">  </label>
-                        <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="save_message" class="save_message btn btn-primary" id="save_message";>SAVE</button>
+                            <div>
+                                <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="save_message" class="save_message btn btn-primary" id="save_message";>SAVE</button>
+                            </div>
                         </div>
                 </div>
             </div>

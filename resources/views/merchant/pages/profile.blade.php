@@ -58,17 +58,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+
                                         <label for="input-Default" class="col-sm-2 control-label">County</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" id="input-default" value="Bulacan" readonly>
+                                            <input type="text" name class="form-control" id="input-default" value="{{$merchant_info->county_id}}" readonly>
                                         </div>
+
                                         <label for="input-Default" class="col-sm-2 control-label">City</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" id="input-default" value="Pandi" readonly>
+                                            <input type="text" class="form-control" id="input-default" value="{{$merchant_info->city_id}}" readonly>
                                         </div>
                                         <label for="input-Default" class="col-sm-2 control-label">Postal</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" id="input-default" value="1432" readonly>
+                                            <input type="text" class="form-control" id="input-default" value="{{$merchant_info->postal_code}}" readonly>
                                         </div>           
                                     </div> 
                                     <div class="form-group">

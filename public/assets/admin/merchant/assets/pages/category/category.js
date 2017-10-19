@@ -24,12 +24,10 @@ function category()
         });
 
 
-
         $("body").on("change", ".checkbox-child", function(e)
         {
             getBusinessCategory();   
         });
-
 
     }
 

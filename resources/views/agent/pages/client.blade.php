@@ -85,7 +85,7 @@
                                                         <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
                                                     </div>
                                                     <div>
-                                                        <p ><center>1:23:08 Call Duration</center></p>
+                                                        <p ><center>{{session('_Timer')}}</center></p>
                                                     </div>
                                                     <div >
                                                         <center><button type="button" class="closed btn btn-danger " data-id="{{$client->business_id}}"  data-dismiss="modal" ><i class="fa fa-phone callme" aria-hidden="true"></i>End Call</button></center>
@@ -203,31 +203,29 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Business Name</th>
-                                    <th>Contact Person</th>
-                                    <th>Phone 1</th>
-                                    <th>Phone 2</th>
-                                    <th>Membership</th>
-                                    <th>Date Pending</th>
-                                    <th>Status</th>
+                                <th>ID</th>
+                                <th>Business Name</th>
+                                <th>Contact Person</th>
+                                <th>Phone 1</th>
+                                <th>Phone 2</th>
+                                <th>Membership</th>
+                                <th>Date Pending</th>
+                                <th>Status</th>
                                   <!--   <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients_pending as $clients_pendingss)
                                 <tr>
-                                     <td>{{$clients_pendingss->business_id}}</td>
-                                    <td>{{$clients_pendingss->business_name}}</td>
-
-                                    <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
-                                    <td>{{$clients_pendingss->business_phone}}</td>
-                                    <td>{{$clients_pendingss->business_alt_phone}}</td>
-                                    <td>{{$clients_pendingss->membership_name}}</td>
-                                     <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
-
-                                    <td>{{$clients_pendingss->transaction_status}}</td>
-                             </tr>
+                                <td>{{$clients_pendingss->business_id}}</td>
+                                <td>{{$clients_pendingss->business_name}}</td>
+                                <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
+                                <td>{{$clients_pendingss->business_phone}}</td>
+                                <td>{{$clients_pendingss->business_alt_phone}}</td>
+                                <td>{{$clients_pendingss->membership_name}}</td>
+                                <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
+                                <td>{{$clients_pendingss->transaction_status}}</td>
+                                </tr>
                  
                                 @endforeach
                             </tbody>
@@ -262,28 +260,27 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Business Name</th>
-                                    <th>Contact Person</th>
-                                    <th>Phone 1</th>
-                                    <th>Phone 2</th>
-                                    <th>Membership</th>
-                                    <th>Date Register</th>
+                                <th>ID</th>
+                                <th>Business Name</th>
+                                <th>Contact Person</th>
+                                <th>Phone 1</th>
+                                <th>Phone 2</th>
+                                <th>Membership</th>
+                                <th>Date Register</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($clients_activated as $clients_activate)
                                 <tr>
-                                    <td>{{$clients_activate->business_id}}</td>
-                                    <td>{{$clients_activate->business_name}}</td>
+                                <td>{{$clients_activate->business_id}}</td>
+                                <td>{{$clients_activate->business_name}}</td>
+                                <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
+                                <td>{{$clients_activate->business_phone}}</td>
+                                <td>{{$clients_activate->business_alt_phone}}</td>
+                                <td>{{$clients_activate->membership_name}}</td>
 
-                                    <td>{{$clients_activate->contact_first_name}}  {{$clients_activate->contact_last_name}}</td>
-                                    <td>{{$clients_activate->business_phone}}</td>
-                                    <td>{{$clients_activate->business_alt_phone}}</td>
-                                    <td>{{$clients_activate->membership_name}}</td>
-
-                                    <td>{{$clients_activate->transaction_status}}</td>
-                                    <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>  
+                                <!--     <td>{{$clients_activate->transaction_status}}</td> -->
+                                    <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>
                               </tr>
                                
                                 @endforeach
@@ -297,7 +294,6 @@
         </div>
     </div>
 </div>
-
 <style>
 
 .distance

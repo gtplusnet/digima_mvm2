@@ -40,13 +40,19 @@ class SuperVisorController extends Controller
         return view ('supervisor.pages.supervisor_login', $data);
 
     }
-    // public function supervisor_logout()
-    // {
+    public function supervisor_logout()
+    {
 
-    //     Session::forget("supervisor_login");
-    //     return Redirect::to("/supervisor");
+        Session::forget("supervisor_login");
+        return Redirect::to("/supervisor");
    
+    }
+    //   public function supervisor_logout()
+    // {
+    //     Session::forget("supervisor_login_submit");
+    //     return Redirect::to("/supervisor");
     // }
+
     public function supervisor_login_submit(Request $request)
     {
         $validate_login = TblSupervisorModels::where('email',$request->email)->first();
@@ -81,11 +87,6 @@ class SuperVisorController extends Controller
         }
     }
 
-    public function supervisor_logout()
-    {
-        Session::forget("supervisor_login_submit");
-        return Redirect::to("/supervisor");
-    }
 
     public function profile()
 	{

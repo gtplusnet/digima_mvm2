@@ -63,7 +63,6 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 
-Route::get('/merchant/dashboard',	'MerchantController@index');
 
 
 /*Merchant Page by Brain*/
@@ -71,8 +70,13 @@ Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
 Route::get('/merchant/redirect/exist', 			'MerchantController@merchant_redirect_exist');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
-
 Route::get('/merchant/category', 	'MerchantController@category');
+Route::any('/merchant/add_business_category', 'MerchantController@add_business_category');
+Route::any('/merchant/delete_business_category/{id}', 'MerchantController@delete_business_category');
+
+
+
+
 Route::get('/merchant/messages', 	'MerchantController@messages');
 Route::any('/merchant/add_messages', 'MerchantController@add_messages');
 Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');

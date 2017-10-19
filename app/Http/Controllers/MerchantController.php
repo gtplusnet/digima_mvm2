@@ -29,17 +29,17 @@ class MerchantController extends Controller
 {
 	public static function allow_logged_in_users_only()
 	{
-		// if(session("merchant_login") != true)
-		// {
-		// 	return Redirect::to("/login")->send();
-		// }
+		if(session("merchant_login") != true)
+		{
+			return Redirect::to("/login")->send();
+		}
 	}
 	public static function allow_logged_out_users_only()
 	{
-		// if(session("merchant_login") )
-		// {
-		// 	return Redirect::to("/merchant/dashboard")->send();
-		// }
+		if(session("merchant_login") )
+		{
+			return Redirect::to("/merchant/dashboard")->send();
+		}
 	}
 
 	public function login()
@@ -298,6 +298,22 @@ class MerchantController extends Controller
       return Redirect::back();
     }
 
+     public function add_business_category(Request $request)
+    {
+      $data["business_category_id"] = $request->business_category_id;
+      $data["business_category_name"] = $request->business_category_name;
+      Tbl_business_category::insert($data); 
+      Session::flash('message', "Category Added");
+      return Redirect::back();
+    }
+
+      public function delete_business_category($id)
+    {
+      Tbl_business_category::where('business_category_id',$id)->delete();
+      Session::flash('danger', "Category Deleted");
+      return Redirect::back();
+    }
+     
 /**
     public function edit($id)
     {
@@ -323,9 +339,8 @@ class MerchantController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Category';
-		$data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();
-        $data['categories']    = Tbl_business_category::get();   	
-
+		// $data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();
+    $data['categories']    = Tbl_business_category::get();   	
 		return view('merchant.pages.category', $data);		
 	}
 

@@ -220,6 +220,7 @@ class AgentController extends Controller
 	public function add_client_submit(Request $request)
 	{
 		// Self::allow_logged_in_users_only();
+		// dd($request->city_list);
 		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
 
         if(count($check_email_availability) == 1)
@@ -232,6 +233,7 @@ class AgentController extends Controller
 	        $business_data->business_id = '';
 	        $business_data->business_name = $request->business_name;
 	        $business_data->city_id = $request->city_list;
+	        $business_data->county_id = $request->county_id;
 	        $business_data->business_complete_address = $request->business_address;
 	        $business_data->business_phone = $request->primary_business_phone;
 	        $business_data->business_alt_phone = $request->secondary_business_phone;
