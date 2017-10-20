@@ -126,18 +126,14 @@
                             <div role="tabpanel" class="tab-pane fade" method="POST" id="tab11">
                                 <form class="form-horizontal" action="">
                                     
-                @if (Session::has('message'))
+                <!-- @if (Session::has('message'))
                 <div class="alert alert-success"><center>{{ Session::get('message') }}</center></div>
-                @endif
-
+                @endif -->
                                     <div class="form-group">
                                          <label for="input-Default" class="col-sm-3 control-label">START</label>
-
                                         <label for="input-Default" class="col-sm-3 control-label">END</label>
-                                        
                                     </div>
                        
-
                                     <div class="form-group">
 
                                         <label for="input-Default" class="col-sm-2 control-label">Monday</label>

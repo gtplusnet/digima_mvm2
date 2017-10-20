@@ -109,6 +109,7 @@ class AgentController extends Controller
 		$data['page']	= 'Profile';
 		$data['profile'] = TblAgentModels::get();
 		$data['agent_info'] = TblAgentModels::where('agent_id',session('agent_id'))->first();
+
 		return view ('agent.pages.profile', $data);		
 
 	}
@@ -138,13 +139,11 @@ class AgentController extends Controller
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
-        $data['clients_activated'] = TblBusinessModel::Where('business_status',4)
+        $data['clients_activated'] = TblBusinessModel::Where('business_status',6)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
-
-
 
     	return view ('agent.pages.client', $data);	
 	}
@@ -212,7 +211,7 @@ class AgentController extends Controller
 		$update['business_status'] = '2';
 		$update['date_transact'] = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-				 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
+		// TblAgentModel::where('agent_id',session('agent_id'))->update($update);
 		return '';
 		
 	}
@@ -220,7 +219,6 @@ class AgentController extends Controller
 	public function add_client_submit(Request $request)
 	{
 		// Self::allow_logged_in_users_only();
-		// dd($request->city_list);
 		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
 
         if(count($check_email_availability) == 1)

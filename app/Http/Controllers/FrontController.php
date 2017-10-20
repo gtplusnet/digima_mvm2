@@ -294,10 +294,11 @@ class FrontController extends Controller
 
         $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
         $check_mail = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
-         $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
+         $message->to('guardians35836@gmail.calculhmac(clent, data)om', 'Croatia Team')->subject
             ('THE RIGHT PLACE FOR BUSINESS');
          $message->from('guardians35836@gmail.com','Croatia Customer');
         });
+        $data['guest_messages']    = TblBusinessContactPersonModel::get(); 
         if($check_mail)
         {
             Session::flash('success', 'Thank you!. Your Message Send Successfully!');
@@ -309,11 +310,11 @@ class FrontController extends Controller
             return Redirect::to('/contact');
         }
     }
-    
+ 
     public function business(Request $request)
     {
         $data['page']   = 'business';
-         $data['business_info'] = DB::table('tbl_business')
+        $data['business_info'] = DB::table('tbl_business')
         ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
         ->where('tbl_business.business_id', '=', $request->business_id)
         ->get();
@@ -328,7 +329,6 @@ class FrontController extends Controller
     public function sampleUpload() {
         return view('practice-page.upload');
     }
-
     //UPLOAD FILE SAMPLE
     public function uploadFile(Request $request) {
         $file = $request->file("file");

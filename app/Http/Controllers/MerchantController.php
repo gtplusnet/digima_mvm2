@@ -224,7 +224,7 @@ class MerchantController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Profile';
-        $data['merchant_info'] = TblBusinessModel::where('business_id',session('business_id'))->first();
+    $data['merchant_info'] = TblBusinessModel::where('business_id',session('business_id'))->first();
 		$data['_payment_method']	= Tbl_payment_method::get();   
 		return view ('merchant.pages.profile', $data);		
 	}
@@ -272,7 +272,9 @@ class MerchantController extends Controller
       $data["email"] = $request->email;
       $data["subject"] = $request->subject;
       $data["messages"] = $request->messages;
-      TblGuestMessages::insert($data); 
+       $data["name"] = $request->name;
+      TblGuestMessages::insert($data);
+      tbl_business_contact_person::insert($data);  
       Session::flash('message', "Message Information Added");
       return Redirect::back();
     }
@@ -331,15 +333,15 @@ class MerchantController extends Controller
         
     }*/
 
-	public function category()
-	{
-		Self::allow_logged_in_users_only();
-		$data['page']				= 'Category';
-		// $data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();
+	  public function category()
+	  {
+		  Self::allow_logged_in_users_only();
+		  $data['page']				= 'Category';
+		  // $data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();
     $data['categories']    = Tbl_business_category::get();
    
 		return view('merchant.pages.category', $data);		
-	}
+  	}
 
     public function messages(Request $request)
     {

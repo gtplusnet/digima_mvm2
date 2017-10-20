@@ -32,7 +32,7 @@
                             <ul id="tree1">
                                 @foreach($categories as $category)
                                     <li>
-                                        <input class="checkbox-parent" id="checkbox" name="business_category" type="checkbox" value="{{ $category->business_category_id }}"> 
+                                        <input class="checkbox-parent" id="checkbox" name="business_category" type="checkbox" value="{{ $category->business_category_id }}"><!-- <a href="">  -->
                                         {{ $category->business_category_name }}          
                                         @if(count($category->childs))                                           
                                             @include('admin.merchant.pages.category.manageChild',['childs' => $category->childs])
@@ -46,25 +46,26 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="1" cellspacing="1"  border="2">
                 <thead>
-                            <tr>
-                            <th style="text-align: center;font-size: 13px">Business ID </th>
-                            <th style="text-align: center;font-size: 13px">Business Name / Category</th>
-                       <!-- <th style="text-align: center;font-size: 13px">Business Information</th> -->
-                            <th style="text-align: center;font-size: 13px">Action</th>
+                    <tr>
+                    <th style="text-align: center;font-size: 13px">Business ID </th>
+                    <th style="text-align: center;font-size: 13px">Business Name / Category</th>
+                    <th style="text-align: center;font-size: 13px">Business Information</th>
+                    <th style="text-align: center;font-size: 13px">Action</th>
                          
-                            </tr>   
-                            </thead>
+                    </tr>   
+                    </thead>
                             @foreach($categories as $data)
-                            <tr>
-                            <td>{{$data->business_category_id}}</td>
-                            <td>{{$data->business_category_name}}</td>
-                        <!--<td>{{$data->business_category_information}}</td> -->
-                            <td>
-                            <a href="/merchant/delete_business_category/{{$data->business_category_id}}"><button type="button" class="btn btn-danger">
-                            <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
-                            </td>
-                            </tr>
-                            @endforeach
+                    <tr>
+                    <td>{{$data->business_category_id}}</td>
+                    <td>{{$data->business_category_name}}</td>
+                    <td>{{$data->business_category_information}}</td> 
+                    <td>
+
+                    <a href="/merchant/delete_business_category/{{$data->business_category_id}}"><button type="button" class="btn btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
+                    </td>
+                    </tr>
+                    @endforeach
                         </table> 
 
                          <div class="col-md-9">

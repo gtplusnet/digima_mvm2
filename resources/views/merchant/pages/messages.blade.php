@@ -17,7 +17,7 @@
                 <h3 class="panel-title">Messages</h3>
                 </div>
                 <div class="panel-body"> 
-                <form class="form-horizontal" method="POST" action="/merchant/add_messages" style="">
+                <form class="form-horizontal" method="POST" action="/contact" style="">
 
                  <div id="showHereSuccess">
                 </div>
@@ -36,7 +36,7 @@
                             <tr>
                             <th style="text-align: center;font-size: 13px">ID</th>
                             <th style="text-align: center;font-size: 13px">Full Name</th>
-                            <th style="text-align: center;font-size: 13px">Email</th>
+                            <th style="text-align: center;font-size: 13px">Mail To</th>
                             <th style="text-align: center;font-size: 13px">Subject</th>
                             <th style="text-align: center;font-size: 13px">Messages</th>
                             <th style="text-align: center;font-size: 13px">Action</th>
@@ -46,7 +46,7 @@
                             <tr>
                             <td>{{$data->guest_messages_id}}</td>
                             <td>{{$data->full_name}}</td>
-                            <td>{{$data->email}}</td>
+                            <td> <a href="{{$data->email}}">{{$data->email}}</td>
                             <td>{{$data->subject}}</td>
                             <td>{{$data->messages}}</td>
                             <td>
@@ -59,7 +59,7 @@
                             @endforeach
                         </table> 
 
-                        <div class="col-md-9">
+                <!--         <div class="col-md-9">
                             <label for="guest_messages_id" class="col-sm-2 control-label" style="text-align: right;">ID</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control input-rounded" name="guest_messages_id" id="guest_messages_id">
@@ -91,7 +91,7 @@
                             <div>
                                 <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="save_message" class="save_message btn btn-primary" id="save_message";>SAVE</button>
                             </div>
-                        </div>
+                        </div> -->
                 </div>
             </div>
         </div>
