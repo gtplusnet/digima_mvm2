@@ -273,6 +273,13 @@ Route::post('/general_admin/manage_user/add_admin', 'GeneralAdminController@gene
 Route::any('/general_admin/manage_user/delete_agent', 	'GeneralAdminController@general_admin_delete_agent');
 Route::any('/general_admin/manage_user/delete_team', 	'GeneralAdminController@general_admin_delete_team');
 Route::get('/general_admin/manage_website', 	'GeneralAdminController@general_admin_manage_website');
+Route::post('/general_admin/manage_website/add_membership', 	'GeneralAdminController@general_admin_add_membership');
+Route::post('/general_admin/manage_website/add_county', 	'GeneralAdminController@general_admin_add_county');
+Route::post('/general_admin/manage_website/add_city', 	'GeneralAdminController@general_admin_add_city');
+Route::post('/general_admin/manage_website/delete_membership',        'GeneralAdminController@general_admin_delete_membership');
+
+
+
 
 Route::any('/sample', 'MerchantController@sample');
 

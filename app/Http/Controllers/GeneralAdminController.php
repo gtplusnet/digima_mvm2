@@ -14,7 +14,7 @@ use App\Models\TblBusinessCategoryModel;
 
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblInvoiceModels;
-
+use App\Models\TblCityModel;
 use App\Models\TblCountyModel;
 use App\Models\TblTeamModel;
 use App\Models\TblAgentmodels;
@@ -27,7 +27,7 @@ use Session;
 use Redirect;
 
 use PDF2;
-use \PDF;
+use PDF;
 use Mail;
 
 
@@ -470,7 +470,34 @@ class GeneralAdminController extends Controller
     public function general_admin_manage_website()
     {
       $data['_membership'] = TblMembeshipModel::get();
+      $data['_county'] = TblCountyModel::get();
+      $data['_city'] = TblCityModel::get();
       return view('general_admin.pages.manage_website',$data);
+    }
+    public function general_admin_add_membership(Request $request)
+    {
+      $data['membership_name'] = $request->membershipName;
+      $data['membership_price']= $request->membershipPrice;
+      TblMembeshipModel::insert($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Membership Added.</div>"; 
+    }
+    public function general_admin_delete_membership()
+    {
+      dd("james");
+    }
+    public function general_admin_add_county(Request $request)
+    {
+      $data['county_name']= $request->countyName;
+      TblCountyModel::insert($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>County Added.</div>"; 
+    }
+    public function general_admin_add_city(Request $request)
+    {
+      $data['county_id']= $request->countyID;
+      $data['city_name']= $request->cityName;
+      $data['postal_code']= $request->cityZip;
+      TblCityModel::insert($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>City Added.</div>"; 
     }
 
     public function general_admin_manage_categories()
