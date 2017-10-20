@@ -6,79 +6,8 @@
 <div class="page-title">
 
     <div class="page-breadcrumb">
-        <ol class="breadcrumb">
-        </ol>
-    </div>
-    <ul class="nav nav-tabs">
-		   <li class="active li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/general_admin">GENERAL ADMIN</a></li>
-	       <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/team">TEAM</a></li>
-	       <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/agent">AGENT</a></li>
-	        <li class="li_me"><a  style="font-size: 15px;" href="/general_admin/manage_user/add/supervisor">SUPERVISOR</a></li>
-	</ul>
-
-	 @if (Session::has('message'))
-	 <div class="alert alert-danger"><center>{{ Session::get('message') }}</center></div>
-	@endif
-</div>
-
-<div class="tab-content" style="">
-	<div class="col-md=-12">
-		<div>
-		<div class="pull-left" style="margin:20px 0px 20px 20px">
-			<button type="button"  data-toggle="modal" data-target="#myModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
-		</div>
-
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-md">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">ADMIN</h4>
-					</div>
-					<div id="showHereSuccess">
-					</div>
-					<div class="modal-body" style="margin-bottom: 200px;width: 110%">
-						<div id="showHere1">
-						</div>
-
-						<div class="col-sm-12">
-							<div class="form-group col-md-2">
-								<label for="full_name" >Full name</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="full_name" id="full_name"  style="width:100%;margin-bottom: 5px;"/>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-2">
-								<label for="email" >Email</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="email" id="email" style="width:100%;margin-bottom: 5px;"/>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-2">
-								<label for="password" >Password</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="password" id="password" style="width:100%;margin-bottom: 5px;"/>
-							</div>
-						</div>
-
-
-						<div class="col-sm-12">
-							<center><button type="submit" class="save_admin btn btn-primary" name="save_admin" id="save_admin">Save</button></center>
-						</div>
-						
-					</div>
-					<div class="modal-footer" style="border:0px;">
-						
-					</div>
-
-	<h3>Manage Team/Agent</h3>
-	<div class="page-breadcrumb">
-		<ol class="breadcrumb">
+        <h3>Manage Team/Agent</h3>
+	    <ol class="breadcrumb">
 			<li><a href="/admin">Home</a></li>
 			<li class="active">Manage Team/Agent</li>
 		</ol>

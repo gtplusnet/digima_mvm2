@@ -272,6 +272,7 @@ Route::post('/general_admin/manage_user/add_supervisor', 'GeneralAdminController
 Route::post('/general_admin/manage_user/add_admin', 'GeneralAdminController@general_admin_add_generaladmin');
 Route::any('/general_admin/manage_user/delete_agent', 	'GeneralAdminController@general_admin_delete_agent');
 Route::any('/general_admin/manage_user/delete_team', 	'GeneralAdminController@general_admin_delete_team');
+Route::get('/general_admin/manage_website', 	'GeneralAdminController@general_admin_manage_website');
 
 Route::any('/sample', 'MerchantController@sample');
 
@@ -284,7 +285,7 @@ Route::any('/upload-file', 'FrontController@uploadFile');
 
 
 
-Route::post('/general_admin/manage_user/add_admin_submit', 	'GeneralAdminController@add_admin_submit');
+
 
 
 

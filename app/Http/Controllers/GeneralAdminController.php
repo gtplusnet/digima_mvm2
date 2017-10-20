@@ -19,6 +19,7 @@ use App\Models\TblCountyModel;
 use App\Models\TblTeamModel;
 use App\Models\TblAgentmodels;
 use App\Models\TblSupervisorModels;
+use App\Models\TblMembeshipModel;
 
 use DB;
 use Response;
@@ -466,6 +467,11 @@ class GeneralAdminController extends Controller
       return view('general_admin.pages.manage_user', $data);
 
     }
+    public function general_admin_manage_website()
+    {
+      $data['_membership'] = TblMembeshipModel::get();
+      return view('general_admin.pages.manage_website',$data);
+    }
 
     public function general_admin_manage_categories()
     {
@@ -742,6 +748,11 @@ class GeneralAdminController extends Controller
      TblTeamModel::where('team_id',$team_id)->delete();
      return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted Successfully!</div>";
   }
+
+
+
+
+
     public function edit_admin_submit(Request $request)
   {
     // dd($request->all());
