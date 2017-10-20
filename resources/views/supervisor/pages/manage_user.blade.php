@@ -61,7 +61,6 @@
                     <h4 class="modal-title">Add Agent</h4>
                 </div>
                 <div class="modal-body" style="margin-bottom: 600px;" >
-                    
                     <div class="col-sm-12">
                         <div class="form-group col-md-3">
                             <label for="business_name" >Team</label>
@@ -150,8 +149,6 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </center>
                     </div>
-                    
-                    
                 </div>
                 <div class="modal-footer" style="border:0px;">
                     
@@ -323,7 +320,6 @@
                                 </select>
                             </td>
                         </tr>
-                        
                         @endforeach
                     </tbody>
                 </table>
@@ -386,9 +382,8 @@
                     </div>
                     <div class="col-sm-12">
                         <center>
-
-                       <input type="hidden" id="delete_agent_id" value=""/>
-                            <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
+                        <input type="hidden" id="delete_agent_id" value=""/>
+                        <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
                         
                         <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
                     </div>

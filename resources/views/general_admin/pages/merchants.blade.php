@@ -89,7 +89,9 @@
 
                                 @endforeach
                             </tbody>
+
                         </table> 
+
                     </div>
                 </div>
             </div>
@@ -107,7 +109,7 @@
 
                                 @foreach($agentAdded as $agent_client)
                                 <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
-e
+
 
                                 @endforeach
                             </select>
