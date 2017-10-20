@@ -15,6 +15,7 @@ use App\Models\TblPaymentMethod;
 use App\Models\Tbl_business_hours;
 use App\Models\TblUserAccountModel;
 use App\Models\TblMembeshipModel;
+
 use Session;
 use Redirect;
 use Carbon\Carbon;
@@ -73,8 +74,8 @@ class AgentController extends Controller
 	public function agent_login(Request $request)
 	{
 		$validate_login = TblAgentModels::where('email',$request->email)->first();
+		
 		if($validate_login)
-
 		{
 			if (password_verify($request->password, $validate_login->password)) 
 				{
@@ -231,7 +232,9 @@ class AgentController extends Controller
 	        $business_data->business_id = '';
 	        $business_data->business_name = $request->business_name;
 	        $business_data->city_id = $request->city_list;
+
 	        $business_data->county_id = $request->county_id;
+
 	        $business_data->business_complete_address = $request->business_address;
 	        $business_data->business_phone = $request->primary_business_phone;
 	        $business_data->business_alt_phone = $request->secondary_business_phone;
