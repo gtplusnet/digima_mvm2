@@ -3,7 +3,7 @@
     <div class="page-sidebar-inner slimscroll">
         <ul class="menu accordion-menu">
             <li class="{{ (Request::segment(2)=='dashboard') ? 'active' : ''  }}"><a href="/general_admin/dashboard" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
-            <li class="{{ (Request::segment(2)=='profile') ? 'active' : ''  }}"><a href="/general_admin/profile" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Profile</p></a></li>
+            {{-- <li class="{{ (Request::segment(2)=='profile') ? 'active' : ''  }}"><a href="/general_admin/profile" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Profile</p></a></li> --}}
             {{-- <li class="{{ (Request::segment(2)=='business_list') ? 'active' : ''  }}"><a href="/general_admin/business_list" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Business List</p></a></li> --}}
             <li class="{{ (Request::segment(2)=='merchants') ? 'active' : ''  }}"><a href="/general_admin/merchants" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-phone-alt"></span><p>Merchants</p></a></li>
             {{-- <li class="{{ (Request::segment(2)=='report') ? 'active' : ''  }}"><a href="/general_admin/report" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Purchase Order</p></a></li> --}}
