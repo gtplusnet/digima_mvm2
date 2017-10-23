@@ -404,6 +404,25 @@ class GeneralAdminController extends Controller
       $check_insert = TblPaymentModel::where('business_id',$business_id)->update($payment);
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
+      $info = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->first();
+      $name = $info->contact_prefix." ".$info->contact_first_name." ".$info->contact_last_name;
+      $email = $info->user_email;
+      $password = $info->string_password;
+
+      $data = array('name'=>$name,'email'=>$email,'password'=>$password);
+      $check_mail = Mail::send('general_admin.pages.activated_merchant_notif', $data, function($message) use($data) {
+      $message->to($data['email'], 'Activated Merchant')->subject
+            ('THE RIGHT PLACE FOR BUSINESS');
+         $message->from('guardians35836@gmail.com','Croatia Customer');
+        });
+
+
+
+
+
       return "<h4 class='modal-title' >Success! Account already activated.</h4>";
 
     }
@@ -481,10 +500,28 @@ class GeneralAdminController extends Controller
       TblMembeshipModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Added.</div>"; 
     }
-    public function general_admin_delete_membership()
+    public function general_admin_delete_membership(Request $request)
     {
-      dd("james");
+      $membership_id = $request->delete_id;
+      TblMembeshipModel::where('membership_id',$membership_id)->delete();
+      return "<div class='alert alert-success'><strong>Success!</strong>Membership Deleted.</div>";
+      
     }
+    public function general_admin_delete_county(Request $request)
+    {
+      $county_id = $request->delete_id;
+      TblCountyModel::where('county_id',$county_id)->delete();
+      return "<div class='alert alert-success'><strong>Success!</strong>County Deleted.</div>";
+      
+    }
+    public function general_admin_delete_city(Request $request)
+    {
+      $city_id = $request->delete_id;
+      TblCityModel::where('city_id',$city_id)->delete();
+      return "<div class='alert alert-success'><strong>Success!</strong>City Deleted.</div>";
+      
+    }
+    
     public function general_admin_add_county(Request $request)
     {
       $data['county_name']= $request->countyName;

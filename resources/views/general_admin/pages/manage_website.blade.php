@@ -80,6 +80,7 @@
 					Membership List
 				</div>
 				<div class="website-content col-md-12">
+					
 					<table class="table table-bordered" style="margin-top:10px;">
 						<thead>
 							<tr>
@@ -145,9 +146,9 @@
 								<td>{{$county->county_id}}</td>
 								<td>{{$county->county_name}}</td>
 								<td>
-									<select class="form-select">
-										<option >Edit</option>
-										<option>Delete</option>
+									<select class="form-select count_action" data-id="{{$county->county_id}}" id="count_action">
+										<option value="edit">Edit</option>
+										<option value="delete">Delete</option>
 									</select>
 								</td>
 							</tr>
@@ -207,9 +208,9 @@
 								<td>{{$city->city_name}}</td>
 								<td>{{$city->postal_code}}</td>
 								<td>
-									<select class="form-select">
-										<option >Edit</option>
-										<option>Delete</option>
+									<select class="form-select city_action" id="city_action" data-id="{{$city->city_id}}">
+										<option value="edit">Edit</option>
+										<option value="delete">Delete</option>
 									</select>
 								</td>
 							</tr>
@@ -239,6 +240,22 @@
                         <input type="hidden" id="delete_link" value=""/>
                         <button type="button" class=" btn btn-danger" id="actionDelete">Delete</button>
                         <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 150px;" class="modal fade" id="successModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body" id="show_user" style="margin-bottom: 120px;" >
+                    <div class="col-sm-12" id="success_alert">
+                        
+                    </div>
+                    <div class="col-sm-12">
+                        <center>
+                       <button type="button" class="btn btn-success"  data-dismiss="modal">OKAY</button>
                         </center>
                     </div>
                 </div>

@@ -88,6 +88,7 @@ Route::post('/login', 'MerchantController@login_submit');
 Route::get('/merchant/payment',	'MerchantController@payment');
 Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
+Route::get('/merchant/payment/{id}/james', 		'MerchantController@payment_merchant');
 
 //Eden
 
@@ -277,6 +278,8 @@ Route::post('/general_admin/manage_website/add_membership', 	'GeneralAdminContro
 Route::post('/general_admin/manage_website/add_county', 	'GeneralAdminController@general_admin_add_county');
 Route::post('/general_admin/manage_website/add_city', 	'GeneralAdminController@general_admin_add_city');
 Route::post('/general_admin/manage_website/delete_membership',        'GeneralAdminController@general_admin_delete_membership');
+Route::post('/general_admin/manage_website/delete_county',        'GeneralAdminController@general_admin_delete_county');
+Route::post('/general_admin/manage_website/delete_city',        'GeneralAdminController@general_admin_delete_city');
 
 
 

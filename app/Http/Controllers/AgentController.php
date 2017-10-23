@@ -265,6 +265,7 @@ class AgentController extends Controller
             $accountData->user_password =  password_hash('habagat', PASSWORD_DEFAULT);
             $accountData->user_category = 'merchant';
             $accountData->status = 'registered';
+            $accountData->string_password = 'habagat';
             $accountData->business_id = $business_data->business_id;
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();
