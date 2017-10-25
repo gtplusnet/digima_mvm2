@@ -26,6 +26,8 @@
 
                             <li role="presentation" class=""><a href="#tab20" role="tab" data-toggle="tab" aria-expanded="false">Payment Methods</a></li>
 
+                            <li role="presentation" class=""><a href="#tab29" role="tab" data-toggle="tab" aria-expanded="false">Add Branch</a></li>
+
                         </ul>       
 
                         <!-- Tab panes -->
@@ -124,105 +126,42 @@
                                 </form> 
                             </div>
                             <div role="tabpanel" class="tab-pane fade" method="POST" id="tab11">
-                                <form class="form-horizontal" action="">
+                            <form class="form-horizontal" action="/merchant/profile">
                                     
-                <!-- @if (Session::has('message'))
-                <div class="alert alert-success"><center>{{ Session::get('message') }}</center></div>
-                @endif -->
+                @if (Session::has('hours'))
+                <div class="alert alert-success"><center>{{ Session::get('hours') }}</center></div>
+                @endif
                                     <div class="form-group">
-                                         <label for="input-Default" class="col-sm-3 control-label">START</label>
+                                        <label for="input-Default" class="col-sm-3 control-label">START</label>
                                         <label for="input-Default" class="col-sm-3 control-label">END</label>
                                     </div>
-                       
+                                @foreach($_business_hours as $business_hours)
                                     <div class="form-group">
-
-                                        <label for="input-Default" class="col-sm-2 control-label">Monday</label>
-
+                                        <label for="input-Default" class="col-sm-2 control-label">{{$business_hours->days}}</label>
                                         <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" name="Monday" id="time" value="00:00" required="true">
+                                            <input type="time" class="form-control" name="days" id="time" value="{{$business_hours->business_hours_from}}" required="true">
+
                                         </div>
-
                                         <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
+                                            <input type="time" class="form-control" id="time" value="{{$business_hours->business_hours_to}}" required="true">
                                         </div>  
-
                                     </div> 
-
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Tuesday</label>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" name="Tuesday" id="time" value="00:00" required="true">
-                                        </div>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
-                                        </div>  
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Wednesday</label>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" name="Wednesday" id="time" value="00:00" required="true">
-                                        </div>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
-                                        </div>  
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Thursday</label>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" name="Thursday" id="time" value="00:00" required="true">
-                                        </div>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
-                                        </div>                                
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Friday</label>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" name="Friday" id="time" value="00:00" required="true">
-                                        </div>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
-                                        </div>                                  
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Saturday</label>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" name="Saturday" id="time" value="00:00" required="true">
-                                        </div>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
-                                        </div>                               
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Sunday</label>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" name="Sunday" id="time" value="00:00" required="true">
-                                        </div>
-                                        <div class="col-sm-3 searchfields-format">
-                                            <input type="time" class="form-control" id="time" value="12:00" required="true">
-                                        </div>                               
-                                    </div>
-
+                                @endforeach
+                                
                                     <div class="form-group">
                                         <div class="col-md-8">
                                             <div class="text-right">
-                                                <button class="btn btn-primary">Save</button>
+                                                <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="save_hours" class="save_hours btn btn-primary"  id="save_hours">Update</button>
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
 
-                   <div role="tabpanel" class="tab-pane fade" id="tab20">
-                      <form class="form-horizontal" method="POST" action="/merchant/add_payment_method" style="">
+                <div role="tabpanel" class="tab-pane fade" id="tab20">
+                    <form class="form-horizontal" method="POST" action="/merchant/add_payment_method" style="">
 
-                 <div id="showHereSuccess">
+                <div id="showHereSuccess">
                 </div>
 
                 @if (Session::has('message'))
@@ -237,14 +176,14 @@
                         <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="1" cellspacing="1"  border="2">
                          <thead>
                             <tr>
-                            <th style="text-align: center;font-size: 13px">ID</th>
+                            <!-- <th style="text-align: center;font-size: 13px">ID</th> -->
                             <th style="text-align: center;font-size: 13px">Payment Method</th>
                             <th style="text-align: center;font-size: 13px">Action</th>
                             </tr>   
                          </thead>
                             @foreach($_payment_method as $data)
                             <tr>
-                            <td>{{$data->payment_method_id}}</td>
+                           <!--  <td>{{$data->payment_method_id}}</td> -->
                             <td>{{$data->payment_method_name}}</td>
                             <td>
                             <a href="#"><button type="button" data-toggle="modal" class="btn btn-warning"  id="myModalEdit{{$data->payment_method_id}}">
@@ -259,10 +198,10 @@
                         </table>  
 
                         <div class="form-group">
-                             <label for="input-Default" class="col-sm-2 control-label" style="text-align: left;">Payment ID</label>
+                          <!--   <label for="input-Default" class="col-sm-2 control-label" style="text-align: left;">Payment ID</label>
                             <div class="col-sm-3">
                             <input type="text" class="form-control" id="input-default"  name="payment_method_id">
-                            </div>                                       
+                            </div>     -->                                   
                         </div>  
                          <div class="form-group">
                             <label for="input-Default" class="col-sm-2 control-label" style="text-align: left;">Payment Method</label>
@@ -275,6 +214,70 @@
                             <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="save_payment" class="save_payment btn btn-primary" id="save_payment";>ADD</button>
                      </form>
                     </div>
+
+                     <div role="tabpanel" class="tab-pane fade" id="tab29">
+                     <form class="form-horizontal" method="POST" action="" style="">
+                         <div class="form-group">
+                                    <div>
+                                     <h3>New Branch</h3>
+                                    </div>
+                                        <label for="business_name" class="col-sm-2 control-label">Business Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="business_name" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="business_phone" class="col-sm-2 control-label">Business Primary Phone</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="business_phone" value="">
+                                        </div>
+                                         <label for="business_alt_phone" class="col-sm-2 control-label">Business Alternate Phone</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="business_alt_phone" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" placeholder="" rows="4=6"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label for="input-Default" class="col-sm-2 control-label">County</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" name class="form-control" id="input-default" value="">
+                                        </div>
+
+                                        <label for="input-Default" class="col-sm-2 control-label">City</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="input-default" value="">
+                                        </div>
+                                        <label for="input-Default" class="col-sm-2 control-label">Postal</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="input-default" value="">
+                                        </div>           
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="twitter_url" class="col-sm-2 control-label">Twitter</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="twitter_url" value="">
+                                        </div>
+                                        <label for="facebook_url" class="col-sm-2 control-label">Facebook</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="facebook_url" value="" >
+                                        </div>
+                                    </div> 
+
+                                     <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="text-right">
+                                                <button type="submit" data-dismiss="modal" style="padding: 5px 50px;" name="" class="btn btn-primary" id="">ADD NEW</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                     </form>
+                    </div>  
                   </div>
                </div>
             </div>

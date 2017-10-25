@@ -134,13 +134,13 @@ class AgentController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
-        $data['clients_pending'] = TblBusinessModel::Where('business_status',2)
+        $data['clients_pending'] = TblBusinessModel::Where('business_status',4)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
-        $data['clients_activated'] = TblBusinessModel::Where('business_status',6)
+        $data['clients_activated'] = TblBusinessModel::Where('business_status',5)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
@@ -198,10 +198,8 @@ class AgentController extends Controller
 		$update['agent_id'] = session('agent_id'); 
 		$update['date_transact'] = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-		
-
+	
 			return '';
-		
 	}
 
 	public function get_client_transaction_reload(Request $request)
@@ -276,7 +274,6 @@ class AgentController extends Controller
             $otherData->business_id = $business_data->business_id;
             $otherData->save();
 
-            
 
             $businessHoursData = new Tbl_business_hours;
             $businessHoursData->insert(array(

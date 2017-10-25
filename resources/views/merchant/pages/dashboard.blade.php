@@ -59,7 +59,7 @@
             <div class="panel info-box panel-white">
                 <div class="panel-body">
                     <div class="info-box-stats">
-                        <p class="counter">200,000</p>
+                        <p class="counter">680</p>
                         <span class="info-box-title">Page tweet</span>
                     </div>
                     <div class="info-box-icon">
@@ -81,11 +81,11 @@
             <div class="panel info-box panel-white">
                 <div class="panel-body">
                     <div class="info-box-stats">
-                        <p class="counter">200,000</p>
-                        <span class="info-box-title">Page tweet</span>
+                        <p class="counter">256</p>
+                        <span class="info-box-title">Page Views Business</span>
                     </div>
                     <div class="info-box-icon">
-                        <i style="color:#00aced;" class="fa fa-twitter"></i>
+                         <i class="icon-eye"></i>
                     </div>
                     <div class="info-box-progress">
                         <div class="progress progress-xs progress-squared bs-n">
@@ -101,29 +101,74 @@
         <div class="content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered</p>
+                                <p class="category">Views</p>
                             </div>
                             <div class="content">
                                 <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Registered
-                                        <i class="fa fa-circle text-warning"></i>Pending
-                                        <i class="fa fa-circle text-success"></i> Activated
+                                        <i class="fa fa-circle text-info"></i>Views
+                                        <i class="fa fa-circle text-danger"></i>Merchants
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                        <i class="fa fa-clock-o"></i> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Page Likes</h4>
+                                <p class="category">Likes</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences1" class="ct-chart ct-perfect-fourth"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i>Views
+                                        <i class="fa fa-circle text-danger"></i>Merchants
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Page Tweets</h4>
+                                <p class="category">Tweets</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences2" class="ct-chart ct-perfect-fourth"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i>Views
+                                        <i class="fa fa-circle text-danger"></i>Merchants
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="col-md-8">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Users Behavior</h4>
@@ -144,7 +189,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -155,7 +200,7 @@
     
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script></head>
     <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
-    
+
     <script src="/assets/agent/assets1/js/chartist.min.js"></script>
     <script src="/assets/agent/assets1/js/demo.js"></script>
     <script type="text/javascript">

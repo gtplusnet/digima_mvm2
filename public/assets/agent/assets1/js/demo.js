@@ -104,10 +104,26 @@ demo = {
     
         Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
         
-        Chartist.Pie('#chartPreferences', {
-          labels: ['62%','32%','6%'],
-          series: [62, 32, 6]
+        Chartist.Pie('#chartPreferences',
+         {
+          labels: ['62%','32%'],
+          series: [62, 32,]
+
         });   
+
+        Chartist.Pie('#chartPreferences1',
+         {
+          labels: ['88%','18%'],
+          series: [88, 18,]
+
+        });  
+
+          Chartist.Pie('#chartPreferences2',
+         {
+          labels: ['92%','11%'],
+          series: [92, 11,]
+
+        });  
     },
     
     initGoogleMaps: function(){
@@ -145,8 +161,6 @@ demo = {
                 align: align
             }
         });
-	}
-
-    
+	}    
 }
 

@@ -59,10 +59,6 @@ Route::get('/category', 'SearchresultController@category');
 Route::get('/resultsortgrid', 'SearchresultController@resultsortgrid');
 Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
-	
-
-
-
 
 
 /*Merchant Page by Brain*/
@@ -70,13 +66,12 @@ Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
 Route::get('/merchant/redirect/exist', 			'MerchantController@merchant_redirect_exist');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
+Route::get('/merchant/profile/add_hours',		'MerchantController@add_hours');
 Route::get('/merchant/category', 	'MerchantController@category');
+Route::get('/merchant/category/add_category', 	'MerchantController@add_category');
+Route::get('/merchant/category/add_keywords', 	'MerchantController@add_keywords');
 Route::any('/merchant/add_business_category', 'MerchantController@add_business_category');
 Route::any('/merchant/delete_business_category/{id}', 'MerchantController@delete_business_category');
-
-
-
-
 Route::get('/merchant/messages', 	'MerchantController@messages');
 Route::any('/merchant/add_messages', 'MerchantController@add_messages');
 Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');
@@ -134,15 +129,11 @@ Route::get('/supervisor', 				'SupervisorController@index');
 Route::post('/supervisor_login_submit', 	'SupervisorController@supervisor_login_submit');
 Route::any('/supervisor_logout', 	'SupervisorController@supervisor_logout');
 
-
-
-
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
 
 Route::any('/supervisor/logout', 		'SupervisorController@supervisor_logout');
 
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
-
 
 Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
 Route::get('/supervisor/profile', 		'SupervisorController@profile');
