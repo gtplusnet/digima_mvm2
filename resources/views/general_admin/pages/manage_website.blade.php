@@ -87,7 +87,7 @@
 								<th>ID</th>
 								<th>Membership Name</th>
 								<th>Price</th>
-								<th>Action</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -98,6 +98,7 @@
 								<td>{{$membership->membership_price}}</td>
 								<td>
 									<select class="form-select mem_action" data-id="{{$membership->membership_id}}" id="mem_action">
+										<option >Action</option>
 										<option value="edit" >Edit</option>
 										<option value="delete">Delete</option>
 									</select>
@@ -137,7 +138,7 @@
 							<tr>
 								<th>ID</th>
 								<th>County Name</th>
-								<th>Action</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -147,6 +148,7 @@
 								<td>{{$county->county_name}}</td>
 								<td>
 									<select class="form-select count_action" data-id="{{$county->county_id}}" id="count_action">
+										<option >Action</option>
 										<option value="edit">Edit</option>
 										<option value="delete">Delete</option>
 									</select>
@@ -197,7 +199,7 @@
 								<th>County Name</th>
 								<th>City Name</th>
 								<th>Zip Code</th>
-								<th>Action</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -209,6 +211,64 @@
 								<td>{{$city->postal_code}}</td>
 								<td>
 									<select class="form-select city_action" id="city_action" data-id="{{$city->city_id}}">
+										<option >Action</option>
+										<option value="edit">Edit</option>
+										<option value="delete">Delete</option>
+									</select>
+								</td>
+							</tr>
+							@endforeach
+							
+
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+				<div class="row">
+			<div class="col-md-5 " style="margin:10px 0px 10px 10px;background-color: #F1F4F9;">
+				<div class="website-title">
+					Add Category
+				</div>
+				<div class="website-content col-md-12">
+					<div class="web-content" id="city_alert">
+					</div>
+					<div class="web-content">
+					    <input type="text" id="cityName" class="form-text center" placeholder="City Name" required/>
+				    </div>
+				    <div class="web-content">
+					    <input type="text" id="cityZip" class="form-text center" placeholder="Zip Code" required/>
+				    </div>
+				    <div class="web-content">
+					    <button type="button" id="addCity" class="form-button  center" >Add Category</button>
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
+				<div class="website-title">
+					City List
+				</div>
+				<div class="website-content col-md-12">
+					<table class="table table-bordered" style="margin-top:10px;">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Category Name</th>
+								<th>Category Information</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($_city as $city)
+							<tr>
+								<td>{{$city->city_id}}</td>
+								<td>{{$city->county_name}}</td>
+								<td>{{$city->city_name}}</td>
+								
+								<td>
+									<select class="form-select city_action" id="city_action" data-id="{{$city->city_id}}">
+										<option >Action</option>
 										<option value="edit">Edit</option>
 										<option value="delete">Delete</option>
 									</select>
