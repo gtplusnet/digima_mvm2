@@ -31,14 +31,14 @@
                         <div class="col-md-6">
                             <select class="form-control " name="date_start" id="date_start" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients as $client_list)
-                                <option value="{{$client_list->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+                                <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <select class="form-control " name="date_end" id="date_end" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients as $client_list)
-                                <option value="{{$client_list->date_created}}">{{date("F j, Y",strtotime($client_list->date_created))}}</option>
+                                <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -67,7 +67,7 @@
                                     <td>{{$client->business_phone}}</td>
                                     <td>{{$client->business_alt_phone}}</td>
                                     <td>{{$client->membership_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
+                                    <td>{{date("F j, Y",strtotime($client->date_transact))}}</td>
                                     <td>{{$client->transaction_status}}</td>
                                     <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
                                 </tr>
@@ -187,14 +187,14 @@
                         <div class="col-md-6">
                             <select class="form-control " name="date_start" id="date_start1" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_pending as $clients_pendings)
-                                <option value="{{$clients_pendings->date_created}}">{{date("F j, Y",strtotime($clients_pendings->date_created))}}</option>
+                                <option value="{{$clients_pendings->date_transact}}">{{date("F j, Y",strtotime($clients_pendings->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <select class="form-control " name="date_end" id="date_end1" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_pending as $clients_pendings)
-                                <option value="{{$clients_pendings->date_created}}">{{date("F j, Y",strtotime($clients_pendings->date_created))}}</option>
+                                <option value="{{$clients_pendings->date_transact}}">{{date("F j, Y",strtotime($clients_pendings->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -223,7 +223,7 @@
                                 <td>{{$clients_pendingss->business_phone}}</td>
                                 <td>{{$clients_pendingss->business_alt_phone}}</td>
                                 <td>{{$clients_pendingss->membership_name}}</td>
-                                <td>{{date("F j, Y",strtotime($clients_pendingss->date_created))}}</td>
+                                <td>{{date("F j, Y",strtotime($clients_pendingss->date_transact))}}</td>
                                 <td>{{$clients_pendingss->transaction_status}}</td>
                                 </tr>
                  
@@ -244,14 +244,14 @@
                         <div class="col-md-6">
                             <select class="form-control " name="date_start" id="date_start2" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_activated as $clients_activates)
-                                <option value="{{$clients_activates->date_created}}">{{date("F j, Y",strtotime($clients_activates->date_created))}}</option>
+                                <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <select class="form-control " name="date_end" id="date_end2" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_activated as $clients_activates)
-                                <option value="{{$clients_activates->date_created}}">{{date("F j, Y",strtotime($clients_activates->date_created))}}</option>
+                                <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -280,7 +280,7 @@
                                 <td>{{$clients_activate->membership_name}}</td>
 
                                 <!--     <td>{{$clients_activate->transaction_status}}</td> -->
-                                    <td>{{date("F j, Y",strtotime($clients_activate->date_created))}}</td>
+                                    <td>{{date("F j, Y",strtotime($clients_activate->date_transact))}}</td>
                               </tr>
                                
                                 @endforeach

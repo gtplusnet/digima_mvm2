@@ -48,6 +48,15 @@ class FrontController extends Controller
     {
         $data['countyList'] = TblCountyModel::get();
         $data['cityList'] = TblCityModel::get();
+        Session::forget("merchant_login");
+        Session::forget("full_name");
+        Session::forget("email");
+        Session::forget("business_name");
+        Session::forget("business_id");
+        Session::forget("business_contact_person_id");
+        Session::forget("business_address");
+        Session::forget("city_state");
+        Session::forget("zip_code");
         return view('front.pages.home',$data);
     }
 
@@ -131,6 +140,7 @@ class FrontController extends Controller
             $accountData->user_password =  password_hash($request->password, PASSWORD_DEFAULT);
             $accountData->user_category = 'merchant';
             $accountData->status = 'registered';
+            $accountData->string_password = $request->password;
             $accountData->business_id = $businessData->business_id;
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();
@@ -220,7 +230,8 @@ class FrontController extends Controller
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID'] = $countyID = $request->countyId;
         $data['cityID'] = $cityID = $request->cityId;
-        $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
+        // $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
+        $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->get();
         return view('front.pages.searchresult',$data); 
     }
 
