@@ -133,15 +133,20 @@ class AgentController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
-        $data['clients_pending'] = TblBusinessModel::Where('business_status',2)
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+        
+        $data['clients_pending'] = TblBusinessModel::where('business_status', 4)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
-        $data['clients_activated'] = TblBusinessModel::Where('business_status',4)
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+
+        
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 
@@ -213,7 +218,9 @@ class AgentController extends Controller
 		$update['business_status'] = '2';
 		$update['date_transact'] = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-				 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
+		$count_call = TblAgentModel::where('agent_id',session('agent_id'))->first();
+		$agent['agent_call'] = $count_call->agent_call + 1;
+        TblAgentModel::where('agent_id',session('agent_id'))->update($agent);
 		return '';
 		
 	}
@@ -265,6 +272,7 @@ class AgentController extends Controller
             $accountData->user_password =  password_hash('habagat', PASSWORD_DEFAULT);
             $accountData->user_category = 'merchant';
             $accountData->status = 'registered';
+            $accountData->string_password = 'habagat';
             $accountData->business_id = $business_data->business_id;
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();

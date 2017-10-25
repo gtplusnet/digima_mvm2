@@ -36,6 +36,9 @@
 						<div class="col-md-6 payment-left-area">
 							<label for="input-amount" class="payment-label">Amount:</label>
 							<input type="text" name="payment_amount" class="payment-textfield" required/>
+						    <input type="hidden" name="business_id" value="{{session('business_id')}}">
+							<input type="hidden" name="contact_id" value="{{session('business_contact_person_id') }}">
+						
 						</div>
 						<div class="col-md-5 payment-right-area">
 							<label for="proof-of-payment" class="payment-label">Upload Proof of Payment:</label>

@@ -20,6 +20,8 @@ use App\Models\TblTeamModel;
 use App\Models\TblAgentmodels;
 use App\Models\TblSupervisorModels;
 use App\Models\TblMembeshipModel;
+use App\Models\TblBusinessSubCategoryModel;
+use App\Models\TblBusinessSubSubCategoryModel;
 
 use DB;
 use Response;
@@ -318,8 +320,12 @@ class GeneralAdminController extends Controller
             TblBusinessModel::where('business_id',$business_id)->update($update);
             if($save_pdf)
             {
-
-                $data = array('name'=>"croatia");
+                // $email_name = $data['invoice_info']->contact_first_name; 
+                // $email_email = $data['invoice_info']->user_email;
+                // $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
+                // $data = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name);
+                
+                $data = array('name'=>'james_ako','date'=>'james','email'=>'guardians35836@gmail.com','business_id'=>$business_id);
                 $pathfile='invoice/'.$file_name;
                 $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($pathfile) {
                    $message->to('guardians35836@gmail.com', 'Tutorials Point')->subject
@@ -404,6 +410,25 @@ class GeneralAdminController extends Controller
       $check_insert = TblPaymentModel::where('business_id',$business_id)->update($payment);
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
+      $info = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->first();
+      $name = $info->contact_prefix." ".$info->contact_first_name." ".$info->contact_last_name;
+      $email = $info->user_email;
+      $password = $info->string_password;
+
+      $data = array('name'=>$name,'email'=>$email,'password'=>$password);
+      $check_mail = Mail::send('general_admin.pages.activated_merchant_notif', $data, function($message) use($data) {
+      $message->to($data['email'], 'Activated Merchant')->subject
+            ('THE RIGHT PLACE FOR BUSINESS');
+         $message->from('guardians35836@gmail.com','Croatia Customer');
+        });
+
+
+
+
+
       return "<h4 class='modal-title' >Success! Account already activated.</h4>";
 
     }
@@ -481,10 +506,28 @@ class GeneralAdminController extends Controller
       TblMembeshipModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Added.</div>"; 
     }
-    public function general_admin_delete_membership()
+    public function general_admin_delete_membership(Request $request)
     {
-      dd("james");
+      $membership_id = $request->delete_id;
+      TblMembeshipModel::where('membership_id',$membership_id)->delete();
+      return "<div class='alert alert-success'><strong>Success!</strong>Membership Deleted.</div>";
+      
     }
+    public function general_admin_delete_county(Request $request)
+    {
+      $county_id = $request->delete_id;
+      TblCountyModel::where('county_id',$county_id)->delete();
+      return "<div class='alert alert-success'><strong>Success!</strong>County Deleted.</div>";
+      
+    }
+    public function general_admin_delete_city(Request $request)
+    {
+      $city_id = $request->delete_id;
+      TblCityModel::where('city_id',$city_id)->delete();
+      return "<div class='alert alert-success'><strong>Success!</strong>City Deleted.</div>";
+      
+    }
+    
     public function general_admin_add_county(Request $request)
     {
       $data['county_name']= $request->countyName;
@@ -528,11 +571,69 @@ class GeneralAdminController extends Controller
       $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->orWhere('business_category_information','like','%'.$search_key.'%')->get();
       return view('general_admin.pages.search_blade',$data);
     }
-    public function general_admin_delete_category($id)
+    public function general_admin_delete_category(Request $request)
     {
+      $id=$request->delete_id;
       TblBusinessCategoryModel::where('business_category_id',$id)->delete();
-      Session::flash('message', "Category Deleted");
-      return Redirect::back();
+      return "<div class='alert alert-success'><strong>Success!</strong>Category Deleted.</div>";
+    }
+    public function general_admin_get_sub_category(Request $request)
+    {
+      $business_category_id = $request->cat_id;
+      $data['_sub_category'] = TblBusinessSubCategoryModel::where('business_category_id',$business_category_id)->get();
+      return view('general_admin.pages.get_sub_category',$data);
+    }
+
+    public function general_admin_add_sub_category(Request $request)
+    {
+      $ins['sub_category_name'] = $request->cat_name;
+      $ins['sub_category_info'] = $request->cat_info;
+      $ins['business_category_id'] = $request->cat_id;
+      $check = TblBusinessSubCategoryModel::insert($ins);
+      if($check)
+      {
+        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+      }
+      else
+      {
+        return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+      }
+    }
+    public function general_admin_edit_sub_category(Request $request)
+    {
+      $ins['sub_category_name'] = $request->cat_name;
+      $ins['sub_category_info'] = $request->cat_info;
+      $sub_category_id = $request->cat_id;
+      $check = TblBusinessSubCategoryModel::where('sub_category_id',$sub_category_id)->update($ins);
+      if($check)
+      {
+        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br>";
+      }
+      else
+      {
+        return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br>";
+      }
+    }
+    public function general_admin_get_sub_sub_category(Request $request)
+    {
+      $sub_category_id = $request->cat_id;
+      $data['_sub_category'] = TblBusinessSubSubCategoryModel::where('sub_category_id',$sub_category_id)->get();
+      return view('general_admin.pages.get_sub_sub_category',$data);
+    }
+    public function general_admin_add_sub_sub_category(Request $request)
+    {
+      $ins['sub_sub_category_name'] = $request->cat_name;
+      $ins['sub_sub_category_info'] = $request->cat_info;
+      $ins['sub_category_id'] = $request->cat_id;
+      $check = TblBusinessSubSubCategoryModel::insert($ins);
+      if($check)
+      {
+        return "<div class='alert alert-success'><strong>Success!</strong>Sub Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+      }
+      else
+      {
+        return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+      }
     }
 
 
@@ -547,78 +648,7 @@ class GeneralAdminController extends Controller
       return view('general_admin.pages.invoice');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
- 
-    }
-
-  
-  
-
-  
-
-  
+    
   public function general_admin_add_agent(Request $request)
   { 
 
