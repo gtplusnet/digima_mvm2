@@ -24,6 +24,7 @@ use Input;
 use flash;
 use where;
 use id;
+use Crypt;
 
 
 class MerchantController extends Controller
@@ -32,6 +33,7 @@ class MerchantController extends Controller
 	{
 		if(session("merchant_login") != true)
 		{
+
 			return Redirect::to("/login")->send();
 		}
 	}
@@ -48,6 +50,7 @@ class MerchantController extends Controller
     {
     	Self::allow_logged_out_users_only();
         $data['page']   = 'login';
+        Session::forget("merchant_login");
         return view('front.pages.login', $data);
     }
     public function login_submit(Request $request)
@@ -185,81 +188,155 @@ class MerchantController extends Controller
     {
           // dd($data);
           $file = $request->payment_file_name;
-          if($file==null||$file=='')
+        if($file==null||$file=='')
           {
           echo "mag browse ka muna ng picture!!!" ; 
           }
-          else
-          {
+      //     else
+      //     {
+      //       $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
+      //       $file_ext = $file->getClientOriginalExtension();
+      //       $destinationPath = public_path('/payment_upload');
+      //       $check=$file->move($destinationPath, $filename);   
+      //       if($check)
+      //       {
+      //           $data['payment_reference_number'] = $request->payment_reference_number;
+      //           $data['payment_amount'] = $request->payment_amount;
+      //           $data['payment_method'] = $request->payment_method;
+      //           $data['payment_file_name'] = $filename;
+      //           $data['business_contact_person_id'] = session('business_contact_person_id');
+      //           $data['business_id'] = session('business_id');
+      //           $data['payment_status'] = 'submitted';
+      //           $check_insert = TblPaymentModel::insert($data);
+      //           if($check_insert)
+      //           {
+      //            return Redirect::to('/merchant/redirect/exist');
+      //           }
+      //           else
+      //           {
+      //            echo "mali ka";
+      //           }
+      //         }
+
+            // }
+
+        else
+        {
           $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
           $file_ext = $file->getClientOriginalExtension();
           $destinationPath = public_path('/payment_upload');
           $check=$file->move($destinationPath, $filename);   
-          if($check)
-          {
-          $data['payment_reference_number'] = $request->payment_reference_number;
-          $data['payment_amount'] = $request->payment_amount;
-          $data['payment_method'] = $request->payment_method;
-          $data['payment_file_name'] = $filename;
-          $data['business_contact_person_id'] = session('business_contact_person_id');
-          $data['business_id'] = session('business_id');
-          $data['payment_status'] = 'submitted';
-          $check_insert = TblPaymentModel::insert($data);
+            if($check)
+            {
+              $data['payment_reference_number'] = $request->payment_reference_number;
+              $data['payment_amount'] = $request->payment_amount;
+              $data['payment_method'] = $request->payment_method;
+              $data['payment_file_name'] = $filename;
+              $data['business_contact_person_id'] = $request->contact_id;
+              $data['business_id'] = $request->business_id;
+              $data['payment_status'] = 'submitted';
+              $check_insert = TblPaymentModel::insert($data);
           if($check_insert)
-          {
-           return Redirect::to('/merchant/redirect/exist');
-          }
-          else
-          {
-           echo "mali ka";
-          }
+            {
+              return Redirect::to('/merchant/redirect/exist');
+            }
+             else
+            {
+          echo "mali ka";
         }
+       }
       }
     }
+  public function payment_merchant(Request $request,$id)
+  {
+    $data['method'] = TblPaymentMethod::get();
+    $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->first();
+
+    return view('front.pages.payment_merchant', $data);
+  }
 
 	  public function profile()
 	  {
 		  Self::allow_logged_in_users_only();
-		  $data['page']				= 'Profile';
-      $data['merchant_info'] = TblBusinessModel::where('business_id',session('business_id'))->first();
-		  $data['_payment_method']	= Tbl_payment_method::get(); 
-      $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
-      // dd( session('business_id'));
+		  $data['page']				       = 'Profile';
+      $data['merchant_info']     = TblBusinessModel::where('business_id',session('business_id'))
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                                ->first();
+		  $data['_payment_method']	 = Tbl_payment_method::get(); 
+      $data['_business_hours']   = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
 		  return view ('merchant.pages.profile', $data);		
 	  }
 
 	  public function view_info()
 	  {
 		  Self::allow_logged_in_users_only();
-		  $data['page']				= 'Profile';
+		  $data['page']			        	= 'Profile';
 	 	  return view ('merchant.pages.view_info', $data);		
 	  }
 
     public function add_other_info(Request $request)//
     {
-    	//dd(Request::input());
-    	Self::allow_logged_in_users_only();
+    
+      Self::allow_logged_in_users_only();
       $data["company_information"] = $request->company_information;
-      $data["business_website"] = $request->business_website;
-      $data["year_established"] = $request->year_established;
+      $data["business_website"]    = $request->business_website;
+      $data["year_established"]    = $request->year_established;
       TblBusinessOtherInfoModel::insert($data); 
       Session::flash('add_info', "Other Information Save");
       return Redirect::back();
     }
 
-      public function add_hours(Request $request)
+    public function update_hours(Request $request)
     {
-    
+
+      $business_hours_to = $request->input('business_hours_to');
+      $business_hours_from = $request->input('business_hours_from');
+      $business_id = $request->input('business_id');
+      $days = $request->input('days');
+      foreach($business_hours_from as $key => $business_hours_f)
+      {
+          // echo $sp." to time ".$business_hours_to[$key]." with day ".$days[$key]."<br>";
+          
+          $data['business_hours_from']= $business_hours_f;
+          $data['business_hours_to']= $business_hours_to[$key];
+          
+          
+          $check = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
+          if($check)
+          {
+            echo "james";
+          }
+          else
+          {
+            echo "wala";
+          }
+        // return Redirect::back();
+      }
+     
+
     }
 
+    public function update_hours_submit(Request $request)
+    {
+     
+    }
 
      public function add_payment_method(Request $request)
     {
-      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_id"]   = $request->payment_method_id;
       $data["payment_method_name"] = $request->payment_method_name;
       TblPaymentMethod::insert($data); 
       Session::flash('message', "Payment Save");
-      return Redirect::back();
+     
     }
 
      public function delete_payment_method($id)
@@ -271,15 +348,6 @@ class MerchantController extends Controller
 
     public function add_messages(Request $request)
     { 
-      // dd('contact_first_name');
-      // $contactData = new TblBusinessContactPersonModel;
-      // $contactData->business_contact_person_id = '';
-      // $contactData->contact_prefix = $request->prefix;
-      // $contactData->contact_first_name = $request->firstName;
-      // $contactData->contact_last_name = $request->lastName;
-      // $contactData->business_id = $request->business_id;
-      // $contactData->save();
-
       $data["guest_messages_id"] = $request->guest_messages_id;
       $data["full_name"] = $request->full_name;
       $data["email"] = $request->email;
@@ -288,6 +356,15 @@ class MerchantController extends Controller
       TblGuestMessages::insert($data);
       Session::flash('message', "Message Information Added");
       return Redirect::back();
+
+       // dd('contact_first_name');
+      // $contactData = new TblBusinessContactPersonModel;
+      // $contactData->business_contact_person_id = '';
+      // $contactData->contact_prefix = $request->prefix;
+      // $contactData->contact_first_name = $request->firstName;
+      // $contactData->contact_last_name = $request->lastName;
+      // $contactData->business_id = $request->business_id;
+      // $contactData->save();
     }
 
     public function delete_messages($id)
@@ -352,14 +429,12 @@ class MerchantController extends Controller
 		return view('merchant.pages.category', $data);		
   	}
 
-
       public function add_category(Request $request)
     {
       $data['business_category_name']= $request->business_category_name;
       Tbl_business_category::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>County Added.</div>"; 
     }
-
    
     public function messages(Request $request)
     {
@@ -368,7 +443,6 @@ class MerchantController extends Controller
       $data['guest_messages']    = TblBusinessContactPersonModel::get(); 
       return view ('merchant.pages.messages', $data);  
     }
-
 
   	public function bills()
 	  {

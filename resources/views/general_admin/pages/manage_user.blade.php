@@ -95,7 +95,7 @@
 						<table class="display table agent_container" style="width: 100%; cellspacing: 0;">
 							<thead>
                             <tr>
-                                <th></th>
+                                <th>ID</th>
                                 <th>Team Name</th>
                                 <th>Team Description</th>
                                 <th>Team Members</th>
@@ -105,13 +105,13 @@
 							<tbody>
 								@foreach($_data_team as $data_team)
 								<tr>
-                                <td></td>
+                                <td>{{ $data_team->team_id}}</td>
                                 <td>{{ $data_team->team_name}}</td>
                                 <td>{{ $data_team->team_information}}</td>
                                 <td>View All Members</td>
                                 <td><select class="team_actionbox" id="team_actionbox"  data-id="{{ $data_team->team_id}}">
 										<option value="">Action</option>
-										<option value="assign">Edit</option>
+										<option value="edit">Edit</option>
 										<option value="assign">Assign</option>
 										<option value="delete">Delete</option>
 									</select>

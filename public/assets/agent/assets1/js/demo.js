@@ -57,10 +57,10 @@ demo = {
         
     
         var data = {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
           series: [
-            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-            [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
+            [302, 303, 220, 350, 383, 393, 326],
+            [152, 180, 280, 300, 233, 353, 300]
           ]
         };
         
@@ -95,7 +95,7 @@ demo = {
             donut: true,
             donutWidth: 40,
             startAngle: 0,
-            total: 100,
+            total: 200,
             showLabel: false,
             axisX: {
                 showGrid: false

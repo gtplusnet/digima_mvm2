@@ -88,16 +88,31 @@ function manage_website()
 	{ 
 		//agent
 		$('.mem_action').change(function(){
-			alert('not available');
-
-		
-	    if ($(this).val() == "delete") {
+		if ($(this).val() == "delete") {
     	var mem_id = $(this).data("id");
         $("#delete_id").val(mem_id);
         $("#delete_link").val('delete_membership');
         $('#deleteModal').modal('show');
         }
 	    });
+	    $('.count_action').change(function(){
+	    	alert("james");
+		if ($(this).val() == "delete") {
+    	var count_id = $(this).data("id");
+        $("#delete_id").val(count_id);
+        $("#delete_link").val('delete_county');
+        $('#deleteModal').modal('show');
+        }
+	    });
+	    $('.city_action').change(function(){
+		if ($(this).val() == "delete") {
+    	var city_id = $(this).data("id");
+        $("#delete_id").val(city_id);
+        $("#delete_link").val('delete_city');
+        $('#deleteModal').modal('show');
+        }
+	    });
+
 	    $('#actionDelete').click(function(){
 	    var delete_id = $('#delete_id').val();
 	    var delete_link = $('#delete_link').val();
@@ -111,7 +126,9 @@ function manage_website()
 
 	 	}).done(function(data){
 	 		    $('#deleteModal').modal('hide');
-	 			$('#membership_alert').html(data);
+	 		    $('#success_alert').html(data);
+	 		    $('#successModal').modal('show');
+	 			
 	 		});
 	    });
 	}

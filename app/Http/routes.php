@@ -26,7 +26,6 @@ Route::get('sendattachmentemail','MailController@attachment_email');
 
 
 
-
 Route::get('/', 'FrontController@index');
 
 
@@ -66,7 +65,10 @@ Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
 Route::get('/merchant/redirect/exist', 			'MerchantController@merchant_redirect_exist');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
-Route::get('/merchant/profile/add_hours',		'MerchantController@add_hours');
+Route::get('/merchant/profile/update_hours',		'MerchantController@update_hours');
+
+Route::get('/merchant/profile/update_hours_submit',		'MerchantController@update_hours_submit');
+
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/category/add_category', 	'MerchantController@add_category');
 Route::get('/merchant/category/add_keywords', 	'MerchantController@add_keywords');
@@ -83,6 +85,7 @@ Route::post('/login', 'MerchantController@login_submit');
 Route::get('/merchant/payment',	'MerchantController@payment');
 Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
+Route::get('/merchant/payment/{id}/james', 		'MerchantController@payment_merchant');
 
 //Eden
 
@@ -250,7 +253,16 @@ Route::any('/general_admin/manage_categories', 'GeneralAdminController@general_a
 Route::any('/general_admin/add_category', 'GeneralAdminController@general_admin_add_category');
 Route::any('/general_admin/edit_category', 'GeneralAdminController@general_admin_edit_category');
 Route::any('/general_admin/search_category', 'GeneralAdminController@general_admin_search_category');
-Route::any('/general_admin/delete_category/{id}', 'GeneralAdminController@general_admin_delete_category');
+Route::any('/general_admin/delete_category', 'GeneralAdminController@general_admin_delete_category');
+Route::any('/general_admin/add_sub_category', 'GeneralAdminController@general_admin_add_sub_category');
+Route::any('/general_admin/get_sub_category', 'GeneralAdminController@general_admin_get_sub_category');
+Route::any('/general_admin/get_sub_sub_category', 'GeneralAdminController@general_admin_get_sub_sub_category');
+Route::any('/general_admin/add_sub_sub_category', 'GeneralAdminController@general_admin_add_sub_sub_category');
+Route::any('/general_admin/edit_sub_category', 'GeneralAdminController@general_admin_edit_sub_category');
+
+
+
+
 Route::any('/general_admin/send_invoice/{id}', 'GeneralAdminController@general_admin_send_invoice');
 Route::any('/general_admin/send_save_invoice/{id}', 'GeneralAdminController@general_admin_send_save_invoice');
 Route::any('/general_admin/manage_invoice', 'GeneralAdminController@general_admin_manage_invoice');
@@ -268,6 +280,8 @@ Route::post('/general_admin/manage_website/add_membership', 	'GeneralAdminContro
 Route::post('/general_admin/manage_website/add_county', 	'GeneralAdminController@general_admin_add_county');
 Route::post('/general_admin/manage_website/add_city', 	'GeneralAdminController@general_admin_add_city');
 Route::post('/general_admin/manage_website/delete_membership',        'GeneralAdminController@general_admin_delete_membership');
+Route::post('/general_admin/manage_website/delete_county',        'GeneralAdminController@general_admin_delete_county');
+Route::post('/general_admin/manage_website/delete_city',        'GeneralAdminController@general_admin_delete_city');
 
 
 

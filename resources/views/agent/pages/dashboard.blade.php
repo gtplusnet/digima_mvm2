@@ -74,7 +74,7 @@
                                  <p class="category">Quantity Sign Up</p>
                             </div>
                             <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
+                                <div id="chartActivity1" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Date
@@ -113,7 +113,7 @@
         var dataSales = {
           labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
           series: [
-             [200, 285, 390, 492, 554, 586, 698,],
+             [50, 285, 250, 352, 304, 480, 698,],
              [150, 22, 133, 200, 87, 350, 35,],
          
           ]
@@ -149,8 +149,8 @@
         var data = {
           labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
           series: [
-            [542, 443, 320, 780, 553, 453, 326],
-            [412, 243, 280, 580, 453, 353, 300]
+            [302, 303, 220, 350, 350, 453, 326],
+            [152, 180, 280, 300, 280, 353, 300]
           ]
         };
         
@@ -173,12 +173,14 @@
           }]
         ];
         
-        Chartist.Bar('#chartActivity', data, options, responsiveOptions);
+        Chartist.Bar('#chartActivity1', data, options, responsiveOptions);
     
-        var dataPreferences = {
-            series: [
-                [25, 30, 20, 25]
-            ]
+          var data = {
+          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+          series: [
+            [250, 203, 220, 400, 380, 300, 450],
+            [172, 190, 150, 250, 1200, 150, 300]
+          ]
         };
         
         var optionsPreferences = 
@@ -196,8 +198,8 @@
         Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
         
         Chartist.Pie('#chartPreferences', {
-          labels: ['62%','10%'],
-          series: [62, 10 ]
+          labels: ['95%','10%'],
+          series: [95, 10 ]
         });   
     }
 </script>
