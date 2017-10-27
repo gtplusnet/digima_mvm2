@@ -87,7 +87,7 @@ Route::post('/login', 'MerchantController@login_submit');
 Route::get('/merchant/payment',	'MerchantController@payment');
 Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
-Route::get('/merchant/payment/{id}/james', 		'MerchantController@payment_merchant');
+Route::get('/merchant/payment/{id}/{name}', 		'MerchantController@payment_merchant');
 
 //Eden
 
@@ -281,6 +281,9 @@ Route::post('/general_admin/manage_user/add_supervisor', 'GeneralAdminController
 Route::post('/general_admin/manage_user/add_admin', 'GeneralAdminController@general_admin_add_generaladmin');
 Route::any('/general_admin/manage_user/delete_agent', 	'GeneralAdminController@general_admin_delete_agent');
 Route::any('/general_admin/manage_user/delete_team', 	'GeneralAdminController@general_admin_delete_team');
+Route::any('/general_admin/manage_user/assign_agent', 	'GeneralAdminController@general_admin_assign_agent');
+
+
 Route::get('/general_admin/manage_website', 	'GeneralAdminController@general_admin_manage_website');
 Route::post('/general_admin/manage_website/add_membership', 	'GeneralAdminController@general_admin_add_membership');
 Route::post('/general_admin/manage_website/add_county', 	'GeneralAdminController@general_admin_add_county');
@@ -288,6 +291,13 @@ Route::post('/general_admin/manage_website/add_city', 	'GeneralAdminController@g
 Route::post('/general_admin/manage_website/delete_membership',        'GeneralAdminController@general_admin_delete_membership');
 Route::post('/general_admin/manage_website/delete_county',        'GeneralAdminController@general_admin_delete_county');
 Route::post('/general_admin/manage_website/delete_city',        'GeneralAdminController@general_admin_delete_city');
+
+Route::post('/general_admin/manage_website/update_membership',        'GeneralAdminController@general_admin_update_membership');
+Route::post('/general_admin/manage_website/update_county',        'GeneralAdminController@general_admin_update_county');
+Route::post('/general_admin/manage_website/update_city',        'GeneralAdminController@general_admin_update_city');
+
+
+
 
 
 

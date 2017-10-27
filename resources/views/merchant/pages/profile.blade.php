@@ -181,7 +181,7 @@
                                             <input type="time" class="form-control" id="time" value="12:00" required="true">
                                         </div>                                
                                     </div>
-
+                                    
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Friday</label>
                                         <div class="col-sm-3 searchfields-format">

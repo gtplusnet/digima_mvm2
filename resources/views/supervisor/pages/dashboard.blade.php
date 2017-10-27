@@ -1,7 +1,7 @@
 @extends('supervisor.layout.layouts')
 @section('content')
-<link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+<script src='/assets/admin/general_admin/assets/plugins/chartsjs/Chart.min.js'></script>
 <div class="page-title">
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
@@ -12,22 +12,48 @@
     </div>
 </div>
 <div id="main-wrapper">
-    <div class="container">
-       <div class="col-md-12">
-            <div class="row clearfix">
-                <div class="col-md-4">
+    
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4" >
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Team Statistics</h4>
-                            <p class="category">Registered</p>
+                            <h4 class="title">Agent Calls</h4>
+                            <p class="category">Pie Chart</p>
                         </div>
-                        <div class="content">
-                            <div id="chartPreferencess" class="ct-chart ct-perfect-fourth"></div>
+                        <div class="content" style="">
+                            <canvas id="agentCallsPie"  class="ct-chart "></canvas>
                             <div class="footer">
                                 <div class="legend">
-                                    <i class="fa fa-circle text-info"></i> Registered
-                                    <i class="fa fa-circle text-warning"></i>Pending
-                                    <i class="fa fa-circle text-success"></i> Activated
+                                    <i class="fa fa-circle text-info"></i>Mon
+                                    <i class="fa fa-circle text-danger"></i>Tue
+                                    <i class="fa fa-circle text-warning"></i>Wed
+                                    <i class="fa fa-circle text-primary"></i>Thu
+                                    <i class="fa fa-circle " style="color:#22BAA0"></i>Fri
+                                    <i class="fa fa-circle " style="color:#34425A"></i>Sat
+                                    <i class="fa fa-circle " style="color:#87CB16"></i>Sun
+                                    
+                                </div>
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-history"></i> Updated 3 minutes ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Agent Calls</h4>
+                            <p class="category">Line Charts</p>
+                        </div>
+                        <div class="content">
+                            <canvas id="agentCallsLine" width="600"  class="ct-chart "></canvas>
+                            <div class="footer">
+                                <div class="legend">
+                                    <i class=""></i>Merchants
                                 </div>
                                 <hr>
                                 <div class="stats">
@@ -37,19 +63,76 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" >
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Team Calls</h4>
+                            <p class="category">Pie Chart</p>
+                        </div>
+                        <div class="content" style="">
+                            <canvas id="teamCallsPie"  class="ct-chart "></canvas>
+                            <div class="footer">
+                                <div class="legend">
+                                    <i class="fa fa-circle text-info"></i>Mon
+                                    <i class="fa fa-circle text-danger"></i>Tue
+                                    <i class="fa fa-circle text-warning"></i>Wed
+                                    <i class="fa fa-circle text-primary"></i>Thu
+                                    <i class="fa fa-circle " style="color:#22BAA0"></i>Fri
+                                    <i class="fa fa-circle " style="color:#34425A"></i>Sat
+                                    <i class="fa fa-circle " style="color:#87CB16"></i>Sun
+                                    
+                                </div>
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-history"></i> Updated 3 minutes ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-7">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Team Behavior</h4>
-                            <p class="category">24 Hours performance</p>
+                            <h4 class="title">Team Calls</h4>
+                            <p class="category">Line Charts</p>
                         </div>
                         <div class="content">
-                            <div id="chartActivityTeam" class="ct-chart"></div>
+                            <canvas id="teamCallsLine" width="600"  class="ct-chart "></canvas>
                             <div class="footer">
                                 <div class="legend">
-                                    <i class="fa fa-circle text-info"></i> Open
-                                    <i class="fa fa-circle text-danger"></i> Click
-                                    <i class="fa fa-circle text-warning"></i> Click Second Time
+                                    <i class=""></i>Merchants
+                                </div>
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-clock-o"></i> Updated 3 minutes ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-11" >
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Registered - Activated By: Agent</h4>
+                            <p class="category">Merchant Statistic</p>
+                        </div>
+                        <div class="content" style="">
+                            
+                            <canvas id="activateRegisterAgent" width="1000" class="ct-chart "></canvas>
+                            
+                            <div class="footer">
+                                <div class="legend">
+                                    <i class="fa fa-circle text-success"></i>SignUp
+                                    <i class="fa fa-circle text-primary"></i>Activated Task
                                 </div>
                                 <hr>
                                 <div class="stats">
@@ -60,166 +143,162 @@
                     </div>
                 </div>
             </div>
+            
         </div>
-        <div class="col-md-12">
-            <div class="row clearfix">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title">Agent Statistics</h4>
-                            <p class="category">Registered</p>
-                        </div>
-                        <div class="content">
-                            <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-                            <div class="footer">
-                                <div class="legend">
-                                    <i class="fa fa-circle text-info"></i> Registered
-                                    <i class="fa fa-circle text-warning"></i>Pending
-                                    <i class="fa fa-circle text-success"></i> Activated
-                                </div>
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-clock-o"></i> Updated 3 minutes ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title">Agent Behavior</h4>
-                            <p class="category">24 Hours performance</p>
-                        </div>
-                        <div class="content">
-                            <div id="chartActivityAgent" class="ct-chart"></div>
-                            <div class="footer">
-                                <div class="legend">
-                                    <i class="fa fa-circle text-info"></i> Activated
-                                    <i class="fa fa-circle text-danger"></i>Registered
-                                </div>
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-history"></i> Updated 3 minutes ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
 </div>
+<script>
+// line chart data
+var buyerData = 
+    {
+        labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
+        datasets : [
+        {
+            fillColor : "rgba(172,194,132,0.4)",
+            strokeColor : "#ACC26D",
+            pointColor : "#fff",
+            pointStrokeColor : "#9DB86D",
+            data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
+        }
+    ]
+    }
+// get line chart canvas
+var buyers = document.getElementById('agentCallsLine').getContext('2d');
+// draw line chart
+new Chart(buyers).Line(buyerData);
+// pie chart data
+var pieData = 
+[
+    {
+        value: {{$mon}},
+        color:"#1DC7EA"
+    },
+    {
+        value : {{$tue}},
+        color : "#1DC7EA"
+    },
+    {
+        value: {{$wed}},
+        color:"#FF9500"
+    },
+    {
+        value : {{$thu}},
+        color : "#1D62F0"
+    },
+    {
+        value: {{$fri}},
+        color:"#22BAA0"
+    },
+    {
+        value : {{$sat}},
+        color : "#34425A"
+    },
+    {
+        value : {{$sun}},
+        color : "#87CCA7"
+    },
 
-<script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
 
-<script src="/assets/agent/assets1/js/chartist.min.js"></script>
-<script src="/assets/agent/assets1/js/demo.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-demo.initChartist();
-initChartist();
-});
-function initChartist(){
-
-var dataSales = {
-labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-series: [
-[287, 385, 490, 492, 554, 586, 698, 695, 752, 788, 846, 944],
-[67, 152, 143, 240, 287, 335, 435, 437, 539, 542, 544, 647],
-[23, 113, 67, 108, 190, 239, 307, 308, 439, 410, 410, 509]
-]
-};
-
-var optionsSales = {
-lineSmooth: false,
-low: 0,
-high: 800,
-showArea: true,
-height: "245px",
-axisX: {
-showGrid: false,
-},
-lineSmooth: Chartist.Interpolation.simple({
-divisor: 3
-}),
-showLine: false,
-showPoint: false,
-};
-
-var responsiveSales = [
-['screen and (max-width: 640px)', {
-axisX: {
-labelInterpolationFnc: function (value) {
-return value[0];
-}
-}
-}]
 ];
+// pie chart options
+var pieOptions = 
+    {
+        segmentShowStroke : false,
+        animateScale : true
+    }
+// get pie chart canvas
+var countries= document.getElementById("agentCallsPie").getContext("2d");
+// draw pie chart
+new Chart(countries).Pie(pieData, pieOptions);
+// bar chart data
+//agent end
+// line chart data
+var teamData = 
+    {
+        labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
+        datasets : [
+        {
+            fillColor : "rgba(172,194,132,0.4)",
+            strokeColor : "#ACC26D",
+            pointColor : "#fff",
+            pointStrokeColor : "#9DB86D",
+            data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
+        }
+        ]
+    }
+// get line chart canvas
+var teams = document.getElementById('teamCallsLine').getContext('2d');
+// draw line chart
+new Chart(teams).Line(teamData);
+// pie chart data
+var pieDataTeams = 
+    [
+         {
+            value: {{$mon}},
+            color:"#1DC7EA"
+        },
+        {
+            value : {{$tue}},
+            color : "#1DC7EA"
+        },
+        {
+            value: {{$wed}},
+            color:"#FF9500"
+        },
+        {
+            value : {{$thu}},
+            color : "#1D62F0"
+        },
+        {
+            value: {{$fri}},
+            color:"#22BAA0"
+        },
+        {
+            value : {{$sat}},
+            color : "#34425A"
+        },
+        {
+            value : {{$sun}},
+            color : "#87CCA7"
+        },
 
-Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
+
+    ];
+// pie chart options
+var pieOptionsTeams = 
+    {
+        segmentShowStroke : false,
+        animateScale : true
+    }
+// get pie chart canvas
+var teamPie= document.getElementById("teamCallsPie").getContext("2d");
+// draw pie chart
+new Chart(teamPie).Pie(pieDataTeams, pieOptionsTeams);
+// bar chart data
+//team end
+
+//activated vs registered team
+var barData = 
+    {
+        labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        datasets : [
+            {
+                fillColor : "#87CB16",
+                strokeColor : "#5D6D7E",
+                data : [{{$count_jan}},{{$count_feb}},{{$count_mar}},{{$count_apr}},{{$count_may}},{{$count_jun}},{{$count_jul}},{{$count_aug}},{{$count_sep}},{{$count_oct}},{{$count_nov}},{{$count_dec}}]
+            },
+            {
+                fillColor : "#1D62F0",
+                strokeColor : "#5D6D7E",
+                data : [{{$counts_jan}},{{$counts_feb}},{{$counts_mar}},{{$counts_apr}},{{$counts_may}},{{$counts_jun}},{{$counts_jul}},{{$counts_aug}},{{$counts_sep}},{{$counts_oct}},{{$counts_nov}},{{$counts_dec}}]
+            }
+        ]
+    }
+// get bar chart canvas
+var activeReg = document.getElementById("activateRegisterAgent").getContext("2d");
+// draw bar chart
+new Chart(activeReg).Bar(barData);
 
 
-var data = {
-labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-series: [
-[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-[412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-]
-};
-
-var options = {
-seriesBarDistance: 10,
-axisX: {
-showGrid: false
-},
-height: "245px"
-};
-
-var responsiveOptions = [
-['screen and (max-width: 640px)', {
-seriesBarDistance: 5,
-axisX: {
-labelInterpolationFnc: function (value) {
-return value[0];
-}
-}
-}]
-];
-
-Chartist.Bar('#chartActivityTeam', data, options, responsiveOptions);
-
-Chartist.Bar('#chartActivityAgent', data, options, responsiveOptions);
-
-var dataPreferences = {
-series: [
-[25, 30, 20, 25]
-]
-};
-
-var optionsPreferences = {
-donut: true,
-donutWidth: 40,
-startAngle: 0,
-total: 100,
-showLabel: false,
-axisX: {
-showGrid: false
-}
-};
-
-Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-
-Chartist.Pie('#chartPreferences', {
-labels: ['62%','32%','6%'],
-series: [62, 32, 6]
-});
-
-Chartist.Pie('#chartPreferencess', {
-labels: ['62%','32%','6%'],
-series: [62, 32, 6]
-});
-}
 </script>
 @endsection
