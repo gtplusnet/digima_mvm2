@@ -308,26 +308,18 @@ class MerchantController extends Controller
           
           $data['business_hours_from']= $business_hours_f;
           $data['business_hours_to']= $business_hours_to[$key];
-          
-          
+            
           $check = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
           if($check)
           {
-            echo "james";
+            return Redirect::back();
+            // echo "james";
           }
           else
           {
-            echo "wala";
+            echo "wrong";
           }
-        // return Redirect::back();
       }
-     
-
-    }
-
-    public function update_hours_submit(Request $request)
-    {
-     
     }
 
      public function add_payment_method(Request $request)
@@ -349,10 +341,10 @@ class MerchantController extends Controller
     public function add_messages(Request $request)
     { 
       $data["guest_messages_id"] = $request->guest_messages_id;
-      $data["full_name"] = $request->full_name;
-      $data["email"] = $request->email;
-      $data["subject"] = $request->subject;
-      $data["messages"] = $request->messages;
+      $data["full_name"]         = $request->full_name;
+      $data["email"]             = $request->email;
+      $data["subject"]           = $request->subject;
+      $data["messages"]          = $request->messages;
       TblGuestMessages::insert($data);
       Session::flash('message', "Message Information Added");
       return Redirect::back();
@@ -376,7 +368,7 @@ class MerchantController extends Controller
 
     public function edit_payment_method(Request $request)
     {
-      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_id"]   = $request->payment_method_id;
       $data["payment_method_name"] = $request->payment_method_name;
       TblPaymentMethod::where($data)->update($data);
       // Session::flash('message', "Payment Save");
@@ -385,7 +377,7 @@ class MerchantController extends Controller
 
     public function add_business_category(Request $request)
     {
-      $data["business_category_id"] = $request->business_category_id;
+      $data["business_category_id"]   = $request->business_category_id;
       $data["business_category_name"] = $request->business_category_name;
       Tbl_business_category::insert($data); 
       Session::flash('message', "Category Added");
@@ -423,7 +415,7 @@ class MerchantController extends Controller
 	  public function category()
 	  {
 		  Self::allow_logged_in_users_only();
-		  $data['page']				= 'Category';
+		  $data['page']			 = 'Category';
       $data['_category'] = Tbl_business_category::get();
       $data['_keywords'] = Tbl_business_category::get();
 		return view('merchant.pages.category', $data);		
@@ -431,7 +423,7 @@ class MerchantController extends Controller
 
       public function add_category(Request $request)
     {
-      $data['business_category_name']= $request->business_category_name;
+      $data['business_category_name'] = $request->business_category_name;
       Tbl_business_category::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>County Added.</div>"; 
     }

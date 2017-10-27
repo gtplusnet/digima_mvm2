@@ -66,9 +66,6 @@ Route::get('/merchant/redirect/exist', 			'MerchantController@merchant_redirect_
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
 Route::get('/merchant/profile/update_hours',		'MerchantController@update_hours');
-
-Route::get('/merchant/profile/update_hours_submit',		'MerchantController@update_hours_submit');
-
 Route::get('/merchant/category', 	'MerchantController@category');
 Route::get('/merchant/category/add_category', 	'MerchantController@add_category');
 Route::get('/merchant/category/add_keywords', 	'MerchantController@add_keywords');
