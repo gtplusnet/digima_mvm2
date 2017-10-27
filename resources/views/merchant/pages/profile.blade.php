@@ -125,10 +125,10 @@
                            <div class="col-sm-3 searchfields-format">
                               <input type="hidden" name="days[]" value="{{$business_hours->days}}">
                               <input type="hidden" name="business_id[]" value="{{$business_hours->business_id}}">
-                              <input type="text" class="form-control" name="business_hours_from[]" id="business_hours_from" value="{{$business_hours->business_hours_from}}" required="true">
+                              <input type="time" class="form-control" name="business_hours_from[]" id="business_hours_from" value="{{$business_hours->business_hours_from}}" required="true">
                            </div>
                            <div class="col-sm-3 searchfields-format">
-                              <input type="text" class="form-control" name="business_hours_to[]" id="business_hours_to" value="{{$business_hours->business_hours_to}}" required="true">
+                              <input type="time" class="form-control" name="business_hours_to[]" id="business_hours_to" value="{{$business_hours->business_hours_to}}" required="true">
                            </div>
                         </div>
                         @endforeach
