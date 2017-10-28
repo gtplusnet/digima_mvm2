@@ -24,7 +24,7 @@ class CreateTblCity extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. pangatlo
      *
      * @return void
      */
