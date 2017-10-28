@@ -95,11 +95,11 @@
                         <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
                             {{ csrf_field() }}
                                
-                            <div class="col-md-2 searchfields-format pull-right">
+                                <div class="col-md-2 searchfields-format pull-right">
                                     <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
                                 </div>
-                                <div class="col-md-4 searchfields-format pull-right">
-                                    <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
+                                 <div class="col-md-2 searchfields-format pull-right">
+                                    <input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode">
                                 </div>
                                 <div class="col-md-3 searchfields-format pull-right">
                                     <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown">
@@ -109,11 +109,12 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-2 searchfields-format pull-right
-                                ">
-                                    <input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode">
+                                
+                                <div class="col-md-4 searchfields-format pull-right">
+                                    <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
                                 </div>
                                 
+                               
                             
                         </form>
                     </div>
