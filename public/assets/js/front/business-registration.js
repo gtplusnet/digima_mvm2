@@ -1,8 +1,5 @@
 $(document).ready(function(){
-	alert();
-	
 	$(".countyDropdown").change(function(e){
-		alert();
 		var countyId = $(this).val();
 		$.ajax({
 			type: 'GET',
@@ -16,7 +13,6 @@ $(document).ready(function(){
 	});
 
 	$(".cityDropdown").change(function(e){
-		alert();
 		var cityId = $(this).val();
 		$.ajax({
 			type: 'GET',
@@ -24,7 +20,6 @@ $(document).ready(function(){
 			dataType: 'text',
 			data: {'cityId': cityId}
 		}).done(function(data){
-			alert(data);
 			$(".postalCode").val(data);
 		});
 	});
