@@ -512,7 +512,7 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent'] = TblAgentmodels::get();
+      $data['_data_agent'] = TblAgentModels::get();
       $data['_data_team'] = TblTeamModel::get();
       $data['_data_supervisor'] = TblSupervisorModels::get();
       $data['_data_admin'] = TblAdminModels::get();
@@ -741,7 +741,7 @@ class GeneralAdminController extends Controller
         
         else
         {
-            $check_insert = TblAgentmodels::insert($ins);
+            $check_insert = TblAgentModels::insert($ins);
             if($check_insert)
             {
               return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
