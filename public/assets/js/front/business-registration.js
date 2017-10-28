@@ -1,5 +1,8 @@
 $(document).ready(function(){
-	$("#countyDropdown").on('change', function(e){
+	alert();
+	
+	$("#countyDropdown").change(function(e){
+		alert();
 		var countyId = $(this).val();
 		$.ajax({
 			type: 'GET',
