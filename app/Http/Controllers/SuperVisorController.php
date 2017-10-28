@@ -15,7 +15,7 @@ use Redirect;
 use Validator;
 use Carbon\Carbon;
 
-class SuperVisorController extends Controller
+class SupervisorController extends Controller
 {
     public static function allow_logged_in_users_only()
     {
@@ -48,13 +48,7 @@ class SuperVisorController extends Controller
         return Redirect::to("/supervisor");
    
     }
-    //   public function supervisor_logout()
-    // {
-    //     Session::forget("supervisor_login_submit");
-    //     return Redirect::to("/supervisor");
-    // }
-
-    public function supervisor_login_submit(Request $request)
+   public function supervisor_login_submit(Request $request)
     {
         $validate_login = TblSupervisorModels::where('email',$request->email)->first();
         if($validate_login)
@@ -70,7 +64,6 @@ class SuperVisorController extends Controller
 
                     Session::put("email",$validate_login->email);
                     Session::put("position",$validate_login->position);
-                    // Session::put("login", $validate_login->email);
                     $data['page']   = 'Dashboard';
 
                     return Redirect::to('/supervisor/dashboard');
