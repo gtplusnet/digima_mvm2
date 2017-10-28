@@ -75,6 +75,7 @@ class AgentController extends Controller
 	public function agent_login(Request $request)
 	{
 		$validate_login = TblAgentModel::where('email',$request->email)->first();
+		dd($validate_login);
 		
 		if($validate_login)
 		{
@@ -94,13 +95,13 @@ class AgentController extends Controller
 			else
 			{
 				$data['page']	= 'Agent Login';
-				return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+				return Redirect::back()->withErrors(['User Login is Incorect!-2', 'User Login is Incorect!-2']);
 			}
 		}
 		else
 		{
 			$data['page']	= 'Agent Login';
-			return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+			return Redirect::back()->withErrors(['User Login is Incorect!-1', 'User Login is Incorect!-1']);
 		}
 	}
 

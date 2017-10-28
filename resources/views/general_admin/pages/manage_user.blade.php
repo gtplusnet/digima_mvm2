@@ -319,7 +319,7 @@
 					
 					<div class="col-sm-12">
 						<center>
-						<button type="submit" class="save_category btn btn-primary" name="add_agent" id="add_agent">Add Agent</button>
+						<button type="submit" class="add_agent btn btn-primary" name="add_agent" id="add_agent">Add Agent</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 						</center>
 					</div>

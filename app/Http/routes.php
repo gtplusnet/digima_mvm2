@@ -275,7 +275,7 @@ Route::any('/general_admin/manage_invoice', 'GeneralAdminController@general_admi
 Route::any('/general_admin/resend_invoice', 'GeneralAdminController@general_admin_resend_invoice');
 Route::post('/general_admin/accept_and_activate', 'GeneralAdminController@general_admin_accept_and_activate');
 Route::post('/general_admin/decline_and_deactivate', 'GeneralAdminController@general_admin_decline_and_deactivate');
-Route::post('/general_admin/manage_user/add_agent', 'GeneralAdminController@general_admin_add_agent');
+Route::any('/general_admin/manage_user/add_agent', 'GeneralAdminController@general_admin_add_agent');
 Route::post('/general_admin/manage_user/add_team', 'GeneralAdminController@general_admin_add_team');
 Route::post('/general_admin/manage_user/add_supervisor', 'GeneralAdminController@general_admin_add_supervisor');
 Route::post('/general_admin/manage_user/add_admin', 'GeneralAdminController@general_admin_add_generaladmin');
