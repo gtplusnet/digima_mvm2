@@ -52,6 +52,7 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
+		$data['countyList'] = TblCountyModel::get();
 		return view ('agent.pages.login', $data);
 	}
 

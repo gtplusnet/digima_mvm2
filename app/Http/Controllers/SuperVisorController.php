@@ -37,7 +37,7 @@ class SuperVisorController extends Controller
     {
         Self::allow_logged_out_users_only();
         $data['page']   = 'Supervisor Login';
-
+        $data['countyList'] = TblCountyModel::get();
         return view ('supervisor.pages.supervisor_login', $data);
 
     }

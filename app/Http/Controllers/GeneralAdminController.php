@@ -56,7 +56,8 @@ class GeneralAdminController extends Controller
       public function index()
 
     {
-        return view('general_admin.pages.general_admin_login');
+      $data['countyList'] = TblCountyModel::get();
+      return view('general_admin.pages.general_admin_login',$data);
     }
     public function general_admin_login_submit(Request $request)
     {

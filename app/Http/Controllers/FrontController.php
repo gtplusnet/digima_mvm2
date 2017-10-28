@@ -237,6 +237,7 @@ class FrontController extends Controller
         // $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
         $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->get();
         $data["_business_list"] = TblBusinessModel::paginate(9);
+        $data['countyList'] = TblCountyModel::get();
         return view('front.pages.searchresult',$data); 
     }
 
