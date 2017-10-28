@@ -17,7 +17,7 @@ use App\Models\TblInvoiceModels;
 use App\Models\TblCityModel;
 use App\Models\TblCountyModel;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentmodels;
+use App\Models\TblAgentModels;
 use App\Models\TblSupervisorModels;
 use App\Models\TblMembeshipModel;
 use App\Models\TblBusinessSubCategoryModel;
