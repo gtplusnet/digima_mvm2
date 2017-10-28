@@ -98,10 +98,10 @@ padding: 10px;
 					<div class="web-content" id="membership_alert">
 					</div>
 					<div class="web-content">
-						<input type="text" class="form-text center" id="mem_name_edit" placeholder="Membership Name" required/>
+						<input type="text" class="form-text center" id="membershipName" placeholder="Membership Name" required/>
 					</div>
 					<div class="web-content">
-						<input type="text" class="form-text center" id="mem_price_edit" placeholder="Membership Price" required/>
+						<input type="text" class="form-text center" id="membershipPrice" placeholder="Membership Price" required/>
 					</div>
 					<div class="web-content">
 						<button type="button" id="addMembership" class="form-button  center" >Add Membership</button>
