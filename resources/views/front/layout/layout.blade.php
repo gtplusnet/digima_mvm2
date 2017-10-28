@@ -54,31 +54,78 @@
     </head>
     <body>
         <!-- HEADER NAVBAR HERE -->
-        <div class="header-nav">
+        <div class="header-nav ">
             <div class="container">
-                <img class="pull-left" src="/images/croatia_directory_logo.png">
-                <div class="pull-right menu-bar">
-                    <!-- TAB BAR -->  
-                    <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
-                    <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
-                    <li class="nav-tab last {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
-                    <!-- BUTTONS -->
-                    <div class="btn-login">
-                        <a href="/login">Log in</a>    
+               
+                <div class="menu-bar">
+                    <div class="pull-left">
+                        <!-- TAB BAR -->  
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
+                        <li class="nav-tab last {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+                       
                     </div>
-                    <div class="btn-register">
-                        <a href="/registration">Register</a>
-                    </div>
-                    <div class="btn-english">
-                        <a class="active" href="">English</a>    
-                    </div>
-                    <div class="btn-croatian">
-                        <a href="">Croatian</a>
+                    <div class="pull-right">
+                         <!-- BUTTONS -->
+                        <div class="btn-login">
+                            <a href="/login">Log in</a>    
+                        </div>
+                        <div class="btn-register">
+                            <a href="/registration">Register</a>
+                        </div>
+                        <div class="language-selection">
+                            <select class="language-select">
+                                <option val="english">English</option>
+                                <option val="croatian">Croatian</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div><!-- header-nav -->
+        <div class="header-nav-bottom">
+        <div class="container">
+                <div class="pull-left col-md-2">
+                    <img  src="/images/croatia_directory_logo.png">
+                </div>
+                <div class="menu-bar col-md-10">
+                    <div class="searchbox-holder">
 
+                        <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
+                            {{ csrf_field() }}
+                               
+                            <div class="col-md-2 searchfields-format pull-right">
+                                    <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
+                                </div>
+                                <div class="col-md-4 searchfields-format pull-right">
+                                    <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
+                                </div>
+                                <div class="col-md-3 searchfields-format pull-right">
+                                    <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown">
+                                        <option value="" disabled selected>--County--</option>
+                                        @foreach($countyList as $countyListItem)
+                                        <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-2 searchfields-format pull-right
+                                ">
+                                    <input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode">
+                                </div>
+                                
+                            
+                        </form>
+                    </div>
+                    
+                </div>
+         
+        </div>
+        </div><!-- header-nav -->
+        
+    
+
+        
         @yield('content')
 
         <!-- FOOTER HERE -->

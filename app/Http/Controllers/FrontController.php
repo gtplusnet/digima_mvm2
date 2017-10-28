@@ -57,6 +57,9 @@ class FrontController extends Controller
         Session::forget("business_address");
         Session::forget("city_state");
         Session::forget("zip_code");
+
+        $data["_business_list"] = TblBusinessModel::paginate(9);
+
         return view('front.pages.home',$data);
     }
 
@@ -233,6 +236,7 @@ class FrontController extends Controller
         $data['cityID'] = $cityID = $request->cityId;
         // $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
         $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->get();
+        $data["_business_list"] = TblBusinessModel::paginate(9);
         return view('front.pages.searchresult',$data); 
     }
 
@@ -289,12 +293,15 @@ class FrontController extends Controller
     public function about()
     {
         $data['page']   = 'About';
+        $data['countyList'] = TblCountyModel::get();
         return view('front.pages.about', $data);
     }
     public function contact()
     {
         $data['page']   = 'Contact';
+        $data['countyList'] = TblCountyModel::get();
         return view('front.pages.contact', $data);
+
     }
     public function contact_send(Request $request)
     {

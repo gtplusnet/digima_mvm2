@@ -24,6 +24,7 @@ class SearchController extends Controller
     {
         //dd($request->search_business);
         $business_name = $request->business_name;
+        $data["_business_list"] = TblBusinessModel::paginate(9);
 
         return Redirect::to("/search_result_list?business_name={$business_name}");
     }
@@ -31,7 +32,7 @@ class SearchController extends Controller
     public function search_result_list(Request $request)
     {
         $data['business_search'] = TblBusinessModel::where('business_name', 'LIKE', '%'.$request->business_name.'%')->get();
-
+        
         return view('mvm.front.search_result', $data); 
     }
 
