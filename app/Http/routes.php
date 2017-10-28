@@ -184,8 +184,9 @@ Route::any('/supervisor/update_agent', 'SupervisorController@update_agent');
 
 Route::any('/supervisor/get_city', 		'SupervisorController@get_city');
 Route::any('/supervisor/get_zip_code', 	'SupervisorController@get_zip_code');
-Route::any('/supervisor/upload-convo', 'SuperVisorController@uploadConvo');
-Route::any('/supervisor/force_activate', 'SuperVisorController@force_activate');
+Route::any('/supervisor/upload-convo', 'SupervisorController@uploadConvo');
+Route::any('/supervisor/force_activate', 'SupervisorController@force_activate');
+Route::any('/agent/upload-convo', 'SupervisorController@uploadConvo');
 
 
 
@@ -203,7 +204,7 @@ Route::post('/agent/get_client2', 		'AgentController@get_client2');
 Route::post('/agent/get_client_transaction', 		'AgentController@get_client_transaction');
 Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_transaction_reload');
 
-Route::any('/agent/upload-convo', 'SuperVisorController@uploadConvo');
+
 
 Route::any('/agent/add/client', 	'AgentController@add_client');
 Route::post('/add_client_submit',   'AgentController@add_client_submit');
