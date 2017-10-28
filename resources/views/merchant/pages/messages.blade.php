@@ -34,10 +34,8 @@
                 <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="1" cellspacing="1"  border="2">
                  <thead>
                             <tr>
-                            <th style="text-align: center;font-size: 13px">ID</th>
-                            <th style="text-align: center;font-size: 13px">First Name</th>
-                            <th style="text-align: center;font-size: 13px">Last Name</th>
-                            <th style="text-align: center;font-size: 13px">Email</th>
+                            <th style="text-align: center;font-size: 13px">Full Name</th>
+                            <th style="text-align: center;font-size: 13px">Mail To</th>
                             <th style="text-align: center;font-size: 13px">Subject</th>
                             <th style="text-align: center;font-size: 13px">Help Message</th>
                               <th style="text-align: center;font-size: 13px">Subject</th>
@@ -45,12 +43,10 @@
                             </thead>
                             @foreach($guest_messages as $data)
                             <tr>
-                            <td>{{$data->business_contact_person_id }}</td>
-                            <td>{{$data->contact_first_name }}</td>
-                            <td>{{$data->contact_last_name}}</td>
-                            <td><a href="">{{$data->user_email}}</td>
+                            <td>{{$data->full_name }}</td>
+                            <td><a href="">{{$data->email}}</td>
                             <td>{{$data->subject}}</td>
-                            <td>{{$data->help_message}}</td>
+                            <td>{{$data->messages}}</td>
                             <td>
                             <a href="/merchant/delete_messages/{{$data->guest_messages_id}}"><button type="button" class="btn btn-danger">
                             <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>

@@ -16,6 +16,7 @@ use App\Models\TblBusinessHoursmodels;
 use App\Models\TblCountyModel;
 use App\Models\TblGuestMessages;
 use App\Models\Tbl_business_hours;
+use App\Models\TblBusinessImages;
 use Redirect;
 use insert;
 use DB;
@@ -192,34 +193,7 @@ class MerchantController extends Controller
           {
           echo "mag browse ka muna ng picture!!!" ; 
           }
-      //     else
-      //     {
-      //       $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
-      //       $file_ext = $file->getClientOriginalExtension();
-      //       $destinationPath = public_path('/payment_upload');
-      //       $check=$file->move($destinationPath, $filename);   
-      //       if($check)
-      //       {
-      //           $data['payment_reference_number'] = $request->payment_reference_number;
-      //           $data['payment_amount'] = $request->payment_amount;
-      //           $data['payment_method'] = $request->payment_method;
-      //           $data['payment_file_name'] = $filename;
-      //           $data['business_contact_person_id'] = session('business_contact_person_id');
-      //           $data['business_id'] = session('business_id');
-      //           $data['payment_status'] = 'submitted';
-      //           $check_insert = TblPaymentModel::insert($data);
-      //           if($check_insert)
-      //           {
-      //            return Redirect::to('/merchant/redirect/exist');
-      //           }
-      //           else
-      //           {
-      //            echo "mali ka";
-      //           }
-      //         }
-
-            // }
-
+    
         else
         {
           $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
@@ -272,7 +246,9 @@ class MerchantController extends Controller
                                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                                 ->first();
 		  $data['_payment_method']	 = Tbl_payment_method::get(); 
+      $data['_other_info']   = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->get();
       $data['_business_hours']   = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
+      $data['_images']   = TblBusinessImages::where('business_id',session('business_id'))->get();
 		  return view ('merchant.pages.profile', $data);		
 	  }
 
@@ -290,8 +266,8 @@ class MerchantController extends Controller
       $data["company_information"] = $request->company_information;
       $data["business_website"]    = $request->business_website;
       $data["year_established"]    = $request->year_established;
-      TblBusinessOtherInfoModel::insert($data); 
-      Session::flash('add_info', "Other Information Save");
+      TblBusinessOtherInfoModel::where('business_id',session('business_id'))->update($data);
+      Session::flash('add_info', "Information Updated");
       return Redirect::back();
     }
 
@@ -312,8 +288,7 @@ class MerchantController extends Controller
           $check = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
           if($check)
           {
-            return Redirect::back();
-            // echo "james";
+            return Redirect::back(); 
           }
           else
           {
@@ -340,7 +315,7 @@ class MerchantController extends Controller
 
     public function add_messages(Request $request)
     { 
-      $data["guest_messages_id"] = $request->guest_messages_id;
+
       $data["full_name"]         = $request->full_name;
       $data["email"]             = $request->email;
       $data["subject"]           = $request->subject;
@@ -390,28 +365,43 @@ class MerchantController extends Controller
       Session::flash('danger', "Category Deleted");
       return Redirect::back();
     }
-     
-    /**
-    public function edit($id)
-    {
-        
-        $data['_edit']=tbl_users::where('id', $id)->first();
-        // dd($id);
-        return view('edit', $data);
+
+     public function add_images(Request $request)
+    { 
+        $file = $request->business_banner;
+        if($file==null||$file=='')
+          {
+            echo "Walang kang picture eh!!!";
+          }
+        else
+          {
+          $filename='/business_images/'.uniqid().$file->getClientOriginalName();
+          $file_ext = $file->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file->move($destinationPath, $filename);   
+            if($check)
+            {
+              $data['business_banner']   = $filename;
+              $data['other_image_one'] = $request->other_image_one;
+              $check_insert = TblBusinessImages::insert($data);
+              if($check_insert)
+                {
+                  echo "NASAVE SIYA";
+                }
+              else
+                { 
+                  echo "mali ka";
+                }
+          }
+         }
+      // $data["business_banner"]         = $request->business_banner;
+      // $data["other_image_one"]         = $request->other_image_one;
+      // $data["other_image_two"]         = $request->other_image_one;
+      // $data["other_image_three"]         = $request->other_image_one;
+      // TblBusinessImages::where('business_id',session('business_id'))->update($data);
+      // return Redirect::back();
     }
-
-    public function edit_submit($id)
-    {
-        $update["name"] = Request::input("name");
-        $update["location"] = Request::input("location");
-        $update["nickname"] = Request::input("nickname");
-  
-        
-        tbl_users::where('id', $id)->update($update);
-       Redirect::to("/pageview")->send();
-        
-    }*/
-
+     
 	  public function category()
 	  {
 		  Self::allow_logged_in_users_only();
@@ -432,7 +422,7 @@ class MerchantController extends Controller
     {
       Self::allow_logged_in_users_only();
       $data['page'] = 'Messages';
-      $data['guest_messages']    = TblBusinessContactPersonModel::get(); 
+      $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->get();
       return view ('merchant.pages.messages', $data);  
     }
 

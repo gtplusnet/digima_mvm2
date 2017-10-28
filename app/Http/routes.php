@@ -73,6 +73,8 @@ Route::any('/merchant/add_business_category', 'MerchantController@add_business_c
 Route::any('/merchant/delete_business_category/{id}', 'MerchantController@delete_business_category');
 Route::get('/merchant/messages', 	'MerchantController@messages');
 Route::any('/merchant/add_messages', 'MerchantController@add_messages');
+Route::any('/merchant/add_images', 'MerchantController@add_images');
+
 Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');
 Route::get('/merchant/bills', 		'MerchantController@bills');
 //james
