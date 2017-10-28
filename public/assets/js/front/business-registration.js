@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	alert();
 	
-	$("#countyDropdown").change(function(e){
+	$(".countyDropdown").change(function(e){
 		alert();
 		var countyId = $(this).val();
 		$.ajax({
@@ -15,15 +15,17 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#cityDropdown").on('change', function(e){
+	$(".cityDropdown").change(function(e){
+		alert();
 		var cityId = $(this).val();
 		$.ajax({
 			type: 'GET',
 			url: '/get-postal-code',
-			dataType: 'json',
+			dataType: 'text',
 			data: {'cityId': cityId}
 		}).done(function(data){
-			$("#postalCode").val(data.postalCode);
+			alert(data);
+			$(".postalCode").val(data);
 		});
 	});
 

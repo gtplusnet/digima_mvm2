@@ -191,7 +191,7 @@
 
         <!-- Registration JS -->
         {{-- <script src="/assets/js/front/registration.js"></script> --}}
-        <script src="/assets/js/front/buusiness-registration.js"></script>
+        {{-- <script src="/assets/js/front/business-registration.js"></script> --}}
 
 
   
