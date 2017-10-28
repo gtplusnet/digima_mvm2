@@ -75,7 +75,7 @@ class AgentController extends Controller
 	public function agent_login(Request $request)
 	{
 		$validate_login = TblAgentModel::where('email',$request->email)->first();
-		dd($validate_login);
+		
 		
 		if($validate_login)
 		{
