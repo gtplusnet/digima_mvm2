@@ -1,5 +1,5 @@
 @extends('general_admin.layout.layout')
-@section('title', 'supervisor_login')
+@section('title', 'Supervisor Login')
 @section('content')
 
 <div class="login-background" style="background-image: url('/images/background_login.jpg')">

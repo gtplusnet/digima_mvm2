@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
@@ -36,7 +37,7 @@ class SupervisorController extends Controller
 	public function index()
     {
         Self::allow_logged_out_users_only();
-        $data['page']   = 'Supervisor Login';
+        $data['page'] = 'Supervisor Login';
         $data['countyList'] = TblCountyModel::get();
         return view ('supervisor.pages.supervisor_login', $data);
 
