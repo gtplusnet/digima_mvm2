@@ -81,7 +81,8 @@
 			@if (Session::has('message'))
 			<div class="alert alert-danger"><center>{{ Session::get('message') }}</center></div>
 			@endif
-			<table class="display table" style="width: 100%; cellspacing: 0;">
+	
+			<table class="display table table-bordered"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 				<thead>
 					<tr>
 						<th>ID</th>

@@ -52,6 +52,7 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_out_users_only();
 		$data['page']	= 'Agent Login';
+		$data['countyList'] = TblCountyModel::get();
 		return view ('agent.pages.login', $data);
 	}
 
@@ -217,6 +218,7 @@ class AgentController extends Controller
 		$update['transaction_status'] = 'called'; 
 		$update['business_status'] = '2';
 		$update['date_transact'] = date("Y/m/d"); 
+		$update['agent_call_date'] = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 		$count_call = TblAgentModel::where('agent_id',session('agent_id'))->first();
 		$agent['agent_call'] = $count_call->agent_call + 1;
@@ -257,6 +259,7 @@ class AgentController extends Controller
             $business_data->agent_id = session('agent_id');
             $business_data->date_transact = date("Y/m/d");
             $business_data->date_created = date("Y/m/d");
+            $business_data->agent_call_date = date("Y/m/d");
             $business_data->save();
 
 	        $contactData = new TblBusinessContactPersonModel;

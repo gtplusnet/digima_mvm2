@@ -50,7 +50,7 @@
 						<td>{{ $invoice->invoice_status }}</td>
 						<td>
 							 <div class="form-group">
-							      <select id="invoice_action" data-name="{{ $invoice->invoice_name }}" data-email="{{ $invoice->user_email }}" data-path="{{$invoice->invoice_path}}" class="form-control invoice_action" id="sel1" style="width:90px;">
+							      <select id="invoice_action" data-contact_name="{{ $invoice->contact_first_name}}" data-b_id="{{ $invoice->business_id}}" data-name="{{ $invoice->invoice_name }}" data-email="{{ $invoice->user_email }}" data-path="{{$invoice->invoice_path}}" class="form-control invoice_action" id="sel1" style="width:90px;">
 							        
 							        <option>Action</option>
 							        @if($invoice->invoice_status=='Paid')
@@ -76,8 +76,10 @@
                     <h4 class="modal-title">Resend Invoice</h4>
                 </div>
                 <div class="modal-body" style="margin-bottom: 190px;" id="resendSuccess">
-                    {{-- <div id="resendSuccess">
-                    </div> --}}
+                    <div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
+						<img src="/assets/img/loading.gif"/>
+					</div>
+					<div id="hide_me">
                     <div class="col-sm-12">
                         <div class="form-group col-md-3">
                             <label for="business_name" >Contact Person Email</label>
@@ -85,6 +87,9 @@
                         <div class="form-group col-md-9">
                             <input type="text" class="form-control" name="resend_email" id="resend_email"  style="width:100%;margin-bottom: 20px;" readOnly/>
                             <input type="hidden" id="invoice_name_resend" />
+                             <input type="hidden" id="resend_business_id" />
+                             <input type="hidden" id="resend_contact_name" />
+                             
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -101,7 +106,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </center>
                     </div>
-                    
+                    </div>
                     
                 </div>
                 <div class="modal-footer" style="border:0px;">

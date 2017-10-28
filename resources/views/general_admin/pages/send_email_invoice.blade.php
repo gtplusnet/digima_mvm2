@@ -298,6 +298,8 @@ table[class=hide], img[class=hide], td[class=hide] {
                       <br>
                       &nbsp;&nbsp;&nbsp;&nbsp;This is your invoice for the activation of your membership. Please see Attachment.
                       <br><br>
+                       <p><font color="red"> {{$remarks}}</font></p>
+                      <br>
                       After you pay your membership. 
                       Click this link : <center>http://digima_mvm.dev/merchant/payment/{{$business_id}}/{{$name}} <br>or<br> just click the UPLOAD BUTTON.</center><br>
                       </p>

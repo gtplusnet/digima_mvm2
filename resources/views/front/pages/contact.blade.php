@@ -1,6 +1,8 @@
 @extends('front.layout.layout')
 @section('title', 'Contact Us')
 @section('content')
+
+
 <div class="banner-contact" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">
 		<div class="pull-left">

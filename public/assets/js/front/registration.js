@@ -1,6 +1,7 @@
 $(document).ready(function(){
-
+// alert();
 	$('#county_list').change(function(){
+		alert();
 		var county_id = $('#county_list').val();
 		$('#postal_code').val("");
 

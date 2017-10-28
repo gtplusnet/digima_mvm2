@@ -1,47 +1,69 @@
-
-
-<?php
-
- $fb_page = '742953982442308'; 
- $access_token = 'EAAD6rZBdEZBzABALWYhj5EtQIYLedACll6rwjOQwgbauhb0o34lPWOqzhd6FK6qs1qNo73KvIJZAHBCJVTe3eM05AMDpXsH1zkt5zZAj48bEBzVL6rAKupxJwMFxnZA8OB9vaPz1fybkBQNg1JuoPn08dvnTRDQ44ez43vySolQT4VzNMiocRZBaVjdVtw33HqqHt0NK2fagZDZD';
- $url = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
- $curl = curl_init($url);
- curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
- curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
- $result = curl_exec($curl);  
- curl_close($curl);
- $details = json_decode($result,true);
- echo $details['fan_count']." likes";
- 
-?>
-
-
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<body>
-<h1>My First Google Map</h1>
-
-
-
-
-<div>{{$coordinates}}</div>
-<div id="googleMap" style="left:50px;width:400px;height:200px;"></div>
-<script>
-function myMap() {
-	var lat={{$coordinates1}};
-	var long={{$coordinates}};
-  var myCenter = new google.maps.LatLng(lat,long);
-  var mapCanvas = document.getElementById("googleMap");
-  var mapOptions = {center: myCenter, zoom: 5};
-  var map = new google.maps.Map(mapCanvas, mapOptions);
-  var marker = new google.maps.Marker({position:myCenter});
-  marker.setMap(map);
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<style>
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr0DttJQ2kkNjyughGhLAF8UfsMjI2WHY&callback=myMap"></script>
+ul {
+    padding:0;
+    margin: 0;
+    list-style: none;
+}
+#nav {
+    position:fixed;
+    top: 50%;
+    right: 0;
+    width: 120px;
+}
+#nav ul {
+    width: 200px;
+    background: grey;
+    position:absolute;
+    left:-9999em;
+}
+#nav a {
+    display:block;
+    padding:5px 10px;
+}
+#nav ul li {
+    position:relative;
+}
+#nav li:hover > ul {
+    left:-200px;
+    top:0;
+}
+#nav li:hover > a {
+    background:yellow;
+    cursor:pointer
+}
+#button-one a {
+    display: block;
+    padding:5px 10px;
+    background: tomato;
+}
+</style>
+</head>
+
+<body>
+<ul id='nav'>
+  <li id='button-one'><a>Sub menu title</a>
+    <ul>
+      <li><a>Link</a></li>
+      <li><a>Submenu</a>
+        <ul>
+          <li><a href=''>Link 1</a></li>
+          <li><a href=''>Link 2</a></li>
+          <li><a href=''>Link 3</a></li>
+          <li><a href=''>Link 4</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 </body>
 </html>
-
-
-
- 
