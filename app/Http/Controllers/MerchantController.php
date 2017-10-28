@@ -150,12 +150,14 @@ class MerchantController extends Controller
 	}
     public function merchant_redirect()
     {
-       return view ('merchant.pages.merchant_redirect');
+      $data['countyList'] = TblCountyModel::get();
+      return view ('merchant.pages.merchant_redirect',$data);
     }
 
     public function merchant_redirect_exist()
     {
-       return view('merchant.pages.merchant_redirect_exist');
+      $data['countyList'] = TblCountyModel::get();
+       return view('merchant.pages.merchant_redirect_exist',$data);
     }
 
      public function payment()
