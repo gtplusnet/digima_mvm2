@@ -1,4 +1,4 @@
-@extends('front.layout.layout')
+@extends('general_admin.layout.layout')
 @section('title', 'Login')
 @section('content')
 <div class="login-background" style="background-image: url('/images/background_login.jpg')">

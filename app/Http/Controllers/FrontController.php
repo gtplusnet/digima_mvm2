@@ -94,10 +94,11 @@ class FrontController extends Controller
 
     public function getPostalCode(Request $request)
     {
+
         if($request->ajax())
         {
              $postalCode = Tbl_city::getPostalCode($request->cityId)->first();
-             return response()->json(['postalCode' => $postalCode->postal_code]);  
+             return response()->json($postalCode->postal_code);  
         }
     }
 
@@ -279,7 +280,8 @@ class FrontController extends Controller
 
     public function success()
     {
-        return view('front.pages.success');
+        $data['countyList'] = TblCountyModel::get();
+        return view('front.pages.success',$data);
     }
 
     public function business_info(Request $request)

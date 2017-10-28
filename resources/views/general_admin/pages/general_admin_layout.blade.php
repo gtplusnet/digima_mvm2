@@ -34,7 +34,7 @@
 
         <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
         
-        <script src="/assets/admin/general_admin/admin/general_admin/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
+        <script src="/assets/admin/general_admin/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="/assets/admin/general_admin/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
       
         

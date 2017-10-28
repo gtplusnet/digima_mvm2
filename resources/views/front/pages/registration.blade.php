@@ -94,7 +94,7 @@
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-5 form-firstpart">
 					<label for="countyDropdown" class="registration-form-label">County:</label>
-			  		<select class="form-control" name="countyDropdown" id="countyDropdown" required="true">
+			  		<select class="form-control countyDropdown" name="countyDropdown" id="countyDropdown" required="true">
 			  			<option value="" disabled selected>--County--</option>
 						@foreach($countyList as $countyListItem)
 							<option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
@@ -103,13 +103,13 @@
 				</div>
 				<div class="col-md-4 form-secondpart">
 					<label for="cityDropdown" class="registration-form-label">City:</label>
-			  		<select class="form-control" name="cityDropdown" id="cityDropdown" required="true">
+			  		<select class="form-control cityDropdown" name="cityDropdown" id="cityDropdown" required="true">
 						<option value="" disabled selected>--City--</option>
 	  				</select>
 				</div>
 				<div class="col-md-3 form-thirdpart">
 					<label for="postalCode" class="registration-form-label">Postal Code:</label>
-			    	<input type="text" class="form-control" name="postalCode" id="postalCode" disabled="true">
+			    	<input type="text" class="form-control postalCode" name="postalCode" id="postalCode" disabled="true">
 				</div>
 			</div>
 		</div>
@@ -155,7 +155,7 @@
 </div>
 
 	{{-- JAVASCRIPTS --}}
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/assets/js/global.ajax.js"></script>
 	<script src="/assets/js/front/business-registration.js"></script>
 	<script>
 		$.ajaxSetup({
