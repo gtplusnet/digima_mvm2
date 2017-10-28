@@ -12,9 +12,9 @@ class UpdateTblBusinessHours9292017 extends Migration
      */
     public function up()
     {
-         Schema::table('tbl_business_hours', function (Blueprint $table) {
-            $table->string('days');
-        });
+        //  Schema::table('tbl_business_hours', function (Blueprint $table) {
+        //     $table->string('days');
+        // });
     }
 
     /**
