@@ -8,7 +8,7 @@ use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
-use App\Models\TblAgentModels;
+use App\Models\TblAgentModel;
 use App\Models\TblBusinessOtherInfoModel;
 use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
@@ -74,7 +74,7 @@ class AgentController extends Controller
 
 	public function agent_login(Request $request)
 	{
-		$validate_login = TblAgentModels::where('email',$request->email)->first();
+		$validate_login = TblAgentModel::where('email',$request->email)->first();
 		
 		if($validate_login)
 		{
@@ -109,8 +109,8 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	= 'Profile';
-		$data['profile'] = TblAgentModels::get();
-		$data['agent_info'] = TblAgentModels::where('agent_id',session('agent_id'))->first();
+		$data['profile'] = TblAgentModel::get();
+		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))->first();
 		return view ('agent.pages.profile', $data);		
 
 	}

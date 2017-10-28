@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentModels;
+use App\Models\TblAgentModel;
 use App\Models\TblSupervisorModels;
 use App\Models\TblBusinessModel;
 use App\Models\Tbl_conversation;
@@ -212,7 +212,7 @@ class SuperVisorController extends Controller
     {
         $agent_id = $request->agent_id_assign;
         $update['team_id'] = $request->teamAssigned;
-        TblAgentModels::where('agent_id',$agent_id)->update($update);
+        TblAgentModel::where('agent_id',$agent_id)->update($update);
         return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
 
     }	
@@ -364,7 +364,7 @@ class SuperVisorController extends Controller
         
         else
         {
-            $check_insert = TblAgentmodels::insert($ins);
+            $check_insert = TblAgentModel::insert($ins);
             if($check_insert)
             {
               return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
@@ -385,7 +385,7 @@ class SuperVisorController extends Controller
         Self::allow_logged_in_users_only();
         $data['page']   = 'Manage Team/Agent';
         $data['viewteam']   = TblTeamModel::get();
-        $data['viewagent']  = TblAgentModels::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+        $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
                              ->get();
         return view ('supervisor.pages.manage_user', $data); 
     }
@@ -398,7 +398,7 @@ class SuperVisorController extends Controller
     public function supervisor_delete_agent(Request $request)
     {   
 
-        TblAgentModels:: where ('agent_id',$request->delete_agent_id)->delete();
+        TblAgentModel:: where ('agent_id',$request->delete_agent_id)->delete();
         return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted</div>";
     }
     public function edit_team(Request $request)
@@ -418,7 +418,7 @@ class SuperVisorController extends Controller
     public function edit_agent(Request $request,$id)
     {
         $data['page']   = 'View User';
-        $data['_edit']=TblAgentModels::where('agent_id', $id)->first();
+        $data['_edit']=TblAgentModel::where('agent_id', $id)->first();
         $data['agent_list'] = TblTeamModel::get();
         return view('supervisor.pages.edit_agent', $data);
     }
@@ -469,7 +469,7 @@ class SuperVisorController extends Controller
         }
         else
         {
-            TblAgentModels::where('agent_id', $request->agent_id)->update($update);
+            TblAgentModel::where('agent_id', $request->agent_id)->update($update);
             return Redirect::to("/supervisor/view/user")->with('warning_agent','testing');
         }
 
