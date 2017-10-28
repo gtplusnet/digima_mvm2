@@ -17,7 +17,7 @@ use App\Models\TblInvoiceModels;
 use App\Models\TblCityModel;
 use App\Models\TblCountyModel;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentmodels;
+use App\Models\TblAgentModels;
 use App\Models\TblSupervisorModels;
 use App\Models\TblMembeshipModel;
 use App\Models\TblBusinessSubCategoryModel;
@@ -56,7 +56,8 @@ class GeneralAdminController extends Controller
       public function index()
 
     {
-        return view('general_admin.pages.general_admin_login');
+        $data['countyList'] = TblCountyModel::get();
+        return view('general_admin.pages.general_admin_login',$data);
     }
     public function general_admin_login_submit(Request $request)
     {
