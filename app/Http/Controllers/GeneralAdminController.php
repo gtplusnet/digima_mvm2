@@ -756,7 +756,7 @@ class GeneralAdminController extends Controller
   {
     $agent_id = $request->agent_id;
     $update['team_id'] = $request->team_id;
-    TblAgentmodels::where('agent_id',$agent_id)->update($update);
+    TblAgentModels::where('agent_id',$agent_id)->update($update);
     return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned Successfully!</div>";
   }
   public function general_admin_add_team(Request $request)
@@ -911,10 +911,8 @@ class GeneralAdminController extends Controller
     $data['primary_phone'] = $request->primary_phone;
     $data['secondary_phone'] = $request->secondary_phone;
     $data['other_info'] = $request->other_info;
-    TblAgentmodels::insert($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    TblAgentModels::insert($data);
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
   }
 
    public function edit_agent_submit(Request $request)
@@ -925,16 +923,14 @@ class GeneralAdminController extends Controller
      $data['primary_phone'] = $request->primary_phone;
      $data['secondary_phone'] = $request->secondary_phone;
      $data['other_info'] = $request->other_info;
-    TblAgentmodels::where('agent_id',$request->agent_id)->update($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    TblAgentModels::where('agent_id',$request->agent_id)->update($data);
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
    }
 
   public function general_admin_delete_agent(Request $request)
   {
       $agent_id = $request->delete_agent_id;
-      TblAgentmodels::where('agent_id',$agent_id)->delete();
+      TblAgentModels::where('agent_id',$agent_id)->delete();
       return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
   }
 
