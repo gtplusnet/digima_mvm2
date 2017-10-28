@@ -762,7 +762,7 @@ class GeneralAdminController extends Controller
   public function general_admin_add_team(Request $request)
   {  
     $data['team_name'] = $request->team_name;
-    $data['team_information'] = $request->team_information;
+    $data['team_information'] = $request->team_info;
     if($data['team_name']=='')
     {
         return "<div class='alert alert-danger'><strong>Please!</strong>Input Team Name.</div>";

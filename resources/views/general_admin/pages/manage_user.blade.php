@@ -224,7 +224,7 @@
 					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Add Agent</h4>
 				</div>
-				<div class="modal-body" style="margin-bottom: 600px;" >
+				<div class="modal-body" style="margin-bottom: 650px;" >
 					<div class="col-sm-12">
 						<div class="form-group col-md-3">
 							<label for="business_name" >Team</label>
@@ -353,7 +353,7 @@
                             <label for="business_name" >Team Description</label>
                         </div>
                         <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="team_info" id="team_des" style="width:100%"/>
+                            <input type="text" class="form-control" name="team_info" id="team_info" style="width:100%"/>
                         </div>
                     </div>
                     <div class="col-sm-12">
