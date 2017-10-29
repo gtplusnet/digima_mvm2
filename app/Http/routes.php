@@ -33,25 +33,19 @@ Route::any('/registration', 'FrontController@registration');
 Route::get('/get-city', 'FrontController@getCity');
 Route::get('/get-postal-code', 'FrontController@getPostalCode');
 Route::any('/register-business', 'FrontController@registerBusiness');
-
 Route::any('/business-search', 'FrontController@businessSearch');
 Route::any('/search-business-result', 'FrontController@businessSearchResult');
 Route::any('/business_info', 'FrontController@business_info');
-
-
 Route::get('/about', 'FrontController@about');
 Route::get('/contact', 'FrontController@contact');
 Route::any('/contact_send', 'FrontController@contact_send');
-
-
-
 Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
 Route::get('/redirect', 'FrontController@redirect_deactivated');
-
-
-Route::get('/business', 'FrontController@business');
+Route::get('/business/{id}', 'FrontController@business');
 Route::get('/business/details', 'FrontController@business_details');
+
+
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category', 'SearchresultController@category');

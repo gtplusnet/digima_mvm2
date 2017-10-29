@@ -57,8 +57,10 @@ class FrontController extends Controller
         Session::forget("business_address");
         Session::forget("city_state");
         Session::forget("zip_code");
-
-        $data["_business_list"] = TblBusinessModel::paginate(9);
+        // TblBusinessModel::where('business_status',5)
+        $data["_business_list"] = TblBusinessModel::  
+                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->paginate(9);
 
         return view('front.pages.home',$data);
     }
@@ -236,8 +238,8 @@ class FrontController extends Controller
         $data['countyID'] = $countyID = $request->countyId;
         $data['cityID'] = $cityID = $request->cityId;
         // $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
-        $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->get();
-        $data["_business_list"] = TblBusinessModel::paginate(9);
+        $data['_businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->paginate(6);
+        $data["_business_list"] = TblBusinessModel::get();
         $data['countyList'] = TblCountyModel::get();
         return view('front.pages.searchresult',$data); 
     }
@@ -249,7 +251,16 @@ class FrontController extends Controller
         $data['coordinates1'] = Self::getCoordinates_lat($address);
         return view('front.pages.business_details',$data); 
     }
-    function getCoordinates_long($address){
+    public function business(Request $request,$id)
+    {
+        $data['page']   = 'business';
+        $data['countyList'] = TblCountyModel::get();
+        $data['business_info'] = TblBusinessModel::where('tbl_business.business_id','=', $id)
+        ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
+        ->get();
+        return view('front.pages.business', $data);
+    }
+    public static function getCoordinates_long($address){
         $address = str_replace(" ", "+", $address); 
         $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
         $response = file_get_contents($url);
@@ -258,7 +269,7 @@ class FrontController extends Controller
         $long = $json['results'][0]['geometry']['location']['lng'];
         return $long;
     }
-    function getCoordinates_lat($address){
+    public static function getCoordinates_lat($address){
         $address = str_replace(" ", "+", $address); 
         $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
         $response = file_get_contents($url);
@@ -286,6 +297,7 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
+         $data['countyList'] = TblCountyModel::get();
         $data['business_info'] = DB::table('tbl_business')
         ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
         ->where('tbl_business.business_id', '=', $request->business_id)
@@ -332,15 +344,7 @@ class FrontController extends Controller
         }
     }
     
-    public function business(Request $request)
-    {
-        $data['page']   = 'business';
-         $data['business_info'] = DB::table('tbl_business')
-        ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
-        ->where('tbl_business.business_id', '=', $request->business_id)
-        ->get();
-        return view('front.pages.business', $data);
-    }
+    
     public function admin()
     {
         $data['page']   = 'generaladmin';
