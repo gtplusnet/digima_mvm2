@@ -7,9 +7,6 @@
 	</div>
 </div>
 <div class="container">
-	<div>
-	    <p class="searched-business">SEARCH RESULT FOR: <a class="search-link" href="">{{ $businessKeyword }}</a></p>
-	</div>
 	<div class="business-list-container">
 		<div class="container">
 			<div class="col-md-3">
@@ -57,6 +54,16 @@
 										</div>
 									</div>
 									@foreach($_business_list as $business_list)
+									<div class="item">
+										<div class="featured-details-container">
+											<div class="detail-picture-container side-list-img-width">
+												<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
+											</div>
+											<div class="detail-name-container">
+												<p class="detail-name-title">Name of Business</p>
+											</div>
+										</div>
+									</div>
 									<div class="item">
 										<div class="featured-details-container">
 											<div class="detail-picture-container side-list-img-width">
@@ -134,30 +141,41 @@
 				
 				<div class="col-md-12">
 					<div class="business-list-holder">
-						<p class="business-list-title">LOCAL FAVOURITES</p>
+						<p class="business-list-title">SEARCH RESULT FOR: <a class="search-link" href="">{{ $businessKeyword }}</a></p>
 					</div>
 					<div class="business-list-content">
-						@foreach($_business_list as $business_list)
-						<div class="col-md-4 per-business">
-							<div class="business-img-holder">
+						@foreach($_businessResult as $businessResult)
+						<div class="">
+						<div class="col-md-3 per-business" >
+							<div class="business-img-holder" style="margin-bottom: 10px;">
 								<img src="/images/walmart_pic.jpg">
 							</div>
+							<div class="social-media-icon">
+								<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fdigimawebsolution&width=63&layout=button&action=like&size=large&show_faces=false&share=false&height=65&appId=275633406278448" width="82" height="40" title="Twitter Tweet Button" style="padding-right:10px;border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+								<iframe src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url=https%3A%2F%2Fmvm.digimahouse.com/&via=iAmJames_35836&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="80" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+								{{-- <button class="btn btn-default">Facebook</button><button class="btn btn-default">Twitter</button> --}}
+							</div>
+							
+						</div>
+						<div class="col-md-3 per-business">
+							
 							<div class="business-info-holder">
 								<div class="business-list-details">
-									<div class="business-list-name">Inasal</div>
+									<div class="business-list-name"><a href="/business/{{$businessResult->business_id}}" style=""> {{$businessResult->business_name}}</a></div>
 									<div class="business-list-phone">
-										<p class="phone-text"><i class="fa fa-phone phone"></i> +6394587</p>
+										<p class="phone-text"><i class="fa fa-phone phone"></i>{{$businessResult->business_phone}}</p>
 									</div>
 									<div class="business-list-map">
-										<p class="map-text"><i class="fa fa-map-marker map" ></i> Marawi City</p>
+										<p class="map-text"><i class="fa fa-map-marker map" ></i>{{$businessResult->business_complete_address}}</p>
 									</div>
 								</div>
 							</div>
-							<div class="social-media-icon">
-								<button class="btn btn-default">Facebook</button><button class="btn btn-default">Twitter</button>
-							</div>
+							
 						</div>
+					    </div>
 						@endforeach
+						{{-- <div class="col-md-4">
+						</div> --}}
 						
 						{{-- <div class="pagination">
 							<a class="active" href="#">1</a>
@@ -168,8 +186,8 @@
 							<a href="#">6</a>
 							<a href="#" class="pagination-next-btn">NEXT</a>
 						</div> --}}
-						<div class="pagination">
-							{!! $_business_list->render() !!}
+						<div class="col-md-12 pagination">
+							{!! $_businessResult->render() !!}
 						</div>
 					</div>
 				</div>
