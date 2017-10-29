@@ -286,6 +286,7 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
+         $data['countyList'] = TblCountyModel::get();
         $data['business_info'] = DB::table('tbl_business')
         ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
         ->where('tbl_business.business_id', '=', $request->business_id)
@@ -335,6 +336,7 @@ class FrontController extends Controller
     public function business(Request $request)
     {
         $data['page']   = 'business';
+        $data['countyList'] = TblCountyModel::get();
          $data['business_info'] = DB::table('tbl_business')
         ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
         ->where('tbl_business.business_id', '=', $request->business_id)
