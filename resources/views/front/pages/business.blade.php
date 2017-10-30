@@ -1,7 +1,7 @@
 @extends('front.layout.layout')
 @section('title', 'Business Info')
 @section('content')
-@foreach($business_info as $business_info)
+
 <div class="banner-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.jpg')">
     <div class="container">
         <div class="pull-left">
@@ -85,13 +85,13 @@
             </div><!-- MAIN PIC -->
             <div class="secondary-pics-container">
                 <a href="/images/arabian_nights_pic01.png" data-lightbox="roadtrip">
-                    <img class="secondary-pics" src="images/arabian_nights_pic01.png">
+                    <img class="secondary-pics" src="/images/arabian_nights_pic01.png">
                 </a>
                 <a href="/images/arabian_nights_pic02.png" data-lightbox="roadtrip">
-                    <img class="secondary-pics" src="images/arabian_nights_pic02.png">
+                    <img class="secondary-pics" src="/images/arabian_nights_pic02.png">
                 </a>
                 <a href="/images/arabian_nights_pic03.png" data-lightbox="roadtrip">
-                    <img class="secondary-pics-last" src="images/arabian_nights_pic03.png">
+                    <img class="secondary-pics-last" src="/images/arabian_nights_pic03.png">
                 </a>
             </div>
             <!-- LIGHTBOX SCRIPT -->
@@ -114,6 +114,7 @@
                     <p class="overview-title">CATEGORY/KEYWORDS</p>
                 </div>
                 <div class="category-content">
+                    <a href="skype:echo123?call">Call the Skype Echo / Sound Test Service</a>
                     <p class="overview-content-text">
                         Cruises
                     <br>Travel & Tourism
@@ -132,7 +133,7 @@
             <div id="business-map"></div>
             <script>
                 function initMap() {
-                    var uluru = {lat: 40.779962, lng: -73.980304};
+                    var uluru = {lat: {{$coordinates1}}, lng: {{$coordinates}}};
                     // var uluru = {lat: -25.363, lng: 131.044};
                     var map = new google.maps.Map(document.getElementById('business-map'), {
                       zoom: 17,
@@ -201,7 +202,7 @@
                         <a href=""><i class="fa fa-twitter businesspage-twitter-icon"></i><p class="twitter-tweet">Tweet</p></a>
                     </div>
                     <div class="links-holder">
-                        <a href=""><i class="fa fa-skype business-skype-icon"></i><p class="go-skype">Skype</p></a>
+                        <a href="skype:Echo123"><i class="fa fa-skype business-skype-icon"></i><p class="go-skype">Skype</p></a>
                         <button class="btn-sendemail" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-paper-plane business-sendemail-icon"></i>
                             <p class="send-mail">Send Email</p>
@@ -320,5 +321,5 @@
     </div>
     
 </div>
-@endforeach
+
 @endsection
