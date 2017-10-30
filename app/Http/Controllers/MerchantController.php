@@ -84,7 +84,7 @@ class MerchantController extends Controller
                                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                                           ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                         ->first();
+                                          ->first();
                                           // dd($user_info);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     Session::put("email",$user_info->user_email);

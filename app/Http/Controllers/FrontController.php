@@ -255,23 +255,31 @@ class FrontController extends Controller
     {
         $data['page']   = 'business';
         $data['countyList'] = TblCountyModel::get();
-        $data['business_info'] = TblBusinessModel::where('tbl_business.business_id','=', $id)
-        ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
-        ->get();
+        
+        $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->first();
+        $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
+        // dd($address);
+        $data['coordinates']  = Self::getCoordinates_long($address);
+        $data['coordinates1'] = Self::getCoordinates_lat($address);       
         return view('front.pages.business', $data);
     }
     public static function getCoordinates_long($address){
         $address = str_replace(" ", "+", $address); 
-        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
         $response = file_get_contents($url);
         $json = json_decode($response,TRUE); 
-        $lat = $json['results'][0]['geometry']['location']['lat'];
         $long = $json['results'][0]['geometry']['location']['lng'];
         return $long;
     }
     public static function getCoordinates_lat($address){
         $address = str_replace(" ", "+", $address); 
-        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
         $response = file_get_contents($url);
         $json = json_decode($response,TRUE); 
         $lat = $json['results'][0]['geometry']['location']['lat'];
