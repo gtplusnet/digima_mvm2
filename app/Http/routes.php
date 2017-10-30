@@ -27,8 +27,6 @@ Route::get('sendattachmentemail','MailController@attachment_email');
 
 
 Route::get('/', 'FrontController@index');
-
-
 Route::any('/registration', 'FrontController@registration');
 Route::get('/get-city', 'FrontController@getCity');
 Route::get('/get-postal-code', 'FrontController@getPostalCode');
@@ -44,7 +42,7 @@ Route::get('/register', 'FrontController@register');
 Route::get('/redirect', 'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 'FrontController@business');
 Route::get('/business/details', 'FrontController@business_details');
-
+Route::get('/forgot/password', 'FrontController@forgot_password');
 
 
 Route::get('/searchresult', 'SearchresultController@index');
@@ -56,7 +54,15 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 
+//james
+Route::get('/merchant/logout', 'MerchantController@logout');
+Route::get('/login', 'MerchantController@login');
+Route::post('/login', 'MerchantController@login_submit');
 
+Route::get('/merchant/payment',	'MerchantController@payment');
+Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
+Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
+Route::get('/merchant/payment/{id}/{name}', 		'MerchantController@payment_merchant');
 
 /*Merchant Page by Brain*/
 Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
@@ -74,14 +80,7 @@ Route::get('/merchant/messages', 	'MerchantController@messages');
 Route::any('/merchant/add_messages', 'MerchantController@add_messages');
 Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');
 Route::get('/merchant/bills', 		'MerchantController@bills');
-//james
-Route::get('/merchant/logout', 'MerchantController@logout');
-Route::get('/login', 'MerchantController@login');
-Route::post('/login', 'MerchantController@login_submit');
-Route::get('/merchant/payment',	'MerchantController@payment');
-Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
-Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
-Route::get('/merchant/payment/{id}/{name}', 		'MerchantController@payment_merchant');
+
 
 //Eden
 

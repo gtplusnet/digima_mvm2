@@ -1,7 +1,7 @@
 @extends('front.layout.layout')
 @section('title', 'Search Result')
 @section('content')
-<div class="banner-searchresult" style="background-image: url('/images/banner_registration.jpg')">
+<div class="banner-searchresult" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		
 	</div>

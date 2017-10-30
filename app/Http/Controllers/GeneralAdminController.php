@@ -600,7 +600,7 @@ class GeneralAdminController extends Controller
     public function general_admin_manage_categories()
     {
 
-      $data['category'] = TblBusinessCategoryModel::paginate(10);
+      $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->paginate(10);
 
       return view('general_admin.pages.manage_categories',$data);
     }
@@ -608,6 +608,7 @@ class GeneralAdminController extends Controller
     {
       $data['business_category_name'] = $request->cat_name;
       $data['business_category_information'] = $request->cat_info;
+      $data['parent_id'] = 0;
       TblBusinessCategoryModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Category Added.</div>";
     }
@@ -634,16 +635,16 @@ class GeneralAdminController extends Controller
     public function general_admin_get_sub_category(Request $request)
     {
       $business_category_id = $request->cat_id;
-      $data['_sub_category'] = TblBusinessSubCategoryModel::where('business_category_id',$business_category_id)->get();
+      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$business_category_id)->get();
       return view('general_admin.pages.get_sub_category',$data);
     }
 
     public function general_admin_add_sub_category(Request $request)
     {
-      $ins['sub_category_name'] = $request->cat_name;
-      $ins['sub_category_info'] = $request->cat_info;
-      $ins['business_category_id'] = $request->cat_id;
-      $check = TblBusinessSubCategoryModel::insert($ins);
+      $ins['business_category_name'] = $request->cat_name;
+      $ins['business_category_information'] = $request->cat_info;
+      $ins['parent_id'] = $request->cat_id;
+      $check = TblBusinessCategoryModel::insert($ins);
       if($check)
       {
         return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
@@ -655,13 +656,14 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_edit_sub_category(Request $request)
     {
-      $ins['sub_category_name'] = $request->cat_name;
-      $ins['sub_category_info'] = $request->cat_info;
-      $sub_category_id = $request->cat_id;
-      $check = TblBusinessSubCategoryModel::where('sub_category_id',$sub_category_id)->update($ins);
+      $ins['business_category_name'] = $request->cat_name;
+      $ins['business_category_information'] = $request->cat_info;
+      $category_id = $request->cat_id;
+      // dd($category_id);
+      $check = TblBusinessCategoryModel::where('business_category_id',$category_id)->update($ins);
       if($check)
       {
-        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br>";
+        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Updated.</div><br>";
       }
       else
       {
@@ -671,15 +673,15 @@ class GeneralAdminController extends Controller
     public function general_admin_get_sub_sub_category(Request $request)
     {
       $sub_category_id = $request->cat_id;
-      $data['_sub_category'] = TblBusinessSubSubCategoryModel::where('sub_category_id',$sub_category_id)->get();
+      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$sub_category_id)->get();
       return view('general_admin.pages.get_sub_sub_category',$data);
     }
     public function general_admin_add_sub_sub_category(Request $request)
     {
-      $ins['sub_sub_category_name'] = $request->cat_name;
-      $ins['sub_sub_category_info'] = $request->cat_info;
-      $ins['sub_category_id'] = $request->cat_id;
-      $check = TblBusinessSubSubCategoryModel::insert($ins);
+      $ins['business_category_name'] = $request->cat_name;
+      $ins['business_category_information'] = $request->cat_info;
+      $ins['parent_id'] = $request->cat_id;
+      $check = TblBusinessCategoryModel::insert($ins);
       if($check)
       {
         return "<div class='alert alert-success'><strong>Success!</strong>Sub Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
