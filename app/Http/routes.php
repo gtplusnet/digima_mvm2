@@ -137,7 +137,7 @@ Route::any('/merchant/sample', 'MerchantController@sample');
 
 
 
-Route::get('/supervisor', 				'SupervisorController@index');
+Route::any('/supervisor', 				'SupervisorController@index');
 Route::post('/supervisor_login_submit', 	'SupervisorController@supervisor_login_submit');
 Route::any('/supervisor_logout', 	'SupervisorController@supervisor_logout');
 

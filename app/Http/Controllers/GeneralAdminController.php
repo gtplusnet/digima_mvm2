@@ -48,7 +48,7 @@ class GeneralAdminController extends Controller
     {
         if(session("general_admin_login") == true)
         {
-            return Redirect::to("/general_admin/dashboard'")->send();
+            return Redirect::to("/general_admin/dashboard")->send();
         }
     }
 

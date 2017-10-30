@@ -27,18 +27,16 @@ class SupervisorController extends Controller
     }
     public static function allow_logged_out_users_only()
     {
-        if(session("supervisor_login") == true)
+        if(session("supervisor_login"))
         {
             return Redirect::to("/supervisor/dashboard")->send();
         }
     }
-
-
-	  public function index()
+    public function index()
     {
         Self::allow_logged_out_users_only();
         $data['page'] = 'Supervisor Login';
-        $data['countyList'] = TblCountyModel::get();
+        // $data['countyList'] = TblCountyModel::get();
         return view ('supervisor.pages.supervisor_login', $data);
     }
     public function supervisor_logout()
@@ -174,23 +172,23 @@ class SupervisorController extends Controller
         return "<div class='alert alert-success'><strong>Success!</strong>Team Added.</div>";
 
     }
-  public function add_team()
-    {
-        Self::allow_logged_in_users_only();
-		$data['county_list'] = TblCountyModel::get();
-		$data['page']	= 'Add User';
-        $data['team_list'] = TblTeamModel::get();
+ //  public function add_team()
+ //    {
+ //        Self::allow_logged_in_users_only();
+	// 	$data['county_list'] = TblCountyModel::get();
+	// 	$data['page']	= 'Add User';
+ //        $data['team_list'] = TblTeamModel::get();
 
-		return view ('supervisor.pages.add_user', $data);
-	}
-	public function add_agent()
-	{
-    Self::allow_logged_in_users_only();
-		$data['county_list'] = TblCountyModel::get();
-		$data['team_list'] = TblTeamModel::get();
-		$data['page']	= 'Add Agent';
-		return view ('supervisor.pages.add_user', $data);	
-  }
+	// 	return view ('supervisor.pages.add_user', $data);
+	// }
+	// public function add_agent()
+	// {
+ //    Self::allow_logged_in_users_only();
+	// 	$data['county_list'] = TblCountyModel::get();
+	// 	$data['team_list'] = TblTeamModel::get();
+	// 	$data['page']	= 'Add Agent';
+	// 	return view ('supervisor.pages.add_user', $data);	
+ //  }
   public function get_agent_info()
   {
       $data['james'] = 'james';
@@ -204,25 +202,25 @@ class SupervisorController extends Controller
       return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
 
   }	
-	public function get_city(Request $request)
-  {
-      $county_id = $request->county_id;
-      $city_list = TblCityModel::where('county_id','=',$county_id)->get();
-      $county_name = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
-      $city_dropdown_output = '';
-      $city_dropdown_output .= '<option value="--Select City--">--Select City for '.$county_name->county_name.'--</option>';
-      foreach($city_list as $city_list)
-      {
-          $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
-      }
-      return $city_dropdown_output;
-  }
-  public function get_zip_code(Request $request)
-  {
-      $city_id = $request->city_id;
-      $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
-      return $postal_code->postal_code;
-  }
+	// public function get_city(Request $request)
+ //  {
+ //      $county_id = $request->county_id;
+ //      $city_list = TblCityModel::where('county_id','=',$county_id)->get();
+ //      $county_name = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
+ //      $city_dropdown_output = '';
+ //      $city_dropdown_output .= '<option value="--Select City--">--Select City for '.$county_name->county_name.'--</option>';
+ //      foreach($city_list as $city_list)
+ //      {
+ //          $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
+ //      }
+ //      return $city_dropdown_output;
+ //  }
+ //  public function get_zip_code(Request $request)
+ //  {
+ //      $city_id = $request->city_id;
+ //      $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
+ //      return $postal_code->postal_code;
+ //  }
 	public function dashboard()
   {
       Self::allow_logged_in_users_only();
@@ -278,34 +276,7 @@ class SupervisorController extends Controller
   	  return view ('supervisor.pages.dashboard', $data);	
   }
 
-	public function add_team_submit(Request $request)
-	{
-		$ins['team_name'] = $request->team_name;
-		$ins['team_information'] = $request->team_information;
-
-        $rules['team_name'] = 'required';
-        $rules['team_information'] = 'required';
-		
-
-        $validator = validator::make($ins, $rules);
-
-        $return_message = '';
-        if($validator->fails())
-        {
-            foreach ($validator->messages()->all('<li style=`list-style:none`>:message</li>')as $keys => $message)
-            {
-                $return_message .= $message;
-            }
-
-            return Redirect::to('/supervisor/add/user')->with('error_team', $return_message);
-        }
-        else
-        {
-            TblTeamModel::insert($ins);
-            return Redirect::to('/supervisor/add/user')->with('warning_team', 'testing');
-        }
-
-	}
+	
     // supervisor_add_agent
 	public function supervisor_add_agent(Request $request)
 	{ 
@@ -406,17 +377,6 @@ class SupervisorController extends Controller
   }
   public function update_agent(Request $request)
   {
-      /*$data['page']   = 'View User';
-      $update["full_name"] = $request->prefix." ".$request->first_name." ".$request->last_name;
-      $update["password"] = $request->password;
-      $update["email"] = $request->email;
-      $update["team_id"] = $request->team_id;
-      $update["primary_phone"] = $request->primary_phone;
-      $update["secondary_phone"] = $request->secondary_phone;
-      $update["other_info"] = $request->other_info;
-      TblAgentModels::where('agent_id', $request->agent_id)->update($update);
-     return Redirect::to("/supervisor/view/user")->with('warning_agent','testing');*/
-
       $ins['prefix'] = $request->prefix;
       $ins['first_name'] = $request->first_name;
       $ins['last_name'] = $request->last_name;
@@ -494,43 +454,6 @@ class SupervisorController extends Controller
           return "<div class='alert alert-success'><strong>Success!</strong>Procedure OverRide!</div>";
       }
   }
-/*
-    public function add_agent()
-	{
-		$data['page']	= 'Team';
-        $insert["team_id"] = Request::input("team_id"); 
-        $insert["agent_fname"] = Request::input("agent_fname"); 
-        $insert["agent_lname"] = Request::input("agent_lname"); 
-        $insert["agent_username"] = Request::input("agent_username"); 
-        $insert["agent_password"] = Request::input("agent_password");
 
-        $agent_confirm_password = Request::input("agent_confirm_password");
-        if ($insert["agent_password"] == $agent_confirm_password)
-        {
-            TblAgentModel::insert($insert);
-            Session::forget('agent');
-            Redirect::to('/admin/view_team')->send();
-        }
-        else
-        {
-            Session::put('agent','agent');
-            return  Redirect::to('/admin/team')->with('error', 'Password not match.');
-	    }
-    }
-    public function delete_agent($id)
-    {
-        TblAgentModel:: where ('agent_id',$id)->delete();
-        Redirect::to("/admin/view_team")->send();
-    }
-	
-    public function view_agent()
-	{
-		$data['page']	= 'View Agent';
-		$data['viewagent']	= TblAgentModel::get();
-		return view ('admin.pages.view_team', $data);	
-	}
-    
-
-*/
 
 }
