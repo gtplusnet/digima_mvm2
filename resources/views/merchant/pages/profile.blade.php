@@ -148,28 +148,26 @@
                            <div>
                               <label for="input-Default" class="col-sm-2 control-label">Business Banner:</label>
                               <input type="file" id="myFile" name="business_banners">
-                              <a href="{{$images->business_banner}}" target="blank">VIEW</a>  
+                              <a href="{{$images->business_banner}}" target="blank">VIEW IMAGE</a>  
                               <br><br>
                            </div>
                            <div>
                               <label for="input-Default" class="col-sm-2 control-label">Other Images 1:</label>
                               <input type="file" id="myFile" name="other_image_one">
-                              <a href="{{$images->other_image_one}}"  target="blank">VIEW</a>
+                              <a href="{{$images->other_image_one}}"  target="blank">VIEW IMAGE</a>
                               <br><br>
                            </div>
                            <div>
                               <label for="input-Default" class="col-sm-2 control-label">Other Images 2:</label>
                               <input type="file" id="myFile" name="other_image_two">
-                              <a href="{{$images->other_image_two}}"  target="blank">VIEW</a>
+                              <a href="{{$images->other_image_two}}"  target="blank">VIEW IMAGE</a>
                               <br><br>
                            </div>
                            
                            <div>
                               <label for="input-Default" class="col-sm-2 control-label">Other Images 3:</label>
                               <input type="file" id="myFile" name="other_image_three">
-                              <a href="{{$images->other_image_three}}"  target="blank">
-                              VIEW
-                              </a>
+                              <a href="{{$images->other_image_three}}"  target="blank">VIEW IMAGE</a>
                               <br><br>
                            </div>
                            @endforeach
