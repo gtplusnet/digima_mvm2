@@ -1,6 +1,8 @@
 @extends('front.layout.layout')
 @section('title', 'Contact Us')
 @section('content')
+
+
 <div class="banner-contact" style="background-image: url('/images/banner_registration.jpg')">
 	<div class="container">
 		<div class="pull-left">
@@ -20,7 +22,7 @@
             </div>
            @endif
 		<div class="contact-title-container">
-			<p class="contact-title">MESSAGE US</p>
+			<p class="contact-title">Support and Contact Inquery</p>
 		</div>
 		<div>
 			<form role="form" action="/contact_send" method="post">
@@ -53,28 +55,7 @@
 	</div>
 	<div class="col-md-6 contact-container-right">
 		<div class="contact-title-container">
-			<p class="contact-title">OUR HQ</p>
-		</div>
-		<div class="map-container">
-			<!-- <img src="/images/example_googlemap.jpg" class="google-map"> -->
-				<div id="map"></div>
-			    <script>
-			      function initMap() {
-			      	var uluru = {lat: 45.1000, lng: 15.2000};
-			        // var uluru = {lat: -25.363, lng: 131.044};
-			        var map = new google.maps.Map(document.getElementById('map'), {
-			          zoom: 4,
-			          center: uluru
-			        });
-			        var marker = new google.maps.Marker({
-			          position: uluru,
-			          map: map
-			        });
-			      }
-			    </script>
-		</div>
-		<div class="contact-title-container">
-			<p class="contact-title">DETAILS</p>
+			<p class="contact-title">Address and Contact Info</p>
 		</div>
 		<div class="contact-details">
 			<div class="details-info-holder">
@@ -101,7 +82,28 @@
 					<p class="details-info">email@gmail.com</p>
 				</div>
 			</div>
+			<div class="map-container">
+			<!-- <img src="/images/example_googlemap.jpg" class="google-map"> -->
+				<div id="map"></div>
+			    <script>
+			      function initMap() {
+			      	var uluru = {lat: 45.1000, lng: 15.2000};
+			        // var uluru = {lat: -25.363, lng: 131.044};
+			        var map = new google.maps.Map(document.getElementById('map'), {
+			          zoom: 4,
+			          center: uluru
+			        });
+			        var marker = new google.maps.Marker({
+			          position: uluru,
+			          map: map
+			        });
+			      }
+			    </script>
+		    </div>
 		</div>
+		
+		
+		
 	</div>
 </div>
 @endsection

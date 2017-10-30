@@ -17,7 +17,7 @@ use App\Models\TblInvoiceModels;
 use App\Models\TblCityModel;
 use App\Models\TblCountyModel;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentmodels;
+use App\Models\TblAgentModel;
 use App\Models\TblSupervisorModels;
 use App\Models\TblMembeshipModel;
 use App\Models\TblBusinessSubCategoryModel;
@@ -48,7 +48,7 @@ class GeneralAdminController extends Controller
     {
         if(session("general_admin_login") == true)
         {
-            return Redirect::to("/general_admin/dashboard'")->send();
+            return Redirect::to("/general_admin/dashboard")->send();
         }
     }
 
@@ -56,7 +56,9 @@ class GeneralAdminController extends Controller
       public function index()
 
     {
-        return view('general_admin.pages.general_admin_login');
+        $data['countyList'] = TblCountyModel::get();
+        return view('general_admin.pages.general_admin_login',$data);
+
     }
     public function general_admin_login_submit(Request $request)
     {
@@ -111,7 +113,7 @@ class GeneralAdminController extends Controller
     {
          Self::allow_logged_in_users_only();
          $count_merchant = TblUserAccountModel::get();
-         $count_agent = TblAgentModels::get();
+         $count_agent = TblAgentModel::get();
          $count_supervisor = TblSupervisorModels::get();
          $count_admin = TblAdminModels::get();
          $data['resultCountM'] = $resM = $count_merchant->count();
@@ -127,16 +129,38 @@ class GeneralAdminController extends Controller
          $count_merchant_supervisor = TblBusinessModel::where('business_status',2)->get();
          $count_merchant_admin = TblBusinessModel::where('business_status',3)->get();
          $count_merchant_admin_payment = TblBusinessModel::where('business_status',4)->get();
-         $count_merchant_admin_activated = TblBusinessModel::where('business_status',2)->get();
-         $data['countAgent'] = $count_merchant_agent->count();
-         $data['countSupervisor'] = $count_merchant_supervisor->count();
-         $data['countAdmin'] = $count_merchant_admin->count();
-         $data['countAdminP'] = $count_merchant_admin_payment->count();
-         $data['countAdminA'] = $count_merchant_admin_activated->count();
+         $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
+         $data['countCall'] = $count_merchant_agent->count();
+         $data['countMP3'] = $count_merchant_supervisor->count();
+         $data['countInvoice'] = $count_merchant_admin->count();
+         $data['countPayment'] = $count_merchant_admin_payment->count();
+         $data['countActivated'] = $count_merchant_admin_activated->count();
+         $data['count_jan']  = TblBusinessModel::whereMONTH('date_created', '=', 01 )->count();
+         $data['count_feb']  = TblBusinessModel::whereMONTH('date_created', '=', 02 )->count();
+         $data['count_mar']  = TblBusinessModel::whereMONTH('date_created', '=', 03 )->count();
+         $data['count_apr']  = TblBusinessModel::whereMONTH('date_created', '=', 04 )->count();
+         $data['count_may']  = TblBusinessModel::whereMONTH('date_created', '=', 05 )->count();
+         $data['count_jun']  = TblBusinessModel::whereMONTH('date_created', '=', 06 )->count();
+         $data['count_jul']  = TblBusinessModel::whereMONTH('date_created', '=', 07 )->count();
+         $data['count_aug']  = TblBusinessModel::whereMONTH('date_created', '=', '08' )->count();
+         $data['count_sep']  = TblBusinessModel::whereMONTH('date_created', '=', '09' )->count();
+         $data['count_oct']  = TblBusinessModel::whereMONTH('date_created', '=', '10' )->count();
+         $data['count_nov']  = TblBusinessModel::whereMONTH('date_created', '=', 11 )->count();
+         $data['count_dec']  = TblBusinessModel::whereMONTH('date_created', '=', 12 )->count();
 
-
-         // dd($data);
-
+         $data['counts_jan']  = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->count();
+         $data['counts_feb']  = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->count();
+         $data['counts_mar']  = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->count();
+         $data['counts_apr']  = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->count();
+         $data['counts_may']  = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->count();
+         $data['counts_jun']  = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->count();
+         $data['counts_jul']  = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->count();
+         $data['counts_aug']  = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->count();
+         $data['counts_sep']  = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->count();
+         $data['counts_oct']  = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->count();
+         $data['counts_nov']  = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->count();
+         $data['counts_dec']  = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->count();
+        
         return view('general_admin.pages.dashboard',$data);
     }
 
@@ -176,6 +200,8 @@ class GeneralAdminController extends Controller
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
         $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
@@ -232,7 +258,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
-                                ->first();
+                          ->first();
             $format["title"] = "james";
             $format["format"] = "A4";
             $format["default_font"] = "sans-serif";
@@ -362,27 +388,29 @@ class GeneralAdminController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->orderBy('tbl_business.date_created',"asc")
+                          ->orderBy('tbl_invoice.invoice_id',"asc")
                           ->get();
           return view('general_admin.pages.manage_invoice',$data);
     }
     public function general_admin_resend_invoice(Request $request)
     {
-        
         $email = $request->resend_email;
+        $contact_name = $request->resend_contact_name;
         $remarks = $request->remarks;
+        $business_id = $request->resend_business_id;
+        $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
         $invoice_name = $request->invoice_name_resend;
-        $data = array('name'=>"croatia");
+        $data = array('name'=>$contact_name,'remarks'=>$remarks,'date'=>$date,'email'=>$email,'business_id'=>$business_id);
                 $pathfile='invoice/'.$invoice_name;
-                $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($pathfile) {
-                   $message->to('guardians35836@gmail.com', 'Croatia Directory')->subject
+                $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile) {
+                   $message->to($data['email'], 'Croatia Directory')->subject
                       ('Your Croatia Directory Invoice');
                    $message->attach(public_path($pathfile));
                    $message->from('guardians35836@gmail.com','Croatia Directory');
                 });
                   if($mail_send)
                   {
-                     return "<div class='alert alert-success'><strong>Success!</strong>Invoice Send.</div>";
+                     return "<div class='alert alert-success'><strong>Success!</strong>Invoice Send.</div><br><center><button type='button' class='btn btn-default' onClick='window.location.reload();'' data-dismiss='modal'>Close</button></center>";
                   }
                   else
                   {
@@ -472,7 +500,7 @@ class GeneralAdminController extends Controller
     public function business_data($business_name)
     {
         $business_list = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', 'tbl_user_account.business_id')->orWhere('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
-
+       
         return $business_list;
     }
 
@@ -485,7 +513,7 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent'] = TblAgentmodels::get();
+      $data['_data_agent'] = TblAgentModel::get();
       $data['_data_team'] = TblTeamModel::get();
       $data['_data_supervisor'] = TblSupervisorModels::get();
       $data['_data_admin'] = TblAdminModels::get();
@@ -497,7 +525,9 @@ class GeneralAdminController extends Controller
     {
       $data['_membership'] = TblMembeshipModel::get();
       $data['_county'] = TblCountyModel::get();
-      $data['_city'] = TblCityModel::get();
+      $data['_city'] = TblCityModel::
+                       join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+                       ->get();
       return view('general_admin.pages.manage_website',$data);
     }
     public function general_admin_add_membership(Request $request)
@@ -507,6 +537,14 @@ class GeneralAdminController extends Controller
       TblMembeshipModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Added.</div>"; 
     }
+    public function general_admin_update_membership(Request $request)
+    {
+      $mem_id = $request->mem_id;
+      $mem['membership_name'] = $request->mem_name;
+      $mem['membership_price'] = $request->mem_id;
+      TblMembeshipModel::where('membership_id',$mem_id)->update($mem);
+      return "<div class='alert alert-success'><strong>Success!</strong>Membership updated.</div>";
+    }
     public function general_admin_delete_membership(Request $request)
     {
       $membership_id = $request->delete_id;
@@ -514,12 +552,28 @@ class GeneralAdminController extends Controller
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Deleted.</div>";
       
     }
+    public function general_admin_update_county(Request $request)
+    {
+      $count_id = $request->count_id;
+      $data['county_name']= $request->count_name;
+      TblCountyModel::where('county_id',$count_id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>County Updated.</div>"; 
+    
+    }
     public function general_admin_delete_county(Request $request)
     {
       $county_id = $request->delete_id;
       TblCountyModel::where('county_id',$county_id)->delete();
       return "<div class='alert alert-success'><strong>Success!</strong>County Deleted.</div>";
       
+    }
+    public function general_admin_update_city(Request $request)
+    {
+      $data_id= $request->city_id;
+      $data['city_name']= $request->city_name;
+      $data['postal_code']= $request->city_zip;
+      TblCityModel::where('city_id',$data_id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>City Updated.</div>"; 
     }
     public function general_admin_delete_city(Request $request)
     {
@@ -665,6 +719,7 @@ class GeneralAdminController extends Controller
     $ins['date_created'] = date("Y/m/d");
     $ins['agent_call'] = '0';
     $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+    dd($ins);
         if($ins['password']=='')
         {
             return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
@@ -688,7 +743,8 @@ class GeneralAdminController extends Controller
         
         else
         {
-            $check_insert = TblAgentmodels::insert($ins);
+            $check_insert = TblAgentModel::insert($ins);
+            echo "james";
             if($check_insert)
             {
               return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
@@ -699,10 +755,17 @@ class GeneralAdminController extends Controller
             }
         }
   }
+  public function general_admin_assign_agent(Request $request)
+  {
+    $agent_id = $request->agent_id;
+    $update['team_id'] = $request->team_id;
+    TblAgentModel::where('agent_id',$agent_id)->update($update);
+    return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned Successfully!</div>";
+  }
   public function general_admin_add_team(Request $request)
   {  
     $data['team_name'] = $request->team_name;
-    $data['team_information'] = $request->team_information;
+    $data['team_information'] = $request->team_info;
     if($data['team_name']=='')
     {
         return "<div class='alert alert-danger'><strong>Please!</strong>Input Team Name.</div>";
@@ -851,10 +914,8 @@ class GeneralAdminController extends Controller
     $data['primary_phone'] = $request->primary_phone;
     $data['secondary_phone'] = $request->secondary_phone;
     $data['other_info'] = $request->other_info;
-    TblAgentmodels::insert($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    TblAgentModel::insert($data);
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
   }
 
    public function edit_agent_submit(Request $request)
@@ -865,16 +926,14 @@ class GeneralAdminController extends Controller
      $data['primary_phone'] = $request->primary_phone;
      $data['secondary_phone'] = $request->secondary_phone;
      $data['other_info'] = $request->other_info;
-    TblAgentmodels::where('agent_id',$request->agent_id)->update($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    TblAgentModel::where('agent_id',$request->agent_id)->update($data);
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
    }
 
   public function general_admin_delete_agent(Request $request)
   {
       $agent_id = $request->delete_agent_id;
-      TblAgentmodels::where('agent_id',$agent_id)->delete();
+      TblAgentModel::where('agent_id',$agent_id)->delete();
       return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
   }
 

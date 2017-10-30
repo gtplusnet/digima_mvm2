@@ -18,6 +18,7 @@ function manage_user()
 			add_team();
 			add_supervisor();
 			add_admin();
+			assigned_agent();
 			action_box();
 		});
 	}
@@ -236,6 +237,27 @@ function manage_user()
 	    });
 	    //end delete
 
+	}
+	function assigned_agent()
+	{
+	    $('#agentAssigned').click(function(){
+	    	alert();
+		var agent_id = $('#agent_id_assign').val();
+		var team_id= $('#teamAssigned').val();
+		$.ajax({
+			type:'POST',
+			url:'/general_admin/manage_user/assign_agent',
+			data:{
+				agent_id: agent_id,
+				team_id: team_id,
+				
+			     },
+			dataType:'text',
+
+		}).done(function(data){
+			    $('#assign_success').html(data);
+			});
+	    });
 	}
 
 	

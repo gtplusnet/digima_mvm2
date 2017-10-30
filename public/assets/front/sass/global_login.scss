@@ -1,4 +1,4 @@
-.header-nav
+.headers-nav
 {
 	// padding: 3px 0px 3px 0px;
 	background-color:#3d516d;
@@ -113,9 +113,88 @@
 	}
 }
 
-.footer-upper
+.login-form-holders
 {
-	background-color: #121212;
+	margin-top:100px;
+	margin-bottom:100px;
+	.login-forms
+	{
+		.login-forms-background
+		{
+			background-size: cover;
+		    background-position: center;
+		    position: relative;
+		    max-width: 304.16px;
+		    min-height: 10px;
+		    border-top-left-radius: 15px;
+		    border-bottom-left-radius: 15px;
+		    padding-bottom:25px;
+		    .welcome-container
+		    {
+		    	background-color: rgba(133,133,133,0.64);
+			    padding-top: 10px;
+			    padding-left: 15px;
+			    padding-right: 15px;
+			    padding-bottom: 15px;
+			    margin-top: 85px;
+			    margin-bottom: 30px;
+			    .text-holder
+			    {
+			    	margin-top: 10px;
+    				margin-bottom: 10px;
+    				.text-welcome
+    				{
+					    color: #fff;
+					    font-size: 40px;
+					    margin: 20px;
+					    text-align: center;
+
+    				}
+			    }
+				
+		    }
+		    .learn-more-btn
+		    {
+		    	margin-top: 130px;
+			    margin-bottom: 15px;
+			    text-align: right;
+			    .more-btn
+			    {
+			    	border: 2px solid #fec600;
+				    background-color: rgba(255,255,255,0);
+				    color: #fec600;
+				    font-weight: 700;
+				    padding: 5px;
+			    }
+		    }
+		}
+		.login-rightpart 
+		{
+		    padding: 0px;
+		    background-color: #fff;
+		    border-top-right-radius: 15px;
+		    border-bottom-right-radius: 15px;
+		    padding-bottom: 34px;
+		    .form-login
+		    {
+		    	.login-last-part
+		    	{
+		    		
+				    margin-top: 55px;
+				    // margin-bottom: 15px;
+					
+		    	}
+
+		    }
+		}
+	}
+
+}
+
+//footer
+.footer-uppers
+{
+	background-color: #142338;
 	.no-padding,.footer-body
 	{
 		padding: 0px;
@@ -181,7 +260,7 @@
 		}
 	}
 }
-.footer-bottom
+.footer-bottoms
 {
 	background-color: #212121;
 	.footer-text-bottom

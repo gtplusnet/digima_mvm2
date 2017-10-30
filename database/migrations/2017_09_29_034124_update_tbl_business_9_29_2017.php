@@ -12,13 +12,13 @@ class UpdateTblBusiness9292017 extends Migration
      */
     public function up()
     {
-        Schema::table('tbl_business', function (Blueprint $table) {
-            $table->string('county_id');
-        });
+        // Schema::table('tbl_business', function (Blueprint $table) {
+        //     $table->string('county_id');
+        // });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.eto po yon
      *
      * @return void
      */

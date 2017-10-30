@@ -37,6 +37,7 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/globals.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/resultsortgrid.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/searchtabular.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/global_login.css">
 
 
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
@@ -49,101 +50,104 @@
 
     </head>
     <body>
-        <div class="header-nav">
-            <div class="container clearfix">
-                <div class="pull-left">
-                    <div class="header-logo">
-                        <img src="/images/croatia_directory_logo.jpg">
-                    </div>
+         <!-- HEADER NAVBAR HERE -->
+        <div class="headers-nav " style="padding:20px 20px 20px 20px;">
+            <div class="container">
+                <div class="pull-left ">
+                    <img  src="/images/croatia_directory_logo.png">
                 </div>
-                <div class="pull-right">
-                    <div class="menu-bar">  
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'category' ? 'active-link' : '' }}"><a class="nav" href="/category">Category</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
-                    </div>
+               
+                <div class="menu-bar">
+                    
                     <div class="pull-right">
-                        <div class="menu-btn">
-                            <div class="spacer-btn">
-                                <a href="/login"><button class="btn btn-login"><i class="fa fa-power-off"></i><p class="nav-buttons">Login</p></button></a>
-                            </div>
-                            <div>
-                                <a href="/registration"><button class="btn btn-register"><i class="fa fa-plus-square"></i><p class="nav-buttons">Register</p></button></a>
-                            </div>
+                         <!-- BUTTONS -->
+                        <div class="btn-login">
+                            <a href="">Log in</a>    
+                        </div>
+                        <div class="btn-register">
+                            <a href="/forgot_password_user">Forgot Password</a>
+                        </div>
+                        <div class="language-selection" >
+
+                            <div id="google_translate_element"></div>
+                            <style>
+                            .goog-logo-link
+                            {
+                                visibility:hidden;
+                                margin-right:-20px;
+                            }
+                            .goog-te-combo
+                            {
+                                background-color: black;
+                                color:#fff;
+                                width:140px;
+                            }
+                            .skiptranslate
+                            {
+                                margin-right: -130px;
+                                
+                            }
+                           </style>
+
+                            {{-- <select class="language-select">
+                                <option val="english">English</option>
+                                <option val="croatian">Croatian</option>
+                            </select> --}}
                         </div>
                     </div>
                 </div>
+
             </div>
         </div><!-- header-nav -->
         @yield('content')       
-        <div class="footer">
-            <div class="container clearfix">
-                <div class="footer-top">
+        <!-- FOOTER HERE -->
+        <div style="margin-bottom: -20px;background-color: #3D516D;">
+        <div class="footer-uppers">
+            <div class="container">
+                <div class="col-md-12 no-padding footer-body">
                     <div class="col-md-5">
                         <p class="footer-title">SUBSCRIBE TO OUR NEWSLETTER</p>
-                        <p class="footer-text">Join today to recieve latest offers</p>
-                        <input class="email-add-textbox" type="text" name="email-add" placeholder="Your Email Address">
-                        <div class="social-links">
-                            <div class="holder-facebook">
-                                <a href=""><i class="fa fa-facebook social-icon"></i></a>
-                            </div>
-                            <div class="holder-twitter">
-                                <a href=""><i class="fa fa-twitter social-icon"></i></a>
-                            </div>
-                            <div class="holder-instagram">
-                                <a href=""><i class="fa fa-instagram social-icon"></i></a>
-                            </div>
-                            <div class="holder-pinterest">
-                                <a href=""><i class="fa fa-pinterest-p social-icon"></i></a>
-                            </div>
-                            <div class="holder-googleplus">
-                                <a href=""><i class="fa fa-google-plus social-icon"></i></a>
-                            </div>
-                        </div>
+                        <p class="footer-content newsletter-content">Join today to recieve latest offers</p>
+                        <input type="text" class="input-emailadd" placeholder="Your Email Address">
                     </div>
                     <div class="col-md-4">
                         <p class="footer-title">CONTACT US</p>
-                        <div class="contactus-holder">
-                            <i class="material-icons contact-icon">location_on</i>
-                            <div class="spacer-contact">
-                                <p class="footer-contact">8871 Spruce Street,<br>Elizabeth City, NC 27909</p>
+                        <div class="contact-content">
+                            <div class="img-holder">
+                                <img src="/images/map_icon.png">
                             </div>
+                            <p class="footer-content">8871 Spruce Street, Elizabeth City, NC 27909</p>
                         </div>
-                        <div class="contactus-holder">
-                            <i class="material-icons contact-icon">phone_iphone</i>
-                            <div class="spacer-contact">
-                                <p class="footer-contact">0926-536-0045</p>
+                        <div class="contact-content">
+                            <div class="img-holder">
+                                <img src="/images/mobile_icon.png">
                             </div>
+                            <p class="footer-content">0926-536-0045</p>
                         </div>
-                        <div class="contactus-holder">
-                            <i class="material-icons contact-icon">mail_outline</i>
-                            <div class="spacer-contact">
-                                <p class="footer-contact">contact@yoursite.com</p>
+                        <div class="contact-content">
+                            <div class="img-holder">
+                                <img src="/images/mail_icon.png">
                             </div>
+                            <p class="footer-content">contact@yoursite.com</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <p class="footer-title">ABOUT US</p>
-                        <img src="/images/invert_croatiadirectory_logo.png" class="invert-logo">
-                        <p class="footer-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <img src="/images/footer_logo.png">
+                        <p class="footer-content aboutus-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container clearfix">
-                <div class="footer-bottom">
-                    <div class="col-md-12">
-                        <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
-                    </div>
-                </div>
+        </div><!-- footer-upper -->
+        <div class="footer-bottoms">
+            <div class="container">
+                <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
             </div>
+        </div><!-- footer-bottom -->
         </div>
-
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"></script>')</script>
+        {{-- <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js"></script>')</script> --}}
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         
 
@@ -167,5 +171,12 @@
        <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>
         <!-- HANGGANG DITO -->
+         <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+        }
+        </script>
+
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </body>
 </html>

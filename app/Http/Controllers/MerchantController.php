@@ -49,7 +49,8 @@ class MerchantController extends Controller
 
 	public function login()
     {
-    	Self::allow_logged_out_users_only();
+      	Self::allow_logged_out_users_only();
+        $data['countyList'] = TblCountyModel::get();
         $data['page']   = 'login';
         Session::forget("merchant_login");
         return view('front.pages.login', $data);
@@ -85,7 +86,7 @@ class MerchantController extends Controller
                                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                                           ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                         ->first();
+                                          ->first();
                                           // dd($user_info);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     Session::put("email",$user_info->user_email);
@@ -151,17 +152,20 @@ class MerchantController extends Controller
 	  }
     public function merchant_redirect()
     {
-       return view ('merchant.pages.merchant_redirect');
+      $data['countyList'] = TblCountyModel::get();
+      return view ('merchant.pages.merchant_redirect',$data);
     }
 
     public function merchant_redirect_exist()
     {
-       return view('merchant.pages.merchant_redirect_exist');
+      $data['countyList'] = TblCountyModel::get();
+       return view('merchant.pages.merchant_redirect_exist',$data);
     }
 
     public function payment()
     {
         $data['page']   = 'payment';
+        $data['countyList'] = TblCountyModel::get();
         $data['method'] = TblPaymentMethod::get();
         $data['picture'] = TblPaymentModel::get();
         $check = TblPaymentModel::where('business_id',session('business_id'))->first();
@@ -224,6 +228,7 @@ class MerchantController extends Controller
   public function payment_merchant(Request $request,$id)
   {
     $data['method'] = TblPaymentMethod::get();
+    $data['countyList'] = TblCountyModel::get();
     $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')

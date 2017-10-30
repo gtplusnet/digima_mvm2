@@ -29,7 +29,7 @@ class CreateTblBusiness extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.pangalawa
      *
      * @return void
      */

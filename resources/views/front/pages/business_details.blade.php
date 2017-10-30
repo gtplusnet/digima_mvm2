@@ -6,38 +6,36 @@
 		
 	</div>
 </div>
-
-
 <div class="container">
 	<div class="col-md-6 contact-container-left">
-		 @if (session('success'))
-           <div class="alert alert-success">
-                Thank you!. Your Message Send Successfully!
-            </div>
-            @elseif(session('error'))
-            <div class="alert alert-danger">
-                Sorry!. Network error, Transaction Fail!
-            </div>
-           @endif
-        <div class="contact-title-container">
+		@if (session('success'))
+		<div class="alert alert-success">
+			Thank you!. Your Message Send Successfully!
+		</div>
+		@elseif(session('error'))
+		<div class="alert alert-danger">
+			Sorry!. Network error, Transaction Fail!
+		</div>
+		@endif
+		<div class="contact-title-container">
 			<p class="contact-title">Business Information</p>
 		</div>
 		<div class="contact-details">
 			<div class="details-info-holder">
 				<a href="/business">
-									<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
-								</a>
+					<img class="business-profilepic" src="/images/mcdo_pic.jpg" alt="Image">
+				</a>
 			</div>
 			<div class="details-info-holder">
 				<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmvm.dev&width=74&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId" width="74" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>&nbsp;&nbsp;
-									
-									<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-								
+				
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mvm.dev" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				
 			</div>
 			<div class="details-info-holder">
-			<a href="/business_info?business_id=m"><p class="business-title">m</p></a>
-								</div>
-								<div class="details-info-holder">
+				<a href="/business_info?business_id=m"><p class="business-title">m</p></a>
+			</div>
+			<div class="details-info-holder">
 				<div class="details-icon-holder">
 					<i class="material-icons details-icon">location_on</i>
 				</div>
@@ -68,6 +66,7 @@
 		<div>
 			<form role="form" action="/merchant/add_messages" method="post">
 				{{csrf_field()}}
+
 			<div class=" col-md-12 contact-form-container">
 				<div class="col-md-12 contact-textfield-holder">
 					<div class="col-md-6 contact-textfield-left-holder">
@@ -91,6 +90,7 @@
 					<button class="contact-send-btn">SEND MESSAGE</button>
 				</div>
 			</div>
+
 			</form>
 		</div>
 	</div>
@@ -100,8 +100,8 @@
 		</div>
 		<div class="map-container">
 			<!-- <img src="/images/example_googlemap.jpg" class="google-map"> -->
-				<div id="map"></div>
-			    <script>
+			<div id="map"></div>
+			<script>
 			function initMap() {
 				
 				var uluru = {lat: {{$coordinates1}}, lng: {{$coordinates}}};
@@ -148,6 +148,5 @@
 		</div>
 	</div>
 </div>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr0DttJQ2kkNjyughGhLAF8UfsMjI2WHY&callback=myMap"></script>
 @endsection

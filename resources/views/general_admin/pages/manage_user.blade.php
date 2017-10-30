@@ -42,7 +42,8 @@
 					<div class="table-responsive" id="showHere3">
 						<div id="agent_success">
 						</div>
-						<table class="display table agent_container" style="width: 100%; cellspacing: 0;">
+						
+						<table class="display table agent_container table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -92,7 +93,8 @@
 					<div class="table-responsive" id="showHere3">
 						<div id="team_success">
 						</div>
-						<table class="display table agent_container" style="width: 100%; cellspacing: 0;">
+						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
+						
 							<thead>
                             <tr>
                                 <th>ID</th>
@@ -109,10 +111,10 @@
                                 <td>{{ $data_team->team_name}}</td>
                                 <td>{{ $data_team->team_information}}</td>
                                 <td>View All Members</td>
-                                <td><select class="team_actionbox" id="team_actionbox"  data-id="{{ $data_team->team_id}}">
+                                <td><select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox"  data-id="{{ $data_team->team_id}}">
 										<option value="">Action</option>
 										<option value="edit">Edit</option>
-										<option value="assign">Assign</option>
+										<option value="assign">Assignee</option>
 										<option value="delete">Delete</option>
 									</select>
 								</td>
@@ -134,8 +136,8 @@
 				<div class="panel-body">
 					
 					<div class="table-responsive" id="showHere3">
-						<table class="display table agent_container" style="width: 100%; cellspacing: 0;">
-							<thead>
+						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
+						<thead>
 								<tr>
 									<th>ID</th>
 									<th>First Name</th>
@@ -157,7 +159,7 @@
 									<td>{{$data_supervisor->primary_phone}}</td>
 									<td>{{$data_supervisor->secondary_phone}}</td>
 									<td>{{$data_supervisor->other_info}}</td>
-									<td><select class="supervisor_actionbox" id="supervisor_actionbox"  data-id="{{ $data_supervisor->supervisor_id}}">
+									<td><select style="height:30px;width:80px;" class="supervisor_actionbox" id="supervisor_actionbox"  data-id="{{ $data_supervisor->supervisor_id}}">
 										<option value="">Action</option>
 										<option value="assign">Edit</option>
 										<option value="assign">Assign</option>
@@ -182,8 +184,8 @@
 				<div class="panel-body">
 					
 					<div class="table-responsive" id="showHere3">
-						<table class="display table agent_container" style="width: 100%; cellspacing: 0;">
-							<thead>
+						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
+						<thead>
 								<tr>
 									<th>ID</th>
 									<th>Full Name</th>
@@ -199,10 +201,9 @@
 									<td>{{$data_admin->full_name}}</td>
 									<td>{{$data_admin->email}}</td>
 									<td>{{$data_admin->position}}</td>
-									<td><select class="admin_actionbox" id="admin_actionbox" data-name="{{$data_admin->first_name}} {{$data_admin->last_name}}" data-id="{{ $data_admin->agent_id}}">
+									<td><select style="height:30px;width:80px;" class="admin_actionbox" id="admin_actionbox" data-name="{{$data_admin->first_name}} {{$data_admin->last_name}}" data-id="{{ $data_admin->agent_id}}">
 										<option value="">Action</option>
 										<option value="edit">Edit</option>
-										<option value="assign">Assign</option>
 										<option value="delete">Delete</option>
 									</select>
 								</td>
@@ -223,7 +224,7 @@
 					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Add Agent</h4>
 				</div>
-				<div class="modal-body" style="margin-bottom: 600px;" >
+				<div class="modal-body" style="margin-bottom: 650px;" >
 					<div class="col-sm-12">
 						<div class="form-group col-md-3">
 							<label for="business_name" >Team</label>
@@ -318,7 +319,7 @@
 					
 					<div class="col-sm-12">
 						<center>
-						<button type="submit" class="save_category btn btn-primary" name="add_agent" id="add_agent">Add Agent</button>
+						<button type="submit" class="add_agent btn btn-primary" name="add_agent" id="add_agent">Add Agent</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 						</center>
 					</div>
@@ -329,7 +330,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="myModalTeam" role="dialog">
+	<div class="modal fade" id="myModalTeam" role="dialog" style="margin-top:85px;">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
                 <div class="modal-header">
@@ -352,7 +353,7 @@
                             <label for="business_name" >Team Description</label>
                         </div>
                         <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="team_info" id="team_des" style="width:100%"/>
+                            <input type="text" class="form-control" name="team_info" id="team_info" style="width:100%"/>
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -468,7 +469,7 @@
 				</div>
 			</div>
 	</div>
-	<div class="modal fade" id="myModalAdmin" role="dialog">
+	<div class="modal fade" id="myModalAdmin" role="dialog" style="margin-top:85px;">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
                 <div class="modal-header">
@@ -538,7 +539,7 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group col-md-3">
-                            <label for="business_name" >Team Description</label>
+                            <label for="business_name" >Team Name</label>
                         </div>
                         <div class="form-group col-md-9">
                             <select id="teamAssigned" class="form-control" >

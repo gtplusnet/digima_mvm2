@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTblBusinessHours9292017 extends Migration
+class UpdateTblBusinessAddAgentCallDate139pm extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class UpdateTblBusinessHours9292017 extends Migration
      */
     public function up()
     {
-        //  Schema::table('tbl_business_hours', function (Blueprint $table) {
-        //     $table->string('days');
-        // });
+        Schema::table('tbl_business', function (Blueprint $table) {
+            $table->string('agent_call_date'); 
+           });
     }
 
     /**
