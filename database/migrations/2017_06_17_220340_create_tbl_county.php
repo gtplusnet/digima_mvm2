@@ -19,7 +19,7 @@ class CreateTblCounty extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. pangapat
      *
      * @return void
      */

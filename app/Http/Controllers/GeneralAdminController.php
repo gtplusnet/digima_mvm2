@@ -17,7 +17,7 @@ use App\Models\TblInvoiceModels;
 use App\Models\TblCityModel;
 use App\Models\TblCountyModel;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentModels;
+use App\Models\TblAgentModel;
 use App\Models\TblSupervisorModels;
 use App\Models\TblMembeshipModel;
 use App\Models\TblBusinessSubCategoryModel;
@@ -48,7 +48,7 @@ class GeneralAdminController extends Controller
     {
         if(session("general_admin_login") == true)
         {
-            return Redirect::to("/general_admin/dashboard'")->send();
+            return Redirect::to("/general_admin/dashboard")->send();
         }
     }
 
@@ -113,7 +113,7 @@ class GeneralAdminController extends Controller
     {
          Self::allow_logged_in_users_only();
          $count_merchant = TblUserAccountModel::get();
-         $count_agent = TblAgentModels::get();
+         $count_agent = TblAgentModel::get();
          $count_supervisor = TblSupervisorModels::get();
          $count_admin = TblAdminModels::get();
          $data['resultCountM'] = $resM = $count_merchant->count();
@@ -512,7 +512,7 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent'] = TblAgentmodels::get();
+      $data['_data_agent'] = TblAgentModel::get();
       $data['_data_team'] = TblTeamModel::get();
       $data['_data_supervisor'] = TblSupervisorModels::get();
       $data['_data_admin'] = TblAdminModels::get();
@@ -718,6 +718,7 @@ class GeneralAdminController extends Controller
     $ins['date_created'] = date("Y/m/d");
     $ins['agent_call'] = '0';
     $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+    dd($ins);
         if($ins['password']=='')
         {
             return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
@@ -741,7 +742,8 @@ class GeneralAdminController extends Controller
         
         else
         {
-            $check_insert = TblAgentmodels::insert($ins);
+            $check_insert = TblAgentModel::insert($ins);
+            echo "james";
             if($check_insert)
             {
               return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
@@ -756,7 +758,7 @@ class GeneralAdminController extends Controller
   {
     $agent_id = $request->agent_id;
     $update['team_id'] = $request->team_id;
-    TblAgentmodels::where('agent_id',$agent_id)->update($update);
+    TblAgentModel::where('agent_id',$agent_id)->update($update);
     return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned Successfully!</div>";
   }
   public function general_admin_add_team(Request $request)
@@ -911,10 +913,8 @@ class GeneralAdminController extends Controller
     $data['primary_phone'] = $request->primary_phone;
     $data['secondary_phone'] = $request->secondary_phone;
     $data['other_info'] = $request->other_info;
-    TblAgentmodels::insert($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    TblAgentModel::insert($data);
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
   }
 
    public function edit_agent_submit(Request $request)
@@ -925,16 +925,14 @@ class GeneralAdminController extends Controller
      $data['primary_phone'] = $request->primary_phone;
      $data['secondary_phone'] = $request->secondary_phone;
      $data['other_info'] = $request->other_info;
-    TblAgentmodels::where('agent_id',$request->agent_id)->update($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    TblAgentModel::where('agent_id',$request->agent_id)->update($data);
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
    }
 
   public function general_admin_delete_agent(Request $request)
   {
       $agent_id = $request->delete_agent_id;
-      TblAgentmodels::where('agent_id',$agent_id)->delete();
+      TblAgentModel::where('agent_id',$agent_id)->delete();
       return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
   }
 

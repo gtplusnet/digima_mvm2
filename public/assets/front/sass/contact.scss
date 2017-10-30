@@ -26,30 +26,36 @@
 }
 .contact-title-container
 {
-    background-color: #333;
+    background-color: #ffffff;
     padding: 7px 20px;
 }
 .contact-title
 {
-    color: #fed600;
+    color: #404040;
     margin: 0px;
     font-size: 20px;
+    font-weight: bold;
+    font-family:"Quicksand",sans-serif;
 }
 .contact-form-container
 {
     width: auto;
     padding: 10px 20px;
-    border: 1px solid #999;
+    border: 1px solid #ffffff;
 }
 .contact-labels
 {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 100;
-    color: #999;
+    font-family: "Poppins",sans-serif;
+    color:#312E2E;
+ 
 }
 .contact-textfield
 {
     width: 100%;
+    border:1px solid #eaeaea;
+    padding: 8px;
 }
 .message-textarea
 {
@@ -82,14 +88,15 @@
     background-color: #fed600;
     font-size: 15px;
     padding: 13px 20px;
+    border-radius:4px;
 }
 .map-container
 {
-    padding-top: 40px;
-    padding-left: 20px;
+    padding-top: 0px;
+    padding-left: 0px;
     padding-right: 20px;
     padding-bottom: 25px;
-    border: 1px solid #999;
+    border: 1px solid #ffffff;
 }
 .google-map
 {
@@ -98,7 +105,7 @@
 }
 .contact-details
 {
-    border: 1px solid #999;
+    border: 1px solid #ffffff;
     padding: 25px 20px;
 }
 .details-icon-holder
@@ -119,7 +126,9 @@
 .details-info
 {
     font-size: 15px;
-    display: inline;
+    font-weight: 100;
+    font-family: "Poppins",sans-serif;
+    color:#312E2E;
 }
 .details-info-holder
 {
