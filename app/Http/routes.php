@@ -43,12 +43,19 @@ Route::get('/redirect', 'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 'FrontController@business');
 Route::get('/business/details', 'FrontController@business_details');
 Route::get('/forgot/password', 'FrontController@forgot_password');
+Route::any('/guest/get_sub_category', 'FrontController@get_sub_category');
+
+
+
 
 
 Route::get('/searchresult', 'SearchresultController@index');
 Route::get('/category', 'SearchresultController@category');
 Route::get('/resultsortgrid', 'SearchresultController@resultsortgrid');
 Route::get('/searchtabular', 'SearchresultController@searchtabular');
+
+
+
 
 	
 

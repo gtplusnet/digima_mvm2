@@ -1,92 +1,4 @@
-@extends('front.layout.layout')
-@section('title', 'Home')
-@section('content')
-
-<style>
-
-.list-group
-{
-width:100%;
-}
-.list-group-item
-{
-width:100%;
-}
-#newpost
-{
-
-}
-</style>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-<script language="javascript">
-	
-	$(document).ready(function()
-	{
-		$('#newpost').hide();
-		$(document).on("click","#show_category",function()
-		{
-			
-			$("#newpost").toggle();
-			
-     
-		});
-		$(document).on("click","#hide_me",function()
-		{
-			$("#newpost").hide();
-		});
-		$(document).on("click",".categoryList",function()
-		{
-			var parent_id = $(this).data("id");
-			var category_name = $(this).data("name");
-
-			
-			alert(parent_id);
-			$.ajax(
-			{
-				type:'GET',
-				url:'/guest/get_sub_category',
-				data: 
-				{
-					parent_id:parent_id,
-				
-				},
-				dataType:'text',
-			}).done(function(data)
-				{
-					$('#show_list_filtered_category').html(data);
-					$(".categories").append("<li class='list-group-item'>"+category_name+"</li>");
-					$("#newpost").hide();
-				});
-				
-		});
-
-		
-	});
-
-
-    
-</script>
-<div class="intro" style="background-image: url('/images/background_home.jpg')">
-	<!-- HEADER NAVBAR HERE -->
-	{{-- wag mo galawin --}}
-	
-	{{-- galawin mo to!! --}}
-	<div class="container">
-		<div class="">
-			<div class="col-md-12 searchbox-container">
-				<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
-				<p class="second-line">FOR BUSINESS</p>
-			</div>
-			<div class="col-md-1">
-			</div>
-			
-			<div class="col-md-1">
-			</div>
-		</div>
-	</div>
-</div>
-<div class="business-list-container" id="show_list_filtered_category">
-	<div class="container">
+<div class="container">
 		<div class="col-md-3">
 			 <div class="col-md-12">
 		    	
@@ -238,7 +150,7 @@ width:100%;
 						</div>
 						<div class="business-info-holder">
 							<div class="business-list-details">
-								<div class="business-list-name"><a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a></div>
+								<div class="business-list-name"><a href="/business/{{$business_list->business_id}}">hgj{{$business_list->business_name}}</a></div>
 								<div class="business-list-phone">
 									<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 								</div>
@@ -315,34 +227,3 @@ width:100%;
 			</div>
 		</div>
 	</div>
-</div>
-	{{-- JAVASCRIPTS --}}
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/assets/js/front/search-registered-business.js"></script>
-	<script>
-		$.ajaxSetup({
-			headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-	</script>
-	<script type="text/javascript">
-			$('.carousel .vertical .item').each(function(){
-			var next = $(this).next();
-			if (!next.length) {
-			next = $(this).siblings(':first');
-			}
-			next.children(':first-child').clone().appendTo($(this));
-			
-			for (var i=1;i<=1;i++) {
-			next=next.next();
-			if (!next.length) {
-				next = $(this).siblings(':first');
-				}
-			
-			next.children(':first-child').clone().appendTo($(this));
-			}
-			});
-	</script>
-	{{-- END OF JAVASCRIPTS --}}
-	@endsection

@@ -64,8 +64,10 @@ class FrontController extends Controller
                                 ->paginate(9);
         $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
 
+
         return view('front.pages.home',$data);
     }
+
 
     public function registration()
     {
@@ -81,6 +83,19 @@ class FrontController extends Controller
         $data['countyList'] = TblCountyModel::get();
         $data['page']   = 'Forgot Password';
         return view('front.pages.forgot_password',$data);
+    }
+    public function get_sub_category(Request $request)
+    {
+        $data["_business_list"] = TblBusinessModel::  
+                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->paginate(9);
+        
+        
+        
+
+        $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
+        return view("front.pages.show_list",$data);
+
     }
     public function redirect_deactivated()
     {
