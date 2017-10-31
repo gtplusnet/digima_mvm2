@@ -2,7 +2,7 @@
 @section('title', 'Registration')
 @section('content')
 
-<div class="banner-registration" style="background-image: url('/images/banner_registration.jpg')">
+<div class="banner-registration" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		<div class="pull-left">
 			<img src="/images/registration_icon.png" class="registration-bg">
