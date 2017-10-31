@@ -20,51 +20,7 @@ width:100%;
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
 <script language="javascript">
 	
-	$(document).ready(function()
-	{
-		$('#newpost').hide();
-		$(document).on("click","#show_category",function()
-		{
-			
-			$("#newpost").toggle();
-			
-     
-		});
-		$(document).on("click","#hide_me",function()
-		{
-			$("#newpost").hide();
-		});
-		$(document).on("click",".categoryList",function()
-		{
-			var parent_id = $(this).data("id");
-			var category_name = $(this).data("name");
-
-			
-			alert(parent_id);
-			$.ajax(
-			{
-				type:'GET',
-				url:'/guest/get_sub_category',
-				data: 
-				{
-					parent_id:parent_id,
-				
-				},
-				dataType:'text',
-			}).done(function(data)
-				{
-					$('#show_list_filtered_category').html(data);
-					$(".categories").append("<li class='list-group-item'>"+category_name+"</li>");
-					$("#newpost").hide();
-				});
-				
-		});
-
-		
-	});
-
-
-    
+	
 </script>
 <div class="intro" style="background-image: url('/images/background_home.jpg')">
 	<!-- HEADER NAVBAR HERE -->
@@ -88,22 +44,18 @@ width:100%;
 <div class="business-list-container" id="show_list_filtered_category">
 	<div class="container">
 		<div class="col-md-3">
-			 <div class="col-md-12">
-		    	
-				<div class="category-filter-holder" >
+			<div class="col-md-12">
+		    	<div class="category-filter-holder" >
 					
 					<div class="category-title-holder" >
 						<p class="categorylist-title">Your Filter</p>
 					</div>
-					
 					<div class="categorylist-container">
 						<ul class="category navbar-nav list-group">
-							<li class="list-group-item categories" id="" >Your Filter:</li>
-							
-							
+							<li class="list-group-item " id="" >Your Filter:</li>
 						</ul>
 					</div>
-			   </div>
+			    </div>
 			</div>
 		    <div class="col-md-12" >
 		    	
@@ -115,7 +67,7 @@ width:100%;
 					
 					<div class="categorylist-container">
 						<ul class="category navbar-nav list-group">
-							<li class="list-group-item " id="" >Your Filter:</li>
+							<li class="list-group-item categories" id="" >Active Filter</li>
 							<div class="" id="newpost" style="width:500px !important;position:absolute;display:inline-block;transition: width 2s;background-color:#fff;display:inline;width:200px;z-index:1;border:1px solid #CCCCCC;">
 							    <div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Select Categories</div>
 							    <div  style="padding:10px; height:200px;overflow-y:scroll;">
@@ -319,6 +271,7 @@ width:100%;
 	{{-- JAVASCRIPTS --}}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="/assets/js/front/search-registered-business.js"></script>
+	<script src="/assets/js/home_categories.js"></script>
 	<script>
 		$.ajaxSetup({
 			headers: {

@@ -43,7 +43,7 @@ Route::get('/redirect', 'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 'FrontController@business');
 Route::get('/business/details', 'FrontController@business_details');
 Route::get('/forgot/password', 'FrontController@forgot_password');
-Route::any('/guest/get_sub_category', 'FrontController@get_sub_category');
+Route::any('/home/get_sub_category', 'FrontController@get_sub_category');
 
 
 
@@ -62,9 +62,10 @@ Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
 //james
-Route::get('/merchant/logout', 'MerchantController@logout');
 Route::get('/login', 'MerchantController@login');
 Route::post('/login', 'MerchantController@login_submit');
+Route::get('/merchant/logout', 'MerchantController@logout');
+
 
 Route::get('/merchant/payment',	'MerchantController@payment');
 Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');

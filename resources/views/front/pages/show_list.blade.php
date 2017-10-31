@@ -10,8 +10,9 @@
 					
 					<div class="categorylist-container">
 						<ul class="category navbar-nav list-group">
-							<li class="list-group-item categories" id="" >Your Filter:</li>
-							
+							@foreach($_filtered as $filtered)
+							<li class="list-group-item " id="" >{{$filtered}}<i class="fa fa-times pull-right" aria-hidden="true"></i></li>
+							@endforeach
 							
 						</ul>
 					</div>
@@ -26,12 +27,14 @@
 					</div>
 					
 					<div class="categorylist-container">
-						<ul class="category navbar-nav list-group">
-							<li class="list-group-item " id="" >Your Filter:</li>
+						<ul class="category navbar-nav list-group" style="">
+							<li class="list-group-item categories" id="" ></li>
 							<div class="" id="newpost" style="width:500px !important;position:absolute;display:inline-block;transition: width 2s;background-color:#fff;display:inline;width:200px;z-index:1;border:1px solid #CCCCCC;">
 							    <div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Select Categories</div>
 							    <div  style="padding:10px; height:200px;overflow-y:scroll;">
-							    	
+							    	@if(count($_categories) == 0)
+							    	<p>nothing to display</p>
+							    	@else
 								    <ul class="list-group" >
 								    	@foreach($_categories as $categories)
 								    	
@@ -39,6 +42,8 @@
 										
 										@endforeach
 									</ul>
+									@endif
+
 
 							    </div>
 							    <div style="text-align:center;margin-bottom: 20px;">

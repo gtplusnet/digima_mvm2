@@ -1,6 +1,21 @@
 @extends('front.layout.layout')
 @section('title', 'Search Result')
 @section('content')
+<style>
+
+.list-group
+{
+width:100%;
+}
+.list-group-item
+{
+width:100%;
+}
+#newpost
+{
+
+}
+</style>
 <div class="banner-searchresult" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		
@@ -11,29 +26,51 @@
 		<div class="container">
 			<div class="col-md-3">
 				<div class="col-md-12">
-					<div class="category-filter-holder">
-						<div class="category-title-holder">
-							<p class="categorylist-title">Category Filter</p>
-						</div>
-						<div class="categorylist-container">
-							<ul class="list-group">
-								<li class="list-group-item">First item</li>
-								<li class="list-group-item">Second item</li>
-								<li class="list-group-item">Third item</li>
-								<li class="list-group-item">First item</li>
-								<li class="list-group-item">Second item</li>
-								<li class="list-group-item">Third item</li>
-								<li class="list-group-item">First item</li>
-								<li class="list-group-item">Second item</li>
-								<li class="list-group-item">Third item</li>
-								<li class="list-group-item">First item</li>
-								<li class="list-group-item">Second item</li>
-								<li class="list-group-item">Third item</li>
-								
-							</ul>
-						</div>
+		    	<div class="category-filter-holder" >
+					
+					<div class="category-title-holder" >
+						<p class="categorylist-title">Your Filter</p>
 					</div>
-				</div>
+					<div class="categorylist-container">
+						<ul class="category navbar-nav list-group">
+							<li class="list-group-item " id="" >Your Filter:</li>
+						</ul>
+					</div>
+			    </div>
+			</div>
+		    <div class="col-md-12" >
+		    	
+				<div class="category-filter-holder" >
+					
+					<div class="category-title-holder" id="show_category">
+						<p class="categorylist-title">Category Filter <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></p>
+					</div>
+					
+					<div class="categorylist-container">
+						<ul class="category navbar-nav list-group">
+							<li class="list-group-item categories" id="" >Active Filter</li>
+							<div class="" id="newpost" style="width:500px !important;position:absolute;display:inline-block;transition: width 2s;background-color:#fff;display:inline;width:200px;z-index:1;border:1px solid #CCCCCC;">
+							    <div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Select Categories</div>
+							    <div  style="padding:10px; height:200px;overflow-y:scroll;">
+							    	
+								    <ul class="list-group" >
+								    	@foreach($_categories as $categories)
+								    	
+										<li class="list-group-item categoryList" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
+										
+										@endforeach
+									</ul>
+
+							    </div>
+							    <div style="text-align:center;margin-bottom: 20px;">
+							    	<button type="button" id="hide_me" class="btn btn-success" style="text-align:center;padding:5px;" >Done</button>
+								</div>
+							</div>
+							
+						</ul>
+					</div>
+			   </div>
+			</div>
 				<div class="col-md-12">
 					<div class="featuredlist-holder">
 						<div class="featuredlist-title-holder">
@@ -191,65 +228,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12">
-					<div class="payment-containers">
-						<div class="payment-title">
-							SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
-							<br>
-						</div>
-						<div class="col-md-12 payment-content">
-							<div class="col-md-5 package-container">
-								<div class="membership-offer">
-									PREMIUM PACKAGE
-								</div>
-								<hr>
-								<div class="membership-price">
-									<span >$52,500 / </span><span >month</span>
-								</div>
-								<hr>
-								<div class="membership-details">
-									<p class="membership-details-text">
-										Sadly, none of them were ok, and I can't seem to find out any other option.
-										The first and second button are displayed
-										on same line, but the third is displayed lower... Can you help me?
-									</p>
-								</div>
-								<div class="membership-btn">
-									<a href="/registration">
-									  <button type="button" class="membership-button">GET STARTED NOW</button>
-									</a>
-								</div>
-								
-							</div>
-							<div class="col-md-5 package-container">
-								<div class="membership-offer">
-									PLATINUM PACKAGE
-								</div>
-								<hr>
-								<div class="membership-price">
-									<span >$5,500 / </span><span >month</span>
-								</div>
-								<hr>
-								<div class="membership-details">
-									<p class="membership-details-text">
-										Sadly, none of them were ok, and I can't seem to find out any other option.
-										The first and second button are displayed
-										on same line, but the third is displayed lower... Can you help me?
-									</p>
-								</div>
-								<div class="membership-btn">
-									<a href="/registration">
-									  <button type="button" class="membership-button">GET STARTED NOW</button>
-									</a>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			
 		</div>
 	</div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/home_categories.js"></script>
 @endsection

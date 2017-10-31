@@ -89,10 +89,38 @@ class FrontController extends Controller
         $data["_business_list"] = TblBusinessModel::  
                                 join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->paginate(9);
-        
-        
-        
-
+        $check = TblBusinessCategoryModel::where('business_category_id',$request->parent_id)->first();
+        $cat = array($check->business_category_name);
+        if($check->parent_id!=0)
+        {
+            
+            $check1 = TblBusinessCategoryModel::where('business_category_id',$check->parent_id)->first();
+            $cat = array( $check1->business_category_name,$check->business_category_name);
+                
+            if($check1->parent_id!=0)
+            {
+                $check2 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
+                $cat = array($check2->business_category_name,$check1->business_category_name,$check->business_category_name);
+                if($check2->parent_id)
+                {
+                    $check3 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
+                    $cat = array($check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
+                }
+                else
+                {
+                   
+                }
+            }
+            else
+            {
+               
+            }
+        }
+        else
+        {
+            
+        }
+        $data['_filtered'] = $cat;
         $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         return view("front.pages.show_list",$data);
 
@@ -266,6 +294,7 @@ class FrontController extends Controller
                                                      ->Where('postal_code', $postalCode)
                                                      ->paginate(6);
         $data["_business_list"] = TblBusinessModel::get();
+        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['countyList'] = TblCountyModel::get();
         return view('front.pages.searchresult',$data); 
     }

@@ -2,12 +2,23 @@
 @section('title', 'Business Info')
 @section('content')
 
-<div class="banner-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.jpg')">
+<div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">s
     <div class="container">
         <div class="pull-left">
-            <div class="business-logo-container">
-                <img class="business-logo" src="/images/business_logo.png">
-                <p class="business-logo-name">{{ $business_info->business_name }}</p>
+            <div class="businesses-info-containers">
+                {{-- <img class="business-logo" src="/images/business_logo.png"> --}}
+                <div  class="businesses-details-containers">
+                    <p class="businesses-name">{{ $business_info->business_name }}</p>
+                </div>
+                <div  class="businesses-details-containers">
+                    <p class="businesses-phone"><i class="fa fa-phone phone" style="color:#f9c200;margin-right:10px;"></i>{{$business_info->business_phone}}</p>
+                </div>
+                <div class="businesses-details-containers">
+                    <p class="businesses-map" ><i class="fa fa-map-marker map" style="color:#f9c200;margin-right:10px;"></i>{{$business_info->business_complete_address}}</p>
+                </div> 
+                <div class="businesses-details-containers pull-right">
+                    <button class="btn btn-primary">Skype</button><buton class="btn btn-danger">Email</buton>
+                </div>    
             </div>
         </div>
         <div class="pull-right">
