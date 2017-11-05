@@ -144,50 +144,50 @@ Route::any('/merchant/sample', 'MerchantController@sample');
 
 
 
-Route::any('/supervisor', 				'SupervisorController@index');
-Route::post('/supervisor_login_submit', 	'SupervisorController@supervisor_login_submit');
-Route::any('/supervisor_logout', 	'SupervisorController@supervisor_logout');
+Route::any('/supervisor', 				'SuperVisorController@index');
+Route::post('/supervisor_login_submit', 	'SuperVisorController@supervisor_login_submit');
+Route::any('/supervisor_logout', 	'SuperVisorController@supervisor_logout');
 
 
 
 
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
 
-Route::any('/supervisor/logout', 		'SupervisorController@supervisor_logout');
+Route::any('/supervisor/logout', 		'SuperVisorController@supervisor_logout');
 
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
 
 
-Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
-Route::get('/supervisor/profile', 		'SupervisorController@profile');
-Route::get('/supervisor/client', 		'SupervisorController@client');
+Route::get('/supervisor/dashboard', 		'SuperVisorController@dashboard');
+Route::get('/supervisor/profile', 		'SuperVisorController@profile');
+Route::get('/supervisor/client', 		'SuperVisorController@client');
 //james
 
-Route::post('/supervisor/get_client', 		'SupervisorController@get_client');
-Route::post('/supervisor/get_client1', 		'SupervisorController@get_client1');
-Route::post('/supervisor/get_client2', 		'SupervisorController@get_client2');
-Route::post('/supervisor/get_client_transaction', 		'SupervisorController@get_client_transaction');
-Route::post('/supervisor/get_client_transaction_reload', 'SupervisorController@get_client_transaction_reload');
-Route::get('/supervisor/manage/merchant', 'SupervisorController@manage_merchant');
-Route::any('/supervisor/manage_user', 	'SupervisorController@manage_user');
-Route::post('/supervisor/add_team', 'SupervisorController@supervisor_add_team');
-Route::post('/supervisor/add_agent', 'SupervisorController@supervisor_add_agent');
-Route::post('/supervisor/get_agent_info', 'SupervisorController@get_agent_info');//wala
-Route::post('/supervisor/assign_agent', 'SupervisorController@supervisor_assign_agent');
-Route::any('/supervisor/delete_team/{id}', 'SupervisorController@supervisor_delete_team');
-Route::post('/supervisor/delete_agent', 'SupervisorController@supervisor_delete_agent');
+Route::post('/supervisor/get_client', 		'SuperVisorController@get_client');
+Route::post('/supervisor/get_client1', 		'SuperVisorController@get_client1');
+Route::post('/supervisor/get_client2', 		'SuperVisorController@get_client2');
+Route::post('/supervisor/get_client_transaction', 		'SuperVisorController@get_client_transaction');
+Route::post('/supervisor/get_client_transaction_reload', 'SuperVisorController@get_client_transaction_reload');
+Route::get('/supervisor/manage/merchant', 'SuperVisorController@manage_merchant');
+Route::any('/supervisor/manage_user', 	'SuperVisorController@manage_user');
+Route::post('/supervisor/add_team', 'SuperVisorController@supervisor_add_team');
+Route::post('/supervisor/add_agent', 'SuperVisorController@supervisor_add_agent');
+Route::post('/supervisor/get_agent_info', 'SuperVisorController@get_agent_info');//wala
+Route::post('/supervisor/assign_agent', 'SuperVisorController@supervisor_assign_agent');
+Route::any('/supervisor/delete_team/{id}', 'SuperVisorController@supervisor_delete_team');
+Route::post('/supervisor/delete_agent', 'SuperVisorController@supervisor_delete_agent');
 //james
 
-Route::any('/supervisor/edit_team', 'SupervisorController@edit_team');
-Route::any('/supervisor/update_team', 'SupervisorController@update_team');
-Route::any('/supervisor/edit_agent/{id}', 'SupervisorController@edit_agent');
-Route::any('/supervisor/update_agent', 'SupervisorController@update_agent');
+Route::any('/supervisor/edit_team', 'SuperVisorController@edit_team');
+Route::any('/supervisor/update_team', 'SuperVisorController@update_team');
+Route::any('/supervisor/edit_agent/{id}', 'SuperVisorController@edit_agent');
+Route::any('/supervisor/update_agent', 'SuperVisorController@update_agent');
 
-Route::any('/supervisor/get_city', 		'SupervisorController@get_city');
-Route::any('/supervisor/get_zip_code', 	'SupervisorController@get_zip_code');
-Route::any('/supervisor/upload-convo', 'SupervisorController@uploadConvo');
-Route::any('/supervisor/force_activate', 'SupervisorController@force_activate');
-Route::any('/agent/upload-convo', 'SupervisorController@uploadConvo');
+Route::any('/supervisor/get_city', 		'SuperVisorController@get_city');
+Route::any('/supervisor/get_zip_code', 	'SuperVisorController@get_zip_code');
+Route::any('/supervisor/upload-convo', 'SuperVisorController@uploadConvo');
+Route::any('/supervisor/force_activate', 'SuperVisorController@force_activate');
+Route::any('/agent/upload-convo', 'SuperVisorController@uploadConvo');
 
 
 
