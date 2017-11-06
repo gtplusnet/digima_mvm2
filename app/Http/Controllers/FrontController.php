@@ -21,6 +21,7 @@ use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
 use App\Models\Tbl_audio;
 use App\Models\TblMembeshipModel;
+use App\Models\TblBusinessCategoryModel;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -61,9 +62,12 @@ class FrontController extends Controller
         $data["_business_list"] = TblBusinessModel::  
                                 join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->paginate(9);
+        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
+
 
         return view('front.pages.home',$data);
     }
+
 
     public function registration()
     {
@@ -73,6 +77,53 @@ class FrontController extends Controller
         $data['membership'] = TblMembeshipModel::get();
         $data['countyList'] = Tbl_county::get();
         return view('front.pages.registration', $data);
+    }
+    public function forgot_password()
+    {
+        $data['countyList'] = TblCountyModel::get();
+        $data['page']   = 'Forgot Password';
+        return view('front.pages.forgot_password',$data);
+    }
+    public function get_sub_category(Request $request)
+    {
+        $data["_business_list"] = TblBusinessModel::  
+                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->paginate(9);
+        $check = TblBusinessCategoryModel::where('business_category_id',$request->parent_id)->first();
+        $cat = array($check->business_category_name);
+        if($check->parent_id!=0)
+        {
+            
+            $check1 = TblBusinessCategoryModel::where('business_category_id',$check->parent_id)->first();
+            $cat = array( $check1->business_category_name,$check->business_category_name);
+                
+            if($check1->parent_id!=0)
+            {
+                $check2 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
+                $cat = array($check2->business_category_name,$check1->business_category_name,$check->business_category_name);
+                if($check2->parent_id)
+                {
+                    $check3 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
+                    $cat = array($check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
+                }
+                else
+                {
+                   
+                }
+            }
+            else
+            {
+               
+            }
+        }
+        else
+        {
+            
+        }
+        $data['_filtered'] = $cat;
+        $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
+        return view("front.pages.show_list",$data);
+
     }
     public function redirect_deactivated()
     {
@@ -229,17 +280,21 @@ class FrontController extends Controller
 
     public function businessSearch(Request $request)
     {
-        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown&cityId=$request->cityDropdown");
+        return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown&postalCode=$request->postalCode");
     }
 
     public function businessSearchResult(Request $request)
     {
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID'] = $countyID = $request->countyId;
-        $data['cityID'] = $cityID = $request->cityId;
+        $data['postal_code'] = $postalCode = $request->postalCode;
         // $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
-        $data['_businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->paginate(6);
+        $data['_businessResult'] = TblBusinessModel::join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                                     ->where('business_name', 'like', '%'.$businessKeyword.'%')
+                                                     ->Where('postal_code', $postalCode)
+                                                     ->paginate(6);
         $data["_business_list"] = TblBusinessModel::get();
+        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['countyList'] = TblCountyModel::get();
         return view('front.pages.searchresult',$data); 
     }

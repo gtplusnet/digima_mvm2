@@ -119,11 +119,12 @@ class MerchantController extends Controller
         }
     }
 
-    public function logout()
+  public function logout()
 	{
 		Session::forget("merchant_login");
         return Redirect::to("/login");
 	}
+  
 
 	public function index()
 	{	

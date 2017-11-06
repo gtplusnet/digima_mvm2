@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="banner-contact" style="background-image: url('/images/banner_registration.jpg')">
+<div class="banner-contact" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		<div class="pull-left">
 			<img src="/images/contact_logo.png" class="contact-logo">

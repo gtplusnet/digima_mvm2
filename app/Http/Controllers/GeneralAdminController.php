@@ -334,6 +334,7 @@ class GeneralAdminController extends Controller
             $file_name  = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
             $pdf = PDF::loadView('mail', $data, [], $format);
             $save_pdf = $pdf->save(public_path('invoice/'.$file_name));
+            // $save_pdf = $pdf->save(public_path('invoice'));
             $invoice['invoice_number'] = $invoice_number;
             $invoice['invoice_name'] = $file_name;
             $invoice['invoice_path'] = '/invoice/'.$file_name;
@@ -346,12 +347,12 @@ class GeneralAdminController extends Controller
             TblBusinessModel::where('business_id',$business_id)->update($update);
             if($save_pdf)
             {
-                // $email_name = $data['invoice_info']->contact_first_name; 
-                // $email_email = $data['invoice_info']->user_email;
-                // $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
-                // $data = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name);
+                $email_name = $data['invoice_info']->contact_first_name; 
+                $email_email = $data['invoice_info']->user_email;
+                $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
+                $data = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name,'remarks'=>'Please Pay As Soon As Possible.');
                 
-                $data = array('name'=>'james_ako','date'=>'james','email'=>'guardians35836@gmail.com','business_id'=>$business_id);
+                // $data = array('name'=>'james_ako','date'=>'james','email'=>'guardians35836@gmail.com','business_id'=>$business_id,'remarks'=>'Please Pay As Soon As Possible.');
                 $pathfile='invoice/'.$file_name;
                 $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($pathfile) {
                    $message->to('guardians35836@gmail.com', 'Tutorials Point')->subject
@@ -600,7 +601,7 @@ class GeneralAdminController extends Controller
     public function general_admin_manage_categories()
     {
 
-      $data['category'] = TblBusinessCategoryModel::paginate(10);
+      $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->paginate(10);
 
       return view('general_admin.pages.manage_categories',$data);
     }
@@ -608,6 +609,7 @@ class GeneralAdminController extends Controller
     {
       $data['business_category_name'] = $request->cat_name;
       $data['business_category_information'] = $request->cat_info;
+      $data['parent_id'] = 0;
       TblBusinessCategoryModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Category Added.</div>";
     }
@@ -634,16 +636,16 @@ class GeneralAdminController extends Controller
     public function general_admin_get_sub_category(Request $request)
     {
       $business_category_id = $request->cat_id;
-      $data['_sub_category'] = TblBusinessSubCategoryModel::where('business_category_id',$business_category_id)->get();
+      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$business_category_id)->get();
       return view('general_admin.pages.get_sub_category',$data);
     }
 
     public function general_admin_add_sub_category(Request $request)
     {
-      $ins['sub_category_name'] = $request->cat_name;
-      $ins['sub_category_info'] = $request->cat_info;
-      $ins['business_category_id'] = $request->cat_id;
-      $check = TblBusinessSubCategoryModel::insert($ins);
+      $ins['business_category_name'] = $request->cat_name;
+      $ins['business_category_information'] = $request->cat_info;
+      $ins['parent_id'] = $request->cat_id;
+      $check = TblBusinessCategoryModel::insert($ins);
       if($check)
       {
         return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
@@ -655,13 +657,14 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_edit_sub_category(Request $request)
     {
-      $ins['sub_category_name'] = $request->cat_name;
-      $ins['sub_category_info'] = $request->cat_info;
-      $sub_category_id = $request->cat_id;
-      $check = TblBusinessSubCategoryModel::where('sub_category_id',$sub_category_id)->update($ins);
+      $ins['business_category_name'] = $request->cat_name;
+      $ins['business_category_information'] = $request->cat_info;
+      $category_id = $request->cat_id;
+      // dd($category_id);
+      $check = TblBusinessCategoryModel::where('business_category_id',$category_id)->update($ins);
       if($check)
       {
-        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br>";
+        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Updated.</div><br>";
       }
       else
       {
@@ -671,15 +674,15 @@ class GeneralAdminController extends Controller
     public function general_admin_get_sub_sub_category(Request $request)
     {
       $sub_category_id = $request->cat_id;
-      $data['_sub_category'] = TblBusinessSubSubCategoryModel::where('sub_category_id',$sub_category_id)->get();
+      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$sub_category_id)->get();
       return view('general_admin.pages.get_sub_sub_category',$data);
     }
     public function general_admin_add_sub_sub_category(Request $request)
     {
-      $ins['sub_sub_category_name'] = $request->cat_name;
-      $ins['sub_sub_category_info'] = $request->cat_info;
-      $ins['sub_category_id'] = $request->cat_id;
-      $check = TblBusinessSubSubCategoryModel::insert($ins);
+      $ins['business_category_name'] = $request->cat_name;
+      $ins['business_category_information'] = $request->cat_info;
+      $ins['parent_id'] = $request->cat_id;
+      $check = TblBusinessCategoryModel::insert($ins);
       if($check)
       {
         return "<div class='alert alert-success'><strong>Success!</strong>Sub Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";

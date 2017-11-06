@@ -1,61 +1,22 @@
-@extends('front.layout.layout')
-@section('title', 'Home')
-@section('content')
-
-<style>
-
-.list-group
-{
-width:100%;
-}
-.list-group-item
-{
-width:100%;
-}
-#newpost
-{
-
-}
-</style>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-<script language="javascript">
-	
-	
-</script>
-<div class="intro" style="background-image: url('/images/background_home.jpg')">
-	<!-- HEADER NAVBAR HERE -->
-	{{-- wag mo galawin --}}
-	
-	{{-- galawin mo to!! --}}
-	<div class="container">
-		<div class="">
-			<div class="col-md-12 searchbox-container">
-				<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
-				<p class="second-line">FOR BUSINESS</p>
-			</div>
-			<div class="col-md-1">
-			</div>
-			
-			<div class="col-md-1">
-			</div>
-		</div>
-	</div>
-</div>
-<div class="business-list-container" id="show_list_filtered_category">
-	<div class="container">
+<div class="container">
 		<div class="col-md-3">
-			<div class="col-md-12">
-		    	<div class="category-filter-holder" >
+			 <div class="col-md-12">
+		    	
+				<div class="category-filter-holder" >
 					
 					<div class="category-title-holder" >
 						<p class="categorylist-title">Your Filter</p>
 					</div>
+					
 					<div class="categorylist-container">
 						<ul class="category navbar-nav list-group">
-							<li class="list-group-item " id="" >Your Filter:</li>
+							@foreach($_filtered as $filtered)
+							<li class="list-group-item " id="" >{{$filtered}}<i class="fa fa-times pull-right" aria-hidden="true"></i></li>
+							@endforeach
+							
 						</ul>
 					</div>
-			    </div>
+			   </div>
 			</div>
 		    <div class="col-md-12" >
 		    	
@@ -66,12 +27,14 @@ width:100%;
 					</div>
 					
 					<div class="categorylist-container">
-						<ul class="category navbar-nav list-group">
-							<li class="list-group-item categories" id="" >Active Filter</li>
+						<ul class="category navbar-nav list-group" style="">
+							<li class="list-group-item categories" id="" ></li>
 							<div class="" id="newpost" style="width:500px !important;position:absolute;display:inline-block;transition: width 2s;background-color:#fff;display:inline;width:200px;z-index:1;border:1px solid #CCCCCC;">
 							    <div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Select Categories</div>
 							    <div  style="padding:10px; height:200px;overflow-y:scroll;">
-							    	
+							    	@if(count($_categories) == 0)
+							    	<p>nothing to display</p>
+							    	@else
 								    <ul class="list-group" >
 								    	@foreach($_categories as $categories)
 								    	
@@ -79,6 +42,8 @@ width:100%;
 										
 										@endforeach
 									</ul>
+									@endif
+
 
 							    </div>
 							    <div style="text-align:center;margin-bottom: 20px;">
@@ -190,7 +155,7 @@ width:100%;
 						</div>
 						<div class="business-info-holder">
 							<div class="business-list-details">
-								<div class="business-list-name"><a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a></div>
+								<div class="business-list-name"><a href="/business/{{$business_list->business_id}}">hgj{{$business_list->business_name}}</a></div>
 								<div class="business-list-phone">
 									<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 								</div>
@@ -267,35 +232,3 @@ width:100%;
 			</div>
 		</div>
 	</div>
-</div>
-	{{-- JAVASCRIPTS --}}
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/assets/js/front/search-registered-business.js"></script>
-	<script src="/assets/js/home_categories.js"></script>
-	<script>
-		$.ajaxSetup({
-			headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-	</script>
-	<script type="text/javascript">
-			$('.carousel .vertical .item').each(function(){
-			var next = $(this).next();
-			if (!next.length) {
-			next = $(this).siblings(':first');
-			}
-			next.children(':first-child').clone().appendTo($(this));
-			
-			for (var i=1;i<=1;i++) {
-			next=next.next();
-			if (!next.length) {
-				next = $(this).siblings(':first');
-				}
-			
-			next.children(':first-child').clone().appendTo($(this));
-			}
-			});
-	</script>
-	{{-- END OF JAVASCRIPTS --}}
-	@endsection

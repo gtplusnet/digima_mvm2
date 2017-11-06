@@ -16,7 +16,7 @@ use Redirect;
 use Validator;
 use Carbon\Carbon;
 
-class SupervisorController extends Controller
+class SuperVisorController extends Controller
 {
     public static function allow_logged_in_users_only()
     {
