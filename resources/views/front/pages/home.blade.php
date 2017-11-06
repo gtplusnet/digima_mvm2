@@ -96,9 +96,9 @@ width:100%;
 						<p class="featuredlist-title">MOST VIEWED</p>
 					</div>
 					<div class="featuredlist-container side-list-padding">
-						<div id="carousel-pager" class="carousel slide featured-carousel" data-ride="carousel" data-interval="3000">
+						<div  class="featured-carousel" >
 							<div class="carousel-inner vertical inner-vertical-carousel">
-								<div class="active item">
+								<div class="">
 									<div class="featured-details-container">
 										<div class="detail-picture-container side-list-img-width">
 											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
@@ -108,8 +108,28 @@ width:100%;
 										</div>
 									</div>
 								</div>
-								@foreach($_business_list as $business_list)
-								<div class="item">
+								<div class="">
+									<div class="featured-details-container">
+										<div class="detail-picture-container side-list-img-width">
+											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
+										</div>
+										<div class="detail-name-container">
+											<p class="detail-name-title">Name of Business</p>
+										</div>
+									</div>
+								</div>
+								<div class="">
+									<div class="featured-details-container">
+										<div class="detail-picture-container side-list-img-width">
+											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
+										</div>
+										<div class="detail-name-container">
+											<p class="detail-name-title">Name of Business</p>
+										</div>
+									</div>
+								</div>
+								{{-- @foreach($_business_list as $business_list) --}}
+								<div class="">
 									<div class="featured-details-container">
 										<div class="detail-picture-container side-list-img-width">
 											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
@@ -119,16 +139,16 @@ width:100%;
 										</div>
 									</div>
 								</div>
-								@endforeach
+								{{-- @endforeach --}}
 							</div>
-							<a  class="left carousel-control features-control" href="#carousel-pager" role="button" data-slide="prev">
+							{{-- <a  class="left carousel-control features-control" href="#carousel-pager" role="button" data-slide="prev">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 								<span class="sr-only">Previous</span>
 							</a>
 							<a  class="right carousel-control features-control" href="#carousel-pager" role="button" data-slide="next">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 								<span class="sr-only">Next</span>
-							</a>
+							</a> --}}
 						</div>
 					</div>
 				</div>

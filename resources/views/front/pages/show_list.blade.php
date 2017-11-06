@@ -11,7 +11,7 @@
 					<div class="categorylist-container">
 						<ul class="category navbar-nav list-group">
 							@foreach($_filtered as $filtered)
-							<li class="list-group-item " id="" >{{$filtered}}<i class="fa fa-times pull-right" aria-hidden="true"></i></li>
+							<li class="list-group-item " id="" >{{$filtered}}<a href="/home/back"><i class="fa fa-times pull-right" aria-hidden="true"></i></a></li>
 							@endforeach
 							
 						</ul>

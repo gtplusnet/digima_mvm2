@@ -12,7 +12,7 @@
 }
 .about-container
 {
-	width: 70%;
+	// width: 70%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
@@ -24,36 +24,46 @@
 }
 .about-title-container
 {
-	background-color: #333;
+	background-color: #ffffff;
     padding: 10px 30px;
 }
 .about-title
 {
-	color: #fed600;
+	color: #404040;
     margin: 0px;
-    text-align: center;
-    font-family: "Poppins Regular", sans-serif;
+    // text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
     font-size: 20px;
 }
 .about-content-container
 {
-	border: 1px solid #999;
-    padding: 25px 72px;
+	// border: 1px solid #999;
+    padding: 2px 10px 50px 10px;
 }
 .about-content
 {
-	text-align: center;
+	text-align: justify;
     font-size: 15px;
     font-family: "Roboto Light", sans-serif;
+
 }
 .bottom-image-container
 {
-    margin-left: -72px;
-    margin-right: -72px;
-    margin-bottom: -25px;
+    // margin-left: -72px;
+    // margin-right: -72px;
+    // margin-bottom: -25px;
 }
 .bottom-image
 {
-	width: 100%;
-	margin-top: 100px;
+	// width: 100%;
+	// margin-top: 100px;
+}
+.about-btn
+{
+    border: 0px;
+    background-color: #fed600;
+    font-size: 15px;
+    padding: 13px 20px;
+    border-radius: 4px;
 }
