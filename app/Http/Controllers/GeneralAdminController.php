@@ -523,11 +523,11 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_manage_website()
     {
-      $data['_membership'] = TblMembeshipModel::get();
-      $data['_county'] = TblCountyModel::get();
+      $data['_membership'] = TblMembeshipModel::paginate(5);
+      $data['_county'] = TblCountyModel::paginate(5);
       $data['_city'] = TblCityModel::
                        join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                       ->get();
+                       ->paginate(5);
       return view('general_admin.pages.manage_website',$data);
     }
     public function general_admin_add_membership(Request $request)
@@ -541,7 +541,7 @@ class GeneralAdminController extends Controller
     {
       $mem_id = $request->mem_id;
       $mem['membership_name'] = $request->mem_name;
-      $mem['membership_price'] = $request->mem_id;
+      $mem['membership_price'] = $request->mem_price;
       TblMembeshipModel::where('membership_id',$mem_id)->update($mem);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership updated.</div>";
     }
