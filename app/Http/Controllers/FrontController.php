@@ -150,7 +150,7 @@ class FrontController extends Controller
         //     {
         //         echo $filt." ".$data['value'][$key];
         //     }
-        
+        $data['_categories_list'] = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         return view("front.pages.show_list",$data);
 

@@ -54,27 +54,6 @@ width:100%;
 					</div>
 					
 					<div class="categorylist-container">
-						{{-- <ul class="category navbar-nav list-group">
-							<li class="list-group-item categories" id="" >Active Filter</li>
-							<div class="" id="newpost" style="width:500px !important;position:absolute;display:inline-block;transition: width 2s;background-color:#fff;display:inline;width:200px;z-index:1;border:1px solid #CCCCCC;">
-							    <div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Select Categories</div>
-							    <div  style="padding:10px; height:200px;overflow-y:scroll;">
-							    	
-								    <ul class="list-group" >
-								    	@foreach($_categories as $categories)
-								    	
-										<li class="list-group-item categoryList" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
-										
-										@endforeach
-									</ul>
-
-							    </div>
-							    <div style="text-align:center;margin-bottom: 20px;">
-							    	<button type="button" id="hide_me" class="btn btn-success" style="text-align:center;padding:5px;" >Done</button>
-								</div>
-							</div>
-							
-						</ul> --}}
 						<ul class="list-group" >
 					    	@foreach($_categories as $categories)
 					    	

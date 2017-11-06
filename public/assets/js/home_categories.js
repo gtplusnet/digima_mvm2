@@ -27,7 +27,7 @@ $(document).ready(function()
 			}).done(function(data)
 				{
 					$('#show_list_filtered_category').html(data);
-					$(".categories").append("<li class='list-group-item'>"+category_name+"</li>");
+					$(".categories").append("<li class='list-group-item' style='background-color:#beecbe'> Active: "+category_name+"</li>");
 					$("#newpost").hide();
 				});
 		});
@@ -50,7 +50,7 @@ $(document).ready(function()
 				{
 					$('#show_list_filtered_category').html(data);
 					$('#newpost').hide();
-					$(".categories").append("<li class='list-group-item'>Active: "+category_name+"</li>");
+					$(".categories").append("<li class='list-group-item' style='background-color:#beecbe'>Active: "+category_name+"</li>");
 					
 				});
 		});
