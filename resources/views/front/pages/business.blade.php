@@ -295,10 +295,18 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <p class="sendemail-title">MESSAGE US</p>
                     </div>
+                    <form role="form" action="/guest/add_messages" method="post">
+
+                        {{csrf_field()}}
                     <div class="modal-body">
+                @if (Session::has('message'))
+                <div class="alert alert-success"><center>{{ Session::get('message') }}</center></div>
+                @endif 
+                   
                         <div class="sendemail-textfield-holder">
                             <label for="input-email" class="sendemail-labels">Email:</label>
-                            <input type="text" name="email_add" class="sendemail-textfield">
+                            <input type="text" name="email" class="sendemail-textfield" required/>
+                            <input type="hidden" name="business_id" value="{{$business_id}}" />
                         </div>
                         <div class="sendemail-textfield-holder">
                             <label for="input-subject" class="sendemail-labels">Subject:</label>
@@ -306,15 +314,14 @@
                         </div>
                         <div class="sendemail-textfield-holder">
                             <label for="input-help" class="sendemail-labels">How Can We Help:</label>
-                            <textarea rows="11" name="help_message" id="we_can_help" class="sendemail-textfield message-textarea"></textarea>
+                            <textarea rows="11" name="messages" id="we_can_help" class="sendemail-textfield message-textarea"></textarea>
                         </div>
+
                         <div class="sendemail-btn-holder">
-                            <button class="sendemail-send-btn" data-toggle="modal" data-target="#myModal"><p style="color:#DFDFDF;">SEND MESSAGE</p></button>
+                            <button type="submit" class="sendemail-send-btn" data-toggle="modal" data-target="#myModal"><p style="color:#DFDFDF;">SEND MESSAGE</p></button>
                         </div>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div> -->
+                    </form>
                 </div>  
             </div>
         </div>

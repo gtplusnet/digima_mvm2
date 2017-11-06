@@ -286,20 +286,13 @@ class MerchantController extends Controller
       foreach($business_hours_from as $key => $business_hours_f)
       {
           // echo $sp." to time ".$business_hours_to[$key]." with day ".$days[$key]."<br>";
-          
           $data['business_hours_from']= $business_hours_f;
-          $data['business_hours_to']= $business_hours_to[$key];
-            
-          $check = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
-          if($check)
-          {
-            return Redirect::back(); 
-          }
-          else
-          {
-            echo "wrong";
-          }
+          $data['business_hours_to']= $business_hours_to[$key];  
+          $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
       }
+      
+      return Redirect::back();  
+    
     }
 
      public function add_payment_method(Request $request)
@@ -316,27 +309,6 @@ class MerchantController extends Controller
       TblPaymentMethod::where('payment_method_id',$id)->delete();
       Session::flash('danger', "Payment Deleted");
       return Redirect::back();
-    }
-
-    public function add_messages(Request $request)
-    { 
-
-      $data["full_name"]         = $request->full_name;
-      $data["email"]             = $request->email;
-      $data["subject"]           = $request->subject;
-      $data["messages"]          = $request->messages;
-      TblGuestMessages::insert($data);
-      Session::flash('message', "Message Information Added");
-      return Redirect::back();
-
-       // dd('contact_first_name');
-      // $contactData = new TblBusinessContactPersonModel;
-      // $contactData->business_contact_person_id = '';
-      // $contactData->contact_prefix = $request->prefix;
-      // $contactData->contact_first_name = $request->firstName;
-      // $contactData->contact_last_name = $request->lastName;
-      // $contactData->business_id = $request->business_id;
-      // $contactData->save();
     }
 
     public function delete_messages($id)

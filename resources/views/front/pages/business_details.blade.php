@@ -66,7 +66,6 @@
 		<div>
 			<form role="form" action="/merchant/add_messages" method="post">
 				{{csrf_field()}}
-
 			<div class=" col-md-12 contact-form-container">
 				<div class="col-md-12 contact-textfield-holder">
 					<div class="col-md-6 contact-textfield-left-holder">
@@ -87,7 +86,7 @@
 					<textarea rows="11" name="messages" id="we_can_help" class="contact-textfield message-textarea" required/></textarea>
 				</div>
 				<div class="col-md-12 contact-btn-holder">
-					<button class="contact-send-btn">SEND MESSAGE</button>
+					<button type="submit" class="contact-send-btn">SEND MESSAGE</button>
 				</div>
 			</div>
 

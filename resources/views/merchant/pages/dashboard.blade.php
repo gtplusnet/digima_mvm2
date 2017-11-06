@@ -2,6 +2,7 @@
 @section('content')
 <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
 <div class="page-title">
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
@@ -11,10 +12,11 @@
       </ol>
    </div>
 </div>
+
 <div id="main-wrapper">
    <div class="row">
       <div class="col-lg-3 col-md-6">
-         <div class="panel info-box panel-white">
+         <div class="panel info-box">
             <div class="panel-body">
                <div class="info-box-stats">
                   <p class="counter">340,230</p>

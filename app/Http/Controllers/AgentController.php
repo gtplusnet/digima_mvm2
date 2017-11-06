@@ -84,7 +84,7 @@ class AgentController extends Controller
 
 					Session::put("agent_login",true);
     				Session::put("agent_id",$validate_login->agent_id);
-    				Session::put("first_name",$validate_login->first_name);
+    				Session::put("full_name",$validate_login->first_name." ".$validate_login->last_name);
     				Session::put("email",$validate_login->email);
     				Session::put("position",$validate_login->position);
 					// Session::put("login", $validate->email);
@@ -171,32 +171,34 @@ class AgentController extends Controller
                           ->get();
 		return view('agent.pages.filtered',$data);
 	}
-	public function get_client1(Request $request)
-	{
-		Self::allow_logged_in_users_only();
-		$s_date = $request->date_start1;
-		$e_date = $request->date_end1;
-		$data['clients'] = TblBusinessModel::where('business_status',4)
-						  ->whereBetween('date_created',[$s_date,$e_date])
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
-		return view('agent.pages.filtered1',$data);
-	}
-	public function get_client2(Request $request)
-	{
-		Self::allow_logged_in_users_only();
-		$s_date = $request->date_start2;
-		$e_date = $request->date_end2;
-		$data['clients'] = TblBusinessModel::where('business_status',5)
-						  ->whereBetween('date_created',[$s_date,$e_date])
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
-		return view('agent.pages.filtered2',$data);
-	}
+	// public function get_client1(Request $request)
+	// {
+	// 	Self::allow_logged_in_users_only();
+	// 	$s_date = $request->date_start1;
+	// 	$e_date = $request->date_end1;
+	// 	$data['clients'] = TblBusinessModel::where('business_status',4)
+	// 					  ->whereBetween('date_created',[$s_date,$e_date])
+	// 					  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ //                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ //                          ->orderBy('tbl_business.date_created',"asc")
+ //                          ->get();
+	// 	return view('agent.pages.filtered1',$data);
+	// }
+
+	// public function get_client2(Request $request)
+	// {
+	// 	Self::allow_logged_in_users_only();
+	// 	$s_date = $request->date_start2;
+	// 	$e_date = $request->date_end2;
+	// 	$data['clients'] = TblBusinessModel::where('business_status',5)
+	// 					  ->whereBetween('date_created',[$s_date,$e_date])
+	// 					  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ //                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ //                          ->orderBy('tbl_business.date_created',"asc")
+ //                          ->get();
+	// 	return view('agent.pages.filtered2',$data);
+	// }
+
 
 	public function get_client_transaction(Request $request)
 	{

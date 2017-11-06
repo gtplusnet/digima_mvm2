@@ -43,6 +43,7 @@ Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
 Route::get('/redirect', 'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 'FrontController@business');
+Route::any('/guest/add_messages', 'FrontController@add_messages');
 Route::get('/business/details', 'FrontController@business_details');
 
 
@@ -66,7 +67,6 @@ Route::get('/merchant/category/add_keywords', 	'MerchantController@add_keywords'
 Route::any('/merchant/add_business_category', 'MerchantController@add_business_category');
 Route::any('/merchant/delete_business_category/{id}', 'MerchantController@delete_business_category');
 Route::get('/merchant/messages', 	'MerchantController@messages');
-Route::any('/merchant/add_messages', 'MerchantController@add_messages');
 Route::any('/merchant/add_images', 'MerchantController@add_images');
 
 Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');

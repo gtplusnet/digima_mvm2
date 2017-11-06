@@ -55,28 +55,6 @@
 <div id="main-wraper">
     <div class="container">
         <div class="row">
-          <!--   <div class="col-md-5 " style="margin:10px 0px 10px 10px;background-color: #F1F4F9;">
-                <div class="website-title">
-                Add Category
-                </div>
-                <div class="category-content col-md-12">
-
-                    <div class="web-content" id="category_alert">
-                    </div>
-
-                     <div class="web-content">
-                        <input type="text" class="form-text center" id="business_category_id" placeholder="Category ID Number" required/>
-                    </div>
-
-                    <div class="web-content">
-                        <input type="text" class="form-text center" id="business_category_name" placeholder="Category Name" required/>
-                    </div>
-                 
-                    <div class="web-content">
-                        <button type="button" id="addMembership" class="form-button  center" >Add category</button>
-                    </div>
-                </div>
-            </div> -->
             <div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
                 <div class="website-title">
                     Category List
@@ -87,34 +65,47 @@
                             <tr>
                                 <th>ID</th> 
                                 <th>Category Name</th>
-                                <th>Action</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($_category as $category)
                             <tr>
                                 <td>{{$category->business_category_id}}</td>
-                                <td>{{$category->business_category_name }}</td>
-                             
-                                <td>
-                                    <button class="form-select cat_action" data-id="{{$category->business_category_id}}" id="mem_action">
-                                        <option value="edit" >View</option>
-                                   </button>
-                                </td>
+                                <td><a href="{{$category->business_category_information}}">{{$category->business_category_name }}</td>
                             </tr>
                             @endforeach   
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
-
-
-
+        </div>
+         <div class="row">
+            <div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
+                <div class="website-content col-md-12">
+                    <table class="table table-bordered" style="margin-top:10px;">
+                        <thead>
+                            <tr>
+                               <!--  <th>ID</th>  -->
+                                <th>{{$category->business_category_name}}</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($_category as $category)
+                            <tr>
+                               <!--  <td>{{$category->parent_id}}</td> -->
+                                 <input type="hidden" name="" value="{{$category->parent_id}}" />
+                                <td>{{$category->business_category_information }}</td>
+                            </tr>
+                            @endforeach   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <div class="row">
+       <!--  <div class="row">
             <div class="col-md-5 " style="margin:10px 0px 10px 10px;background-color: #F1F4F9;">
                 <div class="website-title">
                     Add Keywords
@@ -174,7 +165,7 @@
                     </table>
                 </div>
             </div>
-        </div>   
+        </div>    -->
     </div>
 </div>
 
