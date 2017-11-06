@@ -44,29 +44,17 @@ width:100%;
 <div class="business-list-container" id="show_list_filtered_category">
 	<div class="container">
 		<div class="col-md-3">
-			<div class="col-md-12">
-		    	<div class="category-filter-holder" >
-					
-					<div class="category-title-holder" >
-						<p class="categorylist-title">Your Filter</p>
-					</div>
-					<div class="categorylist-container">
-						<ul class="category navbar-nav list-group">
-							<li class="list-group-item " id="" >Your Filter:</li>
-						</ul>
-					</div>
-			    </div>
-			</div>
-		    <div class="col-md-12" >
+			<div class="col-md-12" >
 		    	
 				<div class="category-filter-holder" >
 					
 					<div class="category-title-holder" id="show_category">
-						<p class="categorylist-title">Category Filter <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></p>
+						{{-- <p class="categorylist-title">Category Filter <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></p> --}}
+						<p class="categorylist-title">Category Filter</p>
 					</div>
 					
 					<div class="categorylist-container">
-						<ul class="category navbar-nav list-group">
+						{{-- <ul class="category navbar-nav list-group">
 							<li class="list-group-item categories" id="" >Active Filter</li>
 							<div class="" id="newpost" style="width:500px !important;position:absolute;display:inline-block;transition: width 2s;background-color:#fff;display:inline;width:200px;z-index:1;border:1px solid #CCCCCC;">
 							    <div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Select Categories</div>
@@ -86,6 +74,13 @@ width:100%;
 								</div>
 							</div>
 							
+						</ul> --}}
+						<ul class="list-group" >
+					    	@foreach($_categories as $categories)
+					    	
+							<li class="list-group-item categoryList" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
+							
+							@endforeach
 						</ul>
 					</div>
 			   </div>

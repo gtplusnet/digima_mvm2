@@ -45,6 +45,26 @@ class FrontController extends Controller
     //       return Redirect::to("/home")->send();
     //     }
     // }
+    public static function directory()
+    {
+        $data['countyList'] = TblCountyModel::get();
+        $data['cityList'] = TblCityModel::get();
+        Session::forget("merchant_login");
+        Session::forget("full_name");
+        Session::forget("email");
+        Session::forget("business_name");
+        Session::forget("business_id");
+        Session::forget("business_contact_person_id");
+        Session::forget("business_address");
+        Session::forget("city_state");
+        Session::forget("zip_code");
+        // TblBusinessModel::where('business_status',5)
+        $data["_business_list"] = TblBusinessModel::  
+                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->paginate(9);
+        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
+        return view('front.pages.home',$data);
+    }
     public function index()
     {
         $data['countyList'] = TblCountyModel::get();
@@ -63,8 +83,6 @@ class FrontController extends Controller
                                 join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->paginate(9);
         $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
-
-
         return view('front.pages.home',$data);
     }
 
@@ -89,22 +107,28 @@ class FrontController extends Controller
         $data["_business_list"] = TblBusinessModel::  
                                 join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->paginate(9);
+
         $check = TblBusinessCategoryModel::where('business_category_id',$request->parent_id)->first();
         $cat = array($check->business_category_name);
+        $cat1 = array($check->business_category_id);
         if($check->parent_id!=0)
         {
             
             $check1 = TblBusinessCategoryModel::where('business_category_id',$check->parent_id)->first();
             $cat = array( $check1->business_category_name,$check->business_category_name);
+            $cat1 = array( $check1->business_category_id,$check->business_category_id);
                 
             if($check1->parent_id!=0)
             {
                 $check2 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
                 $cat = array($check2->business_category_name,$check1->business_category_name,$check->business_category_name);
+                $cat1 = array($check2->business_category_id,$check1->business_category_id,$check->business_category_id);
+                 
                 if($check2->parent_id)
                 {
                     $check3 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
                     $cat = array($check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
+                    $cat1 = array($check3->parent_id,$check2->parent_id,$check1->parent_id,$check->parent_id );
                 }
                 else
                 {
@@ -118,9 +142,15 @@ class FrontController extends Controller
         }
         else
         {
-            
+          
         }
+        $data['value'] = $cat1;
         $data['_filtered'] = $cat;
+        // foreach($data['_filtered'] as $key=>$filt)
+        //     {
+        //         echo $filt." ".$data['value'][$key];
+        //     }
+        
         $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         return view("front.pages.show_list",$data);
 
