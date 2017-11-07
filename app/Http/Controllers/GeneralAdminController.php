@@ -127,12 +127,13 @@ class GeneralAdminController extends Controller
          $data['sumP4'] = ($resAd/$sum)*100;
          $count_merchant_agent = TblBusinessModel::where('business_status',1)->get();
          $count_merchant_supervisor = TblBusinessModel::where('business_status',2)->get();
+         $count_merchant_agent_added = TblBusinessModel::where('business_status',20)->get();
          $count_merchant_admin = TblBusinessModel::where('business_status',3)->get();
          $count_merchant_admin_payment = TblBusinessModel::where('business_status',4)->get();
          $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
          $data['countCall'] = $count_merchant_agent->count();
          $data['countMP3'] = $count_merchant_supervisor->count();
-         $data['countInvoice'] = $count_merchant_admin->count();
+         $data['countInvoice'] = $count_merchant_admin->count() + $count_merchant_agent_added->count();
          $data['countPayment'] = $count_merchant_admin_payment->count();
          $data['countActivated'] = $count_merchant_admin_activated->count();
          $data['count_jan']  = TblBusinessModel::whereMONTH('date_created', '=', 01 )->count();
@@ -523,11 +524,11 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_manage_website()
     {
-      $data['_membership'] = TblMembeshipModel::get();
-      $data['_county'] = TblCountyModel::get();
+      $data['_membership'] = TblMembeshipModel::paginate(5);
+      $data['_county'] = TblCountyModel::paginate(5);
       $data['_city'] = TblCityModel::
                        join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                       ->get();
+                       ->paginate(5);
       return view('general_admin.pages.manage_website',$data);
     }
     public function general_admin_add_membership(Request $request)
@@ -541,7 +542,7 @@ class GeneralAdminController extends Controller
     {
       $mem_id = $request->mem_id;
       $mem['membership_name'] = $request->mem_name;
-      $mem['membership_price'] = $request->mem_id;
+      $mem['membership_price'] = $request->mem_price;
       TblMembeshipModel::where('membership_id',$mem_id)->update($mem);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership updated.</div>";
     }

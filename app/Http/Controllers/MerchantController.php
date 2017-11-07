@@ -333,34 +333,12 @@ class MerchantController extends Controller
       Session::flash('danger', "Category Deleted");
       return Redirect::back();
     }
-     
-/**
-    public function edit($id)
-    {
-        
-        $data['_edit']=tbl_users::where('id', $id)->first();
-        // dd($id);
-        return view('edit', $data);
-    }
-
-    public function edit_submit($id)
-    {
-        $update["name"] = Request::input("name");
-        $update["location"] = Request::input("location");
-        $update["nickname"] = Request::input("nickname");
-  
-        
-        tbl_users::where('id', $id)->update($update);
-       Redirect::to("/pageview")->send();
-        
-    }*/
-
-	public function category()
+  public function category()
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']				= 'Category';
-		// $data['categories'] 		= Tbl_business_category::where('parent_id', '=','0')->get();
-    $data['categories']    = Tbl_business_category::get();
+		$data['categories']    = Tbl_business_category::get();
+
    
 		return view('merchant.pages.category', $data);		
 	}

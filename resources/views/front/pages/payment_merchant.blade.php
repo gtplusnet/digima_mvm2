@@ -1,9 +1,9 @@
 @extends('front.layout.layout')
 @section('content')
-<div class="banner-payment" style="background-image: url('/images/banner_registration.jpg')">
+<div class="banner-payment" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
-		<div class="pull-left">
-			<img src="/images/payment_icon.png" class="payment-bg">
+		<div class="title-holder-page" style="">
+			PROOF OF PAYMENT
 		</div>
 	</div>
 </div>

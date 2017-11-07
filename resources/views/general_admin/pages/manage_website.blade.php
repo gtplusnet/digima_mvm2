@@ -37,7 +37,7 @@
 {
 	padding:10px 10px 10px 10px;
 	width:200px;
-	background-color: #10e0bd;
+	background-color: #cbd1d2;
 }
 .center {
 margin: auto;
@@ -62,11 +62,11 @@ padding: 10px;
 			
 			<div class="modal-body" style="margin-bottom: 250px;">
 				<div class="website-title">
-					Add City
+					Edit City
 				</div>
 				<div class="website-content col-md-12">
 					<div class="web-content">
-						<input type="text" id="count_name_edit" class="form-text center" placeholder="County Name" readOnly/>
+						<input type="text" id="county_name_edit" class="form-text center" placeholder="County Name" readOnly/>
 					</div>
 					<div class="web-content">
 						<input type="text" id="city_name_edit" class="form-text center" placeholder="City Name" required/>
@@ -138,10 +138,9 @@ padding: 10px;
 								</td>
 							</tr>
 							@endforeach
-							
-							
 						</tbody>
 					</table>
+					{!! $_membership->render() !!}
 				</div>
 			</div>
 		</div>
@@ -190,8 +189,10 @@ padding: 10px;
 							@endforeach
 						</tbody>
 					</table>
+					{!! $_county->render() !!}
 				</div>
 			</div>
+			
 		</div>
 		<div class="row">
 			<div class="col-md-5 " style="margin:10px 0px 10px 10px;background-color: #F1F4F9;">
@@ -220,6 +221,7 @@ padding: 10px;
 					</div>
 				</div>
 			</div>
+			
 			<div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
 				<div class="website-title">
 					City List
@@ -251,10 +253,9 @@ padding: 10px;
 								</td>
 							</tr>
 							@endforeach
-							
-							
 						</tbody>
 					</table>
+					{!! $_city->render() !!}
 				</div>
 			</div>
 		</div>
@@ -301,7 +302,7 @@ padding: 10px;
 				<div class="website-content col-md-12">
 					
 					<div class="web-content">
-						<input type="text" id="count_name_edit" class="form-text center" placeholder="County Name" required/>
+						<input type="text" id="count_name_edit" class="form-text center count_name_edit" placeholder="County Name" required/>
 						<input type="hidden" id="count_id_edit" />
 					</div>
 					<div class="web-content">
