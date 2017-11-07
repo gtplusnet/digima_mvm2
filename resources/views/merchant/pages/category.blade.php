@@ -61,9 +61,13 @@
                 <div class="website-title">
                     Category List
                 </div>
-                
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="website-content col-md-12" id="showk">
+                      @if (Session::has('message1'))
+                      <div class="alert alert-success">
+                         <center>{{ Session::get('message1') }}</center>
+                      </div>
+                      @endif 
                     <table class="table table-bordered" style="margin-top:8px;">
                         <thead>
                             <tr>
@@ -77,17 +81,17 @@
                             @foreach($_category as $category)
                             <tr>
                             <td>{{$category->business_category_id}}</td>
-                            
-                            <td><input type="checkbox" name="category_id[]" value="{{$category->business_category_id}}"></td>
+
+                            <td><input type="checkbox" name="category_id[]" value="business_category_id" name="business_id"></td>
 
                             <td>{{$category->business_category_name}}</td>
-                            <td><p style="font-size:20px"><i class="fa fa-tags center  viewSubs" aria-hidden="true" data-id="{{$category->business_category_id}}"></i></p></td>
+                            <td><p style="font-size:20px"><i class="fa fa-search center  viewSubs" aria-hidden="true" data-id="{{$category->business_category_id}}"></i></p></td>
                             </tr>
                             @endforeach   
                         </tbody>
                     </table>
                 <div class="web-content">
-                    <button type="submit" class="form-button center">Add Tag</button>
+                    <button type="submit" class="form-button center" >Add Tag</button>
                 </div>
                 </div>             
             </div>
@@ -96,6 +100,11 @@
                     Tag List
                     </div>
                     <div class="website-content col-md-12">
+                     @if (Session::has('delete1'))
+                      <div class="alert alert-danger">
+                         <center>{{ Session::get('delete1') }}</center>
+                      </div>
+                      @endif 
                         <table class="table table-bordered" style="margin-top:10px;">
                             <thead>
                                 <tr>
@@ -107,10 +116,11 @@
                             <tbody>
                                 @foreach($_subcategory as $subcategory)
                                 <tr> 
-                                    <td></td>
-                                    <td></td>
+
+                                    <td>{{$subcategory->business_tag_category_id }}</td>
+                                    <td>{{$subcategory->business_category_id }}</td>
                                     <td>
-                                        <a href=""><button type="button" class="btn btn-danger">
+                                        <a href="/merchant/delete_tag_category/{{$subcategory->business_tag_category_id }}"><button type="button" class="btn btn-danger">
                                         <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
                                     </td>
                                 </tr>
@@ -130,12 +140,13 @@
                     </div>
                   
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                       @if (Session::has('message'))
+                     
+                    <div class="website-content col-md-12">
+                          @if (Session::has('message'))
                       <div class="alert alert-success">
                          <center>{{ Session::get('message') }}</center>
                       </div>
                       @endif 
-                    <div class="website-content col-md-12">
                         <div class="web-content">
                             <input type="text" name="keywords_name" id="business_tag_keywords_id " class="form-text center" placeholder=" Keywords Name" required/>
                         </div>
@@ -150,7 +161,7 @@
                         Keywords List
                     </div>
                     <div class="website-content col-md-12">
-                           @if (Session::has('delete'))
+                      @if (Session::has('delete'))
                       <div class="alert alert-danger">
                          <center>{{ Session::get('delete') }}</center>
                       </div>

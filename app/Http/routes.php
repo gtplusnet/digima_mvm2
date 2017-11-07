@@ -78,6 +78,7 @@ Route::get('/merchant/category/delete_keywords/{id}', 	'MerchantController@delet
 
 Route::get('/merchant/tag_category', 	'MerchantController@tag_category');
 Route::post('/merchant/add_tag_category', 	'MerchantController@add_tag_category');
+Route::any('/merchant/delete_tag_category/{id}', 'MerchantController@delete_tag_category');
 
 
 

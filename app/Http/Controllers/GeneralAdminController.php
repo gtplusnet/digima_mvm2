@@ -723,7 +723,7 @@ class GeneralAdminController extends Controller
     $ins['date_created'] = date("Y/m/d");
     $ins['agent_call'] = '0';
     $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-    dd($ins);
+    // dd($ins);
         if($ins['password']=='')
         {
             return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";

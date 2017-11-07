@@ -20,6 +20,7 @@ use App\Models\TblBusinessImages;
 use App\Models\TblBusinessKeywordsModel;
 use App\Models\TblBusinessCategoryModel;
 use App\Models\TblBusinessSubCategoryModel;
+use App\Models\TblBusinessTagCategoryModel;
 use Redirect;
 use insert;
 use DB;
@@ -305,7 +306,7 @@ class MerchantController extends Controller
       TblPaymentMethod::insert($data); 
       Session::flash('message', "Payment Save");
         return Redirect::back();
-     
+  
     }
 
      public function delete_payment_method($id)
@@ -395,27 +396,31 @@ class MerchantController extends Controller
 		  Self::allow_logged_in_users_only();
 		  $data['page']			 = 'Category';
       $data['_category'] = TblBusinessCategoryModel::where('parent_id',0)->get();
-      $data['_subcategory'] = TblBusinessKeywordsModel::get();
+      $data['_subcategory'] = TblBusinessTagCategoryModel::get();
       $data['_keywords'] = TblBusinessKeywordsModel::get();
 		  return view('merchant.pages.category', $data);		
   	}
 
      public function tag_category(Request $request)
     {
-
       $data['_category'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
       return view('merchant.pages.subcategory_list',$data);
-
     }
 
      public function add_tag_category(Request $request)
     {
-     
-      // dd($request->category_id);
-      $data['business_category_id'] = $request->business_category_id;
-      $_insert = TblBusinessCategoryModel::whereIn('business_category_id', $request->category_id)->get();
-      // dd($_insert);
-      TblBusinessCategoryModel::insert();
+      $data['business_tag_category_id'] = $request->business_tag_category_id;
+      $_insert = TblBusinessTagCategoryModel::whereIn('business_id', $request->category_id)->get();
+      // dd($request->business_category_id);
+      TblBusinessTagCategoryModel::insert($data);
+      Session::flash('message1', "Done Tagging!");
+      return Redirect::back();
+    }
+
+      public function delete_tag_category($id)
+    {
+      TblBusinessTagCategoryModel::where('business_tag_category_id',$id)->delete();
+      Session::flash('delete1', "Tag Category Deleted!");
       return Redirect::back();
     }
 
@@ -435,6 +440,7 @@ class MerchantController extends Controller
       return Redirect::back();
     }
    
+
     public function messages(Request $request)
     {
       Self::allow_logged_in_users_only();
@@ -488,3 +494,4 @@ class MerchantController extends Controller
     }
 
 }
+  

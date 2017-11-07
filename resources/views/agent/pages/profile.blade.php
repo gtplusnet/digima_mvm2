@@ -25,8 +25,9 @@
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-md-3 user-profile">
-                    <h3 class="text-center">{{$agent_info->first_name}}</h3>
+                    <h3 class="text-center">{{session('full_name')}}</h3>
                     <p class="text-center">{{$agent_info->email}}</p>
+                     <p class="text-center">{{$agent_info->position}}</p>
                     <hr>
                     <ul class="list-unstyled text-center">
                         <li><p><i class="fa fa-map-marker m-r-xs"></i>{{$agent_info->agent_address}}</p></li>
