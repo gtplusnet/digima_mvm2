@@ -25,13 +25,13 @@
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-md-3 user-profile">
-                    <h3 class="text-center">{{$agent_info->first_name }}</h3>
+                    <h3 class="text-center">{{$agent_info->first_name}}</h3>
                     <p class="text-center">{{$agent_info->email}}</p>
                     <hr>
                     <ul class="list-unstyled text-center">
                         <li><p><i class="fa fa-map-marker m-r-xs"></i>{{$agent_info->agent_address}}</p></li>
                         <li><p><i class="fa fa-envelope m-r-xs"></i><a href="#">{{session('email')}}</a></p></li>
-                        <li><p><i class="fa fa-link m-r-xs"></i><a href="#">www.themeforest.net</a></p></li>
+                      <!--   <li><p><i class="fa fa-facebook-square"></i><a href="#">{{$agent_info->facebook_url}}</a></p></li> -->
                     </ul>
                     <hr>
                     <button class="btn btn-primary btn-block"><i class="fa fa-plus m-r-xs"></i>Follow</button>

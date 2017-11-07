@@ -185,14 +185,14 @@
                 <div class="panel-body">
                     <div class="col-md-4 pull-right">
                         <div class="col-md-6">
-                            <select class="form-control " name="date_start" id="date_start1" style="width: 150px; border-radius: 20px;">
+                            <select class="form-control " name="date_start1" id="date_start1" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_pending as $clients_pendings)
                                 <option value="{{$clients_pendings->date_transact}}">{{date("F j, Y",strtotime($clients_pendings->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control " name="date_end" id="date_end1" style="width: 150px; border-radius: 20px;">
+                            <select class="form-control " name="date_end1" id="date_end1" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_pending as $clients_pendings)
                                 <option value="{{$clients_pendings->date_transact}}">{{date("F j, Y",strtotime($clients_pendings->date_transact))}}</option>
                                 @endforeach
@@ -242,14 +242,14 @@
                 <div class="panel-body">
                     <div class="col-md-4 pull-right">
                         <div class="col-md-6">
-                            <select class="form-control " name="date_start" id="date_start2" style="width: 150px; border-radius: 20px;">
+                            <select class="form-control " name="date_start2" id="date_start2" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_activated as $clients_activates)
                                 <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control " name="date_end" id="date_end2" style="width: 150px; border-radius: 20px;">
+                            <select class="form-control " name="date_end2" id="date_end2" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients_activated as $clients_activates)
                                 <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
                                 @endforeach
@@ -266,7 +266,7 @@
                                 <th>Phone 1</th>
                                 <th>Phone 2</th>
                                 <th>Membership</th>
-                                <th>Date Register</th>
+                                <th>Date Registered</th>
                                 </tr>
                             </thead>
                             <tbody>

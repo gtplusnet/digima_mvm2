@@ -103,10 +103,7 @@
                             }
                            </style>
 
-                            {{-- <select class="language-select">
-                                <option val="english">English</option>
-                                <option val="croatian">Croatian</option>
-                            </select> --}}
+                            
                         </div>
                     </div>
                 </div>

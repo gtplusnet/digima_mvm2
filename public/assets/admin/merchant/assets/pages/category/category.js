@@ -18,23 +18,22 @@ function category()
 
     function event_on_check()
     {
-        $("body").on("change", ".checkbox-parent", function(e)
+        $(".viewSubs").click(function()
         {
-            getBusinessCategory();
-        });
-
-
-        $("body").on("change", ".checkbox-child", function(e)
-        {
-            getBusinessCategory();   
+            var parent_id = $(this).data("id");
+           
+           $.ajax({
+            type:'POST',
+            url:'/merchant/tag_category',
+            data:{parent_id: parent_id},
+            dataType:'text',
+            }).done(function(data)
+            {
+              $("#showk").html(data);
+            });
         });
 
     }
 
-    function getBusinessCategory()
-    {
-        console.log($('#checkbox:checked').map(function() {
-            return this.value;
-        }).get().join(', '));
-    }
+    
 }
