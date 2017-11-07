@@ -15,6 +15,11 @@ use App\Models\TblBusinessModel;
 use App\Models\TblBusinessHoursmodels;
 use App\Models\TblCountyModel;
 use App\Models\TblGuestMessages;
+use App\Models\Tbl_business_hours;
+use App\Models\TblBusinessImages;
+use App\Models\TblBusinessKeywordsModel;
+use App\Models\TblBusinessCategoryModel;
+use App\Models\TblBusinessSubCategoryModel;
 use Redirect;
 use insert;
 use DB;
@@ -116,18 +121,17 @@ class MerchantController extends Controller
         {
             $data['page']   = 'Merchant Login';
             return Redirect::back()->withErrors(['User Login is Incorect!'.$request->email.$request->password, 'User Login is Incorect!']);
-        }
-    }
+      }
+   }
 
-  public function logout()
-	{
-		Session::forget("merchant_login");
-        return Redirect::to("/login");
-	}
-  
+   public function logout()
+	 {
+		  Session::forget("merchant_login");
+      return Redirect::to("/login");
+	 }
 
-	public function index()
-	{	
+	 public function index()
+	 {	
 		Self::allow_logged_in_users_only();
         // $fb_page = '742953982442308'; 
 
@@ -143,12 +147,12 @@ class MerchantController extends Controller
 
         // // dd($details);
         // $data['fb'] = $details['fan_count'];
-        $data['fb']="james";
+        $data['fb']="526";
         $data['page']	= 'Dashboard';
 
 		return view ('merchant.pages.dashboard', $data);	
 		
-	}
+	  }
     public function merchant_redirect()
     {
       $data['countyList'] = TblCountyModel::get();
@@ -161,8 +165,7 @@ class MerchantController extends Controller
        return view('merchant.pages.merchant_redirect_exist',$data);
     }
 
-     public function payment()
-    
+    public function payment()
     {
         $data['page']   = 'payment';
         $data['countyList'] = TblCountyModel::get();
@@ -188,44 +191,42 @@ class MerchantController extends Controller
         // $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
         // $account_data->save();
         // echo 'Registered successfully ! But your account is pending.';
-   }
+     }
     public function upload_payment(Request $request)
     {
-       
-        // dd($data);
-        $file = $request->payment_file_name;
+          // dd($data);
+          $file = $request->file('payment_file_name');
         if($file==null||$file=='')
-        {
-           echo "mag browse ka muna ng picture!!!" ; 
-        }
+          {
+          echo "mag browse ka muna ng picture!!!" ; 
+          }
+    
         else
         {
-            $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
-            $file_ext = $file->getClientOriginalExtension();
-            $destinationPath = public_path('/payment_upload');
-            $check=$file->move($destinationPath, $filename);   
+          $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
+          $file_ext = $file->getClientOriginalExtension();
+          $destinationPath = public_path('/payment_upload');
+          $check=$file->move($destinationPath, $filename);   
             if($check)
-                {
-
-                    $data['payment_reference_number'] = $request->payment_reference_number;
-                    $data['payment_amount'] = $request->payment_amount;
-                    $data['payment_method'] = $request->payment_method;
-                    $data['payment_file_name'] = $filename;
-                    $data['business_contact_person_id'] = $request->contact_id;
-                    $data['business_id'] = $request->business_id;
-                    $data['payment_status'] = 'submitted';
-                    $check_insert = TblPaymentModel::insert($data);
-                    if($check_insert)
-                    {
-                        return Redirect::to('/merchant/redirect/exist');
-                    }
-                    else
-                    {
-                        echo "mali ka";
-                    }
-                }
+            {
+              $data['payment_reference_number'] = $request->payment_reference_number;
+              $data['payment_amount'] = $request->payment_amount;
+              $data['payment_method'] = $request->payment_method;
+              $data['payment_file_name'] = $filename;
+              $data['business_contact_person_id'] = $request->contact_id;
+              $data['business_id'] = $request->business_id;
+              $data['payment_status'] = 'submitted';
+              $check_insert = TblPaymentModel::insert($data);
+          if($check_insert)
+            {
+              return Redirect::to('/merchant/redirect/exist');
+            }
+             else
+            {
+          echo "mali ka";
         }
-       
+       }
+      }
     }
   public function payment_merchant(Request $request,$id)
   {
@@ -244,60 +245,73 @@ class MerchantController extends Controller
     return view('front.pages.payment_merchant', $data);
   }
 
-	public function profile()
-	{
-		Self::allow_logged_in_users_only();
-		$data['page']				= 'Profile';
-        $data['merchant_info'] = TblBusinessModel::where('business_id',session('business_id'))->first();
-		$data['_payment_method']	= Tbl_payment_method::get();   
-		return view ('merchant.pages.profile', $data);		
-	}
+	 public function profile()
+    {
+      Self::allow_logged_in_users_only();
+      $data['page']            = 'Profile';
+      $data['merchant_info']   = TblBusinessModel::where('business_id',session('business_id'))
+                               ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                                ->first();
+      $data['_payment_method'] = Tbl_payment_method::get(); 
+      $data['_other_info']     = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->get();
+      $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
+      $data['_images']   = TblBusinessImages::where('business_id',session('business_id'))->get();
+      return view ('merchant.pages.profile', $data);    
+    }
 
-	public function view_info()
-	{
-		Self::allow_logged_in_users_only();
-		$data['page']				= 'Profile';
-		return view ('merchant.pages.view_info', $data);		
-	}
+	  public function view_info()
+	  {
+		  Self::allow_logged_in_users_only();
+		  $data['page']			        	= 'Profile';
+	 	  return view ('merchant.pages.view_info', $data);		
+	  }
 
     public function add_other_info(Request $request)//
     {
-    	//dd(Request::input());
-    	Self::allow_logged_in_users_only();
-        $data["company_information"] = $request->company_information;
-        $data["business_website"] = $request->business_website;
-        $data["year_established"] = $request->year_established;
-        TblBusinessOtherInfoModel::insert($data); 
-        Session::flash('add_info', "Other Information Save");
-        return Redirect::back();
+    
+      Self::allow_logged_in_users_only();
+      $data["company_information"] = $request->company_information;
+      $data["business_website"]    = $request->business_website;
+      $data["year_established"]    = $request->year_established;
+      TblBusinessOtherInfoModel::where('business_id',session('business_id'))->update($data);
+      Session::flash('add_info', "Information Updated");
+      return Redirect::back();
+    }
+
+    public function update_hours(Request $request)
+    {
+
+      $business_hours_to = $request->input('business_hours_to');
+      $business_hours_from = $request->input('business_hours_from');
+      $business_id = $request->input('business_id');
+      $days = $request->input('days');
+      foreach($business_hours_from as $key => $business_hours_f)
+      {
+          // echo $sp." to time ".$business_hours_to[$key]." with day ".$days[$key]."<br>";
+          $data['business_hours_from']= $business_hours_f;
+          $data['business_hours_to']= $business_hours_to[$key];  
+          $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
+      }
+      
+      return Redirect::back();  
+    
     }
 
      public function add_payment_method(Request $request)
     {
-      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_id"]   = $request->payment_method_id;
       $data["payment_method_name"] = $request->payment_method_name;
       TblPaymentMethod::insert($data); 
       Session::flash('message', "Payment Save");
-      return Redirect::back();
+        return Redirect::back();
+     
     }
 
      public function delete_payment_method($id)
     {
       TblPaymentMethod::where('payment_method_id',$id)->delete();
       Session::flash('danger', "Payment Deleted");
-      return Redirect::back();
-    }
-
-
-    public function add_messages(Request $request)
-    {
-      $data["guest_messages_id"] = $request->guest_messages_id;
-      $data["full_name"] = $request->full_name;
-      $data["email"] = $request->email;
-      $data["subject"] = $request->subject;
-      $data["messages"] = $request->messages;
-      TblGuestMessages::insert($data); 
-      Session::flash('message', "Message Information Added");
       return Redirect::back();
     }
 
@@ -308,65 +322,141 @@ class MerchantController extends Controller
       return Redirect::back();
     }
 
-
-      public function edit_payment_method(Request $request)
+    public function edit_payment_method(Request $request)
     {
-      $data["payment_method_id"] = $request->payment_method_id;
+      $data["payment_method_id"]   = $request->payment_method_id;
       $data["payment_method_name"] = $request->payment_method_name;
       TblPaymentMethod::where($data)->update($data);
-      // Session::flash('message', "Payment Save");
       return Redirect::back();
     }
 
-     public function add_business_category(Request $request)
+    public function add_business_category(Request $request)
     {
-      $data["business_category_id"] = $request->business_category_id;
+      $data["business_category_id"]   = $request->business_category_id;
       $data["business_category_name"] = $request->business_category_name;
       Tbl_business_category::insert($data); 
       Session::flash('message', "Category Added");
       return Redirect::back();
     }
 
-      public function delete_business_category($id)
+    public function delete_business_category($id)
     {
       Tbl_business_category::where('business_category_id',$id)->delete();
       Session::flash('danger', "Category Deleted");
       return Redirect::back();
     }
-  public function category()
-	{
-		Self::allow_logged_in_users_only();
-		$data['page']				= 'Category';
-		$data['categories']    = Tbl_business_category::get();
 
-   
-		return view('merchant.pages.category', $data);		
-	}
+     public function add_images(Request $request)
+    { 
+        $file = $request->file('business_banners');
+        $file1 = $request->file('other_image_one');
+        $file2 = $request->file('other_image_two');
+        $file3 = $request->file('other_image_three');
+        if($file==null||$file=='')
+          {
+            echo "Walang kang picture eh!!!";
+          }
+        else
+          {
+          $filename='/business_images/'.uniqid().$file->getClientOriginalName();
+          $filename1='/business_images/'.uniqid().$file1->getClientOriginalName();
+          $filename2='/business_images/'.uniqid().$file2->getClientOriginalName();
+          $filename3='/business_images/'.uniqid().$file3->getClientOriginalName();
+          $file_ext = $file->getClientOriginalExtension();
+          $file_ext = $file1->getClientOriginalExtension();
+          $file_ext = $file2->getClientOriginalExtension();
+          $file_ext = $file3->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file->move($destinationPath, $filename);
+          $check=$file1->move($destinationPath, $filename1);
+          $check=$file2->move($destinationPath, $filename2);
+          $check=$file3->move($destinationPath, $filename3);
+            if($check)
+            {
+              $data['business_banner'] = $filename;
+              $data['other_image_one'] = $filename1;
+              $data['other_image_two'] = $filename2;
+              $data['other_image_three'] = $filename3;
+              $check_insert = TblBusinessImages::where('business_id',session('business_id'))->update($data);
+              if($check_insert)
+                {
+                   return Redirect::back();
+                }
+              else
+                {   
+                  echo "mali ka";
+                }
+          }
+        }
+    }
+     
+	  public function category()
+	  {
+		  Self::allow_logged_in_users_only();
+		  $data['page']			 = 'Category';
+      $data['_category'] = TblBusinessCategoryModel::where('parent_id',0)->get();
+      $data['_subcategory'] = TblBusinessKeywordsModel::get();
+      $data['_keywords'] = TblBusinessKeywordsModel::get();
+		  return view('merchant.pages.category', $data);		
+  	}
 
-    public function messages(Request $request)
+     public function tag_category(Request $request)
     {
-        Self::allow_logged_in_users_only();
-        $data['page'] = 'Messages';
-        $data['guest_messages']    = TblGuestMessages::get(); 
-        return view ('merchant.pages.messages', $data);  
+
+      $data['_category'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
+      return view('merchant.pages.subcategory_list',$data);
+
+    }
+
+     public function add_tag_category(Request $request)
+    {
+     
+      // dd($request->category_id);
+      $data['business_category_id'] = $request->business_category_id;
+      $_insert = TblBusinessCategoryModel::whereIn('business_category_id', $request->category_id)->get();
+      dd($_insert);
+      TblBusinessCategoryModel::insert();
+      return Redirect::back();
+    }
+
+       public function add_keywords(Request $request)
+    {
+      $data['keywords_name'] = $request->keywords_name;
+      TblBusinessKeywordsModel::insert($data);
+      Session::flash('message', "Keyword Successfully Added!");
+      return Redirect::back();
     }
 
 
-	public function bills()
-	{
-		Self::allow_logged_in_users_only();
-		$data['page']	= 'Bills';
-		return view ('merchant.pages.bills', $data);		
-	}
-
-	public function sample()
-	{
-		return view ('merchant.pages.sample');	
-	}
-
-   public function sample2()
+     public function delete_keywords($id)
     {
-       
+      TblBusinessKeywordsModel::where('business_tag_keywords_id',$id)->delete();
+      Session::flash('delete', "Keyword Deleted!");
+      return Redirect::back();
+    }
+   
+    public function messages(Request $request)
+    {
+      Self::allow_logged_in_users_only();
+      $data['page'] = 'Messages';
+      $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->get();
+      return view ('merchant.pages.messages', $data);  
+    }
+
+  	public function bills()
+	  {
+		  Self::allow_logged_in_users_only();
+		  $data['page']	= 'Bills';
+		  return view ('merchant.pages.bills', $data);		
+	  }
+
+	  public function sample()
+	  {
+		  return view ('merchant.pages.sample');	
+	  }
+
+    public function sample2()
+    {
         return view ('sample2');  
     }
 
