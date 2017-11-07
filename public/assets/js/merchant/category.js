@@ -18,12 +18,12 @@ function category()
 
     function event_on_check()
     {
-        $(".viewSubs").click(function()
+        $(document).on('click','.viewSubs',function()
         {
             var parent_id = $(this).data("id");
-           
+             alert(parent_id);
            $.ajax({
-            type:'POST',
+            type:'GET',
             url:'/merchant/tag_category',
             data:{parent_id: parent_id},
             dataType:'text',

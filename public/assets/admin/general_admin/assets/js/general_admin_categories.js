@@ -163,28 +163,6 @@ function manage_categories()
 				});
 	    });
     }
-
-    function update_hours()
-    {
-        $('.update_hours').click(function(){
-			var business_hours_from = $('#business_hours_from_edit').val();
-			var business_hours_to = $('#business_hours_to_edit').val();
-			$.ajax({
-				type:'POST',
-				url:'/merchant/profile/update_hours',
-				data:{
-					business_hours_from: business_hours_from,business_hours_to: business_hours_to
-					 },
-				dataType:'text',
-			}).done(function(data){
-				dd(Request::input());
-				 //    $('#categoryEdit').modal('hide');
-					// $('#success_alert').html(data);
-		 		//     $('#successModal').modal('show');
-				});
-	    });
-	    
-    }
 	function sub_category_action()
 	{
 		$(document).on('change','.sub_category_action',function()

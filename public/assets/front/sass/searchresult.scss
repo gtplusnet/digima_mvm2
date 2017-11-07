@@ -5,11 +5,18 @@
     min-height: 175px;
     position: relative;
 }
+.banner-business-searchresult
+{
+    background-size: cover;
+    background-position: center;
+    min-height: 350px;
+    position: relative;
+}
 .search-text
 {
 	color: #fff;
     font-size: 16px;
-    margin-top: 90px;
+    margin-top: 0px;
     padding-right: 60px;
 }
 .search-link,.search-link:hover

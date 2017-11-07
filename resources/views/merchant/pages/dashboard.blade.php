@@ -1,6 +1,6 @@
 @extends('merchant.layout.layout')
 @section('content')
-<link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
+<!-- <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" /> -->
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
 <div class="page-title">

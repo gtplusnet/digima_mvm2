@@ -42,7 +42,7 @@
 							</div>
 							<div class="col-md-12 login-textfield-container-lastpart">
 								<button class="login-btn">LOGIN</button>
-								<a href=""><p class="forgot-password-label">Forgot Password?</p></a>
+								<a href="/forgot/password"><p class="forgot-password-label">Forgot Password?</p></a>
 							</div>
 						</form>
 					</div>

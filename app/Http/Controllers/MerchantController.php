@@ -17,6 +17,9 @@ use App\Models\TblCountyModel;
 use App\Models\TblGuestMessages;
 use App\Models\Tbl_business_hours;
 use App\Models\TblBusinessImages;
+use App\Models\TblBusinessKeywordsModel;
+use App\Models\TblBusinessCategoryModel;
+use App\Models\TblBusinessSubCategoryModel;
 use Redirect;
 use insert;
 use DB;
@@ -301,6 +304,7 @@ class MerchantController extends Controller
       $data["payment_method_name"] = $request->payment_method_name;
       TblPaymentMethod::insert($data); 
       Session::flash('message', "Payment Save");
+        return Redirect::back();
      
     }
 
@@ -323,7 +327,6 @@ class MerchantController extends Controller
       $data["payment_method_id"]   = $request->payment_method_id;
       $data["payment_method_name"] = $request->payment_method_name;
       TblPaymentMethod::where($data)->update($data);
-      // Session::flash('message', "Payment Save");
       return Redirect::back();
     }
 
@@ -391,16 +394,42 @@ class MerchantController extends Controller
 	  {
 		  Self::allow_logged_in_users_only();
 		  $data['page']			 = 'Category';
-      $data['_category'] = Tbl_business_category::get();
-      $data['_keywords'] = Tbl_business_category::get();
-		return view('merchant.pages.category', $data);		
+      $data['_category'] = TblBusinessCategoryModel::where('parent_id',0)->get();
+      $data['_subcategory'] = TblBusinessKeywordsModel::get();
+      $data['_keywords'] = TblBusinessKeywordsModel::get();
+		  return view('merchant.pages.category', $data);		
   	}
 
-      public function add_category(Request $request)
+     public function tag_category(Request $request)
     {
+
+      $data['_category'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
+      return view('merchant.pages.subcategory_list',$data);
+
+    }
+
+     public function add_tag_category(Request $request)
+    {
+      // dd(123);
+      $data['business_category_id'] = $request->business_category_id;
       $data['business_category_name'] = $request->business_category_name;
-      Tbl_business_category::insert($data);
-      return "<div class='alert alert-success'><strong>Success!</strong>County Added.</div>"; 
+      TblBusinessCategoryModel::insert();
+      return Redirect::back();
+    }
+
+       public function add_keywords(Request $request)
+    {
+      $data['keywords_name'] = $request->keywords_name;
+      TblBusinessKeywordsModel::insert($data);
+      Session::flash('message', "Keyword Successfully Added!");
+      return Redirect::back();
+    }
+
+     public function delete_keywords($id)
+    {
+      TblBusinessKeywordsModel::where('business_tag_keywords_id',$id)->delete();
+      Session::flash('delete', "Keyword Deleted!");
+      return Redirect::back();
     }
    
     public function messages(Request $request)

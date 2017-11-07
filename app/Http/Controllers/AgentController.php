@@ -143,8 +143,9 @@ class AgentController extends Controller
         
         $data['clients_pending'] = TblBusinessModel::where('business_status', 4)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
 

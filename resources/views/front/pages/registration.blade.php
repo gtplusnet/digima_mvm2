@@ -2,7 +2,7 @@
 @section('title', 'Registration')
 @section('content')
 
-<div class="banner-registration" style="background-image: url('/images/banner_registration.jpg')">
+<div class="banner-registration" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		<div class="pull-left">
 			<img src="/images/registration_icon.png" class="registration-bg">
@@ -14,7 +14,7 @@
 	{{ csrf_field() }}
 	<div class="col-md-6 form-leftpart">
 		<div class="col-md-12 registration-title-container">
-			<p class="registration-form-title">ENTER YOUR PERSONAL INFORMATION</p>
+			<p class="registration-form-title">PERSONAL INFORMATION</p>
 		</div>	
 		<div class="col-md-12 form-upper-container">			
 			<div class="col-md-12 registration-form-container">
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 		<div class="col-md-12 registration-title-container">
-			<p class="registration-form-title">ENTER YOUR BUSINESS INFORMATION</p>
+			<p class="registration-form-title">BUSINESS INFORMATION</p>
 		</div>
 		<div class="col-md-12 form-bottom-container">
 			<div class="col-md-12 registration-form-container">
