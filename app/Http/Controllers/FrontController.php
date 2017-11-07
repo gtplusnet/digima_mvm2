@@ -45,26 +45,7 @@ class FrontController extends Controller
     //       return Redirect::to("/home")->send();
     //     }
     // }
-    public static function directory()
-    {
-        $data['countyList'] = TblCountyModel::get();
-        $data['cityList'] = TblCityModel::get();
-        Session::forget("merchant_login");
-        Session::forget("full_name");
-        Session::forget("email");
-        Session::forget("business_name");
-        Session::forget("business_id");
-        Session::forget("business_contact_person_id");
-        Session::forget("business_address");
-        Session::forget("city_state");
-        Session::forget("zip_code");
-        // TblBusinessModel::where('business_status',5)
-        $data["_business_list"] = TblBusinessModel::  
-                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                ->paginate(9);
-        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
-        return view('front.pages.home',$data);
-    }
+    
     public function index()
     {
         $data['countyList'] = TblCountyModel::get();
@@ -79,8 +60,12 @@ class FrontController extends Controller
         Session::forget("city_state");
         Session::forget("zip_code");
         // TblBusinessModel::where('business_status',5)
-        $data["_business_list"] = TblBusinessModel::  
-                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+        $data["_business_list"] = TblBusinessModel:: where('business_status',5)
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->orderBy('tbl_business.membership',"ASC")
+                                ->paginate(9);
+        $data["_featured_list"] = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->paginate(9);
         $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
         return view('front.pages.home',$data);
