@@ -77,7 +77,8 @@
                             @foreach($_category as $category)
                             <tr>
                             <td>{{$category->business_category_id}}</td>
-                            <td><input type="checkbox" name="category_id[]" value="123"></td>
+                            
+                            <td><input type="checkbox" name="category_id[]" value="{{$category->business_category_id}}"></td>
 
                             <td>{{$category->business_category_name}}</td>
                             <td><p style="font-size:20px"><i class="fa fa-tags center  viewSubs" aria-hidden="true" data-id="{{$category->business_category_id}}"></i></p></td>

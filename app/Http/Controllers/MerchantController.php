@@ -410,9 +410,11 @@ class MerchantController extends Controller
 
      public function add_tag_category(Request $request)
     {
-      // dd(123);
+     
+      // dd($request->category_id);
       $data['business_category_id'] = $request->business_category_id;
-      $data['business_category_name'] = $request->business_category_name;
+      $_insert = TblBusinessCategoryModel::whereIn('business_category_id', $request->category_id)->get();
+      dd($_insert);
       TblBusinessCategoryModel::insert();
       return Redirect::back();
     }
