@@ -200,11 +200,11 @@
             // pie chart data
             var pieData = [
                 {
-                    value: {{$countCall+2}},
+                    value: {{$countCall}},
                     color:"#1DC7EA"
                 },
                 {
-                    value : {{$countMP3+1}},
+                    value : {{$countMP3}},
                     color : "#FF4A55"
                 },
                 {

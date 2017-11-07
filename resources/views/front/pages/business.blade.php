@@ -17,7 +17,7 @@
                     <p class="businesses-map" ><i class="fa fa-map-marker map" style="color:#f9c200;margin-right:10px;"></i>{{$business_info->business_complete_address}}</p>
                 </div> 
                 <div class="businesses-details-containers pull-right">
-                    <button class="btn btn-primary">Skype</button><buton class="btn btn-danger">Email</buton>
+                    <button class="btn btn-primary pull-right">Skype</button><buton class="btn btn-danger pull-right">Email</buton>
                 </div>    
             </div>
         </div>

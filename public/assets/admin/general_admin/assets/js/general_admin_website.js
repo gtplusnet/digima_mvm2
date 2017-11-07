@@ -134,7 +134,7 @@ function manage_website()
 	     	var city_name = $(this).data("name");
 	     	var city_zip = $(this).data("zip");
 	     	$("#city_id_edit").val(city_id);
-	     	$("#count_name_edit").val(count_name);
+	     	$("#county_name_edit").val(count_name);
 	     	$("#city_name_edit").val(city_name);
 	     	$("#city_zip_edit").val(city_zip);
 	     	$('#editCity').modal('show');
@@ -216,7 +216,7 @@ function manage_website()
 	     $('#editCityBtn').click(function(){
 	     	
 	     	var city_id = $("#city_id_edit").val();
-	     	var count_name = $("#count_name_edit").val();
+	     	var count_name = $("#county_name_edit").val();
 	     	var city_name = $("#city_name_edit").val();
 	     	var city_zip = $("#city_zip_edit").val();
          	$.ajax({

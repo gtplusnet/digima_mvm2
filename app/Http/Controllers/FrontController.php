@@ -22,6 +22,7 @@ use App\Models\Tbl_audio;
 use App\Models\TblMembeshipModel;
 use App\Models\TblGuestMessages;
 use App\Models\TblBusinessCategoryModel;
+use App\Models\TblReportsModel;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -45,6 +46,7 @@ class FrontController extends Controller
     //       return Redirect::to("/home")->send();
     //     }
     // }
+    
     public function index()
     {
         $data['countyList'] = TblCountyModel::get();
@@ -59,12 +61,18 @@ class FrontController extends Controller
         Session::forget("city_state");
         Session::forget("zip_code");
         // TblBusinessModel::where('business_status',5)
-        $data["_business_list"] = TblBusinessModel::  
-                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+        $data["_business_list"] = TblBusinessModel:: where('business_status',5)
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->orderBy('tbl_business.membership',"ASC")
+                                ->paginate(9);
+        $data["_featured_list"] = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->paginate(9);
         $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
-
-
+        $data['_most_viewed']    = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                ->limit(4)
+                                ->orderBy('tbl_reports.business_views',"DESC")
+                                ->get();
         return view('front.pages.home',$data);
     }
 
@@ -86,25 +94,29 @@ class FrontController extends Controller
     }
     public function get_sub_category(Request $request)
     {
-        $data["_business_list"] = TblBusinessModel::  
-                                join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                ->paginate(9);
+        
+
         $check = TblBusinessCategoryModel::where('business_category_id',$request->parent_id)->first();
         $cat = array($check->business_category_name);
+        $cat1 = array($check->business_category_id);
         if($check->parent_id!=0)
         {
             
             $check1 = TblBusinessCategoryModel::where('business_category_id',$check->parent_id)->first();
             $cat = array( $check1->business_category_name,$check->business_category_name);
+            $cat1 = array( $check1->business_category_id,$check->business_category_id);
                 
             if($check1->parent_id!=0)
             {
                 $check2 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
                 $cat = array($check2->business_category_name,$check1->business_category_name,$check->business_category_name);
+                $cat1 = array($check2->business_category_id,$check1->business_category_id,$check->business_category_id);
+                 
                 if($check2->parent_id)
                 {
                     $check3 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
                     $cat = array($check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
+                    $cat1 = array($check3->parent_id,$check2->parent_id,$check1->parent_id,$check->parent_id );
                 }
                 else
                 {
@@ -118,10 +130,24 @@ class FrontController extends Controller
         }
         else
         {
-            
+          
         }
+        $data['value'] = $cat1;
         $data['_filtered'] = $cat;
+        $data['_categories_list'] = TblBusinessCategoryModel::where('parent_id',0)->get();
+        $data["_business_list"] = TblBusinessModel:: where('business_status',5)
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->orderBy('tbl_business.membership',"ASC")
+                                ->paginate(9);
+        $data["_featured_list"] = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->get();
         $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
+        $data['_most_viewed']    = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                ->limit(4)
+                                ->orderBy('tbl_reports.business_views',"DESC")
+                                ->get();
+        
         return view("front.pages.show_list",$data);
 
     }
@@ -233,50 +259,8 @@ class FrontController extends Controller
             } 
         }
 
-     //    else
-     //    {
-	    //     $business_data = new TblBusinessModel;
-	    //     $business_data->business_id = '';
-	    //     $business_data->business_name = $request->business_name;
-	    //     $business_data->city_id = $request->city_list;
-	    //     $business_data->business_complete_address = $request->business_address;
-	    //     $business_data->business_phone = $request->primary_business_phone;
-	    //     $business_data->business_alt_phone = $request->secondary_business_phone;
-	    //     $business_data->business_fax = $request->fax_number;
-	    //     $business_data->facebook_url = $request->facebook_url;
-	    //     $business_data->twitter_url = $request->twitter_username;
-     //        $business_data->membership = $request->membership;
-     //        // $business_data->date_created = Carbon::now();
-     //        $business_data->date_created = date("Y/m/d");
-     //        $business_data->save();
-
-	    //     $contact_data = new TblBusinessContactPersonModel;
-	    //     $contact_data->business_contact_person_id = '';
-	    //     $contact_data->contact_prefix = $request->prefix;
-	    //     $contact_data->contact_first_name = $request->first_name;
-	    //     $contact_data->contact_last_name = $request->last_name;
-	    //     $contact_data->business_id = $business_data->business_id;
-     //        $contact_data->save();
-
-
-     //        $account_data = new TblUserAccountModel;
-     //        $account_data->user_email = $request->email;
-     //        $account_data->user_password = password_hash($request->password, PASSWORD_DEFAULT);
-     //        $account_data->user_category = 'merchant';
-     //        $account_data->status = 'registered';
-     //        $account_data->business_id = $business_data->business_id;
-     //        $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
-     //        $account_data->save();
-  
-    	// }
 	}
-    //   public function payment()
-    // {
-    //     $data['page']   = 'payment';
-    //     return view('front.pages.payment', $data);
-    // }
-
-   
+    
 
     public function businessSearch(Request $request)
     {
@@ -311,7 +295,20 @@ class FrontController extends Controller
         $data['page']   = 'business';
         $data['countyList'] = TblCountyModel::get();
         $data['business_id']= $id;
-        
+
+        $check = TblReportsModel::where('business_id',$id)->first();
+        if($check)
+        {
+            $update['business_id'] = $id;
+            $update['business_views'] = $check->business_views + 1;
+            TblReportsModel::where('business_id',$id)->update($update);   
+        }
+        else
+        {
+            $insert['business_id'] = $id;
+            $insert['business_views'] = '1';
+            TblReportsModel::insert($insert);   
+        }
         $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')

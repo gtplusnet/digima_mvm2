@@ -52,6 +52,7 @@
         </ol>
     </div>
 </div>
+
 <div id="wraper">
     <div class="container">
         <div class="row">
@@ -183,3 +184,4 @@
 <script type="text/javascript" src="/assets/js/merchant/category.js"></script>
 
 @endsection
+

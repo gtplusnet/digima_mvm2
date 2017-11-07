@@ -425,6 +425,7 @@ class MerchantController extends Controller
       return Redirect::back();
     }
 
+
      public function delete_keywords($id)
     {
       TblBusinessKeywordsModel::where('business_tag_keywords_id',$id)->delete();
