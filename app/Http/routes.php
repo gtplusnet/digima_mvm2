@@ -95,7 +95,7 @@ Route::get('/merchant/bills', 		'MerchantController@bills');
 //Eden/oliver
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info');
 Route::any('/merchant/add_payment_method', 'MerchantController@add_payment_method');
-Route::any('/merchant/delete_payment_method/{id}', 'MerchantController@delete_payment_method');
+Route::any('/merchant/delete_payment_method', 'MerchantController@delete_payment_method');
 Route::any('/merchant/edit_payment_method', 'MerchantController@edit_payment_method');
 
 

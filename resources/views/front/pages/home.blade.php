@@ -86,10 +86,10 @@ width:100%;
 								<div class="active item">
 									<div class="featured-details-container">
 										<div class="detail-picture-container side-list-img-width">
-											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
+											<img src="/images/yellow-finger-logo.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
 										</div>
 										<div class="detail-name-container">
-											<p class="detail-name-title">Name of Business</p>
+											<p class="detail-name-title">CROATIA</p>
 										</div>
 									</div>
 								</div>
@@ -159,13 +159,14 @@ width:100%;
 						<br>
 					</div>
 					<div class="col-md-12 payment-content">
+
 						<div class="col-md-5 package-container">
 							<div class="membership-offer">
 								PREMIUM PACKAGE
 							</div>
 							<hr>
 							<div class="membership-price">
-								<span >$52,500 / </span><span >month</span>
+								<span >$2,500  </span>
 							</div>
 							<hr>
 							<div class="membership-details">
@@ -187,7 +188,7 @@ width:100%;
 							</div>
 							<hr>
 							<div class="membership-price">
-								<span >$5,500 / </span><span >month</span>
+								<span >$5,500  </span>
 							</div>
 							<hr>
 							<div class="membership-details">
