@@ -1,7 +1,7 @@
 <div class="page-sidebar sidebar">
     <div class="page-sidebar-inner slimscroll">
         <ul class="menu accordion-menu">
-            <li class="{{ (Request::segment(2)=='') ? 'active' : ''  }}"><a href="/merchant/dashboard" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
+            <li class="{{ (Request::segment(2)=='dashboard') ? 'active' : ''  }}"><a href="/merchant/dashboard" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
 
             
             <li class="{{ (Request::segment(2) == 'profile') ? 'active' : ''  }}"><a href="/merchant/profile" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-user"></span><p>Profile</p></a></li>

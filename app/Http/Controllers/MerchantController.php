@@ -20,6 +20,7 @@ use App\Models\TblBusinessImages;
 use App\Models\TblBusinessKeywordsModel;
 use App\Models\TblBusinessCategoryModel;
 use App\Models\TblBusinessSubCategoryModel;
+use App\Models\TblABusinessPaymentMethodModel;
 use Redirect;
 use insert;
 use DB;
@@ -69,16 +70,12 @@ class MerchantController extends Controller
                    if($validate_login->status=="activated")
                    {
                     $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
-                                // ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                                 ->first();
-                    // dd($user_info);
-
                     Session::put("merchant_login",true);
                     Session::put("business_id",$user_info->business_id);
                     Session::put("email",$validate_login->user_email);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     $data['page']   = 'Dashboard';
-
                     return Redirect::to('/merchant/dashboard');
                    }
                    elseif($validate_login->status=="registered")
@@ -90,7 +87,6 @@ class MerchantController extends Controller
                                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                                           ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
                                           ->first();
-                                          // dd($user_info);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     Session::put("email",$user_info->user_email);
                     Session::put("business_name",$user_info->business_name);
@@ -252,12 +248,14 @@ class MerchantController extends Controller
       $data['page']            = 'Profile';
 
       $data['merchant_info']   = TblBusinessModel::where('business_id',session('business_id'))
-                               ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                                 ->first();
 
-		  $data['_payment_method'] = Tbl_payment_method::get(); 
-      $data['_other_info']     = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->get();
+
+		  $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->get();
+
+      $data['other_info']     = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
       $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
       $data['_images']   = TblBusinessImages::where('business_id',session('business_id'))->get();
 		  return view ('merchant.pages.profile', $data);		
@@ -279,8 +277,7 @@ class MerchantController extends Controller
       $data["business_website"]    = $request->business_website;
       $data["year_established"]    = $request->year_established;
       TblBusinessOtherInfoModel::where('business_id',session('business_id'))->update($data);
-      Session::flash('add_info', "Information Updated");
-      return Redirect::back();
+     return "<div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>";
     }
 
     public function update_hours(Request $request)
@@ -292,7 +289,6 @@ class MerchantController extends Controller
       $days = $request->input('days');
       foreach($business_hours_from as $key => $business_hours_f)
       {
-          // echo $sp." to time ".$business_hours_to[$key]." with day ".$days[$key]."<br>";
           $data['business_hours_from']= $business_hours_f;
           $data['business_hours_to']= $business_hours_to[$key];  
           $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
@@ -304,19 +300,20 @@ class MerchantController extends Controller
 
      public function add_payment_method(Request $request)
     {
-      $data["payment_method_id"]   = $request->payment_method_id;
-      $data["payment_method_name"] = $request->payment_method_name;
-      TblPaymentMethod::insert($data); 
-      Session::flash('message', "Payment Save");
-        return Redirect::back();
+      $data["payment_method_name"] = $request->paymentMethodName;
+      $data["payment_method_info"] = "not available";
+      $data["business_id"] = session("business_id");
+      TblABusinessPaymentMethodModel::insert($data); 
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Added.</div>";
      
     }
 
-     public function delete_payment_method($id)
+     public function delete_payment_method(Request $request)
     {
-      TblPaymentMethod::where('payment_method_id',$id)->delete();
+      $id = $request->paymentMethodId;
+      TblABusinessPaymentMethodModel::where('payment_method_id',$id)->delete();
       Session::flash('danger', "Payment Deleted");
-      return Redirect::back();
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method deleted.</div>";
     }
 
     public function delete_messages($id)
@@ -353,9 +350,9 @@ class MerchantController extends Controller
      public function add_images(Request $request)
     { 
         $file = $request->file('business_banners');
-        $file1 = $request->file('other_image_one');
-        $file2 = $request->file('other_image_two');
-        $file3 = $request->file('other_image_three');
+        // $file1 = $request->file('other_image_one');
+        // $file2 = $request->file('other_image_two');
+        // $file3 = $request->file('other_image_three');
         if($file==null||$file=='')
           {
             echo "Walang kang picture eh!!!";
@@ -363,25 +360,26 @@ class MerchantController extends Controller
         else
           {
           $filename='/business_images/'.uniqid().$file->getClientOriginalName();
-          $filename1='/business_images/'.uniqid().$file1->getClientOriginalName();
-          $filename2='/business_images/'.uniqid().$file2->getClientOriginalName();
-          $filename3='/business_images/'.uniqid().$file3->getClientOriginalName();
+          // $filename1='/business_images/'.uniqid().$file1->getClientOriginalName();
+          // $filename2='/business_images/'.uniqid().$file2->getClientOriginalName();
+          // $filename3='/business_images/'.uniqid().$file3->getClientOriginalName();
           $file_ext = $file->getClientOriginalExtension();
-          $file_ext = $file1->getClientOriginalExtension();
-          $file_ext = $file2->getClientOriginalExtension();
-          $file_ext = $file3->getClientOriginalExtension();
+          // $file_ext = $file1->getClientOriginalExtension();
+          // $file_ext = $file2->getClientOriginalExtension();
+          // $file_ext = $file3->getClientOriginalExtension();
           $destinationPath = public_path('/business_images');
           $check=$file->move($destinationPath, $filename);
-          $check=$file1->move($destinationPath, $filename1);
-          $check=$file2->move($destinationPath, $filename2);
-          $check=$file3->move($destinationPath, $filename3);
+          // $check=$file1->move($destinationPath, $filename1);
+          // $check=$file2->move($destinationPath, $filename2);
+          // $check=$file3->move($destinationPath, $filename3);
             if($check)
             {
               $data['business_banner'] = $filename;
-              $data['other_image_one'] = $filename1;
-              $data['other_image_two'] = $filename2;
-              $data['other_image_three'] = $filename3;
-              $check_insert = TblBusinessImages::where('business_id',session('business_id'))->update($data);
+              $data['business_id']    =  session("business_id");
+              // $data['other_image_one'] = $filename1;
+              // $data['other_image_two'] = $filename2;
+              // $data['other_image_three'] = $filename3;
+              $check_insert = TblBusinessImages::where('business_id',session('business_id'))->insert($data);
               if($check_insert)
                 {
                    return Redirect::back();
