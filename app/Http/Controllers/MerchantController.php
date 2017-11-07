@@ -414,7 +414,7 @@ class MerchantController extends Controller
       // dd($request->category_id);
       $data['business_category_id'] = $request->business_category_id;
       $_insert = TblBusinessCategoryModel::whereIn('business_category_id', $request->category_id)->get();
-      dd($_insert);
+      // dd($_insert);
       TblBusinessCategoryModel::insert();
       return Redirect::back();
     }
