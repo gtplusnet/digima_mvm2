@@ -1,7 +1,7 @@
  <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                   <th>ID</th>
+                                    <th>IDam</th>
                                     <th>Business Name</th>
                                     <th>Contact Person</th>
                                     <th>Phone 1</th>
@@ -25,7 +25,7 @@
                                     <td>{{$client->transaction_status}}</td>
                                    <!--  <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td> -->
                                 </tr>
-                                <div class="modal fade" id="myModal{{$client->business_id}}" role="dialog" >
+                               <!--  <div class="modal fade" id="myModal{{$client->business_id}}" role="dialog" >
                                     <div class="modal-lg modal-dialog">
                                         <div class="modal-content">
                                             
@@ -127,6 +127,6 @@
                                     </div>
                                 </div>
                              
-                                @endforeach
+                                @endforeach -->
                             </tbody>
                         </table>

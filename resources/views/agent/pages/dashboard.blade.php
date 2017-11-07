@@ -16,15 +16,16 @@
 <div class="wrapper">
    <div class="main-panel">
         
-
         <div class="content">
             <div class="container">
+
                 <div class="row">
+
                     <div class="col-md-4">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered</p>
+                                <p class="category">Registered / Sign up</p>
                             </div>
                             <div class="content">
                                 <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
@@ -32,56 +33,31 @@
                                 <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Sign Up Merchant
-                                        <i class="fa fa-circle text-success"></i> Registered Merchant
+                                        <i class="fa fa-circle text-danger"></i> Registered Merchant
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-clock-o"></i>  Updated 3 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">1  performance</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Date
-                                        <i class="fa fa-circle text-warning"></i> Quantity Sign-up
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        <i class="fa fa-history-o"></i> Updated 3 minutes ago
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-<!-- 
-                    <div class="col-md-10">
+
+                   
 
                     <div class="col-md-7">
-
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">24 Hours performance</p>
+                                <h4 class="title">Merchant Statistics</h4>
+                                <p class="category">Quantity Registered</p>
                             </div>
                             <div class="content">
                                 <div id="chartActivity" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Sign Up
-                                        <i class="fa fa-circle text-danger"></i>Activated
+                                        <i class="fa fa-circle text-info"></i> Date
+                                        <i class="fa fa-circle text-danger"></i> Quantity Registered
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -90,11 +66,32 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div> -->
                     </div>
-                </div>
+                     <div class="col-md-7">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Merchant Statistics</h4>
+                                 <p class="category">Quantity Sign Up</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartActivity1" class="ct-chart"></div>
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Date
+                                        <i class="fa fa-circle text-danger"></i> Quantity Sign-up
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div >
             </div>
+        </div>
     </div>
 </div>
 <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -110,21 +107,21 @@
             initChartist();
 
         });
+
         function initChartist(){    
         
         var dataSales = {
-          labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
+          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
           series: [
-             [287, 385, 490, 492, 554, 586, 698, 695, 752, 788, 846, 944],
-            [67, 152, 143, 240, 287, 335, 435, 437, 539, 542, 544, 647],
-            [23, 113, 67, 108, 190, 239, 307, 308, 439, 410, 410, 509]
+             [50, 285, 250, 352, 304, 480, 698,],
+             [150, 22, 133, 200, 87, 350, 35,],
+         
           ]
         };
-        
         var optionsSales = {
-          lineSmooth: false,
+          lineSmooth: true,
           low: 0,
-          high: 800,
+          high: 1000,
           showArea: true,
           height: "245px",
           axisX: {
@@ -149,12 +146,11 @@
     
         Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
         
-    
         var data = {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
           series: [
-            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-            [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
+            [302, 303, 220, 350, 350, 453, 326],
+            [152, 180, 280, 300, 280, 353, 300]
           ]
         };
         
@@ -163,7 +159,7 @@
             axisX: {
                 showGrid: false
             },
-            height: "245px"
+            height: "230px"
         };
         
         var responsiveOptions = [
@@ -177,19 +173,22 @@
           }]
         ];
         
-        Chartist.Bar('#chartActivity', data, options, responsiveOptions);
+        Chartist.Bar('#chartActivity1', data, options, responsiveOptions);
     
-        var dataPreferences = {
-            series: [
-                [25, 30, 20, 25]
-            ]
+          var data = {
+          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+          series: [
+            [250, 203, 220, 400, 380, 300, 450],
+            [172, 190, 150, 250, 1200, 150, 300]
+          ]
         };
         
-        var optionsPreferences = {
+        var optionsPreferences = 
+        {
             donut: true,
             donutWidth: 40,
             startAngle: 0,
-            total: 100,
+            total: 200,
             showLabel: false,
             axisX: {
                 showGrid: false
@@ -199,8 +198,8 @@
         Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
         
         Chartist.Pie('#chartPreferences', {
-          labels: ['62%','32%','6%'],
-          series: [62, 32, 6]
+          labels: ['95%','10%'],
+          series: [95, 10 ]
         });   
     }
 </script>

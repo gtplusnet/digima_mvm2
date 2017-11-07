@@ -41,6 +41,7 @@ Route::get('/success', 'FrontController@success');
 Route::get('/register', 'FrontController@register');
 Route::get('/redirect', 'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 'FrontController@business');
+Route::any('/guest/add_messages', 'FrontController@add_messages');
 Route::get('/business/details', 'FrontController@business_details');
 Route::get('/forgot/password', 'FrontController@forgot_password');
 Route::any('/home/get_sub_category', 'FrontController@get_sub_category');
@@ -55,18 +56,10 @@ Route::get('/resultsortgrid', 'SearchresultController@resultsortgrid');
 Route::get('/searchtabular', 'SearchresultController@searchtabular');
 
 
-
-
-	
-
-
-
 //james
 Route::get('/login', 'MerchantController@login');
 Route::post('/login', 'MerchantController@login_submit');
 Route::get('/merchant/logout', 'MerchantController@logout');
-
-
 Route::get('/merchant/payment',	'MerchantController@payment');
 Route::post('/merchant/upload_payment',	'MerchantController@upload_payment');
 Route::any('/merchant/add_other_info', 'MerchantController@add_other_info'); 
@@ -77,15 +70,21 @@ Route::get('/merchant/redirect', 			'MerchantController@merchant_redirect');
 Route::get('/merchant/redirect/exist', 			'MerchantController@merchant_redirect_exist');
 Route::get('/merchant/dashboard', 			'MerchantController@index');
 Route::get('/merchant/profile',		'MerchantController@profile');
+Route::get('/merchant/profile/update_hours',		'MerchantController@update_hours');
 Route::get('/merchant/category', 	'MerchantController@category');
+Route::get('/merchant/category/add_category', 	'MerchantController@add_category');
+Route::post('/merchant/category/add_keywords', 	'MerchantController@add_keywords');
+Route::get('/merchant/category/delete_keywords/{id}', 	'MerchantController@delete_keywords');
+
+Route::get('/merchant/tag_category', 	'MerchantController@tag_category');
+Route::post('/merchant/add_tag_category', 	'MerchantController@add_tag_category');
+
+
+
 Route::any('/merchant/add_business_category', 'MerchantController@add_business_category');
 Route::any('/merchant/delete_business_category/{id}', 'MerchantController@delete_business_category');
-
-
-
-
 Route::get('/merchant/messages', 	'MerchantController@messages');
-Route::any('/merchant/add_messages', 'MerchantController@add_messages');
+Route::any('/merchant/add_images', 'MerchantController@add_images');
 Route::any('/merchant/delete_messages/{id}', 'MerchantController@delete_messages');
 Route::get('/merchant/bills', 		'MerchantController@bills');
 
@@ -108,19 +107,16 @@ Route::any('/supervisor', 				'SuperVisorController@index');
 Route::post('/supervisor_login_submit', 	'SuperVisorController@supervisor_login_submit');
 Route::any('/supervisor_logout', 	'SuperVisorController@supervisor_logout');
 
-
-
-
 /*Route::post('/admin_login', 	'AdminController@admin_login_submit');*/
 
 Route::any('/supervisor/logout', 		'SuperVisorController@supervisor_logout');
 
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
 
+Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
+Route::get('/supervisor/profile', 		'SupervisorController@profile');
+Route::get('/supervisor/client', 		'SupervisorController@client');
 
-Route::get('/supervisor/dashboard', 		'SuperVisorController@dashboard');
-Route::get('/supervisor/profile', 		'SuperVisorController@profile');
-Route::get('/supervisor/client', 		'SuperVisorController@client');
 //james
 
 Route::post('/supervisor/get_client', 		'SuperVisorController@get_client');
@@ -262,23 +258,12 @@ Route::post('/general_admin/manage_website/update_city',        'GeneralAdminCon
 
 
 
-
-
-
-
 Route::any('/sample', 'MerchantController@sample');
 
 Route::any('/sample-upload', 'FrontController@sampleUpload');
 Route::any('/upload-file', 'FrontController@uploadFile');
 
 //oliver route
-
-
-
-
-
-
-
 
 
 Route::post('/general_admin/manage_user/edit_admin_submit', 	'GeneralAdminController@edit_admin_submit');

@@ -245,20 +245,24 @@ class MerchantController extends Controller
     return view('front.pages.payment_merchant', $data);
   }
 
+
 	 public function profile()
     {
       Self::allow_logged_in_users_only();
       $data['page']            = 'Profile';
+
       $data['merchant_info']   = TblBusinessModel::where('business_id',session('business_id'))
                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                                 ->first();
-      $data['_payment_method'] = Tbl_payment_method::get(); 
+
+		  $data['_payment_method'] = Tbl_payment_method::get(); 
       $data['_other_info']     = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->get();
       $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
       $data['_images']   = TblBusinessImages::where('business_id',session('business_id'))->get();
-      return view ('merchant.pages.profile', $data);    
-    }
+		  return view ('merchant.pages.profile', $data);		
+	  }
+
 
 	  public function view_info()
 	  {

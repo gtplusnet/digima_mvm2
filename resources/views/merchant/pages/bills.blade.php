@@ -22,37 +22,18 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Description</th>
+                                    <th>Membership</th>
                                     <th>Reference</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>                       
                             <tbody>
-                               <tr>
-                                    <td>Mar 2017</td>
-                                    <td>Monthly Fee</td>
-                                    <td><a href="#" class="dropdown-toggle waves-effect waves-button waves-classic">ref1234</a></td>
-                                    <td>Paid</td>
-                                </tr>
                                 <tr>
-                                    <td>Feb 2017</td>
-                                    <td>Monthly Fee</td>
+                                    <td>Platinum</td>
                                     <td><a href="#" class="dropdown-toggle waves-effect waves-button waves-classic">ref1234</a></td>
                                     <td>Paid</td>
                                 </tr>
-                                <tr>
-                                    <td>Jan 2017</td>
-                                    <td>Monthly Fee</td>
-                                    <td><a href="#" class="dropdown-toggle waves-effect waves-button waves-classic">ref1234</a></td>
-                                    <td>Paid</td>
-                                </tr>
-                                <tr>
-                                    <td>Dec 2016</td>
-                                    <td>Membership</td>
-                                    <td><a href="#" class="dropdown-toggle waves-effect waves-button waves-classic">ref1234</a></td>
-                                    <td>Paid</td>
-                                </tr>
+                               
                             </tbody>
                         </table>
                     </div>
@@ -61,6 +42,7 @@
         </div>
 
         <div class="invoice col-md-7">
+            <form class="form-horizontal" method="POST" action="/merchant/payment/{id}/{name}" style="">
             <div class="panel panel-white">
                 <div class="panel-body">
                     <div class="row">
@@ -78,10 +60,11 @@
                         <div class="col-md-12">
                             <hr>
                             <p>
-                                <strong>Invoice to</strong><br>
-                                John Doe<br>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107
+                                <strong>Invoice to</strong>
+                                <br>
+                                {{session('full_name')}}<br>
+                                <br>
+                                
                             </p>
                         </div>
                         <div class="col-md-12">
@@ -101,24 +84,7 @@
                                         <td>23</td>
                                         <td>$3157</td>
                                     </tr>
-                                    <tr>
-                                        <td>Item Two</td>
-                                        <td>Consectetur adipiscing elit</td>
-                                        <td>13</td>
-                                        <td>$940</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Item Three</td>
-                                        <td>Eget porttitor lorem</td>
-                                        <td>36</td>
-                                        <td>$2080</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Item Four</td>
-                                        <td>Integer molestie lorem at massa</td>
-                                        <td>29</td>
-                                        <td>$1105</td>
-                                    </tr>
+                                  
                                 </tbody>
                             </table>
                         </div>
@@ -138,11 +104,11 @@
                                 <h4 class="no-m m-t-md text-success">Total</h4>
                                 <h1 class="no-m text-success">$7522</h1>
                                 <hr>
-                                <button class="btn btn-primary">Submit your invoice</button>
                             </div>
                         </div>
                     </div><!--row-->
                 </div>
+             </form>
             </div>
         </div>
 

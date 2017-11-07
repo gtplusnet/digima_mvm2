@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblPaymentMethod;
@@ -21,6 +20,7 @@ use App\Models\Tbl_user_account;
 use App\Models\Tbl_business_hours;
 use App\Models\Tbl_audio;
 use App\Models\TblMembeshipModel;
+use App\Models\TblGuestMessages;
 use App\Models\TblBusinessCategoryModel;
 use App\Models\TblReportsModel;
 use Session;
@@ -294,7 +294,7 @@ class FrontController extends Controller
     {
         $data['page']   = 'business';
         $data['countyList'] = TblCountyModel::get();
-
+        $data['business_id']= $id;
 
         $check = TblReportsModel::where('business_id',$id)->first();
         if($check)
@@ -316,12 +316,24 @@ class FrontController extends Controller
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                           ->first();
+
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
         // dd($address);
         $data['coordinates']  = Self::getCoordinates_long($address);
         $data['coordinates1'] = Self::getCoordinates_lat($address);       
         return view('front.pages.business', $data);
     }
+     public function add_messages(Request $request)
+    { 
+      $data["email"]             = $request->email;
+      $data["subject"]           = $request->subject;
+      $data["messages"]          = $request->messages;
+      $data["business_id"]       = $request->business_id;
+      TblGuestMessages::insert($data);;
+      Session::flash('message', "Message Information Added");
+      return Redirect::back();
+    }
+
     public static function getCoordinates_long($address){
         $address = str_replace(" ", "+", $address); 
         $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
@@ -381,18 +393,19 @@ class FrontController extends Controller
     }
     public function contact_send(Request $request)
     {
-        $contact_name= $request->name;
-        $contact_email_add = $request->email_add;
+        $contact_name= $request->full_name;
+        $contact_email_add = $request->email;
         $contact_subject = $request->subject;
-        $contact_help_message = $request->help_message;
+        $contact_help_message = $request->messages;
         $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
 
-        $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
+        $data = array('full_name'=>$contact_name,'email'=>$contact_email,'subject'=>$contact_subject,'message'=>$contact_help_message,'date'=>$date);
         $check_mail = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
-         $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
+         $message->to('guardians35836@gmail.calculhmac(clent, data)om', 'Croatia Team')->subject
             ('THE RIGHT PLACE FOR BUSINESS');
          $message->from('guardians35836@gmail.com','Croatia Customer');
         });
+        $data['guest_messages']    = TblBusinessContactPersonModel::get(); 
         if($check_mail)
         {
             Session::flash('success', 'Thank you!. Your Message Send Successfully!');
@@ -404,8 +417,18 @@ class FrontController extends Controller
             return Redirect::to('/contact');
         }
     }
-    
-    
+
+ 
+    // public function business(Request $request)
+    // {
+    //     $data['page']   = 'business';
+    //     $data['business_info'] = DB::table('tbl_business')
+    //     ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
+    //     ->where('tbl_business.business_id', '=', $request->business_id)
+    //     ->get();
+    //     return view('front.pages.business', $data);
+    // }
+
     public function admin()
     {
         $data['page']   = 'generaladmin';
@@ -415,7 +438,6 @@ class FrontController extends Controller
     public function sampleUpload() {
         return view('practice-page.upload');
     }
-
     //UPLOAD FILE SAMPLE
     public function uploadFile(Request $request) {
         $file = $request->file("file");

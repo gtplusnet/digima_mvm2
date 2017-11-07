@@ -64,31 +64,32 @@
 			<p class="contact-title">MESSAGE US</p>
 		</div>
 		<div>
-			<form role="form" action="/contact_send" method="post">
+			<form role="form" action="/merchant/add_messages" method="post">
 				{{csrf_field()}}
-				<div class=" col-md-12 contact-form-container">
-					<div class="col-md-12 contact-textfield-holder">
-						<div class="col-md-6 contact-textfield-left-holder">
-							<label for="input-name" class="contact-labels">Name:</label>
-							<input type="text" name="name" class="contact-textfield" required/>
-						</div>
-						<div class="col-md-6 contact-textfield-right-holder">
-							<label for="input-email" class="contact-labels">Email:</label>
-							<input type="email" name="email_add" class="contact-textfield" required/>
-						</div>
+			<div class=" col-md-12 contact-form-container">
+				<div class="col-md-12 contact-textfield-holder">
+					<div class="col-md-6 contact-textfield-left-holder">
+						<label for="input-name" class="contact-labels">Name:</label>
+						<input type="text" name="full_name" class="contact-textfield" required/>
 					</div>
-					<div class="col-md-12 contact-textfield-holder">
-						<label for="input-subject" class="contact-labels">Subject:</label>
-						<input type="text" name="subject" class="contact-textfield" required/>
-					</div>
-					<div class="col-md-12 contact-textfield-holder">
-						<label for="input-help" class="contact-labels">How Can We Help:</label>
-						<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea" required/></textarea>
-					</div>
-					<div class="col-md-12 contact-btn-holder">
-						<button class="contact-send-btn">SEND MESSAGE</button>
+					<div class="col-md-6 contact-textfield-right-holder">
+						<label for="input-email" class="contact-labels">Email:</label>
+						<input type="email" name="email" class="contact-textfield" required/>
 					</div>
 				</div>
+				<div class="col-md-12 contact-textfield-holder">
+					<label for="input-subject" class="contact-labels">Subject:</label>
+					<input type="text" name="subject" class="contact-textfield" required/>
+				</div>
+				<div class="col-md-12 contact-textfield-holder">
+					<label for="input-help" class="contact-labels">How Can We Help:</label>
+					<textarea rows="11" name="messages" id="we_can_help" class="contact-textfield message-textarea" required/></textarea>
+				</div>
+				<div class="col-md-12 contact-btn-holder">
+					<button type="submit" class="contact-send-btn">SEND MESSAGE</button>
+				</div>
+			</div>
+
 			</form>
 		</div>
 	</div>

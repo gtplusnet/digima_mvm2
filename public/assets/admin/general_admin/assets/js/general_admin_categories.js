@@ -1,4 +1,4 @@
-
+categoryEdit
 var manage_categories = new manage_categories();
 
 
@@ -18,6 +18,7 @@ function manage_categories()
 			search_category();
 			save_category();
 			action_box();
+			update_hours();
 			delete_category();
 			update_category();
 			sub_category_action();

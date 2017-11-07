@@ -211,6 +211,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
+      
         return view('general_admin.pages.merchants',$data);
     }
     public function general_admin_send_invoice($id)

@@ -165,7 +165,6 @@ class AdminController extends Controller
         if($validate_login)
         {
         	if (password_verify($request->password, $validate_login->password)) 
-
 				{
     				Session::put("login",true);
     				Session::put("admin_id",$validate_login->admin_id);
