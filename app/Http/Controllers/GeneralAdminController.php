@@ -127,12 +127,13 @@ class GeneralAdminController extends Controller
          $data['sumP4'] = ($resAd/$sum)*100;
          $count_merchant_agent = TblBusinessModel::where('business_status',1)->get();
          $count_merchant_supervisor = TblBusinessModel::where('business_status',2)->get();
+         $count_merchant_agent_added = TblBusinessModel::where('business_status',20)->get();
          $count_merchant_admin = TblBusinessModel::where('business_status',3)->get();
          $count_merchant_admin_payment = TblBusinessModel::where('business_status',4)->get();
          $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
          $data['countCall'] = $count_merchant_agent->count();
          $data['countMP3'] = $count_merchant_supervisor->count();
-         $data['countInvoice'] = $count_merchant_admin->count();
+         $data['countInvoice'] = $count_merchant_admin->count() + $count_merchant_agent_added->count();
          $data['countPayment'] = $count_merchant_admin_payment->count();
          $data['countActivated'] = $count_merchant_admin_activated->count();
          $data['count_jan']  = TblBusinessModel::whereMONTH('date_created', '=', 01 )->count();
