@@ -1,9 +1,7 @@
 @extends('front.layout.layout')
 @section('title', 'Home')
 @section('content')
-
 <style>
-
 .list-group
 {
 width:100%;
@@ -14,19 +12,9 @@ width:100%;
 }
 #newpost
 {
-
 }
 </style>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-<script language="javascript">
-	
-	
-</script>
 <div class="intro" style="background-image: url('/images/background_home.jpg')">
-	<!-- HEADER NAVBAR HERE -->
-	{{-- wag mo galawin --}}
-	
-	{{-- galawin mo to!! --}}
 	<div class="container">
 		<div class="">
 			<div class="col-md-12 searchbox-container">
@@ -45,75 +33,43 @@ width:100%;
 	<div class="container">
 		<div class="col-md-3">
 			<div class="col-md-12" >
-		    	
+				
 				<div class="category-filter-holder" >
 					
 					<div class="category-title-holder" id="show_category">
-						{{-- <p class="categorylist-title">Category Filter <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></p> --}}
 						<p class="categorylist-title">Category Filter</p>
 					</div>
 					
 					<div class="categorylist-container">
 						<ul class="list-group" >
-					    	@foreach($_categories as $categories)
-					    	
+							@foreach($_categories as $categories)
 							<li class="list-group-item categoryList" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
-							
 							@endforeach
 						</ul>
 					</div>
-			   </div>
+				</div>
 			</div>
-		    <div class="col-md-12">
-			    <div class="featuredlist-holder">
+			<div class="col-md-12">
+				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
 						<p class="featuredlist-title">MOST VIEWED</p>
 					</div>
 					<div class="featuredlist-container side-list-padding">
 						<div  class="featured-carousel" >
 							<div class="carousel-inner vertical inner-vertical-carousel">
+								@foreach($_most_viewed as $most_viewed)
 								<div class="">
 									<div class="featured-details-container">
 										<div class="detail-picture-container side-list-img-width">
 											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
 										</div>
 										<div class="detail-name-container">
-											<p class="detail-name-title">Name of Business</p>
+											<p class="detail-name-title">{{$most_viewed->business_name}}<br><font size="1">views: {{$most_viewed->business_views}}</font></p>
 										</div>
 									</div>
 								</div>
-								<div class="">
-									<div class="featured-details-container">
-										<div class="detail-picture-container side-list-img-width">
-											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
-										</div>
-										<div class="detail-name-container">
-											<p class="detail-name-title">Name of Business</p>
-										</div>
-									</div>
-								</div>
-								<div class="">
-									<div class="featured-details-container">
-										<div class="detail-picture-container side-list-img-width">
-											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
-										</div>
-										<div class="detail-name-container">
-											<p class="detail-name-title">Name of Business</p>
-										</div>
-									</div>
-								</div>
-								{{-- @foreach($_business_list as $business_list) --}}
-								<div class="">
-									<div class="featured-details-container">
-										<div class="detail-picture-container side-list-img-width">
-											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
-										</div>
-										<div class="detail-name-container">
-											<p class="detail-name-title">Name of Business</p>
-										</div>
-									</div>
-								</div>
-								{{-- @endforeach --}}
+								@endforeach
+								
 							</div>
 						</div>
 					</div>
@@ -149,7 +105,6 @@ width:100%;
 									</div>
 								</div>
 								@endforeach
-								
 							</div>
 							<a  class="left carousel-control features-control" href="#carousel-pager" role="button" data-slide="prev">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
@@ -225,7 +180,6 @@ width:100%;
 									<button type="button" class="membership-button">GET STARTED NOW</button>
 								</a>
 							</div>
-							
 						</div>
 						<div class="col-md-5 package-container">
 							<div class="membership-offer">
@@ -255,34 +209,34 @@ width:100%;
 		</div>
 	</div>
 </div>
-	{{-- JAVASCRIPTS --}}
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/assets/js/front/search-registered-business.js"></script>
-	<script src="/assets/js/home_categories.js"></script>
-	<script>
-		$.ajaxSetup({
-			headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-	</script>
-	<script type="text/javascript">
-			$('.carousel .vertical .item').each(function(){
-			var next = $(this).next();
-			if (!next.length) {
+{{-- JAVASCRIPTS --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/front/search-registered-business.js"></script>
+<script src="/assets/js/home_categories.js"></script>
+<script>
+	$.ajaxSetup({
+		headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+</script>
+<script type="text/javascript">
+		$('.carousel .vertical .item').each(function(){
+		var next = $(this).next();
+		if (!next.length) {
+		next = $(this).siblings(':first');
+		}
+		next.children(':first-child').clone().appendTo($(this));
+		
+		for (var i=1;i<=1;i++) {
+		next=next.next();
+		if (!next.length) {
 			next = $(this).siblings(':first');
 			}
-			next.children(':first-child').clone().appendTo($(this));
-			
-			for (var i=1;i<=1;i++) {
-			next=next.next();
-			if (!next.length) {
-				next = $(this).siblings(':first');
-				}
-			
-			next.children(':first-child').clone().appendTo($(this));
-			}
-			});
-	</script>
-	{{-- END OF JAVASCRIPTS --}}
-	@endsection
+		
+		next.children(':first-child').clone().appendTo($(this));
+		}
+		});
+</script>
+{{-- END OF JAVASCRIPTS --}}
+@endsection

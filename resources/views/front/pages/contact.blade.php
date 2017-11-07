@@ -5,8 +5,8 @@
 
 <div class="banner-contact" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
-		<div class="pull-left">
-			<img src="/images/contact_logo.png" class="contact-logo">
+		<div class="title-holder-page" style="">
+			CONTACT US
 		</div>
 	</div>
 </div>
