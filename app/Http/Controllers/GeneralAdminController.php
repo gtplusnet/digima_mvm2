@@ -356,8 +356,8 @@ class GeneralAdminController extends Controller
                 
                 // $data = array('name'=>'james_ako','date'=>'james','email'=>'guardians35836@gmail.com','business_id'=>$business_id,'remarks'=>'Please Pay As Soon As Possible.');
                 $pathfile='invoice/'.$file_name;
-                $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($pathfile) {
-                   $message->to('guardians35836@gmail.com', 'Tutorials Point')->subject
+                $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile) {
+                   $message->to($data['email'],'Croatia Invoice')->subject
                       ('Your Croatia Directory Invoice');
                    $message->attach(public_path($pathfile));
                    $message->from('guardians35836@gmail.com','Croatia Directory');
