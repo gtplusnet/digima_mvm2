@@ -24,7 +24,10 @@ use App\Models\TblBusinessSubCategoryModel;
 use App\Models\TblBusinessSubSubCategoryModel;
 use App\Models\TblPaymentMethod;
 use App\Models\TblReportsModel;
-
+use App\Models\TblABusinessPaymentMethodModel;
+use App\Models\TblBusinessOtherInfoModel;
+use App\Models\TblBusinessHoursmodels;
+use App\Models\TblBusinessImages;
 use DB;
 use Response;
 use Session;
@@ -485,10 +488,13 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent'] = TblAgentModel::get();
-      $data['_data_team'] = TblTeamModel::get();
-      $data['_data_supervisor'] = TblSupervisorModels::get();
-      $data['_data_admin'] = TblAdminModels::get();
+      $data['_data_agent']          = TblAgentModel::get();
+      $data['_data_team']           = TblTeamModel::get();
+      $data['_data_supervisor']     = TblSupervisorModels::get();
+      $data['_data_admin']          = TblAdminModels::get();
+      $data['_merchant']            = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                                    ->get();
       $data['page'] = 'Manage Users';
       return view('general_admin.pages.manage_user', $data);
 
@@ -847,13 +853,27 @@ class GeneralAdminController extends Controller
        TblTeamModel::where('team_id',$team_id)->delete();
        return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted Successfully!</div>";
     }
-    
-
     public function general_admin_delete_agent(Request $request)
     {
         $agent_id = $request->delete_agent_id;
         TblAgentModel::where('agent_id',$agent_id)->delete();
         return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
+    }
+    public function general_admin_view_merchant_info(Request $request)
+    {
+      $business_id = $request->business_id;
+      TblBusinessModel::where('tbl_business.business_id',$business_id)
+                      ->join('tbl_business_hours','tbl_business_hours.business_id','=','tbl_business.business_id')
+                      ->get();
+      $data['merchant_info']   = TblBusinessModel::where('business_id',$business_id)
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                                ->first();
+      $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',$business_id)->paginate(5);
+      $data['other_info']     = TblBusinessOtherInfoModel::where('business_id',$business_id)->first();
+      $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$business_id)->get();
+      $data['_images']   = TblBusinessImages::where('business_id',$business_id)->get();
+      return view("general_admin.pages.view_merchant_info",$data);
     }
 
 

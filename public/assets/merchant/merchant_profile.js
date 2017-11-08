@@ -5,7 +5,6 @@ $(document).ready(function(){
 		var business_website = $('#business_website').val();
 		var year_established = $('#year_established').val();
 
-		alert(company_information);
 		$.ajax({
 			type:'POST',
 			url:'/merchant/add_other_info',
@@ -18,30 +17,14 @@ $(document).ready(function(){
 			dataType:'text',
 		}).done(function(data){
 			$('#other_info_success').html(data);
+				setTimeout(function(){
+				   location.reload();
+				}, 1000);
 			});
 		
 	});
-	// $('.deletePayments').click(function(){
-	// 	var paymentMethodId = $(this).data("id");
-	// 	$.ajax({
-	// 		type:'POST',
-	// 		url:'/merchant/delete_payment_method',
-	// 		data:{
-	// 			paymentMethodId: paymentMethodId,
-				
-	// 			},
-	// 		dataType:'text',
-	// 	}).done(function(data){
-	// 		$('#adding_payment_method_success').html(data);
-
-	// 		});
-	// });
+	
 });
-
-
-
-
-
 
 $(document).ready(function(){
 
@@ -57,10 +40,12 @@ $(document).ready(function(){
 			dataType:'text',
 		}).done(function(data){
 			$('#adding_payment_method_success').html(data);
-			
-			});
+				setTimeout(function(){
+				   location.reload();
+				}, 1000);
+		    });
 	});
-	$(document).on("click","#deletePayments",function(){
+	$(document).on("click",".deletePaymentss",function(){
 		var paymentMethodId = $(this).data("id");
 		$.ajax({
 			type:'POST',
@@ -72,7 +57,9 @@ $(document).ready(function(){
 			dataType:'text',
 		}).done(function(data){
 			$('#adding_payment_method_success').html(data);
-
+				setTimeout(function(){
+				   location.reload();
+				}, 1000);
 			});
 	});
 });

@@ -245,19 +245,18 @@ class MerchantController extends Controller
 	 public function profile()
     {
       Self::allow_logged_in_users_only();
-      $data['page']            = 'Profile';
+      $data['page']             = 'Profile';
 
-      $data['merchant_info']   = TblBusinessModel::where('business_id',session('business_id'))
+      $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))
                                 ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                                 ->first();
 
 
-		  $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->get();
-
-      $data['other_info']     = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
-      $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
-      $data['_images']   = TblBusinessImages::where('business_id',session('business_id'))->get();
+		  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(5);
+      $data['other_info']       = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
+      $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
+      $data['_images']          = TblBusinessImages::where('business_id',session('business_id'))->get();
 		  return view ('merchant.pages.profile', $data);		
 	  }
 

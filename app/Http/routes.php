@@ -175,6 +175,21 @@ Route::post('/general_admin/manage_website/update_membership',        'GeneralAd
 Route::post('/general_admin/manage_website/update_payment_method',        'GeneralAdminController@general_admin_update_payment_method');
 Route::post('/general_admin/manage_website/update_county',        'GeneralAdminController@general_admin_update_county');
 Route::post('/general_admin/manage_website/update_city',        'GeneralAdminController@general_admin_update_city');
+
+
+Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdminController@general_admin_view_merchant_info');
+
+
+
+
+
+
+
+
+
+
+
+
 Route::any('/sample', 'MerchantController@sample');
 Route::any('/sample-upload', 'FrontController@sampleUpload');
 Route::any('/upload-file', 'FrontController@uploadFile');
