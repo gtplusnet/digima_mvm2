@@ -113,9 +113,9 @@ Route::any('/supervisor/logout', 		'SuperVisorController@supervisor_logout');
 
 // Route::any('/supervisor/logout', 		'SupervisorController@admin_logout');
 
-Route::get('/supervisor/dashboard', 		'SupervisorController@dashboard');
-Route::get('/supervisor/profile', 		'SupervisorController@profile');
-Route::get('/supervisor/client', 		'SupervisorController@client');
+Route::get('/supervisor/dashboard', 		'SuperVisorController@dashboard');
+Route::get('/supervisor/profile', 		'SuperVisorController@profile');
+Route::get('/supervisor/client', 		'SuperVisorController@client');
 
 //james
 
