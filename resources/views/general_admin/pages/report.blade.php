@@ -3,11 +3,11 @@
 @section('description', 'Report')
 @section('content')
 <div class="page-title">
-	<h3>categories</h3>
+	<h3>Reports</h3>
 	<div class="page-breadcrumb">
 		<ol class="breadcrumb">
-			<li><a href="/admin">Home</a></li>
-			<li class="active">categories</li>
+			<li><a href="/general_admin/dashboard">Home</a></li>
+			<li class="active">Reports</li>
 		</ol>
 	</div>
 </div>
