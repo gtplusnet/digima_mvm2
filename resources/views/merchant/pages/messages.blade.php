@@ -31,7 +31,7 @@
                 @endif 
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="1" cellspacing="1"  border="2">
+                <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="0" cellspacing="0"  border="1">
                  <thead>
                             <tr>
                             <th style="text-align: center;font-size: 13px">MAIL TO</th>
@@ -42,7 +42,7 @@
                             </thead>
                             @foreach($guest_messages as $data)
                             <tr>
-                            <td><a href="mailto:oliverbacsal2gmail.com">{{$data->email}}</td>
+                            <td><a href="mailto:{{$data->email}}">{{$data->email}}</td>
                             <td>{{$data->subject}}</td>
                             <td>{{$data->messages}}</td>
                             <td>
@@ -57,6 +57,7 @@
     </div><!-- Row -->
     <!-- Row -->                    
 </div>
+
 
 <script type="text/javascript" src="/assets/admin/merchant/assets/pages/category/category.js"></script>
 @endsection

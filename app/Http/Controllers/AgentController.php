@@ -15,6 +15,7 @@ use App\Models\TblPaymentMethod;
 use App\Models\Tbl_business_hours;
 use App\Models\TblUserAccountModel;
 use App\Models\TblMembeshipModel;
+use App\Models\TblTeamModel;
 
 use Session;
 use Redirect;
@@ -110,10 +111,10 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$data['page']	= 'Profile';
-
 		$data['profile'] = TblAgentModel::get();
 		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))->first();
-
+		$data['team'] = TblTeamModel::where('team_id',session('team_id'))->get();
+		// dd($data['team']);
 		return view ('agent.pages.profile', $data);		
 
 	}

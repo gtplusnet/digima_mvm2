@@ -82,7 +82,7 @@
                                       <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Team Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->team_name}}" readonly>
                                         </div>
                                     </div>
 

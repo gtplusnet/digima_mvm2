@@ -415,6 +415,19 @@ class MerchantController extends Controller
 
      public function add_tag_category(Request $request)
     {
+      // $business_hours_to = $request->input('business_hours_to');
+      // $business_hours_from = $request->input('business_hours_from');
+      // $business_id = $request->input('business_id');
+      // $days = $request->input('days');
+      // foreach($business_hours_from as $key => $business_hours_f)
+      // {
+      //     $data['business_hours_from']= $business_hours_f;
+      //     $data['business_hours_to']= $business_hours_to[$key];  
+      //     $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
+      // }
+      
+      // return Redirect::back(); 
+
       $data['business_tag_category_id'] = $request->business_tag_category_id;
       $_insert = TblBusinessTagCategoryModel::whereIn('business_id', $request->category_id)->get();
       // dd($request->business_category_id);
