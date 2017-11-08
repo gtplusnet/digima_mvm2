@@ -336,10 +336,11 @@ class SuperVisorController extends Controller
   public function manage_user()
   {
       Self::allow_logged_in_users_only();
-      $data['page']   = 'Manage Team/Agent';
-      $data['viewteam']   = TblTeamModel::get();
+      $data['page']       = 'Manage Team/Agent';
+      $data['viewteam']   = TblTeamModel::join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->get();
       $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
-                           ->get();
+                          ->get();
       return view ('supervisor.pages.manage_user', $data); 
   }
   public function supervisor_delete_team(Request $request,$id)

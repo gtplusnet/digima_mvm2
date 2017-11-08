@@ -1,4 +1,3 @@
-categoryEdit
 var manage_categories = new manage_categories();
 
 
@@ -18,7 +17,6 @@ function manage_categories()
 			search_category();
 			save_category();
 			action_box();
-			update_hours();
 			delete_category();
 			update_category();
 			sub_category_action();
@@ -27,7 +25,7 @@ function manage_categories()
 	}
 	function save_category()
 	{
-		$('.save_category').click(function(){
+		$(document).on('click','.save_category',function(){
 		var cat_name = $('#cat_name').val();
 		var cat_info = $('#cat_info').val();
 		
@@ -44,7 +42,7 @@ function manage_categories()
 	}
 	function search_category()
 	{
-		$('#search_button').click(function(){
+		$(document).on('click','#search_button',function(){
 		var search_key = $('#search_key').val();
 		$('#ajax-loader').show();
 		$('#showHere3').hide();
@@ -64,8 +62,7 @@ function manage_categories()
 	
 	function action_box()
 	{ 
-		//agent
-		$('.category_action').change(function(){
+		$(document).on('change','.category_action',function(){
 			
 			if ($(this).val() == "delete") 
 			   {
@@ -107,7 +104,7 @@ function manage_categories()
     }
 	function delete_category()
 	{
-   		$('#actionDelete').click(function(){
+   		$(document).on('click','#actionDelete',function(){
 		    var delete_id = $('#delete_id').val();
 		    var delete_link = $('#delete_link').val();
 		    $.ajax({
@@ -207,17 +204,19 @@ function manage_categories()
 	}
 	function add_sub_category()
 	{
-		$('#addSubCategoryBtn').click(function(){
+		$(document).on('click','#addSubCategoryBtn',function()
+		{
 	        
 			$('#addSubCategory').modal('show');
 		});
-        $('#addSubSubCategoryBtn').click(function(){
+        $(document).on('click','#addSubSubCategoryBtn',function()
+        {
 	        
 			$('#addSubSubCategory').modal('show');
 		});
 		
-		
-		$('#save_sub_categoryBtn').click(function(){
+		$(document).on('click','#save_sub_categoryBtn',function()
+		{
 			var cat_id = $('#cat_id_dis').val();
 			var cat_name = $('#cat_name_dis').val();
 			var  cat_info = $('#cat_info_dis').val();
@@ -233,7 +232,8 @@ function manage_categories()
 				    $('#addSubCategory_alert').html(data);
 		 		});
 	    });
-	    $('#save_sub_sub_categoryBtn').click(function(){
+	    $(document).on('click','#save_sub_sub_categoryBtn',function()
+	    {
 	    	
 			var cat_id = $('#cat_id_dis_sub').val();
 			var cat_name = $('#cat_name_dis_sub').val();
