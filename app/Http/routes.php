@@ -261,6 +261,10 @@ Route::post('/general_admin/manage_website/delete_county',        'GeneralAdminC
 Route::post('/general_admin/manage_website/delete_city',        'GeneralAdminController@general_admin_delete_city');
 
 Route::post('/general_admin/manage_website/update_membership',        'GeneralAdminController@general_admin_update_membership');
+Route::post('/general_admin/manage_website/update_payment_method',        'GeneralAdminController@general_admin_update_payment_method');
+
+
+
 Route::post('/general_admin/manage_website/update_county',        'GeneralAdminController@general_admin_update_county');
 Route::post('/general_admin/manage_website/update_city',        'GeneralAdminController@general_admin_update_city');
 

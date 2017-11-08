@@ -209,7 +209,7 @@ function manage_website()
 	function action_submit_edit()
 	{
          
-         $('#editMemBtn').click(function(){
+        $('#editMemBtn').click(function(){
 	        var mem_id = $("#mem_id_edit").val();
 	        var mem_name = $("#mem_name_edit").val();
 	        var mem_price = $("#mem_price_edit").val();
@@ -221,6 +221,26 @@ function manage_website()
 		 			mem_name:mem_name,
 		 			mem_price:mem_price,
 		 		     },
+		 		dataType:'text',
+
+		 	}).done(function(data){
+		 		    $('#editMem').modal('hide');
+		 		    $('#success_alert').html(data);
+		 		    $('#successModal').modal('show');
+		 			
+		 		});
+	    });
+
+        $('#editPaymentBtn').click(function(){
+	        var pay_id = $("#pay_id_edit").val();
+	        var pay_name = $("#pay_name_edit").val();
+	        $.ajax({
+		 		type:'POST',
+		 		url:'/general_admin/manage_website/update_payment_method',
+		 		data:{
+		 			pay_id: pay_id,
+		 			pay_name:pay_name,
+		 			},
 		 		dataType:'text',
 
 		 	}).done(function(data){

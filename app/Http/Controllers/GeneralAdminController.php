@@ -546,6 +546,13 @@ class GeneralAdminController extends Controller
       TblPaymentMethod::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Added.</div>"; 
     }
+    public function general_admin_update_payment_method(Request $request)
+    {
+      $id = $request->pay_id;
+      $data['payment_method_name'] = $request->pay_name;
+      TblPaymentMethod::where('payment_method_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Updated.</div>"; 
+    }
     public function general_admin_delete_payment_method(Request $request)
     {
       $payment_method_id = $request->delete_id;
