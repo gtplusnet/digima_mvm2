@@ -395,10 +395,11 @@ class FrontController extends Controller
     }
     public function contact_send(Request $request)
     {
-        $contact_name= $request->full_name;
-        $contact_email_add = $request->email;
+        $contact_name= $request->name;
+        $contact_email_add = $request->email_add;
         $contact_subject = $request->subject;
-        $contact_help_message = $request->messages;
+        $contact_help_message = $request->help_message;
+        // dd($contact_name);
         $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
 
         $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
