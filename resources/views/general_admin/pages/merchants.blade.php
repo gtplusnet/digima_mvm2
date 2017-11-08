@@ -78,7 +78,13 @@
                                         <td>{{$client->business_name}}</td>
                                         <td>{{$client->membership_name}}</td>
                                         <td>{{$client->transaction_status}} by: {{$client->first_name}} {{$client->last_name}}</td>
-                                        <td><a target="blank" href="{{$client->file_path}}">View Conversation</a></td>
+                                        <td>
+                                            @if($client->file_path=="not available")
+                                            <p>MP3 not available</p>
+                                            @else
+                                            <a target="blank" href="{{$client->file_path}}">View Conversation</a>
+                                            @endif
+                                        </td>
                                         <td><a target="_blank" href="/general_admin/send_invoice/{{$client->business_id}}"><button class="transaction btn btn-default "><i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice</button></a></td>
                                     </tr>
                                     @endforeach
