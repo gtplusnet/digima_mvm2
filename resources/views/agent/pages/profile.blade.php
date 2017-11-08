@@ -30,7 +30,7 @@
                      <p class="text-center">{{$agent_info->position}}</p>
                     <hr>
                     <ul class="list-unstyled text-center">
-                        <li><p><i class="fa fa-map-marker m-r-xs"></i>{{$agent_info->agent_address}}</p></li>
+                        <li><p><i class="fa fa-map-marker m-r-xs"></i>{{$agent_info->address}}</p></li>
                         <li><p><i class="fa fa-envelope m-r-xs"></i><a href="#">{{session('email')}}</a></p></li>
                       <!--   <li><p><i class="fa fa-facebook-square"></i><a href="#">{{$agent_info->facebook_url}}</a></p></li> -->
                     </ul>
@@ -82,7 +82,7 @@
                                       <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Team Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->team_id}}" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="" readonly>
                                         </div>
                                     </div>
 

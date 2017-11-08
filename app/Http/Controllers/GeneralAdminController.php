@@ -719,6 +719,7 @@ class GeneralAdminController extends Controller
     $ins['team_id'] = $request->team_id;
     $ins['primary_phone'] = $request->primary;
     $ins['secondary_phone'] = $request->secondary;
+    $ins['address'] = $request->address;
     $ins['other_info'] = $request->other_info;
     $ins['date_created'] = date("Y/m/d");
     $ins['agent_call'] = '0';
@@ -748,7 +749,7 @@ class GeneralAdminController extends Controller
         else
         {
             $check_insert = TblAgentModel::insert($ins);
-            echo "james";
+            
             if($check_insert)
             {
               return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
@@ -917,6 +918,7 @@ class GeneralAdminController extends Controller
     $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
     $data['primary_phone'] = $request->primary_phone;
     $data['secondary_phone'] = $request->secondary_phone;
+    $data['address'] = $request->address;
     $data['other_info'] = $request->other_info;
     TblAgentModel::insert($data);
     return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
@@ -929,6 +931,7 @@ class GeneralAdminController extends Controller
      $data['email'] = $request->email;
      $data['primary_phone'] = $request->primary_phone;
      $data['secondary_phone'] = $request->secondary_phone;
+     $data['address'] = $request->address;
      $data['other_info'] = $request->other_info;
     TblAgentModel::where('agent_id',$request->agent_id)->update($data);
     return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";

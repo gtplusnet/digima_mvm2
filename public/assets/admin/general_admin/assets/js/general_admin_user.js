@@ -34,6 +34,7 @@ function manage_user()
 		var password = $('#password').val();
 		var primary = $('#primary').val();
 		var secondary = $('#secondary').val();
+		var address = $('#address').val();
 		var other_info = $('#other_info').val();
 
 		$.ajax({
@@ -48,6 +49,7 @@ function manage_user()
 				password: password,
 				primary: primary,
 				secondary: secondary,
+				address: address,
 				other_info: other_info
 			     },
 			dataType:'text',

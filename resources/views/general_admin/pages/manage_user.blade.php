@@ -281,7 +281,7 @@
 							<label for="business_name" >Password</label>
 						</div>
 						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="password" id="password"  style="width:100%;margin-bottom: 20px;" required/>
+							<input type="password" class="form-control" name="password" id="password"  style="width:100%;margin-bottom: 20px;" required/>
 						</div>
 					</div>
 					<div class="col-sm-12">
@@ -421,7 +421,7 @@
 							<label for="business_name" >Password</label>
 						</div>
 						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="spassword" id="spassword"  style="width:100%;margin-bottom: 20px;" required/>
+							<input type="password" class="form-control" name="spassword" id="spassword"  style="width:100%;margin-bottom: 20px;" required/>
 						</div>
 					</div>
 					<div class="col-sm-12">
@@ -500,7 +500,7 @@
 							<label for="password" >Password</label>
 						</div>
 						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="apassword" id="apassword" style="width:100%;margin-bottom: 5px;"/>
+							<input type="password" class="form-control" name="apassword" id="apassword" style="width:100%;margin-bottom: 5px;"/>
 						</div>
 					</div>
                     <div class="col-sm-12">
