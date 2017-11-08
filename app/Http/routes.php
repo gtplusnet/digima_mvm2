@@ -246,9 +246,17 @@ Route::any('/general_admin/manage_user/assign_agent', 	'GeneralAdminController@g
 
 Route::get('/general_admin/manage_website', 	'GeneralAdminController@general_admin_manage_website');
 Route::post('/general_admin/manage_website/add_membership', 	'GeneralAdminController@general_admin_add_membership');
+Route::post('/general_admin/manage_website/add_payment_method', 	'GeneralAdminController@general_admin_add_payment_method');
+
+
 Route::post('/general_admin/manage_website/add_county', 	'GeneralAdminController@general_admin_add_county');
 Route::post('/general_admin/manage_website/add_city', 	'GeneralAdminController@general_admin_add_city');
 Route::post('/general_admin/manage_website/delete_membership',        'GeneralAdminController@general_admin_delete_membership');
+Route::post('/general_admin/manage_website/delete_payment_method',        'GeneralAdminController@general_admin_delete_payment_method');
+
+
+
+
 Route::post('/general_admin/manage_website/delete_county',        'GeneralAdminController@general_admin_delete_county');
 Route::post('/general_admin/manage_website/delete_city',        'GeneralAdminController@general_admin_delete_city');
 
@@ -266,31 +274,31 @@ Route::any('/upload-file', 'FrontController@uploadFile');
 //oliver route
 
 
-Route::post('/general_admin/manage_user/edit_admin_submit', 	'GeneralAdminController@edit_admin_submit');
+// Route::post('/general_admin/manage_user/edit_admin_submit', 	'GeneralAdminController@edit_admin_submit');
 
 
-Route::any('/general_admin/manage_user/delete_admin_submit/{id}', 	'GeneralAdminController@delete_admin_submit');
+// Route::any('/general_admin/manage_user/delete_admin_submit/{id}', 	'GeneralAdminController@delete_admin_submit');
 
-Route::any('/general_admin/manage_user/search_admin_submit', 	'GeneralAdminController@search_admin_submit');
+// Route::any('/general_admin/manage_user/search_admin_submit', 	'GeneralAdminController@search_admin_submit');
 
-Route::post('/general_admin/manage_user/add_team_submit', 	'GeneralAdminController@add_team_submit');
+// Route::post('/general_admin/manage_user/add_team_submit', 	'GeneralAdminController@add_team_submit');
 
-Route::post('/general_admin/manage_user/edit_team_submit', 	'GeneralAdminController@edit_team_submit');
-
-
-
-Route::post('/general_admin/manage_user/add_agent_submit', 	'GeneralAdminController@add_agent_submit');
-
-Route::post('/general_admin/manage_user/edit_agent_submit', 	'GeneralAdminController@edit_agent_submit');
+// Route::post('/general_admin/manage_user/edit_team_submit', 	'GeneralAdminController@edit_team_submit');
 
 
 
+// Route::post('/general_admin/manage_user/add_agent_submit', 	'GeneralAdminController@add_agent_submit');
 
-Route::post('/general_admin/manage_user/add_supervisor_submit',	'GeneralAdminController@add_supervisor_submit');
+// Route::post('/general_admin/manage_user/edit_agent_submit', 	'GeneralAdminController@edit_agent_submit');
 
-Route::post('/general_admin/manage_user/edit_supervisor_submit', 	'GeneralAdminController@edit_supervisor_submit');
 
-Route::any('/general_admin/manage_user/delete_supervisor_submit/{id}', 	'GeneralAdminController@delete_supervisor_submit');
+
+
+// Route::post('/general_admin/manage_user/add_supervisor_submit',	'GeneralAdminController@add_supervisor_submit');
+
+// Route::post('/general_admin/manage_user/edit_supervisor_submit', 	'GeneralAdminController@edit_supervisor_submit');
+
+// Route::any('/general_admin/manage_user/delete_supervisor_submit/{id}', 	'GeneralAdminController@delete_supervisor_submit');
 
 
 //Route::any('/search_result_list', 'SearchController@search_result_list');

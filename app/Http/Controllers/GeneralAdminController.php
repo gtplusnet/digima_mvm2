@@ -22,6 +22,7 @@ use App\Models\TblSupervisorModels;
 use App\Models\TblMembeshipModel;
 use App\Models\TblBusinessSubCategoryModel;
 use App\Models\TblBusinessSubSubCategoryModel;
+use App\Models\TblPaymentMethod;
 
 use DB;
 use Response;
@@ -525,11 +526,11 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_manage_website()
     {
-      $data['_membership'] = TblMembeshipModel::paginate(5);
-      $data['_county'] = TblCountyModel::paginate(5);
-      $data['_city'] = TblCityModel::
-                       join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                       ->paginate(5);
+      $data['_membership']          = TblMembeshipModel::paginate(5);
+      $data['_payment_method']      = TblPaymentMethod::paginate(5);
+      $data['_county']              = TblCountyModel::paginate(5);
+      $data['_city']                = TblCityModel::join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+                                    ->paginate(5);
       return view('general_admin.pages.manage_website',$data);
     }
     public function general_admin_add_membership(Request $request)
@@ -538,6 +539,17 @@ class GeneralAdminController extends Controller
       $data['membership_price']= $request->membershipPrice;
       TblMembeshipModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Added.</div>"; 
+    }
+    public function general_admin_add_payment_method(Request $request)
+    {
+      $data['payment_method_name']= $request->paymentMethodName;
+      TblPaymentMethod::insert($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Added.</div>"; 
+    }
+    public function general_admin_delete_payment_method(Request $request)
+    {
+      $payment_method_id = $request->delete_id;
+      TblPaymentMethod::where('payment_method_id',$payment_method_id)->delete();
     }
     public function general_admin_update_membership(Request $request)
     {

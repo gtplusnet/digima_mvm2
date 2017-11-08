@@ -43,6 +43,11 @@
 margin: auto;
 padding: 10px;
 }
+.website-container
+{
+	margin:10px 10px 10px 10px;
+	background-color: #F1F4F9;
+}
 </style>
 <div class="page-title">
 	<div class="page-breadcrumb">
@@ -56,41 +61,12 @@ padding: 10px;
 {{-- modal --}}
 
 
-<div class="modal fade" id="editCity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
-	<div class="modal-dialog modal-md" role="document">
-		<div class="modal-content">
-			
-			<div class="modal-body" style="margin-bottom: 250px;">
-				<div class="website-title">
-					Edit City
-				</div>
-				<div class="website-content col-md-12">
-					<div class="web-content">
-						<input type="text" id="county_name_edit" class="form-text center" placeholder="County Name" readOnly/>
-					</div>
-					<div class="web-content">
-						<input type="text" id="city_name_edit" class="form-text center" placeholder="City Name" required/>
-						<input type="hidden" id="city_id_edit" />
-					</div>
-					<div class="web-content">
-						<input type="text" id="city_zip_edit" class="form-text center" placeholder="Zip Code" required/>
-					</div>
-					<div class="web-content">
-						<button type="button" id="editCityBtn" class="form-button  center" >Save City</button>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
+
 {{-- modal end --}}
 <div id="main-wraper">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-5 " style="margin:10px 0px 10px 10px;background-color: #F1F4F9;">
+			<div class="col-md-5 website-container">
 				<div class="website-title">
 					Add Membership
 				</div>
@@ -108,7 +84,7 @@ padding: 10px;
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
+			<div class="col-md-6 website-container">
 				<div class="website-title">
 					Membership List
 				</div>
@@ -145,7 +121,57 @@ padding: 10px;
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-5 " style="margin:10px 0px 10px 10px;background-color: #F1F4F9;">
+			<div class="col-md-5 website-container">
+				<div class="website-title">
+					Add Payment Method
+				</div>
+				<div class="website-content col-md-12">
+					<div class="web-content" id="payment_method_alert">
+					</div>
+					<div class="web-content">
+						<input type="text" class="form-text center" id="paymentMethodName" placeholder="Payment Method Name" required/>
+					</div>
+					<div class="web-content">
+						<button type="button" id="addPaymentMethod" class="form-button  center" >Add Payment Method</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 website-container">
+				<div class="website-title">
+					Payment Method List
+				</div>
+				<div class="website-content col-md-12">
+					
+					<table class="table table-bordered" style="margin-top:10px;">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Payment Method Name</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($_payment_method as $payment_method)
+							<tr>
+								<td>{{$payment_method->payment_method_id}}</td>
+								<td>{{$payment_method->payment_method_name}}</td>
+								<td>
+									<select class="form-select pay_action" data-name="{{$payment_method->payment_method_name}}" data-id="{{$payment_method->payment_method_id}}" id="pay_action">
+										<option >Action</option>
+										<option value="edit" >Edit</option>
+										<option value="delete">Delete</option>
+									</select>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					{!! $_payment_method->render() !!}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 website-container">
 				<div class="website-title">
 					Add County
 				</div>
@@ -160,7 +186,7 @@ padding: 10px;
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
+			<div class="col-md-6 website-container">
 				<div class="website-title">
 					County List
 				</div>
@@ -195,7 +221,7 @@ padding: 10px;
 			
 		</div>
 		<div class="row">
-			<div class="col-md-5 " style="margin:10px 0px 10px 10px;background-color: #F1F4F9;">
+			<div class="col-md-5 website-container">
 				<div class="website-title">
 					Add City
 				</div>
@@ -222,7 +248,7 @@ padding: 10px;
 				</div>
 			</div>
 			
-			<div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
+			<div class="col-md-6 website-container">
 				<div class="website-title">
 					City List
 				</div>
@@ -291,6 +317,31 @@ padding: 10px;
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="editPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			
+			<div class="modal-body" style="margin-bottom: 140px;">
+				<div class="website-title">
+					Edit Payment Method
+				</div>
+				<div class="website-content col-md-12">
+					
+					<div class="web-content">
+						<input type="text" id="pay_name_edit" class="form-text center pay_name_edit" placeholder="Payment Method Name" required/>
+						<input type="hidden" id="pay_id_edit" />
+					</div>
+					<div class="web-content">
+						<button type="button" id="editPaymentBtn" class="form-button center" >Save Payment Method</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="editCounty" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
@@ -307,6 +358,36 @@ padding: 10px;
 					</div>
 					<div class="web-content">
 						<button type="button" id="editCountyBtn" class="form-button center" >Save County</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="editCity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			
+			<div class="modal-body" style="margin-bottom: 250px;">
+				<div class="website-title">
+					Edit City
+				</div>
+				<div class="website-content col-md-12">
+					<div class="web-content">
+						<input type="text" id="county_name_edit" class="form-text center" placeholder="County Name" readOnly/>
+					</div>
+					<div class="web-content">
+						<input type="text" id="city_name_edit" class="form-text center" placeholder="City Name" required/>
+						<input type="hidden" id="city_id_edit" />
+					</div>
+					<div class="web-content">
+						<input type="text" id="city_zip_edit" class="form-text center" placeholder="Zip Code" required/>
+					</div>
+					<div class="web-content">
+						<button type="button" id="editCityBtn" class="form-button  center" >Save City</button>
 					</div>
 				</div>
 			</div>

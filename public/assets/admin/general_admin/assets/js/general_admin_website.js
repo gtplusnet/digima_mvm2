@@ -16,6 +16,7 @@ function manage_website()
 		{
 			add_category();
 			add_membership();
+			add_payment_method();
 			add_county();
 			add_city();
 			// add_category();
@@ -41,6 +42,24 @@ function manage_website()
 
 		}).done(function(data){
 			    $('#membership_alert').html(data);
+			    setTimeout(location.reload.bind(location), 1000);
+			});
+	    });
+	}
+	function add_payment_method()
+	{ 
+		$('#addPaymentMethod').click(function(){
+        var paymentMethodName = $('#paymentMethodName').val();
+		$.ajax({
+			type:'POST',
+			url:'/general_admin/manage_website/add_payment_method',
+			data:{
+				paymentMethodName: paymentMethodName,
+				 },
+			dataType:'text',
+
+		}).done(function(data){
+			    $('#payment_method_alert').html(data);
 			    setTimeout(location.reload.bind(location), 1000);
 			});
 	    });
@@ -91,81 +110,100 @@ function manage_website()
 	function action_box()
 	{ 
 		//agent
-		$('.mem_action').change(function(){
-		if ($(this).val() == "edit") {
-			
-	    	var mem_id = $(this).data("id");
-	        var mem_name = $(this).data("name");
-	        var mem_price = $(this).data("price");
-	        $("#mem_id_edit").val(mem_id);
-	        $("#mem_name_edit").val(mem_name);
-	        $("#mem_price_edit").val(mem_price);
+		$('.mem_action').change(function()
+		{
+			if ($(this).val() == "edit") {
+				
+		    	var mem_id = $(this).data("id");
+		        var mem_name = $(this).data("name");
+		        var mem_price = $(this).data("price");
+		        $("#mem_id_edit").val(mem_id);
+		        $("#mem_name_edit").val(mem_name);
+		        $("#mem_price_edit").val(mem_price);
 
-	        $('#editMem').modal('show');
-        }
-		if ($(this).val() == "delete") {
-	    	var mem_id = $(this).data("id");
-	        $("#delete_id").val(mem_id);
-	        $("#delete_link").val('delete_membership');
-	        $('#deleteModal').modal('show');
-        }
+		        $('#editMem').modal('show');
+	        }
+			if ($(this).val() == "delete") {
+		    	var mem_id = $(this).data("id");
+		        $("#delete_id").val(mem_id);
+		        $("#delete_link").val('delete_membership');
+		        $('#deleteModal').modal('show');
+	        }
+	    });
+	    $('.pay_action').change(function()
+		{
+			if ($(this).val() == "edit") {
+				
+		    	var pay_id = $(this).data("id");
+		        var pay_name = $(this).data("name");
+		        $("#pay_id_edit").val(pay_id);
+		        $("#pay_name_edit").val(pay_name);
+		        $('#editPayment').modal('show');
+	        }
+			if ($(this).val() == "delete") {
+		    	var pay_id = $(this).data("id");
+		        $("#delete_id").val(pay_id);
+		        $("#delete_link").val('delete_payment_method');
+		        $('#deleteModal').modal('show');
+	        }
 	    });
 
-	    $('.count_action').change(function(){
-	    if ($(this).val() == "edit") {
-	    	var count_id_edit = $(this).data("id");
-	    	var count_name_edit = $(this).data("name");
-	        $("#count_id_edit").val(count_id_edit);
-	        $("#count_name_edit").val(count_name_edit);
-	        $('#editCounty').modal('show');
-        }
-        if ($(this).val() == "delete") {
-	    	var count_id = $(this).data("id");
-	        $("#delete_id").val(count_id);
-	        $("#delete_link").val('delete_county');
-	        $('#deleteModal').modal('show');
-        }
+	    $('.count_action').change(function()
+	    {
+		    if ($(this).val() == "edit") {
+		    	var count_id_edit = $(this).data("id");
+		    	var count_name_edit = $(this).data("name");
+		        $("#count_id_edit").val(count_id_edit);
+		        $("#count_name_edit").val(count_name_edit);
+		        $('#editCounty').modal('show');
+	        }
+	        if ($(this).val() == "delete") {
+		    	var count_id = $(this).data("id");
+		        $("#delete_id").val(count_id);
+		        $("#delete_link").val('delete_county');
+		        $('#deleteModal').modal('show');
+	        }
 	    });
 
-	    $('.city_action').change(function(){
-		if ($(this).val() == "edit") {
-	    	var city_id = $(this).data("id");
-	     	var count_name = $(this).data("county_name");
-	     	var city_name = $(this).data("name");
-	     	var city_zip = $(this).data("zip");
-	     	$("#city_id_edit").val(city_id);
-	     	$("#county_name_edit").val(count_name);
-	     	$("#city_name_edit").val(city_name);
-	     	$("#city_zip_edit").val(city_zip);
-	     	$('#editCity').modal('show');
-        }
-        if ($(this).val() == "delete") {
-	    	var city_id = $(this).data("id");
-	        $("#delete_id").val(city_id);
-	        $("#delete_link").val('delete_city');
-	        $('#deleteModal').modal('show');
-        }
+	    $('.city_action').change(function()
+	    {
+			if ($(this).val() == "edit") {
+		    	var city_id = $(this).data("id");
+		     	var count_name = $(this).data("county_name");
+		     	var city_name = $(this).data("name");
+		     	var city_zip = $(this).data("zip");
+		     	$("#city_id_edit").val(city_id);
+		     	$("#county_name_edit").val(count_name);
+		     	$("#city_name_edit").val(city_name);
+		     	$("#city_zip_edit").val(city_zip);
+		     	$('#editCity').modal('show');
+	        }
+	        if ($(this).val() == "delete") {
+		    	var city_id = $(this).data("id");
+		        $("#delete_id").val(city_id);
+		        $("#delete_link").val('delete_city');
+		        $('#deleteModal').modal('show');
+	        }
+		});
 
-        
-	    });
+	    $('#actionDelete').click(function()
+	    {
+		    var delete_id = $('#delete_id').val();
+		    var delete_link = $('#delete_link').val();
+		    $.ajax({
+		 		type:'POST',
+		 		url:'/general_admin/manage_website/'+delete_link+'',
+		 		data:{
+		 			delete_id: delete_id
+		 		     },
+		 		dataType:'text',
 
-	    $('#actionDelete').click(function(){
-	    var delete_id = $('#delete_id').val();
-	    var delete_link = $('#delete_link').val();
-	    $.ajax({
-	 		type:'POST',
-	 		url:'/general_admin/manage_website/'+delete_link+'',
-	 		data:{
-	 			delete_id: delete_id
-	 		     },
-	 		dataType:'text',
-
-	 	}).done(function(data){
-	 		    $('#deleteModal').modal('hide');
-	 		    $('#success_alert').html(data);
-	 		    $('#successModal').modal('show');
-	 			
-	 		});
+		 	}).done(function(data){
+		 		    $('#deleteModal').modal('hide');
+		 		    $('#success_alert').html(data);
+		 		    $('#successModal').modal('show');
+		 			
+		 		});
 	    });
 	}
 	function action_submit_edit()
