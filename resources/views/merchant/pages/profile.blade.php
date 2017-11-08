@@ -28,7 +28,7 @@
                <div class="tab-content">
                   <div role="tabpanel" class="tab-pane fade active in" id="tab9">
                      <form class="form-horizontal">
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top:50px;">
                            <label for="business_name" class="col-sm-2 control-label">Business Name</label>
                            <div class="col-sm-10">
                               <input type="text" class="form-control" id="business_name" value="{{$merchant_info->business_name}}" readonly>

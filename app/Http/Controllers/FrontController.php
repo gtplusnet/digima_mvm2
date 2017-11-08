@@ -49,8 +49,7 @@ class FrontController extends Controller
     
     public function index()
     {
-        $data['countyList'] = TblCountyModel::get();
-        $data['cityList'] = TblCityModel::get();
+        
         Session::forget("merchant_login");
         Session::forget("full_name");
         Session::forget("email");
@@ -60,7 +59,9 @@ class FrontController extends Controller
         Session::forget("business_address");
         Session::forget("city_state");
         Session::forget("zip_code");
-        // TblBusinessModel::where('business_status',5)
+        $data['countyList'] = TblCountyModel::get();
+        $data['cityList'] = TblCityModel::get();
+        $data['_membership']  = TblMembeshipModel::get();
         $data["_business_list"] = TblBusinessModel:: where('business_status',5)
                                 ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->orderBy('tbl_business.membership',"ASC")
@@ -74,6 +75,7 @@ class FrontController extends Controller
                                 ->orderBy('tbl_reports.business_views',"DESC")
                                 ->get();
         return view('front.pages.home',$data);
+
     }
 
 
