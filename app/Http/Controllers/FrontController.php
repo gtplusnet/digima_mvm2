@@ -401,9 +401,9 @@ class FrontController extends Controller
         $contact_help_message = $request->messages;
         $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
 
-        $data = array('full_name'=>$contact_name,'email'=>$contact_email,'subject'=>$contact_subject,'message'=>$contact_help_message,'date'=>$date);
+        $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
         $check_mail = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
-         $message->to('guardians35836@gmail.calculhmac(clent, data)om', 'Croatia Team')->subject
+         $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
             ('THE RIGHT PLACE FOR BUSINESS');
          $message->from('guardians35836@gmail.com','Croatia Customer');
         });
