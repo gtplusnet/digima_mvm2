@@ -400,9 +400,12 @@ class MerchantController extends Controller
 	  public function category()
 	  {
 		  Self::allow_logged_in_users_only();
-		  $data['page']			 = 'Category';
-      $data['_category'] = TblBusinessCategoryModel::where('parent_id',0)->get();
-      $data['_subcategory'] = TblBusinessTagCategoryModel::get();
+		  $data['page']			    = 'Category';
+      $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->get();
+      $data['_subcategory'] = TblBusinessTagCategoryModel::where('business_id',session('business_id'))
+                            ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
+                            ->paginate(10);
+
       $data['_keywords'] = TblBusinessKeywordsModel::get();
 		  return view('merchant.pages.category', $data);		
   	}
@@ -415,23 +418,25 @@ class MerchantController extends Controller
 
      public function add_tag_category(Request $request)
     {
-      // $business_hours_to = $request->input('business_hours_to');
-      // $business_hours_from = $request->input('business_hours_from');
-      // $business_id = $request->input('business_id');
-      // $days = $request->input('days');
-      // foreach($business_hours_from as $key => $business_hours_f)
-      // {
-      //     $data['business_hours_from']= $business_hours_f;
-      //     $data['business_hours_to']= $business_hours_to[$key];  
-      //     $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
-      // }
-      
-      // return Redirect::back(); 
 
-      $data['business_tag_category_id'] = $request->business_tag_category_id;
-      $_insert = TblBusinessTagCategoryModel::whereIn('business_id', $request->category_id)->get();
-      // dd($request->business_category_id);
-      TblBusinessTagCategoryModel::insert($data);
+      $data_id = $request->checkbox;
+      foreach($data_id as $key=>$id)
+      {
+        $data['business_category_id'] = $id;
+        $data['business_id'] = session('business_id');
+        $_check = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->where('business_category_id',$id)->first();
+        $_check2 = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->count();
+      
+          if($_check)
+          {
+            // echo "hi";
+          }
+          elseif($_check2<6)
+          {
+           $_insert = TblBusinessTagCategoryModel::whereIn('business_id',session('business_id'))->insert($data);
+          }
+          
+      }  
       Session::flash('message1', "Done Tagging!");
       return Redirect::back();
     }
@@ -459,7 +464,6 @@ class MerchantController extends Controller
       return Redirect::back();
     }
    
-
     public function messages(Request $request)
     {
       Self::allow_logged_in_users_only();

@@ -38,7 +38,6 @@
                     <button class="btn btn-primary btn-block"><i class="fa fa-plus m-r-xs"></i>Follow</button>
                 </div>
 
-
                 <div class="col-md-9 m-t-lg">
 
                     <div class="row">
@@ -50,6 +49,13 @@
                             <div class="panel-body">
                                 <h4>Personal Information</h4>
                                 <form class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->prefix}}" readonly>
+                                        </div>
+                                    </div>
                                   
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">First Name</label>
@@ -63,7 +69,7 @@
                                     </div>
                                    
                                     <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Email</label>
+                                        <label for="input-rounded-Default" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->email}}" readonly>
                                         </div>
@@ -79,13 +85,12 @@
                                         </div>
                                     </div>
                                     
-                                      <div class="form-group">
+                                    <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Team Name</label>
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->team_name}}" readonly>
                                         </div>
                                     </div>
-
 
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Information</label>

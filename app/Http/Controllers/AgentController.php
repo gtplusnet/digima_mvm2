@@ -67,9 +67,7 @@ class AgentController extends Controller
          $data['countSignup'] = $count_merchant_signup->count();
          $data['countPending'] = $count_merchant_pending->count();
          $data['countActivated'] = $count_merchant_activated->count();
-         
-
-
+    
 		return view ('agent.pages.dashboard', $data);	
     }
 
@@ -110,15 +108,14 @@ class AgentController extends Controller
 	public function profile()
 	{
 		Self::allow_logged_in_users_only();
-		$data['page']	= 'Profile';
-		$data['profile'] = TblAgentModel::get();
-		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))->first();
-		$data['team'] = TblTeamModel::where('team_id',session('team_id'))->get();
-		// dd($data['team']);
+		$data['page']	    = 'Profile';
+		$data['profile']    = TblAgentModel::get();
+		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))
+		                      ->first();				
+	
 		return view ('agent.pages.profile', $data);		
-
 	}
-
+		  
 	public function client()
 	{
 		Self::allow_logged_in_users_only();
