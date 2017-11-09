@@ -91,7 +91,7 @@ Route::post('/supervisor/add_team', 		'SuperVisorController@supervisor_add_team'
 Route::post('/supervisor/add_agent', 		'SuperVisorController@supervisor_add_agent');
 Route::post('/supervisor/get_agent_info', 	'SuperVisorController@get_agent_info');//wala
 Route::post('/supervisor/assign_agent', 	'SuperVisorController@supervisor_assign_agent');
-Route::any('/supervisor/delete_team/{id}',  'SuperVisorController@supervisor_delete_team');
+Route::any('/supervisor/delete_team',  		'SuperVisorController@supervisor_delete_team');
 Route::post('/supervisor/delete_agent', 	'SuperVisorController@supervisor_delete_agent');
 Route::any('/supervisor/edit_team', 		'SuperVisorController@edit_team');
 Route::any('/supervisor/update_team', 		'SuperVisorController@update_team');

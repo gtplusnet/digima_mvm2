@@ -327,27 +327,28 @@ class SuperVisorController extends Controller
                 return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
             }
         }
-         
-        
-        
-	}
+  }
 
   //Eden
   public function manage_user()
   {
       Self::allow_logged_in_users_only();
       $data['page']       = 'Manage Team/Agent';
-      $data['viewteam']   = TblTeamModel::join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                          ->get();
+      $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->groupBy('team_id')->get();
+
+                          // dd($data['viewteam']);
+      $data['_agent_team']= TblTeamModel::get();
       $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
                           ->get();
       return view ('supervisor.pages.manage_user', $data); 
   }
-  public function supervisor_delete_team(Request $request,$id)
+  public function supervisor_delete_team(Request $request)
   {
 
-      TblTeamModel:: where ('team_id',$id)->delete();
-      return Redirect::to("/supervisor/manage_user")->with('delete_team', 'testing');
+      TblTeamModel:: where ('team_id',$request->delete_agent_id)->delete();
+       return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted</div>";
   }
   public function supervisor_delete_agent(Request $request)
   {   
@@ -365,9 +366,9 @@ class SuperVisorController extends Controller
   {
       $data['page']   = 'View User';
       $update["team_name"] = $request->team_name;
-      $update["team_information"] = $request->team_information;
+      $update["team_information"] = $request->team_info;
       TblTeamModel::where('team_id',$request->team_id)->update($update);
-      return Redirect::to("/supervisor/view/user")->with('warning_team','testing');
+      return "<div class='alert alert-success'><strong>Success!</strong>Team Updated</div>";
   }
   public function edit_agent(Request $request,$id)
   {

@@ -5,7 +5,7 @@
 			<div class="category-filter-holder" >
 				
 				<div class="category-title-holder" >
-					<p class="categorylist-title">Your Filter</p>
+					<p class="categorylist-title">Your Filter<a href="/"><i class="fa fa-trash-o pull-right" style="font-size:20px;color:#fff;" aria-hidden="true"></i></a></p>
 				</div>
 				
 				<div class="categorylist-container">
@@ -31,7 +31,7 @@
 						<li class="list-group-item categories" id="" ></li>
 						@foreach($_categories_list as $categories_list)
 						
-						<li class="list-group-item categoryList" data-name="{{$categories_list->business_category_name}}" data-id="{{$categories_list->business_category_id}}">{{$categories_list->business_category_name}}</li>
+						<li  style="cursor:pointer;" class="list-group-item categoryList" data-name="{{$categories_list->business_category_name}}" data-id="{{$categories_list->business_category_id}}">{{$categories_list->business_category_name}}</li>
 						
 						@endforeach
 						<div class="" id="newpost" style="width:500px !important;position:absolute;display:inline-block;transition: width 2s;background-color:#fff;display:inline;width:200px;z-index:1;border:1px solid #CCCCCC;">

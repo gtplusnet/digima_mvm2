@@ -43,7 +43,7 @@ width:100%;
 					<div class="categorylist-container">
 						<ul class="list-group" >
 							@foreach($_categories as $categories)
-							<li class="list-group-item categoryList" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
+							<li class="list-group-item categoryList"  style="cursor:pointer;" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
 							@endforeach
 						</ul>
 					</div>
