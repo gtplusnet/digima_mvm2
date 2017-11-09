@@ -504,6 +504,7 @@ class GeneralAdminController extends Controller
       $data['_membership']          = TblMembeshipModel::paginate(5);
       $data['_payment_method']      = TblPaymentMethod::paginate(5);
       $data['_county']              = TblCountyModel::paginate(5);
+      $data['_county_city']         = TblCountyModel::get();
       $data['_city']                = TblCityModel::join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
                                     ->paginate(5);
       return view('general_admin.pages.manage_website',$data);
