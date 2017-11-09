@@ -146,8 +146,13 @@ Route::any('/general_admin/search_category', 						'GeneralAdminController@gener
 Route::any('/general_admin/delete_category', 						'GeneralAdminController@general_admin_delete_category');
 Route::any('/general_admin/add_sub_category', 						'GeneralAdminController@general_admin_add_sub_category');
 Route::any('/general_admin/get_sub_category', 						'GeneralAdminController@general_admin_get_sub_category');
-Route::any('/general_admin/get_sub_sub_category', 					'GeneralAdminController@general_admin_get_sub_sub_category');
-Route::any('/general_admin/add_sub_sub_category', 					'GeneralAdminController@general_admin_add_sub_sub_category');
+// Route::any('/general_admin/get_sub_sub_category', 					'GeneralAdminController@general_admin_get_sub_sub_category');
+// Route::any('/general_admin/add_sub_sub_category', 					'GeneralAdminController@general_admin_add_sub_sub_category');
+// Route::any('/general_admin/sub_sub_sub_category', 					'GeneralAdminController@general_admin_sub_sub_sub_category');
+
+
+
+
 Route::any('/general_admin/edit_sub_category', 						'GeneralAdminController@general_admin_edit_sub_category');
 Route::any('/general_admin/send_invoice/{id}', 						'GeneralAdminController@general_admin_send_invoice');
 Route::any('/general_admin/send_save_invoice/{id}', 				'GeneralAdminController@general_admin_send_save_invoice');

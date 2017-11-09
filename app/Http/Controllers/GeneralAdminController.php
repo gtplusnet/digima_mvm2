@@ -644,7 +644,8 @@ class GeneralAdminController extends Controller
       $check = TblBusinessCategoryModel::insert($ins);
       if($check)
       {
-        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+        $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$request->cat_id)->get();
+        return view('general_admin.pages.get_sub_category',$data);
       }
       else
       {
@@ -667,27 +668,28 @@ class GeneralAdminController extends Controller
         return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br>";
       }
     }
-    public function general_admin_get_sub_sub_category(Request $request)
-    {
-      $sub_category_id = $request->cat_id;
-      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$sub_category_id)->get();
-      return view('general_admin.pages.get_sub_sub_category',$data);
-    }
-    public function general_admin_add_sub_sub_category(Request $request)
-    {
-      $ins['business_category_name'] = $request->cat_name;
-      $ins['business_category_information'] = $request->cat_info;
-      $ins['parent_id'] = $request->cat_id;
-      $check = TblBusinessCategoryModel::insert($ins);
-      if($check)
-      {
-        return "<div class='alert alert-success'><strong>Success!</strong>Sub Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
-      }
-      else
-      {
-        return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
-      }
-    }
+    // public function general_admin_get_sub_sub_category(Request $request)
+    // {
+    //   $sub_category_id = $request->cat_id;
+    //   $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$sub_category_id)->get();
+    //   return view('general_admin.pages.get_sub_sub_category',$data);
+    // }
+    // public function general_admin_add_sub_sub_category(Request $request)
+    // {
+    //   $ins['business_category_name'] = $request->cat_name;
+    //   $ins['business_category_information'] = $request->cat_info;
+    //   $ins['parent_id'] = $request->cat_id;
+    //   $check = TblBusinessCategoryModel::insert($ins);
+    //   if($check)
+    //   {
+    //     return "<div class='alert alert-success'><strong>Success!</strong>Sub Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+    //   }
+    //   else
+    //   {
+    //     return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+    //   }
+    // }
+    
 
     public function general_admin_add_agent(Request $request)
     { 
