@@ -179,8 +179,11 @@
 }
 .overview-content-text
 {
-	font-size: 13px;
+	font-size: 12px;
     text-align: justify;
+    font-family:"Poppins",sans-serif;
+    
+
 }
 .category-content
 {
@@ -207,9 +210,8 @@
 .details-container
 {
 	border-bottom: 1px solid #999;
-	height: 73px;
-
-	margin-top: 5px;
+    height: auto;
+    margin-top: 5px;
 }
 .details-container-last
 {
