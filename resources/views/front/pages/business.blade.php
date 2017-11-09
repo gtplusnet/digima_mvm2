@@ -5,25 +5,30 @@
 <div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">s
     <div class="container">
         <div class="pull-left">
+            <div class="pull-right">
+                <p class="search-text">Search ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
+            </div>
             <div class="businesses-info-containers">
                 {{-- <img class="business-logo" src="/images/business_logo.png"> --}}
                 <div  class="businesses-details-containers">
                     <p class="businesses-name">{{ $business_info->business_name }}</p>
                 </div>
                 <div  class="businesses-details-containers">
-                    <p class="businesses-phone"><i class="fa fa-phone phone" style="color:#f9c200;margin-right:10px;"></i>{{$business_info->business_phone}}</p>
+                    <p class="businesses-phone"><i class="fa fa-phone phone" style=""></i>{{$business_info->business_phone}}</p>
                 </div>
-                <div class="businesses-details-containers">
-                    <p class="businesses-map" ><i class="fa fa-map-marker map" style="color:#f9c200;margin-right:10px;"></i>{{$business_info->business_complete_address}}</p>
-                </div> 
-                <div class="businesses-details-containers pull-right">
-                    <button class="btn btn-primary pull-right">Skype</button><buton class="btn btn-danger pull-right">Email</buton>
-                </div>    
+                <div class="businesses-details-containers" style="">
+                    
+                    <div class="businesses-map" >
+                        <i class="fa fa-map-marker map" style=""></i>{{$business_info->business_complete_address}}
+                    </div>
+                    <div class="pull-right">
+                            <a href="skype:Echo123"><button class=" btn-skype"><i class="fa fa-skype skype" aria-hidden="true"></i>Call on Skype</button></a>
+                            <buton class=" btn-email" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope email" aria-hidden="true"></i>Send Email</buton>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="pull-right">
-            <p class="search-text">Search ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
-        </div>
+        
     </div>
 </div>
 <div class="container business-containers">
@@ -120,7 +125,6 @@
                     <p class="overview-title">CATEGORY/KEYWORDS</p>
                 </div>
                 <div class="category-content">
-                    <a href="skype:echo123?call">Call the Skype Echo / Sound Test Service</a>
                     <p class="overview-content-text">
                         Cruises
                     <br>Travel & Tourism
@@ -154,17 +158,18 @@
         </div>
         <div class="business-details-rightpart">
             <div class="details-container">
-                <div class="business-details-rightpart-title">
-                    <i class="material-icons">location_on</i><p class="title-margin-mi">ADDRESS:</p>
+                <div class="sociallinks-container">
+                    <div class="links-holder">
+                        
+                        <a href=""><i class="fa fa-facebook businesspage-fb-icon"></i><p class="fb-like">Like</p></a>
+
+
+                        <a href=""><i class="fa fa-twitter businesspage-twitter-icon"></i><p class="twitter-tweet">Tweet</p></a>
+                    </div>
+                   
                 </div>
-                <p class="business-details-rightpart-content">{{ $business_info->business_complete_address }}</p>
             </div>
-            <div class="details-container">
-                <div class="business-details-rightpart-title">
-                    <i class="fa fa-phone icon-size"></i><p class="title-margin"> PHONE:</p>
-                </div>
-                <p class="business-details-rightpart-content">{{ $business_info->business_phone }}</p>
-            </div>
+           
             <div class="details-container">
                 <div class="business-details-rightpart-title">
                     <i class="fa fa-globe icon-size"></i><p class="title-margin"> WEBSITE:</p>
@@ -183,7 +188,7 @@
                 </div>
                 @foreach($_business_hours as $business_hours)
                     <p class="business-details-rightpart-content">
-                        <table style="width:100%;">
+                        <table style="width:100%;margin-left:30px;">
                             <td style="width:50%;color: #7E8692;font-size: 13px;">{{$business_hours->days}}  </td>
                             <td style="width:50%;color: #7E8692;font-size: 13px;"> {{date('h:i a', strtotime($business_hours->business_hours_from))}} - {{date('h:i a', strtotime($business_hours->business_hours_from))}}</td>
                        </table>
@@ -200,24 +205,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="sociallinks-holder">
-                <div class="sociallinks-container">
-                    <div class="links-holder">
-                        
-                        <a href=""><i class="fa fa-facebook businesspage-fb-icon"></i><p class="fb-like">Like</p></a>
-
-
-                        <a href=""><i class="fa fa-twitter businesspage-twitter-icon"></i><p class="twitter-tweet">Tweet</p></a>
-                    </div>
-                    <div class="links-holder">
-                        <a href="skype:Echo123"><i class="fa fa-skype business-skype-icon"></i><p class="go-skype">Skype</p></a>
-                        <button class="btn-sendemail" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-paper-plane business-sendemail-icon"></i>
-                            <p class="send-mail">Send Email</p>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
         <!-- MODAL CSS STYLE -->
