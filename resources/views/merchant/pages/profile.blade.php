@@ -17,7 +17,7 @@
                <!-- Nav tabs -->
                <div role="tabpanel">
                   <ul class="nav nav-pills" role="tablist">
-                     <li role="presentation" class="active"><a href="#tab9" role="tab" data-toggle="tab" aria-expanded="true">General Information</a></li>
+                     <li role="presentation" class="active"><a href="#tab9" role="tab" data-toggle="tab" aria-expanded="true">Other Information</a></li>
                      <li role="presentation" class=""><a href="#tab15" role="tab" data-toggle="tab" aria-expanded="false">Other Information</a></li>
                      <li role="presentation" class=""><a href="#tab11" role="tab" data-toggle="tab" aria-expanded="false">Business Hours</a></li>
                      <li role="presentation" class=""><a href="#tab20" role="tab" data-toggle="tab" aria-expanded="false">Business Image</a></li>
@@ -28,7 +28,7 @@
                <div class="tab-content">
                   <div role="tabpanel" class="tab-pane fade active in" id="tab9">
                      <form class="form-horizontal">
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top:50px;">
                            <label for="business_name" class="col-sm-2 control-label">Business Name</label>
                            <div class="col-sm-10">
                               <input type="text" class="form-control" id="business_name" value="{{$merchant_info->business_name}}" readonly>
@@ -196,13 +196,16 @@
                               <td>{{$data->payment_method_id}}</td>
                               <td>{{$data->payment_method_name}}</td>
                               <td>
-                                 <button type="button" class="btn btn-danger deletePayments" data-id="{{$data->payment_method_id}}">
+                                 <button type="button" class="btn btn-danger deletePaymentss" data-id="{{$data->payment_method_id}}">
                                  <i class="fa fa-trash" aria-hidden="true"></i>Delete
                                  </button>
                               </td>
                            </tr>
                            @endforeach
                         </table>
+                        <div>
+                        {!! $_payment_method->render()!!}
+                        <div class="col-md-12">
                         <div class="col-md-4">
                            <label class="control-label" style="text-align: left;margin-bottom:10px;">Payment Method</label>
                            <div  class="col-md-12">

@@ -31,6 +31,7 @@
                 @endif 
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                 <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="0" cellspacing="0"  border="1">
                  <thead>
                             <tr>
@@ -46,11 +47,15 @@
                             <td>{{$data->subject}}</td>
                             <td>{{$data->messages}}</td>
                             <td>
-                            <a href="/merchant/delete_messages/{{$data->guest_messages_id}}"><button type="button" class="btn btn-danger">
-                            <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
-                            </tr>
-                            @endforeach
-                        </table> 
+                                <a href="/merchant/delete_messages/{{$data->guest_messages_id}}">
+                                    <button type="button" class="btn btn-danger">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>Delete
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                </table> 
                 </div>
             </div>
         </div>
@@ -58,6 +63,6 @@
     <!-- Row -->                    
 </div>
 
-
 <script type="text/javascript" src="/assets/admin/merchant/assets/pages/category/category.js"></script>
+
 @endsection

@@ -1,4 +1,3 @@
-categoryEdit
 var manage_categories = new manage_categories();
 
 
@@ -18,7 +17,6 @@ function manage_categories()
 			search_category();
 			save_category();
 			action_box();
-			update_hours();
 			delete_category();
 			update_category();
 			sub_category_action();
@@ -27,7 +25,7 @@ function manage_categories()
 	}
 	function save_category()
 	{
-		$('.save_category').click(function(){
+		$(document).on('click','.save_category',function(){
 		var cat_name = $('#cat_name').val();
 		var cat_info = $('#cat_info').val();
 		
@@ -44,7 +42,7 @@ function manage_categories()
 	}
 	function search_category()
 	{
-		$('#search_button').click(function(){
+		$(document).on('click','#search_button',function(){
 		var search_key = $('#search_key').val();
 		$('#ajax-loader').show();
 		$('#showHere3').hide();
@@ -64,8 +62,7 @@ function manage_categories()
 	
 	function action_box()
 	{ 
-		//agent
-		$('.category_action').change(function(){
+		$(document).on('change','.category_action',function(){
 			
 			if ($(this).val() == "delete") 
 			   {
@@ -107,7 +104,7 @@ function manage_categories()
     }
 	function delete_category()
 	{
-   		$('#actionDelete').click(function(){
+   		$(document).on('click','#actionDelete',function(){
 		    var delete_id = $('#delete_id').val();
 		    var delete_link = $('#delete_link').val();
 		    $.ajax({
@@ -159,6 +156,7 @@ function manage_categories()
 				dataType:'text',
 			}).done(function(data){
 				    $('#success_alert').html(data);
+				    $('#subCategoryEdit').modal('hide');
 		 		    $('#successModal').modal('show');
 				});
 	    });
@@ -170,9 +168,9 @@ function manage_categories()
 			if ($(this).val() == "delete") 
 			   {
 		    	var cat_id = $(this).data("id");
-		        $("#delete_id_sub").val(cat_id);
-		        $("#delete_link_sub").val('delete_sub_category');
-		        $('#deleteModal_sub').modal('show');
+		        $("#delete_id").val(cat_id);
+		        $("#delete_link").val('delete_category');
+		        $('#deleteModal').modal('show');
 		       }
 	        if ($(this).val() == "edit") 
 	           {
@@ -190,34 +188,31 @@ function manage_categories()
 		    	var cat_name = $(this).data("name");
 		    	$.ajax({
 			 		type:'POST',
-			 		url:'/general_admin/get_sub_sub_category',
+			 		url:'/general_admin/get_sub_category',
 			 		data:{
 			 			cat_id: cat_id,
 			 		     },
 			 		dataType:'text',
 
 			 	}).done(function(data){
-			 		    $("#cat_id_dis_sub").val(cat_id);
-				        $("#cat_name_head_sub").text(cat_name);
-				        $("#get_sub_sub_category_result").html(data);
-				        $('#subSubCategory').modal('show');
+			 		    $("#cat_id_dis").val(cat_id);
+				        $("#cat_name_head").text(cat_name);
+				        $("#get_sub_category_result").html(data);
+				        $('#subCategory').modal('show');
 			 		});
 		    	}	
 		});
 	}
 	function add_sub_category()
 	{
-		$('#addSubCategoryBtn').click(function(){
+		$(document).on('click','#addSubCategoryBtn',function()
+		{
 	        
 			$('#addSubCategory').modal('show');
 		});
-        $('#addSubSubCategoryBtn').click(function(){
-	        
-			$('#addSubSubCategory').modal('show');
-		});
-		
-		
-		$('#save_sub_categoryBtn').click(function(){
+  
+		$(document).on('click','#save_sub_categoryBtn',function()
+		{
 			var cat_id = $('#cat_id_dis').val();
 			var cat_name = $('#cat_name_dis').val();
 			var  cat_info = $('#cat_info_dis').val();
@@ -230,25 +225,8 @@ function manage_categories()
 					cat_id:cat_id},
 				dataType:'text',
 			}).done(function(data){
-				    $('#addSubCategory_alert').html(data);
-		 		});
-	    });
-	    $('#save_sub_sub_categoryBtn').click(function(){
-	    	
-			var cat_id = $('#cat_id_dis_sub').val();
-			var cat_name = $('#cat_name_dis_sub').val();
-			var  cat_info = $('#cat_info_dis_sub').val();
-			alert(cat_id);
-			$.ajax({
-				type:'POST',
-				url:'/general_admin/add_sub_sub_category',
-				data:{
-					cat_name: cat_name,
-					cat_info: cat_info,
-					cat_id:cat_id},
-				dataType:'text',
-			}).done(function(data){
-				    $('#addSubSubCategory_alert').html(data);
+					$('#addSubCategory').modal('hide');
+				    $('#get_sub_category_result').html(data);
 		 		});
 	    });
 	}

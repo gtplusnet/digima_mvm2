@@ -23,6 +23,8 @@ use App\Models\TblMembeshipModel;
 use App\Models\TblGuestMessages;
 use App\Models\TblBusinessCategoryModel;
 use App\Models\TblReportsModel;
+use App\Models\TblABusinessPaymentMethodModel;
+use App\Models\TblBusinessHoursmodels;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -49,8 +51,7 @@ class FrontController extends Controller
     
     public function index()
     {
-        $data['countyList'] = TblCountyModel::get();
-        $data['cityList'] = TblCityModel::get();
+        
         Session::forget("merchant_login");
         Session::forget("full_name");
         Session::forget("email");
@@ -60,7 +61,9 @@ class FrontController extends Controller
         Session::forget("business_address");
         Session::forget("city_state");
         Session::forget("zip_code");
-        // TblBusinessModel::where('business_status',5)
+        $data['countyList'] = TblCountyModel::get();
+        $data['cityList'] = TblCityModel::get();
+        $data['_membership']  = TblMembeshipModel::get();
         $data["_business_list"] = TblBusinessModel:: where('business_status',5)
                                 ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->orderBy('tbl_business.membership',"ASC")
@@ -74,6 +77,7 @@ class FrontController extends Controller
                                 ->orderBy('tbl_reports.business_views',"DESC")
                                 ->get();
         return view('front.pages.home',$data);
+
     }
 
 
@@ -135,6 +139,7 @@ class FrontController extends Controller
         $data['value'] = $cat1;
         $data['_filtered'] = $cat;
         $data['_categories_list'] = TblBusinessCategoryModel::where('parent_id',0)->get();
+        $data['_membership']  = TblMembeshipModel::get();
         $data["_business_list"] = TblBusinessModel:: where('business_status',5)
                                 ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->orderBy('tbl_business.membership',"ASC")
@@ -316,7 +321,10 @@ class FrontController extends Controller
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
                           ->first();
+        $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
+        $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$id)->get();
 
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
         // dd($address);
@@ -394,15 +402,16 @@ class FrontController extends Controller
     }
     public function contact_send(Request $request)
     {
-        $contact_name= $request->full_name;
-        $contact_email_add = $request->email;
+        $contact_name= $request->name;
+        $contact_email_add = $request->email_add;
         $contact_subject = $request->subject;
-        $contact_help_message = $request->messages;
+        $contact_help_message = $request->help_message;
+        // dd($contact_name);
         $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
 
-        $data = array('full_name'=>$contact_name,'email'=>$contact_email,'subject'=>$contact_subject,'message'=>$contact_help_message,'date'=>$date);
+        $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
         $check_mail = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
-         $message->to('guardians35836@gmail.calculhmac(clent, data)om', 'Croatia Team')->subject
+         $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
             ('THE RIGHT PLACE FOR BUSINESS');
          $message->from('guardians35836@gmail.com','Croatia Customer');
         });

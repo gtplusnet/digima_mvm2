@@ -159,14 +159,14 @@ width:100%;
 						<br>
 					</div>
 					<div class="col-md-12 payment-content">
-
+						@foreach($_membership as $membership)
 						<div class="col-md-5 package-container">
 							<div class="membership-offer">
-								PREMIUM PACKAGE
+								{{$membership->membership_name}}
 							</div>
 							<hr>
 							<div class="membership-price">
-								<span >$2,500  </span>
+								<span >${{$membership->membership_price}}  </span>
 							</div>
 							<hr>
 							<div class="membership-details">
@@ -182,28 +182,8 @@ width:100%;
 								</a>
 							</div>
 						</div>
-						<div class="col-md-5 package-container">
-							<div class="membership-offer">
-								PLATINUM PACKAGE
-							</div>
-							<hr>
-							<div class="membership-price">
-								<span >$5,500  </span>
-							</div>
-							<hr>
-							<div class="membership-details">
-								<p class="membership-details-text">
-									Sadly, none of them were ok, and I can't seem to find out any other option.
-									The first and second button are displayed
-									on same line, but the third is displayed lower... Can you help me?
-								</p>
-							</div>
-							<div class="membership-btn">
-								<a href="/registration">
-									<button type="button" class="membership-button">GET STARTED NOW</button>
-								</a>
-							</div>
-						</div>
+						@endforeach
+						
 					</div>
 				</div>
 			</div>

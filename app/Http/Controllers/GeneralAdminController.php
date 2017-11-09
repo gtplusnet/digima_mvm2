@@ -22,7 +22,12 @@ use App\Models\TblSupervisorModels;
 use App\Models\TblMembeshipModel;
 use App\Models\TblBusinessSubCategoryModel;
 use App\Models\TblBusinessSubSubCategoryModel;
-
+use App\Models\TblPaymentMethod;
+use App\Models\TblReportsModel;
+use App\Models\TblABusinessPaymentMethodModel;
+use App\Models\TblBusinessOtherInfoModel;
+use App\Models\TblBusinessHoursmodels;
+use App\Models\TblBusinessImages;
 use DB;
 use Response;
 use Session;
@@ -38,59 +43,48 @@ class GeneralAdminController extends Controller
 {
     public static function allow_logged_in_users_only()
     {
-        if(session("general_admin_login") != true)
-        {
-            return Redirect::to("/general_admin")->send();
-        }
+      if(session("general_admin_login") != true)
+      {
+          return Redirect::to("/general_admin")->send();
+      }
     }
-
     public static function allow_logged_out_users_only()
     {
-        if(session("general_admin_login") == true)
-        {
-            return Redirect::to("/general_admin/dashboard")->send();
-        }
+      if(session("general_admin_login") == true)
+      {
+          return Redirect::to("/general_admin/dashboard")->send();
+      }
     }
-
-
-      public function index()
-
+    public function index()
     {
-        $data['countyList'] = TblCountyModel::get();
-        return view('general_admin.pages.general_admin_login',$data);
-
+      $data['countyList'] = TblCountyModel::get();
+      return view('general_admin.pages.general_admin_login',$data);
     }
     public function general_admin_login_submit(Request $request)
     {
-
-        $validate_login = TblAdminModels::where('email','=',$request->email)->first();
-
-        if($validate_login)
+      $validate_login = TblAdminModels::where('email','=',$request->email)->first();
+      if($validate_login)
+      {
+        if (password_verify($request->password, $validate_login->password)) 
         {
-
-            if (password_verify($request->password, $validate_login->password)) 
-
-                {
-                    Session::put("general_admin_login",true);
-                    Session::put("admin_id",$validate_login->admin_id);
-                    Session::put("full_name",$validate_login->full_name);
-                    Session::put("email",$validate_login->email);
-                    Session::put("position",$validate_login->position);
-                    // Session::put("login",$validate_login->email);
-                    $data['page']   = 'Dashboard';
-                    return Redirect::to('/general_admin/dashboard');
-                }
-
-            else
-            {
-                $data['page']  = 'Admin login';
-                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-            }
+          Session::put("general_admin_login",true);
+          Session::put("admin_id",$validate_login->admin_id);
+          Session::put("full_name",$validate_login->full_name);
+          Session::put("email",$validate_login->email);
+          Session::put("position",$validate_login->position);
+          $data['page']   = 'Dashboard';
+          return Redirect::to('/general_admin/dashboard');
         }
         else
         {
+            $data['page']  = 'Admin login';
             return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
         }
+      }
+      else
+      {
+          return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+      }
     }
 
     public function general_admin_logout()
@@ -101,14 +95,9 @@ class GeneralAdminController extends Controller
 
     public function general_admin_business_list(Request $request)
     {
-
-          $data['business_list'] = $this->business_data($request['business_name']);
-          return view('general_admin.pages.business',$data)->render();
-
-        Self::allow_logged_in_users_only();
-       
+      $data['business_list'] = $this->business_data($request['business_name']);
+      return view('general_admin.pages.business',$data)->render();
     }
-
     public function general_admin_dashboard()
     {
          Self::allow_logged_in_users_only();
@@ -236,7 +225,6 @@ class GeneralAdminController extends Controller
 
     public function general_admin_send_save_invoice(Request $request,$id)
     {
-
       $checked=TblInvoiceModels::where('business_id',$id)->first();
       if($checked)
         {
@@ -249,11 +237,8 @@ class GeneralAdminController extends Controller
       $business_contact_person_id = $request->business_contact_person_id;
       $invoice_number = $request->invoice_number;
       $data['invoice_number'] = $request->invoice_number;
-
-      
-      
-       if($request->submit == 'Print') 
-       {
+        if($request->submit == 'Print') 
+        {
             $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -336,7 +321,6 @@ class GeneralAdminController extends Controller
             $file_name  = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
             $pdf = PDF::loadView('mail', $data, [], $format);
             $save_pdf = $pdf->save(public_path('invoice/'.$file_name));
-            // $save_pdf = $pdf->save(public_path('invoice'));
             $invoice['invoice_number'] = $invoice_number;
             $invoice['invoice_name'] = $file_name;
             $invoice['invoice_path'] = '/invoice/'.$file_name;
@@ -356,8 +340,8 @@ class GeneralAdminController extends Controller
                 
                 // $data = array('name'=>'james_ako','date'=>'james','email'=>'guardians35836@gmail.com','business_id'=>$business_id,'remarks'=>'Please Pay As Soon As Possible.');
                 $pathfile='invoice/'.$file_name;
-                $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($pathfile) {
-                   $message->to('guardians35836@gmail.com', 'Tutorials Point')->subject
+                $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile) {
+                   $message->to($data['email'],'Croatia Invoice')->subject
                       ('Your Croatia Directory Invoice');
                    $message->attach(public_path($pathfile));
                    $message->from('guardians35836@gmail.com','Croatia Directory');
@@ -377,7 +361,6 @@ class GeneralAdminController extends Controller
             {
               echo "Error";
             }
-            
         }
       }
     }
@@ -422,13 +405,11 @@ class GeneralAdminController extends Controller
 
     public function general_admin_payment_monitoring()
     {
-      
       $data['business_list'] = TblPaymentModel::where('payment_status','submitted')
-                                          ->join('tbl_business','tbl_business.business_id','=','tbl_payment.business_id')
-                                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
-                                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                                          ->get();
-         // dd($data);
+                          ->join('tbl_business','tbl_business.business_id','=','tbl_payment.business_id')
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->get();
       return view('general_admin.pages.payment_monitoring',$data);
     }
     public function general_admin_accept_and_activate(Request $request)
@@ -455,13 +436,7 @@ class GeneralAdminController extends Controller
             ('THE RIGHT PLACE FOR BUSINESS');
          $message->from('guardians35836@gmail.com','Croatia Customer');
         });
-
-
-
-
-
       return "<h4 class='modal-title' >Success! Account already activated.</h4>";
-
     }
     public function general_admin_decline_and_deactivate(Request $request)
     {
@@ -474,9 +449,7 @@ class GeneralAdminController extends Controller
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
       return "<h4 class='modal-title' >Success! Account already deactivated.</h4>";
-
     }
-
     public function get_business_list_info(Request $request)
     {
         if($request->ajax())
@@ -515,21 +488,24 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent'] = TblAgentModel::get();
-      $data['_data_team'] = TblTeamModel::get();
-      $data['_data_supervisor'] = TblSupervisorModels::get();
-      $data['_data_admin'] = TblAdminModels::get();
+      $data['_data_agent']          = TblAgentModel::get();
+      $data['_data_team']           = TblTeamModel::get();
+      $data['_data_supervisor']     = TblSupervisorModels::get();
+      $data['_data_admin']          = TblAdminModels::get();
+      $data['_merchant']            = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                                    ->get();
       $data['page'] = 'Manage Users';
       return view('general_admin.pages.manage_user', $data);
 
     }
     public function general_admin_manage_website()
     {
-      $data['_membership'] = TblMembeshipModel::paginate(5);
-      $data['_county'] = TblCountyModel::paginate(5);
-      $data['_city'] = TblCityModel::
-                       join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                       ->paginate(5);
+      $data['_membership']          = TblMembeshipModel::paginate(5);
+      $data['_payment_method']      = TblPaymentMethod::paginate(5);
+      $data['_county']              = TblCountyModel::paginate(5);
+      $data['_city']                = TblCityModel::join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+                                    ->paginate(5);
       return view('general_admin.pages.manage_website',$data);
     }
     public function general_admin_add_membership(Request $request)
@@ -538,6 +514,24 @@ class GeneralAdminController extends Controller
       $data['membership_price']= $request->membershipPrice;
       TblMembeshipModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Added.</div>"; 
+    }
+    public function general_admin_add_payment_method(Request $request)
+    {
+      $data['payment_method_name']= $request->paymentMethodName;
+      TblPaymentMethod::insert($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Added.</div>"; 
+    }
+    public function general_admin_update_payment_method(Request $request)
+    {
+      $id = $request->pay_id;
+      $data['payment_method_name'] = $request->pay_name;
+      TblPaymentMethod::where('payment_method_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Updated.</div>"; 
+    }
+    public function general_admin_delete_payment_method(Request $request)
+    {
+      $payment_method_id = $request->delete_id;
+      TblPaymentMethod::where('payment_method_id',$payment_method_id)->delete();
     }
     public function general_admin_update_membership(Request $request)
     {
@@ -650,7 +644,8 @@ class GeneralAdminController extends Controller
       $check = TblBusinessCategoryModel::insert($ins);
       if($check)
       {
-        return "<div class='alert alert-success'><strong>Success!</strong>Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+        $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$request->cat_id)->get();
+        return view('general_admin.pages.get_sub_category',$data);
       }
       else
       {
@@ -673,39 +668,81 @@ class GeneralAdminController extends Controller
         return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br>";
       }
     }
-    public function general_admin_get_sub_sub_category(Request $request)
-    {
-      $sub_category_id = $request->cat_id;
-      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$sub_category_id)->get();
-      return view('general_admin.pages.get_sub_sub_category',$data);
-    }
-    public function general_admin_add_sub_sub_category(Request $request)
-    {
-      $ins['business_category_name'] = $request->cat_name;
-      $ins['business_category_information'] = $request->cat_info;
-      $ins['parent_id'] = $request->cat_id;
-      $check = TblBusinessCategoryModel::insert($ins);
-      if($check)
-      {
-        return "<div class='alert alert-success'><strong>Success!</strong>Sub Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
-      }
-      else
-      {
-        return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
-      }
-    }
+    // public function general_admin_get_sub_sub_category(Request $request)
+    // {
+    //   $sub_category_id = $request->cat_id;
+    //   $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$sub_category_id)->get();
+    //   return view('general_admin.pages.get_sub_sub_category',$data);
+    // }
+    // public function general_admin_add_sub_sub_category(Request $request)
+    // {
+    //   $ins['business_category_name'] = $request->cat_name;
+    //   $ins['business_category_information'] = $request->cat_info;
+    //   $ins['parent_id'] = $request->cat_id;
+    //   $check = TblBusinessCategoryModel::insert($ins);
+    //   if($check)
+    //   {
+    //     return "<div class='alert alert-success'><strong>Success!</strong>Sub Sub Category Added.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+    //   }
+    //   else
+    //   {
+    //     return "<div class='alert alert-danger'><strong>Failed!</strong>Failed to Insert.</div><br><center><button type='button' class='btn btn-default' data-dismiss='modal'>Close</button></center>";
+    //   }
+    // }
+    
 
+    // public function general_admin_add_agent(Request $request)
+    // { 
 
-    public function report()
-    {
-      Self::allow_logged_in_users_only();
-        return view('general_admin.pages.report');
-    }
-
-    public function sample_invoice()
-    {
-      return view('general_admin.pages.invoice');
-    }
+    //   $ins['prefix'] = $request->prefix;
+    //   $ins['first_name'] = $request->first_name;
+    //   $ins['last_name'] = $request->last_name;
+    //   $ins['email'] = $request->email;
+    //   $ins['position'] = 'agent';
+    //   $ins['team_id'] = $request->team_id;
+    //   $ins['primary_phone'] = $request->primary;
+    //   $ins['secondary_phone'] = $request->secondary;
+    //   $ins['other_info'] = $request->other_info;
+    //   $ins['date_created'] = date("Y/m/d");
+    //   $ins['agent_call'] = '0';
+    //   $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+      
+    //       if($ins['password']=='')
+    //       {
+    //           return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
+    //       }
+    //       else if($ins['first_name']=='')
+    //       {
+    //           return "<div class='alert alert-danger'><strong>Please!</strong>Input First Name.</div>";
+    //       }
+    //       else if($ins['last_name']=='')
+    //       {
+    //           return "<div class='alert alert-danger'><strong>Please!</strong>Input Last Name.</div>";
+    //       }
+    //       else if($ins['email']=='')
+    //       {
+    //           return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
+    //       }
+    //       else if($ins['primary_phone']=='')
+    //       {
+    //           return "<div class='alert alert-danger'><strong>Please!</strong>Input Primary Phone.</div>";
+    //       }
+          
+    //       else
+    //       {
+    //           $check_insert = TblAgentModel::insert($ins);
+    //           echo "james";
+    //           if($check_insert)
+    //           {
+    //             return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
+    //           }
+    //           else
+    //           {
+    //               return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
+    //           }
+    //       }
+    // }
+   
 
     
   public function general_admin_add_agent(Request $request)
@@ -766,6 +803,7 @@ class GeneralAdminController extends Controller
     TblAgentModel::where('agent_id',$agent_id)->update($update);
     return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned Successfully!</div>";
   }
+
   public function general_admin_add_team(Request $request)
   {  
     $data['team_name'] = $request->team_name;
@@ -786,6 +824,7 @@ class GeneralAdminController extends Controller
     }
   }
 
+ 
   public function general_admin_add_supervisor(Request $request)
   {
     $ins['prefix'] = $request->prefix;
@@ -799,6 +838,7 @@ class GeneralAdminController extends Controller
     $ins['other_info'] = $request->other_info;
     $ins['date_created'] = date("Y/m/d");
     $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
         if($ins['password']=='')
         {
             return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
@@ -832,28 +872,27 @@ class GeneralAdminController extends Controller
                 return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
             }
         }  
-  }
-  public function general_admin_add_generaladmin(Request $request)
-  {
-    $data['full_name'] = $request->full_name;
-    $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-    $data['email'] = $request->email;
-    if($data['full_name']=='')
+    }
+    public function general_admin_add_generaladmin(Request $request)
     {
+      $data['full_name'] = $request->full_name;
+      $data['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+      $data['email'] = $request->email;
+      if($data['full_name']=='')
+      {
         return "<div class='alert alert-danger'><strong>Please!</strong>Input Full Name.</div>";
-    }
-    else if($data['password']=='')
-    {
+      }
+      else if($data['password']=='')
+      {
         return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
-    }
-    else if($data['email']=='')
-    {
+      }
+      else if($data['email']=='')
+      {
         return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
-    }
-    
-    else
-    {
-        
+      }
+      
+      else
+      {
         $check_insert = TblAdminModels::insert($data);
         if($check_insert)
         {
@@ -863,16 +902,9 @@ class GeneralAdminController extends Controller
         {
             return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
         }
+      }
+
     }
-
-  }
-
-  public function general_admin_delete_team(Request $request)
-  {
-     $team_id = $request->delete_team_id;
-     TblTeamModel::where('team_id',$team_id)->delete();
-     return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted Successfully!</div>";
-  }
 
 
 
@@ -936,12 +968,7 @@ class GeneralAdminController extends Controller
     return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
    }
 
-  public function general_admin_delete_agent(Request $request)
-  {
-      $agent_id = $request->delete_agent_id;
-      TblAgentModel::where('agent_id',$agent_id)->delete();
-      return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
-  }
+ 
 
   public function add_supervisor_submit(Request $request)
   {
@@ -972,7 +999,54 @@ class GeneralAdminController extends Controller
       return Redirect::back();
     }
 
+    public function general_admin_delete_team(Request $request)
+    {
+       $team_id = $request->delete_team_id;
+       TblTeamModel::where('team_id',$team_id)->delete();
+       return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted Successfully!</div>";
+    }
 
+
+    public function general_admin_delete_agent(Request $request)
+    {
+        $agent_id = $request->delete_agent_id;
+        TblAgentModel::where('agent_id',$agent_id)->delete();
+        return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
+    }
+
+    public function general_admin_view_merchant_info(Request $request)
+    {
+      $business_id = $request->business_id;
+      TblBusinessModel::where('tbl_business.business_id',$business_id)
+                      ->join('tbl_business_hours','tbl_business_hours.business_id','=','tbl_business.business_id')
+                      ->get();
+      $data['merchant_info']   = TblBusinessModel::where('business_id',$business_id)
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                                ->first();
+      $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',$business_id)->paginate(5);
+      $data['other_info']     = TblBusinessOtherInfoModel::where('business_id',$business_id)->first();
+      $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$business_id)->get();
+      $data['_images']   = TblBusinessImages::where('business_id',$business_id)->get();
+      return view("general_admin.pages.view_merchant_info",$data);
+
+    }
+
+
+
+    public function report()
+    {
+      Self::allow_logged_in_users_only();
+      $data['_reports'] = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')->paginate(10);
+      return view('general_admin.pages.report',$data);
+    }
+
+    public function sample_invoice()
+    {
+      return view('general_admin.pages.invoice');
+    }
+
+    
       public function pdfview(Request $request)
     {
         // $items = DB::table("tbl_business")->get();

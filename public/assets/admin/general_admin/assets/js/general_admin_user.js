@@ -14,6 +14,7 @@ function manage_user()
 	{
 		$(document).ready(function()
 		{
+			merchant();
 			add_agent();
 			add_team();
 			add_supervisor();
@@ -21,6 +22,28 @@ function manage_user()
 			assigned_agent();
 			action_box();
 		});
+	}
+	function merchant()
+	{
+		$('.merchant_actionbox').change(function()
+		{
+			if ($(this).val() == "edit") 
+			{
+	            var business_id = $(this).data('id');
+	            $.ajax({
+					type:'POST',
+					url:'/general_admin/manage_user/view_merchant_info',
+					data:{
+						business_id: business_id,
+						},
+					dataType:'text',
+
+				}).done(function(data){
+					    $('#show_merchant_info').html(data);
+					});
+			}
+		
+	    });
 	}
 
 	function add_agent()
