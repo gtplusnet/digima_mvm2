@@ -137,6 +137,7 @@ class FrontController extends Controller
         $data['value'] = $cat1;
         $data['_filtered'] = $cat;
         $data['_categories_list'] = TblBusinessCategoryModel::where('parent_id',0)->get();
+        $data['_membership']  = TblMembeshipModel::get();
         $data["_business_list"] = TblBusinessModel:: where('business_status',5)
                                 ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->orderBy('tbl_business.membership',"ASC")

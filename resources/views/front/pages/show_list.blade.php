@@ -162,59 +162,39 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<div class="payment-containers">
-				<div class="payment-title">
-					SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
-					<br>
-				</div>
-				<div class="col-md-12 payment-content">
-					<div class="col-md-5 package-container">
-						<div class="membership-offer">
-							PREMIUM PACKAGE
-						</div>
-						<hr>
-						<div class="membership-price">
-							<span >$7,500</span>
-						</div>
-						<hr>
-						<div class="membership-details">
-							<p class="membership-details-text">
-								Sadly, none of them were ok, and I can't seem to find out any other option.
-								The first and second button are displayed
-								on same line, but the third is displayed lower... Can you help me?
-							</p>
-						</div>
-						<div class="membership-btn">
-							<a href="/registration">
-								<button type="button" class="membership-button">GET STARTED NOW</button>
-							</a>
-						</div>
-						
+				<div class="payment-containers">
+					<div class="payment-title">
+						SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
+						<br>
 					</div>
-					<div class="col-md-5 package-container">
-						<div class="membership-offer">
-							PLATINUM PACKAGE
+					<div class="col-md-12 payment-content">
+						@foreach($_membership as $membership)
+						<div class="col-md-5 package-container">
+							<div class="membership-offer">
+								{{$membership->membership_name}}
+							</div>
+							<hr>
+							<div class="membership-price">
+								<span >${{$membership->membership_price}}  </span>
+							</div>
+							<hr>
+							<div class="membership-details">
+								<p class="membership-details-text">
+									Sadly, none of them were ok, and I can't seem to find out any other option.
+									The first and second button are displayed
+									on same line, but the third is displayed lower... Can you help me?
+								</p>
+							</div>
+							<div class="membership-btn">
+								<a href="/registration">
+									<button type="button" class="membership-button">GET STARTED NOW</button>
+								</a>
+							</div>
 						</div>
-						<hr>
-						<div class="membership-price">
-							<span >$5,500 / </span><span >month</span>
-						</div>
-						<hr>
-						<div class="membership-details">
-							<p class="membership-details-text">
-								Sadly, none of them were ok, and I can't seem to find out any other option.
-								The first and second button are displayed
-								on same line, but the third is displayed lower... Can you help me?
-							</p>
-						</div>
-						<div class="membership-btn">
-							<a href="/registration">
-								<button type="button" class="membership-button">GET STARTED NOW</button>
-							</a>
-						</div>
+						@endforeach
+						
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 </div>
