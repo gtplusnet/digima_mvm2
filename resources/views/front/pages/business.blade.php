@@ -174,7 +174,7 @@
                 <div class="business-details-rightpart-title">
                     <i class="fa fa-globe icon-size"></i><p class="title-margin"> WEBSITE:</p>
                 </div>
-                <p class="business-details-rightpart-content">http://yourwebsite.com</p>
+                <p class="business-details-rightpart-content">{{ $business_info->business_website }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
@@ -186,21 +186,23 @@
                 <div class="business-details-rightpart-title">
                     <i class="material-icons">access_time</i><p class="title-margin-mi">TIME:</p>
                 </div>
-                <p class="business-details-rightpart-content">9.00 am to 6 pm every day</p>
+                @foreach($_business_hours as $business_hours)
+                    <p class="business-details-rightpart-content">
+                        <table style="width:100%;">
+                            <td style="width:50%;color: #7E8692;font-size: 13px;">{{$business_hours->days}}  </td>
+                            <td style="width:50%;color: #7E8692;font-size: 13px;"> {{date('h:i a', strtotime($business_hours->business_hours_from))}} - {{date('h:i a', strtotime($business_hours->business_hours_from))}}</td>
+                       </table>
+                    </p>
+                @endforeach
             </div>
             <div class="details-container-last">
                 <div class="business-details-rightpart-title">
                     <i class="material-icons">payment</i><p class="title-margin-mi">PAYMENT METHODS:</p>
                 </div>
                 <ul class="business-details-paymentmethods">
-                    <li>Cash Accepted</li>
-                    <li>Paypal</li>
-                    <li>American Express</li>
-                    <li>Visa</li>
-                    <li>American Express</li>
-                    <li>MasterCard</li>
-                    <li>Discover Card</li>
-                    <li>Personal Checks/Business Checks</li>
+                    @foreach($_payment_method as $payment_method)
+                    <li>{{$payment_method->payment_method_name}}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="sociallinks-holder">

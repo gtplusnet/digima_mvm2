@@ -23,6 +23,8 @@ use App\Models\TblMembeshipModel;
 use App\Models\TblGuestMessages;
 use App\Models\TblBusinessCategoryModel;
 use App\Models\TblReportsModel;
+use App\Models\TblABusinessPaymentMethodModel;
+use App\Models\TblBusinessHoursmodels;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -318,7 +320,10 @@ class FrontController extends Controller
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
                           ->first();
+        $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
+        $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$id)->get();
 
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
         // dd($address);
