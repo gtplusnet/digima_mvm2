@@ -65,16 +65,14 @@ class FrontController extends Controller
         $data['cityList'] = TblCityModel::get();
         $data['_membership']  = TblMembeshipModel::get();
         $data["_business_list"] = TblBusinessModel:: where('business_status',5)
-                                // ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->orderBy('tbl_business.membership',"ASC")
                                 ->paginate(9);
         $data["_featured_list"] = TblBusinessModel::where('membership',2)->where('business_status',5)  
-                                // ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->get();
         $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']    = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                ->orderBy('tbl_reports.business_views','ASC')
                                 ->limit(4)
-                                ->orderBy('tbl_reports.business_views',"DESC")
                                 ->get();
         return view('front.pages.home',$data);
 
@@ -149,8 +147,8 @@ class FrontController extends Controller
                                 ->get();
         $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         $data['_most_viewed']    = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                ->orderBy('tbl_reports.business_views','ASC')
                                 ->limit(4)
-                                ->orderBy('tbl_reports.business_views',"DESC")
                                 ->get();
         
         return view("front.pages.show_list",$data);

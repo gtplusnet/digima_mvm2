@@ -370,7 +370,6 @@ class GeneralAdminController extends Controller
       $data['_invoice'] = TblBusinessModel::where('business_status', 4)->orWhere('business_status', 5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_invoice.invoice_id',"asc")

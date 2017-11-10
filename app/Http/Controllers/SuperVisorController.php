@@ -272,8 +272,76 @@ class SuperVisorController extends Controller
       $data['fri'] = TblBusinessModel::where('agent_call_date',$fri)->count();
       $data['sat'] = TblBusinessModel::where('agent_call_date',$sat)->count();
       $data['sun'] = TblBusinessModel::where('agent_call_date',$sun)->count();
+
+
+      $data['_agents']   = TblAgentModel::get();
+      $data['_teams']   = TblTeamModel::get();
+
       $data['page']	= 'Dashboard';
   	  return view ('supervisor.pages.dashboard', $data);	
+  }
+  public function supervisor_show_agent_calls(Request $request)
+  {
+    $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
+    $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
+    $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
+    $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
+    $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
+    $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
+    $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+
+    $agent_id = $request->agent_id;
+    $data['mon'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$mon)
+                  ->count();
+    $data['tue'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$tue)
+                  ->count();
+    $data['wed'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$wed)
+                  ->count();
+    $data['thu'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$thu)
+                  ->count();
+    $data['fri'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$fri)
+                  ->count();
+    $data['sat'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$sat)
+                  ->count();
+    $data['sun'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$sun)
+                  ->count();
+    $data['_agents']   = TblAgentModel::get();
+    return view('supervisor.pages.show_agent_calls',$data);
+
+  }
+  public function supervisor_show_team_calls(Request $request)
+  {
+    $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
+    $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
+    $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
+    $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
+    $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
+    $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
+    $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+
+    $data['viewteam']   = TblTeamModel:: selectRaw('sum(count(agent_call_date)) as sum, tbl_business.*')
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$sun)
+                          ->groupBy('team_id')
+                          ->get();
+                          dd($data['viewteam']);
+
+    return view('supervisor.pages.show_team_calls',$data);
   }
 
 	
