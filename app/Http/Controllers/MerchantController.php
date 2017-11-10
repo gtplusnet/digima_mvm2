@@ -51,6 +51,13 @@ class MerchantController extends Controller
 		}
 	}
 
+  public function truncate($table_name)
+  {
+      DB::table($table_name)->truncate();
+      echo "success truncate" . $table_name;
+  }
+
+
 	public function login()
     {
       	Self::allow_logged_out_users_only();

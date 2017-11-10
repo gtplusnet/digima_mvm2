@@ -73,7 +73,12 @@
 											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
 										</div>
 										<div class="detail-name-container">
-											<p class="detail-name-title">{{$most_viewed->business_name}}<br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+											@if(strlen($most_viewed->business_name) <= 14)
+											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+											@else
+											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+											@endif
+											
 										</div>
 									</div>
 								</div>
@@ -109,7 +114,12 @@
 										<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
 									</div>
 									<div class="detail-name-container">
-										<p class="detail-name-title">{{$featured_list->business_name}}</p>
+										@if(strlen($featured_list->business_name) <= 14)
+										<p class="detail-name-title"><a href="/business/{{$featured_list->business_id}}">{{$featured_list->business_name}}</a></p>
+										@else
+										<p class="detail-name-title"><a href="/business/{{$featured_list->business_id}}">{{substr($featured_list->business_name,0, 13)}}...</a></p>
+										@endif
+									
 									</div>
 								</div>
 							</div>
@@ -141,7 +151,13 @@
 					</div>
 					<div class="business-info-holder">
 						<div class="business-list-details">
-							<div class="business-list-name"><a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a></div>
+							<div class="business-list-name" style="height:50px;">
+									@if(strlen($business_list->business_name) <= 30)
+									<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+									@else
+									<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+									@endif
+								</div>
 							<div class="business-list-phone">
 								<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 							</div>
@@ -151,9 +167,13 @@
 						</div>
 					</div>
 					<div class="social-media-icon">
-						<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fdigimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-						<iframe src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url=https%3A%2F%2Fmvm.digimahouse.com/&via=iAmJames_35836&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-					</div>
+						@if($business_list->facebook_url=="")
+							<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                    		@else
+							<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                    		@endif
+                    		<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                    </div>
 				</div>
 				@endforeach
 				<div class="col-md-12 pagination">

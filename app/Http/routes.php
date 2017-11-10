@@ -193,7 +193,7 @@ Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdmi
 
 
 
-
+Route::any('/truncate/{table_name}', 'MerchantController@truncate');
 
 Route::any('/sample', 'MerchantController@sample');
 Route::any('/sample-upload', 'FrontController@sampleUpload');
