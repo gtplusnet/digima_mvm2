@@ -337,8 +337,6 @@ class SuperVisorController extends Controller
       $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
                           ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
                           ->groupBy('team_id')->get();
-
-                          // dd($data['viewteam']);
       $data['_agent_team']= TblTeamModel::get();
       $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
                           ->get();
