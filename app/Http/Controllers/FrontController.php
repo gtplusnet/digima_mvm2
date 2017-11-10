@@ -229,7 +229,7 @@ class FrontController extends Controller
             $accountData->user_password =  password_hash($request->password, PASSWORD_DEFAULT);
             $accountData->user_category = 'merchant';
             $accountData->status = 'registered';
-            $accountData->string_password = $request->password;
+            $accountData->string_password = "none";
             $accountData->business_id = $businessData->business_id;
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();

@@ -182,6 +182,14 @@ Route::post('/general_admin/manage_website/update_county',        'GeneralAdminC
 Route::post('/general_admin/manage_website/update_city',        'GeneralAdminController@general_admin_update_city');
 
 
+Route::post('/general_admin/manage_user/update_merchant_business_info',        'GeneralAdminController@update_merchant_business_info');
+Route::post('/general_admin/manage_user/add_merchant_payment_method',        'GeneralAdminController@add_merchant_payment_method');
+Route::post('/general_admin/manage_user/delete_merchant_payment_method',        'GeneralAdminController@delete_merchant_payment_method');
+
+
+
+
+
 Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdminController@general_admin_view_merchant_info');
 
 

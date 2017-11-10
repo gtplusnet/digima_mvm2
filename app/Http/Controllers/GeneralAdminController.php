@@ -492,11 +492,40 @@ class GeneralAdminController extends Controller
       $data['_data_team']           = TblTeamModel::get();
       $data['_data_supervisor']     = TblSupervisorModels::get();
       $data['_data_admin']          = TblAdminModels::get();
-      $data['_merchant']            = TblBusinessModel::join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+      $data['_merchant']            = TblBusinessModel::where('business_status',5)
+                                    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                                     ->get();
       $data['page'] = 'Manage Users';
       return view('general_admin.pages.manage_user', $data);
+
+    }
+    public function update_merchant_business_info(Request $request)//
+    {
+    
+      Self::allow_logged_in_users_only();
+      $id = $request->business_id;
+      $data["company_information"] = $request->company_information;
+      $data["business_website"]    = $request->business_website;
+      $data["year_established"]    = $request->year_established;
+      TblBusinessOtherInfoModel::where('business_id',$id)->update($data);
+     return "<div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>";
+    }
+    public function add_merchant_payment_method(Request $request)
+    {
+      $data["payment_method_name"] = $request->paymentMethodName;
+      $data["payment_method_info"] = "not available";
+      $data["business_id"] = $request->businessId;
+      TblABusinessPaymentMethodModel::insert($data); 
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Added.</div>";
+
+    }
+    public function delete_merchant_payment_method(Request $request)
+    {
+      $id = $request->paymentMethodId;
+      TblABusinessPaymentMethodModel::where('payment_method_id',$id)->delete();
+      Session::flash('danger', "Payment Deleted");
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method deleted.</div>";
 
     }
     public function general_admin_manage_website()
@@ -621,7 +650,7 @@ class GeneralAdminController extends Controller
     public function general_admin_search_category(Request $request)
     {
       $search_key = $request->search_key;
-      $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->orWhere('business_category_information','like','%'.$search_key.'%')->get();
+      $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->orWhere('business_category_information','like','%'.$search_key.'%')->paginate(10);
       return view('general_admin.pages.search_blade',$data);
     }
     public function general_admin_delete_category(Request $request)
@@ -864,7 +893,7 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_view_merchant_info(Request $request)
     {
-      $business_id = $request->business_id;
+      $data['merchant_id'] = $business_id = $request->business_id;
       TblBusinessModel::where('tbl_business.business_id',$business_id)
                       ->join('tbl_business_hours','tbl_business_hours.business_id','=','tbl_business.business_id')
                       ->get();
