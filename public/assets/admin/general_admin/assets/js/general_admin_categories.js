@@ -37,6 +37,9 @@ function manage_categories()
 			dataType:'text',
 		}).done(function(data){
 				$('#showHere1').html(data);
+				setTimeout(function(){
+					   location.reload();
+					}, 1000);
 			});
 	    });
 	}
@@ -56,6 +59,9 @@ function manage_categories()
 				$('#showHere3').html(data);
 				$('#showHere3').show();
 				$('#ajax-loader').hide();
+				setTimeout(function(){
+					   location.reload();
+					}, 1000);
 		    });
 	    });
 	}
@@ -98,6 +104,9 @@ function manage_categories()
 				        $("#cat_name_head").text(cat_name);
 				        $("#get_sub_category_result").html(data);
 				        $('#subCategory').modal('show');
+				        setTimeout(function(){
+						   location.reload();
+						}, 1000);
 			 		});
 		    	}
 	    });
@@ -119,6 +128,9 @@ function manage_categories()
 		 		    $('#deleteModal').modal('hide');
 		 		    $('#success_alert').html(data);
 		 		    $('#successModal').modal('show');
+		 		    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 		 			
 		 		});
 	    });
@@ -138,6 +150,9 @@ function manage_categories()
 				    $('#categoryEdit').modal('hide');
 					$('#success_alert').html(data);
 		 		    $('#successModal').modal('show');
+		 		    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 				});
 	    });
 	    
@@ -158,6 +173,9 @@ function manage_categories()
 				    $('#success_alert').html(data);
 				    $('#subCategoryEdit').modal('hide');
 		 		    $('#successModal').modal('show');
+		 		    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 				});
 	    });
     }
@@ -199,6 +217,9 @@ function manage_categories()
 				        $("#cat_name_head").text(cat_name);
 				        $("#get_sub_category_result").html(data);
 				        $('#subCategory').modal('show');
+				        setTimeout(function(){
+						   location.reload();
+						}, 1000);
 			 		});
 		    	}	
 		});
@@ -222,11 +243,15 @@ function manage_categories()
 				data:{
 					cat_name: cat_name,
 					cat_info: cat_info,
-					cat_id:cat_id},
+					cat_id:cat_id
+					},
 				dataType:'text',
 			}).done(function(data){
 					$('#addSubCategory').modal('hide');
 				    $('#get_sub_category_result').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 		 		});
 	    });
 	}

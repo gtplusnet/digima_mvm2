@@ -39,8 +39,6 @@
 							<option >Action</option>
 							<option value="edit">Edit</option>
 							<option value="delete">Delete</option>
-							<option value="view">Sub-Category</option>
-							
 						</select>
 					</td>
 				</tr>
