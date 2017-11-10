@@ -1,10 +1,10 @@
 .businesses-info-containers
 {
-    margin-bottom: 0px;
-   
+     margin-bottom: 0px;
     margin-top: 144px;
     margin-left: 224px;
-    width:500px;
+    width: 800px;
+
 }
 .businesses-name
 {
@@ -19,6 +19,7 @@
 .businesses-details-containers
 {
     width:100%;
+    display:inline-block;
 }
 .businesses-phone
 {
@@ -39,13 +40,6 @@
     margin-left: 20px;
 }
 
-
-
-
-
-
-
-
 .border-line
 {
     padding:20px;
@@ -53,13 +47,6 @@
     margin-right:0px;
     height:auto;
 }
-
-
-
-
-
-
-
 
 .business-containers
 {
@@ -221,8 +208,9 @@
 .business-details-rightpart-title
 {
 	display: -webkit-inline-box;
-	color: #333333;
+    color: #7E8692;
     font-size: 15px;
+    font-family: "Quicksand",sans-serif;
 }
 .icon-size
 {
@@ -333,4 +321,56 @@
 {
     height: 320px;
     width: 100%;
+}
+.map
+{
+    color:#f9c200;
+    margin-right:10px;
+}
+.phone
+{
+    color:#f9c200;
+    margin-right:10px;
+}
+.btn-skype
+{
+    background-color: #43bee7;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    font-family: "Poppins",sans-serif;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.skype
+{
+    font-size:25px;
+    margin-right:10px;
+    margin-bottom:-5px;
+}
+.btn-email
+{
+    background-color: #ea4130;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    font-family: "Poppins",sans-serif;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.email
+{
+    font-size:25px;
+    margin-right:10px;
+    margin-bottom:-5px;
 }

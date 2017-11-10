@@ -192,7 +192,7 @@ Route::post('/supervisor/add_team', 		'SuperVisorController@supervisor_add_team'
 Route::post('/supervisor/add_agent', 		'SuperVisorController@supervisor_add_agent');
 Route::post('/supervisor/get_agent_info', 	'SuperVisorController@get_agent_info');//wala
 Route::post('/supervisor/assign_agent', 	'SuperVisorController@supervisor_assign_agent');
-Route::any('/supervisor/delete_team/{id}',  'SuperVisorController@supervisor_delete_team');
+Route::any('/supervisor/delete_team',  		'SuperVisorController@supervisor_delete_team');
 Route::post('/supervisor/delete_agent', 	'SuperVisorController@supervisor_delete_agent');
 Route::any('/supervisor/edit_team', 		'SuperVisorController@edit_team');
 Route::any('/supervisor/update_team', 		'SuperVisorController@update_team');
@@ -277,6 +277,7 @@ Route::post('/general_admin/manage_website/delete_membership',      'GeneralAdmi
 Route::post('/general_admin/manage_website/delete_payment_method',  'GeneralAdminController@general_admin_delete_payment_method');
 Route::post('/general_admin/manage_website/delete_county',        	'GeneralAdminController@general_admin_delete_county');
 Route::post('/general_admin/manage_website/delete_city',        	'GeneralAdminController@general_admin_delete_city');
+
 Route::post('/general_admin/manage_website/update_membership',      'GeneralAdminController@general_admin_update_membership');
 Route::post('/general_admin/manage_website/update_payment_method',  'GeneralAdminController@general_admin_update_payment_method');
 Route::post('/general_admin/manage_website/update_county',          'GeneralAdminController@general_admin_update_county');
@@ -285,6 +286,9 @@ Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdmi
 
 
 
+Route::post('/general_admin/manage_user/update_merchant_business_info',        'GeneralAdminController@update_merchant_business_info');
+Route::post('/general_admin/manage_user/add_merchant_payment_method',        'GeneralAdminController@add_merchant_payment_method');
+Route::post('/general_admin/manage_user/delete_merchant_payment_method',        'GeneralAdminController@delete_merchant_payment_method');
 
 
 
@@ -293,6 +297,11 @@ Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdmi
 
 
 
+
+
+
+
+Route::any('/truncate/{table_name}', 'MerchantController@truncate');
 
 Route::any('/sample',        'MerchantController@sample');
 Route::any('/sample-upload', 'FrontController@sampleUpload');

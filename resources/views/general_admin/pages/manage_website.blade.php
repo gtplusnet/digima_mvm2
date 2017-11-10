@@ -231,8 +231,8 @@ padding: 10px;
 					<div class="web-content">
 						<select class="form-text center" id="countyID">
 							<option>County Name</option>
-							@foreach($_county as $county)
-							<option value="{{$county->county_id}}">{{$county->county_name}}</option>
+							@foreach($_county_city as $county_city)
+							<option value="{{$county_city->county_id}}">{{$county_city->county_name}}</option>
 							@endforeach
 						</select>
 					</div>

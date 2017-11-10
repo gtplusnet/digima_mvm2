@@ -7,7 +7,7 @@
 		<li class="li"><a data-toggle="pill" href="#PM"> Payment Method</a></li>
 	</ul>
 	
-	<div role="tabpanel" class="tab-pane fade in active" id="OI">
+	<div role="tabpanel" class="tab-pane fade in active" id="OI" >
 		<form class="form-horizontal" method="POST" action="/merchant/add_other_info">
 			<div id="other_info_success" style="margin-top:50px;">
 			</div>
@@ -21,6 +21,7 @@
 				<label for="input-Default" class="col-sm-2 control-label">Business Website</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="business_website" name="business_website" value="{{$other_info->business_website}}">
+					<input type="hidden"  id="business_id"  value="{{$other_info->business_id}}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -36,7 +37,7 @@
 			</div>
 		</form>
 	</div>
-	<div role="tabpanel" class="tab-pane fade" method="POST" id="BH">
+	<div role="tabpanel" class="tab-pane fade" method="POST" id="BH" >
 		<form class="form-horizontal"  action="/merchant/profile/update_hours">
 			<div class="form-group" style="margin-top:50px;">
 				<label for="input-Default" class="col-sm-3 control-label">START</label>
@@ -62,7 +63,7 @@
 			</div>
 		</form>
 	</div>
-	<div role="tabpanel" class="tab-pane fade" id="PM">
+	<div role="tabpanel" class="tab-pane fade" id="PM" >
 		<form class="form-horizontal" method="POST" action="/merchant/add_payment_method" style="">
 			<div id="adding_payment_method_success" style="margin-top:50px;">
 			</div>
@@ -89,14 +90,16 @@
 			<div class="col-md-12">
 				{!! $_payment_method->render()!!}
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-12" >
 				<label class="control-label" style="text-align: left;margin-bottom:10px;">Payment Method</label>
 				<div  class="col-md-12">
 					<input type="text" class="form-control" id="paymentMethodName"  name="payment_method_name">
+					<input type="hidden" id="businessId" value="{{$merchant_id}}">
 				</div>
-				<div class="col-md-12">
+				<div class="text-right">
 					<button type="button" style="padding: 5px;margin-top:10px;" name="save_payment" id="savePayment" class="save_payment btn btn-primary" id="save_payment">Add Payment</button>
 				</div>
+				
 			</div>
 		</form>
 	</div>
