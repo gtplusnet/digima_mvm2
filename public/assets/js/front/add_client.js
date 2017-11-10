@@ -43,7 +43,7 @@ $(document).ready(function(){
 	});
 
 	$('#continue').click(function(){
-		// alert("123");
+		alert("123");
 		var prefix = $('#prefix').val();
 		var first_name = $('#first_name').val();
 		var last_name = $('#last_name').val();
@@ -63,7 +63,7 @@ $(document).ready(function(){
 		var city_list = $('#city_list').val();
 		var postal_code = $('#postal_code').val();
 		var membership = $('#membership').val();
-		
+		var agree_checkbox = $('#agree_checkbox').prop('checked');
 
 		if(prefix == '')
 		{

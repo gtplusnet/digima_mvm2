@@ -114,13 +114,13 @@ class MerchantController extends Controller
             else
             {
                 $data['page']   = 'Merchant Login';
-                return Redirect::back()->withErrors(['User Login is Incorect!'.$request->email.$request->password, 'User Login is Incorect!']);
+                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
             }
         }
         else
         {
             $data['page']   = 'Merchant Login';
-            return Redirect::back()->withErrors(['User Login is Incorect!'.$request->email.$request->password, 'User Login is Incorect!']);
+            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
       }
    }
 
@@ -167,10 +167,10 @@ class MerchantController extends Controller
 
     public function payment()
     {
-        $data['page']   = 'payment';
+        $data['page']       = 'payment';
         $data['countyList'] = TblCountyModel::get();
-        $data['method'] = TblPaymentMethod::get();
-        $data['picture'] = TblPaymentModel::get();
+        $data['method']     = TblPaymentMethod::get();
+        $data['picture']    = TblPaymentModel::get();
         $check = TblPaymentModel::where('business_id',session('business_id'))->first();
         if($check)
         {
@@ -180,8 +180,7 @@ class MerchantController extends Controller
         {
             return view('front.pages.payment', $data);
         }
-        
-
+      
         // $account_data = new TblUserAccountModel;
         // $account_data->user_email = $request->email;
         // $account_data->user_password = $request->password;
@@ -210,12 +209,12 @@ class MerchantController extends Controller
             if($check)
             {
               $data['payment_reference_number'] = $request->payment_reference_number;
-              $data['payment_amount'] = $request->payment_amount;
-              $data['payment_method'] = $request->payment_method;
-              $data['payment_file_name'] = $filename;
+              $data['payment_amount']           = $request->payment_amount;
+              $data['payment_method']           = $request->payment_method;
+              $data['payment_file_name']        = $filename;
               $data['business_contact_person_id'] = $request->contact_id;
-              $data['business_id'] = $request->business_id;
-              $data['payment_status'] = 'submitted';
+              $data['business_id']              = $request->business_id;
+              $data['payment_status']           = 'submitted';
               $check_insert = TblPaymentModel::insert($data);
           if($check_insert)
             {
@@ -306,7 +305,7 @@ class MerchantController extends Controller
 
       $data["payment_method_name"] = $request->paymentMethodName;
       $data["payment_method_info"] = "not available";
-      $data["business_id"] = session("business_id");
+      $data["business_id"]         = session("business_id");
       TblABusinessPaymentMethodModel::insert($data); 
       return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Added.</div>";
   
@@ -400,7 +399,7 @@ class MerchantController extends Controller
 	  {
 		  Self::allow_logged_in_users_only();
 		  $data['page']			    = 'Category';
-      $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->get();
+      $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->paginate(15);
       $data['_subcategory'] = TblBusinessTagCategoryModel::where('business_id',session('business_id'))
                             ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
                             ->paginate(10);
@@ -428,7 +427,7 @@ class MerchantController extends Controller
       
           if($_check)
           {
-            // echo "hi";
+            echo "hi";
           }
           elseif($_check2<6)
           {
@@ -469,6 +468,15 @@ class MerchantController extends Controller
       $data['page'] = 'Messages';
       $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->get();
       return view ('merchant.pages.messages', $data);  
+    }
+
+
+    public function messages_reply(Request $request)
+    {
+
+
+      alert(123);
+
     }
 
   	public function bills()
