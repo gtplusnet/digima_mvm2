@@ -71,6 +71,7 @@
                         </div>
                         <div class="btn-register">
                             <a href="/registration">Register</a>
+
                         </div>
                         <div class="language-selection" >
                             <div id="google_translate_element"></div>
