@@ -21,6 +21,7 @@
 				<label for="input-Default" class="col-sm-2 control-label">Business Website</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="business_website" name="business_website" value="{{$other_info->business_website}}">
+					<input type="hidden"  id="business_id"  value="{{$other_info->business_id}}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -93,6 +94,7 @@
 				<label class="control-label" style="text-align: left;margin-bottom:10px;">Payment Method</label>
 				<div  class="col-md-12">
 					<input type="text" class="form-control" id="paymentMethodName"  name="payment_method_name">
+					<input type="text" id="merchantID"  value="{{$id}}" name="merchantID">
 				</div>
 				<div class="col-md-12">
 					<button type="button" style="padding: 5px;margin-top:10px;" name="save_payment" id="savePayment" class="save_payment btn btn-primary" id="save_payment">Add Payment</button>

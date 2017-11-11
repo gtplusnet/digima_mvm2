@@ -15,12 +15,62 @@ function manage_user()
 		$(document).ready(function()
 		{
 			merchant();
+			update_merchant_info();
+			add_payment_method();
 			add_agent();
 			add_team();
 			add_supervisor();
 			add_admin();
 			assigned_agent();
 			action_box();
+		});
+	}
+	function add_payment_method()
+	{
+		$(document).on("click","#savePayment",function(){
+		var paymentMethodName = $('#paymentMethodName').val();
+		$.ajax({
+			type:'POST',
+			url:'/merchant/add_payment_method',
+			data:{
+				paymentMethodName: paymentMethodName,
+				
+				},
+			dataType:'text',
+		}).done(function(data){
+			$('#adding_payment_method_success').html(data);
+				setTimeout(function(){
+				   location.reload();
+				}, 1000);
+		    });
+		});
+	}
+	function update_merchant_info()
+	{
+		$(document).on("click","#updateInfo",function(){
+		var company_information = $('#company_information').val();
+		var business_website = $('#business_website').val();
+		var year_established = $('#year_established').val();
+		var business_id = $('#business_id').val();
+
+		$.ajax({
+			type:'POST',
+			url:'/general_admin/manage_user/update_merchant_info',
+			data:{
+				company_information: company_information,
+				business_website: business_website,
+				year_established: year_established,
+				business_id:business_id,
+				
+				},
+			dataType:'text',
+		}).done(function(data){
+			$('#other_info_success').html(data);
+				setTimeout(function(){
+				   location.reload();
+				}, 1000);
+			});
+		
 		});
 	}
 	function merchant()

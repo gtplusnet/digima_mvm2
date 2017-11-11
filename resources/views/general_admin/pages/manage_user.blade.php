@@ -51,7 +51,6 @@
 			</div>
 			<div class="row col-md-12">
 				<div class="panel-body" id="show_merchant_info">
-					
 					<div class="table-responsive" id="showHere3">
 						<div id="agent_success">
 						</div>
@@ -276,7 +275,6 @@
 </div>
 </div>
 </div>
-
 {{-- modal start --}}
 <div class="modal fade" id="myModalAgent" role="dialog">
 <div class="modal-dialog modal-md">
@@ -700,8 +698,6 @@
 </div>
 </div>
 {{-- modal end --}}
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_user.js"></script>
-
 @endsection

@@ -183,6 +183,9 @@ Route::post('/general_admin/manage_website/update_city',        'GeneralAdminCon
 
 
 Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdminController@general_admin_view_merchant_info');
+Route::post('/general_admin/manage_user/update_merchant_info',        'GeneralAdminController@general_admin_update_merchant_info');
+
+
 
 
 
