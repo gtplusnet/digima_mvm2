@@ -1,6 +1,16 @@
 @extends('supervisor.layout.layout')
 @section('content')
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<style>
+th
+{
+text-align: center;
+}
+td
+{
+text-align: center;
+}
+</style>
 <div class="page-title clearfix">
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
@@ -67,8 +77,8 @@
                         </div>
                         <div class="form-group col-md-9">
                             <select name="team_id" class='form-control' id="team_id">
-                                @foreach ($viewteam as $select_team)
-                                <option value = '{{$select_team->team_id}}'>{{$select_team->team_name}}</option>
+                                @foreach($_agent_team as $agent_team)
+                                <option value = '{{$agent_team->team_id}}'>{{$agent_team->team_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -156,6 +166,49 @@
             </div>
         </div>
     </div>
+    <div style="margin-top: 150px;" class="modal fade" id="teamEditModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Team</h4>
+                </div>
+                
+                <div class="modal-body" style="margin-bottom: 150px;" >
+                    <div id="team_update_success">
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group col-md-3">
+                            <label for="business_name" >Team Name</label>
+                        </div>
+                        <div class="form-group col-md-9">
+                            <input type="text" class="form-control" id="teamNameEdit" name="teamNameEdit"  style="width:100%;margin-bottom: 20px;"/>
+                            <input type="hidden"  id="teamIdEdit" name="teamIdEdit" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group col-md-3">
+                            <label for="business_name" >Team Description</label>
+                        </div>
+                        <div class="form-group col-md-9">
+                            <input type="text" class="form-control" id="teamInfoEdit" name="teamInfoEdit" id="team_des_update" style="width:100%"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <center>
+                        <button type="submit" class="btn btn-primary" name="updateTeamBtn" id="updateTeamBtn">Update Team</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </center>
+                    </div>
+                    
+                    
+                </div>
+                <div class="modal-footer" style="border:0px;">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     <!---end james modal-->
     <div class="tab-content">
         <div class=" panel-primary">
@@ -189,6 +242,8 @@
                             </form>
                         </div>
                     </div>
+                    <div id="team_delete_success">
+                    </div>
                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
                             <tr>
@@ -196,6 +251,7 @@
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Team Members</th>
+                                <th>Team Calls</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -206,68 +262,16 @@
                                 <td>{{ $newteam->team_name}}</td>
                                 <td>{{ $newteam->team_information}}</td>
                                 <td>View All Members</td>
-                                <td><a href="#"><button type="button" class="btn btn-warning" data-toggle="modal"  id="view_btn" data-target="#myModalEdit{{$newteam->team_id}}"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button>
-                                <button type="button" class="btn btn-danger"  data-toggle="modal"  id="deleteModal" data-target="#deleteModal{{$newteam->team_id}}"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button></td>
+                                <td>{{ $newteam->sum}}</td>
+                                <td>
+                                    <select class="teamAction" id="actionbox" data-info="{{ $newteam->team_information}}" data-name="{{ $newteam->team_name}}" data-id="{{ $newteam->team_id}}">
+                                        <option value="">Action</option>
+                                        <option value="edit">Edit</option>
+                                        <option value="delete">Delete</option>
+                                    </select>
+                                </td>
                             </tr>
-                            <div style="margin-top: 150px;" class="modal fade" id="deleteModal{{$newteam->team_id}}" role="dialog">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-body" style="margin-bottom: 80px;" >
-                                            <div class="col-sm-12">
-                                                <h4 class="modal-title">Are You sure You want to delete this item?</h4>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                <a href="/supervisor/delete_team/{{$newteam->team_id}}">
-                                                    <button type="button" class="save_category btn btn-danger">Delete</button>
-                                                </a>
-                                                <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="margin-top: 150px;" class="modal fade" id="myModalEdit{{$newteam->team_id}}" role="dialog">
-                                <div class="modal-dialog modal-md">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Edit Team</h4>
-                                        </div>
-                                        <div class="modal-body" style="margin-bottom: 150px;" >
-                                            <div id="team_success">
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group col-md-3">
-                                                    <label for="business_name" >Team Name</label>
-                                                </div>
-                                                <div class="form-group col-md-9">
-                                                    <input type="text" class="form-control" value="{{$newteam->team_name}}" name="team_name_update" id="team_name_update"  style="width:100%;margin-bottom: 20px;"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group col-md-3">
-                                                    <label for="business_name" >Team Description</label>
-                                                </div>
-                                                <div class="form-group col-md-9">
-                                                    <input type="text" class="form-control" value="{{$newteam->team_information}}" name="team_des_update" id="team_des_update" style="width:100%"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                <button type="submit" class="btn btn-primary" name="edit_team" id="edit_team">Update Team</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </center>
-                                            </div>
-                                            
-                                            
-                                        </div>
-                                        <div class="modal-footer" style="border:0px;">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             @endforeach
                         </tbody>
                     </table>
@@ -292,14 +296,14 @@
                             </form>
                         </div>
                     </div>
-                    <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
-                        <thead>
-                            <tr>
+                    <table id="example" class="display table" style="text-align:center;width: 100%; cellspacing: 0;">
+                        <thead >
+                            <tr >
                                 <th>Agent ID</th>
                                 <th>Full Name</th>
                                 <th>Email</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Phone</th>
+                                <th>Agent Calls</th>
                                 <th>Team </th>
                                 <th></th>
                             </tr>
@@ -311,89 +315,105 @@
                                 <td>{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}</td>
                                 <td>{{ $newagent->email}}</td>
                                 <td>{{ $newagent->primary_phone}}</td>
-                                <td>{{ $newagent->secondary_phone}}</td>
+                                <td>{{ $newagent->agent_call}}</td>
                                 <td>{{ $newagent->team_name}}</td>
-                                <td><select class="actionbox" id="actionbox" data-name="{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}" data-id="{{ $newagent->agent_id}}">
-                                    <option value="">Action</option>
-                                    <option value="assign">Assign</option>
-                                    <option value="delete">Delete</option>
+                                <td>
+                                    <select class="actionbox" id="actionbox" data-name="{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}" data-id="{{ $newagent->agent_id}}">
+                                        <option value="">Action</option>
+                                        <option value="assign">Assign</option>
+                                        <option value="delete">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+        {{--  modal --}}
+        <div style="margin-top: 150px;" class="modal fade" id="assignAgent" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Assign Agent</h4>
+                    </div>
+                    <div class="modal-body" style="margin-bottom: 150px;" >
+                        <div id="assign_success">
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group col-md-3">
+                                <label for="business_name" >Agent Name</label>
+                            </div>
+                            <div class="form-group col-md-9">
+                                <input type="text" class="form-control" name="agent_name" id="agent_name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
+                                <input type="hidden" class="form-control" name="agent_id" id="agent_id_assign"  />
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group col-md-3">
+                                <label for="business_name" >Team Description</label>
+                            </div>
+                            <div class="form-group col-md-9">
+                                <select id="teamAssigned" class="form-control" >
+                                    @foreach($_agent_team as $agent_team)
+                                    <option value="{{$agent_team->team_id}}">{{$agent_team->team_name}}</option>
+                                    @endforeach
                                 </select>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </form>
-    </div>
-    {{--  modal --}}
-    <div style="margin-top: 150px;" class="modal fade" id="assignAgent" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Assign Agent</h4>
-                </div>
-                <div class="modal-body" style="margin-bottom: 150px;" >
-                    <div id="assign_success">
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Agent Name</label>
+                            </div>
                         </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="agent_name" id="agent_name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
-                            <input type="hidden" class="form-control" name="agent_id" id="agent_id_assign"  />
+                        <div class="col-sm-12">
+                            <center>
+                            <button type="submit" class="save_category btn btn-primary" name="agentAssigned" id="agentAssigned">Assign Agent</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </center>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Team Description</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <select id="teamAssigned" class="form-control" >
-                                @foreach($viewteam as $assign_team)
-                                <option value="{{$assign_team->team_id}}">{{$assign_team->team_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <center>
-                        <button type="submit" class="save_category btn btn-primary" name="agentAssigned" id="agentAssigned">Assign Agent</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        </center>
-                    </div>
-                    
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="margin-top: 150px;" class="modal fade" id="deleteAgent" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-body" style="margin-bottom: 80px;" >
-                    <div class="col-sm-12">
-                        <h4 class="modal-title">Are You sure You want to delete this item?</h4>
-                    </div>
-                    <div class="col-sm-12">
-                        <center>
-                        <input type="hidden" id="delete_agent_id" value=""/>
-                        <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
-                        
-                        <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
+        <div style="margin-top: 150px;" class="modal fade" id="deleteTeam" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body" style="margin-bottom: 80px;" >
+                        <div class="col-sm-12">
+                            <h4 class="modal-title">Are You sure You want to delete this Team?</h4>
+                        </div>
+                        <div class="col-sm-12">
+                            <center>
+                            <input type="hidden" id="delete_team_id" value=""/>
+                            <button type="button" class=" btn btn-danger" id="teamDeleted">Delete</button>
+                            
+                            <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 150px;" class="modal fade" id="deleteAgent" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body" style="margin-bottom: 80px;" >
+                        <div class="col-sm-12">
+                            <h4 class="modal-title">Are You sure You want to delete this Agent?</h4>
+                        </div>
+                        <div class="col-sm-12">
+                            <center>
+                            <input type="hidden" id="delete_agent_id" value=""/>
+                            <button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
+                            
+                            <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--  end modal --}}
     </div>
-    {{--  end modal --}}
-    
-</div>
 </div>
 </div>
 <style>
@@ -402,7 +422,6 @@
 width:50%;
 }
 </style>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
 <script src="/assets/js/global.ajax.js"></script>
 <script src="/assets/supervisor/supervisor_user.js"></script>
 @endsection

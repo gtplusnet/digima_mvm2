@@ -21,7 +21,7 @@ function category()
         $(document).on('click','.viewSubs',function()
         {
             var parent_id = $(this).data("id");
-             alert(parent_id);
+             // alert(parent_id);
            $.ajax({
             type:'GET',
             url:'/merchant/tag_category',

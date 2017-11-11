@@ -61,21 +61,19 @@ class FrontController extends Controller
         Session::forget("business_address");
         Session::forget("city_state");
         Session::forget("zip_code");
-        $data['countyList'] = TblCountyModel::get();
-        $data['cityList'] = TblCityModel::get();
-        $data['_membership']  = TblMembeshipModel::get();
-        $data["_business_list"] = TblBusinessModel:: where('business_status',5)
-                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                ->orderBy('tbl_business.membership',"ASC")
-                                ->paginate(9);
-        $data["_featured_list"] = TblBusinessModel::where('membership',2)->where('business_status',5)  
-                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                ->paginate(9);
-        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
-        $data['_most_viewed']    = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
-                                ->limit(4)
-                                ->orderBy('tbl_reports.business_views',"DESC")
-                                ->get();
+        $data['countyList']         = TblCountyModel::get();
+        $data['cityList']           = TblCityModel::get();
+        $data['_membership']        = TblMembeshipModel::get();
+        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)
+                                    ->orderBy('tbl_business.membership','ASC')
+                                    ->paginate(9);
+        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                    ->get();
+        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
+        $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->limit(4)
+                                    ->get();
         return view('front.pages.home',$data);
 
     }
@@ -149,8 +147,8 @@ class FrontController extends Controller
                                 ->get();
         $data['_categories'] = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         $data['_most_viewed']    = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                ->orderBy('tbl_reports.business_views','ASC')
                                 ->limit(4)
-                                ->orderBy('tbl_reports.business_views',"DESC")
                                 ->get();
         
         return view("front.pages.show_list",$data);
@@ -229,7 +227,7 @@ class FrontController extends Controller
             $accountData->user_password =  password_hash($request->password, PASSWORD_DEFAULT);
             $accountData->user_category = 'merchant';
             $accountData->status = 'registered';
-            $accountData->string_password = $request->password;
+            $accountData->string_password = "none";
             $accountData->business_id = $businessData->business_id;
             $accountData->business_contact_person_id = $contactData->business_contact_person_id;
             $accountData->save();
@@ -316,14 +314,24 @@ class FrontController extends Controller
         }
         $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
                           ->first();
-        $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
         $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$id)->get();
+        $check_payment = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
+
+        if($check_payment)
+        {
+            $data['_payment_method']=$check_payment;
+        }
+        else
+        {
+            $data['_payment_method']="";
+        }
+        
 
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
         // dd($address);
@@ -378,7 +386,7 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-         $data['countyList'] = TblCountyModel::get();
+        $data['countyList'] = TblCountyModel::get();
         $data['business_info'] = DB::table('tbl_business')
         ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
         ->where('tbl_business.business_id', '=', $request->business_id)
@@ -418,7 +426,7 @@ class FrontController extends Controller
         if($check_mail)
         {
             Session::flash('success', 'Thank you!. Your Message Send Successfully!');
-            return Redirect::to('/contact');
+            // return Redirect::to('/contact');
         }
         else
         {

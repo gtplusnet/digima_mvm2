@@ -68,13 +68,13 @@ class SuperVisorController extends Controller
             else
             {
                 $data['page']   = 'supervisor Login';
-                return Redirect::back()->withErrors(['User Login is Incorectsdfsd!', 'User Login is Incorect!fdsf']);
+                return Redirect::back()->withErrors(['User Login is Incorrect!', 'User Login is Incorrect']);
             }
         }
         else
         {
             
-            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+            return Redirect::back()->withErrors(['User Login is Incorrect!', 'User Login is Incorect!']);
         }
     }
 
@@ -196,7 +196,7 @@ class SuperVisorController extends Controller
   }
   public function supervisor_assign_agent(Request $request)
   {
-      $agent_id = $request->agent_id_assign;
+      $agent_id          = $request->agent_id_assign;
       $update['team_id'] = $request->teamAssigned;
       TblAgentModel::where('agent_id',$agent_id)->update($update);
       return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
@@ -272,8 +272,105 @@ class SuperVisorController extends Controller
       $data['fri'] = TblBusinessModel::where('agent_call_date',$fri)->count();
       $data['sat'] = TblBusinessModel::where('agent_call_date',$sat)->count();
       $data['sun'] = TblBusinessModel::where('agent_call_date',$sun)->count();
+
+
+      $data['_agents']   = TblAgentModel::get();
+      $data['_teams']   = TblTeamModel::get();
+
       $data['page']	= 'Dashboard';
   	  return view ('supervisor.pages.dashboard', $data);	
+  }
+  public function supervisor_show_agent_calls(Request $request)
+  {
+    $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
+    $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
+    $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
+    $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
+    $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
+    $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
+    $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+
+    $agent_id = $request->agent_id;
+    $data['mon'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$mon)
+                  ->count();
+    $data['tue'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$tue)
+                  ->count();
+    $data['wed'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$wed)
+                  ->count();
+    $data['thu'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$thu)
+                  ->count();
+    $data['fri'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$fri)
+                  ->count();
+    $data['sat'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$sat)
+                  ->count();
+    $data['sun'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                  ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                  ->where('agent_call_date',$sun)
+                  ->count();
+    $data['_agents']   = TblAgentModel::get();
+    return view('supervisor.pages.show_agent_calls',$data);
+
+  }
+  public function supervisor_show_team_calls(Request $request)
+  {
+    $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
+    $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
+    $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
+    $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
+    $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
+    $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
+    $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+
+    $data['mon']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$mon)
+                          ->count();
+    $data['tue']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$tue)
+                          ->count();
+    $data['wed']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$wed)
+                          ->count();
+    $data['thu']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$thu)
+                          ->count();                                                                
+    $data['fri']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$fri)
+                          ->count();
+    $data['sat']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$sat)
+                          ->count();
+    $data['sun']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$sun)
+                          ->count();                      
+                          // dd($data['viewteam']);
+    $data['_teams']   = TblTeamModel::get();                     
+    return view('supervisor.pages.show_team_calls',$data);
   }
 
 	
@@ -281,17 +378,17 @@ class SuperVisorController extends Controller
 	public function supervisor_add_agent(Request $request)
 	{ 
 
-        $ins['prefix'] = $request->prefix;
-        $ins['first_name'] = $request->first_name;
-        $ins['last_name'] = $request->last_name;
-    		$ins['email'] = $request->email;
-    		$ins['position'] = 'agent';
-    		$ins['team_id'] = $request->team_id;
+        $ins['prefix']        = $request->prefix;
+        $ins['first_name']    = $request->first_name;
+        $ins['last_name']     = $request->last_name;
+    		$ins['email']         = $request->email;
+    		$ins['position']      = 'agent';
+    		$ins['team_id']       = $request->team_id;
     		$ins['primary_phone'] = $request->primary;
     		$ins['secondary_phone'] = $request->secondary;
-    		$ins['other_info'] = $request->other_info;
-        $ins['date_created'] = date("Y/m/d");
-        $ins['agent_call'] = '0';
+    		$ins['other_info']    = $request->other_info;
+        $ins['date_created']  = date("Y/m/d");
+        $ins['agent_call']    = '0';
 
         $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
         if($ins['password']=='')
@@ -327,27 +424,28 @@ class SuperVisorController extends Controller
                 return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
             }
         }
-         
-        
-        
-	}
+
+  }
+
 
   //Eden
   public function manage_user()
   {
       Self::allow_logged_in_users_only();
       $data['page']       = 'Manage Team/Agent';
-      $data['viewteam']   = TblTeamModel::join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                          ->get();
+      $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->groupBy('team_id')->get();
+      $data['_agent_team']= TblTeamModel::get();
       $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
                           ->get();
       return view ('supervisor.pages.manage_user', $data); 
   }
-  public function supervisor_delete_team(Request $request,$id)
+  public function supervisor_delete_team(Request $request)
   {
 
-      TblTeamModel:: where ('team_id',$id)->delete();
-      return Redirect::to("/supervisor/manage_user")->with('delete_team', 'testing');
+      TblTeamModel:: where ('team_id',$request->delete_agent_id)->delete();
+       return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted</div>";
   }
   public function supervisor_delete_agent(Request $request)
   {   
@@ -365,9 +463,9 @@ class SuperVisorController extends Controller
   {
       $data['page']   = 'View User';
       $update["team_name"] = $request->team_name;
-      $update["team_information"] = $request->team_information;
+      $update["team_information"] = $request->team_info;
       TblTeamModel::where('team_id',$request->team_id)->update($update);
-      return Redirect::to("/supervisor/view/user")->with('warning_team','testing');
+      return "<div class='alert alert-success'><strong>Success!</strong>Team Updated</div>";
   }
   public function edit_agent(Request $request,$id)
   {
@@ -378,29 +476,29 @@ class SuperVisorController extends Controller
   }
   public function update_agent(Request $request)
   {
-      $ins['prefix'] = $request->prefix;
-      $ins['first_name'] = $request->first_name;
-      $ins['last_name'] = $request->last_name;
-      $ins['password'] = $request->password;
-      $ins['email'] = $request->email;
-      $ins['position'] = 'agent';
-      $ins['team_id'] = $request->team;
+      $ins['prefix']        = $request->prefix;
+      $ins['first_name']    = $request->first_name;
+      $ins['last_name']     = $request->last_name;
+      $ins['password']      = $request->password;
+      $ins['email']         = $request->email;
+      $ins['position']      = 'agent';
+      $ins['team_id']       = $request->team;
       $ins['primary_phone'] = $request->primary_phone;
       $ins['secondary_phone'] = $request->secondary_phone;
-      $ins['other_info'] = $request->other_info;
+      $ins['other_info']    = $request->other_info;
 
-      $rules['first_name'] = 'required';
-      $rules['last_name'] = 'required';
-      $rules['password'] = 'required';
-      $rules['email'] = 'email';
-      $rules['team_id'] = 'required';
+      $rules['first_name']  = 'required';
+      $rules['last_name']   = 'required';
+      $rules['password']    = 'required';
+      $rules['email']       = 'email';
+      $rules['team_id']     = 'required';
       $rules['primary_phone'] = 'required|numeric';
       $rules['secondary_phone'] = 'required|numeric';
 
       $validator = Validator::make($ins, $rules);
 
-      $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-      $return_message = '';
+      $ins['password']  = password_hash($request->password, PASSWORD_DEFAULT);
+      $return_message   = '';
       if($validator->fails())
       {
           foreach ($validator->messages()->all('<li style=`list-style:none`>:message</li>')as $keys => $message)

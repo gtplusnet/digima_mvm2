@@ -3,14 +3,24 @@
 
 
 /*Routes for SAMPLE PAGES*/
-Route::get('/pdfview','GeneralAdminController@pdfview');
-Route::get('sendbasicemail','MailController@basic_email');
-Route::get('sendhtmlemail','MailController@html_email');
-Route::get('sendattachmentemail','MailController@attachment_email');
-Route::any('/sample', 'MerchantController@sample');
-Route::any('/sample1', 'MerchantController@sample1');
-Route::any('/sample2', 'MerchantController@sample2');
-Route::any('/sample_invoice', 'GeneralAdminController@sample_invoice');
+Route::get('/pdfview',               'GeneralAdminController@pdfview');
+Route::get('sendbasicemail',         'MailController@basic_email');
+Route::get('sendhtmlemail',          'MailController@html_email');
+Route::get('sendattachmentemail',    'MailController@attachment_email');
+Route::any('/sample',                'MerchantController@sample');
+Route::any('/sample1',               'MerchantController@sample1');
+Route::any('/sample2',               'MerchantController@sample2');
+Route::any('/sample_invoice',        'GeneralAdminController@sample_invoice');
+
+
+ 
+Route::get('/searchresult',        'SearchresultController@index');
+Route::get('/category',            'SearchresultController@category');
+Route::get('/resultsortgrid',      'SearchresultController@resultsortgrid');
+Route::get('/searchtabular',       'SearchresultController@searchtabular');
+
+
+
 
 
 /*Routes for Front*/
@@ -33,10 +43,6 @@ Route::any('/guest/add_messages', 		'FrontController@add_messages');
 Route::get('/business/details', 		'FrontController@business_details');
 Route::get('/forgot/password', 			'FrontController@forgot_password');
 Route::any('/home/get_sub_category', 	'FrontController@get_sub_category');
-Route::get('/searchresult', 			'SearchresultController@index');
-Route::get('/category', 				'SearchresultController@category');
-Route::get('/resultsortgrid', 			'SearchresultController@resultsortgrid');
-Route::get('/searchtabular', 			'SearchresultController@searchtabular');
 
 
 /*Routes for Merchant*/
@@ -61,6 +67,11 @@ Route::post('/merchant/add_tag_category', 				'MerchantController@add_tag_catego
 Route::any('/merchant/add_business_category', 			'MerchantController@add_business_category');
 Route::any('/merchant/delete_business_category/{id}', 	'MerchantController@delete_business_category');
 Route::get('/merchant/messages', 						'MerchantController@messages');
+
+
+Route::post('/merchant/messages/reply', 				'MerchantController@messages_reply');
+
+
 Route::any('/merchant/add_images', 						'MerchantController@add_images');
 Route::any('/merchant/delete_messages/{id}', 			'MerchantController@delete_messages');
 Route::get('/merchant/bills', 							'MerchantController@bills');
@@ -91,7 +102,7 @@ Route::post('/supervisor/add_team', 		'SuperVisorController@supervisor_add_team'
 Route::post('/supervisor/add_agent', 		'SuperVisorController@supervisor_add_agent');
 Route::post('/supervisor/get_agent_info', 	'SuperVisorController@get_agent_info');//wala
 Route::post('/supervisor/assign_agent', 	'SuperVisorController@supervisor_assign_agent');
-Route::any('/supervisor/delete_team/{id}',  'SuperVisorController@supervisor_delete_team');
+Route::any('/supervisor/delete_team',  		'SuperVisorController@supervisor_delete_team');
 Route::post('/supervisor/delete_agent', 	'SuperVisorController@supervisor_delete_agent');
 Route::any('/supervisor/edit_team', 		'SuperVisorController@edit_team');
 Route::any('/supervisor/update_team', 		'SuperVisorController@update_team');
@@ -104,12 +115,21 @@ Route::any('/supervisor/force_activate', 	'SuperVisorController@force_activate')
 Route::any('/agent/upload-convo', 			'SuperVisorController@uploadConvo');
 
 
+Route::any('/supervisor/show_agent_calls', 			'SuperVisorController@supervisor_show_agent_calls');
+Route::any('/supervisor/show_team_calls', 			'SuperVisorController@supervisor_show_team_calls');
+
+
+
+
+
+
+
 
 
 
 /*Routes for Agent*/
 Route::any('/agent',          						'AgentController@login');
-Route::get('/agent/dashboard', 						'AgentController@dashboard');
+Route::get('/agent/dashboard', 						'AgentController@index');
 Route::post('/agent_login', 	    				'AgentController@agent_login');
 Route::get('/agent/profile', 						'AgentController@profile');
 Route::get('/agent/client', 						'AgentController@client');
@@ -146,10 +166,6 @@ Route::any('/general_admin/search_category', 						'GeneralAdminController@gener
 Route::any('/general_admin/delete_category', 						'GeneralAdminController@general_admin_delete_category');
 Route::any('/general_admin/add_sub_category', 						'GeneralAdminController@general_admin_add_sub_category');
 Route::any('/general_admin/get_sub_category', 						'GeneralAdminController@general_admin_get_sub_category');
-// Route::any('/general_admin/get_sub_sub_category', 					'GeneralAdminController@general_admin_get_sub_sub_category');
-// Route::any('/general_admin/add_sub_sub_category', 					'GeneralAdminController@general_admin_add_sub_sub_category');
-// Route::any('/general_admin/sub_sub_sub_category', 					'GeneralAdminController@general_admin_sub_sub_sub_category');
-
 
 
 
@@ -172,18 +188,21 @@ Route::post('/general_admin/manage_website/add_membership', 		'GeneralAdminContr
 Route::post('/general_admin/manage_website/add_payment_method', 	'GeneralAdminController@general_admin_add_payment_method');
 Route::post('/general_admin/manage_website/add_county', 			'GeneralAdminController@general_admin_add_county');
 Route::post('/general_admin/manage_website/add_city', 				'GeneralAdminController@general_admin_add_city');
-Route::post('/general_admin/manage_website/delete_membership',        'GeneralAdminController@general_admin_delete_membership');
+Route::post('/general_admin/manage_website/delete_membership',      'GeneralAdminController@general_admin_delete_membership');
 Route::post('/general_admin/manage_website/delete_payment_method',  'GeneralAdminController@general_admin_delete_payment_method');
 Route::post('/general_admin/manage_website/delete_county',        	'GeneralAdminController@general_admin_delete_county');
 Route::post('/general_admin/manage_website/delete_city',        	'GeneralAdminController@general_admin_delete_city');
-Route::post('/general_admin/manage_website/update_membership',        'GeneralAdminController@general_admin_update_membership');
-Route::post('/general_admin/manage_website/update_payment_method',        'GeneralAdminController@general_admin_update_payment_method');
-Route::post('/general_admin/manage_website/update_county',        'GeneralAdminController@general_admin_update_county');
-Route::post('/general_admin/manage_website/update_city',        'GeneralAdminController@general_admin_update_city');
 
+Route::post('/general_admin/manage_website/update_membership',      'GeneralAdminController@general_admin_update_membership');
+Route::post('/general_admin/manage_website/update_payment_method',  'GeneralAdminController@general_admin_update_payment_method');
+Route::post('/general_admin/manage_website/update_county',          'GeneralAdminController@general_admin_update_county');
+Route::post('/general_admin/manage_website/update_city',            'GeneralAdminController@general_admin_update_city');
 
 Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdminController@general_admin_view_merchant_info');
-Route::post('/general_admin/manage_user/update_merchant_info',        'GeneralAdminController@general_admin_update_merchant_info');
+
+Route::post('/general_admin/manage_user/update_merchant_business_info',        'GeneralAdminController@update_merchant_business_info');
+Route::post('/general_admin/manage_user/add_merchant_payment_method',        'GeneralAdminController@add_merchant_payment_method');
+Route::post('/general_admin/manage_user/delete_merchant_payment_method',        'GeneralAdminController@delete_merchant_payment_method');
 
 
 
@@ -196,11 +215,11 @@ Route::post('/general_admin/manage_user/update_merchant_info',        'GeneralAd
 
 
 
+Route::any('/truncate/{table_name}', 'MerchantController@truncate');
 
-
-Route::any('/sample', 'MerchantController@sample');
+Route::any('/sample',        'MerchantController@sample');
 Route::any('/sample-upload', 'FrontController@sampleUpload');
-Route::any('/upload-file', 'FrontController@uploadFile');
+Route::any('/upload-file',   'FrontController@uploadFile');
 
 
 

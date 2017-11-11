@@ -18,11 +18,65 @@ $(document).ready(function()
         $('#deleteAgent').modal('show');
       }
    });
+	$(".teamAction").change(function () {
+		if ($(this).val() == "delete") {
+	    	var team_id = $(this).data("id");
+	        $("#delete_team_id").val(team_id);
+	        $('#deleteTeam').modal('show');
+	    }
+
+	    if ($(this).val() == "edit") {
+	    	var team_id = $(this).data("id");
+	    	var team_name = $(this).data("name");
+	    	var team_info = $(this).data("info");
+	        $("#teamIdEdit").val(team_id);
+	        $("#teamNameEdit").val(team_name);
+	        $("#teamInfoEdit").val(team_info);
+	        $('#teamEditModal').modal('show');
+	    }
+   });
 	//modal act
+	$(document).on('click','#updateTeamBtn',function()
+	{
+		var team_id   = $("#teamIdEdit").val();
+        var team_name = $("#teamNameEdit").val();
+        var team_info = $("#teamInfoEdit").val();
+        $.ajax({
+		type:'POST',
+		url:'/supervisor/update_team',
+		data:{
+			team_id: team_id,
+			team_name: team_name,
+			team_info: team_info,
+			},
+		dataType:'text',
+		}).done(function(data){
+			    $('#team_update_success').html(data);
+			    setTimeout(function(){
+					   location.reload();
+					}, 1000);
+			});
+	       
+	});
+	$('#teamDeleted').click(function(){
+		var delete_team_id = $('#delete_team_id').val();
+		$.ajax({
+			type:'POST',
+			url:'/supervisor/delete_team',
+			data:{delete_team_id: delete_team_id},
+			dataType:'text',
+
+		}).done(function(data){
+			    $('#deleteTeam').modal('hide');
+				$('#team_delete_success').html(data);
+				setTimeout(function(){
+					   location.reload();
+					}, 1000);
+			});
+	});
+
     $('#agentDeleted').click(function(){
 		var delete_agent_id = $('#delete_agent_id').val();
-		alert();
-		
 		$.ajax({
 			type:'POST',
 			url:'/supervisor/delete_agent',
@@ -32,6 +86,9 @@ $(document).ready(function()
 		}).done(function(data){
 			    $('#deleteAgent').modal('hide');
 				$('#agent_delete_success').html(data);
+				setTimeout(function(){
+					   location.reload();
+					}, 1000);
 			});
 	});
 
@@ -48,6 +105,9 @@ $(document).ready(function()
 
 		}).done(function(data){
 				$('#assign_success').html(data);
+				setTimeout(function(){
+					   location.reload();
+					}, 1000);
 			});
 	});
 
@@ -63,6 +123,9 @@ $(document).ready(function()
 
 		}).done(function(data){
 				$('#team_success').html(data);
+				setTimeout(function(){
+					   location.reload();
+					}, 1000);
 			});
 	});
 
@@ -77,7 +140,6 @@ $(document).ready(function()
 		var secondary = $('#secondary').val();
 		var other_info = $('#other_info').val();
 
-		alert('');
 		$.ajax({
 			type:'POST',
 			url:'/supervisor/add_agent',
@@ -96,6 +158,9 @@ $(document).ready(function()
 
 		}).done(function(data){
 				$('#agent_success').html(data);
+				setTimeout(function(){
+					   location.reload();
+					}, 1000);
 			});
 	});
 });

@@ -22,7 +22,7 @@
                         <i class="fa fa-map-marker map" style=""></i>{{$business_info->business_complete_address}}
                     </div>
                     <div class="pull-right">
-                            <a href="skype:Echo123"><button class=" btn-skype"><i class="fa fa-skype skype" aria-hidden="true"></i>Call on Skype</button></a>
+                            <a href="skype:{{$business_info->business_phone}}"><button class=" btn-skype"><i class="fa fa-skype skype" aria-hidden="true"></i>Call on Skype</button></a>
                             <buton class=" btn-email" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope email" aria-hidden="true"></i>Send Email</buton>
                     </div>
                 </div>
@@ -157,14 +157,27 @@
             </script>
         </div>
         <div class="business-details-rightpart">
+            <style>
+            .facebook {
+                  padding: 6px;
+                  font-size: 30px;
+                  width: 100px;
+                  text-align: center;
+                  text-decoration: none;
+                  margin: 5px 2px;
+                  border-radius:5px;
+                  
+                }
+            </style>
             <div class="details-container">
                 <div class="sociallinks-container">
                     <div class="links-holder">
-                        
-                        <a href=""><i class="fa fa-facebook businesspage-fb-icon"></i><p class="fb-like">Like</p></a>
-
-
-                        <a href=""><i class="fa fa-twitter businesspage-twitter-icon"></i><p class="twitter-tweet">Tweet</p></a>
+                        @if($business_info->facebook_url=="")
+                        <iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                        @else
+                        <iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_info->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                        @endif
+                        <iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_info->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
                     </div>
                    
                 </div>
@@ -258,7 +271,7 @@
             }
             .message-textarea
             {
-                max-width: 516px;
+                max-width: 700px;
                 min-height: 237px;
             }
             .sendemail-btn-holder
@@ -291,11 +304,11 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <p class="sendemail-title">MESSAGE US</p>
                     </div>
+
                     <form role="form" action="/guest/add_messages" method="post">
 
                         {{csrf_field()}}
                     <div class="modal-body">
-                   
                         <div class="sendemail-textfield-holder">
                             <label for="input-email" class="sendemail-labels">Email:</label>
                             <input type="text" name="email" class="sendemail-textfield" required/>
@@ -321,5 +334,7 @@
     </div>
     
 </div>
+
+<script src="/assets/admin/general_admin/assets/js/general_admin_categories.js"></script>
 
 @endsection

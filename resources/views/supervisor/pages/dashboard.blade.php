@@ -18,9 +18,12 @@
             <div class="row">
                 <div class="col-md-4" >
                     <div class="card">
-                        <div class="header">
-                            <h4 class="title">Agent Calls</h4>
-                            <p class="category">Pie Chart</p>
+                        <div class="header col-md-12" style="display:inline-block;">
+                            <div class="col-md-12">
+                                <h4 class="title">Agent Calls</h4>
+                                <p class="category">Pie Chart</p>
+                            </div>
+                            
                         </div>
                         <div class="content" style="">
                             <canvas id="agentCallsPie"  class="ct-chart "></canvas>
@@ -43,11 +46,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7" id="showAgentCalls">
                     <div class="card">
-                        <div class="header">
-                            <h4 class="title">Agent Calls</h4>
-                            <p class="category">Line Charts</p>
+                        <div class="header col-md-12" style="display:inline-block;">
+                            <div class="col-md-9">
+                                <h4 class="title">Agent Calls</h4>
+                                <p class="category">Line Charts</p>
+                            </div>
+                            <div class="col-md-3  pull-right">
+                                <select class="form-control " id="agent_calls">
+                                    <option value="james">SELECT AGENT</option>
+                                    @foreach($_agents as $agents)
+                                        <option value="{{$agents->agent_id}}">{{$agents->first_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="content">
                             <canvas id="agentCallsLine" width="600"  class="ct-chart "></canvas>
@@ -62,14 +75,35 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        var agentData = 
+                            {
+                                labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
+                                datasets : [
+                                {
+                                    fillColor : "rgba(172,194,132,0.4)",
+                                    strokeColor : "#ACC26D",
+                                    pointColor : "#fff",
+                                    pointStrokeColor : "#9DB86D",
+                                    data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
+                                }
+                            ]
+                            }
+                        var agents = document.getElementById('agentCallsLine').getContext('2d');
+                        new Chart(agents).Line(agentData);
+                    </script>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4" >
                     <div class="card">
-                        <div class="header">
-                            <h4 class="title">Team Calls</h4>
-                            <p class="category">Pie Chart</p>
+                        
+                        <div class="header col-md-12" style="display:inline-block;">
+                            <div class="col-md-12">
+                                <h4 class="title">Team Calls</h4>
+                                <p class="category">Pie Chart</p>
+                            </div>
+                            
                         </div>
                         <div class="content" style="">
                             <canvas id="teamCallsPie"  class="ct-chart "></canvas>
@@ -92,11 +126,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7" id="showTeamCalls">
                     <div class="card">
-                        <div class="header">
-                            <h4 class="title">Team Calls</h4>
-                            <p class="category">Line Charts</p>
+                        <div class="header col-md-12" style="display:inline-block;">
+                            <div class="col-md-9">
+                                <h4 class="title">Team Calls</h4>
+                                <p class="category">Line Charts</p>
+                            </div>
+                            <div class="col-md-3  pull-right">
+                                <select class="form-control " id="team_calls">
+                                    <option>SLECT TEAM</option>
+                                    @foreach($_teams as $teams)
+                                        <option value="{{$teams->team_id}}">{{$teams->team_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="content">
                             <canvas id="teamCallsLine" width="600"  class="ct-chart "></canvas>
@@ -111,6 +155,23 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        var teamData = 
+                            {
+                                labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
+                                datasets : [
+                                {
+                                    fillColor : "rgba(172,194,132,0.4)",
+                                    strokeColor : "#ACC26D",
+                                    pointColor : "#fff",
+                                    pointStrokeColor : "#9DB86D",
+                                    data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
+                                }
+                                ]
+                            }
+                        var teams = document.getElementById('teamCallsLine').getContext('2d');
+                        new Chart(teams).Line(teamData);
+                    </script>
                 </div>
             </div>
         </div>
@@ -148,24 +209,7 @@
     </div>
 </div>
 <script>
-// line chart data
-var buyerData = 
-    {
-        labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
-        datasets : [
-        {
-            fillColor : "rgba(172,194,132,0.4)",
-            strokeColor : "#ACC26D",
-            pointColor : "#fff",
-            pointStrokeColor : "#9DB86D",
-            data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
-        }
-    ]
-    }
-// get line chart canvas
-var buyers = document.getElementById('agentCallsLine').getContext('2d');
-// draw line chart
-new Chart(buyers).Line(buyerData);
+
 // pie chart data
 var pieData = 
 [
@@ -212,24 +256,7 @@ var countries= document.getElementById("agentCallsPie").getContext("2d");
 new Chart(countries).Pie(pieData, pieOptions);
 // bar chart data
 //agent end
-// line chart data
-var teamData = 
-    {
-        labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
-        datasets : [
-        {
-            fillColor : "rgba(172,194,132,0.4)",
-            strokeColor : "#ACC26D",
-            pointColor : "#fff",
-            pointStrokeColor : "#9DB86D",
-            data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
-        }
-        ]
-    }
-// get line chart canvas
-var teams = document.getElementById('teamCallsLine').getContext('2d');
-// draw line chart
-new Chart(teams).Line(teamData);
+
 // pie chart data
 var pieDataTeams = 
     [
@@ -301,4 +328,6 @@ new Chart(activeReg).Bar(barData);
 
 
 </script>
+<script src="/assets/js/global.ajax.js"></script>
+<script src="/assets/js/supervisor/supervisor_dashboard.js"></script>
 @endsection

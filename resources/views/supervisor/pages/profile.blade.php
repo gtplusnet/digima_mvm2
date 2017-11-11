@@ -25,7 +25,8 @@
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-md-3 user-profile">
-                    <h3 class="text-center">{{$profile->prefix}} {{$profile->first_name}}{{$profile->last_name}}</h3>
+                    <h3 class="text-center">{{$profile->prefix}} {{$profile->first_name}} {{$profile->last_name}}</h3>
+                      <p class="text-center">{{$profile->email}}</p>
                     <p class="text-center">{{$profile->position}}</p>
                     <hr>
                     <ul class="list-unstyled text-center">

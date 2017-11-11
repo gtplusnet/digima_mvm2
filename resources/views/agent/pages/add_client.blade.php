@@ -113,7 +113,6 @@
 									    @endforeach
   								</select>
 	                        </div>
-	                        
 	                        <label for="city" class="col-sm-2 control-label">City</label>
 	                        <div class="col-sm-2">
 	                            <select class="form-control" name="city_list" id="city_list" style="width: 190px; border-radius: 20px;">
@@ -132,7 +131,7 @@
 	                    	<div class="col-sm-9">
 	                    	</div>
 	                        <div class="col-sm-3">
-	                        	<button  class="btn btn-primary btn-lg"  style="border-radius: 20px; float: right;">Add Merchant</button>
+	                        	<button  class="btn btn-primary btn-lg"  name="continueButton" id="continueButton" style="border-radius: 20px; float: right;">Add Merchant</button>
 	                        </div>
 	                    </div>
 
@@ -142,6 +141,8 @@
 	    </div>
 	
 </div>
+
+<script src="/assets/js/global.ajax.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/add_client.js"></script>
 @endsection

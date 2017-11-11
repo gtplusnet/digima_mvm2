@@ -43,27 +43,27 @@ $(document).ready(function(){
 	});
 
 	$('#continue').click(function(){
-		// alert("123");
+		alert("123");
 		var prefix = $('#prefix').val();
 		var first_name = $('#first_name').val();
 		var last_name = $('#last_name').val();
 		var email = $('#email_address').val();
 		var atpos = email.indexOf("@");
    	    var dotpos = email.lastIndexOf(".");
-   	    // var password = $('#password').val();
+   	    var password = $('#password').val();
    	    var facebook_url = $('#facebook_url').val();
    	    var twitter_username = $('#twitter_username').val();
-   	    // var retype_password = $('#retype_password').val();
+   	    var retype_password = $('#retype_password').val();
 		var business_name = $('#business_name').val();
 		var primary_business_phone = $('#primary_business_phone').val();
 		var secondary_business_phone = $('#secondary_business_phone').val();
-		// var fax_number = $('#fax_number').val();
+		var fax_number = $('#fax_number').val();
 		var business_address = $('#business_address').val();
 		var county_list = $('#county_list').val();
 		var city_list = $('#city_list').val();
 		var postal_code = $('#postal_code').val();
 		var membership = $('#membership').val();
-		
+		var agree_checkbox = $('#agree_checkbox').prop('checked');
 
 		if(prefix == '')
 		{
@@ -105,7 +105,6 @@ $(document).ready(function(){
 			    transitionOut: 'fadeOutUp'
 			});
     	}
-    	
 		else if(business_name == '')
 		{
 			iziToast.warning({

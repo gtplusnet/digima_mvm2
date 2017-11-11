@@ -82,7 +82,7 @@
                                             <div class="modal-body">
                                                 <div>
                                                     <div>
-                                                        <center><a href="http://www.animatedimages.org/cat-telephones-325.htm"><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
+                                                        <center><a href=""><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
                                                     </div>
                                                     <div>
                                                         <p ><center>{{session('_Timer')}}</center></p>
@@ -155,7 +155,7 @@
                                                                     </div>
                                                                     <label for="input-Default" class="col-sm-2 control-label">Postal</label>
                                                                     <div class="col-sm-2">
-                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_id}}" readonly>
+                                                                        <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_code}}" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
