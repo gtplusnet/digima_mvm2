@@ -1,5 +1,15 @@
 @extends('merchant.layout.layout')
 @section('content')
+<style>
+.file-margin
+{
+   margin-bottom:20px;
+}
+th
+{
+   text-align: center;
+}
+</style>
 <div class="page-title">
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
@@ -17,16 +27,21 @@
                <!-- Nav tabs -->
                <div role="tabpanel">
                   <ul class="nav nav-pills" role="tablist">
-                     <li role="presentation" class="active"><a href="#tab9" role="tab" data-toggle="tab" aria-expanded="true">Other Information</a></li>
-                     <li role="presentation" class=""><a href="#tab15" role="tab" data-toggle="tab" aria-expanded="false">Other Information</a></li>
-                     <li role="presentation" class=""><a href="#tab11" role="tab" data-toggle="tab" aria-expanded="false">Business Hours</a></li>
-                     <li role="presentation" class=""><a href="#tab20" role="tab" data-toggle="tab" aria-expanded="false">Business Image</a></li>
-                     <li role="presentation" class=""><a href="#tab29" role="tab" data-toggle="tab" aria-expanded="false">Payment Method</a></li>
+                     <li role="presentation" class="active"><a href="#MI" role="tab" data-toggle="tab" aria-expanded="true">Merchant Information</a></li>
+                     <li role="presentation" class=""><a href="#OI" role="tab" data-toggle="tab" aria-expanded="false">Other Information</a></li>
+                     <li role="presentation" class=""><a href="#BH" role="tab" data-toggle="tab" aria-expanded="false">Business Hours</a></li>
+                     <li role="presentation" class=""><a href="#BI" role="tab" data-toggle="tab" aria-expanded="false">Business Image</a></li>
+                     <li role="presentation" class=""><a href="#PM" role="tab" data-toggle="tab" aria-expanded="false">Payment Method</a></li>
                   </ul>
                </div>
                <!-- Tab panes -->
                <div class="tab-content">
-                  <div role="tabpanel" class="tab-pane fade active in" id="tab9">
+                  <div style="margin-top:10px;" id="show_alert_here">
+                     @if(Session::has('success'))
+                     <div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>
+                     @endif 
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade active in" id="MI">
                      <form class="form-horizontal">
                         <div class="form-group" style="margin-top:50px;">
                            <label for="business_name" class="col-sm-2 control-label">Business Name</label>
@@ -76,7 +91,7 @@
                         </div>
                      </form>
                   </div>
-                  <div role="tabpanel" class="tab-pane fade" id="tab15">
+                  <div role="tabpanel" class="tab-pane fade" id="OI">
                      <form class="form-horizontal" method="POST" action="/merchant/add_other_info">
                         <div id="other_info_success" style="margin-top:50px;">
                         </div>
@@ -105,7 +120,7 @@
                         </div>
                      </form>
                   </div>
-                  <div role="tabpanel" class="tab-pane fade" method="POST" id="tab11">
+                  <div role="tabpanel" class="tab-pane fade" method="POST" id="BH">
                      <form class="form-horizontal"  action="/merchant/profile/update_hours">
                         <div class="form-group" style="margin-top:50px;">
                            <label for="input-Default" class="col-sm-3 control-label">START</label>
@@ -124,61 +139,165 @@
                            </div>
                         </div>
                         @endforeach
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                            <div class="text-right">
                               <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="" class="update_hours btn btn-primary"  id="">Update</button>
                            </div>
                         </div>
                      </form>
                   </div>
-                  <div role="tabpanel" class="tab-pane" id="tab20">
-                     <div>
-                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/merchant/add_images" style="">
-                           <h3>Images</h3>
-                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                           @foreach($_images as $images)
-                           <div>
-                              <label for="input-Default" class="col-sm-2 control-label">Business Banner:</label>
-                              <input type="file" id="myFile" name="business_banners">
-                              <input type="hidden" name="business_id" value="fdsfsd">
-                              <a href="{{$images->business_banner}}" target="blank">VIEW IMAGE</a>
-                              <br><br>
+                  <div role="tabpanel" class="tab-pane" id="BI">
+
+                     <div class="col-md-12">
+                        <div id="other_info_success" style="margin-top:50px;">
+                        </div>
+                        @if($images!=0)
+                        <div class="col-md-6">
+                           <div class="col-md-12 file-margin" >
+                              <div class="col-md-6">
+                                 <label for="input-Default" class="control-label">Business Banner:</label>
+                                 <img src="{{$_images->business_banner}}" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
+                              <div class="col-md-6 ">
+                                 <label for="input-Default" class="control-label">First Sub Image</label>
+                                 <img src="{{$_images->other_image_one}}" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
                            </div>
-                           @endforeach
-                           {{--  @foreach($_images as $images)
-                           <div>
-                              <label for="input-Default" class="col-sm-2 control-label">Business Banner:</label>
-                              <input type="file" id="myFile" name="business_banners">
-                              <input type="hidden" name="business_id" value="{{$images->business_id}}">
-                              <a href="{{$images->business_banner}}" target="blank">VIEW IMAGE</a>
-                              <br><br>
+                           <div class="col-md-12 file-margin" >
+                              <div class="col-md-6">
+                                 <label for="input-Default" class="control-label">Second Sub Image</label>
+                                 <img src="{{$_images->other_image_two}}" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
+                              <div class="col-md-6 ">
+                                 <label for="input-Default" class="control-label">Third Sub Image</label>
+                                 <img src="{{$_images->other_image_three}}" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
                            </div>
-                           <div>
-                              <label for="input-Default" class="col-sm-2 control-label">Other Images 1:</label>
-                              <input type="file" id="myFile" name="other_image_one">
-                              <a href="{{$images->other_image_one}}"  target="blank">VIEW IMAGE</a>
-                              <br><br>
+                        </div>
+                        <div class="col-md-6">
+                           <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/merchant/add_images" style="">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              
+                              <div class="col-md-12 file-margin" >
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">Business Banner:</label>
+                                 </div>
+                                 <div class="col-md-6 ">
+                                    <input type="file" id="business_banner" name="business_banner">
+                                    <input type="hidden" name="business_banner_text" value="{{$_images->business_banner}}">
+                                 </div>
+                              </div>
+                              <div class="col-md-12 file-margin">
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">First Sub Image</label>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="file" id="other_image_one" name="other_image_one">
+                                     <input type="hidden" name="other_image_one_text" value="{{$_images->business_banner}}">
+                                 </div>
+                              </div>
+                              <div class="col-md-12 file-margin">
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">Second Sub Image</label>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="file" id="other_image_two" name="other_image_two">
+                                     <input type="hidden" name="other_image_two_text" value="{{$_images->business_banner}}">
+                                 </div>
+                              </div>
+                              <div class="col-md-12 file-margin">
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">Third Sub Image</label>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="file" id="other_image_three" name="other_image_three">
+                                     <input type="hidden" name="other_image_three_text" value="{{$_images->business_banner}}">
+                                 </div>
+                                 <br><br><br>
+                              </div>
+                              <div  class="col-md-12">
+                                 <div class="text-right">
+                                    <button type="submit" style="padding: 5px 18px;" class="btn btn-primary"  id="">Update</button>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                        @else
+                        <div class="col-md-6">
+                           <div class="col-md-12 file-margin" >
+                              <div class="col-md-6">
+                                 <label for="input-Default" class="control-label">Business Banner:</label>
+                                 <img src="" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
+                              <div class="col-md-6 ">
+                                 <label for="input-Default" class="control-label">First Sub Image</label>
+                                 <img src="" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
                            </div>
-                           <div>
-                              <label for="input-Default" class="col-sm-2 control-label">Other Images 2:</label>
-                              <input type="file" id="myFile" name="other_image_two">
-                              <a href="{{$images->other_image_two}}"  target="blank">VIEW IMAGE</a>
-                              <br><br>
+                           <div class="col-md-12 file-margin" >
+                              <div class="col-md-6">
+                                 <label for="input-Default" class="control-label">Second Sub Image</label>
+                                 <img src="" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
+                              <div class="col-md-6 ">
+                                 <label for="input-Default" class="control-label">Third Sub Image</label>
+                                 <img src="" alt="" class="thumbnail" width="100%" height="auto">
+                              </div>
                            </div>
-                           <div>
-                              <label for="input-Default" class="col-sm-2 control-label">Other Images 3:</label>
-                              <input type="file" id="myFile" name="other_image_three">
-                              <a href="{{$images->other_image_three}}"  target="blank">VIEW IMAGE</a>
-                              <br><br>
-                           </div>
-                           @endforeach --}}
-                           <div class="col-sm-10">
-                              <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="upload_images" class="upload_images btn btn-primary"  id="upload_images">Upload Images</button>
-                           </div>
-                        </form>
+                        </div>
+                        <div class="col-md-6">
+                           <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/merchant/add_images" style="">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              
+                              <div class="col-md-12 file-margin" >
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">Business Banner:</label>
+                                 </div>
+                                 <div class="col-md-6 ">
+                                    <input type="file" id="business_banner" name="business_banner">
+                                    <input type="hidden" name="business_banner_text" value="">
+                                 </div>
+                              </div>
+                              <div class="col-md-12 file-margin">
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">First Sub Image</label>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="file" id="other_image_one" name="other_image_one">
+                                     <input type="hidden" name="other_image_one_text" value="">
+                                 </div>
+                              </div>
+                              <div class="col-md-12 file-margin">
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">Second Sub Image</label>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="file" id="other_image_two" name="other_image_two">
+                                     <input type="hidden" name="other_image_two_text" value="">
+                                 </div>
+                              </div>
+                              <div class="col-md-12 file-margin">
+                                 <div class="col-md-4">
+                                    <label for="input-Default" class="control-label">Third Sub Image</label>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="file" id="other_image_three" name="other_image_three">
+                                     <input type="hidden" name="other_image_three_text" value="">
+                                 </div>
+                                 <br><br><br>
+                              </div>
+                              <div  class="col-md-12">
+                                 <div class="text-right">
+                                    <button type="submit" style="padding: 5px 18px;" class="btn btn-primary"  id="">Update</button>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                        @endif
+                        
                      </div>
                   </div>
-                  <div role="tabpanel" class="tab-pane fade" id="tab29">
+                  <div role="tabpanel" class="tab-pane fade" id="PM">
                      <form class="form-horizontal" method="POST" action="/merchant/add_payment_method" style="">
                         
                         <div id="adding_payment_method_success" style="margin-top:50px;">
@@ -186,14 +305,14 @@
                         <table class="table table-bordered" style="width: 100%; text-align: center;font-size:13px;" cellpadding="1" cellspacing="1"  border="2">
                            <thead>
                               <tr>
-                                
-                                 <th style="text-align: center;">Payment Method Name</th>
-                                 <th style="text-align: center;">Action</th>
+                                 <th >ID</th>
+                                 <th >Payment Method Name</th>
+                                 <th >Action</th>
                               </tr>
                            </thead>
                            @foreach($_payment_method as $data)
                            <tr>
-                              
+                              <td>{{$data->payment_method_id}}</td>
                               <td >{{$data->payment_method_name}}</td>
                               <td>
                                  <button type="button" class="btn btn-danger deletePaymentss" data-id="{{$data->payment_method_id}}">

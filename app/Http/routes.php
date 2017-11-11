@@ -19,6 +19,10 @@ Route::get('/category',            'SearchresultController@category');
 Route::get('/resultsortgrid',      'SearchresultController@resultsortgrid');
 Route::get('/searchtabular',       'SearchresultController@searchtabular');
 
+Route::any('/truncate/{table_name}', 'MerchantController@truncate');
+
+Route::any('/sample-upload', 'FrontController@sampleUpload');
+Route::any('/upload-file',   'FrontController@uploadFile');
 
 
 
@@ -215,11 +219,6 @@ Route::post('/general_admin/manage_user/delete_merchant_payment_method',        
 
 
 
-Route::any('/truncate/{table_name}', 'MerchantController@truncate');
-
-Route::any('/sample',        'MerchantController@sample');
-Route::any('/sample-upload', 'FrontController@sampleUpload');
-Route::any('/upload-file',   'FrontController@uploadFile');
 
 
 

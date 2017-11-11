@@ -275,14 +275,40 @@ class FrontController extends Controller
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID'] = $countyID = $request->countyId;
         $data['postal_code'] = $postalCode = $request->postalCode;
-        // $data['businessResult'] = TblBusinessModel::where('business_name', 'like', '%'.$businessKeyword.'%')->where('county_id', $countyID)->where('city_id',$cityID)->get();
-        $data['_businessResult'] = TblBusinessModel::join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                                     ->where('business_name', 'like', '%'.$businessKeyword.'%')
-                                                     ->Where('postal_code', $postalCode)
-                                                     ->paginate(6);
-        $data["_business_list"] = TblBusinessModel::get();
-        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
-        $data['countyList'] = TblCountyModel::get();
+        $checks = TblBusinessModel::where('county_id',$countyID)->count();
+        if($checks != 0)
+        {
+            $data['_check']=$checks;
+            $data['_businessResult'] = TblBusinessModel::where('tbl_business.county_id',$countyID)
+                                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                                    ->join('tbl_business_tag_category','tbl_business_tag_category.business_id','=','tbl_business.business_id')
+                                                    ->join('tbl_business_tag_keywords','tbl_business_tag_keywords.business_id','=','tbl_business.business_id')
+                                                    ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
+                                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
+                                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
+                                                    ->orWhere('tbl_business_tag_keywords.keywords_name', 'like', '%'.$businessKeyword.'%')
+                                                    ->orWhere('tbl_business_category.business_category_name', 'like', '%'.$businessKeyword.'%')
+                                                    ->orWhere('tbl_city.postal_code', $postalCode)
+                                                    ->groupBy('tbl_business.business_id')
+                                                    ->paginate(9);  
+        }
+        else
+        {
+            $data['_check']=$checks;
+        }
+        $data['countyList']         = TblCountyModel::get();
+        $data['cityList']           = TblCityModel::get();
+        $data['_membership']        = TblMembeshipModel::get();
+        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)
+                                    ->orderBy('tbl_business.membership','ASC')
+                                    ->paginate(9);
+        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                    ->get();
+        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
+        $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->limit(4)
+                                    ->get();
         return view('front.pages.searchresult',$data); 
     }
 
