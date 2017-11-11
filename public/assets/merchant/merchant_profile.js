@@ -1,5 +1,15 @@
 $(document).ready(function(){
 
+	$(document).on("click","#OI",function()
+	{
+		alert();
+		$('#show_alert_here').show();
+	});
+	
+});
+
+$(document).ready(function(){
+
 	$(document).on("click","#updateInfo",function(){
 		var company_information = $('#company_information').val();
 		var business_website = $('#business_website').val();

@@ -266,8 +266,17 @@ class MerchantController extends Controller
 		  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(5);
       $data['other_info']       = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
       $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
-      $data['_images']          = TblBusinessImages::where('business_id',session('business_id'))->get();
-		  return view ('merchant.pages.profile', $data);		
+      $images                   = TblBusinessImages::where('business_id',session('business_id'))->count();
+      if($images==0)
+      {
+        $data['images']  = 0;
+      }
+      else
+      {
+        $data['images']  = 1;
+        $data['_images'] = TblBusinessImages::where('business_id',session('business_id'))->first();
+      }
+      return view ('merchant.pages.profile', $data);		
 	  }
 
 
@@ -302,7 +311,7 @@ class MerchantController extends Controller
           $data['business_hours_to']= $business_hours_to[$key];  
           $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
       }
-      
+      Session::flash('success', 'success');
       return Redirect::back();  
     
     }
@@ -359,47 +368,81 @@ class MerchantController extends Controller
 
      public function add_images(Request $request)
     { 
-        $file = $request->file('business_banners');
-        // $file1 = $request->file('other_image_one');
-        // $file2 = $request->file('other_image_two');
-        // $file3 = $request->file('other_image_three');
-        if($file==null||$file=='')
-          {
-            echo "Walang kang picture eh!!!";
-          }
+        $file = $request->file('business_banner');
+        $file1 = $request->file('other_image_one');
+        $file2 = $request->file('other_image_two');
+        $file3 = $request->file('other_image_three');
+
+        $my_file = $request->business_banner_text;
+        $my_file1 = $request->other_image_one_text;
+        $my_file2 = $request->other_image_two_text;
+        $my_file3 = $request->other_image_three_text;
+
+        if($file==null||$file=="")
+        {
+          $filename = $my_file;
+        }
         else
-          {
+        {
           $filename='/business_images/'.uniqid().$file->getClientOriginalName();
-          // $filename1='/business_images/'.uniqid().$file1->getClientOriginalName();
-          // $filename2='/business_images/'.uniqid().$file2->getClientOriginalName();
-          // $filename3='/business_images/'.uniqid().$file3->getClientOriginalName();
           $file_ext = $file->getClientOriginalExtension();
-          // $file_ext = $file1->getClientOriginalExtension();
-          // $file_ext = $file2->getClientOriginalExtension();
-          // $file_ext = $file3->getClientOriginalExtension();
           $destinationPath = public_path('/business_images');
           $check=$file->move($destinationPath, $filename);
-          // $check=$file1->move($destinationPath, $filename1);
-          // $check=$file2->move($destinationPath, $filename2);
-          // $check=$file3->move($destinationPath, $filename3);
-            if($check)
-            {
-              $data['business_banner'] = $filename;
-              $data['business_id']    =  session("business_id");
-              // $data['other_image_one'] = $filename1;
-              // $data['other_image_two'] = $filename2;
-              // $data['other_image_three'] = $filename3;
-              $check_insert = TblBusinessImages::where('business_id',session('business_id'))->insert($data);
-              if($check_insert)
-                {
-                   return Redirect::back();
-                }
-              else
-                {   
-                  echo "mali ka";
-                }
-          }
         }
+        if($file1==null||$file=="")
+        {
+          $filename1 = $my_file1;
+        }
+        else
+        {
+          $filename1='/business_images/'.uniqid().$file1->getClientOriginalName();
+          $file_ext1 = $file1->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file1->move($destinationPath, $filename1);
+        }
+        if($file2==null||$file=="")
+        {
+          $filename2 =  $my_file2;
+        }
+        else
+        {
+          $filename2='/business_images/'.uniqid().$file2->getClientOriginalName();
+          $file_ext2 = $file2->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file2->move($destinationPath, $filename2);
+          
+        }
+        if($file3==null||$file=="")
+        {
+          $filename3 = $my_file3;
+        }
+        else
+        {
+          $filename3='/business_images/'.uniqid().$file3->getClientOriginalName();
+          $file_ext3 = $file3->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file3->move($destinationPath, $filename3);
+        }
+
+        $data['business_banner'] = $filename;
+        $data['business_id']    =  session("business_id");
+        $data['other_image_one'] = $filename1;
+        $data['other_image_two'] = $filename2;
+        $data['other_image_three'] = $filename3;
+        // dd($data);
+        $check_insert = TblBusinessImages::where('business_id',session('business_id'))->insert($data);
+        if($check_insert)
+        {
+          Session::flash('success', "success");
+          return Redirect::back();
+        }
+        else
+        {   
+          Session::flash('success', "success");
+          return Redirect::back();
+        }
+        
+        
     }
      
 	  public function category()
@@ -457,6 +500,7 @@ class MerchantController extends Controller
        public function add_keywords(Request $request)
     {
       $data['keywords_name'] = $request->keywords_name;
+      $data['business_id'] = session('business_id');
       TblBusinessKeywordsModel::insert($data);
       Session::flash('message', "Keyword Successfully Added!");
       return Redirect::back();

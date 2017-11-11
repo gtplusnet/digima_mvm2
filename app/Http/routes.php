@@ -27,7 +27,6 @@ Route::get('/searchtabular',       'SearchresultController@searchtabular');
 
 
 
-
 /*Routes for Front*/
 Route::get('/', 						'FrontController@index');
 Route::any('/registration', 			'FrontController@registration');
@@ -208,7 +207,5 @@ Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdmi
 Route::post('/general_admin/manage_user/update_merchant_business_info',        'GeneralAdminController@update_merchant_business_info');
 Route::post('/general_admin/manage_user/add_merchant_payment_method',        'GeneralAdminController@add_merchant_payment_method');
 Route::post('/general_admin/manage_user/delete_merchant_payment_method',        'GeneralAdminController@delete_merchant_payment_method');
-
-
 
 

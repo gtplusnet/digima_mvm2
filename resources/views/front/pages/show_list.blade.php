@@ -38,7 +38,7 @@
 							<div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Select Categories</div>
 							<div  style="padding:10px; height:200px;overflow-y:scroll;">
 								@if(count($_categories) == 0)
-								<p>nothing to display</p>
+								<p style="text-align:center;vertical-align: middle;font-family: 'Quicksand',sans-serif;font-weight: bold;font-size: 20px;">Sorry You Ran Out Of Option.</p>
 								@else
 								<ul class="list-group" >
 									@foreach($_categories as $categories)
@@ -59,35 +59,35 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-				<div class="featuredlist-holder">
-					<div class="featuredlist-title-holder">
-						<p class="featuredlist-title">MOST VIEWED</p>
-					</div>
-					<div class="featuredlist-container side-list-padding">
-						<div  class="featured-carousel" >
-							<div class="carousel-inner vertical inner-vertical-carousel">
-								@foreach($_most_viewed as $most_viewed)
-								<div class="">
-									<div class="featured-details-container">
-										<div class="detail-picture-container side-list-img-width">
-											<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
-										</div>
-										<div class="detail-name-container">
-											@if(strlen($most_viewed->business_name) <= 14)
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
-											@else
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
-											@endif
-											
-										</div>
+			<div class="featuredlist-holder">
+				<div class="featuredlist-title-holder">
+					<p class="featuredlist-title">MOST VIEWED</p>
+				</div>
+				<div class="featuredlist-container side-list-padding">
+					<div  class="featured-carousel" >
+						<div class="carousel-inner vertical inner-vertical-carousel">
+							@foreach($_most_viewed as $most_viewed)
+							<div class="">
+								<div class="featured-details-container">
+									<div class="detail-picture-container side-list-img-width">
+										<img src="/images/jollibee_pic.jpg" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
+									</div>
+									<div class="detail-name-container">
+										@if(strlen($most_viewed->business_name) <= 14)
+										<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+										@else
+										<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+										@endif
+										
 									</div>
 								</div>
-								@endforeach
-								
 							</div>
+							@endforeach
+							
 						</div>
 					</div>
 				</div>
+			</div>
 		</div>
 		<div class="col-md-12">
 			<div class="featuredlist-holder">
@@ -119,7 +119,7 @@
 										@else
 										<p class="detail-name-title"><a href="/business/{{$featured_list->business_id}}">{{substr($featured_list->business_name,0, 13)}}...</a></p>
 										@endif
-									
+										
 									</div>
 								</div>
 							</div>
@@ -152,12 +152,12 @@
 					<div class="business-info-holder">
 						<div class="business-list-details">
 							<div class="business-list-name" style="height:50px;">
-									@if(strlen($business_list->business_name) <= 30)
-									<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
-									@else
-									<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
-									@endif
-								</div>
+								@if(strlen($business_list->business_name) <= 30)
+								<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+								@else
+								<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+								@endif
+							</div>
 							<div class="business-list-phone">
 								<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 							</div>
@@ -168,12 +168,12 @@
 					</div>
 					<div class="social-media-icon">
 						@if($business_list->facebook_url=="")
-							<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                    		@else
-							<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                    		@endif
-                    		<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                    </div>
+						<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+						@else
+						<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+						@endif
+						<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+					</div>
 				</div>
 				@endforeach
 				<div class="col-md-12 pagination">
@@ -182,39 +182,39 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-				<div class="payment-containers">
-					<div class="payment-title">
-						SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
-						<br>
-					</div>
-					<div class="col-md-12 payment-content">
-						@foreach($_membership as $membership)
-						<div class="col-md-5 package-container">
-							<div class="membership-offer">
-								{{$membership->membership_name}}
-							</div>
-							<hr>
-							<div class="membership-price">
-								<span >${{$membership->membership_price}}  </span>
-							</div>
-							<hr>
-							<div class="membership-details">
-								<p class="membership-details-text">
-									Sadly, none of them were ok, and I can't seem to find out any other option.
-									The first and second button are displayed
-									on same line, but the third is displayed lower... Can you help me?
-								</p>
-							</div>
-							<div class="membership-btn">
-								<a href="/registration">
-									<button type="button" class="membership-button">GET STARTED NOW</button>
-								</a>
-							</div>
+			<div class="payment-containers">
+				<div class="payment-title">
+					SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
+					<br>
+				</div>
+				<div class="col-md-12 payment-content">
+					@foreach($_membership as $membership)
+					<div class="col-md-5 package-container">
+						<div class="membership-offer">
+							{{$membership->membership_name}}
 						</div>
-						@endforeach
-						
+						<hr>
+						<div class="membership-price">
+							<span >${{$membership->membership_price}}  </span>
+						</div>
+						<hr>
+						<div class="membership-details">
+							<p class="membership-details-text">
+								Sadly, none of them were ok, and I can't seem to find out any other option.
+								The first and second button are displayed
+								on same line, but the third is displayed lower... Can you help me?
+							</p>
+						</div>
+						<div class="membership-btn">
+							<a href="/registration">
+								<button type="button" class="membership-button">GET STARTED NOW</button>
+							</a>
+						</div>
 					</div>
+					@endforeach
+					
 				</div>
 			</div>
+		</div>
 	</div>
 </div>

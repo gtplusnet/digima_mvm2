@@ -91,14 +91,7 @@
 .searchbox-holder
 {
 	padding: 0px;
-	    
-  //   .form-spacer
-  //   {
-  //   	background-color: rgba(239, 230, 230, 0.17);
-		// padding: 25px 50px;
-		// border-radius: 0px;
-  //   }
-    .searchfields-format
+	.searchfields-format
     {
     	padding: 0px;
     	margin:2px 2px 2px 2px;
@@ -108,7 +101,10 @@
 	    border-radius: 1px;
 	    border: 1px solid #ccc;
 	    width: 100%;
-    	padding: 6px 0px 6px 40px;
+	    padding: 6px 0px 6px 0px;
+	    text-align:center;
+	    font-family: "Quicksand",sans-serif;
+	    color:#555555;
 	}
 	.counties-selectbox
 	{
@@ -135,6 +131,7 @@
 	    color: #333;
 	    margin-bottom: 2px;
 	    padding: 8px 40px 8px 40px;
+	    width: 100%;
 		
 	}
 	.search-btn-text
