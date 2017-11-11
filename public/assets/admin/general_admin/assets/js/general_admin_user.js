@@ -29,6 +29,7 @@ function manage_user()
 	function add_payment_method()
 	{
 		$(document).on("click","#savePayment",function(){
+
 			var paymentMethodName = $('#paymentMethodName').val();
 			var businessId = $('#businessId').val();
 			$.ajax({
@@ -94,6 +95,7 @@ function manage_user()
 				});
 		});
 		
+
 	}
 	function merchant()
 	{

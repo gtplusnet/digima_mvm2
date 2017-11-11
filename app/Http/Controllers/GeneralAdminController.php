@@ -1045,7 +1045,9 @@ class GeneralAdminController extends Controller
 
     public function general_admin_view_merchant_info(Request $request)
     {
+
       $data['merchant_id'] = $business_id = $request->business_id;
+
       TblBusinessModel::where('tbl_business.business_id',$business_id)
                       ->join('tbl_business_hours','tbl_business_hours.business_id','=','tbl_business.business_id')
                       ->get();
@@ -1059,6 +1061,23 @@ class GeneralAdminController extends Controller
       $data['_images']   = TblBusinessImages::where('business_id',$business_id)->get();
       return view("general_admin.pages.view_merchant_info",$data);
 
+    }
+    public function general_admin_update_merchant_info(Request $request)
+    {
+      Self::allow_logged_in_users_only();
+      $data["company_information"] = $request->company_information;
+      $data["business_website"]    = $request->business_website;
+      $data["year_established"]    = $request->year_established;
+      $check = TblBusinessOtherInfoModel::where('business_id',$request->business_id)->update($data);
+      if($check)
+      {
+        return "<div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>";
+      }
+      else
+      {
+        return "<div class='alert alert-danger'><strong>Sorry!</strong>Transaction Failed.</div>";
+      }
+     
     }
 
 

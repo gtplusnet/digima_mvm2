@@ -94,7 +94,9 @@
 				<label class="control-label" style="text-align: left;margin-bottom:10px;">Payment Method</label>
 				<div  class="col-md-12">
 					<input type="text" class="form-control" id="paymentMethodName"  name="payment_method_name">
+
 					<input type="hidden" id="businessId" value="{{$merchant_id}}">
+
 				</div>
 				<div class="text-right">
 					<button type="button" style="padding: 5px;margin-top:10px;" name="save_payment" id="savePayment" class="save_payment btn btn-primary" id="save_payment">Add Payment</button>
