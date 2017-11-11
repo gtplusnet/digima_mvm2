@@ -14,13 +14,8 @@ Route::any('/sample_invoice',        'GeneralAdminController@sample_invoice');
 
 Route::any('/truncate/{table_name}', 'MerchantController@truncate');
 
-Route::any('/sample',        'MerchantController@sample');
 Route::any('/sample-upload', 'FrontController@sampleUpload');
 Route::any('/upload-file',   'FrontController@uploadFile');
-
-
-
-
 
 
  
