@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<style>
+.js
+{
+    overflow-x:hidden !important;
+}
+</style>
     <head>
         <!-- Title -->
         <title>CROTIA Directory | @yield('title')</title>

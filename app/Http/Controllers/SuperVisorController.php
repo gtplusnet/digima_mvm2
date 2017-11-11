@@ -333,14 +333,43 @@ class SuperVisorController extends Controller
     $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
     $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
 
-    $data['viewteam']   = TblTeamModel:: selectRaw('sum(count(agent_call_date)) as sum, tbl_business.*')
+    $data['mon']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$mon)
+                          ->count();
+    $data['tue']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$tue)
+                          ->count();
+    $data['wed']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$wed)
+                          ->count();
+    $data['thu']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$thu)
+                          ->count();                                                                
+    $data['fri']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$fri)
+                          ->count();
+    $data['sat']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
+                          ->where('agent_call_date',$sat)
+                          ->count();
+    $data['sun']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
                           ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
                           ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
                           ->where('agent_call_date',$sun)
-                          ->groupBy('team_id')
-                          ->get();
-                          dd($data['viewteam']);
-
+                          ->count();                      
+                          // dd($data['viewteam']);
+    $data['_teams']   = TblTeamModel::get();                     
     return view('supervisor.pages.show_team_calls',$data);
   }
 

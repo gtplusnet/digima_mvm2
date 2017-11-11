@@ -61,19 +61,19 @@ class FrontController extends Controller
         Session::forget("business_address");
         Session::forget("city_state");
         Session::forget("zip_code");
-        $data['countyList'] = TblCountyModel::get();
-        $data['cityList'] = TblCityModel::get();
-        $data['_membership']  = TblMembeshipModel::get();
-        $data["_business_list"] = TblBusinessModel:: where('business_status',5)
-                                ->orderBy('tbl_business.membership',"ASC")
-                                ->paginate(9);
-        $data["_featured_list"] = TblBusinessModel::where('membership',2)->where('business_status',5)  
-                                ->get();
-        $data['_categories']    = TblBusinessCategoryModel::where('parent_id',0)->get();
-        $data['_most_viewed']    = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
-                                ->orderBy('tbl_reports.business_views','ASC')
-                                ->limit(4)
-                                ->get();
+        $data['countyList']         = TblCountyModel::get();
+        $data['cityList']           = TblCityModel::get();
+        $data['_membership']        = TblMembeshipModel::get();
+        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)
+                                    ->orderBy('tbl_business.membership','ASC')
+                                    ->paginate(9);
+        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                    ->get();
+        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
+        $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->limit(4)
+                                    ->get();
         return view('front.pages.home',$data);
 
     }

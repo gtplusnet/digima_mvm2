@@ -404,6 +404,7 @@ class MerchantController extends Controller
 		  $data['page']			 = 'Category';
       $data['_category'] = TblBusinessCategoryModel::where('parent_id',0)->get();
       $data['_subcategory'] = TblBusinessKeywordsModel::get();
+      
       $data['_keywords'] = TblBusinessKeywordsModel::get();
 		  return view('merchant.pages.category', $data);		
   	}
