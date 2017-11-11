@@ -144,6 +144,7 @@
 				<div class="pull-left" style="margin:20px 0px 20px 20px">
 					<button type="button"  data-toggle="modal" data-target="#myModalTeam"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
 				</div>
+
 			</div>
 			<div class="row col-md-12">
 				<div class="panel-body">
@@ -182,6 +183,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 		<div id="supervisor" class=" col-md-12 tab-pane fade in">
 			<div class="">
@@ -279,7 +281,7 @@
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Add Agent</h4>
 					</div>
-					<div class="modal-body" style="margin-bottom: 650px;" >
+					<div class="modal-body" style="margin-bottom: 680px;" >
 						<div class="col-sm-12">
 							<div class="form-group col-md-3">
 								<label for="business_name" >Team</label>

@@ -146,11 +146,11 @@
                             <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href="profile"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="/agent/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
                     </li>
                     <li>
-                    @if(session("agent_login") == true)
+                    @if(session("agent_login"))
                     <a style="font-size:15px",  href='/agent/logout'>
                     <span><i class="fa fa-sign-out m-r-xs"></i>Log out
                     </span>
@@ -158,12 +158,13 @@
                     @else
                     <a style="font-size:15px",  href="">
                     <span>
-                    <i class="fa fa-sign-out m-r-xs"></i>
+                    <i class="fa fa-sign-out m-r-xs" ></i>
                     Hi Guest
                     </span>
-                    </a>             
+                    </a>                       
                     @endif 
                     </li>
+
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->
         </div>

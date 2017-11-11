@@ -68,13 +68,13 @@ class SuperVisorController extends Controller
             else
             {
                 $data['page']   = 'supervisor Login';
-                return Redirect::back()->withErrors(['User Login is Incorectsdfsd!', 'User Login is Incorect!fdsf']);
+                return Redirect::back()->withErrors(['User Login is Incorrect!', 'User Login is Incorrect']);
             }
         }
         else
         {
             
-            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+            return Redirect::back()->withErrors(['User Login is Incorrect!', 'User Login is Incorect!']);
         }
     }
 
@@ -196,7 +196,7 @@ class SuperVisorController extends Controller
   }
   public function supervisor_assign_agent(Request $request)
   {
-      $agent_id = $request->agent_id_assign;
+      $agent_id          = $request->agent_id_assign;
       $update['team_id'] = $request->teamAssigned;
       TblAgentModel::where('agent_id',$agent_id)->update($update);
       return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
@@ -378,17 +378,17 @@ class SuperVisorController extends Controller
 	public function supervisor_add_agent(Request $request)
 	{ 
 
-        $ins['prefix'] = $request->prefix;
-        $ins['first_name'] = $request->first_name;
-        $ins['last_name'] = $request->last_name;
-    		$ins['email'] = $request->email;
-    		$ins['position'] = 'agent';
-    		$ins['team_id'] = $request->team_id;
+        $ins['prefix']        = $request->prefix;
+        $ins['first_name']    = $request->first_name;
+        $ins['last_name']     = $request->last_name;
+    		$ins['email']         = $request->email;
+    		$ins['position']      = 'agent';
+    		$ins['team_id']       = $request->team_id;
     		$ins['primary_phone'] = $request->primary;
     		$ins['secondary_phone'] = $request->secondary;
-    		$ins['other_info'] = $request->other_info;
-        $ins['date_created'] = date("Y/m/d");
-        $ins['agent_call'] = '0';
+    		$ins['other_info']    = $request->other_info;
+        $ins['date_created']  = date("Y/m/d");
+        $ins['agent_call']    = '0';
 
         $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
         if($ins['password']=='')
@@ -424,7 +424,9 @@ class SuperVisorController extends Controller
                 return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
             }
         }
+
   }
+
 
   //Eden
   public function manage_user()
@@ -474,29 +476,29 @@ class SuperVisorController extends Controller
   }
   public function update_agent(Request $request)
   {
-      $ins['prefix'] = $request->prefix;
-      $ins['first_name'] = $request->first_name;
-      $ins['last_name'] = $request->last_name;
-      $ins['password'] = $request->password;
-      $ins['email'] = $request->email;
-      $ins['position'] = 'agent';
-      $ins['team_id'] = $request->team;
+      $ins['prefix']        = $request->prefix;
+      $ins['first_name']    = $request->first_name;
+      $ins['last_name']     = $request->last_name;
+      $ins['password']      = $request->password;
+      $ins['email']         = $request->email;
+      $ins['position']      = 'agent';
+      $ins['team_id']       = $request->team;
       $ins['primary_phone'] = $request->primary_phone;
       $ins['secondary_phone'] = $request->secondary_phone;
-      $ins['other_info'] = $request->other_info;
+      $ins['other_info']    = $request->other_info;
 
-      $rules['first_name'] = 'required';
-      $rules['last_name'] = 'required';
-      $rules['password'] = 'required';
-      $rules['email'] = 'email';
-      $rules['team_id'] = 'required';
+      $rules['first_name']  = 'required';
+      $rules['last_name']   = 'required';
+      $rules['password']    = 'required';
+      $rules['email']       = 'email';
+      $rules['team_id']     = 'required';
       $rules['primary_phone'] = 'required|numeric';
       $rules['secondary_phone'] = 'required|numeric';
 
       $validator = Validator::make($ins, $rules);
 
-      $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-      $return_message = '';
+      $ins['password']  = password_hash($request->password, PASSWORD_DEFAULT);
+      $return_message   = '';
       if($validator->fails())
       {
           foreach ($validator->messages()->all('<li style=`list-style:none`>:message</li>')as $keys => $message)

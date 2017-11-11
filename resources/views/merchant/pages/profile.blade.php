@@ -186,15 +186,15 @@
                         <table class="table table-bordered" style="width: 100%; text-align: center;font-size:13px;" cellpadding="1" cellspacing="1"  border="2">
                            <thead>
                               <tr>
-                                 <th >Payment Method ID</th>
-                                 <th >Payment Method Name</th>
-                                 <th >Action</th>
+                                
+                                 <th style="text-align: center;">Payment Method Name</th>
+                                 <th style="text-align: center;">Action</th>
                               </tr>
                            </thead>
                            @foreach($_payment_method as $data)
                            <tr>
-                              <td>{{$data->payment_method_id}}</td>
-                              <td>{{$data->payment_method_name}}</td>
+                              
+                              <td >{{$data->payment_method_name}}</td>
                               <td>
                                  <button type="button" class="btn btn-danger deletePaymentss" data-id="{{$data->payment_method_id}}">
                                  <i class="fa fa-trash" aria-hidden="true"></i>Delete

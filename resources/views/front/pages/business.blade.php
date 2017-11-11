@@ -271,7 +271,7 @@
             }
             .message-textarea
             {
-                max-width: 516px;
+                max-width: 700px;
                 min-height: 237px;
             }
             .sendemail-btn-holder
@@ -304,11 +304,11 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <p class="sendemail-title">MESSAGE US</p>
                     </div>
+
                     <form role="form" action="/guest/add_messages" method="post">
 
                         {{csrf_field()}}
                     <div class="modal-body">
-                   
                         <div class="sendemail-textfield-holder">
                             <label for="input-email" class="sendemail-labels">Email:</label>
                             <input type="text" name="email" class="sendemail-textfield" required/>
@@ -334,5 +334,7 @@
     </div>
     
 </div>
+
+<script src="/assets/admin/general_admin/assets/js/general_admin_categories.js"></script>
 
 @endsection

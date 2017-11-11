@@ -314,10 +314,11 @@ class FrontController extends Controller
         }
         $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
                           ->first();
         $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$id)->get();
         $check_payment = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
@@ -385,7 +386,7 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-         $data['countyList'] = TblCountyModel::get();
+        $data['countyList'] = TblCountyModel::get();
         $data['business_info'] = DB::table('tbl_business')
         ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
         ->where('tbl_business.business_id', '=', $request->business_id)
@@ -425,7 +426,7 @@ class FrontController extends Controller
         if($check_mail)
         {
             Session::flash('success', 'Thank you!. Your Message Send Successfully!');
-            return Redirect::to('/contact');
+            // return Redirect::to('/contact');
         }
         else
         {
