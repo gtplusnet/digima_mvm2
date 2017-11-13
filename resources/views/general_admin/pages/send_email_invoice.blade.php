@@ -301,7 +301,7 @@ table[class=hide], img[class=hide], td[class=hide] {
                        <p><font color="red"> {{$remarks}}</font></p>
                       <br>
                       After you pay your membership. 
-                      Click this link : <center>http://digima_mvm.dev/merchant/payment/{{$business_id}}/{{$name}} <br>or<br> just click the UPLOAD BUTTON.</center><br>
+                      Click this link : <center>{{$link}}<br>or<br> just click the UPLOAD BUTTON.</center><br>
                       </p>
                     
                        
@@ -324,7 +324,7 @@ table[class=hide], img[class=hide], td[class=hide] {
                                   <tr>
                                     <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
                                         <tr>
-                                          <td width="250" height="60" align="center" bgcolor="#BBB929"><a href="http://digima_mvm.dev/merchant/payment/{{$business_id}}/{{$name}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: black; background:#BBB929" class="button_link">Upload Payment</a></td>
+                                          <td width="250" height="60" align="center" bgcolor="#BBB929"><a href="{{$link}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: black; background:#BBB929" class="button_link">Upload Payment</a></td>
                                         </tr>
                                       </table></td>
                                   </tr>

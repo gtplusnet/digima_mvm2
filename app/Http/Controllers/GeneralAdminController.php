@@ -385,7 +385,8 @@ class GeneralAdminController extends Controller
         $business_id = $request->resend_business_id;
         $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
         $invoice_name = $request->invoice_name_resend;
-        $data = array('name'=>$contact_name,'remarks'=>$remarks,'date'=>$date,'email'=>$email,'business_id'=>$business_id);
+        $link = "http://mvm.digimahouse.com/".$business_id."/".$contact_name;
+        $data = array('name'=>$contact_name,'remarks'=>$remarks,'date'=>$date,'email'=>$email,'business_id'=>$business_id,'link'=>$link);
                 $pathfile='invoice/'.$invoice_name;
                 $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile) {
                    $message->to($data['email'], 'Croatia Directory')->subject

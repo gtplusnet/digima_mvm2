@@ -98,7 +98,7 @@ class FrontController extends Controller
     }
     public function reset_password(Request $request)
     {
-        $data['countyList'] = TblCountyModel::get();
+        
         $data['page']   = 'Forgot Password';
         $email = $request->email;
         $phone = $request->phone;
@@ -115,20 +115,34 @@ class FrontController extends Controller
             $link = 'http://mvm.digimahouse.com/password/'.$st.'/'.$business_id;
             $data = array('name'=>$name,'email_add'=>$mail,'date'=>$date,'link'=>$link);
             $check_mail = Mail::send('front.pages.send_password_reset_link', $data, function($message) use($data) {
-             $message->to($data['email_add'], 'Croatia Team')->subject('PASSWORD RESET');
-             $message->from('guardians35836@gmail.com','Croatia Customer');
+            $message->to($data['email_add'], 'Croatia Team')->subject('PASSWORD RESET');
+            $message->from('guardians35836@gmail.com','Croatia Customer');
             });
             if($check_mail)
             {
-                TblPasswordResetModel::insert($ins);
-                Session::flash('sent', 'message');
-                return view('front.pages.forgot_password',$data);
+                $exist = TblPasswordResetModel::where('business_id',$business_id)->first();
+                if($exist)
+                {
+                    TblPasswordResetModel::where('business_id',$business_id)->update($ins);
+                    Session::flash('sent', 'message');
+                    $data['countyList'] = TblCountyModel::get();
+                    return view('front.pages.forgot_password',$data);
+                }
+                else
+                {
+                    TblPasswordResetModel::insert($ins);
+                    Session::flash('sent', 'message');
+                    $data['countyList'] = TblCountyModel::get();
+                    return view('front.pages.forgot_password',$data);
+                }
+                
             }
             
         }
         else
         {
             Session::flash('notmatch', 'message');
+            $data['countyList'] = TblCountyModel::get();
             return view('front.pages.forgot_password',$data);
         }
     }
