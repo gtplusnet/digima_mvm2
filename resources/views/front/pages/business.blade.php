@@ -2,6 +2,7 @@
 @section('title', 'Business Info')
 @section('content')
 
+
 <div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">s
     <div class="container">
         <div class="pull-left">
@@ -9,7 +10,6 @@
                 <p class="search-text">Search ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
             </div>
             <div class="businesses-info-containers">
-                {{-- <img class="business-logo" src="/images/business_logo.png"> --}}
                 <div  class="businesses-details-containers">
                     <p class="businesses-name">{{ $business_info->business_name }}</p>
                 </div>
@@ -35,8 +35,7 @@
     <div class="col-md-8 business-details-containers">
         <div class="border-line" >
             <div class="main-pic-container">
-                <!-- <img class="main-pic" src="/images/business_profilepic01.jpg"> -->
-               
+                @if($images==0)
                 <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators business-indicators">
@@ -70,6 +69,41 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                @else
+                <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators business-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="{{$_images->business_banner}}" style="height:529px;width:745px;">
+                        </div>
+                        <div class="item">
+                            <img src="{{$_images->other_image_one}}" style="height:529px;width:745px;">
+                        </div>
+                        <div class="item">
+                            <img src="{{$_images->other_image_two}}" style="height:529px;width:745px;">
+                        </div>
+                        <div class="item">
+                            <img src="{{$_images->other_image_three}}" style="height:529px;width:745px;">
+                        </div>
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control business-carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control business-carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                @endif
                 <!-- CAROUSEL SCRIPT -->
                 <script type="text/javascript">
                     // INTERVAL
