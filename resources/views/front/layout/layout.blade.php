@@ -71,7 +71,6 @@
                         </div>
                         <div class="btn-register">
                             <a href="/registration">Register</a>
-
                         </div>
                         <div class="language-selection" >
                             <div id="google_translate_element"></div>
@@ -108,7 +107,6 @@
                         <div class="searchbox-holder">
                             <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
                                 {{ csrf_field() }}
-
                                 <div class="col-md-4 searchfields-format ">
                                     <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
                                 </div>

@@ -24,6 +24,9 @@ Route::get('/category',            'SearchresultController@category');
 Route::get('/resultsortgrid',      'SearchresultController@resultsortgrid');
 Route::get('/searchtabular',       'SearchresultController@searchtabular');
 
+Route::post('/reset/password',       'FrontController@reset_password');
+Route::any('/password/{code}/{id}',       'FrontController@password_reset_link');
+Route::any('/reset/user/password',       'FrontController@reset_user_password');
 
 
 

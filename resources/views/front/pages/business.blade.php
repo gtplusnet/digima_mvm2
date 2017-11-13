@@ -144,10 +144,6 @@
                     <img class="secondary-pics-last" src="/images/arabian_nights_pic03.png">
                 </a>
             </div>
-            <!-- LIGHTBOX SCRIPT -->
-            <!-- <script>
-                lightbox.option({'resizeDuration': 200,'wrapAround': true});
-            </script> -->
             <div>
                 <div class="overview-container">
                     <p class="overview-title">OVERVIEW</p>
