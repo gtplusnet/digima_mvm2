@@ -104,9 +104,7 @@ function manage_categories()
 				        $("#cat_name_head").text(cat_name);
 				        $("#get_sub_category_result").html(data);
 				        $('#subCategory').modal('show');
-				        setTimeout(function(){
-						   location.reload();
-						}, 1000);
+				        
 			 		});
 		    	}
 	    });
@@ -217,9 +215,7 @@ function manage_categories()
 				        $("#cat_name_head").text(cat_name);
 				        $("#get_sub_category_result").html(data);
 				        $('#subCategory').modal('show');
-				        setTimeout(function(){
-						   location.reload();
-						}, 1000);
+				        
 			 		});
 		    	}	
 		});

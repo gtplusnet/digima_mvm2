@@ -140,7 +140,18 @@ class MerchantController extends Controller
 	 public function index()
 	 {	
 		Self::allow_logged_in_users_only();
-        $fb_page      = 'https://www.facebook.com/AngDiaryNgLoyal/'; 
+
+        $data['page'] = 'Dashboard';
+        $fb = TblBusinessModel::where("business_id",session('business_id'))->first();
+        if($fb->facebook_url==""||$fb->facebook_url==null)
+        {
+          $fb_page    = 'https://www.facebook.com/AngDiaryNgLoyal/';
+        }
+        else
+        {
+          $fb_page    = $fb->facebook_url;
+        }
+        
         $access_token = 'EAAD6rZBdEZBzABAFQIyH9AYydJUw1MlR7gVTCjqKLG7rVFQZBNTgFcVPE1UHfbGtCsHY12R5pdRIoDPp4i6BSy5gU9rUGZBnC3snzuj2VU7ZBZA4csIYLSGPGnovoayRhZBb3qUTKIXvkyMdH5TFWyo2IoArQ8oTj4g6sZC4l3tJ0QZDZD';
         $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
         $curl         = curl_init($url);
@@ -149,16 +160,10 @@ class MerchantController extends Controller
         $result       = curl_exec($curl);  
         curl_close($curl);
         $details      = json_decode($result,true);
-        // dd($details);
         $data['fb']   = $details['fan_count'];
         $data['page_view'] = TblReportsModel::where('business_id',session('business_id'))->first();
 
         
-
-
-
-
-        $data['page']	= 'Dashboard';
 
 		return view ('merchant.pages.dashboard', $data);	
 		
@@ -182,23 +187,50 @@ class MerchantController extends Controller
       $data['method']     = TblPaymentMethod::get();
       $data['picture']    = TblPaymentModel::get();
       $check = TblPaymentModel::where('business_id',session('business_id'))->first();
+
+
+
+
+
+
         if($check)
         {
             return Redirect::to('/merchant/redirect/exist');
         }
         else
         {
-            return view('front.pages.payment', $data);
+          $data['method'] = TblPaymentMethod::get();
+          $data['countyList'] = TblCountyModel::get();
+          $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->first();  
+
+
+
+
+            return view('front.pages.payment_merchant', $data);
         }
     }
     public function upload_payment(Request $request)
     {
-          // dd($data);
-          $file = $request->file('payment_file_name');
+        $file = $request->file('payment_file_name');
         if($file==null||$file=='')
-          {
-          echo "mag browse ka muna ng picture!!!" ; 
-          }
+        {
+          $data['payment_reference_number'] = $request->payment_reference_number;
+          $data['payment_amount']           = $request->payment_amount;
+          $data['payment_method']           = $request->payment_method;
+          $data['payment_file_name']        = 'Image Not Available';
+          $data['business_contact_person_id'] = $request->contact_id;
+          $data['business_id']              = $request->business_id;
+          $data['payment_status']           = 'submitted';
+          $check_insert = TblPaymentModel::insert($data);
+        }
     
         else
         {
