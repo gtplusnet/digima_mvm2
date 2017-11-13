@@ -20,7 +20,7 @@ use App\Models\TblBusinessImages;
 use App\Models\TblBusinessKeywordsModel;
 use App\Models\TblBusinessCategoryModel;
 use App\Models\TblBusinessSubCategoryModel;
-
+use App\Models\TblReportsModel;
 use App\Models\TblBusinessTagCategoryModel;
 
 use App\Models\TblABusinessPaymentMethodModel;
@@ -140,21 +140,24 @@ class MerchantController extends Controller
 	 public function index()
 	 {	
 		Self::allow_logged_in_users_only();
-        // $fb_page = '742953982442308'; 
+        $fb_page      = 'https://www.facebook.com/AngDiaryNgLoyal/'; 
+        $access_token = 'EAAD6rZBdEZBzABAFQIyH9AYydJUw1MlR7gVTCjqKLG7rVFQZBNTgFcVPE1UHfbGtCsHY12R5pdRIoDPp4i6BSy5gU9rUGZBnC3snzuj2VU7ZBZA4csIYLSGPGnovoayRhZBb3qUTKIXvkyMdH5TFWyo2IoArQ8oTj4g6sZC4l3tJ0QZDZD';
+        $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
+        $curl         = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result       = curl_exec($curl);  
+        curl_close($curl);
+        $details      = json_decode($result,true);
+        // dd($details);
+        $data['fb']   = $details['fan_count'];
+        $data['page_view'] = TblReportsModel::where('business_id',session('business_id'))->first();
 
-        // $access_token = 'EAAD6rZBdEZBzABAIf5b2ZC4MNedpKRM1DC7XiUaqxkDSYBqxA8s4lutvB9az0BZBd3BhLPqDOZBwqxlbsuucm11rafaEaCIMRXFtPl9cdzcyUOZCdgQiHWU8N5TxJMz9K9WOiz4pE5hA7ivLJUIy1g9rjKHvarE4pQkWqFScBwBZAu9cXUhlfvWU57xuWNqSNsZD';
+        
 
-        // $url = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
-        // $curl = curl_init($url);
-        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
-        // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        // $result = curl_exec($curl);  
-        // curl_close($curl);
-        // $details = json_decode($result,true);
 
-        // // dd($details);
-        // $data['fb'] = $details['fan_count'];
-        $data['fb']="526";
+
+
         $data['page']	= 'Dashboard';
 
 		return view ('merchant.pages.dashboard', $data);	
@@ -174,11 +177,11 @@ class MerchantController extends Controller
 
     public function payment()
     {
-        $data['page']       = 'payment';
-        $data['countyList'] = TblCountyModel::get();
-        $data['method']     = TblPaymentMethod::get();
-        $data['picture']    = TblPaymentModel::get();
-        $check = TblPaymentModel::where('business_id',session('business_id'))->first();
+      $data['page']       = 'payment';
+      $data['countyList'] = TblCountyModel::get();
+      $data['method']     = TblPaymentMethod::get();
+      $data['picture']    = TblPaymentModel::get();
+      $check = TblPaymentModel::where('business_id',session('business_id'))->first();
         if($check)
         {
             return Redirect::to('/merchant/redirect/exist');
@@ -187,17 +190,7 @@ class MerchantController extends Controller
         {
             return view('front.pages.payment', $data);
         }
-      
-        // $account_data = new TblUserAccountModel;
-        // $account_data->user_email = $request->email;
-        // $account_data->user_password = $request->password;
-        // $account_data->user_category = 'merchant';
-        // $account_data->status = 2;
-        // $account_data->business_id = $business_data->business_id;
-        // $account_data->business_contact_person_id = $contact_data->business_contact_person_id;
-        // $account_data->save();
-        // echo 'Registered successfully ! But your account is pending.';
-     }
+    }
     public function upload_payment(Request $request)
     {
           // dd($data);
@@ -247,6 +240,7 @@ class MerchantController extends Controller
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                           ->first();
+
 
     return view('front.pages.payment_merchant', $data);
   }
