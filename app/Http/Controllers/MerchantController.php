@@ -402,7 +402,6 @@ class MerchantController extends Controller
         $file1 = $request->file('other_image_one');
         $file2 = $request->file('other_image_two');
         $file3 = $request->file('other_image_three');
-
         $my_file = $request->business_banner_text;
         $my_file1 = $request->other_image_one_text;
         $my_file2 = $request->other_image_two_text;
@@ -419,7 +418,7 @@ class MerchantController extends Controller
           $destinationPath = public_path('/business_images');
           $check=$file->move($destinationPath, $filename);
         }
-        if($file1==null||$file=="")
+        if($file1==null||$file1=="")
         {
           $filename1 = $my_file1;
         }
@@ -430,7 +429,7 @@ class MerchantController extends Controller
           $destinationPath = public_path('/business_images');
           $check=$file1->move($destinationPath, $filename1);
         }
-        if($file2==null||$file=="")
+        if($file2==null||$file2=="")
         {
           $filename2 =  $my_file2;
         }
@@ -442,7 +441,7 @@ class MerchantController extends Controller
           $check=$file2->move($destinationPath, $filename2);
           
         }
-        if($file3==null||$file=="")
+        if($file3==null||$file3=="")
         {
           $filename3 = $my_file3;
         }
@@ -460,17 +459,36 @@ class MerchantController extends Controller
         $data['other_image_two'] = $filename2;
         $data['other_image_three'] = $filename3;
         // dd($data);
-        $check_insert = TblBusinessImages::where('business_id',session('business_id'))->insert($data);
-        if($check_insert)
+        $check_data = TblBusinessImages::where('business_id',session('business_id'))->count();
+        if($check_data==1)
         {
-          Session::flash('success', "success");
-          return Redirect::back();
+          $check_insert = TblBusinessImages::where('business_id',session('business_id'))->update($data);
+          if($check_insert)
+          {
+            Session::flash('success', "success");
+            return Redirect::back();
+          }
+          else
+          {   
+            Session::flash('success', "success");
+            return Redirect::back();
+          }
         }
         else
-        {   
-          Session::flash('success', "success");
-          return Redirect::back();
+        {
+          $check_insert = TblBusinessImages::where('business_id',session('business_id'))->insert($data);
+          if($check_insert)
+          {
+            Session::flash('success', "success");
+            return Redirect::back();
+          }
+          else
+          {   
+            Session::flash('success', "success");
+            return Redirect::back();
+          }
         }
+          
         
         
     }
