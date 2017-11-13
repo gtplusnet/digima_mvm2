@@ -144,16 +144,21 @@ class MerchantController extends Controller
         $data['page'] = 'Dashboard';
         $views = TblReportsModel::where('business_id',session('business_id'))->count();
         $fb = TblBusinessModel::where("business_id",session('business_id'))->first();
-        if($fb->facebook_url==""||$fb->facebook_url==null || $views==0)
+        if($fb->facebook_url==""||$fb->facebook_url==null)
         {
-          $data['page_view']  ="99999";
           $data['fb']         = "99999";
+          if($views==0)
+          {
+            $data['page_view']  ="99999";
+          }
+          else
+          {
+            $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
+            $data['page_view'] = $business_views->business_views;
+          }
         }
         else
         {
-          $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
-          $data['page_view'] = $business_views->business_views;
-
           $fb_page    = $fb->facebook_url;
           $access_token = 'EAAD6rZBdEZBzABAFQIyH9AYydJUw1MlR7gVTCjqKLG7rVFQZBNTgFcVPE1UHfbGtCsHY12R5pdRIoDPp4i6BSy5gU9rUGZBnC3snzuj2VU7ZBZA4csIYLSGPGnovoayRhZBb3qUTKIXvkyMdH5TFWyo2IoArQ8oTj4g6sZC4l3tJ0QZDZD';
           $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
@@ -164,10 +169,16 @@ class MerchantController extends Controller
           curl_close($curl);
           $details      = json_decode($result,true);
           $data['fb']   = $details['fan_count'];
-         
+          if($views==0)
+          {
+            $data['page_view']  ="99999";
+          }
+          else
+          {
+            $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
+            $data['page_view'] = $business_views->business_views;
+          }
         }
-        
-        
     return view ('merchant.pages.dashboard', $data);	
 		
 	  }
@@ -190,12 +201,6 @@ class MerchantController extends Controller
       $data['method']     = TblPaymentMethod::get();
       $data['picture']    = TblPaymentModel::get();
       $check = TblPaymentModel::where('business_id',session('business_id'))->first();
-
-
-
-
-
-
         if($check)
         {
             return Redirect::to('/merchant/redirect/exist');
@@ -213,11 +218,7 @@ class MerchantController extends Controller
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                           ->first();  
-
-
-
-
-            return view('front.pages.payment_merchant', $data);
+          return view('front.pages.payment_merchant', $data);
         }
     }
     public function upload_payment(Request $request)

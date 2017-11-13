@@ -23,7 +23,7 @@
 						</div>
 
 						<div class="col-md-12 password-textfield-container">
-							<label for="input-username" class="password-labels">Confrim New Password</label>
+							<label for="input-username" class="password-labels">Confirm New Password</label>
 							<input type="text" name="confirm_password" class="form-control password-textfields">
 							<input type="hidden" name="business_id" value="{{$business_id}}" class="">
 						</div>
@@ -50,12 +50,12 @@
 						
 	                    <div class="col-md-12 password-textfield-container">
 	                    	<div class='alert alert-danger'><strong>Failed!</strong>Password did'nt match</div>
-							<label for="input-username" class="password-labels">New PAsswordf</label>
+							<label for="input-username" class="password-labels">New PAssword</label>
 							<input type="text" name="password" class="form-control password-textfields">
 						</div>
 
 						<div class="col-md-12 password-textfield-container">
-							<label for="input-username" class="password-labels">Confrim New Password</label>
+							<label for="input-username" class="password-labels">Confirm New Password</label>
 							<input type="text" name="confirm_password" class="form-control password-textfields">
 							<input type="hidden" name="business_id" value="{{$business_id}}" class="">
 						</div>

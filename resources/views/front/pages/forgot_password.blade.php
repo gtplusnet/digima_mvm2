@@ -9,9 +9,7 @@
 			<div class="col-md-12">
 
 			<div class="col-md-12 login-form-holder">
-
-				
-				<div class="col-md-12 login-container-middle">
+			<div class="col-md-12 login-container-middle">
 					<div class="col-md-12 password-form" style="padding: 100px;">	
 						@if(Session::has('sent'))
 						<div class='alert alert-success'><strong>SUCCESS!</strong>Check your email to reset your password.</div>
@@ -19,7 +17,7 @@
 							<a href="/"><button  class="password-btn">CONTINUE</button></a>
 						</div>
 						@elseif(Session::has('notmatch'))
-						<div class='alert alert-success'><strong>Sorry!</strong>Email or Password did'nt match to any account.</div>
+						<div class='alert alert-danger'><strong>Sorry!</strong>Email or Password did'nt match to any account.</div>
 						<div class="col-md-12 password-textfield-container-lastpart">
 							<a href="/"><button  class="password-btn">CONTINUE</button></a>
 						</div>
