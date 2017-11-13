@@ -19,12 +19,12 @@
 							{{csrf_field()}}
 	                    <div class="col-md-12 password-textfield-container">
 							<label for="input-username" class="password-labels">New PAssword</label>
-							<input type="text" name="password" class="form-control password-textfields">
+							<input type="password" name="password" class="form-control password-textfields">
 						</div>
 
 						<div class="col-md-12 password-textfield-container">
 							<label for="input-username" class="password-labels">Confirm New Password</label>
-							<input type="text" name="confirm_password" class="form-control password-textfields">
+							<input type="password" name="confirm_password" class="form-control password-textfields">
 							<input type="hidden" name="business_id" value="{{$business_id}}" class="">
 						</div>
 						<div class="col-md-12 password-textfield-container-lastpart">
