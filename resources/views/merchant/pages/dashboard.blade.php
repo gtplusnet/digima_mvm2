@@ -2,7 +2,24 @@
 @section('content')
 <!-- <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" /> -->
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+{{-- <?php
 
+ $source_url = 'http://www.facebook.com/';
+
+   $url = ' http://public.newsharecounts.com/count.json?url=' . $source_url;
+
+   $ch=curl_init();
+   curl_setopt($ch, CURLOPT_URL, $url);
+   curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+   curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+   curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+   curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+   $cont = curl_exec($ch);
+   $json = json_decode($cont, true);
+   echo isset($json['count'])?intval($json['count']):0;
+
+?> --}}
 <div class="page-title">
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
@@ -19,7 +36,7 @@
          <div class="panel info-box">
             <div class="panel-body">
                <div class="info-box-stats">
-                  <p class="counter">340,230</p>
+                  <p class="counter">{{$page_view->business_views}}</p>
                   <span class="info-box-title">Page views</span>
                </div>
                <div class="info-box-icon">

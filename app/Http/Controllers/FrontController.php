@@ -25,6 +25,7 @@ use App\Models\TblBusinessCategoryModel;
 use App\Models\TblReportsModel;
 use App\Models\TblABusinessPaymentMethodModel;
 use App\Models\TblBusinessHoursmodels;
+use App\Models\TblBusinessImages;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -339,33 +340,41 @@ class FrontController extends Controller
             TblReportsModel::insert($insert);   
         }
         $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->first();
-        $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$id)->get();
-        $check_payment = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
-
-        if($check_payment)
-        {
-            $data['_payment_method']=$check_payment;
-        }
-        else
-        {
-            $data['_payment_method']="";
-        }
-        
-
+                               ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                               ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
+                               ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                               ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                               ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                               ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                               ->first();
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
-        // dd($address);
-        $data['coordinates']  = Self::getCoordinates_long($address);
-        $data['coordinates1'] = Self::getCoordinates_lat($address);       
+        $data['coordinates']   = Self::getCoordinates_long($address);
+        $data['coordinates1']  = Self::getCoordinates_lat($address); 
+
+        $images                = TblBusinessImages::where('business_id',$id)->count();
+            if($images==0)
+            {
+                $data['images']  = 0;
+            }
+            else
+            {
+                $data['images']  = 1;
+                $data['_images'] = TblBusinessImages::where('business_id',$id)->first();
+            }
+            $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$id)->get();
+            $check_payment = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
+
+            if($check_payment)
+            {
+                $data['_payment_method']=$check_payment;
+            }
+            else
+            {
+                $data['_payment_method']="";
+            }
         return view('front.pages.business', $data);
     }
-     public function add_messages(Request $request)
+    public function add_messages(Request $request)
     { 
       $data["email"]             = $request->email;
       $data["subject"]           = $request->subject;
