@@ -305,14 +305,14 @@ th
                         <table class="table table-bordered" style="width: 100%; text-align: center;font-size:13px;" cellpadding="1" cellspacing="1"  border="2">
                            <thead>
                               <tr>
-                                 <th >ID</th>
+                                
                                  <th >Payment Method Name</th>
                                  <th >Action</th>
                               </tr>
                            </thead>
                            @foreach($_payment_method as $data)
                            <tr>
-                              <td>{{$data->payment_method_id}}</td>
+                            
                               <td >{{$data->payment_method_name}}</td>
                               <td>
                                  <button type="button" class="btn btn-danger deletePaymentss" data-id="{{$data->payment_method_id}}">
