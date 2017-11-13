@@ -19,7 +19,11 @@
          <div class="panel info-box">
             <div class="panel-body">
                <div class="info-box-stats">
+                  @if($page_view=="")
+                  <p class="counter">9999999</p>
+                  @else
                   <p class="counter">{{$page_view->business_views}}</p>
+                  @endif
                   <span class="info-box-title">Page views</span>
                </div>
                <div class="info-box-icon">

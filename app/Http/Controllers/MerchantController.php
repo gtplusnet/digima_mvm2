@@ -142,6 +142,15 @@ class MerchantController extends Controller
 		Self::allow_logged_in_users_only();
 
         $data['page'] = 'Dashboard';
+        $views = TblReportsModel::where('business_id',session('business_id'))->count();
+        if($views==0)
+        {
+           $data['page_view'] ="";
+        }
+        else
+        {
+          $data['page_view'] = TblReportsModel::where('business_id',session('business_id'))->first();
+        }
         $fb = TblBusinessModel::where("business_id",session('business_id'))->first();
         if($fb->facebook_url==""||$fb->facebook_url==null)
         {
@@ -161,7 +170,8 @@ class MerchantController extends Controller
         curl_close($curl);
         $details      = json_decode($result,true);
         $data['fb']   = $details['fan_count'];
-        $data['page_view'] = TblReportsModel::where('business_id',session('business_id'))->first();
+        
+
 
         
 
