@@ -19,11 +19,9 @@
          <div class="panel info-box">
             <div class="panel-body">
                <div class="info-box-stats">
-                  @if($page_view=="")
-                  <p class="counter">9999999</p>
-                  @else
-                  <p class="counter">{{$page_view->business_views}}</p>
-                  @endif
+                  
+                  <p class="counter">{{$page_view}}</p>
+                 
                   <span class="info-box-title">Page views</span>
                </div>
                <div class="info-box-icon">
@@ -48,7 +46,7 @@
                </div>
                <div class="info-box-stats">
                   <p class="counter">{{$fb}}</p>
-                  <span class="info-box-title">Page Likes</span>
+                  <span class="info-box-title">Facebook Page Likes</span>
                </div>
                <div class="info-box-progress">
                   <div class="progress progress-xs progress-squared bs-n">

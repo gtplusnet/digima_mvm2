@@ -323,11 +323,6 @@
                 border-radius: 3px;
                 /*box-shadow: 0 9px #999;*/
             }
-            /*.sendemail-send-btn:active
-            {
-                box-shadow: 0 5px #666;
-                transform: translateY(4px);
-            }*/
         </style>
         <!-- MODAL -->
         <div class="modal fade" id="myModal" role="dialog">

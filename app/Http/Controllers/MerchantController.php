@@ -143,39 +143,32 @@ class MerchantController extends Controller
 
         $data['page'] = 'Dashboard';
         $views = TblReportsModel::where('business_id',session('business_id'))->count();
-        if($views==0)
-        {
-           $data['page_view'] ="";
-        }
-        else
-        {
-          $data['page_view'] = TblReportsModel::where('business_id',session('business_id'))->first();
-        }
         $fb = TblBusinessModel::where("business_id",session('business_id'))->first();
-        if($fb->facebook_url==""||$fb->facebook_url==null)
+        if($fb->facebook_url==""||$fb->facebook_url==null || $views==0)
         {
-          $fb_page    = 'https://www.facebook.com/AngDiaryNgLoyal/';
+          $data['page_view']  ="99999";
+          $data['fb']         = "99999";
         }
         else
         {
+          $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
+          $data['page_view'] = $business_views->business_views;
+
           $fb_page    = $fb->facebook_url;
+          $access_token = 'EAAD6rZBdEZBzABAFQIyH9AYydJUw1MlR7gVTCjqKLG7rVFQZBNTgFcVPE1UHfbGtCsHY12R5pdRIoDPp4i6BSy5gU9rUGZBnC3snzuj2VU7ZBZA4csIYLSGPGnovoayRhZBb3qUTKIXvkyMdH5TFWyo2IoArQ8oTj4g6sZC4l3tJ0QZDZD';
+          $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
+          $curl         = curl_init($url);
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
+          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+          $result       = curl_exec($curl);  
+          curl_close($curl);
+          $details      = json_decode($result,true);
+          $data['fb']   = $details['fan_count'];
+         
         }
         
-        $access_token = 'EAAD6rZBdEZBzABAFQIyH9AYydJUw1MlR7gVTCjqKLG7rVFQZBNTgFcVPE1UHfbGtCsHY12R5pdRIoDPp4i6BSy5gU9rUGZBnC3snzuj2VU7ZBZA4csIYLSGPGnovoayRhZBb3qUTKIXvkyMdH5TFWyo2IoArQ8oTj4g6sZC4l3tJ0QZDZD';
-        $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
-        $curl         = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $result       = curl_exec($curl);  
-        curl_close($curl);
-        $details      = json_decode($result,true);
-        $data['fb']   = $details['fan_count'];
         
-
-
-        
-
-		return view ('merchant.pages.dashboard', $data);	
+    return view ('merchant.pages.dashboard', $data);	
 		
 	  }
     public function merchant_redirect()

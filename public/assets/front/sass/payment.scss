@@ -17,19 +17,21 @@
 }
 .payment-title-container
 {
-	background-color: #333;
+    background-color: #fff;
 	padding: 10px 20px;
 }
 .payment-title
 {
 	margin: 0px;
-    color: #fed600;
+    color: #727272;
     font-size: 20px;
+    font-weight: bold;
+    font-family:"Quicksand",sans-serif;
 }
 .payment-form-container
 {
 	padding: 10px 20px;
-	border: 1px solid #999;
+	border: 1px solid #eaeaea;
 }
 .payment-form-upperpart
 {
@@ -128,7 +130,7 @@
 .payment-form-seperator
 {
 	padding: 0px;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #eaeaea;
 }
 .payment-btn-container
 {

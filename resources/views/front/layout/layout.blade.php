@@ -121,7 +121,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 searchfields-format ">
-                                    <input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode">
+                                    <input class="zipcode-textbox" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
                                 </div>
                                 <div class="col-md-2 searchfields-format ">
                                     <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
