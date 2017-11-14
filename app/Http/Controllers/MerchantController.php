@@ -116,7 +116,6 @@ class MerchantController extends Controller
                      $data['page']   = 'Merchant Login';
                      return Redirect::to('/redirect');
                    }
-                    
                 }
             else
             {
@@ -271,26 +270,24 @@ class MerchantController extends Controller
             }
         }
     }
-  public function payment_merchant(Request $request,$id)
-  {
-    $data['method'] = TblPaymentMethod::get();
-    $data['countyList'] = TblCountyModel::get();
-    $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
-                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->first();
-
-
+    public function payment_merchant(Request $request,$id)
+    {
+      $data['method'] = TblPaymentMethod::get();
+      $data['countyList'] = TblCountyModel::get();
+      $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
+                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                            ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                            ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                            ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                            ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                            ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                            ->first();
     return view('front.pages.payment_merchant', $data);
-  }
+    }
 
 
-	 public function profile()
+	  public function profile()
     {
       Self::allow_logged_in_users_only();
       $data['page']             = 'Profile';
@@ -613,23 +610,23 @@ class MerchantController extends Controller
         return view ('merchant.pages.sample1',$data);
     }
 
-    function getCoordinates_long($address){
-    $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
-    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
-    $response = file_get_contents($url);
-    $json = json_decode($response,TRUE); //generate array object from the response from the web
+    // function getCoordinates_long($address){
+    // $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+    // $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+    // $response = file_get_contents($url);
+    // $json = json_decode($response,TRUE); //generate array object from the response from the web
+    // // $lat = $json['results'][0]['geometry']['location']['lat'];
+    // $long = $json['results'][0]['geometry']['location']['lng'];
+    // return $long;
+    // }
+    // function getCoordinates_lat($address){
+    // $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+    // $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+    // $response = file_get_contents($url);
+    // $json = json_decode($response,TRUE); //generate array object from the response from the web
     // $lat = $json['results'][0]['geometry']['location']['lat'];
-    $long = $json['results'][0]['geometry']['location']['lng'];
-    return $long;
-    }
-    function getCoordinates_lat($address){
-    $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
-    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
-    $response = file_get_contents($url);
-    $json = json_decode($response,TRUE); //generate array object from the response from the web
-    $lat = $json['results'][0]['geometry']['location']['lat'];
-    return $lat;
-    }
+    // return $lat;
+    // }
 
 }
   

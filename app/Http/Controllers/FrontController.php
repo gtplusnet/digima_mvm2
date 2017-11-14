@@ -80,8 +80,6 @@ class FrontController extends Controller
         return view('front.pages.home',$data);
 
     }
-
-
     public function registration()
     {
 
@@ -91,10 +89,6 @@ class FrontController extends Controller
         $data['countyList'] = Tbl_county::get();
         return view('front.pages.registration', $data);
     }
-    
-    
-  
-    
     public function get_sub_category(Request $request)
     {
         
@@ -139,10 +133,6 @@ class FrontController extends Controller
         $data['_filtered'] = $cat;
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_membership']        = TblMembeshipModel::get();
-        // $data["_business_list"]     = TblBusinessModel:: where('business_status',5)
-        //                             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-        //                             ->orderBy('tbl_business.membership',"ASC")
-        //                             ->paginate(9);
         $data["_business_list"]     = TblBusinessTagCategoryModel::where('business_category_id',$request->parent_id)
                                     ->join('tbl_business','tbl_business.business_id','=','tbl_business_tag_category.business_id')
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -272,8 +262,6 @@ class FrontController extends Controller
         }
 
 	}
-    
-
     public function businessSearch(Request $request)
     {
         return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown&cityOrpostalCode=$request->postalCode");
@@ -289,18 +277,18 @@ class FrontController extends Controller
         {
             $data['_check']=$checks;
             $data['_businessResult'] = TblBusinessModel::where('tbl_business.county_id',$countyID)
-                                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                                    ->join('tbl_business_tag_category','tbl_business_tag_category.business_id','=','tbl_business.business_id')
-                                                    ->join('tbl_business_tag_keywords','tbl_business_tag_keywords.business_id','=','tbl_business.business_id')
-                                                    ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
-                                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
-                                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
-                                                    ->orWhere('tbl_business_tag_keywords.keywords_name', 'like', '%'.$businessKeyword.'%')
-                                                    ->orWhere('tbl_business_category.business_category_name', 'like', '%'.$businessKeyword.'%')
-                                                    ->orWhere('tbl_city.postal_code', $postalCode)
-                                                    ->orWhere('tbl_city.city_name', $postalCode)
-                                                    ->groupBy('tbl_business.business_id')
-                                                    ->paginate(9);  
+                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                    ->join('tbl_business_tag_category','tbl_business_tag_category.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_business_tag_keywords','tbl_business_tag_keywords.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
+                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
+                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
+                                    ->orWhere('tbl_business_tag_keywords.keywords_name', 'like', '%'.$businessKeyword.'%')
+                                    ->orWhere('tbl_business_category.business_category_name', 'like', '%'.$businessKeyword.'%')
+                                    ->orWhere('tbl_city.postal_code', $postalCode)
+                                    ->orWhere('tbl_city.city_name', $postalCode)
+                                    ->groupBy('tbl_business.business_id')
+                                    ->paginate(9);  
         }
         else
         {
@@ -478,17 +466,6 @@ class FrontController extends Controller
             return Redirect::to('/contact');
         }
     }
-
- 
-    // public function business(Request $request)
-    // {
-    //     $data['page']   = 'business';
-    //     $data['business_info'] = DB::table('tbl_business')
-    //     ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
-    //     ->where('tbl_business.business_id', '=', $request->business_id)
-    //     ->get();
-    //     return view('front.pages.business', $data);
-    // }
 
     public function admin()
     {

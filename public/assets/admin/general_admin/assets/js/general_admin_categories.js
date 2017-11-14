@@ -59,9 +59,7 @@ function manage_categories()
 				$('#showHere3').html(data);
 				$('#showHere3').show();
 				$('#ajax-loader').hide();
-				setTimeout(function(){
-					   location.reload();
-					}, 1000);
+				
 		    });
 	    });
 	}
