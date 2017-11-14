@@ -23,7 +23,7 @@
 									<input type="password" name="confirm_password" class="form-control password-textfields">
 									<input type="hidden" name="business_id" value="{{$business_id}}" class="">
 									<input type="hidden" name="password_code" value="{{$password_code}}" class="">
-									
+									<input type="hidden" name="position" value="{{$position}}" class="">
 									
 								</div>
 								<div class="col-md-12 password-textfield-container-lastpart">

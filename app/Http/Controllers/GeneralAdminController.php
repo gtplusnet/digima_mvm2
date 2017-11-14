@@ -336,9 +336,8 @@ class GeneralAdminController extends Controller
                 $email_name = $data['invoice_info']->contact_first_name; 
                 $email_email = $data['invoice_info']->user_email;
                 $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
-                $data = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name,'remarks'=>'Please Pay As Soon As Possible.');
-                
-                // $data = array('name'=>'james_ako','date'=>'james','email'=>'guardians35836@gmail.com','business_id'=>$business_id,'remarks'=>'Please Pay As Soon As Possible.');
+                $link = "http://mvm.digimahouse.com/".$business_id."/".$email_name;
+                $data = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name,'remarks'=>'Please Pay As Soon As Possible.','link'=>$link);
                 $pathfile='invoice/'.$file_name;
                 $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile)
                  {

@@ -20,6 +20,7 @@
                     <li>        
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
                     </li>
+
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                             <i class="fa fa-cogs"></i>
@@ -67,6 +68,7 @@
                                             <input type="checkbox" class="js-switch pull-right hover-menu-check">
                                         </div>
                                     </li>
+                                   
                                 </ul>
                             </li>
                             <li class="li-group">
@@ -95,10 +97,13 @@
                                 </ul>
                             </li>
                             <li class="no-link"><button class="btn btn-default reset-options">Reset Options</button></li>
+                            
                         </ul>
                     </li>
+                    
                 </ul>
-                <ul class="nav navbar-nav navbar-right">                               
+                <ul class="nav navbar-nav navbar-right">   
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-success pull-right">3</span></a>
                         <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
@@ -143,8 +148,9 @@
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
                             <li role="presentation"><a href="/merchant/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                           
                         </ul>
-                      <li>
+                    <li>
                     @if(session("merchant_login") == true)
                     <a style="font-size:15px",  href='/merchant/logout'>
                     <span><i class="fa fa-sign-out m-r-xs"></i>Log out
@@ -159,9 +165,45 @@
                     </a>             
                     @endif 
                     </li>
+                    {{-- <li class="no-link">
+                        <div class="margins" id="google_translate_element"></div>
+                    </li>
+                    <style>
+                    .goog-logo-link
+                    {
+                    visibility:hidden;
+                    margin-right:-20px;
+                    content:"james";
+                    }
+                    .goog-logo-link::after
+                    {
+                    content:"james";
+                    }
+                    .goog-te-combo
+                    {
+                    width:140px;
+                    margin-top:100px;
+                    height:30px;
+                    }
+                    
+                    #targetLanguage
+                    {
+                        color:white;
+                    }
+                    .margins
+                    {
+                        margin-top: 10px;
+                    }
+                    </style> --}}
 
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

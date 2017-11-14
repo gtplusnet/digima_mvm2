@@ -39,7 +39,7 @@ Route::any('/reset/user/password',      'PasswordController@reset_user_password'
 
 Route::any('/forgot_password_user',       					'PasswordController@forgot_password_user');
 Route::any('/forgot_password_user/reset_password',       	'PasswordController@forgot_password_user_reset_password');
-Route::any('/forgot_password_user/reset_link/{code}/{id}',       		'PasswordController@forgot_password_user_reset_link');
+Route::any('/forgot_password_user/reset_link/{code}/{id}/{post}',       		'PasswordController@forgot_password_user_reset_link');
 Route::any('/forgot_password_user/submit_reset_password',   'PasswordController@forgot_password_user_submit_reset_password');
 
 

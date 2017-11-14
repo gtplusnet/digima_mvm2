@@ -35,8 +35,7 @@ class PasswordController extends Controller
             $str = $email.$phone.date('Y-m-d');
             $ins['password_code'] = $st = md5($str);
             $ins['business_id'] = $id =  $check->agent_id;
-            // dd($st);
-            $link = 'http://mvm.digimahouse.com/forgot_password_user/reset_link/'.$st.'/'.$id;
+            $link = 'http://mvm.digimahouse.com/forgot_password_user/reset_link/'.$st.'/'.$id.'/'.$check->position;
             $data = array('name'=>'user','email'=>'jamesomosora@gmail.com','date'=>$date,'link'=>$link);
             $check_mail = Mail::send('front.pages.send_password_reset_link', $data, function($message) use($data) {
             $message->to($data['email'], 'Croatia Team')->subject('PASSWORD RESET');
@@ -50,14 +49,14 @@ class PasswordController extends Controller
                     TblPasswordResetModel::where('password_code',$st)->update($ins);
                     Session::flash('sent', 'message');
                     $data['countyList'] = TblCountyModel::get();
-                    return view('front.pages.forgot_password',$data);
+                    return view('password_blade.forgot_user_password',$data);
                 }
                 else
                 {
                     TblPasswordResetModel::insert($ins);
                     Session::flash('sent', 'message');
                     $data['countyList'] = TblCountyModel::get();
-                    return view('front.pages.forgot_password',$data);
+                    return view('password_blade.forgot_user_password',$data);
                 }
             }
             
@@ -69,11 +68,13 @@ class PasswordController extends Controller
             return view('password_blade.forgot_user_password',$data);
         }
     }
-    public function forgot_password_user_reset_link(Request $request,$code,$id)
+    public function forgot_password_user_reset_link(Request $request,$code,$id,$post)
     {
         $check = TblPasswordResetModel::where('business_id',$id)->where('password_code',$code)->first();
         $data['business_id']    = $id;
         $data['password_code']  = $code;
+        $data['position']       = $post;
+        // dd($data);
         $data['countyList']     = TblCountyModel::get();
         if($check)
         {
@@ -93,23 +94,63 @@ class PasswordController extends Controller
         $confirm_password = $request->confirm_password;
         $business_id = $request->business_id;
         $password_code = $request->password_code;
+        $position = $request->position;
         $data['business_id']    = $business_id;
         
         // dd($business_id);
-
-        if($password==$confirm_password)
+        if($position=='agent')
         {
-            $update['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-            TblAgentModel::where('agent_id',$business_id)->update($update);
-            TblPasswordResetModel::where('password_code',$password_code)->delete();
-            Session::flash('success', 'message');
-            return view('password_blade.forgot_user_password_change',$data);
+            if($password==$confirm_password)
+            {
+                $update['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+                TblAgentModel::where('agent_id',$business_id)->update($update);
+                TblPasswordResetModel::where('password_code',$password_code)->delete();
+                Session::flash('success', 'message');
+                return view('password_blade.forgot_user_password_change',$data);
+            }
+            else
+            {
+                Session::flash('error', 'message');
+                return view('password_blade.forgot_user_password_change',$data);
+            }  
+        }
+        elseif($position=='supervisor')
+        {
+            if($password==$confirm_password)
+            {
+                $update['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+                TblSupervisorModel::where('supervisor_id',$business_id)->update($update);
+                TblPasswordResetModel::where('password_code',$password_code)->delete();
+                Session::flash('success', 'message');
+                return view('password_blade.forgot_user_password_change',$data);
+            }
+            else
+            {
+                Session::flash('error', 'message');
+                return view('password_blade.forgot_user_password_change',$data);
+            }  
+        }
+        elseif($position=='gm')
+        {
+            if($password==$confirm_password)
+            {
+                $update['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+                TblAdminModel::where('admin_id',$business_id)->update($update);
+                TblPasswordResetModel::where('password_code',$password_code)->delete();
+                Session::flash('success', 'message');
+                return view('password_blade.forgot_user_password_change',$data);
+            }
+            else
+            {
+                Session::flash('error', 'message');
+                return view('password_blade.forgot_user_password_change',$data);
+            }  
         }
         else
         {
-            Session::flash('error', 'message');
-            return view('password_blade.forgot_user_password_change',$data);
+            return "link expired";
         }
+        
     }
 
 

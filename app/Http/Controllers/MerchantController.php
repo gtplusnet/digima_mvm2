@@ -234,6 +234,14 @@ class MerchantController extends Controller
           $data['business_id']              = $request->business_id;
           $data['payment_status']           = 'submitted';
           $check_insert = TblPaymentModel::insert($data);
+          if($check_insert)
+          {
+            return Redirect::to('/merchant/redirect/exist');
+          }
+           else
+          {
+            echo "Failed to Upload";
+          }
         }
     
         else
@@ -252,16 +260,16 @@ class MerchantController extends Controller
               $data['business_id']              = $request->business_id;
               $data['payment_status']           = 'submitted';
               $check_insert = TblPaymentModel::insert($data);
-          if($check_insert)
-            {
-              return Redirect::to('/merchant/redirect/exist');
+            if($check_insert)
+              {
+                return Redirect::to('/merchant/redirect/exist');
+              }
+               else
+              {
+                echo "Failed to Upload";
+              }
             }
-             else
-            {
-          echo "mali ka";
         }
-       }
-      }
     }
   public function payment_merchant(Request $request,$id)
   {
