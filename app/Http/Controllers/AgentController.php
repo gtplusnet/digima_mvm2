@@ -59,13 +59,39 @@ class AgentController extends Controller
 	public function dashboard()
     {
     	$data['page']	           = 'Dashboard';
-         $count_merchant_signup    = TblBusinessModel::get();
-    	 $count_merchant_signup    = TblBusinessModel::where('business_status',1)->get();
-         $count_merchant_pending   = TblBusinessModel::where('business_status',2)->get();
-         $count_merchant_activated = TblBusinessModel::where('business_status',3)->get();
-         $data['countSignup']      = $count_merchant_signup->count();
-         $data['countPending']     = $count_merchant_pending->count();
-         $data['countActivated']   = $count_merchant_activated->count();
+        $count_merchant_signup    = TblBusinessModel::get();
+    	$count_merchant_signup    = TblBusinessModel::where('business_status',1)->get();
+        $count_merchant_pending   = TblBusinessModel::where('business_status',2)->get();
+        $count_merchant_activated = TblBusinessModel::where('business_status',3)->get();
+        $data['countSignup']      = $count_merchant_signup->count();
+        $data['countPending']     = $count_merchant_pending->count();
+        $data['countActivated']   = $count_merchant_activated->count();
+
+
+        $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
+	    $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
+	    $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
+	    $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
+	    $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
+	    $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
+	    $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+	    $data['mon'] = TblBusinessModel::where('date_created',$mon)->count();
+	    $data['tue'] = TblBusinessModel::where('date_created',$tue)->count();
+	    $data['wed'] = TblBusinessModel::where('date_created',$wed)->count();
+	    $data['thu'] = TblBusinessModel::where('date_created',$thu)->count();
+	    $data['fri'] = TblBusinessModel::where('date_created',$fri)->count();
+	    $data['sat'] = TblBusinessModel::where('date_created',$sat)->count();
+	    $data['sun'] = TblBusinessModel::where('date_created',$sun)->count();
+
+	    $data['amon'] = TblBusinessModel::where('date_transact',$mon)->where('business_status',5)->count();
+	    $data['atue'] = TblBusinessModel::where('date_transact',$tue)->where('business_status',5)->count();
+	    $data['awed'] = TblBusinessModel::where('date_transact',$wed)->where('business_status',5)->count();
+	    $data['athu'] = TblBusinessModel::where('date_transact',$thu)->where('business_status',5)->count();
+	    $data['afri'] = TblBusinessModel::where('date_transact',$fri)->where('business_status',5)->count();
+	    $data['asat'] = TblBusinessModel::where('date_transact',$sat)->where('business_status',5)->count();
+	    $data['asun'] = TblBusinessModel::where('date_transact',$sun)->where('business_status',5)->count();
+
+
     
 		return view ('agent.pages.dashboard', $data);	
     }

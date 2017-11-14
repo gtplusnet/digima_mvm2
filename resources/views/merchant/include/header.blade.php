@@ -165,45 +165,9 @@
                     </a>             
                     @endif 
                     </li>
-                    {{-- <li class="no-link">
-                        <div class="margins" id="google_translate_element"></div>
-                    </li>
-                    <style>
-                    .goog-logo-link
-                    {
-                    visibility:hidden;
-                    margin-right:-20px;
-                    content:"james";
-                    }
-                    .goog-logo-link::after
-                    {
-                    content:"james";
-                    }
-                    .goog-te-combo
-                    {
-                    width:140px;
-                    margin-top:100px;
-                    height:30px;
-                    }
                     
-                    #targetLanguage
-                    {
-                        color:white;
-                    }
-                    .margins
-                    {
-                        margin-top: 10px;
-                    }
-                    </style> --}}
-
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->
         </div>
     </div>
 </div>
-<script type="text/javascript">
-function googleTranslateElementInit() {
-new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

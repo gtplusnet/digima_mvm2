@@ -73,7 +73,7 @@
                             <a href="/registration">Register</a>
                         </div>
                         <div class="language-selection" >
-                            
+                            <div id="google_translate_element"></div>
                             <style>
                             .goog-logo-link
                             {
@@ -89,7 +89,6 @@
                             .skiptranslate
                             {
                             margin-right: -130px;
-                            
                             }
                             </style>
                             
