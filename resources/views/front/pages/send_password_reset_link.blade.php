@@ -285,8 +285,12 @@ table[class=hide], img[class=hide], td[class=hide] {
                   <tr>
                     <td align="left" style="padding:0px 40px 40px 40px"><p style="color:#5b5f65; font-size:15px; text-align:left; font-family: Verdana, Geneva, sans-serif">
                     
-                     </p>
-                     <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"> <br/>Business Name: {{$name}}<br><br>
+                      </p>
+                      @if($name=='user')
+                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"> <br/>hi, {{$email}}<br><br>
+                      @else
+                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"> <br/>Business Name: {{$name}}<br><br>
+                      @endif
                       <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"><br/>YOUR PASSWORD RESET LINK : {{$link}}<br/>
                       <!-- START BUTTON -->
                       

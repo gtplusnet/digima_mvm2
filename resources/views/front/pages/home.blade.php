@@ -29,10 +29,12 @@ width:100%;
 		</div>
 	</div>
 </div>
+
 <div class="business-list-container" id="show_list_filtered_category">
 	<div class="container">
 		<div class="col-md-3">
 			<div class="col-md-12" >
+				<a href="http://twitcount.com/btn" class="twitcount-button" data-count="vertical" data-size="" data-url="" data-text="" data-related="" data-hashtag="" data-via="iAmJames_35836">TwitCount Button</a><script type="text/javascript" src="https://static1.twitcount.com/js/button.js"></script>
 				
 				<div class="category-filter-holder" >
 					
