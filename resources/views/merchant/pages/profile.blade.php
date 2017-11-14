@@ -193,7 +193,7 @@ th
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_one" name="other_image_one">
-                                     <input type="hidden" name="other_image_one_text" value="{{$_images->business_banner}}">
+                                     <input type="hidden" name="other_image_one_text" value="{{$_images->other_image_one}}">
                                  </div>
                               </div>
                               <div class="col-md-12 file-margin">
@@ -202,7 +202,7 @@ th
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_two" name="other_image_two">
-                                     <input type="hidden" name="other_image_two_text" value="{{$_images->business_banner}}">
+                                     <input type="hidden" name="other_image_two_text" value="{{$_images->other_image_two}}">
                                  </div>
                               </div>
                               <div class="col-md-12 file-margin">
@@ -211,7 +211,7 @@ th
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_three" name="other_image_three">
-                                     <input type="hidden" name="other_image_three_text" value="{{$_images->business_banner}}">
+                                     <input type="hidden" name="other_image_three_text" value="{{$_images->other_image_three}}">
                                  </div>
                                  <br><br><br>
                               </div>
