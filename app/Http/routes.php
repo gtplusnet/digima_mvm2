@@ -151,7 +151,7 @@ Route::any('/supervisor/show_team_calls', 			'SuperVisorController@supervisor_sh
 
 /*Routes for Agent*/
 Route::any('/agent',          						'AgentController@login');
-Route::get('/agent/dashboard', 						'AgentController@index');
+Route::get('/agent/dashboard', 						'AgentController@dashboard');
 Route::post('/agent_login', 	    				'AgentController@agent_login');
 Route::get('/agent/profile', 						'AgentController@profile');
 Route::get('/agent/client', 						'AgentController@client');

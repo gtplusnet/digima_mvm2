@@ -24,15 +24,15 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered / Sign up</p>
+                                <p class="category">Registered / Activated -Per Week</p>
                             </div>
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                <div id="chartPreferencesPerWeek" class="ct-chart ct-perfect-fourth"></div>
 
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Sign Up Merchant
                                         <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                        <i class="fa fa-circle text-info"></i> Activated Merchant
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -49,14 +49,14 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Quantity Registered</p>
+                                <p class="category">Registered / Activated -Per Day</p>
                             </div>
                             <div class="content">
-                                <div id="chartActivity1" class="ct-chart"></div>
+                                <div id="chartActivityPerDay" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Date
-                                        <i class="fa fa-circle text-danger"></i> Quantity Registered
+                                        <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                        <i class="fa fa-circle text-info"></i> Activated Merchant
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -73,15 +73,15 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered / Sign up</p>
+                                <p class="category">Registered / Activated -Per Year</p>
                             </div>
                             <div class="content">
-                                <div id="chartPreferences1" class="ct-chart ct-perfect-fourth"></div>
+                                <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
 
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Sign Up Merchant
                                         <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                        <i class="fa fa-circle text-info"></i> Activated Merchant
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -98,14 +98,14 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Quantity Registered</p>
+                                <p class="category">Registered / Activated -Per Month</p>
                             </div>
                             <div class="content">
-                                <div id="chartHours2" class="ct-chart"></div>
+                                <div id="chartActivityPerMonth" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Date
-                                        <i class="fa fa-circle text-danger"></i> Quantity Registered
+                                        <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                        <i class="fa fa-circle text-info"></i> Activated Merchant
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -122,7 +122,6 @@
 </div>
 <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="/assets/agent/assets1/js/chartist.min.js"></script>
-{{-- <script src="/assets/agent/assets1/js/demo.js"></script> --}}
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -135,32 +134,25 @@ $(document).ready(function()
 function initChartist()
 {    
         
-        var dataSales = {
-          labels: ['Monf', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+        var data1 = {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           series: [
-             [50, 285, 250, 352, 304, 480, 698,],
-             [150, 22, 133, 200, 87, 350, 35,],
-         
+            [450, 303, 220, 350, 350, 453, 326, 220, 350, 350, 453, 326],
+            [152, 180, 280, 300, 280, 353, 300, 220, 350, 350, 453, 326]
           ]
         };
-        var optionsSales = {
-          lineSmooth: true,
-          low: 0,
-          high: 1000,
-          showArea: true,
-          height: "245px",
-          axisX: {
-            showGrid: false,
-          },
-          lineSmooth: Chartist.Interpolation.simple({
-            divisor: 3
-          }),
-          showLine: false,
-          showPoint: false,
+        
+        var options1 = {
+            seriesBarDistance: 10,
+            axisX: {
+                showGrid: false
+            },
+            height: "230px"
         };
         
-        var responsiveSales = [
+        var responsiveOptions1 = [
           ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
             axisX: {
               labelInterpolationFnc: function (value) {
                 return value[0];
@@ -168,14 +160,14 @@ function initChartist()
             }
           }]
         ];
-    
-        Chartist.Line('#chartHours2', dataSales, optionsSales, responsiveSales);
+        
+        Chartist.Bar('#chartActivityPerMonth', data1, options1, responsiveOptions1);
         
         var data = {
-          labels: ['Monf', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
           series: [
-            [450, 303, 220, 350, 350, 453, 326],
-            [152, 180, 280, 300, 280, 353, 300]
+            [{{$mon}}, {{$tue}}, {{$wed}}, {{$thu}}, {{$fri}}, {{$sat}}, {{$sun}}],
+            [{{$mona}}, {{$tuea}}, {{$weda}}, {{$thua}}, {{$fria}}, {{$sata}}, {{$suna}}],
           ]
         };
         
@@ -198,15 +190,15 @@ function initChartist()
           }]
         ];
         
-        Chartist.Bar('#chartActivity1', data, options, responsiveOptions);
+        Chartist.Bar('#chartActivityPerDay', data, options, responsiveOptions);
     
         
         
-        Chartist.Pie('#chartPreferences', {
-          labels: ['80%','20%'],
-          series: [80, 20 ]
+        Chartist.Pie('#chartPreferencesPerWeek', {
+          labels: ['{{$total_c}}%','{{$total_r}}%'],
+          series: [{{$total_c}}, {{$total_r}} ]
         });  
-        Chartist.Pie('#chartPreferences1', {
+        Chartist.Pie('#chartPreferencesPerYear', {
           labels: ['80%','20%'],
           series: [80, 20 ]
         });   

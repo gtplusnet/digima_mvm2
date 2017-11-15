@@ -67,13 +67,16 @@ class FrontController extends Controller
         $data['countyList']         = TblCountyModel::get();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();
-        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)
+        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_business.membership','ASC')
                                     ->paginate(9);
-        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
+        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5) 
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_reports.business_views','ASC')
                                     ->limit(4)
                                     ->get();
@@ -133,8 +136,9 @@ class FrontController extends Controller
         $data['_filtered'] = $cat;
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_membership']        = TblMembeshipModel::get();
-        $data["_business_list"]     = TblBusinessTagCategoryModel::where('business_category_id',$request->parent_id)
+        $data["_business_list"]     = TblBusinessTagCategoryModel::where('business_category_id',$request->parent_id)->where('business_status',5)
                                     ->join('tbl_business','tbl_business.business_id','=','tbl_business_tag_category.business_id')
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_business.membership',"ASC")
                                     ->paginate(9);
@@ -143,12 +147,15 @@ class FrontController extends Controller
 
         $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_reports.business_views','ASC')
                                     ->limit(4)
                                     ->get();
+                                    // dd($data['_most_viewed']);
         
         return view("front.pages.show_list",$data);
 
@@ -273,27 +280,23 @@ class FrontController extends Controller
         $data['countyID'] = $countyID = $request->countyId;
         $data['postal_code'] = $postalCode = $request->cityOrpostalCode;
         $checks = TblBusinessModel::where('county_id',$countyID)->count();
-        if($checks != 0)
+        if($postalCode=="")
         {
-            $data['_check']=$checks;
-            $data['_businessResult'] = TblBusinessModel::where('tbl_business.county_id',$countyID)
-                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                    ->join('tbl_business_tag_category','tbl_business_tag_category.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_business_tag_keywords','tbl_business_tag_keywords.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
-                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
-                                    ->orWhere('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')
-                                    ->orWhere('tbl_business_tag_keywords.keywords_name', 'like', '%'.$businessKeyword.'%')
-                                    ->orWhere('tbl_business_category.business_category_name', 'like', '%'.$businessKeyword.'%')
-                                    ->orWhere('tbl_city.postal_code', $postalCode)
-                                    ->orWhere('tbl_city.city_name', $postalCode)
+            
+            $data['_businessResult'] = TblBusinessModel::where('tbl_business.county_id',$countyID)->Business($businessKeyword)
                                     ->groupBy('tbl_business.business_id')
+                                    ->orderBy('tbl_business.membership','DESC')
                                     ->paginate(9);  
         }
         else
         {
-            $data['_check']=$checks;
+            
+            $data['_businessResult'] = TblBusinessModel::where('tbl_business.county_id',$countyID)->Businesses($businessKeyword,$postalCode)
+                                    ->groupBy('tbl_business.business_id')
+                                    ->orderBy('tbl_business.membership','DESC')
+                                    ->paginate(9);  
         }
+        $data['_check']             = $checks;
         $data['countyList']         = TblCountyModel::get();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();
@@ -301,13 +304,16 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.membership','ASC')
                                     ->paginate(9);
         $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_reports.business_views','ASC')
                                     ->limit(4)
                                     ->get();
         return view('front.pages.searchresult',$data); 
+        
     }
 
     public function business_details(Request $request)
@@ -343,12 +349,17 @@ class FrontController extends Controller
                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                                ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                               ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                ->first();
-        $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
-        $data['coordinates']   = Self::getCoordinates_long($address);
-        $data['coordinates1']  = Self::getCoordinates_lat($address); 
 
-        $images                = TblBusinessImages::where('business_id',$id)->count();
+        $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
+        $data['coordinates']    = Self::getCoordinates_long($address);
+        $data['coordinates1']   = Self::getCoordinates_lat($address); 
+
+        $data['_tag_category']  = TblBusinessTagCategoryModel::where('business_id',$id)
+                                ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
+                                ->get();
+        $images                 = TblBusinessImages::where('business_id',$id)->count();
             if($images==0)
             {
                 $data['images']  = 0;

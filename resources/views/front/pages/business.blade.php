@@ -35,7 +35,7 @@
     <div class="col-md-8 business-details-containers">
         <div class="border-line" >
             <div class="main-pic-container">
-                @if($images==0)
+                {{-- @if($images==0)
                 <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators business-indicators">
@@ -69,7 +69,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                @else
+                @else --}}
                 <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators business-indicators">
@@ -81,16 +81,16 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="{{$_images->business_banner}}" style="height:529px;width:745px;">
+                            <img src="{{$business_info->business_banner}}" style="height:529px;width:745px;">
                         </div>
                         <div class="item">
-                            <img src="{{$_images->other_image_one}}" style="height:529px;width:745px;">
+                            <img src="{{$business_info->other_image_one}}" style="height:529px;width:745px;">
                         </div>
                         <div class="item">
-                            <img src="{{$_images->other_image_two}}" style="height:529px;width:745px;">
+                            <img src="{{$business_info->other_image_two}}" style="height:529px;width:745px;">
                         </div>
                         <div class="item">
-                            <img src="{{$_images->other_image_three}}" style="height:529px;width:745px;">
+                            <img src="{{$business_info->other_image_three}}" style="height:529px;width:745px;">
                         </div>
                     </div>
                     <!-- Left and right controls -->
@@ -103,7 +103,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                @endif
+               {{--  @endif --}}
                 <!-- CAROUSEL SCRIPT -->
                 <script type="text/javascript">
                     // INTERVAL
@@ -133,6 +133,7 @@
                     });
                 </script>
             </div><!-- MAIN PIC -->
+            {{-- @if($images==0)
             <div class="secondary-pics-container">
                 <a href="/images/arabian_nights_pic01.png" data-lightbox="roadtrip">
                     <img class="secondary-pics" src="/images/arabian_nights_pic01.png">
@@ -144,6 +145,19 @@
                     <img class="secondary-pics-last" src="/images/arabian_nights_pic03.png">
                 </a>
             </div>
+            @else --}}
+            <div class="secondary-pics-container">
+                <a href="{{$business_info->other_image_one}}" data-lightbox="roadtrip">
+                    <img class="secondary-pics" src="{{$business_info->other_image_one}}">
+                </a>
+                <a href="{{$business_info->other_image_two}}" data-lightbox="roadtrip">
+                    <img class="secondary-pics" src="{{$business_info->other_image_two}}">
+                </a>
+                <a href="{{$business_info->other_image_three}}" data-lightbox="roadtrip">
+                    <img class="secondary-pics-last" src="{{$business_info->other_image_three}}">
+                </a>
+            </div>
+           {{--  @endif --}}
             <div>
                 <div class="overview-container">
                     <p class="overview-title">OVERVIEW</p>
@@ -156,12 +170,10 @@
                 </div>
                 <div class="category-content">
                     <p class="overview-content-text">
-                        Cruises
-                    <br>Travel & Tourism
-                    <br>Ticket Sales
-                    <br>Hotel & Other Accommodations
-                    <br>Schools Travel Agents
-                    <br>Discount Stores Plans & Clubs
+                        @foreach($_tag_category as $tag_category)
+                        {{$tag_category->business_category_name}}<br>
+                        @endforeach
+                    
                     </p>
                 </div>
             </div>

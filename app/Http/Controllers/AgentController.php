@@ -41,12 +41,12 @@ class AgentController extends Controller
 		}
 	}
 
-	public function index()
-	{
-		Self::allow_logged_in_users_only();
-		$data['page']	= 'Dashboard';
-		return view('agent.pages.dashboard',$data);
-	}
+	// public function index()
+	// {
+	// 	Self::allow_logged_in_users_only();
+	// 	$data['page']	= 'Dashboard';
+	// 	return view('agent.pages.dashboard',$data);
+	// }
 
 	public function login()
 	{
@@ -75,23 +75,27 @@ class AgentController extends Controller
 	    $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
 	    $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
 	    $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
-	    $data['mon'] = TblBusinessModel::where('date_created',$mon)->count();
-	    $data['tue'] = TblBusinessModel::where('date_created',$tue)->count();
-	    $data['wed'] = TblBusinessModel::where('date_created',$wed)->count();
-	    $data['thu'] = TblBusinessModel::where('date_created',$thu)->count();
-	    $data['fri'] = TblBusinessModel::where('date_created',$fri)->count();
-	    $data['sat'] = TblBusinessModel::where('date_created',$sat)->count();
-	    $data['sun'] = TblBusinessModel::where('date_created',$sun)->count();
 
-	    $data['amon'] = TblBusinessModel::where('date_transact',$mon)->where('business_status',5)->count();
-	    $data['atue'] = TblBusinessModel::where('date_transact',$tue)->where('business_status',5)->count();
-	    $data['awed'] = TblBusinessModel::where('date_transact',$wed)->where('business_status',5)->count();
-	    $data['athu'] = TblBusinessModel::where('date_transact',$thu)->where('business_status',5)->count();
-	    $data['afri'] = TblBusinessModel::where('date_transact',$fri)->where('business_status',5)->count();
-	    $data['asat'] = TblBusinessModel::where('date_transact',$sat)->where('business_status',5)->count();
-	    $data['asun'] = TblBusinessModel::where('date_transact',$sun)->where('business_status',5)->count();
+	    $data['mon'] = $monr = TblBusinessModel::where('date_created',$mon)->count();
+	    $data['tue'] = $tuer = TblBusinessModel::where('date_created',$tue)->count();
+	    $data['wed'] = $wedr = TblBusinessModel::where('date_created',$wed)->count();
+	    $data['thu'] = $thur = TblBusinessModel::where('date_created',$thu)->count();
+	    $data['fri'] = $frir = TblBusinessModel::where('date_created',$fri)->count();
+	    $data['sat'] = $satr = TblBusinessModel::where('date_created',$sat)->count();
+	    $data['sun'] = $sunr = TblBusinessModel::where('date_created',$sun)->count();
 
+	    $data['total_r'] = $monr+$tuer+$wedr+$thur+$frir+$satr+$sunr;
 
+	    $data['mona'] = $monc = TblBusinessModel::where('date_transact',$mon)->where('business_status',5)->count();
+	    $data['tuea'] = $tuec = TblBusinessModel::where('date_transact',$tue)->where('business_status',5)->count();
+	    $data['weda'] = $wedc = TblBusinessModel::where('date_transact',$wed)->where('business_status',5)->count();
+	    $data['thua'] = $thuc = TblBusinessModel::where('date_transact',$thu)->where('business_status',5)->count();
+	    $data['fria'] = $fric = TblBusinessModel::where('date_transact',$fri)->where('business_status',5)->count();
+	    $data['sata'] = $satc = TblBusinessModel::where('date_transact',$sat)->where('business_status',5)->count();
+	    $data['suna'] = $sunc = TblBusinessModel::where('date_transact',$sun)->where('business_status',5)->count();
+	    
+	    $data['total_c'] = $monc+$tuec+$wedc+$thuc+$fric+$satc+$sunc;
+	    // dd($data['date_mon']);
     
 		return view ('agent.pages.dashboard', $data);	
     }
