@@ -166,7 +166,7 @@
                     <p class="overview-content-text">{{ $business_info->company_information }}</p>
                 </div>
                 <div class="overview-container">
-                    <p class="overview-title">CATEGORY/KEYWORDS</p>
+                    <p class="overview-title">CATEGORY</p>
                 </div>
                 <div class="category-content">
                     <p class="overview-content-text">

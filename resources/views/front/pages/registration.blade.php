@@ -75,11 +75,11 @@
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<div class="col-md-4 form-firstpart">
-					<label for="primaryPhone" class="registration-form-label">Primary Business Phone:</label>
+					<label for="primaryPhone" class="registration-form-label">Primary Phone:</label>
 				    <input type="text" class="form-control" name="primaryPhone" id="primaryPhone" required="true">
 				</div>
 				<div class="col-md-4 form-secondpart">
-					<label for="alternatePhone" class="registration-form-label">Alternate Business Phone:</label>
+					<label for="alternatePhone" class="registration-form-label">Alternative Phone:</label>
 				    <input type="text" class="form-control" name="alternatePhone" id="alternatePhone" required="true">
 				</div>
 				<div class="col-md-4 form-thirdpart">

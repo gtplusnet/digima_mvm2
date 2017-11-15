@@ -195,9 +195,14 @@ class FrontController extends Controller
         if($request->ajax())
         {
             $emailAvailability = Tbl_user_account::checkEmail($request->emailAddress)->first();
+            $phoneAvailability = TblBusinessModel::checkPhone($request->primaryPhone,$request->alternatePhone)->first();
             if(count($emailAvailability) == 1)
             {
                 return response()->json(['status' => 'used', 'message' => 'Email has already been used.']); 
+            }
+            elseif(count($phoneAvailability) != 0)
+            {
+                return response()->json(['status' => 'used', 'message' => 'Primary or Secondary Phone has already been used.']); 
             }
             else
             {

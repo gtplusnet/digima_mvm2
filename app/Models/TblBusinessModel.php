@@ -35,5 +35,10 @@ class TblBusinessModel extends Model
         $query->orWhere('tbl_business_category.business_category_name', 'like', '%'.$businessKeyword.'%');
         return $query;
 	}
+    public function scopeCheckPhone($query, $userPhone,$userAltPhone)
+    {
+        return $query->select('business_phone')->where('business_phone', $userPhone)->orWhere('business_phone',$userAltPhone)
+                    ->orWhere('business_alt_phone', $userPhone)->orWhere('business_alt_phone',$userAltPhone);
+    }
     
 }

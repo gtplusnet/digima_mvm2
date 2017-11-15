@@ -14,4 +14,5 @@ class Tbl_user_account extends Model
     {
     	return $query->select('user_email')->where('user_email', $userEmail);
     }
+    
 }
