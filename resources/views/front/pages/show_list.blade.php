@@ -70,7 +70,7 @@
 							<div class="">
 								<div class="featured-details-container">
 									<div class="detail-picture-container side-list-img-width">
-										<img src="/images/arabian_nights_pic01.png" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
+										<img src="{{$most_viewed->business_banner}}" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
 									</div>
 									<div class="detail-name-container">
 										@if(strlen($most_viewed->business_name) <= 14)
@@ -103,7 +103,7 @@
 										<img src="/images/arabian_nights_pic01.png" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
 									</div>
 									<div class="detail-name-container">
-										<p class="detail-name-title">Name of Business</p>
+										<p class="detail-name-title">CROATIA</p>
 									</div>
 								</div>
 							</div>
@@ -111,7 +111,7 @@
 							<div class=" item">
 								<div class="featured-details-container">
 									<div class="detail-picture-container side-list-img-width">
-										<img src="/images/arabian_nights_pic01.png" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
+										<img src="{{$featured_list->business_banner}}" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
 									</div>
 									<div class="detail-name-container">
 										@if(strlen($featured_list->business_name) <= 14)
@@ -147,7 +147,7 @@
 				@foreach($_business_list as $business_list)
 				<div class="col-md-4 per-business">
 					<div class="business-img-holder">
-						<img src="/images/arabian_nights_pic01.png">
+						<img src="{{$business_list->business_banner}}">
 					</div>
 					<div class="business-info-holder">
 						<div class="business-list-details">
@@ -218,3 +218,28 @@
 		</div>
 	</div>
 </div>
+<script>
+$.ajaxSetup({
+	headers: {
+	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
+});
+</script>
+<script type="text/javascript">
+	$('.carousel .vertical .item').each(function(){
+	var next = $(this).next();
+	if (!next.length) {
+	next = $(this).siblings(':first');
+	}
+	next.children(':first-child').clone().appendTo($(this));
+	
+	for (var i=1;i<=1;i++) {
+	next=next.next();
+	if (!next.length) {
+		next = $(this).siblings(':first');
+		}
+	
+	next.children(':first-child').clone().appendTo($(this));
+	}
+	});
+</script>

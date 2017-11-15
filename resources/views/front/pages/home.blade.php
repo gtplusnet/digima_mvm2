@@ -29,11 +29,11 @@ width:100%;
 		</div>
 	</div>
 </div>
+
 <div class="business-list-container" id="show_list_filtered_category">
 	<div class="container">
 		<div class="col-md-3">
 			<div class="col-md-12" >
-				
 				<div class="category-filter-holder" >
 					
 					<div class="category-title-holder" id="show_category">
@@ -61,7 +61,7 @@ width:100%;
 								<div class="">
 									<div class="featured-details-container">
 										<div class="detail-picture-container side-list-img-width">
-											<img src="/images/arabian_nights_pic01.png" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
+											<img src="{{$most_viewed->business_banner}}" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
 										</div>
 										<div class="detail-name-container">
 											@if(strlen($most_viewed->business_name) <= 14)
@@ -102,7 +102,7 @@ width:100%;
 								<div class=" item">
 									<div class="featured-details-container">
 										<div class="detail-picture-container side-list-img-width">
-											<img src="/images/arabian_nights_pic01.png" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
+											<img src="{{$featured_list->business_banner}}" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="1">
 										</div>
 										<div class="detail-name-container">
 											<div class="detail-name-container">
@@ -130,6 +130,31 @@ width:100%;
 						</div>
 					</div>
 				</div>
+				<script>
+					$.ajaxSetup({
+						headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+				</script>
+				<script type="text/javascript">
+						$('.carousel .vertical .item').each(function(){
+						var next = $(this).next();
+						if (!next.length) {
+						next = $(this).siblings(':first');
+						}
+						next.children(':first-child').clone().appendTo($(this));
+						
+						for (var i=1;i<=1;i++) {
+						next=next.next();
+						if (!next.length) {
+							next = $(this).siblings(':first');
+							}
+						
+						next.children(':first-child').clone().appendTo($(this));
+						}
+						});
+				</script>
 			</div>
 		</div>
 		<div class="col-md-9" >
@@ -141,7 +166,7 @@ width:100%;
 					@foreach($_business_list as $business_list)
 					<div class="col-md-4 per-business">
 						<div class="business-img-holder">
-							<img src="/images/arabian_nights_pic01.png">
+							<img src="{{$business_list->business_banner}}">
 						</div>
 						<div class="business-info-holder">
 							<div class="business-list-details">
@@ -176,40 +201,40 @@ width:100%;
 				</div>
 			</div>
 			<div class="col-md-12">
-				<div class="payment-containers">
-					<div class="payment-title">
-						SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
-						<br>
-					</div>
-					<div class="col-md-12 payment-content">
-						@foreach($_membership as $membership)
-						<div class="col-md-5 package-container">
-							<div class="membership-offer">
-								{{$membership->membership_name}}
-							</div>
-							<hr>
-							<div class="membership-price">
-								<span >${{$membership->membership_price}}  </span>
-							</div>
-							<hr>
-							<div class="membership-details">
-								<p class="membership-details-text">
-									Sadly, none of them were ok, and I can't seem to find out any other option.
-									The first and second button are displayed
-									on same line, but the third is displayed lower... Can you help me?
-								</p>
-							</div>
-							<div class="membership-btn">
-								<a href="/registration">
-									<button type="button" class="membership-button">GET STARTED NOW</button>
-								</a>
-							</div>
+				<div class="payment-containers col-md-12 " style="margin-bottom:50px;">
+						<div class="payment-title col-md-12">
+							SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
+							<br>
 						</div>
-						@endforeach
-						
-					</div>
+						<div class="col-md-12 payment-content " style="margin-bottom:100px;">
+							@foreach($_membership as $membership)
+							<div class="col-md-5 package-container">
+								<div class="membership-offer">
+									{{$membership->membership_name}}
+								</div>
+								<hr>
+								<div class="membership-price">
+									<span >${{$membership->membership_price}}  </span>
+								</div>
+								<hr>
+								<div class="membership-details">
+									<p class="membership-details-text">
+										Sadly, none of them were ok, and I can't seem to find out any other option.
+										The first and second button are displayed
+										on same line, but the third is displayed lower... Can you help me?
+									</p>
+								</div>
+								<div class="membership-btn">
+									<a href="/registration">
+										<button type="button" class="membership-button">GET STARTED NOW</button>
+									</a>
+								</div>
+							</div>
+							@endforeach
+							
+						</div>
 				</div>
-			</div>
+		   </div>
 		</div>
 	</div>
 </div>
@@ -217,30 +242,6 @@ width:100%;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/search-registered-business.js"></script>
 <script src="/assets/js/home_categories.js"></script>
-<script>
-	$.ajaxSetup({
-		headers: {
-		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
-</script>
-<script type="text/javascript">
-		$('.carousel .vertical .item').each(function(){
-		var next = $(this).next();
-		if (!next.length) {
-		next = $(this).siblings(':first');
-		}
-		next.children(':first-child').clone().appendTo($(this));
-		
-		for (var i=1;i<=1;i++) {
-		next=next.next();
-		if (!next.length) {
-			next = $(this).siblings(':first');
-			}
-		
-		next.children(':first-child').clone().appendTo($(this));
-		}
-		});
-</script>
+
 {{-- END OF JAVASCRIPTS --}}
 @endsection

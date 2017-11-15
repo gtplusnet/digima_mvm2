@@ -46,7 +46,7 @@
 						</div>
 						<div class="col-md-1 payment-upload-icon-container">
 							<div class="fileUpload payment-upload-holder fa fa-upload payment-upload-icon">
-						    <input id="uploadBtn" name="payment_file_name" type="file" class="upload" required/>
+						    <input id="uploadBtn" name="payment_file_name" type="file" class="upload"/>
 						</div>
 						</div>
 
@@ -59,10 +59,10 @@
 			<div class="col-md-12 payment-form-container">
 				<div class="col-md-12 payment-form-upperpart">
 					<div class="col-md-4 payment-left-area">
-						<p class="payment-invoice-label">Invoice No:00000</p>
+						<p class="payment-invoice-label">Invoice No : {{$merchant_info->invoice_number}}</p>
 					</div>
 					<div class="col-md-8 payment-email-right-area">
-						<p class="payment-invoice-label">{{session('email')}}</p>
+						<p class="payment-invoice-label">{{$merchant_info->user_email}}</p>
 					</div>
 				</div>
 				<div class="col-md-12 payment-form-seperator">
@@ -72,8 +72,7 @@
 							
 						</div>
 						<div class="col-md-6 payment-right-area">
-							<p class="payment-invoice-content-label">{{session('full_name')}} </p>
-							
+							<p class="payment-invoice-content-label">{{$merchant_info->contact_prefix}} {{$merchant_info->contact_first_name}} {{$merchant_info->contact_last_name}} </p>
 						</div>
 					</div>
 					<div class="col-md-12 payment-form-upperpart">	
@@ -84,7 +83,7 @@
 						</div>
 						<div class="col-md-6 payment-right-area">
 							
-							<p class="payment-invoice-content-label">{{session('business_name')}} </p>
+							<p class="payment-invoice-content-label">{{$merchant_info->business_name}}</p>
 							
 						</div>
 					</div>
@@ -95,7 +94,7 @@
 							
 						</div>
 						<div class="col-md-6 payment-right-area">
-							<p class="payment-invoice-content-label">{{session('business_address')}} </p>
+							<p class="payment-invoice-content-label">{{$merchant_info->business_complete_address}}</p>
 							
 						</div>
 					</div>
@@ -107,8 +106,7 @@
 						</div>
 						<div class="col-md-6 payment-right-area">
 							
-							<p class="payment-invoice-content-label">{{session('city_state')}} </p>
-							
+							<p class="payment-invoice-content-label">{{$merchant_info->city_name}} {{$merchant_info->county_name}}</p>
 						</div>
 					</div>
 					<div class="col-md-12 payment-form-upperpart">	
@@ -119,7 +117,7 @@
 						</div>
 						<div class="col-md-6 payment-right-area">
 							
-							<p class="payment-invoice-content-label">{{session('zip_code')}} </p>
+							<p class="payment-invoice-content-label">{{$merchant_info->postal_code}}</p>
 							
 						</div>
 					</div>
@@ -130,7 +128,7 @@
 						</div>
 						<div class="col-md-6 payment-right-area">
 							
-							<p class="payment-invoice-content-label">Sept 31,2017 </p>
+							<p class="payment-invoice-content-label">{{$merchant_info->date_transact}}</p>
 						</div>
 					</div>
 					

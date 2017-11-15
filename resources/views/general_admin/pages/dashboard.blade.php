@@ -102,7 +102,7 @@
                     <div class="col-md-7">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">SignUp Per Month</h4>
+                                <h4 class="title">Registered Per Month</h4>
                                 <p class="category">Merchant Statistic</p>
                             </div>
                             <div class="content">
@@ -161,7 +161,7 @@
                            
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-success"></i>SignUp
+                                        <i class="fa fa-circle text-success"></i>Registered
                                         <i class="fa fa-circle text-primary"></i>Activated Task
                                     </div>
                                     <hr>

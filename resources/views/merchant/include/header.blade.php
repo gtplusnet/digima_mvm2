@@ -20,6 +20,7 @@
                     <li>        
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
                     </li>
+
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                             <i class="fa fa-cogs"></i>
@@ -67,6 +68,7 @@
                                             <input type="checkbox" class="js-switch pull-right hover-menu-check">
                                         </div>
                                     </li>
+                                   
                                 </ul>
                             </li>
                             <li class="li-group">
@@ -95,10 +97,13 @@
                                 </ul>
                             </li>
                             <li class="no-link"><button class="btn btn-default reset-options">Reset Options</button></li>
+                            
                         </ul>
                     </li>
+                    
                 </ul>
-                <ul class="nav navbar-nav navbar-right">                               
+                <ul class="nav navbar-nav navbar-right">   
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-success pull-right">3</span></a>
                         <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
@@ -143,8 +148,9 @@
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
                             <li role="presentation"><a href="/merchant/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                           
                         </ul>
-                      <li>
+                    <li>
                     @if(session("merchant_login") == true)
                     <a style="font-size:15px",  href='/merchant/logout'>
                     <span><i class="fa fa-sign-out m-r-xs"></i>Log out
@@ -159,7 +165,7 @@
                     </a>             
                     @endif 
                     </li>
-
+                    
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->
         </div>

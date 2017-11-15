@@ -25,6 +25,25 @@ Route::get('/resultsortgrid',      'SearchresultController@resultsortgrid');
 Route::get('/searchtabular',       'SearchresultController@searchtabular');
 
 
+Route::get('/forgot/password', 			'PasswordController@forgot_password');
+Route::post('/reset/password',       	'PasswordController@reset_password');
+Route::any('/password/{code}/{id}',     'PasswordController@password_reset_link');
+Route::any('/reset/user/password',      'PasswordController@reset_user_password');
+
+
+
+
+
+
+
+
+Route::any('/forgot_password_user',       					'PasswordController@forgot_password_user');
+Route::any('/forgot_password_user/reset_password',       	'PasswordController@forgot_password_user_reset_password');
+Route::any('/forgot_password_user/reset_link/{code}/{id}/{post}',       		'PasswordController@forgot_password_user_reset_link');
+Route::any('/forgot_password_user/submit_reset_password',   'PasswordController@forgot_password_user_submit_reset_password');
+
+
+
 
 
 /*Routes for Front*/
@@ -45,7 +64,6 @@ Route::get('/redirect', 				'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 			'FrontController@business');
 Route::any('/guest/add_messages', 		'FrontController@add_messages');
 Route::get('/business/details', 		'FrontController@business_details');
-Route::get('/forgot/password', 			'FrontController@forgot_password');
 Route::any('/home/get_sub_category', 	'FrontController@get_sub_category');
 
 
@@ -132,7 +150,7 @@ Route::any('/supervisor/supervisor_search_agent', 	'SuperVisorController@supervi
 
 /*Routes for Agent*/
 Route::any('/agent',          						'AgentController@login');
-Route::get('/agent/dashboard', 						'AgentController@index');
+Route::get('/agent/dashboard', 						'AgentController@dashboard');
 Route::post('/agent_login', 	    				'AgentController@agent_login');
 Route::get('/agent/profile', 						'AgentController@profile');
 Route::get('/agent/client', 						'AgentController@client');

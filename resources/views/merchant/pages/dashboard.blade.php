@@ -3,26 +3,6 @@
 <!-- <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" /> -->
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
-{{-- <?php
-
- $source_url = 'http://www.facebook.com/';
-
-   $url = ' http://public.newsharecounts.com/count.json?url=' . $source_url;
-
-   $ch=curl_init();
-   curl_setopt($ch, CURLOPT_URL, $url);
-   curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-   curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-   curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-   curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-   $cont = curl_exec($ch);
-   $json = json_decode($cont, true);
-   echo isset($json['count'])?intval($json['count']):0;
-
-?> --}}
-
-
 <div class="page-title">
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
@@ -39,7 +19,9 @@
          <div class="panel info-box">
             <div class="panel-body">
                <div class="info-box-stats">
-                  <p class="counter">{{$page_view->business_views}}</p>
+                  
+                  <p class="counter">{{$page_view}}</p>
+                 
                   <span class="info-box-title">Page views</span>
                </div>
                <div class="info-box-icon">
@@ -64,7 +46,7 @@
                </div>
                <div class="info-box-stats">
                   <p class="counter">{{$fb}}</p>
-                  <span class="info-box-title">Page Likes</span>
+                  <span class="info-box-title">Facebook Page Likes</span>
                </div>
                <div class="info-box-progress">
                   <div class="progress progress-xs progress-squared bs-n">
@@ -119,14 +101,14 @@
       <div class="content">
          <div class="container">
             <div class="row">
-               <div class="col-md-3">
+               <div class="col-md-4">
                   <div class="card">
                      <div class="header">
                         <h4 class="title">Merchant Statistics</h4>
                         <p class="category">Views</p>
                      </div>
                      <div class="content">
-                        <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                        <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
                         <div class="footer">
                            <div class="legend">
                               <i class="fa fa-circle text-info"></i>Views
@@ -140,14 +122,14 @@
                      </div>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-7">
                   <div class="card">
                      <div class="header">
                         <h4 class="title">Page Likes</h4>
                         <p class="category">Likes</p>
                      </div>
                      <div class="content">
-                        <div id="chartPreferences1" class="ct-chart ct-perfect-fourth"></div>
+                        <div id="chartActivityPerMonth" class="ct-chart ct-perfect-fourth"></div>
                         <div class="footer">
                            <div class="legend">
                               <i class="fa fa-circle text-info"></i>Views
@@ -161,49 +143,8 @@
                      </div>
                   </div>
                </div>
-               <div class="col-md-3">
-                  <div class="card">
-                     <div class="header">
-                        <h4 class="title">Page Tweets</h4>
-                        <p class="category">Tweets</p>
-                     </div>
-                     <div class="content">
-                        <div id="chartPreferences2" class="ct-chart ct-perfect-fourth"></div>
-                        <div class="footer">
-                           <div class="legend">
-                              <i class="fa fa-circle text-info"></i>Views
-                              <i class="fa fa-circle text-danger"></i>Merchants
-                           </div>
-                           <hr>
-                           <div class="stats">
-                              <i class="fa fa-clock-o"></i> 
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- <div class="col-md-8">
-                  <div class="card">
-                      <div class="header">
-                          <h4 class="title">Users Behavior</h4>
-                          <p class="category">24 Hours performance</p>
-                      </div>
-                      <div class="content">
-                          <div id="chartHours" class="ct-chart"></div>
-                          <div class="footer">
-                              <div class="legend">
-                                  <i class="fa fa-circle text-info"></i> Open
-                                  <i class="fa fa-circle text-danger"></i> Click
-                                  <i class="fa fa-circle text-warning"></i> Click Second Time
-                              </div>
-                              <hr>
-                              <div class="stats">
-                                  <i class="fa fa-history"></i> Updated 3 minutes ago
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  </div> -->
+               
+               
             </div>
          </div>
       </div>
@@ -212,14 +153,52 @@
    <!-- Row -->
    <!-- Row -->
 </div>
-<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script></head>
 <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="/assets/agent/assets1/js/chartist.min.js"></script>
-<script src="/assets/agent/assets1/js/demo.js"></script>
 <script type="text/javascript">
-   $(document).ready(function(){
-   demo.initChartist();
-   
-   });
+$(document).ready(function()
+{
+
+
+  initChartist();
+
+});
+
+function initChartist()
+{    
+        
+        var data1 = {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          series: [
+            [450, 303, 220, 350, 350, 453, 326, 220, 350, 350, 453, 326],
+            [152, 180, 280, 300, 280, 353, 300, 220, 350, 350, 453, 326]
+          ]
+        };
+        
+        var options1 = {
+            seriesBarDistance: 10,
+            axisX: {
+                showGrid: false
+            },
+            height: "230px"
+        };
+        
+        var responsiveOptions1 = [
+          ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              }
+            }
+          }]
+        ];
+        
+         Chartist.Bar('#chartActivityPerMonth', data1, options1, responsiveOptions1);
+         Chartist.Pie('#chartPreferencesPerYear', {
+          labels: ['80%','20%'],
+          series: [80, 20 ]
+         });   
+}
 </script>
 @endsection

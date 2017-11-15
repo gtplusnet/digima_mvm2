@@ -71,7 +71,6 @@
                         </div>
                         <div class="btn-register">
                             <a href="/registration">Register</a>
-
                         </div>
                         <div class="language-selection" >
                             <div id="google_translate_element"></div>
@@ -90,7 +89,6 @@
                             .skiptranslate
                             {
                             margin-right: -130px;
-                            
                             }
                             </style>
                             
@@ -108,7 +106,6 @@
                         <div class="searchbox-holder">
                             <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
                                 {{ csrf_field() }}
-
                                 <div class="col-md-4 searchfields-format ">
                                     <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
                                 </div>
@@ -121,7 +118,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 searchfields-format ">
-                                    <input class="zipcode-textbox" type="text" placeholder="Postal Code" name="postalCode" id="postalCode">
+                                    <input class="zipcode-textbox" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
                                 </div>
                                 <div class="col-md-2 searchfields-format ">
                                     <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>

@@ -118,9 +118,15 @@
 										<label for="business_name" >Proof of Payment</label>
 									</div>
 									<div class="form-group col-md-7">
+										@if($business_item->payment_file_name=='Image Not Available')
+										<center>
+											Image Not Available
+										</center>
+										@else
 										<a href="{{ $business_item->payment_file_name }}"  target="_blank">
 											click here to view image!
 										</a>
+										@endif
 									</div>
 								</div>
 								<div class="col-sm-12">
