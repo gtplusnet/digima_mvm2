@@ -64,7 +64,7 @@ class FrontController extends Controller
         Session::forget("business_address");
         Session::forget("city_state");
         Session::forget("zip_code");
-        $data['countyList']         = TblCountyModel::get();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();
         $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
@@ -87,37 +87,34 @@ class FrontController extends Controller
     public function registration()
     {
 
-        $data['county_list'] = TblCountyModel::get();
-        // dd($data);
-        $data['membership'] = TblMembeshipModel::get();
-        $data['countyList'] = Tbl_county::get();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['membership']         = TblMembeshipModel::get();
+        $data['countyList']         = Tbl_county::get();
         return view('front.pages.registration', $data);
     }
     public function get_sub_category(Request $request)
     {
-        
-
-        $check = TblBusinessCategoryModel::where('business_category_id',$request->parent_id)->first();
-        $cat = array($check->business_category_name);
-        $cat1 = array($check->business_category_id);
+        $check      = TblBusinessCategoryModel::where('business_category_id',$request->parent_id)->first();
+        $cat        = array($check->business_category_name);
+        $cat1       = array($check->business_category_id);
         if($check->parent_id!=0)
         {
             
-            $check1 = TblBusinessCategoryModel::where('business_category_id',$check->parent_id)->first();
-            $cat = array( $check1->business_category_name,$check->business_category_name);
-            $cat1 = array( $check1->business_category_id,$check->business_category_id);
+            $check1         = TblBusinessCategoryModel::where('business_category_id',$check->parent_id)->first();
+            $cat            = array( $check1->business_category_name,$check->business_category_name);
+            $cat1           = array( $check1->business_category_id,$check->business_category_id);
                 
             if($check1->parent_id!=0)
             {
-                $check2 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
-                $cat = array($check2->business_category_name,$check1->business_category_name,$check->business_category_name);
-                $cat1 = array($check2->business_category_id,$check1->business_category_id,$check->business_category_id);
+                $check2     = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
+                $cat        = array($check2->business_category_name,$check1->business_category_name,$check->business_category_name);
+                $cat1       = array($check2->business_category_id,$check1->business_category_id,$check->business_category_id);
                  
                 if($check2->parent_id)
                 {
                     $check3 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
-                    $cat = array($check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
-                    $cat1 = array($check3->parent_id,$check2->parent_id,$check1->parent_id,$check->parent_id );
+                    $cat    = array($check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
+                    $cat1   = array($check3->parent_id,$check2->parent_id,$check1->parent_id,$check->parent_id );
                 }
                 else
                 {
@@ -133,14 +130,15 @@ class FrontController extends Controller
         {
           
         }
-        $data['value'] = $cat1;
-        $data['_filtered'] = $cat;
+        $data['value']              = $cat1;
+        $data['_filtered']          = $cat;
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_membership']        = TblMembeshipModel::get();
         $data["_business_list"]     = TblBusinessTagCategoryModel::where('business_category_id',$request->parent_id)->where('business_status',5)
                                     ->join('tbl_business','tbl_business.business_id','=','tbl_business_tag_category.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                    ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_business.membership',"ASC")
                                     ->paginate(9);
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)
@@ -149,14 +147,15 @@ class FrontController extends Controller
         $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                                    ->groupBy('tbl_business.business_id')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                                    ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_reports.business_views','ASC')
                                     ->limit(4)
                                     ->get();
-                                    // dd($data['_most_viewed']);
         
         return view("front.pages.show_list",$data);
 
@@ -170,12 +169,12 @@ class FrontController extends Controller
     {
         if($request->ajax())
         {
-            $cityList = Tbl_city::getCity($request->countyId)->get();
-            $cityOutputList = '';
-            $cityOutputList .= '<option value="" disabled selected>--City--</option>';
+            $cityList               = Tbl_city::getCity($request->countyId)->get();
+            $cityOutputList         = '';
+            $cityOutputList         .= '<option value="" disabled selected>--City--</option>';
             foreach($cityList as $cityListItem)
             {
-                $cityOutputList .= '<option value="'.$cityListItem->city_id.'">'.$cityListItem->city_name.'</option>';
+                $cityOutputList     .= '<option value="'.$cityListItem->city_id.'">'.$cityListItem->city_name.'</option>';
             }
             return response()->json(['html' => $cityOutputList]);
         }
@@ -302,14 +301,17 @@ class FrontController extends Controller
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();
         $data["_business_list"]     = TblBusinessModel:: where('business_status',5)
+                                    ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_business.membership','ASC')
                                     ->paginate(9);
         $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
+                                    ->groupBy('tbl_business.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                                    ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_reports.business_views','ASC')
                                     ->limit(4)
                                     ->get();
@@ -411,16 +413,6 @@ class FrontController extends Controller
         return $lat;
     }
     
-    
-    // THIS IS A DUMMY
-    // STARTS HERE
-
-    public function dummypage()
-    {
-        $data['page']   = 'dummypage';
-        return view('front.pages.dummypage', $data);
-    }
-    // ENDS HERE
 
     public function success()
     {
@@ -430,34 +422,33 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-        $data['countyList'] = TblCountyModel::get();
-        $data['business_info'] = DB::table('tbl_business')
-        ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
-        ->where('tbl_business.business_id', '=', $request->business_id)
-        ->get();
+        $data['countyList']     = TblCountyModel::get();
+        $data['business_info']  = DB::table('tbl_business')
+                                ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
+                                ->where('tbl_business.business_id', '=', $request->business_id)
+                                ->get();
         return view('front.pages.business', $data); 
     }
 
     public function about()
     {
-        $data['page']   = 'About';
-        $data['countyList'] = TblCountyModel::get();
+        $data['page']           = 'About';
+        $data['countyList']     = TblCountyModel::get();
         return view('front.pages.about', $data);
     }
     public function contact()
     {
-        $data['page']   = 'Contact';
-        $data['countyList'] = TblCountyModel::get();
+        $data['page']           = 'Contact';
+        $data['countyList']     = TblCountyModel::get();
         return view('front.pages.contact', $data);
 
     }
     public function contact_send(Request $request)
     {
-        $contact_name= $request->name;
-        $contact_email_add = $request->email_add;
-        $contact_subject = $request->subject;
-        $contact_help_message = $request->help_message;
-        // dd($contact_name);
+        $contact_name           = $request->name;
+        $contact_email_add      = $request->email_add;
+        $contact_subject        = $request->subject;
+        $contact_help_message   = $request->help_message;
         $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
 
         $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
@@ -470,7 +461,7 @@ class FrontController extends Controller
         if($check_mail)
         {
             Session::flash('success', 'Thank you!. Your Message Send Successfully!');
-            // return Redirect::to('/contact');
+            return Redirect::to('/contact');
         }
         else
         {
@@ -491,13 +482,16 @@ class FrontController extends Controller
     //UPLOAD FILE SAMPLE
     public function uploadFile(Request $request) {
         $file = $request->file("file");
-        if ($file == "") {
+        if ($file == "") 
+        {
             echo "File is empty.";
         }
-        else if($file->getClientOriginalExtension() != "mp3") {
+        else if($file->getClientOriginalExtension() != "mp3") 
+        {
             echo "File is not an audio, please select audio file.";
         }
-        else {
+        else 
+        {
             $file->move('uploads', $file->getClientOriginalName());
             $audioInfo = new Tbl_audio;
             $audioInfo ->audio_name = $file->getClientOriginalName();

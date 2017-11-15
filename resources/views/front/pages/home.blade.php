@@ -201,12 +201,12 @@ width:100%;
 				</div>
 			</div>
 			<div class="col-md-12">
-				<div class="payment-containers">
-					<div class="payment-title">
+			<div class="payment-containers col-md-12">
+					<div class="payment-title col-md-12">
 						SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
 						<br>
 					</div>
-					<div class="col-md-12 payment-content">
+					<div class="col-md-12 payment-content " style="margin-bottom:50px;">
 						@foreach($_membership as $membership)
 						<div class="col-md-5 package-container">
 							<div class="membership-offer">
@@ -233,8 +233,8 @@ width:100%;
 						@endforeach
 						
 					</div>
-				</div>
 			</div>
+		   </div>
 		</div>
 	</div>
 </div>
