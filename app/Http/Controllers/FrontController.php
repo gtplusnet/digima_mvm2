@@ -70,6 +70,7 @@ class FrontController extends Controller
         $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_business.membership','ASC')
+                                    ->groupBy('tbl_business.business_id')
                                     ->paginate(9);
         $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5) 
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
