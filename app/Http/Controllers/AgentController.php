@@ -255,11 +255,17 @@ class AgentController extends Controller
 	public function add_client_submit(Request $request)
 	{
 		
-		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email)->first();
-
+		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email_address)->first();
+		$phoneAvailability = TblBusinessModel::checkPhone($request->primary_business_phone,$request->secondary_business_phone)->first();
         if(count($check_email_availability) == 1)
         {
-            echo 'Email has already been used.';
+           Session::flash('add_merchant', "Sorry!, Email Exist");
+           return Redirect::to('/agent/add/client');
+        }
+        elseif(count($phoneAvailability) !=0)
+        {
+           Session::flash('add_merchant', "Sorry!, Phone Exist");
+           return Redirect::to('/agent/add/client');
         }
         else
         {
@@ -331,7 +337,7 @@ class AgentController extends Controller
             ));
            Session::flash('add_merchant', "New Merchant Added");
            return Redirect::to('/agent/add/client');
-       }
+        }
 	}
 	public function add_client()
 	{
