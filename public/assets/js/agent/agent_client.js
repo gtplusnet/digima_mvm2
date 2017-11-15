@@ -1,3 +1,79 @@
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button1',function()
+		{
+			var search_key = $('#search_key1').val();
+			// alert(search_key);
+			
+
+			$.ajax({
+
+				type:'POST',
+				url:'/agent/search_client',
+				data:{
+					search_key: search_key,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					// alert("Hello");
+					$('#showHere_signup').html(data);
+					
+			    });
+	    });
+});
+
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button12',function()
+		{
+			var search_key1 = $('#search_key12').val();
+			// alert(search_key1);
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/agent/search_client_pending',
+				data:{
+					search_key1: search_key1,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					// alert("pending");
+					$('#showHere_pending').html(data);
+					
+			    });
+	    });
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button123',function()
+		{
+			var search_key2 = $('#search_key3').val();
+			// alert(search_key2);
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/agent/search_client_activated',
+				data:{
+					search_key2: search_key2,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					// alert("activated");
+					$('#showHere_activated').html(data);
+					
+			    });
+	    });
+});
+
+
 $(document).ready(function(){
 
 	$('#date_end').change(function(){
@@ -9,7 +85,7 @@ $(document).ready(function(){
 			data:{date_start: date_start,date_end: date_end},
 			dataType:'text',
 		}).done(function(data){
-				$('#showHere').html(data);
+				$('#showHere_signup').html(data);
 			});
 	});
 });
@@ -25,7 +101,7 @@ $(document).ready(function(){
 			data:{date_start1: date_start1,date_end1: date_end1},
 			dataType:'text',
 		}).done(function(data){
-				$('#showHere1').html(data);
+				$('#showHere_pending').html(data);
 			});
 	});
 });
@@ -41,7 +117,7 @@ $(document).ready(function(){
 			data:{date_start2: date_start2,date_end2: date_end2},
 			dataType:'text',
 		}).done(function(data){
-				$('#showHere2').html(data);
+				$('#showHere_activated').html(data);
 			});
 	});
 });

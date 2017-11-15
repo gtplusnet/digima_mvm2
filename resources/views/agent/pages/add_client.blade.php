@@ -5,6 +5,7 @@
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/agent">Home</a></li>
+             <li class="active">{{ $page }}</li>
             
         </ol>
     </div>

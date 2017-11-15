@@ -14,14 +14,18 @@
 	</div>
 </div>
 <div class="tab-content col-md-12">
+
 	<div class="text-center pull-right" style="margin:20px 20px 20px 20px;">
-		<form class="form-inline" >
+		<form class="form-inline" method="post" action="/general_admin/search_payment_monitoring">
+			 {{csrf_field()}}
 			<div class="form-group">
-				<input type="text" class="form-control" name="search_me" id="search_me">
+				<input type="text" class="form-control" name="search_payment_admin" id="search_payment_admin">
 			</div>
-			<button type="submit" class="btn btn-success" name="search_btn" id="search_btn">Search</button>
+			<button type="submit" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
 		</form>
 	</div>
+
+
 	<div  class="tab-pane fade in active col-md-12">
 		<div class="table-responsive" id="success_activation">
 			<table class="table table-bordered" style="background-color: #FFFFFF;">

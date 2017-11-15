@@ -164,3 +164,55 @@ $(document).ready(function()
 			});
 	});
 });
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button_team',function()
+		{
+			var search_key_team = $('#search_key1').val();
+			alert(search_key_team);
+			
+
+			$.ajax({
+
+				type:'POST',
+				url:'/supervisor/supervisor_search_team',
+				data:
+				{
+					search_key_team: search_key_team,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert("team");
+					$('#showHere_team').html(data);
+					
+			    });
+	    });
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button_agent',function()
+		{
+			var search_key_agent = $('#search_key2').val();
+			alert(search_key_agent);
+			
+
+			$.ajax({
+
+				type:'POST',
+				url:'/supervisor/supervisor_search_agent',
+				data:
+				{
+					search_key_agent: search_key_agent,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert("agent");
+					$('#agent_delete_success').html(data);
+					
+			    });
+	    });
+});

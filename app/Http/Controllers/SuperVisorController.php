@@ -121,8 +121,7 @@ class SuperVisorController extends Controller
     {
         $s_date = $request->date_start1;
         $e_date = $request->date_end1;
-        $data['clients'] = TblBusinessModel::
-        whereBetween('date_created',[$s_date,$e_date])
+        $data['clients'] = TblBusinessModel::whereBetween('date_created',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
@@ -539,7 +538,8 @@ class SuperVisorController extends Controller
   public function force_activate(Request $request)
   {
       Self::allow_logged_in_users_only();
-      if($request->ajax()) {
+      if($request->ajax()) 
+      {
           $convoInfo = new Tbl_conversation;
           $convoInfo->file_path = 'not available';
           $convoInfo->file_name = 'not available';
@@ -555,4 +555,54 @@ class SuperVisorController extends Controller
   }
 
 
+    public function supervisor_search_client(Request $request)
+    {
+
+    $search_key = $request->search_key;
+    $data['clients'] = TblBusinessModel::where('business_status',2)->where('business_name','like','%'.$search_key.'%')
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->get();
+      return view('supervisor.pages.search_blade',$data);
+
+    }
+
+    public function supervisor_search_client_activated(Request $request)
+    {
+
+    $search_key_act = $request->search_key_act;
+    $data['clients_activated'] = TblBusinessModel::where('business_status', 3)->where('business_name','like','%'.$search_key_act.'%')
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->get();
+      return view('supervisor.pages.search_blade1',$data);
+    }
+
+
+
+
+    public function supervisor_search_team(Request $request)
+    {
+
+    $search_key_team = $request->search_key_team;
+     $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
+                          ->where('team_name','like','%'.$search_key_team.'%')
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->groupBy('team_id')->get();
+    return view('supervisor.pages.search_team_blade',$data);
+    }
+
+     public function supervisor_search_agent(Request $request)
+    {
+
+    $search_key_agent = $request->search_key_agent;
+    $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+                          ->where('email','like','%'.$search_key_agent.'%')
+                          ->get();
+    return view('supervisor.pages.search_agent_blade',$data);
+   
+    }
+
+
 }
+

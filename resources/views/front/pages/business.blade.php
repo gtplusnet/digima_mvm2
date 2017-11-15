@@ -314,7 +314,7 @@
                 margin-top: 15px;
                 margin-bottom: 38px;
             }
-            .sendemail-send-btn
+            .message_send-send-btn
             {
                 border: 0px;
                 background-color: #3D516D;
@@ -348,27 +348,48 @@
                             <input type="text" name="email" class="sendemail-textfield" required/>
                             <input type="hidden" name="business_id" value="{{$business_id}}" />
                         </div>
+
                         <div class="sendemail-textfield-holder">
                             <label for="input-subject" class="sendemail-labels">Subject:</label>
                             <input type="text" name="subject" class="sendemail-textfield">
                         </div>
+
                         <div class="sendemail-textfield-holder">
                             <label for="input-help" class="sendemail-labels">How Can We Help:</label>
                             <textarea rows="11" name="messages" id="we_can_help" class="sendemail-textfield message-textarea"></textarea>
                         </div>
 
                         <div class="sendemail-btn-holder">
-                            <button type="submit" class="sendemail-send-btn" data-toggle="modal" data-target="#myModal"><p style="color:#DFDFDF;">SEND MESSAGE</p></button>
+                            <button type="submit" class="message_send-send-btn" data-toggle="modal" name="message_send" id="message_send"  data-target="#myModal" ><p style="color:#DFDFDF;">SEND MESSAGE</p></button>
                         </div>
+
                     </div>
                     </form>
                 </div>  
             </div>
         </div>
+
+        
+        <div style="margin-top:80px;" class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="show_user" style="margin-bottom: 160px;" >
+                        <div class="col-sm-12" id="success_alert">
+                        </div>
+                         <div class="col-sm-12">
+                         <center>
+                        <button type="button" class="btn btn-success" onClick="window.location.reload();"  data-dismiss="modal">OKAY</button>
+                    </center>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_categories.js"></script>
 
 @endsection

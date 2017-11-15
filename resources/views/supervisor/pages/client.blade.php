@@ -10,7 +10,7 @@ width:50%;
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li>
-                <a href="/supervisor">Home</a>
+                <a href="/supervisor/dashboard">Home</a>
             </li>
             <li class="active">{{ $page }}</li>
         </ol>
@@ -32,6 +32,18 @@ width:50%;
     </div>
      
         <div id="pendingCustomer" class="tab-pane fade in active">
+
+            <div class="pull-right" style="margin:20px 20px 20px 0px">
+            <form class="form-inline" method="post" action="/supervisor/supervisor_search_client">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search_key1" id="search_key1">
+                </div>
+                <button type="button" class="btn btn-success" name="search_button" id="search_button">Search</button>
+            </form>
+            </div>
+
+
             <div class="panel-body" >
                 <div class="col-md-4 pull-right">
                     <div class="col-md-6">
@@ -49,7 +61,7 @@ width:50%;
                         </select>
                     </div>
                 </div>
-                <div class="table-responsive col-md-12" id="showHere" style="margin-top: 10px;">
+                <div class="table-responsive col-md-12" id="showHere_pending" style="margin-top: 10px;">
                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
                             <tr>
@@ -100,28 +112,39 @@ width:50%;
                             </div>
                         </div>
                     </div>
-                                    </div>
+                </div>
             </div>
         </div>
         <div id="activatedCustomer" class="tab-pane fade">
+
+            <div class="pull-right" style="margin:20px 20px 20px 0px">
+            <form class="form-inline" method="post" action="/supervisor/supervisor_search_client_activated">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search_key2" id="search_key2">
+                </div>
+                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
+            </form>
+            </div>
+
             <div class="panel-body" >
                 <div class="col-md-4 pull-right">
                     <div class="col-md-6">
-                        <select class="form-control " name="date_start" id="date_start1" style="width: 150px; border-radius: 20px;">
+                        <select class="form-control " name="date_start1" id="date_start1" style="width: 150px; border-radius: 20px;">
                             @foreach($clients_activated as $clients_activates)
                             <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-control " name="date_end" id="date_end1" style="width: 150px; border-radius: 20px;">
+                        <select class="form-control " name="date_end1" id="date_end1" style="width: 150px; border-radius: 20px;">
                             @foreach($clients_activated as $clients_activates)
                             <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="table-responsive col-md-12" id="showHere" style="margin-top: 10px;">
+                <div class="table-responsive col-md-12" id="showHere_activated" style="margin-top: 10px;">
                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
                             <tr>

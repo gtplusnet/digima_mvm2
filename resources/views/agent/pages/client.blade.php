@@ -5,11 +5,13 @@
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/agent">Home</a></li>
+             <li class="active">{{ $page }}</li>
         </ol>
     </div>
 </div>
 <div id="main-wrapper">
     <div class="tab-content ">
+
         <div class=" panel-primary">
             <div class="panel-heading row clearfix">
                 <div class="col-md-8">
@@ -24,7 +26,20 @@
                 
             </div>
         </div>
+
+        
         <div id="customer" class="tab-pane fade in active">
+        
+            <div class="pull-right" style="margin:20px 20px 20px 0px">
+            <form class="form-inline" method="post" action="/agent/search_client">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search_key1" id="search_key1">
+                </div>
+                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
+            </form>
+            </div>
+
             <div class="row">
                 <div class="panel-body">
                     <div class="col-md-4 pull-right">
@@ -43,7 +58,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="table-responsive col-md-12"  id="showHere">
+                    <div class="table-responsive col-md-12"  id="showHere_signup">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
@@ -173,7 +188,7 @@
                             </tbody>
                         </table>
                         
-                        
+                       {!! $clients->render() !!}   
                     </div>
                 </div>
             </div>
@@ -181,6 +196,17 @@
 
 
         <div id="pendingCustomer" class="tab-pane fade">
+
+            <div class="pull-right" style="margin:20px 20px 20px 0px">
+            <form class="form-inline" method="post" action="/agent/search_client_pending">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search_key12" id="search_key12">
+                </div>
+                <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Search</button>
+            </form>
+            </div>
+
             <div class="row">
                 <div class="panel-body">
                     <div class="col-md-4 pull-right">
@@ -199,7 +225,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="table-responsive col-md-12"  id="showHere1">
+                    <div class="table-responsive col-md-12"  id="showHere_pending">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
@@ -231,13 +257,25 @@
                             </tbody>
                         </table>
                         
-                        
+                        {!! $clients_pending->render() !!}   
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="activatedCustomer" class="tab-pane fade">
+
+            <div class="pull-right" style="margin:20px 20px 20px 0px">
+            <form class="form-inline" method="post" action="/agent/search_client">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search_key3" id="search_key3">
+                </div>
+                <button type="button" class="btn btn-success" name="search_button123" id="search_button123">Search</button>
+            </form>
+            </div>
+
+
             <div class="row">
                 <div class="panel-body">
                     <div class="col-md-4 pull-right">
@@ -256,7 +294,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="table-responsive col-md-12"  id="showHere2">
+                    <div class="table-responsive col-md-12"  id="showHere_activated">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
@@ -286,7 +324,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                                    
+                        {!! $clients_activated->render() !!}               
                     </div>
                 </div>
             </div>
@@ -327,7 +365,8 @@ font-size:20px;
 }
 </style>
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/assets/js/global.ajax.js"></script>
 <script src="/assets/js/agent/agent_client.js"></script>
 @endsection
 

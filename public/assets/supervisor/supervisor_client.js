@@ -1,4 +1,54 @@
 
+$(document).ready(function(){
+
+		$(document).on('click','#search_button',function()
+		{
+			var search_key = $('#search_key1').val();
+			alert(search_key);
+			
+
+			$.ajax({
+
+				type:'POST',
+				url:'/supervisor/supervisor_search_client',
+				data:{
+					search_key: search_key,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert("supervisor");
+					$('#showHere_pending').html(data);
+					
+			    });
+	    });
+});
+	
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button1',function()
+		{
+			var search_key_act = $('#search_key2').val();
+			alert(search_key_act);
+			
+
+			$.ajax({
+
+				type:'POST',
+				url:'/supervisor/supervisor_search_client_activated',
+				data:{
+					search_key_act: search_key_act,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert("supervisor_activated");
+					$('#showHere_activated').html(data);
+					
+			    });
+	    });
+});
 
 
 $(document).ready(function(){
@@ -13,7 +63,7 @@ $(document).ready(function(){
 			data:{date_start: date_start,date_end: date_end},
 			dataType:'text',
 		}).done(function(data){
-				$('#showHere').html(data);
+				$('#showHere_pending').html(data)
 			});
 	});
 });
@@ -23,16 +73,19 @@ $(document).ready(function(){
 	$('#date_end1').change(function(){
 		var date_start1 = $('#date_start1').val();
 		var date_end1 = $('#date_end1').val();
+		alert(date_start1+date_end1);
 		$.ajax({
 			type:'POST',
 			url:'/supervisor/get_client1',
 			data:{date_start1: date_start1,date_end1: date_end1},
 			dataType:'text',
 		}).done(function(data){
-				$('#showHere1').html(data);
+				$('#showHere_activated').html(data);
 			});
 	});
 });
+
+
 
 $(document).ready(function(){
 

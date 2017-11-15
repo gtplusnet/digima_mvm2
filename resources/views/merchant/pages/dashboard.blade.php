@@ -2,6 +2,7 @@
 @section('content')
 <!-- <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" /> -->
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
 {{-- <?php
 
  $source_url = 'http://www.facebook.com/';
@@ -20,6 +21,8 @@
    echo isset($json['count'])?intval($json['count']):0;
 
 ?> --}}
+
+
 <div class="page-title">
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
@@ -93,7 +96,7 @@
          </div>
       </div>
       <!--   Others-->
-      <div class="col-lg-3 col-md-6">
+   <!--    <div class="col-lg-3 col-md-6">
          <div class="panel info-box panel-white">
             <div class="panel-body">
                <div class="info-box-stats">
@@ -111,7 +114,7 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> -->
       {{-- mula dito james --}}
       <div class="content">
          <div class="container">

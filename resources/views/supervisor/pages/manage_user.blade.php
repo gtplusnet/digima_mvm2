@@ -15,7 +15,7 @@ text-align: center;
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="/">Home</a></li>
+            <li><a href="/supervisor/dashboard">Home</a></li>
             <li class="active">{{ $page }}</li>
         </ol>
     </div>
@@ -23,6 +23,9 @@ text-align: center;
 <div id="main-wrapper">
     <!---james modal-->
     <div style="margin-top: 150px;" class="modal fade" id="myModal" role="dialog">
+
+
+
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -32,6 +35,7 @@ text-align: center;
                 <div class="modal-body" style="margin-bottom: 150px;" >
                     <div id="team_success">
                     </div>
+
                     <div class="col-sm-12">
                         <div class="form-group col-md-3">
                             <label for="business_name" >Team Name</label>
@@ -228,22 +232,27 @@ text-align: center;
             <form class="form-horizontal">
                 {{csrf_field()}}
                 
-                <div class="table-responsive">
+                <div class="table-responsive" id="showHere_team">
                     <div class="col-md-12">
                         <div class="pull-left" style="margin:20px 0px 20px 20px">
                             <button type="button"  data-toggle="modal" data-target="#myModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
                         </div>
+
                         <div class="pull-right" style="margin:20px 20px 20px 0px">
-                            <form class="form-inline">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="search_key" id="search_key">
-                                    
-                                </div>
+                            <form class="form-inline" method="post"  action="/supervisor/supervisor_search_team" method="post">
+                            {{csrf_field()}}
+                            <div class="form-inline">
+                                <input type="text" class="form-control" name="search_key1" id="search_key1">
+                                 <button type="button" class="btn btn-success" name="search_button_team" id="search_button_team">Search</button>
+                            </div>
+                            
                             </form>
                         </div>
+
                     </div>
                     <div id="team_delete_success">
                     </div>
+
                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
                             <tr>
@@ -278,21 +287,26 @@ text-align: center;
                 </div>
             </form>
         </div>
+
         <div  class="tab-pane fade" id="agent">
             <form class="form-horizontal">
                 {{csrf_field()}}
                 
                 <div class="table-responsive" id="agent_delete_success">
                     <div class="col-md-12">
+
                         <div class="pull-left" style="margin:20px 0px 20px 20px">
                             <button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
                         </div>
+
                         <div class="pull-right" style="margin:20px 20px 20px 0px">
-                            <form class="form-inline">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="search_key" id="search_key">
-                                    
-                                </div>
+                            <form class="form-inline" method="post"  action="/supervisor/supervisor_search_agent" method="post">
+                            {{csrf_field()}}
+                            <div class="form-inline">
+                                <input type="text" class="form-control" name="search_key2" id="search_key2">
+                                <button type="button" class="btn btn-success" name="search_button_agent" id="search_button_agent">Search</button>
+                            </div>
+                             
                             </form>
                         </div>
                     </div>
@@ -414,7 +428,6 @@ text-align: center;
         </div>
         {{--  end modal --}}
     </div>
-</div>
 </div>
 <style>
 .li_style

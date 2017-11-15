@@ -6,7 +6,7 @@
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="/merchant">Home</a></li>
+            <li><a href="/merchant/dashboard">Home</a></li>
             <li class="active">{{ $page }}</li>
         </ol>
     </div>
@@ -22,9 +22,6 @@
                 </div>
                 <div class="panel-body"> 
                 <form class="form-horizontal" method="POST" action="/merchant/messages" style="">
-
-                <div id="showHereSuccess">
-                </div>
             
                 @if (Session::has('danger'))
                 <div class="alert alert-danger"><center>{{ Session::get('danger') }}</center></div>
@@ -43,7 +40,7 @@
                             </thead>
                             @foreach($guest_messages as $data)
                             <tr>
-                            <td><p  class="myModals" data-id="{{$data->email}}">{{$data->email}}</p></td>
+                            <td><a  href="mailto:{{$data->email}}" data-id="{{$data->email}}">{{$data->email}}</p></td>
                             <td>{{$data->subject}}</td>
                             <td>{{$data->messages}}</td>
                             <td>
@@ -62,7 +59,8 @@
     </div><!-- Row -->
     <!-- Row -->                    
 </div>
- <style type="text/css">
+
+<!--  <style type="text/css">
 
             .modal-header
             {
@@ -129,7 +127,6 @@
                 font-size: 15px;
                 padding: 13px 20px 0px 20px;
                 border-radius: 3px;
-                /*box-shadow: 0 9px #999;*/
             }
             </style>
 
@@ -137,25 +134,48 @@
             <script>
                 $(document).ready(function()
                 {
-                $('.myModals').click(function()
-                {
-                    var mail=$(this).data('id');
-                    $('#myEmail').val(mail);
-                    $('#myModal').modal('show');
+                    $('.myModals').click(function()
+                    {
+                        var mail=$(this).data('id');
+                        $('#myEmail').val(mail);
+                        $('#myModal').modal('show');
 
-                });
+                    });
+                    // $('#sub').click(function()
+                    // {
+
+                    //     var email = $('#email').val();
+                    //     var subject = $('#subject').val();
+                    //     var messages = $('#messages').val();
+
+                    //      $.ajax({
+                    //         type:'POST',
+                    //         url:'/merchant/messages/reply',
+                    //         data:{email: email,subject: subject,messages: messages},
+                    //         dataType:'text',
+                    //     }).done(function(data)
+                    //     {   
+                    //         $(".myModal").show();
+                    //         $("#myModal").modal("hide");
+                    //         // $('#showHereSuccess').html(data);
+                    //     });
+
+
+
+
+                    });
                 });
             </script>
 
             <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">    
-                <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <p class="sendemail-title">MAIL TO </p>
                     </div>
-                    <form role="form" action="/merchant/messages/reply/" method="POST">
+                    <form role="form" action="/merchant/messages/reply" method="post">
+
                         {{csrf_field()}}
 
                         <div class="modal-body">
@@ -164,7 +184,6 @@
                             <input type="text" name="email" class="sendemail-textfield" id="myEmail" readonly="">
                             <input type="hidden" name="business_id" value="">
                         </div>
-
 
                         <div class="sendemail-textfield-holder">
                             <label for="input-subject" class="sendemail-labels">Subject:</label>
@@ -176,18 +195,17 @@
                         </div>
 
                         <div class="sendemail-btn-holder">
-                            <button type="submit" class="sendemail-send-btn" data-toggle="" data-target="#myModal"><p style="color:#DFDFDF;">REPLY</p></button>
+                            <button type="button" id="sub" class="sendemail-send-btn" ><p style="color:#DFDFDF;">REPLY</p></button>
                         </div>
                     </div>
                  </form>
                 </div>  
             </div>
-        </div>
+        </div> -->
+
 
 <script type="text/javascript" src="/assets/admin/merchant/assets/pages/category/category.js"></script>
-
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 @endsection

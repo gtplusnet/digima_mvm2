@@ -4,7 +4,7 @@
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="/merchant">Home</a></li>
+            <li><a href="/merchant/dashboard">Home</a></li>
             <li class="active">{{ $page }}</li>
         </ol>
     </div>
@@ -30,7 +30,7 @@
                             <tbody>
                                 <tr>
                                     <td>Platinum</td>
-                                    <td><a href="#" class="dropdown-toggle waves-effect waves-button waves-classic">ref1234</a></td>
+                                    <td><a href="#" class="dropdown-toggle waves-effect waves-button waves-classic">Reference Number</a></td>
                                     <td>Paid</td>
                                 </tr>
                                
@@ -42,7 +42,9 @@
         </div>
 
         <div class="invoice col-md-7">
-            <form class="form-horizontal" method="POST" action="/merchant/payment/{id}/{name}" style="">
+
+            <form class="form-horizontal" method="POST" action="/merchant/bills">
+            {{csrf_field()}}
             <div class="panel panel-white">
                 <div class="panel-body">
                     <div class="row">
@@ -58,14 +60,23 @@
                             <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
                         </div>
                         <div class="col-md-12">
-                            <hr>
-                            <p>
-                                <strong>Invoice to</strong>
-                                <br>
-                                {{session('full_name')}}<br>
-                                <br>
+                            
+                             <div class="col-md-12">
+                                <hr>
+                                <p>
+                                    <h3>Invoice to</h3><br>
+                                </p>
                                 
-                            </p>
+                                <div class="col-md-12">
+                                    <strong>{{session('full_name')}}</strong>
+                                </div>
+                                <div class="col-md-12">
+                                    <strong>  {{$bills->business_phone}} / {{$bills->business_alt_phone}} </strong>
+                                </div>
+                                <div class="col-md-12">
+                                    <strong> {{session('email')}}   </strong>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <table class="table table-striped">

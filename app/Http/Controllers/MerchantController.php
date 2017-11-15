@@ -239,9 +239,7 @@ class MerchantController extends Controller
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->first();
-
-
+                          ->get();
     return view('front.pages.payment_merchant', $data);
   }
 
@@ -281,16 +279,26 @@ class MerchantController extends Controller
 	 	  return view ('merchant.pages.view_info', $data);		
 	  }
 
-    public function add_other_info(Request $request)//
+    public function update_merchant_info(Request $request)//
     {
+      $data["twitter_url"] = $request->twitter_url;
+      $data["facebook_url"]    = $request->facebook_url;
+      TblBusinessModel::where('business_id',session('business_id'))->update($data);
+       Session::flash('success_merchant', 'Successfully Updated!');
+      return Redirect::back();  
+   }
     
-      Self::allow_logged_in_users_only();
+
+    public function update_other_info(Request $request)//
+    {
+      
       $data["company_information"] = $request->company_information;
       $data["business_website"]    = $request->business_website;
       $data["year_established"]    = $request->year_established;
       TblBusinessOtherInfoModel::where('business_id',session('business_id'))->update($data);
-     return "<div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>";
-    }
+     return Redirect::back();  
+   }
+    
 
     public function update_hours(Request $request)
     {
@@ -310,6 +318,7 @@ class MerchantController extends Controller
     
     }
 
+
      public function add_payment_method(Request $request)
     {
 
@@ -317,8 +326,7 @@ class MerchantController extends Controller
       $data["payment_method_info"] = "not available";
       $data["business_id"]         = session("business_id");
       TblABusinessPaymentMethodModel::insert($data); 
-      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Added.</div>";
-  
+      return "<div class='alert alert-success'><strong>Success!</strong> Payment Method Added.</div>";
     }
 
      public function delete_payment_method(Request $request)
@@ -326,7 +334,7 @@ class MerchantController extends Controller
       $id = $request->paymentMethodId;
       TblABusinessPaymentMethodModel::where('payment_method_id',$id)->delete();
       Session::flash('danger', "Payment Deleted");
-      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method deleted.</div>";
+      return "<div class='alert alert-danger'><strong>Success!</strong> Payment Method deleted.</div>";
     }
 
     public function delete_messages($id)
@@ -342,6 +350,13 @@ class MerchantController extends Controller
       $data["payment_method_name"] = $request->payment_method_name;
       TblPaymentMethod::where($data)->update($data);
       return Redirect::back();
+    }
+
+    public function merchant_change_password()
+    {
+
+      echo "Wala Pang Code";
+
     }
 
     public function add_business_category(Request $request)
@@ -444,12 +459,12 @@ class MerchantController extends Controller
 		  Self::allow_logged_in_users_only();
 
 		  $data['page']			    = 'Category';
-      $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->paginate(15);
+      $data['_category']    = TblBusinessCategoryModel::paginate(6);
       $data['_subcategory'] = TblBusinessTagCategoryModel::where('business_id',session('business_id'))
                             ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
                             ->paginate(10);
 
-      $data['_keywords'] = TblBusinessKeywordsModel::get();
+      $data['_keywords'] = TblBusinessKeywordsModel::where('business_id',session('business_id'))->paginate(10);
 		  return view('merchant.pages.category', $data);		
   	}
 
@@ -516,22 +531,11 @@ class MerchantController extends Controller
       return view ('merchant.pages.messages', $data);  
     }
 
-
-    public function messages_reply(Request $request)
-    {
-
-      
-
-
-
-      alert(123);
-
-    }
-
-  	public function bills()
+  	public function bills(Request $request)
 	  {
 		  Self::allow_logged_in_users_only();
 		  $data['page']	= 'Bills';
+      $data['bills'] = TblBusinessModel::where('business_id',session('business_id'))->first();
 		  return view ('merchant.pages.bills', $data);		
 	  }
 

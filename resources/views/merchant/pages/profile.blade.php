@@ -14,7 +14,7 @@ th
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
       <ol class="breadcrumb">
-         <li><a href="/merchant">Home</a></li>
+         <li><a href="/merchant/dashboard">Home</a></li>
          <li class="active">{{ $page }}</li>
       </ol>
    </div>
@@ -27,22 +27,29 @@ th
                <!-- Nav tabs -->
                <div role="tabpanel">
                   <ul class="nav nav-pills" role="tablist">
+
                      <li role="presentation" class="active"><a href="#MI" role="tab" data-toggle="tab" aria-expanded="true">Merchant Information</a></li>
                      <li role="presentation" class=""><a href="#OI" role="tab" data-toggle="tab" aria-expanded="false">Other Information</a></li>
                      <li role="presentation" class=""><a href="#BH" role="tab" data-toggle="tab" aria-expanded="false">Business Hours</a></li>
                      <li role="presentation" class=""><a href="#BI" role="tab" data-toggle="tab" aria-expanded="false">Business Image</a></li>
+
                      <li role="presentation" class=""><a href="#PM" role="tab" data-toggle="tab" aria-expanded="false">Payment Method</a></li>
+
+                      <li role="presentation" class=""><a href="#CP" role="tab" data-toggle="tab" aria-expanded="false">Change Password</a></li>
+
                   </ul>
                </div>
                <!-- Tab panes -->
+
                <div class="tab-content">
-                  <div style="margin-top:10px;" id="show_alert_here">
-                     @if(Session::has('success'))
-                     <div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>
-                     @endif 
-                  </div>
+                
                   <div role="tabpanel" class="tab-pane fade active in" id="MI">
-                     <form class="form-horizontal">
+                     <form class="form-horizontal" method="POST" action="/merchant/update_merchant_info">
+                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            @if(Session::has('success_merchant'))
+                            <div class='alert alert-success'><strong>Success!</strong> Information Updated.</div>
+                            @endif 
+
                         <div class="form-group" style="margin-top:50px;">
                            <label for="business_name" class="col-sm-2 control-label">Business Name</label>
                            <div class="col-sm-10">
@@ -79,16 +86,25 @@ th
                               <input type="text" class="form-control" id="input-default" value="{{$merchant_info->postal_code}}" readonly>
                            </div>
                         </div>
+                      
                         <div class="form-group">
                            <label for="twitter_url" class="col-sm-2 control-label">Twitter</label>
                            <div class="col-sm-4">
-                              <input type="text" class="form-control" id="twitter_url" value="{{$merchant_info->twitter_url}}" readonly>
+                              <input type="text" class="form-control" id="twitter_url" name="twitter_url" value="{{$merchant_info->twitter_url}}" >
                            </div>
                            <label for="facebook_url" class="col-sm-2 control-label">Facebook</label>
                            <div class="col-sm-4">
-                              <input type="text" class="form-control" id="facebook_url" value="{{$merchant_info->facebook_url}}" readonly>
+                              <input type="text" class="form-control" id="facebook_url" name="facebook_url" value="{{$merchant_info->facebook_url}}">
                            </div>
                         </div>
+                     
+                        <div class="col-md-15">
+                           <div class="text-right">
+                              <button type="submit" class="btn btn-primary" id="update" style="padding: 5px 18px;">Update</button>
+                           </div>
+                        </div>
+
+
                      </form>
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="OI">
@@ -113,13 +129,15 @@ th
                               <input type="text" class="form-control" id="year_established"  name="year_established" value="{{$other_info->year_established}}">
                            </div>
                         </div>
+
                         <div class="col-md-15">
                            <div class="text-right">
-                              <button type="button" class="btn btn-primary" id="updateInfo" style="padding: 5px 18px;">Update</button>
+                              <button type="button" class="btn btn-primary" id="update" style="padding: 5px 18px;">Update</button>
                            </div>
                         </div>
                      </form>
                   </div>
+
                   <div role="tabpanel" class="tab-pane fade" method="POST" id="BH">
                      <form class="form-horizontal"  action="/merchant/profile/update_hours">
                         <div class="form-group" style="margin-top:50px;">
@@ -322,17 +340,55 @@ th
                            </tr>
                            @endforeach
                         </table>
-                        <div>
                         {!! $_payment_method->render()!!}
-                        <div class="col-md-12">
                         <div class="col-md-4">
-                           <label class="control-label" style="text-align: left;margin-bottom:10px;">Payment Method</label>
+                           <label class="control-label" style="text-align: left;margin-bottom:10px;">&nbsp;&nbsp;Payment Method</label>
                            <div  class="col-md-12">
                               <input type="text" class="form-control" id="paymentMethodName"  name="payment_method_name">
                            </div>
                            <div class="col-md-12">
                               <button type="button" style="padding: 5px;margin-top:10px;" name="save_payment" id="savePayment" class="save_payment btn btn-primary" id="save_payment";>Add Payment</button>
                               
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+
+
+                  <div role="tabpanel" class="tab-pane fade" id="CP">
+                      <form class="form-horizontal" method="POST" action="/merchant/change_password">
+                        <br><br><br>
+                        <div class="form-group"> 
+                             <div class="col-sm-3">
+                           <strong style="font-size: 18px;">Change Password</strong>
+                           </div>
+                        </div>
+                       
+                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                           <label for="input-Default" class="col-sm-2 control-label">Enter Current Password</label>
+                           <div class="col-sm-3">
+                              <input type="Password" class="form-control" id="" name="" value="">
+                           </div>
+                        </div>
+
+                        <div class="form-group">
+                           <label for="input-Default" class="col-sm-2 control-label">New Password</label>
+                           <div class="col-sm-3">
+                              <input type="Password" class="form-control" id="" name="" value="">
+                           </div>
+                        </div>
+
+                        <div class="form-group">
+                           <label for="input-Default" class="col-sm-2 control-label">Confirm New Password</label>
+                           <div class="col-sm-3">
+                              <input type="Password" class="form-control" id=""  name="" value="">
+                           </div>
+                        </div>
+
+                       <div class="col-md-5">
+                           <div class="text-right">
+                              <button type="submit" class="btn btn-primary" id="update" style="padding: 5px 18px;">Submit</button>
                            </div>
                         </div>
                      </form>

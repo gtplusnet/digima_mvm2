@@ -46,7 +46,7 @@
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
       <ol class="breadcrumb">
-         <li><a href="/merchant">Home</a></li>
+         <li><a href="/merchant/dashboard">Home</a></li>
          <li class="active">{{ $page }}</li>
       </ol>
    </div>
@@ -82,11 +82,15 @@
                         @endforeach   
                      </tbody>
                   </table>
+                  {!! $_category->render() !!}
                   <div class="web-content">
                      <button type="submit" class="form-button center" name="business_id" >Add Tag</button>
                   </div>
                </div>
             </div>
+
+
+
             <div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
                <div class="website-title">
                   Tag List
@@ -102,6 +106,8 @@
                      <center>{{ Session::get('message1') }}</center>
                   </div>
                   @endif  
+
+                  
                   <table class="table table-bordered" style="margin-top:10px;">
                      <thead>
                         <tr>
@@ -123,6 +129,9 @@
                   </table>
                </div>
             </div>
+
+
+
          </form>
       </div>
       <div class="row">
@@ -175,6 +184,7 @@
                         @endforeach
                      </tbody>
                   </table>
+                      {!! $_keywords->render() !!}
                </div>
             </div>
          </form>

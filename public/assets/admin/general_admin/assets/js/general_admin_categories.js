@@ -21,6 +21,7 @@ function manage_categories()
 			update_category();
 			sub_category_action();
 			add_sub_category();
+			message_send();
 		});
 	}
 	function save_category()
@@ -59,9 +60,6 @@ function manage_categories()
 				$('#showHere3').html(data);
 				$('#showHere3').show();
 				$('#ajax-loader').hide();
-				setTimeout(function(){
-					   location.reload();
-					}, 1000);
 		    });
 	    });
 	}
@@ -255,6 +253,34 @@ function manage_categories()
 		 		});
 	    });
 	}
+
+
+
+	//Dagdag ko lang to SAMPLE LANG//
+
+	    function message_send()
+    {
+        $('.message_send').click(function(){
+        	Alert('123');
+			var email = $('#email').val();
+			var subject = $('#subject').val();
+			var messages = $('#messages').val();
+			$.ajax({
+				type:'POST',
+				url:'/guest/add_messages',
+				data:{email: email,subject: subject,messages:messages},
+				dataType:'text',
+			}).done(function(data)
+					{
+					$('#myModal').modal('show');
+		 		    $('#successModal').modal('show');
+		 		    setTimeout(function(){
+					   location.reload();
+					}, 1000);
+				});
+	    });
+	    
+    }
 
 }
 
