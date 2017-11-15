@@ -145,10 +145,10 @@ class MerchantController extends Controller
         $fb = TblBusinessModel::where("business_id",session('business_id'))->first();
         if($fb->facebook_url==""||$fb->facebook_url==null)
         {
-          $data['fb']         = "99999";
+          $data['fb']         = "0";
           if($views==0)
           {
-            $data['page_view']  ="99999";
+            $data['page_view']  ="0";
           }
           else
           {
@@ -158,7 +158,7 @@ class MerchantController extends Controller
         }
         else
         {
-          $fb_page    = $fb->facebook_url;
+          $fb_page      = $fb->facebook_url;
           $access_token = 'EAAD6rZBdEZBzABAFQIyH9AYydJUw1MlR7gVTCjqKLG7rVFQZBNTgFcVPE1UHfbGtCsHY12R5pdRIoDPp4i6BSy5gU9rUGZBnC3snzuj2VU7ZBZA4csIYLSGPGnovoayRhZBb3qUTKIXvkyMdH5TFWyo2IoArQ8oTj4g6sZC4l3tJ0QZDZD';
           $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
           $curl         = curl_init($url);
@@ -170,7 +170,7 @@ class MerchantController extends Controller
           $data['fb']   = $details['fan_count'];
           if($views==0)
           {
-            $data['page_view']  ="99999";
+            $data['page_view']  ="0";
           }
           else
           {
@@ -609,24 +609,5 @@ class MerchantController extends Controller
         $data['coordinates1'] = Self::getCoordinates_lat($address);
         return view ('merchant.pages.sample1',$data);
     }
-
-    // function getCoordinates_long($address){
-    // $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
-    // $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
-    // $response = file_get_contents($url);
-    // $json = json_decode($response,TRUE); //generate array object from the response from the web
-    // // $lat = $json['results'][0]['geometry']['location']['lat'];
-    // $long = $json['results'][0]['geometry']['location']['lng'];
-    // return $long;
-    // }
-    // function getCoordinates_lat($address){
-    // $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
-    // $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
-    // $response = file_get_contents($url);
-    // $json = json_decode($response,TRUE); //generate array object from the response from the web
-    // $lat = $json['results'][0]['geometry']['location']['lat'];
-    // return $lat;
-    // }
-
 }
   

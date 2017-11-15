@@ -201,39 +201,39 @@ width:100%;
 				</div>
 			</div>
 			<div class="col-md-12">
-			<div class="payment-containers col-md-12">
-					<div class="payment-title col-md-12">
-						SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
-						<br>
-					</div>
-					<div class="col-md-12 payment-content " style="margin-bottom:50px;">
-						@foreach($_membership as $membership)
-						<div class="col-md-5 package-container">
-							<div class="membership-offer">
-								{{$membership->membership_name}}
-							</div>
-							<hr>
-							<div class="membership-price">
-								<span >${{$membership->membership_price}}  </span>
-							</div>
-							<hr>
-							<div class="membership-details">
-								<p class="membership-details-text">
-									Sadly, none of them were ok, and I can't seem to find out any other option.
-									The first and second button are displayed
-									on same line, but the third is displayed lower... Can you help me?
-								</p>
-							</div>
-							<div class="membership-btn">
-								<a href="/registration">
-									<button type="button" class="membership-button">GET STARTED NOW</button>
-								</a>
-							</div>
+				<div class="payment-containers col-md-12 " style="margin-bottom:50px;">
+						<div class="payment-title col-md-12">
+							SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
+							<br>
 						</div>
-						@endforeach
-						
-					</div>
-			</div>
+						<div class="col-md-12 payment-content " style="margin-bottom:100px;">
+							@foreach($_membership as $membership)
+							<div class="col-md-5 package-container">
+								<div class="membership-offer">
+									{{$membership->membership_name}}
+								</div>
+								<hr>
+								<div class="membership-price">
+									<span >${{$membership->membership_price}}  </span>
+								</div>
+								<hr>
+								<div class="membership-details">
+									<p class="membership-details-text">
+										Sadly, none of them were ok, and I can't seem to find out any other option.
+										The first and second button are displayed
+										on same line, but the third is displayed lower... Can you help me?
+									</p>
+								</div>
+								<div class="membership-btn">
+									<a href="/registration">
+										<button type="button" class="membership-button">GET STARTED NOW</button>
+									</a>
+								</div>
+							</div>
+							@endforeach
+							
+						</div>
+				</div>
 		   </div>
 		</div>
 	</div>
