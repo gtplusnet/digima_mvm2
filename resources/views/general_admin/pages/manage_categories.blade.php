@@ -76,6 +76,7 @@
 	<div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
 		<img src="/assets/img/loading.gif"/>
 	</div>
+
 	<div id="home" class=" col-md-12 tab-pane fade in active">
 		<div class="table-responsive" id="showHere3">
 			@if (Session::has('message'))
@@ -300,6 +301,7 @@
 		</div>
 	</div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_categories.js"></script>
 {{-- <script src="/assets/js/global.ajax.js"></script> --}}

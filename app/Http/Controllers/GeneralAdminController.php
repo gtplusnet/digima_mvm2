@@ -374,7 +374,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_invoice.invoice_id',"asc")
                           ->get();
-          return view('general_admin.pages.manage_invoice',$data);
+      return view('general_admin.pages.manage_invoice',$data);
     }
     public function general_admin_resend_invoice(Request $request)
     {
@@ -936,8 +936,8 @@ class GeneralAdminController extends Controller
     }
 
 
-
-
+  
+  
 
     public function edit_admin_submit(Request $request)
   {
@@ -1094,7 +1094,6 @@ class GeneralAdminController extends Controller
       return view('general_admin.pages.invoice');
     }
 
-    
       public function pdfview(Request $request)
     {
         // $items = DB::table("tbl_business")->get();
@@ -1107,5 +1106,143 @@ class GeneralAdminController extends Controller
 
         return view('pdfview');
     }
+
+
+
+     public function  search_payment_monitoring(Request $request)
+    {
+      $search_key = $request->search_key;
+      $data['business_list'] = TblPaymentModel::where('payment_status','submitted')
+                          ->where('business_name','like','%'.$search_key.'%')
+                          ->join('tbl_business','tbl_business.business_id','=','tbl_payment.business_id')
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->get();
+      return view('general_admin.pages.search_payment_monitoring',$data);
+    }
+
+     public function  search_manage_invoice(Request $request)
+    {
+      $search_key1 = $request->search_key1;
+      $data['_invoice'] = TblBusinessModel::where('business_name','like','%'.$search_key1.'%')
+                          ->where('business_status', 4)->orWhere('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->orderBy('tbl_invoice.invoice_id',"asc")
+                          ->get();
+
+      return view('general_admin.pages.search_manage_invoice',$data);
+    }
+
+    public function search_send_invoice(Request $request)
+    {
+      $search_key1 = $request->search_key1;
+      $data['clients'] = TblBusinessModel::where('business_name','like','%'.$search_key1.'%')->where('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+      return view('general_admin.pages.search_merchant_invoice',$data);
+    }
+
+    public function search_agent(Request $request)
+    {
+       $search_key2 = $request->search_key2;
+       $data['agentAdded'] = TblBusinessModel::where('business_name','like','%'.$search_key2.'%')->where('business_status', 20)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+       return view('general_admin.pages.search_agent_added',$data);
+
+    }
+
+    public function search_pending(Request $request)
+    {
+        $search_key3 = $request->search_key3;
+        $data['pending_clients'] = TblBusinessModel::where('business_name','like','%'.$search_key3.'%')
+                          ->where('business_status', 4)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_pending',$data);
+    }
+
+    public function search_registered(Request $request)
+    {
+      
+        $search_key4 = $request->search_key4;
+        $data['registered_clients'] = TblBusinessModel::where('business_name','like','%'.$search_key4.'%')
+                          ->where('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_registered',$data);
+        
+    }
+
+    public function search_merchant(Request $request)
+    {
+
+      $search_key_merchant = $request->search_key_merchant;
+      $data['_merchant']  = TblBusinessModel::where('business_name','like','%'.$search_key_merchant.'%')
+                          ->where('business_status',5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->get();
+       return view('general_admin.pages.search_merchant',$data);
+    }
+
+
+    public function search_agent_user(Request $request)
+    {
+      $search_key_agent             = $request->search_key_agent;
+      $data['_data_agent']          = TblAgentModel::where('email','like','%'.$search_key_agent.'%')
+                                      ->get();
+      return view('general_admin.pages.search_agent',$data);
+    }
+
+    public function search_team_user(Request $request)
+    {
+      
+      $search_key_team              = $request->search_key_team;
+      $data['_data_team']           = TblTeamModel::where('team_name','like','%'.$search_key_team.'%')
+                                      ->get();
+      return view('general_admin.pages.search_team',$data);
+    }
+
+     public function search_supervisor_user(Request $request)
+    {
+      
+      $search_key_supervisor        = $request->search_key_supervisor;
+      $data['_data_supervisor']     = TblSupervisorModels::where('email','like','%'.$search_key_supervisor.'%')
+                                      ->get();
+   
+      return view('general_admin.pages.search_supervisor',$data);
+     
+    }
+
+    public function search_admin_user(Request $request)
+    {
+      
+      $search_key_admin        = $request->search_key_admin;
+      $data['_data_admin']     = TblAdminModels::where('email','like','%'.$search_key_admin.'%')
+                                ->get();
+   
+      return view('general_admin.pages.search_admin',$data);
+     
+    }
+
 
 }

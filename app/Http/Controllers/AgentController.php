@@ -161,7 +161,7 @@ class AgentController extends Controller
                           ->orderBy('tbl_business.date_created',"asc")
                           ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
-                          ->get();
+                          ->paginate(10);
         
         $data['clients_pending'] = TblBusinessModel::where('business_status', 4)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -169,14 +169,14 @@ class AgentController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                         ->paginate(10);
 
         $data['clients_activated'] = TblBusinessModel::where('business_status', 5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                           ->paginate(10);
 
     	return view ('agent.pages.client', $data);	
 	}
@@ -191,36 +191,36 @@ class AgentController extends Controller
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                           ->paginate(10);
 		return view('agent.pages.filtered',$data);
 	}
-	// public function get_client1(Request $request)
-	// {
-	// 	Self::allow_logged_in_users_only();
-	// 	$s_date = $request->date_start1;
-	// 	$e_date = $request->date_end1;
-	// 	$data['clients'] = TblBusinessModel::where('business_status',4)
-	// 					  ->whereBetween('date_created',[$s_date,$e_date])
-	// 					  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	//                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	//                          ->orderBy('tbl_business.date_created',"asc")
- 	//                          ->get();
-	// 	return view('agent.pages.filtered1',$data);
-	// }
+	public function get_client1(Request $request)
+	{
+		Self::allow_logged_in_users_only();
+		$s_date = $request->date_start1;
+		$e_date = $request->date_end1;
+		$data['clients'] = TblBusinessModel::where('business_status',4)
+						  ->whereBetween('date_created',[$s_date,$e_date])
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ 	                         ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ 	                         ->orderBy('tbl_business.date_created',"asc")
+ 	                          ->paginate(10);
+		return view('agent.pages.filtered1',$data);
+	}
 
-	// public function get_client2(Request $request)
-	// {
-	// 	Self::allow_logged_in_users_only();
-	// 	$s_date = $request->date_start2;
-	// 	$e_date = $request->date_end2;
-	// 	$data['clients'] = TblBusinessModel::where('business_status',5)
-	// 					  ->whereBetween('date_created',[$s_date,$e_date])
-	// 					  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	//                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	//                          ->orderBy('tbl_business.date_created',"asc")
- 	//                          ->get();
-	// 	return view('agent.pages.filtered2',$data);
-	// }
+	public function get_client2(Request $request)
+	{
+		Self::allow_logged_in_users_only();
+		$s_date = $request->date_start2;
+		$e_date = $request->date_end2;
+		$data['clients'] = TblBusinessModel::where('business_status',5)
+						  ->whereBetween('date_created',[$s_date,$e_date])
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ 	                         ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ 	                         ->orderBy('tbl_business.date_created',"asc")
+ 	                          ->paginate(10);
+		return view('agent.pages.filtered2',$data);
+	}
 
 	public function get_client_transaction(Request $request)
 	{
@@ -348,12 +348,48 @@ class AgentController extends Controller
 		return view ('agent.pages.add_client', $data);		
 	}
 
+	public function search_client(Request $request)
+    {
+      $search_key = $request->search_key;
+      $data['clients'] = TblBusinessModel::where('business_status',1)->where('business_name','like','%'.$search_key.'%')
+      		             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ 	                     ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ 	                     ->paginate(10);
+      return view('agent.pages.search_blade',$data);
+
+    }
+
+    public function search_client_pending(Request $request)
+    {
+      $search_key1 = $request->search_key1;
+      $data['clients_pending'] = TblBusinessModel::where('business_status',4)->where('business_name','like','%'.$search_key1.'%')
+      						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ 	                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ 	                            ->paginate(10);
+      return view('agent.pages.search_blade1',$data);
+
+    }
+
+     public function search_client_activated(Request $request)
+    {
+   
+     $search_key2 = $request->search_key2;
+     $data['clients_activated'] = TblBusinessModel::where('business_status',5)->where('business_name','like','%'.$search_key2.'%')
+      						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ 	                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ 	                            ->paginate(10);
+      return view('agent.pages.search_blade2',$data);
+
+    }
+
+
+
 	public function filter_clients(request $request)
 	{
 	    Self::allow_logged_in_users_only();
 		$sdate = $request->start_date;
 		$edate = $request->end_date;
-		dd($sdate.$edate);
+	
 	}
 	public function get_city(Request $request)
     {

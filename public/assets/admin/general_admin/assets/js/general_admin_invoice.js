@@ -1,26 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function()
+{
 
-	// $('#save_send').click(function(){
-	// 	var business_id = $('#business_id').val();
-	// 	var business_contact_person_id = $('#business_contact_person_id').val();
-	// 	var invoice_number = $('#invoice_number').val();
-	// 	var token = $('#_token').val();
-	// 	$.ajax({
-	// 		type:'POST',
-	// 		url:'/general_admin/send_save_invoice',
-	// 		// url:'/pdfview',
-	// 		data:{
-	// 			business_id: business_id,
-	// 			business_contact_person_id: business_contact_person_id,
-	// 			invoice_number: invoice_number,
-	// 		      },
-	// 		dataType:'text',
-	// 	}).done(function(data){
-	// 			$('#showHere1s').html('success');
-	// 		});
-	// });
-
-	$('.invoice_action').change(function(){
+	$(document).on('change','.invoice_action',function(){
 		var path = $(this).data('path');
 		var email = $(this).data('email');
 		var b_id = $(this).data('b_id');
@@ -67,4 +48,31 @@ $(document).ready(function(){
 			});
     });
 
+});
+
+
+$(document).ready(function()
+{
+
+    $(document).on('click','#search_btn_invoice',function()
+    {
+        var search_key1 = $('#search_manage_invoice').val();
+        // alert(search_key1);
+        
+
+        $.ajax({
+
+            type:'POST',
+            url:'/general_admin/search_manage_invoice',
+            data:{
+                search_key1: search_key1,
+            },
+            dataType:'text',
+        }).done(function(data)
+            {       
+                // alert("Hello World");
+                $('#ipakitamo').html(data);
+                
+            });
+    });
 });

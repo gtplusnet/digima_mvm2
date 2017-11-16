@@ -42,6 +42,17 @@
                 <div class="row">
                     <div class="panel-body">
                         <div class="row col-md-6 date" style="margin-right:-20px">
+
+                             <div class="pull-right" style="padding:0px">
+                             <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
+                                 {{csrf_field()}}
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" name="search_send_invoice" id="search_send_invoice" >
+                                 </div>
+                                 <button type="button" class="btn btn-success" name="search_btn_invoice" id="search_btn_invoice">Search</button>
+                             </form>
+                            </div>  
+
                             <div class="col-md-6" style="padding:1px;">
                                 <select class="form-control" name="date_start" id="date_start">
                                     @foreach($clients as $client_list)
@@ -98,6 +109,17 @@
                 <div class="row">
                     <div class="panel-body">
                         <div class="row col-md-6 date" style="margin-right:-20px;">
+
+                            <div class="pull-right" style="padding:0px">
+                             <form class="form-inline" method="post" action="/general_admin/search_agent_added">
+                                 {{csrf_field()}}
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" name="search_agent" id="search_agent" >
+                                 </div>
+                                 <button type="button" class="btn btn-success" name="search_agent_btn" id="search_agent_btn">Search</button>
+                             </form>
+                            </div>  
+
                             <div class="col-md-6" style="padding:1px;">
                                 <select class="form-control" name="date_start" id="date_start">
                                     @foreach($agentAdded as $agent_client)
@@ -113,7 +135,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="table-responsive col-md-12"  id="showHere">
+                        <div class="table-responsive col-md-12"  id="showHere1">
                             <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
                                 <thead>
                                     <tr>
@@ -146,6 +168,17 @@
                 <div class="row">
                     <div class="panel-body">
                         <div class="row col-md-6 date" style="margin-right:-20px">
+
+                            <div class="pull-right" style="padding:0px">
+                             <form class="form-inline" method="post" action="/general_admin/search_pending">
+                                 {{csrf_field()}}
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" name="search_pending" id="search_pending" >
+                                 </div>
+                                 <button type="button" class="btn btn-success" name="search_pending_btn" id="search_pending_btn">Search</button>
+                             </form>
+                            </div>  
+
                             <div class="col-md-6" style="padding:1px;">
                                 <select class="form-control" name="date_start" id="date_start">
                                     @foreach($pending_clients as $pending_client)
@@ -161,7 +194,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="table-responsive col-md-12"  id="showHere">
+                        <div class="table-responsive col-md-12"  id="showHere2">
                             <div id="resendSuccess">
                             </div>
                             <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
@@ -217,6 +250,18 @@
                 <div class="row">
                     <div class="panel-body">
                         <div class="row col-md-6 date" style="margin-right:-20px">
+
+                            <div class="pull-right" style="padding:0px">
+                             <form class="form-inline" method="post" action="/general_admin/search_registered">
+                                 {{csrf_field()}}
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" name="search_registered" id="search_registered" >
+                                 </div>
+                                 <button type="button" class="btn btn-success" name="search_registered_btn" id="search_registered_btn">Search</button>
+                             </form>
+                            </div>  
+
+
                             <div class="col-md-6" style="padding:1px;">
                                 <select class="form-control" name="date_start" id="date_start">
                                     @foreach($registered_clients as $registered_client)
@@ -232,7 +277,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="table-responsive col-md-12"  id="showHere">
+                        <div class="table-responsive col-md-12"  id="showHere3">
                            <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
                                 <thead>
                                     <tr>

@@ -1,4 +1,4 @@
- <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                        <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -30,3 +30,4 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {!! $clients->render() !!}   

@@ -3,7 +3,7 @@
 $(document).ready(function()
 {
 	//modal
-	$(".actionbox").change(function () {
+	$(document).on('change','.actionbox',function () {
 	if ($(this).val() == "assign") {
         
         var agent_id = $(this).data("id");
@@ -18,7 +18,7 @@ $(document).ready(function()
         $('#deleteAgent').modal('show');
       }
    });
-	$(".teamAction").change(function () {
+	$(document).on('change','.teamAction',function () {
 		if ($(this).val() == "delete") {
 	    	var team_id = $(this).data("id");
 	        $("#delete_team_id").val(team_id);
@@ -163,4 +163,56 @@ $(document).ready(function()
 					}, 1000);
 			});
 	});
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button_team',function()
+		{
+			var search_key_team = $('#search_key1').val();
+		
+			
+
+			$.ajax({
+
+				type:'POST',
+				url:'/supervisor/supervisor_search_team',
+				data:
+				{
+					search_key_team: search_key_team,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					
+					$('#showHere_team').html(data);
+					
+			    });
+	    });
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_button_agent',function()
+		{
+			var search_key_agent = $('#search_key2').val();
+			
+			
+
+			$.ajax({
+
+				type:'POST',
+				url:'/supervisor/supervisor_search_agent',
+				data:
+				{
+					search_key_agent: search_key_agent,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					
+					$('#agent_delete_success').html(data);
+					
+			    });
+	    });
 });

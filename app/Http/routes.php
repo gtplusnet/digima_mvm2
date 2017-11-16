@@ -73,7 +73,6 @@ Route::post('/login', 									'MerchantController@login_submit');
 Route::get('/merchant/logout', 							'MerchantController@logout');
 Route::get('/merchant/payment',							'MerchantController@payment');
 Route::post('/merchant/upload_payment',					'MerchantController@upload_payment');
-Route::any('/merchant/add_other_info',  				'MerchantController@add_other_info'); 
 Route::get('/merchant/payment/{id}/{name}', 			'MerchantController@payment_merchant');
 Route::get('/merchant/redirect', 						'MerchantController@merchant_redirect');
 Route::get('/merchant/redirect/exist', 					'MerchantController@merchant_redirect_exist');
@@ -87,21 +86,19 @@ Route::get('/merchant/category/delete_keywords/{id}',   'MerchantController@dele
 Route::get('/merchant/tag_category', 					'MerchantController@tag_category');
 Route::post('/merchant/add_tag_category', 				'MerchantController@add_tag_category');
 Route::any('/merchant/add_business_category', 			'MerchantController@add_business_category');
-Route::any('/merchant/delete_business_category/{id}', 	'MerchantController@delete_business_category');
+Route::any('/merchant/delete_tag_category/{id}', 	    'MerchantController@delete_tag_category');
 Route::get('/merchant/messages', 						'MerchantController@messages');
-
-
-Route::post('/merchant/messages/reply', 				'MerchantController@messages_reply');
-
-
 Route::any('/merchant/add_images', 						'MerchantController@add_images');
 Route::any('/merchant/delete_messages/{id}', 			'MerchantController@delete_messages');
-Route::get('/merchant/bills', 							'MerchantController@bills');
-Route::any('/merchant/add_other_info', 					'MerchantController@add_other_info');
+Route::any('/merchant/bills', 				   		    'MerchantController@bills');
+Route::any('/merchant/add_other_info', 					'MerchantController@update_other_info');
+Route::any('/merchant/update_merchant_info', 		    'MerchantController@update_merchant_info');
 Route::any('/merchant/add_payment_method', 				'MerchantController@add_payment_method');
 Route::any('/merchant/delete_payment_method', 			'MerchantController@delete_payment_method');
 Route::any('/merchant/edit_payment_method', 			'MerchantController@edit_payment_method');
 Route::any('/merchant/view_info', 						'MerchantController@view_info');
+
+Route::any('/merchant/change_password', 				'MerchantController@merchant_change_password');
 Route::any('/merchant/sample', 							'MerchantController@sample');
 
 
@@ -136,11 +133,13 @@ Route::any('/supervisor/upload-convo', 		'SuperVisorController@uploadConvo');
 Route::any('/supervisor/force_activate', 	'SuperVisorController@force_activate');
 Route::any('/agent/upload-convo', 			'SuperVisorController@uploadConvo');
 
-
 Route::any('/supervisor/show_agent_calls', 			'SuperVisorController@supervisor_show_agent_calls');
 Route::any('/supervisor/show_team_calls', 			'SuperVisorController@supervisor_show_team_calls');
 
-
+Route::any('/supervisor/supervisor_search_client', 	'SuperVisorController@supervisor_search_client');
+Route::any('/supervisor/supervisor_search_client_activated', 'SuperVisorController@supervisor_search_client_activated');
+Route::any('/supervisor/supervisor_search_team', 	'SuperVisorController@supervisor_search_team');
+Route::any('/supervisor/supervisor_search_agent', 	'SuperVisorController@supervisor_search_agent');
 
 
 
@@ -161,6 +160,9 @@ Route::post('/agent/get_client2', 					'AgentController@get_client2');
 Route::post('/agent/get_client_transaction', 		'AgentController@get_client_transaction');
 Route::post('/agent/get_client_transaction_reload', 'AgentController@get_client_transaction_reload');
 Route::any('/agent/add/client', 					'AgentController@add_client');
+Route::any('/agent/search_client', 					'AgentController@search_client');
+Route::any('/agent/search_client_pending', 			'AgentController@search_client_pending');
+Route::any('/agent/search_client_activated', 		'AgentController@search_client_activated');
 Route::post('/add_client_submit',   				'AgentController@add_client_submit');
 Route::any('/agent/get_city', 						'AgentController@get_city');
 Route::any('/agent/get_postal_code', 				'AgentController@get_zip_code');
@@ -223,7 +225,21 @@ Route::post('/general_admin/manage_website/update_city',            'GeneralAdmi
 Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdminController@general_admin_view_merchant_info');
 
 Route::post('/general_admin/manage_user/update_merchant_business_info',        'GeneralAdminController@update_merchant_business_info');
-Route::post('/general_admin/manage_user/add_merchant_payment_method',        'GeneralAdminController@add_merchant_payment_method');
+Route::post('/general_admin/manage_user/add_merchant_payment_method','GeneralAdminController@add_merchant_payment_method');
 Route::post('/general_admin/manage_user/delete_merchant_payment_method',        'GeneralAdminController@delete_merchant_payment_method');
+
+Route::any('/general_admin/search_payment_monitoring', 			     'GeneralAdminController@search_payment_monitoring');
+Route::any('/general_admin/search_manage_invoice', 			         'GeneralAdminController@search_manage_invoice');
+Route::any('/general_admin/search_send_invoice', 			         'GeneralAdminController@search_send_invoice');
+Route::any('/general_admin/search_agent_added', 			         'GeneralAdminController@search_agent');
+Route::any('/general_admin/search_pending', 			         	 'GeneralAdminController@search_pending');
+Route::any('/general_admin/search_registered', 			         	 'GeneralAdminController@search_registered');
+Route::any('/general_admin/search_merchant', 			         	 'GeneralAdminController@search_merchant');
+Route::any('/general_admin/search_agent_user', 			         	 'GeneralAdminController@search_agent_user');
+Route::any('/general_admin/search_team_user', 			         	 'GeneralAdminController@search_team_user');
+Route::any('/general_admin/search_supervisor_user', 			     'GeneralAdminController@search_supervisor_user');
+Route::any('/general_admin/search_admin_user', 			     		 'GeneralAdminController@search_admin_user');
+
+
 
 

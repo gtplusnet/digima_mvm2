@@ -1,4 +1,4 @@
-<table class="display table table-bordered"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
+			<table class="display table table-bordered"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -26,3 +26,5 @@
 					@endforeach
 				</tbody>
 			</table>
+
+		<!-- 	CATEGORY -->

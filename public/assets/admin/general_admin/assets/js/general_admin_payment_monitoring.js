@@ -47,3 +47,29 @@ $(document).ready(function(){
     });
 
 });
+
+$(document).ready(function(){
+
+        $(document).on('click','#search_btn_admin',function()
+        {
+            var search_key = $('#search_payment_admin').val();
+            // alert(search_key);
+            
+
+            $.ajax({
+
+                type:'POST',
+                url:'/general_admin/search_payment_monitoring',
+                data:{
+                    search_key: search_key,
+                },
+                dataType:'text',
+            }).done(function(data)
+                {       
+                    // alert("Hello");
+                    $('#success_activation').html(data);
+                    
+                });
+        });
+});
+
