@@ -78,7 +78,7 @@ class FrontController extends Controller
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->orderBy('tbl_reports.business_views','DESC')
                                     ->limit(4)
                                     ->get();
         return view('front.pages.home',$data);
@@ -152,8 +152,7 @@ class FrontController extends Controller
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->orderBy('tbl_reports.business_views','DESC')
                                     ->limit(4)
                                     ->get();
         
@@ -195,9 +194,14 @@ class FrontController extends Controller
         if($request->ajax())
         {
             $emailAvailability = Tbl_user_account::checkEmail($request->emailAddress)->first();
+            $phoneAvailability = TblBusinessModel::checkPhone($request->primaryPhone,$request->alternatePhone)->first();
             if(count($emailAvailability) == 1)
             {
                 return response()->json(['status' => 'used', 'message' => 'Email has already been used.']); 
+            }
+            elseif(count($phoneAvailability) != 0)
+            {
+                return response()->json(['status' => 'used', 'message' => 'Primary or Secondary Phone has already been used.']); 
             }
             else
             {
@@ -311,8 +315,7 @@ class FrontController extends Controller
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->orderBy('tbl_reports.business_views','DESC')
                                     ->limit(4)
                                     ->get();
         return view('front.pages.searchresult',$data); 

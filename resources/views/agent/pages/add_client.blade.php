@@ -14,7 +14,7 @@
 	    <div class="row">
 	        <div class="panel panel-primary">
 	            <div class="panel-heading clearfix">
-	                <h3 class="panel-title" style="color: white;">Profile</h3>
+	                <h3 class="panel-title" style="color: white;">Add Merchant</h3>
 	            </div>
 
 				@if (Session::has('add_merchant'))
