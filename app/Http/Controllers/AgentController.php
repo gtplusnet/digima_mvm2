@@ -140,6 +140,40 @@ class AgentController extends Controller
 		                      ->first();			
 		return view ('agent.pages.profile', $data);		
 	}
+	public function update_profile(Request $request)
+	{
+		$data['transaction'] = 'profile';
+		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))
+		                      ->first();			
+		return view('agent.pages.update_profile',$data); 
+	}
+	public function update_password(Request $request)
+	{   
+		$data['transaction'] = 'password';
+		return  view('agent.pages.update_profile',$data);
+	}
+	public function checking_password(Request $request )
+	{
+		$user = TblAgentModel::where('agent_id',session('agent_id'))->first();
+		if(password_verify($request->currentPassword,$user->password))
+		{
+            
+            if($request->newPassword==$request->confirmPassword)
+            {
+            	$data['password'] = password_hash($request->newPassword, PASSWORD_DEFAULT);
+            	TblAgentModel::where('agent_id',session('agent_id'))->update($data);
+            	return "<div class='alert alert-success'><strong>Please!</strong>Password Successfully Change.</div>";
+            }
+            else
+            {
+            	return "wrong";
+            }
+		}
+		else
+		{
+			return "wrong";
+		}
+	}
 		  
 	public function client()
 	{

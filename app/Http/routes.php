@@ -168,6 +168,15 @@ Route::any('/agent/get_city', 						'AgentController@get_city');
 Route::any('/agent/get_postal_code', 				'AgentController@get_zip_code');
 Route::any('/agent/logout', 						'AgentController@agent_logout');
 
+Route::any('/agent/update_profile', 				'AgentController@update_profile');
+Route::any('/agent/update_password', 				'AgentController@update_password');
+Route::any('/agent/checking_password', 				'AgentController@checking_password');
+
+
+
+
+
+
 
 //Routes for General Admin
 Route::any('/general_admin', 										'GeneralAdminController@index');
