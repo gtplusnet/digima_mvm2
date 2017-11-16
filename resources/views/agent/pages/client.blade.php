@@ -1,5 +1,20 @@
 @extends('agent.layout.layout')
 @section('content')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( ".datepicker" ).datepicker();
+    $( ".datepicker1" ).datepicker();
+    // $( "#datepicker" ).change(function(){
+    //     var date = $("#datepicker" ).datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+    //     var james = $(this).val()
+    //     alert(date);
+    // });
+  } );
+  </script>
 <div class="page-title">
     <h3>Merchant</h3>
     <div class="page-breadcrumb">
@@ -29,18 +44,23 @@
                 <div class="panel-body">
                     <div class="col-md-4 pull-right">
                         <div class="col-md-6">
-                            <select class="form-control " name="date_start" id="date_start" style="width: 150px; border-radius: 20px;">
+
+                            <input type="text" class="form-control datepicker" id="date_start" value="20107/12/23">
+                            {{-- <input type="date" class="form-control" data-date-format="YYYY/MM/DD" id="date_start" value="2017/01/23"> --}}
+                           {{--  <select class="form-control " name="date_start" id="date_start" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients as $client_list)
                                 <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control " name="date_end" id="date_end" style="width: 150px; border-radius: 20px;">
+                            <input type="text" class="form-control datepicker1" id="date_end" value="20107/12/23">
+                            {{-- <input type="date" class="form-control " data-date-format="YYYY/MM/DD" id="date_end" value="2017/01/23"> --}}
+                            {{-- <select class="form-control " name="date_end" id="date_end" style="width: 150px; border-radius: 20px;">
                                 @foreach($clients as $client_list)
                                 <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                     </div>
                     <div class="table-responsive col-md-12"  id="showHere">

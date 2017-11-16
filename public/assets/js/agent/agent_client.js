@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
 	$('#date_end').change(function(){
-		var date_start = $('#date_start').val();
-		var date_end = $('#date_end').val();
+		var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client',
