@@ -3,7 +3,7 @@
 $(document).ready(function()
 {
 	//modal
-	$(".actionbox").change(function () {
+	$(document).on('change','.actionbox',function () {
 	if ($(this).val() == "assign") {
         
         var agent_id = $(this).data("id");
@@ -18,7 +18,7 @@ $(document).ready(function()
         $('#deleteAgent').modal('show');
       }
    });
-	$(".teamAction").change(function () {
+	$(document).on('change','.teamAction',function () {
 		if ($(this).val() == "delete") {
 	    	var team_id = $(this).data("id");
 	        $("#delete_team_id").val(team_id);
@@ -170,7 +170,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_button_team',function()
 		{
 			var search_key_team = $('#search_key1').val();
-			alert(search_key_team);
+		
 			
 
 			$.ajax({
@@ -184,7 +184,7 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					alert("team");
+					
 					$('#showHere_team').html(data);
 					
 			    });
@@ -196,7 +196,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_button_agent',function()
 		{
 			var search_key_agent = $('#search_key2').val();
-			alert(search_key_agent);
+			
 			
 
 			$.ajax({
@@ -210,7 +210,7 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					alert("agent");
+					
 					$('#agent_delete_success').html(data);
 					
 			    });

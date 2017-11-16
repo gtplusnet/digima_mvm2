@@ -230,5 +230,16 @@ Route::post('/general_admin/manage_user/delete_merchant_payment_method',        
 
 Route::any('/general_admin/search_payment_monitoring', 			     'GeneralAdminController@search_payment_monitoring');
 Route::any('/general_admin/search_manage_invoice', 			         'GeneralAdminController@search_manage_invoice');
+Route::any('/general_admin/search_send_invoice', 			         'GeneralAdminController@search_send_invoice');
+Route::any('/general_admin/search_agent_added', 			         'GeneralAdminController@search_agent');
+Route::any('/general_admin/search_pending', 			         	 'GeneralAdminController@search_pending');
+Route::any('/general_admin/search_registered', 			         	 'GeneralAdminController@search_registered');
+Route::any('/general_admin/search_merchant', 			         	 'GeneralAdminController@search_merchant');
+Route::any('/general_admin/search_agent_user', 			         	 'GeneralAdminController@search_agent_user');
+Route::any('/general_admin/search_team_user', 			         	 'GeneralAdminController@search_team_user');
+Route::any('/general_admin/search_supervisor_user', 			     'GeneralAdminController@search_supervisor_user');
+Route::any('/general_admin/search_admin_user', 			     		 'GeneralAdminController@search_admin_user');
+
+
 
 

@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
 
-	$('.invoice_action').change(function(){
+	$(document).on('change','.invoice_action',function(){
 		var path = $(this).data('path');
 		var email = $(this).data('email');
 		var b_id = $(this).data('b_id');
@@ -57,7 +57,7 @@ $(document).ready(function()
     $(document).on('click','#search_btn_invoice',function()
     {
         var search_key1 = $('#search_manage_invoice').val();
-        alert(search_key1);
+        // alert(search_key1);
         
 
         $.ajax({
@@ -70,7 +70,7 @@ $(document).ready(function()
             dataType:'text',
         }).done(function(data)
             {       
-                alert("Hello World");
+                // alert("Hello World");
                 $('#ipakitamo').html(data);
                 
             });

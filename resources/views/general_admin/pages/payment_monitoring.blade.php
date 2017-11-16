@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<input type="text" class="form-control" name="search_payment_admin" id="search_payment_admin">
 			</div>
-			<button type="submit" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
+			<button type="button" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
 		</form>
 	</div>
 

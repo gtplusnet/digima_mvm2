@@ -26,6 +26,7 @@ function manage_user()
 			delete_payment_method();
 		});
 	}
+
 	function add_payment_method()
 	{
 		$(document).on("click","#savePayment",function(){
@@ -99,7 +100,7 @@ function manage_user()
 	}
 	function merchant()
 	{
-		$('.merchant_actionbox').change(function()
+		$(document).on('change','.merchant_actionbox',function()
 		{
 			if ($(this).val() == "edit") 
 			{
@@ -122,7 +123,8 @@ function manage_user()
 
 	function add_agent()
 	{ 
-		$('#add_agent').click(function(){
+		$(document).on('click','#add_agent',function()
+		{
 		var team_id = $('#team_id').val();
 		var prefix = $('#prefix').val();
 		var first_name = $('#first_name').val();
@@ -158,7 +160,7 @@ function manage_user()
 	}
 	function add_team()
 	{ 
-		$('#add_team').click(function()
+		$(document).on('click','#add_team',function()
 		{
 			var team_name = $('#team_name').val();
 			var team_info = $('#team_info').val();
@@ -179,7 +181,7 @@ function manage_user()
 	}
 	function add_supervisor()
 	{ 
-		$('#add_supervisor').click(function()
+		$(document).on('click','#add_supervisor',function()
 		{
 			var team_id = $('#steam_id').val();
 			var prefix = $('#sprefix').val();
@@ -217,7 +219,7 @@ function manage_user()
 	}
 	function add_admin()
 	{ 
-		$('#add_admin').click(function()
+		$(document).on('click','#add_admin',function()
 		{
 			var full_name = $('#afull_name').val();
 			var email = $('#aemail').val();
@@ -241,7 +243,7 @@ function manage_user()
 	function action_box()
 	{ 
 		//agent
-		$('.agent_actionbox').change(function()
+		$(document).on('change','.agent_actionbox',function()
 		{
 			if ($(this).val() == "edit") 
 			{
@@ -263,7 +265,7 @@ function manage_user()
 		    }
 	    });
 	    //team
-	    $('.team_actionbox').change(function()
+	    $(document).on('change','.team_actionbox',function()
 	    {
 			if ($(this).val() == "edit") 
 			{
@@ -284,7 +286,7 @@ function manage_user()
 	        }
 	    });
 	    //supervisor
-	    $('.supervisor_actionbox').change(function()
+	    $(document).on('change','.supervisor_actionbox',function()
 	    {
 			if ($(this).val() == "edit") 
 			{
@@ -306,7 +308,7 @@ function manage_user()
 	        }
 	    });
 	    //admin
-	    $('.admin_actionbox').change(function()
+	    $(document).on('change','.admin_actionbox',function()
 	    {
 			if ($(this).val() == "edit") 
 			{
@@ -321,7 +323,7 @@ function manage_user()
 	    });
 	    //end action box
 	    //delete
-	    $('#agentDeleted').click(function()
+	    $(document).on('click','#agentDeleted',function()
 	    {
 		    var delete_agent_id = $('#delete_agent_id').val();
 
@@ -337,7 +339,7 @@ function manage_user()
 		 			$('#agent_success').html(data);
 		 		});
 	    });
-	    $('#teamDeleted').click(function()
+	    $(document).on('click','#teamDeleted',function()
 	    {
 		    var delete_team_id = $('#delete_team_id').val();
 
@@ -352,6 +354,9 @@ function manage_user()
 		 		{
 		 		    $('#deleteTeam').modal('hide');
 		 			$('#team_success').html(data);
+		 			setTimeout(function(){
+					   location.reload();
+					}, 1000);
 		 		});
 	    });
 	    //end delete
@@ -359,7 +364,8 @@ function manage_user()
 	}
 	function assigned_agent()
 	{
-	    $('#agentAssigned').click(function()
+	   
+	    $(document).on('click','#agentAssigned',function()
 	    {
 		    var agent_id = $('#agent_id_assign').val();
 			var team_id= $('#teamAssigned').val();
@@ -383,7 +389,132 @@ function manage_user()
 	
 }
 
+$(document).ready(function(){
 
+		$(document).on('click','#search_btn_merchant',function()
+		{
+			var search_key_merchant = $('#search_merchant').val();
+			alert(search_key_merchant);
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_merchant',
+				data:{
+					search_key_merchant: search_key_merchant,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert('merchant');
+					$('#showHere_merchant').html(data);
+					
+			    });
+	    });
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_btn_agent',function()
+		{
+			var search_key_agent = $('#search_agent').val();
+			alert(search_key_agent);
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_agent_user',
+				data:{
+					search_key_agent: search_key_agent,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert('agent');
+					$('#showHere_agent').html(data);
+					
+			    });
+	    });
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_btn_team',function()
+		{
+			var search_key_team = $('#search_team').val();
+			alert(search_key_team);
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_team_user',
+				data:{
+					search_key_team: search_key_team,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert('team');
+					$('#showHere_team').html(data);
+					
+			    });
+	    });
+});
+
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_btn_supervisor',function()
+		{
+			var search_key_supervisor = $('#search_supervisor').val();
+			alert(search_key_supervisor);
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_supervisor_user',
+				data:{
+					search_key_supervisor: search_key_supervisor,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert('supervisor');
+					$('#showHere_supervisor').html(data);
+					
+			    });
+	    });
+});
+
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_btn_admin',function()
+		{
+			var search_key_admin = $('#search_admin').val();
+			alert(search_key_admin);
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_admin_user',
+				data:{
+					search_key_admin: search_key_admin,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					alert('admin');
+					$('#showHere_admin').html(data);
+					
+			    });
+	    });
+});
 
 
 

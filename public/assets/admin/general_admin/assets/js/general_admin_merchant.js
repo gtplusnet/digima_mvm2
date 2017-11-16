@@ -21,7 +21,8 @@ function merchant()
 
 	function resend_invoice()
 	{ 
-		$('.resendAction').change(function(){
+		$(document).on('change','.resendAction',function()
+		{
 		if ($(this).val() == "resend") 
 			   {
 			   	
@@ -52,14 +53,102 @@ function merchant()
 		
 	});
 	}
-	
-
-	
 }
 
+$(document).ready(function(){
 
+		$(document).on('click','#search_btn_invoice',function()
+		{
+			var search_key1 = $('#search_send_invoice').val();
+		
+			
+			$.ajax({
 
+				type:'POST',
+				url:'/general_admin/search_send_invoice',
+				data:{
+					search_key1: search_key1,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					$('#showHere').html(data);
+					
+			    });
+	    });
+});
 
+$(document).ready(function(){
+
+		$(document).on('click','#search_agent_btn',function()
+		{
+			var search_key2 = $('#search_agent').val();
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_agent_added',
+				data:{
+					search_key2: search_key2,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					
+					$('#showHere1').html(data);
+					
+			    });
+	    });
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_pending_btn',function()
+		{
+			var search_key3 = $('#search_pending').val();
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_pending',
+				data:{
+					search_key3: search_key3,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					
+					$('#showHere2').html(data);
+					
+			    });
+	    });
+});
+
+$(document).ready(function(){
+
+		$(document).on('click','#search_registered_btn',function()
+		{
+			var search_key4 = $('#search_registered').val();
+			
+			
+			$.ajax({
+
+				type:'POST',
+				url:'/general_admin/search_registered',
+				data:{
+					search_key4: search_key4,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+				
+					$('#showHere3').html(data);
+					
+			    });
+	    });
+});
 
 
 

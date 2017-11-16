@@ -39,18 +39,21 @@
 	<div class="tab-content" style="">
 		<div id="merchant" class=" tab-pane fade in  active">
 			<div class="row col-md-12">
+
 				<div class="pull-right" style="margin:20px 20px 20px 0px">
-					<form class="form-inline">
+					<form class="form-inline" method="position" action="/general_admin/search_merchant" >
+						 {{csrf_field()}}
 						<div class="form-group">
-							<input type="text" class="form-control" name="search_key" id="search_key">
+							<input type="text" class="form-control" name="search_merchant" id="search_merchant">
 						</div>
-						<button type="button" class="btn btn-success" name="search_button" id="search_button">Search</button>
+						<button type="button" class="btn btn-success" name="search_btn_merchant" id="search_btn_merchant">Search</button>
 					</form>
 				</div>
+
 			</div>
 			<div class="row col-md-12" style="background-color: #fff !important;">
 				<div class="panel-body" id="show_merchant_info">
-					<div class="table-responsive" id="showHere3">
+					<div class="table-responsive" id="showHere_merchant">
 						<div id="agent_success">
 						</div>
 						<table class="display table agent_container table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
@@ -94,10 +97,21 @@
 				<div class="pull-left" style="margin:20px 0px 20px 20px">
 					<button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
 				</div>
+
+				<div class="pull-right" style="margin:20px 20px 20px 0px">
+					<form class="form-inline" method="position" action="/general_admin/search_agent_user" >
+						 {{csrf_field()}}
+						<div class="form-group">
+							<input type="text" class="form-control" name="search_agent" id="search_agent">
+						</div>
+						<button type="button" class="btn btn-success" name="search_btn_agent" id="search_btn_agent">Search</button>
+					</form>
+				</div>
+
 			</div>
 			<div class="row col-md-12">
 				<div class="panel-body">
-					<div class="table-responsive" id="showHere3">
+					<div class="table-responsive" id="showHere_agent">
 						<div id="agent_success">
 						</div>
 						<table class="display table agent_container table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
@@ -144,10 +158,21 @@
 				<div class="pull-left" style="margin:20px 0px 20px 20px">
 					<button type="button"  data-toggle="modal" data-target="#myModalTeam"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
 				</div>
+
+				<div class="pull-right" style="margin:20px 20px 20px 0px">
+					<form class="form-inline" method="position" action="/general_admin/search_team_user" >
+						 {{csrf_field()}}
+						<div class="form-group">
+							<input type="text" class="form-control" name="search_team" id="search_team">
+						</div>
+						<button type="button" class="btn btn-success" name="search_btn_team" id="search_btn_team">Search</button>
+					</form>
+				</div>
+
  			</div>
 			<div class="row col-md-12">
 				<div class="panel-body">
-					<div class="table-responsive" id="showHere3">
+					<div class="table-responsive" id="showHere_team">
 						<div id="team_success">
 						</div>
 						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
@@ -188,10 +213,21 @@
 				<div class="pull-left" style="margin:20px 0px 20px 20px">
 					<button type="button"  data-toggle="modal" data-target="#myModalSupervisor"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Supervisor</button>
 				</div>
+
+				<div class="pull-right" style="margin:20px 20px 20px 0px">
+					<form class="form-inline" method="position" action="/general_admin/search_supervisor_user" >
+						 {{csrf_field()}}
+						<div class="form-group">
+							<input type="text" class="form-control" name="search_supervisor" id="search_supervisor">
+						</div>
+						<button type="button" class="btn btn-success" name="search_btn_supervisor" id="search_btn_supervisor">Search</button>
+					</form>
+				</div>
+
 			</div>
 			<div class="row col-md-12">
 				<div class="panel-body">
-					<div class="table-responsive" id="showHere3">
+					<div class="table-responsive" id="showHere_supervisor">
 						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 							<thead>
 								<tr>
@@ -236,10 +272,21 @@
 				<div class="pull-left" style="margin:20px 0px 20px 20px">
 					<button type="button"  data-toggle="modal" data-target="#myModalAdmin"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Admin</button>
 				</div>
+
+				<div class="pull-right" style="margin:20px 20px 20px 0px">
+					<form class="form-inline" method="position" action="/general_admin/search_admin_user" >
+						 {{csrf_field()}}
+						<div class="form-group">
+							<input type="text" class="form-control" name="search_admin" id="search_admin">
+						</div>
+						<button type="button" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
+					</form>
+				</div>
+
 			</div>
 			<div class="row col-md-12">
 				<div class="panel-body">
-					<div class="table-responsive" id="showHere3">
+					<div class="table-responsive" id="showHere_admin">
 						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 							<thead>
 								<tr>
