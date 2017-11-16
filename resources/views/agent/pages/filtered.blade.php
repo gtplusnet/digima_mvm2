@@ -23,8 +23,17 @@
                                     <td>{{$client->membership_name}}</td>
                                     <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->transaction_status}}</td>
-
-                                    <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
+                                    <td>
+                                        @if($client->transaction_status == 'call in progress')
+                                        <button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}" disabled>
+                                            <i class="fa fa-phone call" aria-hidden="true"></i>Busy
+                                        </button>
+                                        @else
+                                        <button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}">
+                                            <i class="fa fa-phone call" aria-hidden="true"></i>call
+                                        </button>
+                                        @endif
+                                    </td>
                                 </tr>
                             
                                 @endforeach

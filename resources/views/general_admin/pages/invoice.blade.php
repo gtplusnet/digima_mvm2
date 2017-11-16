@@ -6,8 +6,10 @@
     <div class="row">
         <div class="invoice" style="margin:0% 20% 10% 20%">
             <form method="post" id="form_print" action="/general_admin/send_save_invoice/{{$id}}">
-            
-                {{csrf_field()}}
+            {{csrf_field()}}
+                @if(Session::has('error'))
+                <div class='alert alert-danger'><strong>Failed!</strong> Transaction Failed! Invoice number has already been issued to another person.</div>
+                @endif 
                 <div class="panel panel-white">
                     <div class="panel-body">
                         <div class="row">

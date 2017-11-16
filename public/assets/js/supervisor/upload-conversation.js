@@ -11,6 +11,10 @@ $(document).ready(function () {
             dataType:'text',
         }).done(function(data){
                 $('#forceSuccess').html(data);
+                setTimeout(function(){
+                    $('#uploadModal').modal('hide');
+                       location.reload();
+                    }, 1000);
             });
     });
     //james

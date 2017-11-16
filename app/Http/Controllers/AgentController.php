@@ -163,13 +163,11 @@ class AgentController extends Controller
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                           ->paginate(10);
         
-        $data['clients_pending'] = TblBusinessModel::where('business_status', 4)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
-                          ->orderBy('tbl_business.date_created',"asc")
-                         ->paginate(10);
+        $data['clients_pending'] = TblBusinessModel::where('business_status', 4)->orWhere('business_status', 20)
+                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                            ->orderBy('tbl_business.date_created',"asc")
+                            ->paginate(10);
 
         $data['clients_activated'] = TblBusinessModel::where('business_status', 5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -199,12 +197,12 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$s_date = $request->date_start1;
 		$e_date = $request->date_end1;
-		$data['clients'] = TblBusinessModel::where('business_status',4)
-						  ->whereBetween('date_created',[$s_date,$e_date])
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	                         ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	                         ->orderBy('tbl_business.date_created',"asc")
- 	                          ->paginate(10);
+		$data['clients_pending'] = TblBusinessModel::where('business_status', 4)
+						    ->whereBetween('date_transact',[$s_date,$e_date])
+						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                            ->orderBy('tbl_business.date_transact',"asc")
+                            ->paginate(10);
 		return view('agent.pages.filtered1',$data);
 	}
 
@@ -213,12 +211,12 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$s_date = $request->date_start2;
 		$e_date = $request->date_end2;
-		$data['clients'] = TblBusinessModel::where('business_status',5)
-						  ->whereBetween('date_created',[$s_date,$e_date])
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	                         ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	                         ->orderBy('tbl_business.date_created',"asc")
- 	                          ->paginate(10);
+		$data['clients_activated'] = TblBusinessModel::where('business_status',5)
+						    ->whereBetween('date_transact',[$s_date,$e_date])
+						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+ 	                        ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+ 	                        ->orderBy('tbl_business.date_transact',"asc")
+ 	                        ->paginate(10);
 		return view('agent.pages.filtered2',$data);
 	}
 
@@ -226,7 +224,6 @@ class AgentController extends Controller
 	{
 		Self::allow_logged_in_users_only();
 		$trans_id                     = $request->transaction_id;
-		// dd($request->transaction_id);
 		$update['transaction_status'] = 'call in progress'; 
 		$update['agent_id']           = session('agent_id'); 
 		$update['date_transact']      = date("Y/m/d"); 
@@ -355,7 +352,7 @@ class AgentController extends Controller
       		             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
  	                     ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
  	                     ->paginate(10);
-      return view('agent.pages.search_blade',$data);
+      return view('agent.pages.filtered',$data);
 
     }
 
@@ -366,7 +363,7 @@ class AgentController extends Controller
       						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
  	                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
  	                            ->paginate(10);
-      return view('agent.pages.search_blade1',$data);
+      return view('agent.pages.filtered1',$data);
 
     }
 
@@ -378,7 +375,7 @@ class AgentController extends Controller
       						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
  	                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
  	                            ->paginate(10);
-      return view('agent.pages.search_blade2',$data);
+      return view('agent.pages.filtered2',$data);
 
     }
 

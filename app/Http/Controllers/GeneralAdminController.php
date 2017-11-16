@@ -225,12 +225,18 @@ class GeneralAdminController extends Controller
 
     public function general_admin_send_save_invoice(Request $request,$id)
     {
-      $checked=TblInvoiceModels::where('business_id',$id)->first();
+      $checked            = TblInvoiceModels::where('business_id',$id)->first();
+      $checked_number     = TblInvoiceModels::where('invoice_number',$request->invoice_number)->first();
       if($checked)
-        {
-          Session::flash('error', 'Transaction Failed! You already issue an invoice to this person. Note: goto Manage Invoice to Resend/View the invoice!');
-          return Redirect::to('/general_admin/merchants');
-        }
+      {
+        Session::flash('error', 'Transaction Failed! You already issue an invoice to this person. Note: goto Manage Invoice to Resend/View the invoice!');
+        return Redirect::to('/general_admin/merchants');
+      }
+      elseif($checked_number)
+      {
+        Session::flash('error', 'Transaction Failed! Invoice number has already been issued to another person.');
+        return Redirect::back();
+      }  
       else
       {
       $business_id = $request->business_id;
@@ -428,9 +434,21 @@ class GeneralAdminController extends Controller
                           ->first();
       $name = $info->contact_prefix." ".$info->contact_first_name." ".$info->contact_last_name;
       $email = $info->user_email;
-      $password = $info->string_password;
+      $checking = TblBusinessModel::where('business_id',$business_id)->first();
+      if($checking->transaction_status=='Added')
+      {
+        $new_password = mt_rand(100000, 99999999);
+        $up['user_password'] = password_hash($new_password, PASSWORD_DEFAULT);
+        $checking = TblBusinessModel::where('business_id',$business_id)->update($up);
+        $password = $new_password;
 
-      $data = array('name'=>$name,'email'=>$email,'password'=>$password);
+      }
+      else
+      {
+        $password = 'Use the password you entered in the registration page.';
+      }
+      $link = 'http://digima_mvm.dev/merchant/dashboard';
+      $data = array('name'=>$name,'email'=>$email,'password'=>$password,'link'=>$link);
       $check_mail = Mail::send('general_admin.pages.activated_merchant_notif', $data, function($message) use($data) {
       $message->to($data['email'], 'Activated Merchant')->subject
             ('THE RIGHT PLACE FOR BUSINESS');
@@ -441,14 +459,25 @@ class GeneralAdminController extends Controller
     public function general_admin_decline_and_deactivate(Request $request)
     {
       $business_id = $request->business_id;
-      $update['business_status'] = '19';//19 for deactivated user
+      $update['business_status'] = '19';//19 for payment deactivated user and 18 for merchant deact.
       $user['status'] = 'deactivated';
       $update['date_transact'] = date("Y/m/d"); 
-      $invoice['invoice_status'] = 'Paid';
+      $invoice['invoice_status'] = 'DECLINED';
       TblPaymentModel::where('business_id',$business_id)->update($invoice);
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
       return "<h4 class='modal-title' >Success! Account already deactivated.</h4>";
+    }
+    public function general_admin_decline_user(Request $request,$id)
+    {
+      $business_id = $id;
+      $update['business_status'] = '18';//19 for payment deactivated user and 18 for merchant deact.
+      $user['status'] = 'deactivated';
+      $update['date_transact'] = date("Y/m/d"); 
+      TblBusinessModel::where('business_id',$business_id)->update($update);
+      TblUserAccountModel::where('business_id',$business_id)->update($user);
+      Session::flash('deact', "Merchant Already Activated");
+      return Redirect::back();
     }
     public function get_business_list_info(Request $request)
     {
@@ -510,6 +539,116 @@ class GeneralAdminController extends Controller
       $data["year_established"]    = $request->year_established;
       TblBusinessOtherInfoModel::where('business_id',$id)->update($data);
      return "<div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>";
+    }
+    public function merchant_update_images(Request $request)
+    {
+        $file = $request->file('business_banner');
+        $file1 = $request->file('other_image_one');
+        $file2 = $request->file('other_image_two');
+        $file3 = $request->file('other_image_three');
+        $my_file = $request->business_banner_text;
+        $my_file1 = $request->other_image_one_text;
+        $my_file2 = $request->other_image_two_text;
+        $my_file3 = $request->other_image_three_text;
+        $business_id = $request->business_image_id;
+
+        if($file==null||$file=="")
+        {
+          $filename = $my_file;
+        }
+        else
+        {
+          $filename='/business_images/'.uniqid().$file->getClientOriginalName();
+          $file_ext = $file->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file->move($destinationPath, $filename);
+        }
+        if($file1==null||$file1=="")
+        {
+          $filename1 = $my_file1;
+        }
+        else
+        {
+          $filename1='/business_images/'.uniqid().$file1->getClientOriginalName();
+          $file_ext1 = $file1->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file1->move($destinationPath, $filename1);
+        }
+        if($file2==null||$file2=="")
+        {
+          $filename2 =  $my_file2;
+        }
+        else
+        {
+          $filename2='/business_images/'.uniqid().$file2->getClientOriginalName();
+          $file_ext2 = $file2->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file2->move($destinationPath, $filename2);
+          
+        }
+        if($file3==null||$file3=="")
+        {
+          $filename3 = $my_file3;
+        }
+        else
+        {
+          $filename3='/business_images/'.uniqid().$file3->getClientOriginalName();
+          $file_ext3 = $file3->getClientOriginalExtension();
+          $destinationPath = public_path('/business_images');
+          $check=$file3->move($destinationPath, $filename3);
+        }
+
+        $data['business_banner'] = $filename;
+        $data['business_id']    =  $business_id;
+        $data['other_image_one'] = $filename1;
+        $data['other_image_two'] = $filename2;
+        $data['other_image_three'] = $filename3;
+        // dd($data);
+        $check_data = TblBusinessImages::where('business_id',$business_id)->count();
+        if($check_data==1)
+        {
+          $check_insert = TblBusinessImages::where('business_id',$business_id)->update($data);
+          if($check_insert)
+          {
+            Session::flash('success', "Merchant Information Updated");
+            return Redirect::back();
+          }
+          else
+          {   
+            Session::flash('success', "Merchant Information Updated");
+            return Redirect::back();
+          }
+        }
+        else
+        {
+          $check_insert = TblBusinessImages::where('business_id',$business_id)->insert($data);
+          if($check_insert)
+          {
+            Session::flash('success', "Merchant Information Updated");
+            return Redirect::back();
+          }
+          else
+          {   
+            Session::flash('success', "Merchant Information Updated");
+            return Redirect::back();
+          }
+        }
+
+    }
+    public function merchant_update_hours(Request $request)
+    {
+      $business_hours_to = $request->input('business_hours_to');
+      $business_hours_from = $request->input('business_hours_from');
+      $business_id = $request->input('business_id');
+      $days = $request->input('days');
+      foreach($business_hours_from as $key => $business_hours_f)
+      {
+          $data['business_hours_from']= $business_hours_f;
+          $data['business_hours_to']= $business_hours_to[$key];  
+          $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
+      }
+      Session::flash('success', 'Merchant Information Updated');
+      return Redirect::back();  
     }
     public function add_merchant_payment_method(Request $request)
     {
@@ -1051,14 +1190,24 @@ class GeneralAdminController extends Controller
       TblBusinessModel::where('tbl_business.business_id',$business_id)
                       ->join('tbl_business_hours','tbl_business_hours.business_id','=','tbl_business.business_id')
                       ->get();
-      $data['merchant_info']   = TblBusinessModel::where('business_id',$business_id)
+      $data['merchant_info']    = TblBusinessModel::where('business_id',$business_id)
                                 ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                                 ->first();
-      $data['_payment_method'] = TblABusinessPaymentMethodModel::where('business_id',$business_id)->paginate(5);
-      $data['other_info']     = TblBusinessOtherInfoModel::where('business_id',$business_id)->first();
-      $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$business_id)->get();
-      $data['_images']   = TblBusinessImages::where('business_id',$business_id)->get();
+      $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',$business_id)->paginate(5);
+      $data['other_info']       = TblBusinessOtherInfoModel::where('business_id',$business_id)->first();
+      $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',$business_id)->get();
+      $data['_images']          = TblBusinessImages::where('business_id',$business_id)->get();
+      $images                   = TblBusinessImages::where('business_id',$business_id)->count();
+      if($images==0)
+      {
+        $data['images']  = 0;
+      }
+      else
+      {
+        $data['images']  = 1;
+        $data['_images'] = TblBusinessImages::where('business_id',$business_id)->first();
+      }
       return view("general_admin.pages.view_merchant_info",$data);
 
     }

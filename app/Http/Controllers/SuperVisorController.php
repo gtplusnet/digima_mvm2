@@ -107,7 +107,7 @@ class SuperVisorController extends Controller
         $s_date = $request->date_start;
         $e_date = $request->date_end;
         $data['clients'] = TblBusinessModel::where('business_status', 2)
-                          ->whereBetween('date_created',[$s_date,$e_date])
+                          ->whereBetween('date_transact',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->orderBy('tbl_business.date_created',"asc")
@@ -118,9 +118,11 @@ class SuperVisorController extends Controller
     {
         $s_date = $request->date_start1;
         $e_date = $request->date_end1;
-        $data['clients'] = TblBusinessModel::whereBetween('date_created',[$s_date,$e_date])
+        $data['clients_activated'] = TblBusinessModel::where('business_status',3)
+                          ->whereBetween('date_transact',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
         return view('supervisor.pages.filtered1',$data);
@@ -146,7 +148,6 @@ class SuperVisorController extends Controller
         $update['transaction_status'] = 'called'; 
         $update['business_status'] = '2'; 
         $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-                 // TblAgentModel::where('agent_id',session('agent_id'))->update($update);
         return '';
         
     }
@@ -506,7 +507,7 @@ class SuperVisorController extends Controller
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->get();
-      return view('supervisor.pages.search_blade',$data);
+      return view('supervisor.pages.filtered',$data);
 
     }
 
@@ -518,7 +519,7 @@ class SuperVisorController extends Controller
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->get();
-      return view('supervisor.pages.search_blade1',$data);
+      return view('supervisor.pages.filtered1',$data);
     }
 
 
