@@ -14,15 +14,6 @@
             </a>
         </li>
 
-        <li data-menu="Business list">
-            <a href="/general_admin/business_list">
-                <span>
-                    <i class="glyphicon glyphicon-user"></i>
-                </span>
-                <p>Business list</p>
-            </a>
-        </li>
-
         <li data-menu="Merchant">
             <a href="/general_admin/merchants">
                 <span>
@@ -32,25 +23,34 @@
             </a>
         </li>
 
-        <li data-menu="Emailing invoice">
-            <a href="/general_admin/email_invoice">
-                <span>
-                    <i class="fa fa-user-plus"></i>
-                </span>
-                <p>Emailing Invoice</p>
-            </a>
-        </li>
-
          <li data-menu="Payment monitoring">
             <a href="/general_admin/payment_monitoring">
                 <span>
-                    <i class="fa fa-user-plus"></i>
+                    <i class="fa fa-cc-visa"></i>
                 </span>
                 <p>Payment Monitoring</p>
             </a>
         </li>
 
-         <li data-menu="Manage user">
+        <li data-menu="Manage Invoice">
+            <a href="/general_admin/manage_invoice">
+                <span>
+                    <i class="fa fa-file-audio-o"></i>
+                </span>
+                <p>Manage Invoice</p>
+            </a>
+        </li>
+
+        <li data-menu="Manage categories">
+            <a href="/general_admin/manage_categories">
+                <span>
+                    <i class="fa fa-tags"></i>
+                </span>
+                <p>Manage Categories</p>
+            </a>
+        </li>
+
+        <li data-menu="Manage user">
             <a href="/general_admin/manage_user">
                 <span>
                     <i class="fa fa-user-plus"></i>
@@ -59,24 +59,24 @@
             </a>
         </li>
 
-         <li data-menu="Manage categories">
-            <a href="/general_admin/manage_categories">
+         <li data-menu="Manage Website">
+            <a href="/general_admin/manage_website">
                 <span>
-                    <i class="fa fa-user-plus"></i>
+                    <i class="fa fa-windows"></i>
                 </span>
-                <p>Manage Categories</p>
+                <p>Manage Website</p>
             </a>
         </li>
 
-
-        <li data-menu="Report">
+        
+      <!--   <li data-menu="Report">
             <a href="/general_admin/report">
                 <span>
-                    <i class="fa fa-user-plus"></i>
+                    <i class="fa fa-bar-chart"></i>
                 </span>
                 <p>Report</p>
             </a>    
-        </li>
+        </li> -->
         
     </ul>
 </nav>

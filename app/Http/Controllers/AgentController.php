@@ -111,7 +111,7 @@ class AgentController extends Controller
 				{
 					Session::put("agent_login",true);
     				Session::put("agent_id",$validate_login->agent_id);
-    				Session::put("full_name",$validate_login->first_name." ".$validate_login->last_name);
+    				Session::put("full_name_agent",$validate_login->first_name." ".$validate_login->last_name);
     				Session::put("email",$validate_login->email);
     				Session::put("position",$validate_login->position);
 				    $data['page']	= 'Dashboard';
@@ -153,6 +153,10 @@ class AgentController extends Controller
 		$data['transaction'] = 'password';
 		return  view('agent.pages.update_profile',$data);
 	}
+
+
+
+	
 	public function checking_password(Request $request )
 	{
 		$user = TblAgentModel::where('agent_id',session('agent_id'))->first();

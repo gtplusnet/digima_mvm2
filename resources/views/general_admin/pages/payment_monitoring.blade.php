@@ -145,6 +145,7 @@
 					@endforeach
 				</tbody>
 			</table>
+			{!! $business_list->render() !!}
 		</div>
 	</div>
 </div>

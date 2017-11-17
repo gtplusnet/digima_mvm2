@@ -91,6 +91,7 @@
 								@endforeach
 							</tbody>
 						</table>
+							{!! $_merchant->render() !!}
 					</div>
 				</div>
 			</div>

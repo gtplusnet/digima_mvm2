@@ -84,7 +84,7 @@
                   </table>
                   {!! $_category->render() !!}
                   <div class="web-content">
-                     <button type="submit" class="form-button center" name="business_id" >Add Tag</button>
+                     <button type="submit" class="form-button center" name="business_id" >Tag</button>
                   </div>
                </div>
             </div>
@@ -148,7 +148,7 @@
                   </div>
                   @endif 
                   <div class="web-content">
-                     <input type="text" name="keywords_name" id="business_tag_keywords_id " class="form-text center" placeholder=" Keywords Name" required/>
+                     <input type="text" name="keywords_name" id="business_tag_keywords_id " class="form-text center" placeholder=" Keyword Name" required/>
                   </div>
                   <div class="web-content">
                      <button type="submit" id="addKeywords" class="form-button  center" >Add Keywords</button>
