@@ -172,6 +172,8 @@ Route::any('/agent/update_profile', 				'AgentController@update_profile');
 Route::any('/agent/update_password', 				'AgentController@update_password');
 Route::any('/agent/checking_password', 				'AgentController@checking_password');
 
+Route::any('/agent/saving_profile', 				'AgentController@saving_profile');
+
 
 
 

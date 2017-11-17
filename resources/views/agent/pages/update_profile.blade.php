@@ -1,6 +1,7 @@
 @if($transaction=='profile')
 <h4>Update Personal Information</h4>
-<form class="form-horizontal">
+<form class="form-horizontal" method="POST" action="/agent/saving_profile">
+    {{csrf_field()}}
     <div class="form-group">
         <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
         <div class="col-sm-2">
@@ -26,21 +27,27 @@
     <div class="form-group">
         <label for="input-Default" class="col-sm-2 control-label">Primary Phone</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->primary_phone}}" >
+            <input type="text" class="form-control input-rounded" id="primaryPhone" value="{{$agent_info->primary_phone}}" >
         </div>
         <label for="input-Default" class="col-sm-2 control-label">Secondary Phone</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->secondary_phone}}">
+            <input type="text" class="form-control input-rounded" id="secondaryPhone" value="{{$agent_info->secondary_phone}}">
         </div>
     </div>
     <div class="form-group">
         <label for="input-Default" class="col-sm-2 control-label">Information</label>
         <div class="col-sm-10">
-            <textarea class="form-control input-rounded" placeholder="" rows="4=6">{{$agent_info->other_info}}</textarea>
+            <textarea class="form-control input-rounded" placeholder="" id="otherInfo" rows="4=6">{{$agent_info->other_info}}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="input-Default" class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-10">
+            <textarea class="form-control input-rounded" placeholder="" id="address" rows="4=6">{{$agent_info->address}}</textarea>
         </div>
     </div>
     <div class="col-md-3 pull-right">
-        <button class="btn btn-primary btn-block"><i class="fa fa-pencil m-r-xs"></i>Save</button>
+        <button type="button" class="btn btn-primary btn-block" id="saveProfile"><i class="fa fa-pencil m-r-xs"></i>Save</button>
     </div>
 </form>
 @else
@@ -56,7 +63,7 @@
     <div class="form-group col-md-12">
         <label for="input-Default" class="col-md-3 control-label">New Password</label>
         <div class="col-md-9">
-            <input type="text" class="form-control input-rounded" id="input-rounded"  >
+            <input type="text" class="form-control input-rounded" id="newPassword"  >
         </div>
        
     </div>
@@ -64,7 +71,7 @@
         
         <label for="input-Default" class="col-sm-3 control-label">Confirm Password</label>
         <div class="col-md-9">
-            <input type="text" class="form-control input-rounded" id="input-rounded" >
+            <input type="text" class="form-control input-rounded" id="confirmPassword" >
         </div>
     </div>
     <div class="col-md-3 pull-right">
