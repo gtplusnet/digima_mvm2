@@ -512,7 +512,7 @@ class GeneralAdminController extends Controller
       {
         $password = 'Use the password you entered in the registration page.';
       }
-      $link = 'http://digima_mvm.dev/merchant/dashboard';
+      $link = 'http://mvm.digimahouse.com//merchant/dashboard';
       $data = array('name'=>$name,'email'=>$email,'password'=>$password,'link'=>$link);
       $check_mail = Mail::send('general_admin.pages.activated_merchant_notif', $data, function($message) use($data) {
       $message->to($data['email'], 'Activated Merchant')->subject

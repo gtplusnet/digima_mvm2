@@ -131,8 +131,8 @@
 								</div>
 								<div class="col-sm-12">
 									<center>
-										<button type="submit" class="btn btn-primary" id="acceptBtn">Accept Payment</button>
-										<button type="submit" class="btn btn-danger"  id="declinedBtn">Declined Payment</button>
+										<button type="button" class="btn btn-primary" id="acceptBtn">Accept Payment</button>
+										<button type="button" class="btn btn-danger"  id="declinedBtn">Declined Payment</button>
 									</center>
 								</div>
 						    </div>
