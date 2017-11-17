@@ -196,7 +196,7 @@
 									<td>{{ $data_team->team_information}}</td>
 									<td>View All Members</td>
 									<td>
-										<select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox"  data-id="{{ $data_team->team_id}}">
+										<select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox" data-name="{{ $data_team->team_name}}" data-info="{{ $data_team->team_information}}" data-id="{{ $data_team->team_id}}">
 											<option value="">Action</option>
 											<option value="edit">Edit</option>
 											<option value="assign">Assignee</option>
@@ -255,9 +255,9 @@
 									<td>{{$data_supervisor->secondary_phone}}</td>
 									<td>{{$data_supervisor->other_info}}</td>
 									<td>
-										<select style="height:30px;width:80px;" class="supervisor_actionbox" id="supervisor_actionbox"  data-id="{{ $data_supervisor->supervisor_id}}">
+										<select style="height:30px;width:80px;" class="supervisor_actionbox" id="supervisor_actionbox" data-name="{{$data_supervisor->first_name}} {{$data_supervisor->last_name}}" data-email="{{$data_supervisor->email}}"  data-id="{{ $data_supervisor->supervisor_id}}">
 											<option value="">Action</option>
-											<option value="assign">Edit</option>
+											<option value="edit">Edit</option>
 											<option value="assign">Assign</option>
 											<option value="delete">Delete</option>
 										</select>
@@ -307,7 +307,7 @@
 									<td>{{$data_admin->full_name}}</td>
 									<td>{{$data_admin->email}}</td>
 									<td>{{$data_admin->position}}</td>
-									<td><select style="height:30px;width:80px;" class="admin_actionbox" id="admin_actionbox" data-name="{{$data_admin->first_name}} {{$data_admin->last_name}}" data-id="{{ $data_admin->agent_id}}">
+									<td><select style="height:30px;width:80px;" class="admin_actionbox" data-email="{{$data_admin->email}}" data-name="{{$data_admin->full_name}}" id="admin_actionbox" data-name="{{$data_admin->first_name}} {{$data_admin->last_name}}" data-id="{{ $data_admin->agent_id}}">
 										<option value="">Action</option>
 										<option value="edit">Edit</option>
 										<option value="delete">Delete</option>
@@ -501,6 +501,45 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="myModalTeamEdit" role="dialog" style="margin-top:85px;">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Team</h4>
+					</div>
+					<div class="modal-body" style="margin-bottom: 150px;" >
+						<div id="team_alerts">
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Team Name</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="team_name" id="tTeam_name"  style="width:100%;margin-bottom: 20px;"/>
+								<input type="hidden" id="tTeam_id" />
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Team Description</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="team_info" id="tTeam_info" style="width:100%"/>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<center>
+							<button type="submit" class="btn btn-primary" name="add_team" id="updateTeam">Update Team</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							</center>
+						</div>
+					</div>
+					<div class="modal-footer" style="border:0px;">
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="myModalSupervisor" role="dialog">
 			<div class="modal-dialog modal-md">
 				<div class="modal-content">
@@ -576,6 +615,58 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="myModalSupervisorEdit" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Supervisor Login</h4>
+					</div>
+					<div class="modal-body" style="margin-bottom: 300px;" >
+						<div class="col-sm-12" id="supervisor_alerts">
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Full Name</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="first_name" id="supFullname"  style="width:100%;margin-bottom: 20px;" readOnly/>
+							</div>
+						</div>
+						
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Email</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="last_name" id="supEmail"  style="width:100%;margin-bottom: 20px;" required/>
+								<input type="hidden"  id="supId" />
+								<input type="hidden"  id="supOldEmail" />
+								
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Password</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="password" class="form-control" name="email" id="supPassword"  style="width:100%;margin-bottom: 20px;" required/>
+							</div>
+						</div>
+						<div class="col-sm-12" id="agent_alert">
+						</div>
+						<div class="col-sm-12">
+							<center>
+							<button type="submit" class="updateAgent btn btn-primary" name="updateSupervisor" id="updateSupervisor">Update Supervisor</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							</center>
+						</div>
+					</div>
+					<div class="modal-footer" style="border:0px;">
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="myModalAdmin" role="dialog" style="margin-top:85px;">
 			<div class="modal-dialog modal-md">
 				<div class="modal-content">
@@ -621,6 +712,58 @@
 					</div>
 					<div class="modal-footer" style="border:0px;">
 						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModalAdminEdit" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Supervisor Login</h4>
+					</div>
+					<div class="modal-body" style="margin-bottom: 300px;" >
+						<div class="col-sm-12" id="admin_alerts">
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Full Name</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="first_name" id="adFullname"  style="width:100%;margin-bottom: 20px;" readOnly/>
+							</div>
+						</div>
+						
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Email</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="last_name" id="adEmail"  style="width:100%;margin-bottom: 20px;" required/>
+								<input type="hidden"  id="adId" />
+								<input type="hidden"  id="adOldEmail" />
+								
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Password</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="password" class="form-control" name="email" id="adPassword"  style="width:100%;margin-bottom: 20px;" required/>
+							</div>
+						</div>
+						<div class="col-sm-12" id="agent_alert">
+						</div>
+						<div class="col-sm-12">
+							<center>
+							<button type="submit" class="updateAgent btn btn-primary" name="updateAdmin" id="updateAdmin">Update Supervisor</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							</center>
+						</div>
+					</div>
+					<div class="modal-footer" style="border:0px;">
 					</div>
 				</div>
 			</div>

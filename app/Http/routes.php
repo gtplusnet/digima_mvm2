@@ -229,9 +229,17 @@ Route::post('/general_admin/manage_user/add_admin', 				'GeneralAdminController@
 Route::any('/general_admin/manage_user/delete_agent', 				'GeneralAdminController@general_admin_delete_agent');
 Route::any('/general_admin/manage_user/delete_team', 				'GeneralAdminController@general_admin_delete_team');
 Route::any('/general_admin/manage_user/assign_agent', 				'GeneralAdminController@general_admin_assign_agent');
-
-
 Route::post('/general_admin/manage_user/update_agent_login', 		'GeneralAdminController@general_admin_update_agent_login');
+Route::post('/general_admin/manage_user/update_team_info', 			'GeneralAdminController@general_admin_update_team_info');
+Route::post('/general_admin/manage_user/update_supervisor_login', 	'GeneralAdminController@general_admin_update_supervisor_login');
+
+
+
+Route::post('/general_admin/manage_user/update_admin_login', 		'GeneralAdminController@general_admin_update_admin_login');
+
+
+
+
 
 
 

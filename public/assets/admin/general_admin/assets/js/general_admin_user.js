@@ -261,6 +261,81 @@ function manage_user()
 					}, 1000);
 				});
 	    });
+	    $(document).on('click','#updateTeam',function()
+		{
+			
+	        var id 			= $("#tTeam_id").val();
+	        var name 		= $("#tTeam_name").val();
+	        var info 		= $("#tTeam_info").val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/manage_user/update_team_info',
+				data:{
+					id 	: id,
+					name: name,
+					info: info,
+					},
+				dataType:'text',
+
+			}).done(function(data)
+				{
+				    $('#team_alerts').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
+				});
+	    });
+	    $(document).on('click','#updateSupervisor',function()
+		{
+			
+	        var id 			= $("#supId").val();
+	        var email 		= $("#supEmail").val();
+	        var oldEmail    = $("#supOldEmail").val();
+	        var password 	= $("#supPassword").val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/manage_user/update_supervisor_login',
+				data:{
+					id 	: id,
+					email: email,
+					oldEmail: oldEmail,
+					password: password,
+				     },
+				dataType:'text',
+
+			}).done(function(data)
+				{
+				    $('#supervisor_alerts').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
+				});
+	    });
+	    $(document).on('click','#updateAdmin',function()
+		{
+			var id 			= $("#adId").val();
+	        var email 		= $("#adEmail").val();
+	        var oldEmail    = $("#adOldEmail").val();
+	        var password 	= $("#adPassword").val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/manage_user/update_admin_login',
+				data:{
+					id 	: id,
+					email: email,
+					oldEmail: oldEmail,
+					password: password,
+				     },
+				dataType:'text',
+
+			}).done(function(data)
+				{
+				    $('#admin_alerts').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
+				});
+	    });
 	}
 	function action_box()
 	{ 
@@ -299,7 +374,14 @@ function manage_user()
 	    {
 			if ($(this).val() == "edit") 
 			{
-	        	$('#viewTeam').modal('show');
+				var team_id 	= $(this).data("id");
+		        var team_name 	= $(this).data("name");
+		        var team_info 	= $(this).data("name");
+		        $("#tTeam_id").val(team_id);
+		        $("#tTeam_name").val(team_name);
+		        $("#tTeam_info").val(team_info);
+
+	        	$('#myModalTeamEdit').modal('show');
 	        }
 			if ($(this).val() == "view_agent") 
 			{
@@ -320,7 +402,16 @@ function manage_user()
 	    {
 			if ($(this).val() == "edit") 
 			{
-	        	alert('not available');
+				var supervisor_id 		= $(this).data("id");
+		        var supervisor_name 	= $(this).data("name");
+		        var supervisor_email 	= $(this).data("email");
+		        $("#supId").val(supervisor_id);
+		        $("#supFullname").val(supervisor_name);
+		        $("#supEmail").val(supervisor_email);
+		        $("#supOldEmail").val(supervisor_email);
+		        $("#supPassword").val(supervisor_email);
+
+	        	$('#myModalSupervisorEdit').modal('show');
 	        }
 			if ($(this).val() == "assign") 
 			{
@@ -342,7 +433,16 @@ function manage_user()
 	    {
 			if ($(this).val() == "edit") 
 			{
-	        	alert('not available');
+	        	var admin_id 		= $(this).data("id");
+		        var admin_name 	= $(this).data("name");
+		        var admin_email 	= $(this).data("email");
+		        $("#adId").val(admin_id);
+		        $("#adFullname").val(admin_name);
+		        $("#adEmail").val(admin_email);
+		        $("#adOldEmail").val(admin_email);
+		        $("#adPassword").val(admin_email);
+
+		        $('#myModalAdminEdit').modal('show');
 	        }
 			if ($(this).val() == "delete") 
 			{

@@ -911,6 +911,57 @@ class GeneralAdminController extends Controller
 
 
   }
+  public function general_admin_update_team_info(Request $request)
+  {
+    $id = $request->id;
+    $name = $request->name;
+    $info = $request->info;
+    $data['team_name'] = $name;
+    $data['team_information'] =  $info;
+    TblTeamModel::where('team_id',$id)->update($data);
+    return "<div class='alert alert-success'><strong>Success!</strong>Team Information Updated Successfully!</div>";  
+  }
+  public function general_admin_update_supervisor_login(Request $request)
+  {
+    $id       = $request->id;
+    $email    = $request->email;
+    $oldEmail = $request->oldEmail;
+    $password = $request->password;
+    if($oldEmail==$password)
+    {
+      $data['email'] = $email;
+      TblSupervisorModels::where('supervisor_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Login Updated Successfully!</div>";  
+    }
+    else
+    {
+      $data['email']    = $email;
+      $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+      TblSupervisorModels::where('supervisor_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Login Updated Successfully!</div>";  
+    }
+  }
+  public function general_admin_update_admin_login(Request $request)
+  {
+    $id       = $request->id;
+    $email    = $request->email;
+    $oldEmail = $request->oldEmail;
+    $password = $request->password;
+    if($oldEmail==$password)
+    {
+      $data['email'] = $email;
+      TblAdminModels::where('admin_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Admin Login Updated Successfully!</div>";  
+    }
+    else
+    {
+      $data['email']    = $email;
+      $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+      TblAdminModels::where('admin_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Admin Login Updated Successfully!</div>";  
+    }
+  }
+
   public function general_admin_assign_agent(Request $request)
   {
     $agent_id = $request->agent_id;
