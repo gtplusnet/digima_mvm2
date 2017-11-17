@@ -357,7 +357,10 @@ th
 
                   <div role="tabpanel" class="tab-pane fade" id="CP">
                       <form class="form-horizontal" method="POST" action="/merchant/change_password">
-                        <br><br><br>
+
+                        <div id="merchant_changepassword_success" style="margin-top:50px;">
+                        </div>
+                       
                         <div class="form-group"> 
                              <div class="col-sm-3">
                            <strong style="font-size: 18px;">Change Password</strong>
@@ -365,31 +368,31 @@ th
                         </div>
                        
                             {{ csrf_field() }}
-
+                
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Enter Current Password</label>
                            <div class="col-sm-3">
-                              <input type="text" class="form-control" id="current_password" name="current_password" >
+                              <input type="Password" class="form-control" id="current_password" name="current_password" >
                            </div>
                         </div>
 
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">New Password</label>
                            <div class="col-sm-3">
-                              <input type="text" class="form-control" id="new_password" name="new_password" >
+                              <input type="Password" class="form-control" id="new_password" name="new_password" >
                            </div>
                         </div>
 
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Confirm New Password</label>
                            <div class="col-sm-3">
-                              <input type="text" class="form-control" id="confirm_password"  name="confirm_password" >
+                              <input type="Password" class="form-control" id="confirm_password"  name="confirm_password" >
                            </div>
                         </div>
 
                        <div class="col-md-5">
                            <div class="text-right" >
-                              <button type="submit" class="btn btn-primary" id="update" style="padding: 5px 18px;">Submit</button>
+                              <button type="button" class="btn btn-primary" id="updatePassword" style="padding: 5px 18px;">Submit</button>
                            </div>
                         </div>
                      </form>

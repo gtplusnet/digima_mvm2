@@ -400,27 +400,24 @@ class MerchantController extends Controller
     public function merchant_change_password(Request $request)
     {
 
-      //   $validate_password = TblUserAccountModel::where('user_email',session('email'))->first();
-                       
-      //   if(password_verify($request->current_password, $validate_password->current_password)
-      //   {
-      //           if (password_verify($request->password, $validate_password->user_password)) 
-      //               {
-                     
-
-      //               }
-      //           else
-      //           {
-                 
-      //               return Redirect::back();
-      //           }
-      //   }
-      //   else
-      //   {
-      //       return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-      // }
-
-      // echo "Wala Pang Code";
+        $merchant_password = TblUserAccountModel::where('business_id',session('business_id'))->first();             
+        if(password_verify($request->current_password,$merchant_password->user_password))
+        {
+              if($request->new_password == $request->confirm_password) 
+                {
+                  $data['user_password'] = password_hash($request->new_password, PASSWORD_DEFAULT);
+                  TblUserAccountModel::where('business_id',session('business_id'))->update($data);
+                  return "<div class='alert alert-success'><strong>Success!</strong>  Password Changed</div>";
+                 }
+              else
+              {
+                return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
+              }
+        }
+        else
+        {
+          return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
+        }
 
     }
 

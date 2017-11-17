@@ -32,7 +32,6 @@ $(document).ready(function(){
 				   location.reload();
 				}, 1000);
 			});
-		
 	});
 	
 });
@@ -74,6 +73,35 @@ $(document).ready(function(){
 			});
 	});
 });
+
+
+$(document).ready(function(){
+
+	$(document).on("click","#updatePassword",function(){
+		var current_password = $('#current_password').val();
+		var new_password = $('#new_password').val();
+		var confirm_password = $('#confirm_password').val();
+		
+		$.ajax({
+			type:'POST',
+			url:'/merchant/change_password',
+			data:{
+				current_password: current_password,
+				new_password: new_password,
+				confirm_password: confirm_password,
+				},
+			dataType:'text',
+		}).done(function(data){
+			$('#merchant_changepassword_success').html(data);
+				setTimeout(function(){
+				   location.reload();
+				}, 1000);
+			});
+	});
+	
+});
+
+
 
 
 

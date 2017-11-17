@@ -153,6 +153,10 @@ class AgentController extends Controller
 		$data['transaction'] = 'password';
 		return  view('agent.pages.update_profile',$data);
 	}
+
+
+
+	
 	public function checking_password(Request $request )
 	{
 		$user = TblAgentModel::where('agent_id',session('agent_id'))->first();
