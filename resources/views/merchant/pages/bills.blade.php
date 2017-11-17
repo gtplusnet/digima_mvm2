@@ -17,21 +17,23 @@
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">List</h4>
                 </div>
+             
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
                                     <th>Membership</th>
-                                    <th>Reference</th>
+                                    <th>Reference #</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>                       
                             <tbody>
                                 <tr>
-                                    <td>Platinum</td>
-                                    <td><a href="#" class="dropdown-toggle waves-effect waves-button waves-classic">Reference Number</a></td>
-                                    <td>Paid</td>
+                                    <td>{{$bills->membership_name}}</td>
+                                    <td><p  class="dropdown-toggle waves-effect waves-button waves-classic">
+                                        {{$method->payment_reference_number}}</a></td>
+                                    <td>{{$method->payment_status}}</td>
                                 </tr>
                                
                             </tbody>
@@ -57,11 +59,14 @@
                         </div>
                         <div class="col-md-8 text-right">
                             <h1>RECEIPT</h1>
-                            <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+                           <!--  <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
+                            <button type="button" class="btn btn-default"><a class="fa fa-print" href="javascript:if(window.print)window.print()"> Print</a></button>
+
+
                         </div>
                         <div class="col-md-12">
                             
-                             <div class="col-md-12">
+                             <div class="col-md-15">
                                 <hr>
                                 <p>
                                     <h3>Invoice to</h3><br>
@@ -76,6 +81,9 @@
                                 <div class="col-md-12">
                                     <strong> {{session('email')}}   </strong>
                                 </div>
+                                <br><br>
+                                <br><br>
+                               
                             </div>
                         </div>
                         <div class="col-md-12">

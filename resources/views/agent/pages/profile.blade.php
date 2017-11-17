@@ -23,7 +23,11 @@
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-md-3 user-profile">
-                    
+
+                    <h3 class="text-center">{{session('full_name_agent')}}</h3>
+                    <p class="text-center">{{$agent_info->email}}</p>
+                     <p class="text-center">{{$agent_info->position}}</p>
+
                     <hr>
                     <ul class="list-unstyled text-center">
                         <li><h3 class="text-center">{{session('full_name')}}</h3></li>

@@ -23,6 +23,7 @@ use App\Models\TblBusinessSubCategoryModel;
 use App\Models\TblReportsModel;
 use App\Models\TblBusinessTagCategoryModel;
 
+
 use App\Models\TblABusinessPaymentMethodModel;
 
 use Redirect;
@@ -329,34 +330,33 @@ class MerchantController extends Controller
       $data["twitter_url"] = $request->twitter_url;
       $data["facebook_url"]    = $request->facebook_url;
       TblBusinessModel::where('business_id',session('business_id'))->update($data);
-       Session::flash('success_merchant', 'Successfully Updated!');
+      Session::flash('success_merchant', 'Successfully Updated!');
       return Redirect::back();  
    }
     
 
-    public function update_other_info(Request $request)//
+    public function update_other_info(Request $request)
     {
       
       $data["company_information"] = $request->company_information;
       $data["business_website"]    = $request->business_website;
       $data["year_established"]    = $request->year_established;
       TblBusinessOtherInfoModel::where('business_id',session('business_id'))->update($data);
-     return Redirect::back();  
+      return "<div class='alert alert-success'><strong>Success!</strong>  Other Information Updated.</div>";
    }
     
 
     public function update_hours(Request $request)
     {
-
       $business_hours_to = $request->input('business_hours_to');
       $business_hours_from = $request->input('business_hours_from');
       $business_id = $request->input('business_id');
       $days = $request->input('days');
       foreach($business_hours_from as $key => $business_hours_f)
       {
-          $data['business_hours_from']= $business_hours_f;
-          $data['business_hours_to']= $business_hours_to[$key];  
-          $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
+        $data['business_hours_from']= $business_hours_f;
+        $data['business_hours_to']= $business_hours_to[$key];  
+        $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
       }
       Session::flash('success', 'success');
       return Redirect::back();  
@@ -397,10 +397,27 @@ class MerchantController extends Controller
       return Redirect::back();
     }
 
-    public function merchant_change_password()
+    public function merchant_change_password(Request $request)
     {
 
-      echo "Wala Pang Code";
+        $merchant_password = TblUserAccountModel::where('business_id',session('business_id'))->first();             
+        if(password_verify($request->current_password,$merchant_password->user_password))
+        {
+              if($request->new_password == $request->confirm_password) 
+                {
+                  $data['user_password'] = password_hash($request->new_password, PASSWORD_DEFAULT);
+                  TblUserAccountModel::where('business_id',session('business_id'))->update($data);
+                  return "<div class='alert alert-success'><strong>Success!</strong>  Password Changed</div>";
+                 }
+              else
+              {
+                return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
+              }
+        }
+        else
+        {
+          return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
+        }
 
     }
 
@@ -554,11 +571,10 @@ class MerchantController extends Controller
           }
           elseif($_check2<6)
           {
+            Session::flash('message1', "Done Tagging!");
            $_insert = TblBusinessTagCategoryModel::whereIn('business_id',session('business_id'))->insert($data);
-          }
-          
+          }  
       }  
-      Session::flash('message1', "Done Tagging!");
       return Redirect::back();
     }
 
@@ -598,7 +614,10 @@ class MerchantController extends Controller
 	  {
 		  Self::allow_logged_in_users_only();
 		  $data['page']	= 'Bills';
-      $data['bills'] = TblBusinessModel::where('business_id',session('business_id'))->first();
+      $data['bills'] = TblBusinessModel::where('business_id',session('business_id'))
+                      ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                      ->first();
+     $data['method'] = TblPaymentModel::where('business_id',session('business_id'))->first();
 		  return view ('merchant.pages.bills', $data);		
 	  }
 

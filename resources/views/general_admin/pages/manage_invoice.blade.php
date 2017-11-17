@@ -67,6 +67,7 @@
 					@endforeach
 				</tbody>
 			</table>
+			{!! $_invoice->render() !!}
 		</div>
 	</div>
 	<div style="margin-top: 150px;" class="modal fade" id="resendModal" role="dialog">

@@ -395,7 +395,8 @@ class FrontController extends Controller
       $data["messages"]          = $request->messages;
       $data["business_id"]       = $request->business_id;
       TblGuestMessages::insert($data);;
-      return "<div class='alert alert-success'><strong>Success!</strong> Message Sent.</div>";
+      // return "<div class='alert alert-success'><strong>Success!</strong> Message Sent.</div>";
+       return Redirect::back();
     }
 
       public function add_messages_send(Request $request)

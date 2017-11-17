@@ -193,6 +193,7 @@ color:#fff;
                                     @endforeach
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
