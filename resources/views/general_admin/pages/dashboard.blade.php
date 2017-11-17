@@ -157,7 +157,7 @@
                             </div>
                             <div class="content" style="">
                             
-                                <canvas id="income" width="1000" class="ct-chart "></canvas>
+                                <canvas id="income" width="1000" class="ct-chart"></canvas>
                            
                                 <div class="footer">
                                     <div class="legend">

@@ -2,12 +2,42 @@
 @section('title', 'merchants')
 @section('description', 'merchants')
 @section('content')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+<script src="/assets/admin/general_admin/assets/js/general_admin_merchant.js"></script>
+<script src="/assets/js/global.ajax.js"></script>
+
 <style>
-    .li_me
-    {
-        width:25%;
-    }
+.date {
+    position: relative;
+    left:500px;
+}
+.distance
+{
+margin:10px 0px 10px 0px;
+}
+.li_me{
+padding:0px;
+width:25%;
+margin-right:0px;
+margin-left:-1px;
+}
+.modal-header
+{
+background-color: #24292E;
+color:#fff;
+/*border-radius: 10px;*/
+}
 </style>
+
+<script>
+    $(document).ready(function() {
+    $( ".datepicker" ).datepicker();
+    $( ".datepicker1" ).datepicker();
+
+    });
+</script>
 <div class="page-title" style="margin-bottom:20px;">
     <h3>Merchant</h3>
     <div class="page-breadcrumb">
@@ -49,20 +79,12 @@
                         <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
                             <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
                                 {{csrf_field()}}
-                                <div class="col-md-5 pull-left">
+                                <div class="col-md-6 pull-left">
                                     <div class="col-md-6">
-                                        <select class="form-control" name="date_start" id="date_start">
-                                            @foreach($clients as $client_list)
-                                            <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="form-control" name="date_end" id="date_end">
-                                            @foreach($clients as $client_list)
-                                            <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-4 pull-right">
@@ -103,11 +125,6 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{-- <a target="_blank" href="/general_admin/send_invoice/{{$client->business_id}}">
-                                                <button class="transaction btn btn-default ">
-                                                    <i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice
-                                                </button>
-                                            </a> --}}
                                             <select id="" onchange="location = this.value;" class="form-control" id="sel1" style="width:90px;">
                                                 <option >Action</option>
                                                 <option value="/general_admin/send_invoice/{{$client->business_id}}">Send Invoice</option>
@@ -128,20 +145,12 @@
                         <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
                             <form class="form-inline" method="post" action="/general_admin/search_agent_added">
                                 {{csrf_field()}}
-                                <div class="col-md-5 pull-left">
+                                <div class="col-md-6 pull-left">
                                     <div class="col-md-6">
-                                        <select class="form-control" name="date_start" id="date_start">
-                                            @foreach($agentAdded as $agent_client)
-                                            <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                     </div>
-                                    <div class="col-md-6" >
-                                        <select class="form-control" name="date_end" id="date_end">
-                                            @foreach($agentAdded as $agent_client)
-                                            <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-4 pull-right">
@@ -194,20 +203,12 @@
                         <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
                             <form class="form-inline" method="post" action="/general_admin/search_pending">
                                 {{csrf_field()}}
-                                <div class="col-md-5 pull-left">
-                                    <div class="col-md-6" >
-                                        <select class="form-control" name="date_start" id="date_start">
-                                            @foreach($pending_clients as $pending_client)
-                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                <div class="col-md-6 pull-left">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="form-control" name="date_end" id="date_end">
-                                            @foreach($pending_clients as $pending_client)
-                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-4 pull-right">
@@ -277,20 +278,12 @@
                         <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
                             <form class="form-inline" method="post" action="/general_admin/search_registered">
                                 {{csrf_field()}}
-                                <div class="col-md-5 pull-left">
-                                    <div class="col-md-6" >
-                                        <select class="form-control" name="date_start" id="date_start">
-                                            @foreach($pending_clients as $pending_client)
-                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                <div class="col-md-6 pull-left">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="" >
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="form-control" name="date_end" id="date_end">
-                                            @foreach($pending_clients as $pending_client)
-                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="" >
                                     </div>
                                 </div>
                                 <div class="col-md-4 pull-right">
@@ -333,29 +326,4 @@
     </div>
 </div>
 
-<style>
-.date {
-    position: relative;
-    left:500px;
-}
-.distance
-{
-margin:10px 0px 10px 0px;
-}
-.li_me{
-padding:0px;
-width:25%;
-margin-right:0px;
-margin-left:-1px;
-}
-.modal-header
-{
-background-color: #24292E;
-color:#fff;
-/*border-radius: 10px;*/
-}
-</style>
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_merchant.js"></script>
 @endsection
