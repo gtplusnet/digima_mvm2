@@ -1,5 +1,51 @@
 @extends('agent.layout.layout')
 @section('content')
+<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{{-- <link rel="stylesheet" href="/resources/demos/style.css"> --}}
+{{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
+{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+<script type="text/javascript" src="/assets/js/global.ajax.js"></script>
+<script src="/assets/js/agent/agent_client.js"></script>
+<style>
+
+.distance
+{
+margin:10px 0px 10px 0px;
+}
+.li_style{
+padding:0px;
+width:33.31%;
+margin-right:0px;
+margin-left:-1px;
+}
+.modal-header
+{
+background-color: #24292E;
+color:#fff;
+/*border-radius: 10px;*/
+}
+.call
+{
+color:green;
+margin-right: 5px;
+font-size:20px;
+}
+.callme
+{
+color:white;
+margin-right: 0px;
+width:35px;
+font-size:20px;
+}
+</style>
+<script>
+$( function() {
+$( ".datepicker" ).datepicker();
+$( ".datepicker1" ).datepicker();
+
+});
+</script>
 <div class="page-title">
     <h3>Merchant</h3>
     <div class="page-breadcrumb">
@@ -17,9 +63,9 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
-                            <li class="active li_style"><a data-toggle="tab" href="#customer">Sign-Up Merchant</a></li>
+                            <li class="active li_style"><a data-toggle="tab" href="#customer">Registered Merchant</a></li>
                             <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Merchant</a></li>
-                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Registered Merchant</a></li>
+                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Merchant</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,34 +75,26 @@
 
         
         <div id="customer" class="tab-pane fade in active">
-        
-            <div class="pull-right" style="margin:20px 20px 20px 0px">
-            <form class="form-inline" method="post" action="/agent/search_client">
-                {{csrf_field()}}
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search_key1" id="search_key1">
-                </div>
-                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
-            </form>
-            </div>
-
             <div class="row">
                 <div class="panel-body">
-                    <div class="col-md-4 pull-right">
-                        <div class="col-md-6">
-                            <select class="form-control " name="date_start" id="date_start" style="width: 150px; border-radius: 20px;">
-                                @foreach($clients as $client_list)
-                                <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <select class="form-control " name="date_end" id="date_end" style="width: 150px; border-radius: 20px;">
-                                @foreach($clients as $client_list)
-                                <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="col-md-12" style="margin:20px 20px 20px 0px">
+                        <form class="form-inline" method="post" action="/agent/search_client">
+                            {{csrf_field()}}
+                            <div class="col-md-5 pull-left">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-4 pull-right">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="search_key1" id="search_key1">
+                                </div>
+                                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="table-responsive col-md-12"  id="showHere_signup">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
@@ -82,9 +120,19 @@
                                     <td>{{$client->business_phone}}</td>
                                     <td>{{$client->business_alt_phone}}</td>
                                     <td>{{$client->membership_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($client->date_transact))}}</td>
+                                    <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->transaction_status}}</td>
-                                    <td><button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}"><i class="fa fa-phone call" aria-hidden="true"></i>call</button></td>
+                                    <td>
+                                        @if($client->transaction_status == 'call in progress' && $client->agent_id !=session('agent_id'))
+                                        <button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}" disabled>
+                                            <i class="fa fa-phone call" aria-hidden="true"></i>Busy
+                                        </button>
+                                        @else
+                                        <button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}">
+                                            <i class="fa fa-phone call" aria-hidden="true"></i>call
+                                        </button>
+                                        @endif
+                                    </td>
                                 </tr>
                                 <div class="modal fade" id="myModal{{$client->business_id}}" role="dialog" >
                                     <div class="modal-lg modal-dialog">
@@ -196,35 +244,27 @@
 
 
         <div id="pendingCustomer" class="tab-pane fade">
-
-            <div class="pull-right" style="margin:20px 20px 20px 0px">
-            <form class="form-inline" method="post" action="/agent/search_client_pending">
-                {{csrf_field()}}
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search_key12" id="search_key12">
-                </div>
-                <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Search</button>
-            </form>
-            </div>
-
-            <div class="row">
-                <div class="panel-body">
-                    <div class="col-md-4 pull-right">
+            <div class="col-md-12" style="margin:20px 20px 20px 0px">
+                <form class="form-inline" method="post" action="/agent/search_client_pending">
+                    {{csrf_field()}}
+                    <div class="col-md-5 pull-left">
                         <div class="col-md-6">
-                            <select class="form-control " name="date_start1" id="date_start1" style="width: 150px; border-radius: 20px;">
-                                @foreach($clients_pending as $clients_pendings)
-                                <option value="{{$clients_pendings->date_transact}}">{{date("F j, Y",strtotime($clients_pendings->date_transact))}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control " name="date_end1" id="date_end1" style="width: 150px; border-radius: 20px;">
-                                @foreach($clients_pending as $clients_pendings)
-                                <option value="{{$clients_pendings->date_transact}}">{{date("F j, Y",strtotime($clients_pendings->date_transact))}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
                         </div>
                     </div>
+                    <div class="col-md-4 pull-right">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search_key12" id="search_key12">
+                        </div>
+                        <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="panel-body">
                     <div class="table-responsive col-md-12"  id="showHere_pending">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
@@ -265,35 +305,27 @@
 
         <div id="activatedCustomer" class="tab-pane fade">
 
-            <div class="pull-right" style="margin:20px 20px 20px 0px">
-            <form class="form-inline" method="post" action="/agent/search_client">
-                {{csrf_field()}}
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search_key3" id="search_key3">
-                </div>
-                <button type="button" class="btn btn-success" name="search_button123" id="search_button123">Search</button>
-            </form>
-            </div>
-
-
-            <div class="row">
-                <div class="panel-body">
-                    <div class="col-md-4 pull-right">
+            <div class="col-md-12" style="margin:20px 20px 20px 0px">
+                <form class="form-inline" method="post" action="/agent/search_client_pending">
+                    {{csrf_field()}}
+                    <div class="col-md-5 pull-left">
                         <div class="col-md-6">
-                            <select class="form-control " name="date_start2" id="date_start2" style="width: 150px; border-radius: 20px;">
-                                @foreach($clients_activated as $clients_activates)
-                                <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control " name="date_end2" id="date_end2" style="width: 150px; border-radius: 20px;">
-                                @foreach($clients_activated as $clients_activates)
-                                <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
                         </div>
                     </div>
+                    <div class="col-md-4 pull-right">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search_key3" id="search_key3">
+                        </div>
+                        <button type="button" class="btn btn-success" name="search_button123" id="search_button123">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="panel-body">
                     <div class="table-responsive col-md-12"  id="showHere_activated">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
@@ -304,7 +336,7 @@
                                 <th>Phone 1</th>
                                 <th>Phone 2</th>
                                 <th>Membership</th>
-                                <th>Date Registered</th>
+                                <th>Date Activated</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -332,41 +364,5 @@
         </div>
     </div>
 </div>
-<style>
-
-.distance
-{
-margin:10px 0px 10px 0px;
-}
-.li_style{
-padding:0px;
-width:33.31%;
-margin-right:0px;
-margin-left:-1px;
-}
-.modal-header
-{
-background-color: #24292E;
-color:#fff;
-/*border-radius: 10px;*/
-}
-.call
-{
-color:green;
-margin-right: 5px;
-font-size:20px;
-}
-.callme
-{
-color:white;
-margin-right: 0px;
-width:35px;
-font-size:20px;
-}
-</style>
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<script type="text/javascript" src="/assets/js/global.ajax.js"></script>
-<script src="/assets/js/agent/agent_client.js"></script>
 @endsection
 

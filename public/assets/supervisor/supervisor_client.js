@@ -54,9 +54,8 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 	$('#date_end').change(function(){
-		var date_start = $('#date_start').val();
-		var date_end = $('#date_end').val();
-		// alert(date_start+date_end);
+		var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
 			type:'POST',
 			url:'/supervisor/get_client',
@@ -71,9 +70,8 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 	$('#date_end1').change(function(){
-		var date_start1 = $('#date_start1').val();
-		var date_end1 = $('#date_end1').val();
-		// alert(date_start1+date_end1);
+		var date_start1 = $('#date_start1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		var date_end1 = $('#date_end1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
 			type:'POST',
 			url:'/supervisor/get_client1',
@@ -85,23 +83,6 @@ $(document).ready(function(){
 	});
 });
 
-
-
-$(document).ready(function(){
-
-	$('#date_end2').change(function(){
-		var date_start2 = $('#date_start2').val();
-		var date_end2 = $('#date_end2').val();
-		$.ajax({
-			type:'POST',
-			url:'/supervisor/get_client2',
-			data:{date_start2: date_start2,date_end2: date_end2},
-			dataType:'text',
-		}).done(function(data){
-				$('#showHere2').html(data);
-			});
-	});
-});
 
 
 $(document).ready(function(){

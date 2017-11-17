@@ -203,7 +203,7 @@ table[class=hide], img[class=hide], td[class=hide] {
                         <br />
                         Password: {{$password}}
                         <br />
-                        Link: mvm.digimahouse.com/login or simply click the dashboard button.
+                        Link: {{$link}} or simply click the dashboard button.
                          <br />
                         <br />
                         <br />
@@ -213,7 +213,7 @@ table[class=hide], img[class=hide], td[class=hide] {
                           <tr>
                             <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
                                 <tr>
-                                  <td width="250" height="60" align="center" bgcolor="  #FFFF00" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;"><a href="mvm.digimahouse.com/merchant/dashboard" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: black" class="button_link">DASHBOARD</a></td>
+                                  <td width="250" height="60" align="center" bgcolor="  #FFFF00" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;"><a href="{{$link}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: black" class="button_link">DASHBOARD</a></td>
                                 </tr>
                               </table></td>
                           </tr>

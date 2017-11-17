@@ -1,10 +1,34 @@
-@extends('supervisor.layout.layout') @section('content')
+@extends('supervisor.layout.layout') 
+@section('content')
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+<script src="/assets/js/global.ajax.js"></script>
+<script src="/assets/supervisor/supervisor_client.js"></script>
+<script src="/assets/js/supervisor/upload-conversation.js"></script>
+<script src="/assets/js/supervisor/get-client-info.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{{-- <link rel="stylesheet" href="/resources/demos/style.css"> --}}
+{{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 <style>
 .li_style
 {
 width:50%;
 }
 </style>
+<script language="javascript">
+document.getElementById("uploadBtn").onchange = function () {
+document.getElementById("uploadFile").value = this.value;
+};
+
+</script>
+<script>
+    $(document).ready(function() {
+$( ".datepicker" ).datepicker();
+$( ".datepicker1" ).datepicker();
+
+});
+</script>
+
 <div class="page-title">
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
@@ -32,35 +56,26 @@ width:50%;
     </div>
      
         <div id="pendingCustomer" class="tab-pane fade in active">
-
-            <div class="pull-right" style="margin:20px 20px 20px 0px">
-            <form class="form-inline" method="post" action="/supervisor/supervisor_search_client">
-                {{csrf_field()}}
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search_key1" id="search_key1">
-                </div>
-                <button type="button" class="btn btn-success" name="search_button" id="search_button">Search</button>
-            </form>
+            <div class="col-md-12" style="margin:20px 20px 20px 0px">
+                <form class="form-inline" method="post" action="/supervisor/supervisor_search_client">
+                    {{csrf_field()}}
+                    <div class="col-md-5 pull-left">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pull-right">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search_key1" id="search_key1">
+                        </div>
+                        <button type="button" class="btn btn-success" name="search_button" id="search_button">Search</button>
+                    </div>
+                </form>
             </div>
-
-
             <div class="panel-body" >
-                <div class="col-md-4 pull-right">
-                    <div class="col-md-6">
-                        <select class="form-control " name="date_start" id="date_start" style="width: 150px; border-radius: 20px;">
-                            @foreach($clients as $client_list)
-                            <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <select class="form-control " name="date_end" id="date_end" style="width: 150px; border-radius: 20px;">
-                            @foreach($clients as $client_list)
-                            <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="table-responsive col-md-12" id="showHere_pending" style="margin-top: 10px;">
                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
@@ -116,34 +131,26 @@ width:50%;
             </div>
         </div>
         <div id="activatedCustomer" class="tab-pane fade">
-
-            <div class="pull-right" style="margin:20px 20px 20px 0px">
-            <form class="form-inline" method="post" action="/supervisor/supervisor_search_client_activated">
-                {{csrf_field()}}
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search_key2" id="search_key2">
-                </div>
-                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
-            </form>
+            <div class="col-md-12" style="margin:20px 20px 20px 0px">
+                <form class="form-inline" method="post" action="/supervisor/supervisor_search_client_activated">
+                    {{csrf_field()}}
+                    <div class="col-md-5 pull-left">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pull-right">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search_key2" id="search_key2">
+                        </div>
+                        <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
+                    </div>
+                </form>
             </div>
-
             <div class="panel-body" >
-                <div class="col-md-4 pull-right">
-                    <div class="col-md-6">
-                        <select class="form-control " name="date_start1" id="date_start1" style="width: 150px; border-radius: 20px;">
-                            @foreach($clients_activated as $clients_activates)
-                            <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <select class="form-control " name="date_end1" id="date_end1" style="width: 150px; border-radius: 20px;">
-                            @foreach($clients_activated as $clients_activates)
-                            <option value="{{$clients_activates->date_transact}}">{{date("F j, Y",strtotime($clients_activates->date_transact))}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="table-responsive col-md-12" id="showHere_activated" style="margin-top: 10px;">
                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
@@ -163,9 +170,15 @@ width:50%;
                                 <td style="text-align: center;">{{$clients_activate->business_name}}</td>
                                 <td style="text-align: center;">{{$clients_activate->membership_name}}</td>
                                 <td style="text-align: center;">
-                                    <button class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target="#viewModal{{$clients_activate->business_id}}" data-bid="{{ $clients_activate->business_id }}" data-cid="{{ $clients_activate->business_contact_person_id }}" id="playAudioBtn">
+                                    @if($clients_activate->file_path == 'not available')
+                                    <button class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target="#viewModal{{$clients_activate->business_id}}" data-bid="{{ $clients_activate->business_id }}" data-cid="{{ $clients_activate->business_contact_person_id }}" id="playAudioBtn" disabled>
+                                    Not Available
+                                    </button>
+                                    @else
+                                    <button class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target="#viewModal{{$clients_activate->business_id}}" data-path="{{$clients_activate->file_path}}" data-bid="{{ $clients_activate->business_id }}" data-cid="{{ $clients_activate->business_contact_person_id }}" id="playAudioBtn">
                                     Play Audio
                                     </button>
+                                    @endif
                                 </td>
                             </tr>
                             <div style="margin-top:160px;" class="modal fade in" id="viewModal{{$clients_activate->business_id}}" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);">
@@ -204,14 +217,5 @@ width:50%;
         
     </div>
 </div>
-<script language="javascript">
-document.getElementById("uploadBtn").onchange = function () {
-document.getElementById("uploadFile").value = this.value;
-};
-</script>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-<script src="/assets/js/global.ajax.js"></script>
-<script src="/assets/supervisor/supervisor_client.js"></script>
-<script src="/assets/js/supervisor/upload-conversation.js"></script>
-<script src="/assets/js/supervisor/get-client-info.js"></script>
+
 @endsection

@@ -36,6 +36,9 @@
 	@if (Session::has('message'))
 	<div class="alert alert-danger"><center>{{ Session::get('message') }}</center></div>
 	@endif
+	@if (Session::has('success'))
+	<div class="alert alert-success"><center>{{ Session::get('success') }}</center></div>
+	@endif
 	<div class="tab-content" style="">
 		<div id="merchant" class=" tab-pane fade in  active">
 			<div class="row col-md-12">
@@ -75,7 +78,7 @@
 									<td>{{$merchant->business_name}}</td>
 									<td>{{$merchant->contact_first_name}} {{$merchant->contact_last_name}}</td>
 									<td>{{$merchant->user_email}}</td>
-									<td>{{$merchant->membership}}</td>
+									<td>{{$merchant->membership_name}}</td>
 									<td>{{$merchant->status}}</td>
 									<td>
 										<select style="height:30px;width:80px;" data-id="{{$merchant->business_id}}" class="merchant_actionbox" id="merchant_actionbox"  >

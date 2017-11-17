@@ -30,6 +30,7 @@
         <div class="tab-content" style="">
 
             <div id="customer" class=" col-md-12 tab-pane fade in  active">
+
                 @if (session('success'))
                 <div class="alert alert-success">
                     Thank you!. Invoice Save and Send Successfully!
@@ -38,36 +39,41 @@
                 <div class="alert alert-danger">
                     Transaction Failed! The file was save but failed to send. Note: goto Invoice to Resend the invoice!
                 </div>
+                @elseif(session('deact'))
+                <div class="alert alert-success">
+                    Success! User Already Deactivated!
+                </div>
                 @endif
                 <div class="row">
                     <div class="panel-body">
-                        <div class="row col-md-6 date" style="margin-right:-20px">
-
-                             <div class="pull-right" style="padding:0px">
-                             <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
-                                 {{csrf_field()}}
-                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="search_send_invoice" id="search_send_invoice" >
-                                 </div>
-                                 <button type="button" class="btn btn-success" name="search_btn_invoice" id="search_btn_invoice">Search</button>
-                             </form>
-                            </div>  
-
-                            <div class="col-md-6" style="padding:1px;">
-                                <select class="form-control" name="date_start" id="date_start">
-                                    @foreach($clients as $client_list)
-                                    <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6" style="padding:0px">
-                                <select class="form-control" name="date_end" id="date_end">
-                                    @foreach($clients as $client_list)
-                                    <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                        <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
+                            <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
+                                {{csrf_field()}}
+                                <div class="col-md-5 pull-left">
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="date_start" id="date_start">
+                                            @foreach($clients as $client_list)
+                                            <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="date_end" id="date_end">
+                                            @foreach($clients as $client_list)
+                                            <option value="{{$client_list->date_transact}}">{{date("F j, Y",strtotime($client_list->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pull-right">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="search_send_invoice" id="search_send_invoice" >
+                                    </div>
+                                    <button type="button" class="btn btn-success" name="search_btn_invoice" id="search_btn_invoice">Search</button>
+                                </div>
+                                 
+                            </form>
+                        </div>  
                         <div class="table-responsive col-md-12"  id="showHere">
                             <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
                                 <thead>
@@ -96,7 +102,18 @@
                                             <a target="blank" href="{{$client->file_path}}">View Conversation</a>
                                             @endif
                                         </td>
-                                        <td><a target="_blank" href="/general_admin/send_invoice/{{$client->business_id}}"><button class="transaction btn btn-default "><i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice</button></a></td>
+                                        <td>
+                                            {{-- <a target="_blank" href="/general_admin/send_invoice/{{$client->business_id}}">
+                                                <button class="transaction btn btn-default ">
+                                                    <i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice
+                                                </button>
+                                            </a> --}}
+                                            <select id="" onchange="location = this.value;" class="form-control" id="sel1" style="width:90px;">
+                                                <option >Action</option>
+                                                <option value="/general_admin/send_invoice/{{$client->business_id}}">Send Invoice</option>
+                                                <option value="/general_admin/decline_user/{{$client->business_id}}">Decline</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -108,33 +125,34 @@
             <div id="agentAdded" class="tab-pane fade">
                 <div class="row">
                     <div class="panel-body">
-                        <div class="row col-md-6 date" style="margin-right:-20px;">
-
-                            <div class="pull-right" style="padding:0px">
-                             <form class="form-inline" method="post" action="/general_admin/search_agent_added">
-                                 {{csrf_field()}}
-                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="search_agent" id="search_agent" >
-                                 </div>
-                                 <button type="button" class="btn btn-success" name="search_agent_btn" id="search_agent_btn">Search</button>
-                             </form>
-                            </div>  
-
-                            <div class="col-md-6" style="padding:1px;">
-                                <select class="form-control" name="date_start" id="date_start">
-                                    @foreach($agentAdded as $agent_client)
-                                    <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6" style="padding:0px">
-                                <select class="form-control" name="date_end" id="date_end">
-                                    @foreach($agentAdded as $agent_client)
-                                    <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                        <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
+                            <form class="form-inline" method="post" action="/general_admin/search_agent_added">
+                                {{csrf_field()}}
+                                <div class="col-md-5 pull-left">
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="date_start" id="date_start">
+                                            @foreach($agentAdded as $agent_client)
+                                            <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <select class="form-control" name="date_end" id="date_end">
+                                            @foreach($agentAdded as $agent_client)
+                                            <option value="{{$agent_client->date_transact}}">{{date("F j, Y",strtotime($agent_client->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pull-right">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="search_agent" id="search_agent" >
+                                    </div>
+                                    <button type="button" class="btn btn-success" name="search_agent_btn" id="search_agent_btn">Search</button>
+                                </div>
+                                 
+                            </form>
+                        </div> 
                         <div class="table-responsive col-md-12"  id="showHere1">
                             <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
                                 <thead>
@@ -155,7 +173,13 @@
                                         <td>{{$agentAdd->business_name}}</td>
                                         <td>{{$agentAdd->membership_name}}</td>
                                         <td>{{$agentAdd->transaction_status}} by: {{$agentAdd->first_name}} {{$agentAdd->last_name}}</td>
-                                        <td><a target="_blank" href="/general_admin/send_invoice/{{$agentAdd->business_id}}"><button class="transaction btn btn-default "><i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice</button></a></td>
+                                        <td>
+                                            <a target="_blank" href="/general_admin/send_invoice/{{$agentAdd->business_id}}">
+                                                <button class="transaction btn btn-default ">
+                                                    <i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice
+                                                </button>
+                                            </a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -168,33 +192,34 @@
             <div id="pending" class="tab-pane fade">
                 <div class="row">
                     <div class="panel-body">
-                        <div class="row col-md-6 date" style="margin-right:-20px">
-
-                            <div class="pull-right" style="padding:0px">
-                             <form class="form-inline" method="post" action="/general_admin/search_pending">
-                                 {{csrf_field()}}
-                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="search_pending" id="search_pending" >
-                                 </div>
-                                 <button type="button" class="btn btn-success" name="search_pending_btn" id="search_pending_btn">Search</button>
-                             </form>
-                            </div>  
-
-                            <div class="col-md-6" style="padding:1px;">
-                                <select class="form-control" name="date_start" id="date_start">
-                                    @foreach($pending_clients as $pending_client)
-                                    <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6" style="padding:0px">
-                                <select class="form-control" name="date_end" id="date_end">
-                                    @foreach($pending_clients as $pending_client)
-                                    <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                        <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
+                            <form class="form-inline" method="post" action="/general_admin/search_pending">
+                                {{csrf_field()}}
+                                <div class="col-md-5 pull-left">
+                                    <div class="col-md-6" >
+                                        <select class="form-control" name="date_start" id="date_start">
+                                            @foreach($pending_clients as $pending_client)
+                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="date_end" id="date_end">
+                                            @foreach($pending_clients as $pending_client)
+                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pull-right">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="search_pending" id="search_pending" >
+                                    </div>
+                                    <button type="button" class="btn btn-success" name="search_pending_btn" id="search_pending_btn">Search</button>
+                                </div>
+                                 
+                            </form>
+                        </div> 
                         <div class="table-responsive col-md-12"  id="showHere2">
                             <div id="resendSuccess">
                             </div>
@@ -250,33 +275,33 @@
             <div id="registered" class="tab-pane fade">
                 <div class="row">
                     <div class="panel-body">
-                        <div class="row col-md-6 date" style="margin-right:-20px">
-
-                            <div class="pull-right" style="padding:0px">
-                             <form class="form-inline" method="post" action="/general_admin/search_registered">
-                                 {{csrf_field()}}
-                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="search_registered" id="search_registered" >
-                                 </div>
-                                 <button type="button" class="btn btn-success" name="search_registered_btn" id="search_registered_btn">Search</button>
-                             </form>
-                            </div>  
-
-
-                            <div class="col-md-6" style="padding:1px;">
-                                <select class="form-control" name="date_start" id="date_start">
-                                    @foreach($registered_clients as $registered_client)
-                                    <option value="{{$registered_client->date_transact}}">{{date("F j, Y",strtotime($registered_client->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6" style="padding:0px">
-                                <select class="form-control" name="date_end" id="date_end">
-                                    @foreach($registered_clients as $registered_client)
-                                    <option value="{{$registered_client->date_transact}}">{{date("F j, Y",strtotime($registered_client->date_transact))}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="col-md-12" style="padding:0px;margin-bottom:30px;">
+                            <form class="form-inline" method="post" action="/general_admin/search_registered">
+                                {{csrf_field()}}
+                                <div class="col-md-5 pull-left">
+                                    <div class="col-md-6" >
+                                        <select class="form-control" name="date_start" id="date_start">
+                                            @foreach($pending_clients as $pending_client)
+                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="date_end" id="date_end">
+                                            @foreach($pending_clients as $pending_client)
+                                            <option value="{{$pending_client->date_transact}}">{{date("F j, Y",strtotime($pending_client->date_transact))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pull-right">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="search_registered" id="search_registered" >
+                                    </div>
+                                    <button type="button" class="btn btn-success" name="search_registered_btn" id="search_registered_btn">Search</button>
+                                </div>
+                                 
+                            </form>
                         </div>
                         <div class="table-responsive col-md-12"  id="showHere3">
                            <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">

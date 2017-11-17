@@ -6,7 +6,7 @@
 <style type="text/css">
 .form-select
 {
-	width:95px;
+	width:130px;
 }
 </style>
 <div class="page-title">

@@ -4,11 +4,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_button1',function()
 		{
 			var search_key = $('#search_key1').val();
-			// alert(search_key);
-			
-
 			$.ajax({
-
 				type:'POST',
 				url:'/agent/search_client',
 				data:{
@@ -17,10 +13,8 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					// alert("Hello");
 					$('#showHere_signup').html(data);
-					
-			    });
+				});
 	    });
 });
 
@@ -30,8 +24,6 @@ $(document).ready(function(){
 		$(document).on('click','#search_button12',function()
 		{
 			var search_key1 = $('#search_key12').val();
-			// alert(search_key1);
-			
 			$.ajax({
 
 				type:'POST',
@@ -42,7 +34,6 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					// alert("pending");
 					$('#showHere_pending').html(data);
 					
 			    });
@@ -54,8 +45,6 @@ $(document).ready(function(){
 		$(document).on('click','#search_button123',function()
 		{
 			var search_key2 = $('#search_key3').val();
-			// alert(search_key2);
-			
 			$.ajax({
 
 				type:'POST',
@@ -66,7 +55,6 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					// alert("activated");
 					$('#showHere_activated').html(data);
 					
 			    });
@@ -77,8 +65,8 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 	$('#date_end').change(function(){
-		var date_start = $('#date_start').val();
-		var date_end = $('#date_end').val();
+		var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client',
@@ -93,8 +81,8 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 	$('#date_end1').change(function(){
-		var date_start1 = $('#date_start1').val();
-		var date_end1 = $('#date_end1').val();
+		var date_start1 = $('#date_start1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		var date_end1 = $('#date_end1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client1',
@@ -109,8 +97,8 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 	$('#date_end2').change(function(){
-		var date_start2 = $('#date_start2').val();
-		var date_end2 = $('#date_end2').val();
+		var date_start2 = $('#date_start2').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		var date_end2 = $('#date_end2').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client2',

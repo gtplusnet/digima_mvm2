@@ -637,10 +637,8 @@ class MerchantController extends Controller
     public function sample1()
     {
        
-        $address = '1700 Parañaque City Philippines';
-        $data['coordinates']  = Self::getCoordinates_long($address);
-        $data['coordinates1'] = Self::getCoordinates_lat($address);
-        return view ('merchant.pages.sample1',$data);
+        
+        return view ('merchant.pages.sample1');
     }
 }
   

@@ -135,11 +135,16 @@ Route::any('/agent/upload-convo', 			'SuperVisorController@uploadConvo');
 
 Route::any('/supervisor/show_agent_calls', 			'SuperVisorController@supervisor_show_agent_calls');
 Route::any('/supervisor/show_team_calls', 			'SuperVisorController@supervisor_show_team_calls');
-
 Route::any('/supervisor/supervisor_search_client', 	'SuperVisorController@supervisor_search_client');
 Route::any('/supervisor/supervisor_search_client_activated', 'SuperVisorController@supervisor_search_client_activated');
 Route::any('/supervisor/supervisor_search_team', 	'SuperVisorController@supervisor_search_team');
 Route::any('/supervisor/supervisor_search_agent', 	'SuperVisorController@supervisor_search_agent');
+
+Route::any('/supervisor/update_profile', 			'SuperVisorController@update_profile');
+Route::any('/supervisor/update_password', 			'SuperVisorController@update_password');
+Route::any('/supervisor/checking_password', 		'SuperVisorController@checking_password');
+Route::any('/supervisor/saving_profile', 			'SuperVisorController@saving_profile');
+
 
 
 
@@ -167,6 +172,17 @@ Route::post('/add_client_submit',   				'AgentController@add_client_submit');
 Route::any('/agent/get_city', 						'AgentController@get_city');
 Route::any('/agent/get_postal_code', 				'AgentController@get_zip_code');
 Route::any('/agent/logout', 						'AgentController@agent_logout');
+
+Route::any('/agent/update_profile', 				'AgentController@update_profile');
+Route::any('/agent/update_password', 				'AgentController@update_password');
+Route::any('/agent/checking_password', 				'AgentController@checking_password');
+
+Route::any('/agent/saving_profile', 				'AgentController@saving_profile');
+
+
+
+
+
 
 
 //Routes for General Admin
@@ -200,6 +216,12 @@ Route::any('/general_admin/manage_invoice', 						'GeneralAdminController@genera
 Route::any('/general_admin/resend_invoice', 						'GeneralAdminController@general_admin_resend_invoice');
 Route::post('/general_admin/accept_and_activate', 					'GeneralAdminController@general_admin_accept_and_activate');
 Route::post('/general_admin/decline_and_deactivate', 				'GeneralAdminController@general_admin_decline_and_deactivate');
+
+Route::get('/general_admin/decline_user/{id}', 					'GeneralAdminController@general_admin_decline_user');
+
+
+
+
 Route::post('/general_admin/manage_user/add_agent', 				'GeneralAdminController@general_admin_add_agent');
 Route::post('/general_admin/manage_user/add_team', 					'GeneralAdminController@general_admin_add_team');
 Route::post('/general_admin/manage_user/add_supervisor', 			'GeneralAdminController@general_admin_add_supervisor');
@@ -223,8 +245,15 @@ Route::post('/general_admin/manage_website/update_county',          'GeneralAdmi
 Route::post('/general_admin/manage_website/update_city',            'GeneralAdminController@general_admin_update_city');
 
 Route::post('/general_admin/manage_user/view_merchant_info',        'GeneralAdminController@general_admin_view_merchant_info');
+Route::post('/general_admin/manage_user/update_merchant_business_info','GeneralAdminController@update_merchant_business_info');
 
-Route::post('/general_admin/manage_user/update_merchant_business_info',        'GeneralAdminController@update_merchant_business_info');
+Route::post('/general_admin/manage_user/merchant_update_images',     'GeneralAdminController@merchant_update_images');
+
+Route::post('/general_admin/manage_user/merchant_update_hours',     'GeneralAdminController@merchant_update_hours');
+
+
+
+
 Route::post('/general_admin/manage_user/add_merchant_payment_method','GeneralAdminController@add_merchant_payment_method');
 Route::post('/general_admin/manage_user/delete_merchant_payment_method',        'GeneralAdminController@delete_merchant_payment_method');
 

@@ -32,7 +32,7 @@ function merchant()
 				var invoice_name_resend = $(this).data('name');
 				var resend_business_id = $(this).data('b_id');
 				var resend_contact_name = $(this).data('contact_name');
-				alert("---"+resend_email+"--"+remarks+"--"+invoice_name_resend+"--"+resend_business_id+"---"+resend_contact_name);
+				// alert("---"+resend_email+"--"+remarks+"--"+invoice_name_resend+"--"+resend_business_id+"---"+resend_contact_name);
 				$.ajax({
 					type:'POST',
 			 		url:'/general_admin/resend_invoice',
