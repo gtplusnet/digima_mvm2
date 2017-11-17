@@ -84,6 +84,55 @@ class SuperVisorController extends Controller
   		return view ('supervisor.pages.profile', $data);		
   	}
 
+    public function update_profile(Request $request)
+  {
+    $data['transaction'] = 'profile';
+    $data['profile'] = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
+    return view('supervisor.pages.update_profile',$data); 
+  }
+  public function update_password(Request $request)
+  {   
+    $data['transaction'] = 'password';
+    return  view('supervisor.pages.update_profile',$data);
+  }
+  public function checking_password(Request $request )
+  {
+    $user = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
+    if(password_verify($request->currentPassword,$user->password))
+    {
+      if($request->newPassword == $request->confirmPassword)
+      {
+        $data['password'] = password_hash($request->newPassword, PASSWORD_DEFAULT);
+        TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
+        return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+      }
+      else
+      {
+        return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+      }
+    }
+    else
+    {
+      return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
+    }
+  }
+  public function saving_profile(Request $request)
+  {
+    $data['primary_phone']    = $request->primaryPhone;
+    $data['secondary_phone']  = $request->secondaryPhone;
+    $data['other_info']     = $request->otherInfo;
+    $data['address']      = $request->address;
+    $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
+    if($check)
+    {
+      return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+    }
+    else
+    {
+      return "<div class='alert alert-danger'><strong>Sorry!</strong> Transaction failure.</div>"; 
+    }
+  }
+
   	public function client()
   	{
       Self::allow_logged_in_users_only();

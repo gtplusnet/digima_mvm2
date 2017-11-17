@@ -135,11 +135,16 @@ Route::any('/agent/upload-convo', 			'SuperVisorController@uploadConvo');
 
 Route::any('/supervisor/show_agent_calls', 			'SuperVisorController@supervisor_show_agent_calls');
 Route::any('/supervisor/show_team_calls', 			'SuperVisorController@supervisor_show_team_calls');
-
 Route::any('/supervisor/supervisor_search_client', 	'SuperVisorController@supervisor_search_client');
 Route::any('/supervisor/supervisor_search_client_activated', 'SuperVisorController@supervisor_search_client_activated');
 Route::any('/supervisor/supervisor_search_team', 	'SuperVisorController@supervisor_search_team');
 Route::any('/supervisor/supervisor_search_agent', 	'SuperVisorController@supervisor_search_agent');
+
+Route::any('/supervisor/update_profile', 			'SuperVisorController@update_profile');
+Route::any('/supervisor/update_password', 			'SuperVisorController@update_password');
+Route::any('/supervisor/checking_password', 		'SuperVisorController@checking_password');
+Route::any('/supervisor/saving_profile', 			'SuperVisorController@saving_profile');
+
 
 
 
