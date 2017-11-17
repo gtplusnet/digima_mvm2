@@ -141,7 +141,7 @@
 									<td>{{$data_agent->secondary_phone}}</td>
 									<td>{{$data_agent->other_info}}</td>
 									<td>
-										<select style="height:30px;width:80px;" class="agent_actionbox" id="agent_actionbox"  data-name="{{$data_agent->first_name}} {{$data_agent->last_name}}" data-id="{{ $data_agent->agent_id}}">
+										<select style="height:30px;width:80px;" class="agent_actionbox" id="agent_actionbox" data-email="{{$data_agent->email}}"  data-name="{{$data_agent->first_name}} {{$data_agent->last_name}}" data-id="{{ $data_agent->agent_id}}">
 											<option value="">Action</option>
 											<option value="edit">Edit</option>
 											<option value="assign">Assign</option>
@@ -329,7 +329,7 @@
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Add Agent</h4>
 					</div>
-					<div class="modal-body" style="margin-bottom: 680px;" >
+					<div class="modal-body" style="margin-bottom: 530px;" >
 						<div class="col-sm-12">
 							<div class="form-group col-md-3">
 								<label for="business_name" >Team</label>
@@ -397,33 +397,63 @@
 								<input type="text" class="form-control" name="primary" id="primary"  style="width:100%;margin-bottom: 20px;" required/>
 							</div>
 						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-3">
-								<label for="business_name" >Secondary Phone</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="secondary" id="secondary"  style="width:100%;margin-bottom: 20px;"/>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-3">
-								<label for="business_name" >Address</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="address" id="address"  style="width:100%;margin-bottom: 20px;"/>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-3">
-								<label for="business_name" >Other Information</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="other_info" id="other_info"  style="width:100%;margin-bottom: 20px;"/>
-							</div>
-						</div>
+						
 						<div class="col-sm-12">
 							<center>
 							<button type="submit" class="add_agent btn btn-primary" name="add_agent" id="add_agent">Add Agent</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							</center>
+						</div>
+					</div>
+					<div class="modal-footer" style="border:0px;">
+					</div>
+				</div>
+			</div>
+		</div>
+		{{-- editAgent --}}
+		<div class="modal fade" id="myModalAgentEdit" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Agent Login</h4>
+					</div>
+					<div class="modal-body" style="margin-bottom: 300px;" >
+						<div class="col-sm-12" id="agent_alerts">
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Full Name</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="first_name" id="agFullname"  style="width:100%;margin-bottom: 20px;" readOnly/>
+							</div>
+						</div>
+						
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Email</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="last_name" id="agEmail"  style="width:100%;margin-bottom: 20px;" required/>
+								<input type="hidden"  id="agAgentId" />
+								<input type="hidden"  id="agOldEmail" />
+								
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Password</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="password" class="form-control" name="email" id="agPassword"  style="width:100%;margin-bottom: 20px;" required/>
+							</div>
+						</div>
+						<div class="col-sm-12" id="agent_alert">
+						</div>
+						<div class="col-sm-12">
+							<center>
+							<button type="submit" class="updateAgent btn btn-primary" name="updateAgent" id="updateAgent">Add Agent</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 							</center>
 						</div>
@@ -478,7 +508,7 @@
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Add Supervisor</h4>
 					</div>
-					<div class="modal-body" style="margin-bottom: 680px;" >
+					<div class="modal-body" style="margin-bottom: 450px;" >
 						<div class="col-sm-12">
 							<div class="form-group col-md-3">
 								<label for="business_name" >Prefix</label>
@@ -532,30 +562,7 @@
 								<input type="text" class="form-control" name="sprimary" id="sprimary"  style="width:100%;margin-bottom: 20px;" required/>
 							</div>
 						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-3">
-								<label for="business_name" >Secondary Phone</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="ssecondary" id="ssecondary"  style="width:100%;margin-bottom: 20px;"/>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-3">
-								<label for="business_name" >Address</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="saddress" id="saddress"  style="width:100%;margin-bottom: 20px;"/>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group col-md-3">
-								<label for="business_name" >Other Information</label>
-							</div>
-							<div class="form-group col-md-9">
-								<input type="text" class="form-control" name="sother_info" id="sother_info"  style="width:100%;margin-bottom: 20px;"/>
-							</div>
-						</div>
+						
 						<div class="col-sm-12">
 							<center>
 							<button type="submit" class="btn btn-primary" name="add_supervisor" id="add_supervisor">Add Supervisor</button>

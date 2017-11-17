@@ -22,6 +22,7 @@ function manage_user()
 			assigned_agent();
 			action_box();
 			update_info();
+			update_user_login();
 			add_payment_method();
 			delete_payment_method();
 		});
@@ -31,8 +32,8 @@ function manage_user()
 	{
 		$(document).on("click","#savePayment",function(){
 
-			var paymentMethodName = $('#paymentMethodName').val();
-			var businessId = $('#businessId').val();
+			var paymentMethodName 	= $('#paymentMethodName').val();
+			var businessId 			= $('#businessId').val();
 			$.ajax({
 				type:'POST',
 				url:'/general_admin/manage_user/add_merchant_payment_method',
@@ -132,9 +133,7 @@ function manage_user()
 		var email = $('#email').val();
 		var password = $('#password').val();
 		var primary = $('#primary').val();
-		var secondary = $('#secondary').val();
-		var address = $('#address').val();
-		var other_info = $('#other_info').val();
+		
 
 		$.ajax({
 			type:'POST',
@@ -147,9 +146,7 @@ function manage_user()
 				email: email,
 				password: password,
 				primary: primary,
-				secondary: secondary,
-				address: address,
-				other_info: other_info
+				
 			     },
 			dataType:'text',
 
@@ -190,9 +187,7 @@ function manage_user()
 			var email = $('#semail').val();
 			var password = $('#spassword').val();
 			var primary = $('#sprimary').val();
-			var secondary = $('#ssecondary').val();
-			var address = $('#saddress').val();
-			var other_info = $('#sother_info').val();
+			
 
 			$.ajax({
 				type:'POST',
@@ -205,9 +200,7 @@ function manage_user()
 					email: email,
 					password: password,
 					primary: primary,
-					secondary: secondary,
-					address: address,
-					other_info: other_info
+					
 				     },
 				dataType:'text',
 
@@ -221,22 +214,51 @@ function manage_user()
 	{ 
 		$(document).on('click','#add_admin',function()
 		{
-			var full_name = $('#afull_name').val();
-			var email = $('#aemail').val();
-			var password = $('#apassword').val();
+			var full_name 		= $('#afull_name').val();
+			var email 			= $('#aemail').val();
+			var password 		= $('#apassword').val();
+			$.ajax({
+				type 			:'POST',
+				url 			:'/general_admin/manage_user/add_admin',
+				data:
+				{
+					full_name	: full_name,
+					email 		: email,
+					password 	: password
+				},
+				dataType 		:'text',
+
+			}).done(function(data)
+				{
+				    $('#admin_alert').html(data);
+				});
+	    });
+	}
+	function update_user_login()
+	{
+		$(document).on('click','#updateAgent',function()
+		{
+			var id 			= $("#agAgentId").val();
+	        var email 		= $("#agEmail").val();
+	        var oldEmail    = $('#agOldEmail').val();
+	        var password 	= $("#agPassword").val();
 			$.ajax({
 				type:'POST',
-				url:'/general_admin/manage_user/add_admin',
+				url:'/general_admin/manage_user/update_agent_login',
 				data:{
-					full_name: full_name,
+					id 	: id,
 					email: email,
-					password: password
+					oldEmail: oldEmail,
+					password: password,
 				     },
 				dataType:'text',
 
 			}).done(function(data)
 				{
-				    $('#admin_alert').html(data);
+				    $('#agent_alerts').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 				});
 	    });
 	}
@@ -247,12 +269,20 @@ function manage_user()
 		{
 			if ($(this).val() == "edit") 
 			{
-	        	alert('not available');
+				var agent_id 		= $(this).data("id");
+		        var agent_name 		= $(this).data("name");
+		        var agent_email 	= $(this).data("email");
+		        $("#agAgentId").val(agent_id);
+		        $("#agFullname").val(agent_name);
+		        $("#agEmail").val(agent_email);
+		        $("#agOldEmail").val(agent_email);
+		        $("#agPassword").val(agent_email);
+		        $('#myModalAgentEdit').modal('show');
 	        }
 			if ($(this).val() == "assign") 
 			{
-		        var agent_id = $(this).data("id");
-		        var agent_name = $(this).data("name");
+		        var agent_id 		= $(this).data("id");
+		        var agent_name 		= $(this).data("name");
 		        $("#agent_id_assign").val(agent_id);
 		        $("#agent_name_assign").val(agent_name);
 		        $('#assignAgent').modal('show');
@@ -269,7 +299,7 @@ function manage_user()
 	    {
 			if ($(this).val() == "edit") 
 			{
-	        	alert('not available');
+	        	$('#viewTeam').modal('show');
 	        }
 			if ($(this).val() == "view_agent") 
 			{
@@ -389,6 +419,9 @@ function manage_user()
 	
 }
 
+
+
+//oliver
 $(document).ready(function(){
 
 		$(document).on('click','#search_btn_merchant',function()

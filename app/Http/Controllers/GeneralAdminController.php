@@ -390,7 +390,7 @@ class GeneralAdminController extends Controller
         $business_id = $request->resend_business_id;
         $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
         $invoice_name = $request->invoice_name_resend;
-        $link = "http://mvm.digimahouse.com/".$business_id."/".$contact_name;
+        $link = "http://mvm.digimahouse.com/merchant/payment/".$business_id."/".$contact_name;
         $data = array('name'=>$contact_name,'remarks'=>$remarks,'date'=>$date,'email'=>$email,'business_id'=>$business_id,'link'=>$link);
                 $pathfile='invoice/'.$invoice_name;
                 $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile) {
@@ -848,9 +848,9 @@ class GeneralAdminController extends Controller
     $ins['position'] = 'agent';
     $ins['team_id'] = $request->team_id;
     $ins['primary_phone'] = $request->primary;
-    $ins['secondary_phone'] = $request->secondary;
-    $ins['address'] = $request->address;
-    $ins['other_info'] = $request->other_info;
+    $ins['secondary_phone'] = 'none';
+    $ins['address'] = 'none';
+    $ins['other_info'] = 'none';
     $ins['date_created'] = date("Y/m/d");
     $ins['agent_call'] = '0';
     $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
@@ -889,6 +889,28 @@ class GeneralAdminController extends Controller
             }
         }
   }
+  public function general_admin_update_agent_login(Request $request)
+  {
+    $id       = $request->id;
+    $email    = $request->email;
+    $oldEmail = $request->oldEmail;
+    $password = $request->password;
+    if($oldEmail==$password)
+    {
+      $data['email'] = $email;
+      TblAgentModel::where('agent_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Agent Login Updated Successfully!</div>";  
+    }
+    else
+    {
+      $data['email']    = $email;
+      $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+      TblAgentModel::where('agent_id',$id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Agent Login Updated Successfully!</div>";  
+    }
+
+
+  }
   public function general_admin_assign_agent(Request $request)
   {
     $agent_id = $request->agent_id;
@@ -926,9 +948,9 @@ class GeneralAdminController extends Controller
     $ins['email'] = $request->email;
     $ins['position'] = 'supervisor';
     $ins['primary_phone'] = $request->primary;
-    $ins['secondary_phone'] = $request->secondary;
-    $ins['address'] = $request->address;
-    $ins['other_info'] = $request->other_info;
+    $ins['secondary_phone'] = 'none';
+    $ins['address'] = 'none';
+    $ins['other_info'] = 'none';
     $ins['date_created'] = date("Y/m/d");
     $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
 
