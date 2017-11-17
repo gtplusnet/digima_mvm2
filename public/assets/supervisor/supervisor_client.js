@@ -26,28 +26,20 @@ $(document).ready(function(){
 	
 
 $(document).ready(function(){
-
-		$(document).on('click','#search_button1',function()
-		{
-			var search_key_act = $('#search_key2').val();
-			
-			
-
-			$.ajax({
-
-				type:'POST',
-				url:'/supervisor/supervisor_search_client_activated',
-				data:{
-					search_key_act: search_key_act,
-				},
-				dataType:'text',
-			}).done(function(data)
-				{		
-					
-					$('#showHere_activated').html(data);
-					
-			    });
-	    });
+	$(document).on('click','#search_button1',function(){
+		var search_key_act = $('#search_key2').val();
+		$.ajax({
+			type:'POST',
+			url:'/supervisor/supervisor_search_client_activated',
+			data:{
+				search_key_act: search_key_act,
+			},
+			dataType:'text',
+		}).done(function(data)
+			{		
+				$('#showHere_activated').html(data);
+			});
+    });
 });
 
 

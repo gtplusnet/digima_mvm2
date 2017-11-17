@@ -4,7 +4,7 @@
 @section('content')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_merchant.js"></script>
 <script src="/assets/js/global.ajax.js"></script>
 
@@ -147,10 +147,10 @@ color:#fff;
                                 {{csrf_field()}}
                                 <div class="col-md-6 pull-left">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
+                                        <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
+                                        <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-4 pull-right">
@@ -205,10 +205,10 @@ color:#fff;
                                 {{csrf_field()}}
                                 <div class="col-md-6 pull-left">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
+                                        <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
+                                        <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-4 pull-right">
@@ -280,10 +280,10 @@ color:#fff;
                                 {{csrf_field()}}
                                 <div class="col-md-6 pull-left">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="" >
+                                        <input type="text" class="form-control datepicker" id="date_start3" placeholder="Date From" value="" >
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="" >
+                                        <input type="text" class="form-control datepicker1" id="date_end3" placeholder="Date To" value="" >
                                     </div>
                                 </div>
                                 <div class="col-md-4 pull-right">

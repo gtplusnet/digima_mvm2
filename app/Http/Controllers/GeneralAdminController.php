@@ -203,6 +203,71 @@ class GeneralAdminController extends Controller
       
         return view('general_admin.pages.merchants',$data);
     }
+
+
+
+
+
+    public function get_client(Request $request)
+    {
+        $s_date = $request->date_start;
+        $e_date = $request->date_end;
+        $data['clients'] = TblBusinessModel::where('business_status', 3)
+                          ->whereBetween('date_transact',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_merchant_invoice',$data);
+    }
+    public function get_client1(Request $request)
+    {
+        $s_date = $request->date_start1;
+        $e_date = $request->date_end1;
+        $data['agentAdded'] = TblBusinessModel::where('business_status',20)
+                          ->whereBetween('date_transact',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_agent_added',$data);
+    }
+    public function get_client2(Request $request)
+    {
+        $s_date = $request->date_start2;
+        $e_date = $request->date_end2;
+        $data['pending_clients'] = TblBusinessModel::where('business_status',4)
+                          ->whereBetween('date_transact',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_pending',$data);
+    }
+    public function get_client3(Request $request)
+    {
+        $s_date = $request->date_start3;
+        $e_date = $request->date_end3;
+        $data['registered_clients'] = TblBusinessModel::where('business_status',5)
+                          ->whereBetween('date_transact',[$s_date,$e_date])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_registered',$data);
+    }
+
+
+
+
+
     public function general_admin_send_invoice($id)
     {
       $check=TblInvoiceModels::where('business_id',$id)->first();
