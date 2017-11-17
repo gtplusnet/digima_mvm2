@@ -152,6 +152,7 @@
 {{-- modal --}}
 <div style="margin-top: 150px;" class="modal fade" id="acceptUser" role="dialog">
         <div class="modal-dialog modal-sm">
+        	<form method="post" action="/general_admin/accept_and_activate">
             <div class="modal-content">
                 <div class="modal-body" style="margin-bottom: 150px;" >
                     <div class="col-sm-12">
@@ -167,6 +168,7 @@
                     </div>
                 </div>
             </div>
+        	</form>
         </div>
     </div>
 <div style="margin-top: 150px;" class="modal fade" id="declinedUser" role="dialog">
