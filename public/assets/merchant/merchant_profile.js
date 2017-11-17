@@ -1,19 +1,21 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 
-	$(document).on("click","#OI",function()
-	{
-		alert();
-		$('#show_alert_here').show();
-	});
+// 	$(document).on("click","#OI",function()
+// 	{
+// 		alert();
+// 		$('#show_alert_here').show();
+// 	});
 	
-});
+// });
 
 $(document).ready(function(){
 
-	$(document).on("click","#updateInfo",function(){
+	$(document).on("click","#update",function(){
 		var company_information = $('#company_information').val();
 		var business_website = $('#business_website').val();
 		var year_established = $('#year_established').val();
+		
+	
 
 		$.ajax({
 			type:'POST',
@@ -22,7 +24,6 @@ $(document).ready(function(){
 				company_information: company_information,
 				business_website: business_website,
 				year_established: year_established,
-				
 				},
 			dataType:'text',
 		}).done(function(data){

@@ -56,7 +56,7 @@ class SuperVisorController extends Controller
                     Session::put("supervisor_login",true);
 
                     Session::put("supervisor_id",$validate_login->supervisor_id);
-                    Session::put("full_name",$validate_login->first_name." ".$validate_login->last_name);
+                    Session::put("full_name_supervisor",$validate_login->first_name." ".$validate_login->last_name);
 
                     Session::put("email",$validate_login->email);
                     Session::put("position",$validate_login->position);

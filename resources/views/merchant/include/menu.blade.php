@@ -4,6 +4,7 @@
         <a href="#0" class="cd-close-nav">Close</a>
     </header>
     <ul class="cd-nav list-unstyled">
+
         <li class="cd-selected" data-menu="index">
             <a href="/merchant/dashboard">
                 <span>
@@ -12,6 +13,7 @@
                 <p>Dashboard</p>
             </a>
         </li>
+        
         <li data-menu="profile">
             <a href="/merchant/profile">
                 <span>
@@ -40,7 +42,7 @@
         <li data-menu="profile">
             <a href="/merchant/bills">
                 <span>
-                    <i class="glyphicon glyphicon-barcode"></i>
+                    <i class="fa fa-calculator"></i>
                 </span>
                 <p>Bills</p>
             </a>

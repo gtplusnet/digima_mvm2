@@ -45,9 +45,9 @@ th
                 
                   <div role="tabpanel" class="tab-pane fade active in" id="MI">
                      <form class="form-horizontal" method="POST" action="/merchant/update_merchant_info">
-                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          {{ csrf_field() }}
                             @if(Session::has('success_merchant'))
-                            <div class='alert alert-success'><strong>Success!</strong> Information Updated.</div>
+                            <div class='alert alert-success'><strong>Success!</strong> Merchant Information Updated.</div>
                             @endif 
 
                         <div class="form-group" style="margin-top:50px;">
@@ -109,6 +109,7 @@ th
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="OI">
                      <form class="form-horizontal" method="POST" action="/merchant/add_other_info">
+                        {{csrf_field()}}
                         <div id="other_info_success" style="margin-top:50px;">
                         </div>
                         <div class="form-group" >
@@ -194,7 +195,7 @@ th
                         </div>
                         <div class="col-md-6">
                            <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/merchant/add_images" style="">
-                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                   {{ csrf_field() }}
                               
                               <div class="col-md-12 file-margin" >
                                  <div class="col-md-4">
@@ -265,7 +266,7 @@ th
                         </div>
                         <div class="col-md-6">
                            <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/merchant/add_images" style="">
-                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                     {{ csrf_field() }}
                               
                               <div class="col-md-12 file-margin" >
                                  <div class="col-md-4">
@@ -323,7 +324,6 @@ th
                         <table class="table table-bordered" style="width: 100%; text-align: center;font-size:13px;" cellpadding="1" cellspacing="1"  border="2">
                            <thead>
                               <tr>
-                                
                                  <th >Payment Method Name</th>
                                  <th >Action</th>
                               </tr>
@@ -364,30 +364,31 @@ th
                            </div>
                         </div>
                        
-                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            {{ csrf_field() }}
+
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Enter Current Password</label>
                            <div class="col-sm-3">
-                              <input type="Password" class="form-control" id="" name="" value="">
+                              <input type="text" class="form-control" id="current_password" name="current_password" >
                            </div>
                         </div>
 
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">New Password</label>
                            <div class="col-sm-3">
-                              <input type="Password" class="form-control" id="" name="" value="">
+                              <input type="text" class="form-control" id="new_password" name="new_password" >
                            </div>
                         </div>
 
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Confirm New Password</label>
                            <div class="col-sm-3">
-                              <input type="Password" class="form-control" id=""  name="" value="">
+                              <input type="text" class="form-control" id="confirm_password"  name="confirm_password" >
                            </div>
                         </div>
 
                        <div class="col-md-5">
-                           <div class="text-right">
+                           <div class="text-right" >
                               <button type="submit" class="btn btn-primary" id="update" style="padding: 5px 18px;">Submit</button>
                            </div>
                         </div>
@@ -401,10 +402,5 @@ th
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/merchant/merchant_profile.js"></script>
-<script>
-function myFunction() {
-var x = document.getElementById("myFile");
-x.disabled = false;
-}
-</script>
+
 @endsection

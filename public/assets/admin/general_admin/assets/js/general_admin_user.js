@@ -394,7 +394,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_btn_merchant',function()
 		{
 			var search_key_merchant = $('#search_merchant').val();
-			alert(search_key_merchant);
+			
 			
 			
 			$.ajax({
@@ -407,7 +407,7 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					alert('merchant');
+					
 					$('#showHere_merchant').html(data);
 					
 			    });
@@ -419,7 +419,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_btn_agent',function()
 		{
 			var search_key_agent = $('#search_agent').val();
-			alert(search_key_agent);
+			
 			
 			
 			$.ajax({
@@ -432,7 +432,7 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					alert('agent');
+					
 					$('#showHere_agent').html(data);
 					
 			    });
@@ -444,7 +444,6 @@ $(document).ready(function(){
 		$(document).on('click','#search_btn_team',function()
 		{
 			var search_key_team = $('#search_team').val();
-			alert(search_key_team);
 			
 			
 			$.ajax({
@@ -457,7 +456,7 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					alert('team');
+				
 					$('#showHere_team').html(data);
 					
 			    });
@@ -470,7 +469,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_btn_supervisor',function()
 		{
 			var search_key_supervisor = $('#search_supervisor').val();
-			alert(search_key_supervisor);
+		
 			
 			
 			$.ajax({
@@ -483,7 +482,7 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					alert('supervisor');
+					
 					$('#showHere_supervisor').html(data);
 					
 			    });
@@ -496,7 +495,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_btn_admin',function()
 		{
 			var search_key_admin = $('#search_admin').val();
-			alert(search_key_admin);
+			
 			
 			
 			$.ajax({
@@ -509,7 +508,7 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					alert('admin');
+					
 					$('#showHere_admin').html(data);
 					
 			    });
