@@ -211,4 +211,5 @@
     {{-- Modal --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_payment_monitoring.js"></script>
+<script src="/assets/js/global.ajax.js"></script>
 @endsection
