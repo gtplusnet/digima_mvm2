@@ -1,17 +1,20 @@
 $(document).ready(function(){
 
 
-    $('#acceptBtn').click(function(){
+    $(document).on('click','#acceptBtn',function(){
+        alert();
     	$('#acceptBtn').modal('hide');
     	$('#acceptUser').modal('show');
         var business_id = $("#action_business_id").val();
 		$("#accept_business_id").val(business_id);
 	});
-    $('#declinedBtn').click(function(){
+    $(document).on('click','#declinedBtn',function(){
+    
     	$('#declinedBtn').modal('hide');
     	$('#declinedUser').modal('show');
     });
-    $('#acceptUserBtn').click(function(){
+    $(document).on('click','#acceptUserBtn',function(){
+    
     	var business_id = $("#accept_business_id").val();
     	$.ajax({
 			type:'POST',
@@ -28,7 +31,8 @@ $(document).ready(function(){
     	        
 			});
     });
-    $('#declineUserBtn').click(function(){
+    $(document).on('click','#declineUserBtn',function(){
+    
     	var business_id = $("#accept_business_id").val();
     	$.ajax({
 			type:'POST',

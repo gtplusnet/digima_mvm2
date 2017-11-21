@@ -131,8 +131,8 @@
 								</div>
 								<div class="col-sm-12">
 									<center>
-										<button type="submit" class="btn btn-primary" id="acceptBtn">Accept Payment</button>
-										<button type="submit" class="btn btn-danger"  id="declinedBtn">Declined Payment</button>
+										<button type="button" class="btn btn-primary" id="acceptBtn">Accept Payment</button>
+										<button type="button" class="btn btn-danger"  id="declinedBtn">Declined Payment</button>
 									</center>
 								</div>
 						    </div>
@@ -145,12 +145,14 @@
 					@endforeach
 				</tbody>
 			</table>
+			{!! $business_list->render() !!}
 		</div>
 	</div>
 </div>
 {{-- modal --}}
 <div style="margin-top: 150px;" class="modal fade" id="acceptUser" role="dialog">
         <div class="modal-dialog modal-sm">
+        	<form method="post" action="/general_admin/accept_and_activate">
             <div class="modal-content">
                 <div class="modal-body" style="margin-bottom: 150px;" >
                     <div class="col-sm-12">
@@ -166,6 +168,7 @@
                     </div>
                 </div>
             </div>
+        	</form>
         </div>
     </div>
 <div style="margin-top: 150px;" class="modal fade" id="declinedUser" role="dialog">
@@ -208,4 +211,5 @@
     {{-- Modal --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_payment_monitoring.js"></script>
+<script src="/assets/js/global.ajax.js"></script>
 @endsection

@@ -25,24 +25,17 @@
                 <span>
                     <i class="fa fa-group"></i>
                 </span>
-                <p>Client</p>
+                <p>Merchant</p>
             </a>
         </li>
         <li data-menu="Manage">
-            <a href="/supervisor/add/user">
+            <a href="/supervisor/manage_user">
                 <span>
                     <i class="fa fa-user-plus"></i>
                 </span>
                 <p>Manage Team/Agent</p>
             </a>
         </li>
-        <li data-menu="view user">
-            <a href="/supervisor/view/user">
-                <span>
-                    <i class="fa fa-user-plus"></i>
-                </span>
-                <p>View User</p>
-            </a>
-        </li>
+       
     </ul>
 </nav>

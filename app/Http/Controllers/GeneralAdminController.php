@@ -69,7 +69,7 @@ class GeneralAdminController extends Controller
         {
           Session::put("general_admin_login",true);
           Session::put("admin_id",$validate_login->admin_id);
-          Session::put("full_name",$validate_login->full_name);
+          Session::put("full_name_admin",$validate_login->full_name);
           Session::put("email",$validate_login->email);
           Session::put("position",$validate_login->position);
           $data['page']   = 'Dashboard';
@@ -444,7 +444,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_invoice.invoice_id',"asc")
-                          ->get();
+                          ->paginate(10);
       return view('general_admin.pages.manage_invoice',$data);
     }
     public function general_admin_resend_invoice(Request $request)
@@ -480,7 +480,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_business','tbl_business.business_id','=','tbl_payment.business_id')
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->get();
+                          ->paginate(10);
       return view('general_admin.pages.payment_monitoring',$data);
     }
     public function general_admin_accept_and_activate(Request $request)
@@ -512,7 +512,7 @@ class GeneralAdminController extends Controller
       {
         $password = 'Use the password you entered in the registration page.';
       }
-      $link = 'http://digima_mvm.dev/merchant/dashboard';
+      $link = 'http://mvm.digimahouse.com//merchant/dashboard';
       $data = array('name'=>$name,'email'=>$email,'password'=>$password,'link'=>$link);
       $check_mail = Mail::send('general_admin.pages.activated_merchant_notif', $data, function($message) use($data) {
       $message->to($data['email'], 'Activated Merchant')->subject
@@ -590,7 +590,7 @@ class GeneralAdminController extends Controller
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                                     ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                                    ->get();
+                                    ->paginate(10);
       $data['page'] = 'Manage Users';
       return view('general_admin.pages.manage_user', $data);
 
