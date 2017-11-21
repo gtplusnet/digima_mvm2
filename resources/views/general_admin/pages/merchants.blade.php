@@ -193,7 +193,6 @@ color:#fff;
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -319,7 +318,11 @@ color:#fff;
                                         <td>{{$registeredclients->transaction_status}} by: {{$registeredclients->first_name}} {{$registeredclients->last_name}}</td>
                                         <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" id="sendNewInvoice" name="sendNewInvoice">New Invoice</button>
+                                            <select id="" onchange="location = this.value;" class="form-control" style="width:90px;">
+                                                <option >Action</option>
+                                                <option value="/general_admin/send_new_invoice/{{$registeredclients->business_id}}/5">New Invoice</option>
+                                                <option value="/general_admin/decline_user/{{$registeredclients->business_id}}">Deactivate</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     @endforeach

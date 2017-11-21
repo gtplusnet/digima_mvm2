@@ -27,6 +27,7 @@
                                 <input type="number" class="form-control" name="invoice_number" id="invoice_number" required/>
                                 <input type="hidden" value="{{$invoice_info->business_id}}" name="business_id" id="business_id">
                                 <input type="hidden" value="{{$invoice_info->business_contact_person_id}}" name="business_contact_person_id" id="business_contact_person_id">
+                                <input type="hidden" value="{{$status}}" name="status" >
                             </div>
                             <div class="col-md-12">
                                 <hr>
@@ -35,13 +36,13 @@
                                 </p>
                                 
                                 <div class="col-md-12">
-                                    <strong>{{$invoice_info->contact_first_name}} {{$invoice_info->contact_last_name}}</strong>
+                                    <strong>NAME : {{$invoice_info->contact_first_name}} {{$invoice_info->contact_last_name}}</strong>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>{{$invoice_info->business_phone}}/{{$invoice_info->business_alt_phone}}</strong>
+                                    <strong>PHONE: {{$invoice_info->business_phone}}/{{$invoice_info->business_alt_phone}}</strong>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>{{$invoice_info->user_email}}</strong>
+                                    <strong>EMAIL: {{$invoice_info->user_email}}</strong>
                                 </div>
                             </div>
                             <div class="col-md-12" id="showHere1s"> 
@@ -58,8 +59,8 @@
                                         <tr>
                                             <td>Item One</td>
                                             <td>{{$invoice_info->business_name}}</td>
-                                            <td>{{$invoice_info->payment_method_name}}</td>
-                                            <td>5000.00</td>
+                                            <td>{{$invoice_info->membership_name}}</td>
+                                            <td>$ {{$invoice_info->membership_price}}</td>
                                         </tr>
                                         
                                     </tbody>
@@ -68,19 +69,19 @@
                             <div class="col-md-12">
                                 <div class="col-md-8">
                                     <h3>Thank you !</h3>
-                                    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                    <p align="justify">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
                                     <img src="/assets/admin/merchant/assets/images/signature.png" height="150" class="m-t-lg" alt="">
                                 </div>
                                 <div class="col-md-4">
                                     <div class="text-right">
                                         <h4 class="no-m m-t-sm">Subtotal</h4>
-                                        <h2 class="no-m">$7282</h2>
+                                        <h2 class="no-m">$0</h2>
                                         <hr>
                                         <h4 class="no-m m-t-sm">Shipping</h4>
-                                        <h2 class="no-m">$240</h2>
+                                        <h2 class="no-m">$0</h2>
                                         <hr>
                                         <h4 class="no-m m-t-md text-success">Total</h4>
-                                        <h1 class="no-m text-success">$7522</h1>
+                                        <h1 class="no-m text-success">$ {{$invoice_info->membership_price}}</h1>
                                         
                                         <hr>
                                         

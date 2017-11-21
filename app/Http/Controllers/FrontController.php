@@ -55,15 +55,7 @@ class FrontController extends Controller
     public function index()
     {
         
-        Session::forget("merchant_login");
-        Session::forget("full_name");
-        Session::forget("email");
-        Session::forget("business_name");
-        Session::forget("business_id");
-        Session::forget("business_contact_person_id");
-        Session::forget("business_address");
-        Session::forget("city_state");
-        Session::forget("zip_code");
+        
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();

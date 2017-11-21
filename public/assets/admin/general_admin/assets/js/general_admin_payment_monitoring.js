@@ -28,6 +28,9 @@ $(document).ready(function(){
     	        $('.modal').modal('hide');
     	        $('#success_message').html(data);
     	        $('#success').modal('show');
+                setTimeout(function(){
+                       location.reload();
+                    }, 1000);
     	        
 			});
     });

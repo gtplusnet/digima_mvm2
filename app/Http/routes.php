@@ -211,13 +211,16 @@ Route::any('/general_admin/get_sub_category', 						'GeneralAdminController@gene
 
 Route::any('/general_admin/edit_sub_category', 						'GeneralAdminController@general_admin_edit_sub_category');
 Route::any('/general_admin/send_invoice/{id}', 						'GeneralAdminController@general_admin_send_invoice');
+
+Route::any('/general_admin/send_new_invoice/{id}/{id2}', 			'GeneralAdminController@general_admin_send_new_invoice');
+
 Route::any('/general_admin/send_save_invoice/{id}', 				'GeneralAdminController@general_admin_send_save_invoice');
 Route::any('/general_admin/manage_invoice', 						'GeneralAdminController@general_admin_manage_invoice');
 Route::any('/general_admin/resend_invoice', 						'GeneralAdminController@general_admin_resend_invoice');
 Route::post('/general_admin/accept_and_activate', 					'GeneralAdminController@general_admin_accept_and_activate');
 Route::post('/general_admin/decline_and_deactivate', 				'GeneralAdminController@general_admin_decline_and_deactivate');
 
-Route::get('/general_admin/decline_user/{id}', 					'GeneralAdminController@general_admin_decline_user');
+Route::get('/general_admin/decline_user/{id}', 						'GeneralAdminController@general_admin_decline_user');
 
 
 

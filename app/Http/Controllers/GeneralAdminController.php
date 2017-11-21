@@ -263,176 +263,194 @@ class GeneralAdminController extends Controller
                           ->get();
         return view('general_admin.pages.search_registered',$data);
     }
-
-
-
-
-
     public function general_admin_send_invoice($id)
     {
-      $check=TblInvoiceModels::where('business_id',$id)->first();
-      if($check)
-        {
-           return Redirect::to('/general_admin/merchants');
-        }
-      else
-      {
-         $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
-                          ->first();
-        $data['id']=$id;
+      $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
+                        ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                        ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                        ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                        ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                        ->first();
+      $data['id']=$id;
+      $data['status']     = "";
+      return view('general_admin.pages.invoice',$data);
+    }
+
+    public function general_admin_send_new_invoice($id,$id2)
+    {
+      $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
+                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                            ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                            ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                            ->first();
+        $data['id']         =$id;
+        $data['status']     = $id2;
         return view('general_admin.pages.invoice',$data);
-       }
     }
 
     public function general_admin_send_save_invoice(Request $request,$id)
     {
-      $checked            = TblInvoiceModels::where('business_id',$id)->first();
       $checked_number     = TblInvoiceModels::where('invoice_number',$request->invoice_number)->first();
-      if($checked)
-      {
-        Session::flash('error', 'Transaction Failed! You already issue an invoice to this person. Note: goto Manage Invoice to Resend/View the invoice!');
-        return Redirect::to('/general_admin/merchants');
-      }
-      elseif($checked_number)
+      
+      if($checked_number)
       {
         Session::flash('error', 'Transaction Failed! Invoice number has already been issued to another person.');
         return Redirect::back();
       }  
       else
       {
-      $business_id = $request->business_id;
-      $business_contact_person_id = $request->business_contact_person_id;
-      $invoice_number = $request->invoice_number;
-      $data['invoice_number'] = $request->invoice_number;
-        if($request->submit == 'Print') 
-        {
-            $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
-                          ->first();
-            $format["title"] = "james";
-            $format["format"] = "A4";
-            $format["default_font"] = "sans-serif";
-            $pdf = PDF::loadView('mail', $data, [], $format);
-            $unique=uniqid();
-            $file_name  = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
-            $save_pdf = $pdf->save(public_path('invoice/'.$file_name));
-            $invoice['invoice_number'] = $invoice_number;
-            $invoice['invoice_name'] = $file_name;
-            $invoice['invoice_path'] = '/invoice/'.$file_name;
-            $invoice['invoice_status'] = 'Print';
-            $invoice['business_id'] = $business_id;
-            $invoice['business_contact_person_id'] = $business_contact_person_id;
-            TblInvoiceModels::insert($invoice);
-            $update['business_status'] = 4;
-            $update['date_transact'] = date("Y/m/d");
-            TblBusinessModel::where('business_id',$business_id)->update($update);
-            if($save_pdf)
-            {
-              return $pdf->stream('document.pdf');
-            }
-            else
-            {
-              echo "Error";
-            }
-           
-        }
-        elseif($request->submit == 'Download') 
-        {
-            $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
-                                ->first();
-            $format["title"] = "james";
-            $format["format"] = "A4";
-            $format["default_font"] = "sans-serif";
-            $pdf = PDF::loadView('mail', $data, [], $format);
-            $unique=uniqid();
-            $file_name  = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
-            $save_pdf = $pdf->save(public_path('invoice/'.$file_name));
-            $invoice['invoice_number'] = $invoice_number;
-            $invoice['invoice_name'] = $file_name;
-            $invoice['invoice_path'] = '/invoice/'.$file_name;
-            $invoice['invoice_status'] = 'Download';
-            $invoice['business_id'] = $business_id;
-            $invoice['business_contact_person_id'] = $business_contact_person_id;
-            TblInvoiceModels::insert($invoice);
-            $update['business_status'] = 4;
-            $update['date_transact'] = date("Y/m/d");
-            TblBusinessModel::where('business_id',$business_id)->update($update);
-            if($save_pdf)
-            {
-                return $pdf->download('invoice.pdf');
-            }
-            else
-            {
-              echo "Error";
-            }
-        }
-        else
-        {
-            $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
-                          ->first();
-            $format["title"] = "james";
-            $format["format"] = "A4";
-            $format["default_font"] = "sans-serif";
-            $unique=uniqid();
-            $file_name  = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
-            $pdf = PDF::loadView('mail', $data, [], $format);
-            $save_pdf = $pdf->save(public_path('invoice/'.$file_name));
-            $invoice['invoice_number'] = $invoice_number;
-            $invoice['invoice_name'] = $file_name;
-            $invoice['invoice_path'] = '/invoice/'.$file_name;
-            $invoice['invoice_status'] = 'send';
-            $invoice['business_id'] = $business_id;
-            $invoice['business_contact_person_id'] = $business_contact_person_id;
-            TblInvoiceModels::insert($invoice);
-            $update['business_status'] = 4;
-            $update['date_transact'] = date("Y/m/d");
-            TblBusinessModel::where('business_id',$business_id)->update($update);
-            if($save_pdf)
-            {
-                $email_name = $data['invoice_info']->contact_first_name; 
-                $email_email = $data['invoice_info']->user_email;
-                $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
-                $link = "http://mvm.digimahouse.com/".$business_id."/".$email_name;
-                $data = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name,'remarks'=>'Please Pay As Soon As Possible.','link'=>$link);
-                $pathfile='invoice/'.$file_name;
-                $mail_send = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile)
-                 {
-                   $message->to($data['email'],'Croatia Invoice')->subject
-                      ('Your Croatia Directory Invoice');
-                   $message->attach(public_path($pathfile));
-                   $message->from('guardians35836@gmail.com','Croatia Directory');
-                });
-                  if($mail_send)
-                  {
-                    Session::flash('success', 'Thank you!. Invoice Save and Send Successfully!');
-                    return Redirect::to('/general_admin/merchants');
-                  }
-                  else
-                  {
-                    Session::flash('error', 'Transaction Failed! The file was save but failed to send. Note: goto Invoice to Resend the invoice!');
-                    return Redirect::to('/general_admin/merchants');
-                  }
-            }
-            else
-            {
-              echo "Error";
-            }
-        }
+        $business_id = $request->business_id;
+        $business_contact_person_id = $request->business_contact_person_id;
+        $invoice_number = $request->invoice_number;
+        $data['invoice_number'] = $request->invoice_number;
+          if($request->submit == 'Print') 
+          {
+              $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                            ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                            ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                            ->first();
+              $format["title"] = "james";
+              $format["format"] = "A4";
+              $format["default_font"] = "sans-serif";
+              $pdf = PDF::loadView('mail', $data, [], $format);
+              $unique=uniqid();
+              $file_name  = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
+              $save_pdf = $pdf->save(public_path('invoice/'.$file_name));
+              $invoice['invoice_number'] = $invoice_number;
+              $invoice['invoice_name'] = $file_name;
+              $invoice['invoice_path'] = '/invoice/'.$file_name;
+              $invoice['invoice_status'] = 'Print';
+              $invoice['business_id'] = $business_id;
+              $invoice['business_contact_person_id'] = $business_contact_person_id;
+              TblInvoiceModels::insert($invoice);
+              if($request->status==5)
+              {
+                $update['business_status'] = 5;
+              }
+              else
+              {
+                $update['business_status'] = 4;
+              }
+              $update['date_transact'] = date("Y/m/d");
+              TblBusinessModel::where('business_id',$business_id)->update($update);
+              if($save_pdf)
+              {
+                return $pdf->stream('document.pdf');
+              }
+              else
+              {
+                echo "Error";
+              }
+             
+          }
+          elseif($request->submit == 'Download') 
+          {
+              $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                            ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                            ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                                  ->first();
+              $format["title"] = "james";
+              $format["format"] = "A4";
+              $format["default_font"] = "sans-serif";
+              $pdf = PDF::loadView('mail', $data, [], $format);
+              $unique=uniqid();
+              $file_name  = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
+              $save_pdf = $pdf->save(public_path('invoice/'.$file_name));
+              $invoice['invoice_number'] = $invoice_number;
+              $invoice['invoice_name'] = $file_name;
+              $invoice['invoice_path'] = '/invoice/'.$file_name;
+              $invoice['invoice_status'] = 'Download';
+              $invoice['business_id'] = $business_id;
+              $invoice['business_contact_person_id'] = $business_contact_person_id;
+              TblInvoiceModels::insert($invoice);
+              if($request->status==5)
+              {
+                $update['business_status'] = 5;
+              }
+              else
+              {
+                $update['business_status'] = 4;
+              }
+              $update['date_transact'] = date("Y/m/d");
+              TblBusinessModel::where('business_id',$business_id)->update($update);
+              if($save_pdf)
+              {
+                  return $pdf->download('invoice.pdf');
+              }
+              else
+              {
+                echo "Error";
+              }
+          }
+          else
+          {
+              $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                                                      ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                                      ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                                                      ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                                                      ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                                                      ->first();
+              $format["title"]                        = "james";
+              $format["format"]                       = "A4";
+              $format["default_font"]                 = "sans-serif";
+              $unique=uniqid();
+              $file_name                              = $data['invoice_info']->contact_first_name."-".$data['invoice_info']->business_name."-".$unique.'.pdf';
+              $pdf                                    = PDF::loadView('mail', $data, [], $format);
+              $save_pdf                               = $pdf->save(public_path('invoice/'.$file_name));
+              $invoice['invoice_number']              = $invoice_number;
+              $invoice['invoice_name']                = $file_name;
+              $invoice['invoice_path']                = '/invoice/'.$file_name;
+              $invoice['invoice_status']              = 'sent';
+              $invoice['date_send']                   = date("Y/m/d");
+              $invoice['business_id']                 = $business_id;
+              $invoice['business_contact_person_id']  = $business_contact_person_id;
+              TblInvoiceModels::insert($invoice);
+              if($request->status==5)
+              {
+                $update['business_status'] = 5;
+              }
+              else
+              {
+                $update['business_status'] = 4;
+              }
+              $update['date_transact']                = date("Y/m/d");
+              TblBusinessModel::where('business_id',$business_id)->update($update);
+              if($save_pdf)
+              {
+                  $email_name       = $data['invoice_info']->contact_first_name; 
+                  $email_email      = $data['invoice_info']->user_email;
+                  $date             = date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
+                  $link             = "http://mvm.digimahouse.com/".$business_id."/".$email_name;
+                  $data             = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name,'remarks'=>'Please Pay As Soon As Possible.','link'=>$link);
+                  $pathfile         ='invoice/'.$file_name;
+                  $mail_send        = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile)
+                   {
+                     $message->to($data['email'],'Croatia Invoice')->subject
+                        ('Your Croatia Directory Invoice');
+                     $message->attach(public_path($pathfile));
+                     $message->from('guardians35836@gmail.com','Croatia Directory');
+                  });
+                    if($mail_send)
+                    {
+                      Session::flash('success', 'Thank you!. Invoice Save and Send Successfully!');
+                      return Redirect::to('/general_admin/merchants');
+                    }
+                    else
+                    {
+                      Session::flash('error', 'Transaction Failed! The file was save but failed to send. Note: goto Invoice to Resend the invoice!');
+                      return Redirect::to('/general_admin/merchants');
+                    }
+              }
+              else
+              {
+                echo "Error";
+              }
+          }
       }
     }
     public function general_admin_manage_invoice()
@@ -443,7 +461,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->orderBy('tbl_invoice.invoice_id',"asc")
+                          ->orderBy('tbl_invoice.date_send',"DESC")
                           ->paginate(10);
       return view('general_admin.pages.manage_invoice',$data);
     }
@@ -504,7 +522,7 @@ class GeneralAdminController extends Controller
       {
         $new_password = mt_rand(100000, 99999999);
         $up['user_password'] = password_hash($new_password, PASSWORD_DEFAULT);
-        $checking = TblBusinessModel::where('business_id',$business_id)->update($up);
+        $checking = TblUserAccountModel::where('business_id',$business_id)->update($up);
         $password = $new_password;
 
       }
@@ -687,7 +705,7 @@ class GeneralAdminController extends Controller
         }
         else
         {
-          $check_insert = TblBusinessImages::where('business_id',$business_id)->insert($data);
+          $check_insert = TblBusinessImages::insert($data);
           if($check_insert)
           {
             Session::flash('success', "Merchant Information Updated");
