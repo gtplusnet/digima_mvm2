@@ -378,7 +378,7 @@ class FrontController extends Controller
                 $data['images']  = 1;
                 $data['_images'] = TblBusinessImages::where('business_id',$id)->first();
             }
-            $data['_business_hours'] = TblBusinessHoursmodels::where('business_id',$id)->get();
+            $data['_business_hours'] = TblBusinessHoursmodels::where('act','!=','yes')->where('business_id',$id)->get();
             $check_payment = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
 
             if($check_payment)

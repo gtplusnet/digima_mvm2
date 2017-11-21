@@ -105,7 +105,7 @@
                <div class="col-md-4">
                   <div class="card">
                      <div class="header">
-                        <h4 class="title">Merchant Statistics</h4>
+                        <h4 class="title">Guest Statistics</h4>
                         <p class="category">Views</p>
                      </div>
                      <div class="content">
@@ -126,7 +126,7 @@
                <div class="col-md-7">
                   <div class="card">
                      <div class="header">
-                        <h4 class="title">Page Likes</h4>
+                        <h4 class="title">Guest Statistics</h4>
                         <p class="category">Likes</p>
                      </div>
                      <div class="content">

@@ -376,7 +376,7 @@ function manage_user()
 			{
 				var team_id 	= $(this).data("id");
 		        var team_name 	= $(this).data("name");
-		        var team_info 	= $(this).data("name");
+		        var team_info 	= $(this).data("info");
 		        $("#tTeam_id").val(team_id);
 		        $("#tTeam_name").val(team_name);
 		        $("#tTeam_info").val(team_info);
@@ -466,7 +466,7 @@ function manage_user()
 		 	}).done(function(data)
 		 		{
 		 		    $('#deleteAgent').modal('hide');
-		 			$('#agent_success').html(data);
+		 			$('#agent_success1').html(data);
 		 		});
 	    });
 	    $(document).on('click','#teamDeleted',function()

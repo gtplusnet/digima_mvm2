@@ -116,7 +116,7 @@
 			<div class="row col-md-12">
 				<div class="panel-body">
 					<div class="table-responsive" id="showHere_agent">
-						<div id="agent_success">
+						<div id="agent_success1">
 						</div>
 						<table class="display table agent_container table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 							<thead>

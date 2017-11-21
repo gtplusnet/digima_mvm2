@@ -21,7 +21,7 @@ function manage_categories()
 			update_category();
 			sub_category_action();
 			add_sub_category();
-			message_send();
+			
 		});
 	}
 	function save_category()

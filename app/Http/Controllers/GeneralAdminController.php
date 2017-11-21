@@ -600,7 +600,7 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent']          = TblAgentModel::get();
+      $data['_data_agent']          = TblAgentModel::where('position','!=','agentDeactivated')->get();
       $data['_data_team']           = TblTeamModel::get();
       $data['_data_supervisor']     = TblSupervisorModels::get();
       $data['_data_admin']          = TblAdminModels::get();
@@ -1261,7 +1261,8 @@ class GeneralAdminController extends Controller
     public function general_admin_delete_agent(Request $request)
     {
         $agent_id = $request->delete_agent_id;
-        TblAgentModel::where('agent_id',$agent_id)->delete();
+        $archived['position'] = 'agentDeactivated';
+        TblAgentModel::where('agent_id',$agent_id)->update($archived);
         return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
     }
 

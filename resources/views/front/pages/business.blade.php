@@ -35,41 +35,6 @@
     <div class="col-md-8 business-details-containers">
         <div class="border-line" >
             <div class="main-pic-container">
-                {{-- @if($images==0)
-                <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators business-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                    </ol>
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="/images/arabian_nights_pic01.png">
-                        </div>
-                        <div class="item">
-                            <img src="/images/arabian_nights_pic02.png">
-                        </div>
-                        <div class="item">
-                            <img src="/images/arabian_nights_pic03.png">
-                        </div>
-                        <div class="item">
-                            <img src="/images/arabian_nights_pic04.png">
-                        </div>
-                    </div>
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control business-carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control business-carousel-control" href="#myCarousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-                @else --}}
                 <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators business-indicators">
@@ -133,19 +98,6 @@
                     });
                 </script>
             </div><!-- MAIN PIC -->
-            {{-- @if($images==0)
-            <div class="secondary-pics-container">
-                <a href="/images/arabian_nights_pic01.png" data-lightbox="roadtrip">
-                    <img class="secondary-pics" src="/images/arabian_nights_pic01.png">
-                </a>
-                <a href="/images/arabian_nights_pic02.png" data-lightbox="roadtrip">
-                    <img class="secondary-pics" src="/images/arabian_nights_pic02.png">
-                </a>
-                <a href="/images/arabian_nights_pic03.png" data-lightbox="roadtrip">
-                    <img class="secondary-pics-last" src="/images/arabian_nights_pic03.png">
-                </a>
-            </div>
-            @else --}}
             <div class="secondary-pics-container">
                 <a href="{{$business_info->other_image_one}}" data-lightbox="roadtrip">
                     <img class="secondary-pics" src="{{$business_info->other_image_one}}">
@@ -245,7 +197,7 @@
                     <p class="business-details-rightpart-content">
                         <table style="width:100%;margin-left:30px;">
                             <td style="width:50%;color: #7E8692;font-size: 13px;">{{$business_hours->days}}  </td>
-                            <td style="width:50%;color: #7E8692;font-size: 13px;"> {{date('h:i a', strtotime($business_hours->business_hours_from))}} - {{date('h:i a', strtotime($business_hours->business_hours_from))}}</td>
+                            <td style="width:50%;color: #7E8692;font-size: 13px;"> {{date('h:i a', strtotime($business_hours->business_hours_from))}} - {{date('h:i a', strtotime($business_hours->business_hours_to))}}</td>
                        </table>
                     </p>
                 @endforeach

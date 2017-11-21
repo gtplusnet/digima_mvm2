@@ -361,7 +361,7 @@ class MerchantController extends Controller
       {
           $data['business_hours_from']  = $business_hours_f;
           $data['business_hours_to']    = $business_hours_to[$key]; 
-          $data['desc']               = $desc[$key]; 
+          $data['act']               = $desc[$key]; 
           
           $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
 
@@ -514,12 +514,12 @@ class MerchantController extends Controller
           $check_insert = TblBusinessImages::where('business_id',session('business_id'))->update($data);
           if($check_insert)
           {
-            Session::flash('success', "success");
+            Session::flash('success_merchant', "success");
             return Redirect::back();
           }
           else
           {   
-            Session::flash('success', "success");
+            Session::flash('success_merchant', "success");
             return Redirect::back();
           }
         }
@@ -528,12 +528,12 @@ class MerchantController extends Controller
           $check_insert = TblBusinessImages::where('business_id',session('business_id'))->insert($data);
           if($check_insert)
           {
-            Session::flash('success', "success");
+            Session::flash('success_merchant', "success");
             return Redirect::back();
           }
           else
           {   
-            Session::flash('success', "success");
+            Session::flash('success_merchant', "success");
             return Redirect::back();
           }
         }

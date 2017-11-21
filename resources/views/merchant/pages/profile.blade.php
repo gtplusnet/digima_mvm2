@@ -158,15 +158,15 @@ th
                               <input type="time" class="form-control" name="business_hours_to[]" id="business_hours_to" value="{{$business_hours->business_hours_to}}" required="true">
                            </div>
                            <div class="col-sm-3 searchfields-format">
-                              @if($business_hours->desc == 'none')
+                              @if($business_hours->act == 'yes')
                                  <select class="form-control" name="disable[]">
-                                    <option value="none">Yes</option>
-                                    <option value="disable">No</option>
+                                    <option value="yes">{{$business_hours->asc}}Yes</option>
+                                    <option value="no">No</option>
                                  </select>
                               @else
                                  <select class="form-control" name="disable[]">
-                                    <option value="disable">No</option>
-                                    <option value="none">Yes</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
                                  </select>
                               @endif
                            </div>

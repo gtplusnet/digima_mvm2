@@ -102,7 +102,7 @@
                                     <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
                                 </div>
                                 <div class="col-md-3 searchfields-format ">
-                                    <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" >
+                                    <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
                                         <option value="" disabled selected><div>--County--</div></option>
                                         @foreach($countyList as $countyListItem)
                                         <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
