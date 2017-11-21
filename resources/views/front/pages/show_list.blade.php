@@ -61,37 +61,6 @@
 		<div class="col-md-12">
 			<div class="featuredlist-holder">
 				<div class="featuredlist-title-holder">
-					<p class="featuredlist-title">MOST VIEWED</p>
-				</div>
-				<div class="featuredlist-container side-list-padding">
-					<div  class="featured-carousel" >
-						<div class="carousel-inner vertical inner-vertical-carousel">
-							@foreach($_most_viewed as $most_viewed)
-							<div class="">
-								<div class="featured-details-container">
-									<div class="detail-picture-container side-list-img-width">
-										<img src="{{$most_viewed->business_banner}}" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
-									</div>
-									<div class="detail-name-container">
-										@if(strlen($most_viewed->business_name) <= 14)
-										<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
-										@else
-										<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
-										@endif
-										
-									</div>
-								</div>
-							</div>
-							@endforeach
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="featuredlist-holder">
-				<div class="featuredlist-title-holder">
 					<p class="featuredlist-title">FEATURED LIST</p>
 				</div>
 				<div class="featuredlist-container side-list-padding">
@@ -137,6 +106,38 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-12">
+			<div class="featuredlist-holder">
+				<div class="featuredlist-title-holder">
+					<p class="featuredlist-title">MOST VIEWED</p>
+				</div>
+				<div class="featuredlist-container side-list-padding">
+					<div  class="featured-carousel" >
+						<div class="carousel-inner vertical inner-vertical-carousel">
+							@foreach($_most_viewed as $most_viewed)
+							<div class="">
+								<div class="featured-details-container">
+									<div class="detail-picture-container side-list-img-width">
+										<img src="{{$most_viewed->business_banner}}" class="img-responsive detail-picture" data-target="#carousel-main" data-slide-to="0">
+									</div>
+									<div class="detail-name-container">
+										@if(strlen($most_viewed->business_name) <= 14)
+										<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+										@else
+										<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+										@endif
+										
+									</div>
+								</div>
+							</div>
+							@endforeach
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	<div class="col-md-9" >
 		<div class="col-md-12">
@@ -195,7 +196,7 @@
 						</div>
 						<hr>
 						<div class="membership-price">
-							<span >${{$membership->membership_price}}  </span>
+							<span >${{$membership->membership_price}}/</span><span >MONTH</span>
 						</div>
 						<hr>
 						<div class="membership-details">

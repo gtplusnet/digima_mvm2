@@ -31,12 +31,14 @@ function manage_website()
 		$('#addMembership').click(function(){
         var membershipName = $('#membershipName').val();
 		var membershipPrice = $('#membershipPrice').val();
+		var membershipInfo = $('#membershipInfo').val();
 		$.ajax({
 			type:'POST',
 			url:'/general_admin/manage_website/add_membership',
 			data:{
 				membershipName: membershipName,
-				membershipPrice: membershipPrice
+				membershipPrice: membershipPrice,
+				membershipInfo:membershipInfo
 				},
 			dataType:'text',
 
@@ -117,9 +119,11 @@ function manage_website()
 		    	var mem_id = $(this).data("id");
 		        var mem_name = $(this).data("name");
 		        var mem_price = $(this).data("price");
+		        var mem_info = $(this).data("info");
 		        $("#mem_id_edit").val(mem_id);
 		        $("#mem_name_edit").val(mem_name);
 		        $("#mem_price_edit").val(mem_price);
+		        $("#mem_info_edit").val(mem_info);
 
 		        $('#editMem').modal('show');
 	        }
@@ -213,6 +217,7 @@ function manage_website()
 	        var mem_id = $("#mem_id_edit").val();
 	        var mem_name = $("#mem_name_edit").val();
 	        var mem_price = $("#mem_price_edit").val();
+	        var mem_info = $("#mem_info_edit").val();
 		    $.ajax({
 		 		type:'POST',
 		 		url:'/general_admin/manage_website/update_membership',
@@ -220,6 +225,7 @@ function manage_website()
 		 			mem_id: mem_id,
 		 			mem_name:mem_name,
 		 			mem_price:mem_price,
+		 			mem_info:mem_info,
 		 		     },
 		 		dataType:'text',
 

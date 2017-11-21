@@ -1,29 +1,37 @@
-<!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Datepicker - Default functionality</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-   
-    $( "#datepicker" ).change(function(){
-        var date = $("#datepicker" ).datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-        var james = $(this).val()
-        alert(date);
-    });
-  } );
-  </script>
 </head>
 <body>
- 
-<p>Date: <input type="text" class="date" id="datepicker" value="20107/12/23"></p>
- 
- 
+    <div id="google_translate_element"></div>
+    <p>
+      This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
+
+This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
+
+
+This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
+
+
+This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
+
+
+This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
+
+
+This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
+
+
+
+
+
+
+    </p>
+    <script type="text/javascript">
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
 </body>
 </html>

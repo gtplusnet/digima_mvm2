@@ -69,16 +69,17 @@ class FrontController extends Controller
         $data['_membership']        = TblMembeshipModel::get();
         $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.membership','ASC')
+                                    ->orderBy('tbl_business.business_name','ASC')
                                     ->groupBy('tbl_business.business_id')
                                     ->paginate(9);
-        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5) 
+        $data["_featured_list"]     = TblBusinessModel::where('membership',1)->where('business_status',5) 
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                                    ->orderBy('tbl_business.business_name','DESC')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_reports.business_views','DESC')
+                                    ->orderBy('tbl_reports.business_views','ASC')
                                     ->limit(4)
                                     ->get();
         return view('front.pages.home',$data);
@@ -115,6 +116,16 @@ class FrontController extends Controller
                     $check3 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
                     $cat    = array($check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
                     $cat1   = array($check3->parent_id,$check2->parent_id,$check1->parent_id,$check->parent_id );
+                    if($check2->parent_id)
+                    {
+                        $check4 = TblBusinessCategoryModel::where('business_category_id',$check1->parent_id)->first();
+                        $cat    = array($check4->business_category_name,$check3->business_category_name,$check2->business_category_name,$check1->business_category_name,$check->business_category_name );
+                        $cat1   = array($check4->parent_id,$check3->parent_id,$check2->parent_id,$check1->parent_id,$check->parent_id );
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else
                 {
@@ -134,7 +145,7 @@ class FrontController extends Controller
         $data['_filtered']          = $cat;
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_membership']        = TblMembeshipModel::get();
-        $data["_business_list"]     = TblBusinessTagCategoryModel::where('business_category_id',$request->parent_id)->where('business_status',5)
+        $data["_business_list"]     = TblBusinessTagCategoryModel::where('tbl_business.membership',1)->where('business_category_id',$request->parent_id)->where('business_status',5)
                                     ->join('tbl_business','tbl_business.business_id','=','tbl_business_tag_category.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -144,13 +155,13 @@ class FrontController extends Controller
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)
                                     ->get();
 
-        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
+        $data["_featured_list"]     = TblBusinessModel::where('tbl_business.membership',1)->where('business_status',5)  
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->groupBy('tbl_business.business_id')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
-        $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
+        $data['_most_viewed']       = TblReportsModel::where('tbl_business.membership',1)->join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_reports.business_views','DESC')
                                     ->limit(4)

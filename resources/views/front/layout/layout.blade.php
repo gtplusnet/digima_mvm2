@@ -75,21 +75,13 @@
                         <div class="language-selection" >
                             <div id="google_translate_element"></div>
                             <style>
-                            .goog-logo-link
+                            .goog-te-gadget-icon
                             {
                             visibility:hidden;
-                            margin-right:-20px;
+                            /*text-align:center;*/
+                            position:absolute;
                             }
-                            .goog-te-combo
-                            {
-                            background-color: black;
-                            color:#fff;
-                            width:140px;
-                            }
-                            .skiptranslate
-                            {
-                            margin-right: -130px;
-                            }
+                            
                             </style>
                             
                         </div>
@@ -110,12 +102,23 @@
                                     <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
                                 </div>
                                 <div class="col-md-3 searchfields-format ">
-                                    <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown">
-                                        <option value="" disabled selected>--County--</option>
+                                    <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" >
+                                        <option value="" disabled selected><div>--County--</div></option>
                                         @foreach($countyList as $countyListItem)
                                         <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                                         @endforeach
                                     </select>
+                                    <style>
+                                    select:required:invalid {
+                                          color: gray;
+                                        }
+                                        option[value=""][disabled] {
+                                          display: none;
+                                        }
+                                        option {
+                                          color: black;
+                                        }
+                                    </style>
                                 </div>
                                 <div class="col-md-2 searchfields-format ">
                                     <input class="zipcode-textbox" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
@@ -192,8 +195,9 @@
                         <!-- HANGGANG DITO -->
                         {{-- LANGUAGE --}}
                         <script type="text/javascript">
+
                         function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+                          new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
                         }
                         </script>
                         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

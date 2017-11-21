@@ -79,15 +79,15 @@
          </div>
       </div>
       <!--   Others-->
-   <!--    <div class="col-lg-3 col-md-6">
+      <div class="col-lg-3 col-md-6">
          <div class="panel info-box panel-white">
             <div class="panel-body">
                <div class="info-box-stats">
-                  <p class="counter">256</p>
-                  <span class="info-box-title">Page Views Business</span>
+                  <p class="counter">{{$guest_messages}}</p>
+                  <span class="info-box-title">Guest Messages</span>
                </div>
                <div class="info-box-icon">
-                  <i class="icon-eye"></i>
+                  <i class="icon-envelope"></i>
                </div>
                <div class="info-box-progress">
                   <div class="progress progress-xs progress-squared bs-n">
@@ -97,7 +97,7 @@
                </div>
             </div>
          </div>
-      </div> -->
+      </div>
       {{-- mula dito james --}}
       <div class="content">
          <div class="container">

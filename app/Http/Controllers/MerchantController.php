@@ -142,6 +142,7 @@ class MerchantController extends Controller
 
         $data['page'] = 'Dashboard';
         $views = TblReportsModel::where('business_id',session('business_id'))->count();
+        $data['guest_messages'] = TblGuestMessages::where('business_id',session('business_id'))->count();
         $fb = TblBusinessModel::where("business_id",session('business_id'))->first();
         if($fb->facebook_url==""||$fb->facebook_url==null)
         {
@@ -348,17 +349,21 @@ class MerchantController extends Controller
     public function update_hours(Request $request)
     {
 
-      $business_hours_to = $request->input('business_hours_to');
-      $business_hours_from = $request->input('business_hours_from');
-      $business_id = $request->input('business_id');
-      $days = $request->input('days');
+      $business_hours_to    = $request->input('business_hours_to');
+      $business_hours_from  = $request->input('business_hours_from');
+      $desc                 = $request->input('disable');
+      $business_id          = $request->input('business_id');
+      $days                 = $request->input('days');
+      
       foreach($business_hours_from as $key => $business_hours_f)
       {
-          $data['business_hours_from']= $business_hours_f;
-          $data['business_hours_to']= $business_hours_to[$key];  
+          $data['business_hours_from']  = $business_hours_f;
+          $data['business_hours_to']    = $business_hours_to[$key]; 
+          $data['desc']               = $desc[$key]; 
+          
           $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
       }
-      Session::flash('success', 'success');
+      Session::flash('success_merchant', 'success');
       return Redirect::back();  
     
     }

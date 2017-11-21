@@ -64,6 +64,7 @@ padding: 10px;
 
 {{-- modal end --}}
 <div id="main-wraper">
+	<form method="POST">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5 website-container">
@@ -78,6 +79,9 @@ padding: 10px;
 					</div>
 					<div class="web-content">
 						<input type="text" class="form-text center" id="membershipPrice" placeholder="Membership Price" required/>
+					</div>
+					<div class="web-content">
+						<textarea class="form-text center" id="membershipInfo" rows="5">Membership Information</textarea>
 					</div>
 					<div class="web-content">
 						<button type="button" id="addMembership" class="form-button  center" >Add Membership</button>
@@ -96,6 +100,7 @@ padding: 10px;
 								<th>ID</th>
 								<th>Membership Name</th>
 								<th>Price</th>
+								<th>Info</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -105,8 +110,9 @@ padding: 10px;
 								<td>{{$membership->membership_id}}</td>
 								<td>{{$membership->membership_name}}</td>
 								<td>{{$membership->membership_price}}</td>
+								<td>{{$membership->membership_info}}</td>
 								<td>
-									<select class="form-select mem_action" data-price="{{$membership->membership_price}}" data-name="{{$membership->membership_name}}" data-id="{{$membership->membership_id}}" id="mem_action">
+									<select class="form-select mem_action" data-info="{{$membership->membership_info}}" data-price="{{$membership->membership_price}}" data-name="{{$membership->membership_name}}" data-id="{{$membership->membership_id}}" id="mem_action">
 										<option >Action</option>
 										<option value="edit" >Edit</option>
 										<option value="delete">Delete</option>
@@ -285,15 +291,14 @@ padding: 10px;
 				</div>
 			</div>
 		</div>
-		
-		
 	</div>
+	</form>
 </div>
 {{-- modal --}}
 <div class="modal fade" id="editMem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content row">
-			<div class="modal-body" style="margin-bottom: 200px;">
+			<div class="modal-body" style="margin-bottom: 350px;">
 				<div class="website-title">
 					Edit Membership
 				</div>
@@ -305,6 +310,9 @@ padding: 10px;
 					</div>
 					<div class="web-content">
 						<input type="text" class="form-text center" id="mem_price_edit" placeholder="Membership Price" required/>
+					</div>
+					<div class="web-content">
+						<textarea class="form-text center" id="mem_info_edit" rows="5"></textarea>
 					</div>
 					<div class="web-content">
 						<button type="button" id="editMemBtn" class="form-button  center" >Save Membership</button>

@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="col-md-12 registration-form-container">
-				<label for="emailAddress" class="registration-form-label">Email Address:(will be use as login)</label>
+				<label for="emailAddress" class="registration-form-label">Email Address:(will be used as login)</label>
 				<input type="email" class="form-control" name="emailAddress" id="emailAddress" required="true">
 			</div>
 			<div class="col-md-12 registration-form-container">

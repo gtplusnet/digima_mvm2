@@ -54,7 +54,7 @@ color:#fff;
             <li class="active li_me"><a data-toggle="pill" href="#customer">Send Invoice</a></li>
             <li class="li_me"><a data-toggle="pill" href="#agentAdded">Agent Added</a></li>
             <li class="li_me"><a data-toggle="pill" href="#pending">Pending Merchant</a></li>
-            <li class="li_me"><a data-toggle="pill" href="#registered">Registered Merchant</a></li>
+            <li class="li_me"><a data-toggle="pill" href="#registered">Activated Merchant</a></li>
         </ul>
         
         <div class="tab-content" style="">
@@ -304,6 +304,8 @@ color:#fff;
                                         <th>Business Name</th>
                                         <th>membership</th>
                                         <th>Transaction</th>
+                                        <th>Days</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -314,6 +316,10 @@ color:#fff;
                                         <td>{{$registeredclients->business_name}}</td>
                                         <td>{{$registeredclients->membership_name}}</td>
                                         <td>{{$registeredclients->transaction_status}} by: {{$registeredclients->first_name}} {{$registeredclients->last_name}}</td>
+                                        <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" id="sendNewInvoice" name="sendNewInvoice">New Invoice</button>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

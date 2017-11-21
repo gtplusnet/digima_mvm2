@@ -747,6 +747,7 @@ class GeneralAdminController extends Controller
     {
       $data['membership_name'] = $request->membershipName;
       $data['membership_price']= $request->membershipPrice;
+      $data['membership_info'] = $request->membershipInfo;
       TblMembeshipModel::insert($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Added.</div>"; 
     }
@@ -773,6 +774,7 @@ class GeneralAdminController extends Controller
       $mem_id = $request->mem_id;
       $mem['membership_name'] = $request->mem_name;
       $mem['membership_price'] = $request->mem_price;
+      $mem['membership_info']   = $request->mem_info;
       TblMembeshipModel::where('membership_id',$mem_id)->update($mem);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership updated.</div>";
     }

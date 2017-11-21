@@ -143,6 +143,7 @@ th
                         <div class="form-group" style="margin-top:50px;">
                            <label for="input-Default" class="col-sm-3 control-label">START</label>
                            <label for="input-Default" class="col-sm-3 control-label">END</label>
+                           <label for="input-Default" class="col-sm-3 control-label">Disable?</label>
                         </div>
                         @foreach($_business_hours as $business_hours)
                         <div class="form-group">
@@ -154,6 +155,19 @@ th
                            </div>
                            <div class="col-sm-3 searchfields-format">
                               <input type="time" class="form-control" name="business_hours_to[]" id="business_hours_to" value="{{$business_hours->business_hours_to}}" required="true">
+                           </div>
+                           <div class="col-sm-3 searchfields-format">
+                              @if($business_hours->desc == 'none')
+                                 <select class="form-control" name="disable[]">
+                                    <option value="none">Yes</option>
+                                    <option value="disable">No</option>
+                                 </select>
+                              @else
+                                 <select class="form-control" name="disable[]">
+                                    <option value="disable">No</option>
+                                    <option value="none">Yes</option>
+                                 </select>
+                              @endif
                            </div>
                         </div>
                         @endforeach
