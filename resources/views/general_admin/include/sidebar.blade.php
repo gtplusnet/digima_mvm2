@@ -12,7 +12,11 @@
             <li class="{{ (Request::segment(2)=='manage_invoice') ? 'active' : ''  }}"><a href="/general_admin/manage_invoice" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Manage Invoice</p></a></li>
             <li class="{{ (Request::segment(2)=='manage_categories') ? 'active' : ''  }}"><a href="/general_admin/manage_categories" class="waves-effect waves-button"><span class="menu-icon fa fa-list" aria-hidden="true"></span><p>Manage Categories</p></a></li>
             <li class="{{ (Request::segment(2)=='manage_user') ? 'active' : ''  }}"><a href="/general_admin/manage_user" class="waves-effect waves-button"><span class="menu-icon fa fa-user-plus"></span><p>Manage User</p></a></li>
+
             <li class="{{ (Request::segment(2)=='manage_website') ? 'active' : ''  }}"><a href="/general_admin/manage_website" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Manage Website</p></a></li>
+
+              <li class="{{ (Request::segment(2)=='manage_front') ? 'active' : ''  }}"><a href="/general_admin/manage_front" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Manage Front</p></a></li>
+
             <li class="{{ (Request::segment(2)=='report') ? 'active' : ''  }}"><a href="/general_admin/report" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Report</p></a></li>
         </ul>
     </div><!-- Page Sidebar Inner -->

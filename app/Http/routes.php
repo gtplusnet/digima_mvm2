@@ -92,7 +92,17 @@ Route::any('/merchant/add_images', 						'MerchantController@add_images');
 Route::any('/merchant/delete_messages/{id}', 			'MerchantController@delete_messages');
 Route::any('/merchant/bills', 				   		    'MerchantController@bills');
 Route::any('/merchant/add_other_info', 					'MerchantController@update_other_info');
+
 Route::any('/merchant/update_merchant_info', 		    'MerchantController@update_merchant_info');
+Route::any('/merchant/saving_merchant_info', 			'MerchantController@saving_merchant_info');
+Route::any('/merchant/get_city', 						'MerchantController@get_city');
+Route::any('/merchant/get_zip_code', 					'MerchantController@get_zip_code');
+
+
+
+
+
+
 Route::any('/merchant/add_payment_method', 				'MerchantController@add_payment_method');
 Route::any('/merchant/delete_payment_method', 			'MerchantController@delete_payment_method');
 Route::any('/merchant/edit_payment_method', 			'MerchantController@edit_payment_method');
@@ -204,6 +214,16 @@ Route::any('/general_admin/logout', 								'GeneralAdminController@general_admi
 Route::any('/general_admin/merchants', 								'GeneralAdminController@general_admin_merchants');
 Route::any('/general_admin/payment_monitoring', 					'GeneralAdminController@general_admin_payment_monitoring');
 Route::any('/general_admin/manage_user', 							'GeneralAdminController@general_admin_manage_user');
+
+Route::any('/general_admin/manage_front', 							'GeneralAdminController@general_admin_manage_front');
+Route::any('/general_admin/update_about_us', 						'GeneralAdminController@general_admin_update_about_us');
+Route::any('/general_admin/update_contact_us', 						'GeneralAdminController@general_admin_update_contact_us');
+Route::any('/general_admin/update_thank_you', 						'GeneralAdminController@general_admin_update_thank_you');
+Route::any('/general_admin/update_terms', 							'GeneralAdminController@general_admin_update_terms');
+
+
+
+
 Route::any('/general_admin/manage_categories', 						'GeneralAdminController@general_admin_manage_categories');
 Route::any('/general_admin/add_category', 							'GeneralAdminController@general_admin_add_category');
 Route::any('/general_admin/edit_category', 							'GeneralAdminController@general_admin_edit_category');

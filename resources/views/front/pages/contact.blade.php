@@ -63,7 +63,7 @@
 					<i class="material-icons details-icon">location_on</i>
 				</div>
 				<div class="details-info-container">
-					<p class="details-info">8871 Spruce Street, Elizabeth City, NC 27909</p>
+					<p class="details-info">@if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif</p>
 				</div>
 			</div>
 			<div class="details-info-holder">
@@ -71,7 +71,7 @@
 					<i class="material-icons details-icon">phone_iphone</i>
 				</div>
 				<div class="details-info-container">
-					<p class="details-info">0123-456-789</p>
+					<p class="details-info">@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif</p>
 				</div>
 			</div>
 			<div class="details-info-holder">
@@ -79,7 +79,7 @@
 					<i class="material-icons details-icon">mail_outline</i>
 				</div>
 				<div class="details-info-container">
-					<p class="details-info">email@gmail.com</p>
+					<p class="details-info">@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif</p>
 				</div>
 			</div>
 			<div class="map-container">
