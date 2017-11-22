@@ -678,10 +678,12 @@ class MerchantController extends Controller
 	  {
 		  Self::allow_logged_in_users_only();
 		  $data['page']	= 'Bills';
-      $data['bills'] = TblBusinessModel::where('business_id',session('business_id'))
+      $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                      ->first();
-     $data['method'] = TblPaymentModel::where('business_id',session('business_id'))->first();
+                      ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
+                      ->orderBy('tbl_payment.payment_id','DESC')
+                      ->get();
+     // $data['method'] = TblPaymentModel::where('business_id',session('business_id'))->get();
 		  return view ('merchant.pages.bills', $data);		
 	  }
 
