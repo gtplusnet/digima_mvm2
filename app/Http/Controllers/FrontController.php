@@ -72,11 +72,13 @@ class FrontController extends Controller
         $data["_featured_list"]     = TblBusinessModel::where('membership',1)->where('business_status',5) 
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_business.business_name','DESC')
+                                    ->groupBy('tbl_business.business_id')
                                     ->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_reports.business_views','ASC')
+                                    ->groupBy('tbl_business.business_id')
                                     ->limit(4)
                                     ->get();
         return view('front.pages.home',$data);
