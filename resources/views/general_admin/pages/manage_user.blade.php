@@ -230,6 +230,8 @@
 
 			</div>
 			<div class="row col-md-12">
+				<form method="post">
+					{{csrf_field()}}
 				<div class="panel-body">
 					<div class="table-responsive" id="showHere_supervisor">
 						<table class="display table table-bordered"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
@@ -269,6 +271,7 @@
 						</table>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 		<div id="admin" class=" col-md-12 tab-pane fade in">

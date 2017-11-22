@@ -538,6 +538,9 @@ function manage_user()
 			}).done(function(data)
 				{
 				    $('#assignSuccess').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 				});
 	    });
 	}
@@ -545,8 +548,7 @@ function manage_user()
 	{
 		$(document).on('click','.viewMem',function()
 	    {
-	    	alert();
-		    var team_id = $(this).data('id');
+	    	var team_id = $(this).data('id');
 		    $.ajax({
 				type:'POST',
 				url:'/general_admin/manage_user/view_all_members',

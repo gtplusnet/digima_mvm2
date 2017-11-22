@@ -1159,11 +1159,11 @@ class GeneralAdminController extends Controller
     return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned Successfully!</div>";
   }
 
-  public function general_admin_assign_supervisor()
+  public function general_admin_assign_supervisor(Request $request)
   {
-    $super_id = $request->agent_id;
+    $super_id = $request->super_id;
     $update['team_id'] = $request->team_id;
-    TblAgentModel::where('supervisor_id',$super_id)->update($update);
+    TblSupervisorModels::where('supervisor_id',$super_id)->update($update);
     return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Assigned Successfully!</div>";
   }
 
@@ -1190,6 +1190,7 @@ class GeneralAdminController extends Controller
   {
     $id = $request->team_id;
     $data['_data_agent'] = TblAgentModel::where('team_id',$id)->get();
+    $data['_supervisor'] = TblSupervisorModels::where('team_id',$id)->get();
     return view('general_admin.pages.viewmember',$data);
   }
 

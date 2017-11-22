@@ -24,6 +24,22 @@ function merchant()
 			search_agent_added();
 			search_pending();
 			search_activated();
+			deactivate_merchant();
+		});
+	}
+	function deactivate_merchant()
+	{
+		$(document).on('change','.registerAction',function(){
+			if($(this).val()=="newinvoice")
+			{
+				$('#confirmModalInvoice').modal('show');
+			}
+			else if($(this).val()=="deactivate")
+			{
+				$('#confirmModal').modal('show');
+			}
+			
+		
 		});
 	}
 
@@ -35,12 +51,11 @@ function merchant()
 			   {
 			   	
 			   	
-		    	var resend_email = $(this).data('email');
-				var remarks="Please pay your Invoice or It will be deleted after 1 month";
-				var invoice_name_resend = $(this).data('name');
-				var resend_business_id = $(this).data('b_id');
-				var resend_contact_name = $(this).data('contact_name');
-				// alert("---"+resend_email+"--"+remarks+"--"+invoice_name_resend+"--"+resend_business_id+"---"+resend_contact_name);
+		    	var resend_email 			= $(this).data('email');
+				var remarks					= "Please pay your Invoice or It will be deleted after 1 month";
+				var invoice_name_resend 	= $(this).data('name');
+				var resend_business_id 		= $(this).data('b_id');
+				var resend_contact_name 	= $(this).data('contact_name');
 				$.ajax({
 					type:'POST',
 			 		url:'/general_admin/resend_invoice',
