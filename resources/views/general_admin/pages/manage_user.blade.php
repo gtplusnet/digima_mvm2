@@ -39,6 +39,7 @@
 	@if (Session::has('success'))
 	<div class="alert alert-success"><center>{{ Session::get('success') }}</center></div>
 	@endif
+	
 	<div class="tab-content" style="">
 		<div id="merchant" class=" tab-pane fade in  active">
 			<div class="row col-md-12">

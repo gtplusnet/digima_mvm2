@@ -28,6 +28,10 @@ use App\Models\TblBusinessHoursmodels;
 use App\Models\TblBusinessImages;
 use App\Models\TblPasswordResetModel;
 use App\Models\TblBusinessTagCategoryModel;
+use App\Models\TblAboutUs;
+use App\Models\TblContactUs;
+use App\Models\TblTerms;
+use App\Models\TblThankYou;
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -65,6 +69,7 @@ class FrontController extends Controller
         Session::forget("city_state");
         Session::forget("zip_code");
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+         $data['contact_us']           = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();
         $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
@@ -90,6 +95,9 @@ class FrontController extends Controller
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['membership']         = TblMembeshipModel::get();
         $data['countyList']         = Tbl_county::get();
+        $data['contact_us']           = TblContactUs::first();
+        $data['terms']                = TblTerms::first();
+        
         return view('front.pages.registration', $data);
     }
     public function get_sub_category(Request $request)
@@ -280,6 +288,7 @@ class FrontController extends Controller
 
     public function businessSearchResult(Request $request)
     {
+         $data['contact_us']           = TblContactUs::first();
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID'] = $countyID = $request->countyId;
         $data['postal_code'] = $postalCode = $request->cityOrpostalCode;
@@ -324,6 +333,7 @@ class FrontController extends Controller
 
     public function business_details(Request $request)
     {
+         $data['contact_us']           = TblContactUs::first();
         $address = '1700 Parañaque City Philippines';
         $data['coordinates']  = Self::getCoordinates_long($address);
         $data['coordinates1'] = Self::getCoordinates_lat($address);
@@ -331,6 +341,7 @@ class FrontController extends Controller
     }
     public function business(Request $request,$id)
     {
+        $data['contact_us']           = TblContactUs::first();
         $data['page']   = 'business';
         $data['countyList'] = TblCountyModel::get();
         $data['business_id']= $id;
@@ -427,12 +438,15 @@ class FrontController extends Controller
     public function success()
     {
         $data['countyList'] = TblCountyModel::get();
+        $data['contact_us']           = TblContactUs::first();
+        $data['thank_you']            = TblThankYou::first();
         return view('front.pages.success',$data);
     }
 
     public function business_info(Request $request)
     {
         $data['countyList']     = TblCountyModel::get();
+        $data['contact_us']           = TblContactUs::first();
         $data['business_info']  = DB::table('tbl_business')
                                 ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
                                 ->where('tbl_business.business_id', '=', $request->business_id)
@@ -444,12 +458,15 @@ class FrontController extends Controller
     {
         $data['page']           = 'About';
         $data['countyList']     = TblCountyModel::get();
+        $data['_about_us']      = TblAboutUs::first();
+         $data['contact_us']           = TblContactUs::first();
         return view('front.pages.about', $data);
     }
     public function contact()
     {
         $data['page']           = 'Contact';
         $data['countyList']     = TblCountyModel::get();
+        $data['contact_us']     = TblContactUs::first();
         return view('front.pages.contact', $data);
 
     }
@@ -482,7 +499,8 @@ class FrontController extends Controller
 
     public function admin()
     {
-        $data['page']   = 'generaladmin';
+        $data['page']                 = 'generaladmin';
+        $data['contact_us']           = TblContactUs::first();
         return view('generaladmin');
     }
 

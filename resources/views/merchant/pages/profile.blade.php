@@ -44,12 +44,9 @@ th
                <div class="tab-content">
                 
                   <div role="tabpanel" class="tab-pane fade active in" id="MI">
-                     <form class="form-horizontal" method="POST" action="/merchant/update_merchant_info">
+                     <form class="form-horizontal">
                           {{ csrf_field() }}
-                            @if(Session::has('success_merchant'))
-                            <div class='alert alert-success'><strong>Success!</strong> Merchant Information Updated.</div>
-                            @endif 
-
+                       
                         <div class="form-group" style="margin-top:50px;">
                            <label for="business_name" class="col-sm-2 control-label">Business Name</label>
                            <div class="col-sm-10">
@@ -69,7 +66,7 @@ th
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
                            <div class="col-sm-10">
-                              <textarea class="form-control" placeholder="" rows="4=6" readonly>{{$merchant_info->business_complete_address}}</textarea>
+                              <textarea class="form-control" id="business_complete_address" name="business_complete_address" rows="4=6" readonly>{{$merchant_info->business_complete_address}}</textarea>
                            </div>
                         </div>
                         <div class="form-group">
@@ -90,20 +87,19 @@ th
                         <div class="form-group">
                            <label for="twitter_url" class="col-sm-2 control-label">Twitter</label>
                            <div class="col-sm-4">
-                              <input type="text" class="form-control" id="twitter_url" name="twitter_url" value="{{$merchant_info->twitter_url}}" >
+                              <input type="text" class="form-control" id="twitter_url" name="twitter_url" value="{{$merchant_info->twitter_url}}" readonly>
                            </div>
                            <label for="facebook_url" class="col-sm-2 control-label">Facebook</label>
                            <div class="col-sm-4">
-                              <input type="text" class="form-control" id="facebook_url" name="facebook_url" value="{{$merchant_info->facebook_url}}">
+                              <input type="text" class="form-control" id="facebook_url" name="facebook_url" value="{{$merchant_info->facebook_url}}" readonly>
                            </div>
                         </div>
                      
                         <div class="col-md-15">
                            <div class="text-right">
-                              <button type="submit" class="btn btn-primary" id="update" style="padding: 5px 18px;">Update</button>
+                              <button type="button" class="btn btn-primary" id="updateprofile" style="padding: 5px 18px;"><i class="fa fa-pencil m-r-xs"></i>Update Information</button>
                            </div>
                         </div>
-
 
                      </form>
                   </div>
