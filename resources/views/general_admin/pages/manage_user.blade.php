@@ -195,12 +195,11 @@
 									<td>{{ $data_team->team_id}}</td>
 									<td>{{ $data_team->team_name}}</td>
 									<td>{{ $data_team->team_information}}</td>
-									<td>View All Members</td>
+									<td><i data-id="{{ $data_team->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
 									<td>
 										<select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox" data-name="{{ $data_team->team_name}}" data-info="{{ $data_team->team_information}}" data-id="{{ $data_team->team_id}}">
 											<option value="">Action</option>
 											<option value="edit">Edit</option>
-											<option value="assign">Assignee</option>
 											<option value="delete">Delete</option>
 										</select>
 									</td>
@@ -232,7 +231,7 @@
 			<div class="row col-md-12">
 				<div class="panel-body">
 					<div class="table-responsive" id="showHere_supervisor">
-						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
+						<table class="display table table-bordered"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -323,6 +322,22 @@
 			</div>
 		</div>
 		{{-- modal start --}}
+		<div class="modal fade" id="myModalViewMem" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close"  data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Team Members</h4>
+					</div>
+					<div class="modal-body" id="viewMemHere">
+						
+						
+					</div>
+					<div class="modal-footer" style="border:0px;">
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="myModalAgent" role="dialog">
 			<div class="modal-dialog modal-md">
 				<div class="modal-content">
@@ -722,7 +737,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Edit Supervisor Login</h4>
+						<h4 class="modal-title">Edit Admin Login</h4>
 					</div>
 					<div class="modal-body" style="margin-bottom: 300px;" >
 						<div class="col-sm-12" id="admin_alerts">
@@ -803,6 +818,52 @@
 						<div class="col-sm-12">
 							<center>
 							<button type="submit" class="save_category btn btn-primary" name="agentAssigned" id="agentAssigned">Assign Agent</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							</center>
+						</div>
+						
+						
+					</div>
+					<div class="modal-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="margin-top: 150px;" class="modal fade" id="assignSupervisor" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Assign Supervisor</h4>
+					</div>
+					<div class="modal-body" style="margin-bottom: 150px;" >
+						<div id="assignSuccess">
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Supervisor Name</label>
+							</div>
+							<div class="form-group col-md-9">
+								<input type="text" class="form-control" name="super_name" id="super_name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
+								<input type="hidden" class="form-control" name="super_id" id="super_id_assign"  />
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group col-md-3">
+								<label for="business_name" >Team Name</label>
+							</div>
+							<div class="form-group col-md-9">
+								<select id="teamAssign" class="form-control" >
+									@foreach($_data_team as $data_team)
+									<option value="{{$data_team->team_id}}">{{$data_team->team_name}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<center>
+							<button type="submit" class="save_category btn btn-primary" name="superAssigned" id="superAssigned">Assign Supervisor</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 							</center>
 						</div>

@@ -20,11 +20,14 @@ function manage_user()
 			add_supervisor();
 			add_admin();
 			assigned_agent();
+			assigned_super();
 			action_box();
 			update_info();
 			update_user_login();
 			add_payment_method();
 			delete_payment_method();
+			view_members();
+			search_user();
 		});
 	}
 
@@ -415,10 +418,11 @@ function manage_user()
 	        }
 			if ($(this).val() == "assign") 
 			{
-		        var agent_id = $(this).data("id");
-		        var agent_name = $(this).data("name");
-		        $("#supervisor_id_assign").val(agent_id);
-		        $("#supervisor_name_assign").val(agent_name);
+		        var super_id = $(this).data("id");
+		        var super_name = $(this).data("name");
+		        // alert(super_name);
+		        $("#super_id_assign").val(super_id);
+		        $("#super_name_assign").val(super_name);
 		        $('#assignSupervisor').modal('show');
 		    }
 		    if ($(this).val() == "delete") 
@@ -515,23 +519,55 @@ function manage_user()
 				});
 	    });
 	}
+	function assigned_super()
+	{
+		$(document).on('click','#superAssigned',function()
+	    {
+		    var super_id = $('#super_id_assign').val();
+			var team_id= $('#teamAssign').val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/manage_user/assign_supervisor',
+				data:{
+					super_id: super_id,
+					team_id: team_id,
+					
+				     },
+				dataType:'text',
 
-	
-}
+			}).done(function(data)
+				{
+				    $('#assignSuccess').html(data);
+				});
+	    });
+	}
+	function view_members()
+	{
+		$(document).on('click','.viewMem',function()
+	    {
+	    	alert();
+		    var team_id = $(this).data('id');
+		    $.ajax({
+				type:'POST',
+				url:'/general_admin/manage_user/view_all_members',
+				data:{
+					team_id: team_id,
+					},
+				dataType:'text',
 
-
-
-//oliver
-$(document).ready(function(){
-
+			}).done(function(data)
+				{
+				    $('#viewMemHere').html(data);
+				    $('#myModalViewMem').modal('show');
+				});
+	    });
+	}
+	function search_user()
+	{
 		$(document).on('click','#search_btn_merchant',function()
 		{
 			var search_key_merchant = $('#search_merchant').val();
-			
-			
-			
 			$.ajax({
-
 				type:'POST',
 				url:'/general_admin/search_merchant',
 				data:{
@@ -540,21 +576,12 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					
 					$('#showHere_merchant').html(data);
-					
-			    });
+				});
 	    });
-});
-
-$(document).ready(function(){
-
-		$(document).on('click','#search_btn_agent',function()
+	    $(document).on('click','#search_btn_agent',function()
 		{
 			var search_key_agent = $('#search_agent').val();
-			
-			
-			
 			$.ajax({
 
 				type:'POST',
@@ -565,20 +592,12 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					
 					$('#showHere_agent').html(data);
-					
-			    });
+				});
 	    });
-});
-
-$(document).ready(function(){
-
-		$(document).on('click','#search_btn_team',function()
+	    $(document).on('click','#search_btn_team',function()
 		{
 			var search_key_team = $('#search_team').val();
-			
-			
 			$.ajax({
 
 				type:'POST',
@@ -594,17 +613,9 @@ $(document).ready(function(){
 					
 			    });
 	    });
-});
-
-
-$(document).ready(function(){
-
-		$(document).on('click','#search_btn_supervisor',function()
+	    $(document).on('click','#search_btn_supervisor',function()
 		{
 			var search_key_supervisor = $('#search_supervisor').val();
-		
-			
-			
 			$.ajax({
 
 				type:'POST',
@@ -615,24 +626,13 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					
 					$('#showHere_supervisor').html(data);
-					
-			    });
+				});
 	    });
-});
-
-
-$(document).ready(function(){
-
-		$(document).on('click','#search_btn_admin',function()
+	    $(document).on('click','#search_btn_admin',function()
 		{
 			var search_key_admin = $('#search_admin').val();
-			
-			
-			
 			$.ajax({
-
 				type:'POST',
 				url:'/general_admin/search_admin_user',
 				data:{
@@ -641,12 +641,15 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					
 					$('#showHere_admin').html(data);
-					
-			    });
+				});
 	    });
-});
+	}
+
+	
+}
+
+
 
 
 
