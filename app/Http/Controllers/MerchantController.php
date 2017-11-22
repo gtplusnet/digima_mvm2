@@ -22,7 +22,8 @@ use App\Models\TblBusinessCategoryModel;
 use App\Models\TblBusinessSubCategoryModel;
 use App\Models\TblReportsModel;
 use App\Models\TblBusinessTagCategoryModel;
-
+use App\Models\TblCityModel;
+use App\Models\TblContactUs;
 
 use App\Models\TblABusinessPaymentMethodModel;
 
@@ -66,7 +67,8 @@ class MerchantController extends Controller
 	public function login()
     {
       	Self::allow_logged_out_users_only();
-        $data['countyList'] = TblCountyModel::get();
+        $data['countyList']           = TblCountyModel::get();
+        $data['contact_us']           = TblContactUs::first();
         $data['page']   = 'login';
         Session::forget("merchant_login");
         return view('front.pages.login', $data);
@@ -186,6 +188,7 @@ class MerchantController extends Controller
     public function merchant_redirect()
     {
       $data['countyList'] = TblCountyModel::get();
+       $data['contact_us']           = TblContactUs::first();
       return view ('merchant.pages.merchant_redirect',$data);
     }
 
@@ -295,7 +298,6 @@ class MerchantController extends Controller
     {
       Self::allow_logged_in_users_only();
       $data['page']             = 'Profile';
-
       $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))
                                 ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
@@ -328,13 +330,67 @@ class MerchantController extends Controller
 
     public function update_merchant_info(Request $request)//
     {
-      $data["twitter_url"] = $request->twitter_url;
-      $data["facebook_url"]    = $request->facebook_url;
-      TblBusinessModel::where('business_id',session('business_id'))->update($data);
-      Session::flash('success_merchant', 'Successfully Updated!');
-      return Redirect::back();  
-   }
+
+    $data['transaction']      = 'profile';
+    $data['county_list']      = TblCountyModel::get();
+    $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                                ->first();     
+    return view('merchant.pages.update_merchant_info',$data); 
     
+     
+   }
+
+   public function saving_merchant_info(Request $request)
+   {
+
+    $data['city_id']        = $request->city_id;
+    $data['county_id']      = $request->county_id;
+    $data['twitter_url']    = $request->twitter_url;
+    $data['facebook_url']   = $request->facebook_url;
+    $data['business_complete_address']     = $request->business_complete_address;
+  
+    $check = TblBusinessModel::where('business_id',session('business_id'))->update($data);
+    if($check)
+    {
+      return "<div class='alert alert-success'><strong>Thank you!</strong> Profile successfully updated.</div>";
+    }
+    else
+    {
+      return "<div class='alert alert-danger'><strong>Sorry!</strong>  Transaction failure.</div>"; 
+    } 
+   }
+
+   public function get_city(Request $request)
+    {
+      
+        $county_id = $request->county_id;
+
+        $city_list = TblCityModel::where('county_id','=',$county_id)->get();
+
+        $county_name = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
+
+        $city_dropdown_output = '';
+
+        $city_dropdown_output .= $county_name->county_name;
+
+        foreach($city_list as $city_list)
+        {
+            $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
+        }
+
+        return $city_dropdown_output;
+    }
+
+
+   public function get_zip_code(Request $request)
+    {
+        $city_id = $request->city_id;
+        $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
+
+        return $postal_code->postal_code;
+    }
 
     public function update_other_info(Request $request)
     {
@@ -344,7 +400,7 @@ class MerchantController extends Controller
       $data["year_established"]    = $request->year_established;
       TblBusinessOtherInfoModel::where('business_id',session('business_id'))->update($data);
       return "<div class='alert alert-success'><strong>Success!</strong>  Other Information Updated.</div>";
-   }
+    }
     
 
     public function update_hours(Request $request)
@@ -547,7 +603,7 @@ class MerchantController extends Controller
 		  Self::allow_logged_in_users_only();
 
 		  $data['page']			    = 'Category';
-      $data['_category']    = TblBusinessCategoryModel::paginate(6);
+      $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->paginate(6);
       $data['_subcategory'] = TblBusinessTagCategoryModel::where('business_id',session('business_id'))
                             ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
                             ->paginate(10);

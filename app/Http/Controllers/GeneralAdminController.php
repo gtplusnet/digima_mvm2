@@ -28,6 +28,10 @@ use App\Models\TblABusinessPaymentMethodModel;
 use App\Models\TblBusinessOtherInfoModel;
 use App\Models\TblBusinessHoursmodels;
 use App\Models\TblBusinessImages;
+use App\Models\TblAboutUs;
+use App\Models\TblContactUs;
+use App\Models\TblTerms;
+use App\Models\TblThankYou;
 use DB;
 use Response;
 use Session;
@@ -613,6 +617,106 @@ class GeneralAdminController extends Controller
       return view('general_admin.pages.manage_user', $data);
 
     }
+
+    public function general_admin_manage_front()
+    {
+      Self::allow_logged_in_users_only();
+      $data['page']                 = 'Manage Front';
+      $data['about_us']             = TblAboutUs::first();
+      $data['contact_us']           = TblContactUs::first();
+      $data['thank_you']            = TblThankYou::first();
+      $data['terms']                = TblTerms::first();
+     
+
+       return view('general_admin.pages.manage_front',$data);
+ 
+    }
+
+    public function general_admin_update_about_us(Request $request)
+    {
+      
+      $data['information_header'] = $request->information_header;
+      $data['information']        = $request->information;
+
+      $check = TblAboutUs::count();
+
+      if ($check)
+      {
+
+          TblAboutUs::where('about_us_id',1)->update($data);
+           return "<div class='alert alert-success'><strong>Success!</strong> About Us Information updated.</div>";
+      }
+      else
+      {
+
+        TblAboutUs::insert($data);
+      }
+      
+       return "<div class='alert alert-success'><strong>Success!</strong> About Us Information updated.</div>";
+
+    }
+
+    public function general_admin_update_contact_us(Request $request)
+    {
+
+      $data['phone_number']       = $request->phone_number;
+      $data['complete_address']   = $request->complete_address;
+      $data['email']              = $request->email;
+
+      $check = TblContactUs::count();
+      if($check)
+      {
+
+        TblContactUs::where('contact_us_id',1)->update($data);
+
+      }
+      else
+      {
+          TblContactUs::insert($data);
+      }
+
+       return "<div class='alert alert-success'><strong>Success!</strong> Contact Us Information updated.</div>";
+
+    }
+
+    public function general_admin_update_thank_you(Request $request)
+    {
+
+      $data['header']                  = $request->header;
+      $data['information_thank_you']   = $request->information_thank_you;
+
+      $check = TblThankYou::count();
+      if($check)
+      {
+        TblThankYou::where('thank_you_id',1)->update($data);
+      }
+      else
+      {
+        TblThankYou::insert($data);
+      }
+
+        return "<div class='alert alert-success'><strong>Success!</strong> Thank you Information updated.</div>";
+
+    }
+
+    public function general_admin_update_terms(Request $request)
+    {
+      $data['terms_of_offers']  = $request->terms_of_offers;
+
+      $check = TblTerms::count();
+      if($check)
+      {
+        TblTerms::where('terms_id',1)->update($data);
+      }
+      else
+      {
+        TblTerms::insert($data);
+      }
+
+      return "<div class='alert alert-success'><strong>Success!</strong> Terms of Offers updated.</div>";
+    }
+
+
     public function update_merchant_business_info(Request $request)//
     {
     

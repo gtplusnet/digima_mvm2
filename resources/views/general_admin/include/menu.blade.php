@@ -68,6 +68,15 @@
             </a>
         </li>
 
+        <li data-menu="Manage Front">
+            <a href="/general_admin/manage_front">
+                <span>
+                    <i class="fa fa-desktop"></i>
+                </span>
+                <p>Manage Front</p>
+            </a>
+        </li>
+
         
       <!--   <li data-menu="Report">
             <a href="/general_admin/report">

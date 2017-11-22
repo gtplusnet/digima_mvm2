@@ -10,6 +10,7 @@ use App\Models\TblCountyModel;
 use App\Models\TblUserAccountModel;
 use App\Models\TblPasswordResetModel;
 use App\Models\TblAgentModel;
+use App\Models\TblContactUs;
 use Session;
 use Mail;
 use Redirect;
@@ -20,6 +21,7 @@ class PasswordController extends Controller
     public function forgot_password_user()
     {
         $data['countyList'] = TblCountyModel::get();
+         $data['contact_us']           = TblContactUs::first();
         $data['page']   = 'Forgot Password';
         return view('password_blade.forgot_user_password',$data);
     }
@@ -160,6 +162,7 @@ class PasswordController extends Controller
     public function forgot_password()
     {
         $data['countyList'] = TblCountyModel::get();
+         $data['contact_us']           = TblContactUs::first();
         $data['page']   = 'Forgot Password';
         return view('front.pages.forgot_password',$data);
     }

@@ -16,6 +16,7 @@ use App\Models\Tbl_business_hours;
 use App\Models\TblUserAccountModel;
 use App\Models\TblMembeshipModel;
 use App\Models\TblTeamModel;
+use App\Models\TblContactUs;
 use Carbon\Carbon;
 use Input;
 use Mail;
@@ -53,6 +54,7 @@ class AgentController extends Controller
 		Self::allow_logged_out_users_only();
 		$data['page']	    = 'Agent Login';
 		$data['countyList'] = TblCountyModel::get();
+		 $data['contact_us']           = TblContactUs::first();
 		return view ('agent.pages.login', $data);
 	}
 
@@ -219,6 +221,7 @@ class AgentController extends Controller
                           ->paginate(10);
         
         $data['clients_pending'] = TblBusinessModel::where('business_status', 4)->orWhere('business_status', 20)
+                            ->where("agent_id", session("agent_id"))
                             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                             ->orderBy('tbl_business.date_created',"asc")
