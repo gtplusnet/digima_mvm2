@@ -142,7 +142,12 @@
 	<div class="col-md-9" >
 		<div class="col-md-12">
 			<div class="business-list-holder">
-				<p class="business-list-title">LOCAL FAVOURITES</p>
+				<p class="business-list-title">FILTERING FAVOURITES</p>
+			</div>
+			<div class="col-md-12">
+				<div class="business-list-holder">
+					<p class="business-list-title">{{count($_business_list)}} Results</p>
+				</div>
 			</div>
 			<div class="business-list-content">
 				@foreach($_business_list as $business_list)

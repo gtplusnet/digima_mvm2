@@ -293,11 +293,10 @@ class FrontController extends Controller
 
     public function businessSearchResult(Request $request)
     {
-         $data['contact_us']           = TblContactUs::first();
+        $data['contact_us']           = TblContactUs::first();
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID'] = $countyID = $request->countyId;
         $data['postal_code'] = $postalCode = $request->cityOrpostalCode;
-        $checks = TblBusinessModel::where('county_id',$countyID)->count();
         if($postalCode=="")
         {
             
@@ -314,7 +313,6 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.membership','DESC')
                                     ->paginate(9);  
         }
-        $data['_check']             = $checks;
         $data['countyList']         = TblCountyModel::get();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();
@@ -333,35 +331,25 @@ class FrontController extends Controller
                                     ->limit(4)
                                     ->get();
         return view('front.pages.searchresult',$data); 
-        
-    }
-
-    public function business_details(Request $request)
-    {
-         $data['contact_us']           = TblContactUs::first();
-        $address = '1700 Parañaque City Philippines';
-        $data['coordinates']  = Self::getCoordinates_long($address);
-        $data['coordinates1'] = Self::getCoordinates_lat($address);
-        return view('front.pages.business_details',$data); 
     }
     public function business(Request $request,$id)
     {
-        $data['contact_us']           = TblContactUs::first();
-        $data['page']   = 'business';
-        $data['countyList'] = TblCountyModel::get();
-        $data['business_id']= $id;
+        $data['contact_us']     = TblContactUs::first();
+        $data['page']           = 'business';
+        $data['countyList']     = TblCountyModel::get();
+        $data['business_id']    = $id;
 
         $check = TblReportsModel::where('business_id',$id)->first();
         if($check)
         {
-            $update['business_id'] = $id;
-            $update['business_views'] = $check->business_views + 1;
+            $update['business_id']      = $id;
+            $update['business_views']   = $check->business_views + 1;
             TblReportsModel::where('business_id',$id)->update($update);   
         }
         else
         {
-            $insert['business_id'] = $id;
-            $insert['business_views'] = '1';
+            $insert['business_id']      = $id;
+            $insert['business_views']   = '1';
             TblReportsModel::insert($insert);   
         }
         $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
@@ -375,24 +363,24 @@ class FrontController extends Controller
                                ->first();
 
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
-        $data['coordinates']    = Self::getCoordinates_long($address);
-        $data['coordinates1']   = Self::getCoordinates_lat($address); 
+        $data['coordinates']            = Self::getCoordinates_long($address);
+        $data['coordinates1']           = Self::getCoordinates_lat($address); 
 
-        $data['_tag_category']  = TblBusinessTagCategoryModel::where('business_id',$id)
-                                ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
-                                ->get();
-        $images                 = TblBusinessImages::where('business_id',$id)->count();
+        $data['_tag_category']          = TblBusinessTagCategoryModel::where('business_id',$id)
+                                        ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
+                                        ->get();
+        $images                         = TblBusinessImages::where('business_id',$id)->count();
             if($images==0)
             {
-                $data['images']  = 0;
+                $data['images']         = 0;
             }
             else
             {
-                $data['images']  = 1;
-                $data['_images'] = TblBusinessImages::where('business_id',$id)->first();
+                $data['images']         = 1;
+                $data['_images']        = TblBusinessImages::where('business_id',$id)->first();
             }
-            $data['_business_hours'] = TblBusinessHoursmodels::where('act','!=','yes')->where('business_id',$id)->get();
-            $check_payment = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
+            $data['_business_hours']    = TblBusinessHoursmodels::where('act','!=','yes')->where('business_id',$id)->get();
+            $check_payment              = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
 
             if($check_payment)
             {
@@ -423,28 +411,28 @@ class FrontController extends Controller
 
 
     public static function getCoordinates_long($address){
-        $address = str_replace(" ", "+", $address); 
-        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
-        $response = file_get_contents($url);
-        $json = json_decode($response,TRUE); 
-        $long = $json['results'][0]['geometry']['location']['lng'];
+        $address        = str_replace(" ", "+", $address); 
+        $url            = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
+        $response       = file_get_contents($url);
+        $json           = json_decode($response,TRUE); 
+        $long           = $json['results'][0]['geometry']['location']['lng'];
         return $long;
     }
     public static function getCoordinates_lat($address){
-        $address = str_replace(" ", "+", $address); 
-        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
-        $response = file_get_contents($url);
-        $json = json_decode($response,TRUE); 
-        $lat = $json['results'][0]['geometry']['location']['lat'];
+        $address        = str_replace(" ", "+", $address); 
+        $url            = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
+        $response       = file_get_contents($url);
+        $json           = json_decode($response,TRUE); 
+        $lat            = $json['results'][0]['geometry']['location']['lat'];
         return $lat;
     }
     
 
     public function success()
     {
-        $data['countyList'] = TblCountyModel::get();
-        $data['contact_us']           = TblContactUs::first();
-        $data['thank_you']            = TblThankYou::first();
+        $data['countyList']     = TblCountyModel::get();
+        $data['contact_us']     = TblContactUs::first();
+        $data['thank_you']      = TblThankYou::first();
         return view('front.pages.success',$data);
     }
 
@@ -481,15 +469,15 @@ class FrontController extends Controller
         $contact_email_add      = $request->email_add;
         $contact_subject        = $request->subject;
         $contact_help_message   = $request->help_message;
-        $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
+        $date                   = date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
 
-        $data = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
-        $check_mail = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
-         $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
-            ('THE RIGHT PLACE FOR BUSINESS');
-         $message->from('guardians35836@gmail.com','Croatia Customer');
+        $data                   = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
+        $check_mail             = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
+                                  $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
+                                    ('THE RIGHT PLACE FOR BUSINESS');
+                                  $message->from('guardians35836@gmail.com','Croatia Customer');
         });
-        $data['guest_messages']    = TblBusinessContactPersonModel::get(); 
+        $data['guest_messages'] = TblBusinessContactPersonModel::get(); 
         if($check_mail)
         {
             Session::flash('success', 'Thank you!. Your Message Send Successfully!');

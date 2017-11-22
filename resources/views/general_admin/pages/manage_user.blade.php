@@ -45,7 +45,7 @@
 			<div class="row col-md-12">
 
 				<div class="pull-right" style="margin:20px 20px 20px 0px">
-					<form class="form-inline" method="position" action="/general_admin/search_merchant" >
+					<form class="form-inline">
 						 {{csrf_field()}}
 						<div class="form-group">
 							<input type="text" class="form-control" name="search_merchant" id="search_merchant">
@@ -104,7 +104,7 @@
 				</div>
 
 				<div class="pull-right" style="margin:20px 20px 20px 0px">
-					<form class="form-inline" method="position" action="/general_admin/search_agent_user" >
+					<form class="form-inline" >
 						 {{csrf_field()}}
 						<div class="form-group">
 							<input type="text" class="form-control" name="search_agent" id="search_agent">
@@ -165,7 +165,7 @@
 				</div>
 
 				<div class="pull-right" style="margin:20px 20px 20px 0px">
-					<form class="form-inline" method="position" action="/general_admin/search_team_user" >
+					<form class="form-inline" >
 						 {{csrf_field()}}
 						<div class="form-group">
 							<input type="text" class="form-control" name="search_team" id="search_team">
@@ -219,7 +219,7 @@
 				</div>
 
 				<div class="pull-right" style="margin:20px 20px 20px 0px">
-					<form class="form-inline" method="position" action="/general_admin/search_supervisor_user" >
+					<form class="form-inline" >
 						 {{csrf_field()}}
 						<div class="form-group">
 							<input type="text" class="form-control" name="search_supervisor" id="search_supervisor">
@@ -281,7 +281,7 @@
 				</div>
 
 				<div class="pull-right" style="margin:20px 20px 20px 0px">
-					<form class="form-inline" method="position" action="/general_admin/search_admin_user" >
+					<form class="form-inline" >
 						 {{csrf_field()}}
 						<div class="form-group">
 							<input type="text" class="form-control" name="search_admin" id="search_admin">

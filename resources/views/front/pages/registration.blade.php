@@ -120,12 +120,7 @@
 		</div>
 		<div class="col-md-12 form-upper-container">
 			<div class="col-md-12 registration-textarea-container">
-
-				<textarea readonly rows="30" name="terms-of-offers" id="terms_of_offers" class="registration-terms-textarea">@if(isset($terms->terms_of_offers)==null)
-			    @else
-			    {{$terms->terms_of_offers}}
-				@endif
-				</textarea>
+				<textarea readonly rows="30" name="terms-of-offers" id="terms_of_offers" class="registration-terms-textarea">@if(isset($terms->terms_of_offers)==null)@else{{$terms->terms_of_offers}}@endif</textarea>
 			</div>
 		</div>
 		<div class="col-md-12 registration-title-container">

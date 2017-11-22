@@ -1,37 +1,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head id="Head1" runat="server">
+    <title>Google Translation</title>
 </head>
 <body>
-    <div id="google_translate_element"></div>
-    <p>
-      This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
+	<form >
+    <div id="google_translate_element" style="display: none">
+    </div>
+    
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        function translateLanguage(lang) {
 
-This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
-
-
-This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
-
-
-This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
-
-
-This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
-
-
-This article will be helpful to all those who wish to have a language translator integrated into their existing applications/websites. This will now be minutes' work. Please find all the libraries and scritps required in the source files attached along with the article. Now you need to just include a reference to one of the scripts in your application's page and you can start using the language translator inside your page.
-
-
-
-
-
-
-    </p>
-    <script type="text/javascript">
-
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  
+            var $frame = $('.goog-te-menu-frame:first');
+            if (!$frame.size()) {
+                alert("Error: Could not find Google translate frame.");
+                return false;
+            }
+            $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
+            return false;
+        }
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+        }
+    </script>
+    <ul>
+        <li><a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);"><span>Spanish
+        </span>
+            <img src="img/flags/spain_flag.jpg" alt="" /></a> </li>
+        <li><a href="javascript:;" id="English" onclick="translateLanguage(this.id);"><span>Russian
+        </span>
+            <img src="img/flags/russia_flag.jpg" alt="" /></a> </li>
+    </ul>
+    
+    </form>
+    <div>
+    	 concluded that the most disputed articles on the English Wikipedia tended to be broader issues, while on other language Wikipedias the most disputed articles tended to be regional issues; this is due to the English language's status as a global concluded that the most disputed articles on the English Wikipedia tended to be broader issues, while on other language Wikipedias the most disputed articles tended to be regional issues; this is due to the English language's status as a global concluded that the most disputed articles on the English Wikipedia tended to be broader issues, while on other language Wikipedias the most disputed articles tended to be regional issues; this is due to the English language's status as a global
+    </div>
 </body>
 </html>

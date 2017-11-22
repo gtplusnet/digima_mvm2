@@ -166,11 +166,16 @@ width:100%;
 					@if(count($_businessResult) == 0)
 					<div class="col-md-12">
 						<div class="business-list-holder">
-							<p class="business-list-title">0 result</p>
+							<p class="business-list-title">{{count($_businessResult)}} Result</p>
 						</div>
 					</div>
 					
 					@else
+					<div class="col-md-12">
+						<div class="business-list-holder">
+							<p class="business-list-title">{{count($_businessResult)}} Results</p>
+						</div>
+					</div>
 					<div class="business-list-content">
 						@foreach($_businessResult as $businessResult)
 						<div class="col-md-6" style="margin-bottom: 10px;">

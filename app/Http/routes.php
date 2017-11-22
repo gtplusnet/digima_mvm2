@@ -63,7 +63,6 @@ Route::get('/register', 				'FrontController@register');
 Route::get('/redirect', 				'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 			'FrontController@business');
 Route::any('/guest/add_messages', 		'FrontController@add_messages');
-Route::get('/business/details', 		'FrontController@business_details');
 Route::any('/home/get_sub_category', 	'FrontController@get_sub_category');
 
 
