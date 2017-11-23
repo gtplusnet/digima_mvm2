@@ -67,7 +67,7 @@ text-align: center;
             </div>
         </div>
     </div>
-    <div style="margin-top: 40px;" class="modal fade" id="myModalAgent" role="dialog">
+    {{-- <div style="margin-top: 40px;" class="modal fade" id="myModalAgent" role="dialog">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -169,7 +169,7 @@ text-align: center;
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div style="margin-top: 150px;" class="modal fade" id="teamEditModal" role="dialog">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
@@ -270,7 +270,7 @@ text-align: center;
                                 <td></td>
                                 <td>{{ $newteam->team_name}}</td>
                                 <td>{{ $newteam->team_information}}</td>
-                                <td>View All Members</td>
+                                <td><i data-id="{{ $newteam->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
                                 <td>{{ $newteam->sum}}</td>
                                 <td>
                                     <select class="teamAction" id="actionbox" data-info="{{ $newteam->team_information}}" data-name="{{ $newteam->team_name}}" data-id="{{ $newteam->team_id}}">
@@ -295,9 +295,9 @@ text-align: center;
                 <div class="table-responsive" id="agent_delete_success">
                     <div class="col-md-12">
 
-                        <div class="pull-left" style="margin:20px 0px 20px 20px">
+                        {{-- <div class="pull-left" style="margin:20px 0px 20px 20px">
                             <button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
-                        </div>
+                        </div> --}}
 
                         <div class="pull-right" style="margin:20px 20px 20px 0px">
                             <form class="form-inline" method="post"  action="/supervisor/supervisor_search_agent" method="post">
@@ -346,6 +346,22 @@ text-align: center;
             </form>
         </div>
         {{--  modal --}}
+        <div class="modal fade" id="myModalViewMem" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"  data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Team Members</h4>
+                    </div>
+                    <div class="modal-body" id="viewMemHere">
+                        
+                        
+                    </div>
+                    <div class="modal-footer" style="border:0px;">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div style="margin-top: 150px;" class="modal fade" id="assignAgent" role="dialog">
             <div class="modal-dialog modal-md">
                 <div class="modal-content">

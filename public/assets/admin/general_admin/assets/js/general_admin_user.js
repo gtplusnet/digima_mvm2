@@ -176,6 +176,9 @@ function manage_user()
 			}).done(function(data)
 				{
 				    $('#team_alert').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 				});
 	    });
 	}

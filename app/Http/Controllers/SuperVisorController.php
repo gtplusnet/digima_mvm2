@@ -428,13 +428,26 @@ class SuperVisorController extends Controller
     {
         Self::allow_logged_in_users_only();
         $data['page']       = 'Manage Team/Agent';
-        $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
+        $data['viewteam']   = TblTeamModel::where('supervisor_id',session('supervisor_id'))
+                            -> selectRaw('sum(agent_call) as sum, tbl_team.*')
                             ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->groupBy('team_id')->get();
-        $data['_agent_team']= TblTeamModel::get();
-        $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
-                            ->get();
+                            ->groupBy('tbl_team.team_id')->get();
+        $data['_agent_team']= TblTeamModel::where('supervisor_id',session('supervisor_id'))->get();
+        $data['viewagent']  = TblTeamModel::where('supervisor_id',session('supervisor_id'))
+                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                            ->groupBy('tbl_team.team_id')->get();
         return view ('supervisor.pages.manage_user', $data); 
+    }
+    public function view_all_members(Request $request)
+    {
+      $id = $request->team_id;
+      $data['_supervisor'] = TblTeamModel::where('tbl_team.team_id',$id)
+                            ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+                            ->get();
+      $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)
+                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                            ->get();
+      return view('supervisor.pages.viewmember',$data);
     }
     public function supervisor_delete_team(Request $request)
     {

@@ -160,6 +160,7 @@ Route::any('/supervisor/checking_password', 		'SuperVisorController@checking_pas
 Route::any('/supervisor/saving_profile', 			'SuperVisorController@saving_profile');
 
 
+Route::any('/supervisor/manage_user/view_all_members', 			'SuperVisorController@view_all_members');
 
 
 
