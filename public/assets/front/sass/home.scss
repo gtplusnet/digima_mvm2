@@ -240,16 +240,25 @@
 	.per-business
     {
     	margin:10px 0px 20px 0px;
+
     	.business-img-holder
     	{
-    		img 
+    		.show-list-img
     		{
     			max-height: 102px !important;
 			    max-width: 100% !important;
 			    min-width: 100% !important;
 			    min-height: 102px !important;
     		}
+    		.home-image
+    		{
+    			max-height: 156px !important;
+			    max-width: 100% !important;
+			    min-width: 100% !important;
+			    min-height: 156px !important;
+    		}
     	}
+
 		.business-info-holder
 		{
 		    display: -webkit-box;
