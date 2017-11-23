@@ -83,8 +83,8 @@
                      </tbody>
                   </table>
                   {!! $_category->render() !!}
-                  <div class="web-content">
-                     <button type="submit" class="form-button center" name="business_id" >Tag</button>
+                  <div class="web-content" >
+                     <button type="submit" class="form-button center" name="business_id"  >Tag</button>
                   </div>
                </div>
             </div>
