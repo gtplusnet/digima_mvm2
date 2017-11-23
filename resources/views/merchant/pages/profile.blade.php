@@ -326,9 +326,10 @@ th
                         
                      </div>
                   </div>
+
                   <div role="tabpanel" class="tab-pane fade" id="PM">
-                     <form class="form-horizontal" method="POST" action="/merchant/add_payment_method" style="">
-                        
+                     <form class="form-horizontal" method="post" action="/merchant/add_payment_method">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div id="adding_payment_method_success" style="margin-top:50px;">
                         </div>
                         <table class="table table-bordered" style="width: 100%; text-align: center;font-size:13px;" cellpadding="1" cellspacing="1"  border="2">
@@ -350,24 +351,26 @@ th
                            </tr>
                            @endforeach
                         </table>
-                        {!! $_payment_method->render()!!}
+                       
                         <div class="col-md-4">
                            <label class="control-label" style="text-align: left;margin-bottom:10px;">&nbsp;&nbsp;Payment Method</label>
                            <div  class="col-md-12">
-                              <input type="text" class="form-control" id="paymentMethodName"  name="payment_method_name">
+                              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName">
                            </div>
                            <div class="col-md-12">
-                              <button type="button" style="padding: 5px;margin-top:10px;" name="save_payment" id="savePayment" class="save_payment btn btn-primary" id="save_payment";>Add Payment</button>
+                              <button type="button" style="padding: 5px;margin-top:10px;" name="savePayment" id="savePayment" class="save_payment btn btn-primary" ;>Add Payment
+                              </button>
                               
                            </div>
                         </div>
+                         {!! $_payment_method->render()!!}
                      </form>
                   </div>
 
 
                   <div role="tabpanel" class="tab-pane fade" id="CP">
                       <form class="form-horizontal" method="POST" action="/merchant/change_password">
-
+                        {{ csrf_field() }}
                         <div id="merchant_changepassword_success" style="margin-top:50px;">
                         </div>
                        
@@ -375,9 +378,7 @@ th
                              <div class="col-sm-3">
                            <strong style="font-size: 18px;">Change Password</strong>
                            </div>
-                        </div>
-                       
-                            {{ csrf_field() }}
+                        </div>  
                 
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Enter Current Password</label>
@@ -407,6 +408,7 @@ th
                         </div>
                      </form>
                   </div>
+
                </div>
             </div>
          </div>
@@ -415,5 +417,6 @@ th
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/merchant/merchant_profile.js"></script>
+
 
 @endsection

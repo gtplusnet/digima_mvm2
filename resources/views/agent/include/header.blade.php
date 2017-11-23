@@ -140,13 +140,13 @@
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                             <span class="user-name">{{session('full_name_agent')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
-                        </a>
+                        </a>    
                         <ul class="dropdown-menu dropdown-list" role="menu">
-                            <li role="presentation"><a href="profile"><i class="fa fa-user"></i>Profile</a></li>
-                            <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
+                            <li role="presentation"><a href="/agent/profile"><i class="fa fa-user"></i>Profile</a></li>
+                            <li role="presentation"><a href=""><i class="fa fa-calendar"></i>Calendar</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href="profile"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href=""><i class="fa fa-lock"></i>Lock screen</a></li>
+                            <li role="presentation"><a href="/agent/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
                     </li>
                     <li>

@@ -304,7 +304,7 @@ class MerchantController extends Controller
                                 ->first();
 
 
-		  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(5);
+		  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(10);
       $data['other_info']       = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
       $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
       $images                   = TblBusinessImages::where('business_id',session('business_id'))->count();
@@ -677,7 +677,8 @@ class MerchantController extends Controller
   	public function bills(Request $request)
 	  {
 		  Self::allow_logged_in_users_only();
-		  $data['page']	= 'Bills';
+		  $data['page']	          = 'Bills';
+      $data['contact_us']     = TblContactUs::first();
       $data['bills'] = TblBusinessModel::where('business_id',session('business_id'))
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->first();

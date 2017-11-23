@@ -36,7 +36,7 @@
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history-o"></i> Updated 3 minutes ago
+                                        <i class="fa fa-history-o"></i> Updated a minute ago
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        <i class="fa fa-history"></i> Updated a minute ago
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history-o"></i> Updated 3 minutes ago
+                                        <i class="fa fa-history-o"></i> Updated a minute ago
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        <i class="fa fa-history"></i> Updated a minute ago
                                     </div>
                                 </div>
                             </div>

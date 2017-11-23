@@ -61,7 +61,8 @@ class GeneralAdminController extends Controller
     }
     public function index()
     {
-      $data['countyList'] = TblCountyModel::get();
+      $data['countyList']           = TblCountyModel::get();
+      $data['contact_us']           = TblContactUs::first();
       return view('general_admin.pages.general_admin_login',$data);
     }
     public function general_admin_login_submit(Request $request)
@@ -1581,5 +1582,18 @@ class GeneralAdminController extends Controller
      
     }
 
+    public function general_admin_archived()
+    {
+
+      Self::allow_logged_in_users_only();
+      $data['page'] = 'Archived';
+      $data['_admin']          = TblAdminModels::get();
+      $data['_agent']          = TblAgentModel::get();
+      $data['_supervisor']     = TblSupervisorModels::get();
+      $data['_team']           = TblTeamModel::get();
+    
+
+      return view('general_admin.pages.archived',$data);
+    }
 
 }
