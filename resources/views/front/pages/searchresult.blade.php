@@ -181,7 +181,7 @@ width:100%;
 						<div class="col-md-6" style="margin-bottom: 10px;">
 							<div class="col-md-6 per-business" >
 								<div class="business-img-holder" style="margin-bottom: 5px;">
-									<img src="{{$businessResult->business_banner}}">
+									<img class="show-list-img" src="{{$businessResult->business_banner}}">
 								</div>
 								
 								

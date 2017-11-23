@@ -203,14 +203,14 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$data['page']	 = 'Client';
 
-		$data['clients'] = TblUserAccountModel::where('status','registered')
-										  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-			                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-			                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-			                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-			                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-			                              ->orderBy('tbl_business.date_created',"asc")
-			                              ->get();
+		// $data['clients'] = TblUserAccountModel::where('status','registered')
+		// 								  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
+		// 	                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+		// 	                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
+		// 	                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+		// 	                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+		// 	                              ->orderBy('tbl_business.date_created',"asc")
+		// 	                              ->get();
 
 		$data['clients'] = TblBusinessModel::Where('business_status',1)
 						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -220,18 +220,18 @@ class AgentController extends Controller
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                           ->paginate(10);
         
-        $data['clients_pending'] = TblBusinessModel::where('business_status', 4)->orWhere('business_status', 20)
-                            ->where("agent_id", session("agent_id"))
+        $data['clients_pending'] = TblBusinessModel::where('business_status', 4)->where("agent_id", session("agent_id"))
+                            ->orWhere('business_status', 20)
                             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->orderBy('tbl_business.date_created',"asc")
+                            ->orderBy('tbl_business.date_created',"DESC")
                             ->paginate(10);
 
         $data['clients_activated'] = TblBusinessModel::where('business_status', 5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->orderBy('tbl_business.date_created',"asc")
+                          ->orderBy('tbl_business.date_created',"DESC")
                            ->paginate(10);
 
     	return view ('agent.pages.client', $data);	
@@ -256,6 +256,7 @@ class AgentController extends Controller
 		$s_date = $request->date_start1;
 		$e_date = $request->date_end1;
 		$data['clients_pending'] = TblBusinessModel::where('business_status', 4)
+							->where("agent_id", session("agent_id"))
 						    ->whereBetween('date_transact',[$s_date,$e_date])
 						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')

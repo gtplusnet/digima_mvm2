@@ -75,7 +75,7 @@
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
 
-        @include('supervisor.include.menu');
+        @include('supervisor.include.menu')
 
         <div class="cd-overlay"></div>
     

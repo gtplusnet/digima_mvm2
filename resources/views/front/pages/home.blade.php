@@ -167,7 +167,7 @@ width:100%;
 					@foreach($_business_list as $business_list)
 					<div class="col-md-4 per-business">
 						<div class="business-img-holder">
-							<img src="{{$business_list->business_banner}}">
+							<img class="home-image" src="{{$business_list->business_banner}}">
 						</div>
 						<div class="business-info-holder">
 							<div class="business-list-details">

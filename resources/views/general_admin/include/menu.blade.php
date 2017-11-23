@@ -78,6 +78,16 @@
         </li>
 
         
+        <li data-menu="Manage Front">
+            <a href="/general_admin/archived">
+                <span>
+                    <i class="fa fa-trash"></i>
+                </span>
+                <p>Archived</p>
+            </a>
+        </li>
+
+
       <!--   <li data-menu="Report">
             <a href="/general_admin/report">
                 <span>

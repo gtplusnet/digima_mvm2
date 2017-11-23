@@ -15,7 +15,6 @@
 			<p class="message-intro">@if(isset($thank_you->header)==null)@else {{$thank_you->header}}@endif</p>
 			<p class="success-message">INSTRUCTION</p>
 			<p class="success-message">@if(isset($thank_you->information_thank_you)==null)@else {{$thank_you->information_thank_you}}@endif</p>
-			
 			<a href="/"><button class="continue-btn">CONTINUE</button></a>
 		</div>
 	</div>

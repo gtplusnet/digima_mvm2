@@ -137,34 +137,39 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">                            
-                            <span class="user-name">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
+                        <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
+                            <span class="user-name">{{session('full_name_agent')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
-                           
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
-                            <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
-                            <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
+                            <li role="presentation" style="margin:10px;"><i class="fa fa-user"></i>Select Language</li>
+                            <li role="presentation"><a href="javascript:;" id="English" onclick="translateLanguage(this.id);"><img src="/images/flag_usa.ico" style="max-width:35px;max-height:15px;margin-right:10px;">USA</a></li>
+                            <li role="presentation"><a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);"><img src="/images/flag_croatia.ico" style="max-width:35px;max-height:15px;margin-right:10px;">CROATIA</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="/merchant/logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
-                           
+                            <li role="presentation"><a href='/merchant/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+
                         </ul>
-                    <li>
-                    @if(session("merchant_login") == true)
-                    <a style="font-size:15px",  href='/merchant/logout'>
-                    <span><i class="fa fa-sign-out m-r-xs"></i>Log out
-                    </span>
-                    </a>
-                    @else
-                    <a style="font-size:15px",  href="">
-                    <span>
-                    <i class="fa fa-sign-out m-r-xs"></i>
-                    Hi Guest
-                    </span>
-                    </a>             
-                    @endif 
                     </li>
+                    <div id="google_translate_element" style="display:none;">
+                        <style>
+                            .goog-te-gadget-icon
+                            {
+                                visibility:hidden;
+                                text-align:center;
+                                position:absolute;
+                            }
+                            
+                            .goog-te-banner-frame.skiptranslate 
+                            {
+                                display: none !important;
+                            } 
+                            body 
+                            { 
+                                top: 0px !important; 
+                            }
+                            
+                            </style>
+                    </div>
                     
                 </ul><!-- Nav -->
             </div><!-- Top Menu -->

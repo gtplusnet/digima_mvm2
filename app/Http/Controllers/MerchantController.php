@@ -304,7 +304,7 @@ class MerchantController extends Controller
                                 ->first();
 
 
-		  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(5);
+		  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(10);
       $data['other_info']       = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
       $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
       $images                   = TblBusinessImages::where('business_id',session('business_id'))->count();
@@ -448,8 +448,9 @@ class MerchantController extends Controller
 
     public function delete_messages($id)
     {
+ 
       TblGuestMessages::where('guest_messages_id',$id)->delete();
-      Session::flash('danger', "Message Information Deleted");
+      Session::flash('danger', "Message  Deleted!");
       return Redirect::back();
     }
 
@@ -670,20 +671,21 @@ class MerchantController extends Controller
     {
       Self::allow_logged_in_users_only();
       $data['page'] = 'Messages';
-      $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->get();
+      $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->paginate(8);
       return view ('merchant.pages.messages', $data);  
     }
 
   	public function bills(Request $request)
 	  {
 		  Self::allow_logged_in_users_only();
+
+      $data['contact_us']     = TblContactUs::first();
 		  $data['page']	= 'Bills';
       $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
                       ->orderBy('tbl_payment.payment_id','DESC')
                       ->get();
-     // $data['method'] = TblPaymentModel::where('business_id',session('business_id'))->get();
 		  return view ('merchant.pages.bills', $data);		
 	  }
 

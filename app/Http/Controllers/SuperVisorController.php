@@ -11,6 +11,7 @@ use App\Models\TblAgentModel;
 use App\Models\TblSupervisorModels;
 use App\Models\TblBusinessModel;
 use App\Models\Tbl_conversation;
+use App\Models\TblContactUs;
 use Session;
 use Redirect;
 use Validator;
@@ -36,6 +37,7 @@ class SuperVisorController extends Controller
     {
         Self::allow_logged_out_users_only();
         $data['page'] = 'Supervisor Login';
+        $data['contact_us']           = TblContactUs::first();
         return view ('supervisor.pages.supervisor_login', $data);
     }
     public function supervisor_logout()
