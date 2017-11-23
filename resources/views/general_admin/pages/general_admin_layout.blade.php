@@ -67,7 +67,7 @@
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
 
-        @include('general_admin.include.menu');
+        @include('general_admin.include.menu')
 
         <div class="cd-overlay"></div>
        

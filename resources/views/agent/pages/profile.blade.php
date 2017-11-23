@@ -26,12 +26,13 @@
 
                     <h3 class="text-center">{{session('full_name_agent')}}</h3>
                     <p class="text-center">{{$agent_info->email}}</p>
-                     <p class="text-center">{{$agent_info->position}}</p>
+                     <p class="text-center">{{$team->team_name}}</p>
+                    <!--  <p class="text-center">{{$agent_info->position}}</p> -->
 
                     <hr>
                     <ul class="list-unstyled text-center">
-                        <li><h3 class="text-center">{{session('full_name')}}</h3></li>
                         <li><p><i class="fa fa-map-marker m-r-xs"></i>{{$agent_info->address}}</p></li>
+                         <li><p><i class="fa fa fa-phone m-r-xs"></i>{{$agent_info->primary_phone}} / {{$agent_info->secondary_phone}} </p></li>
                         <li><p><i class="fa fa-envelope m-r-xs"></i><a href="#">{{$agent_info->email}}</a></p></li>
                     </ul>
                     <hr>

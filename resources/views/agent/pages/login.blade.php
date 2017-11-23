@@ -40,7 +40,7 @@
 							</div>
 							<div class="col-md-12 login-lastpart">
 								<button class="login-btn">AGENT LOGIN</button>
-								<a href="/forgot_user_password"><p class="forgot-password-label">Forgot Password?</p></a>
+								<a href="/forgot_password_user"><p class="forgot-password-label">Forgot Password?</p></a>
 							</div>
 						</form>
 					</div>

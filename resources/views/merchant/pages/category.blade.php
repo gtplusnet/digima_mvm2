@@ -83,8 +83,8 @@
                      </tbody>
                   </table>
                   {!! $_category->render() !!}
-                  <div class="web-content">
-                     <button type="submit" class="form-button center" name="business_id" >Tag</button>
+                  <div class="web-content" >
+                     <button type="submit" class="form-button center" name="business_id"  >Tag</button>
                   </div>
                </div>
             </div>
@@ -191,6 +191,7 @@
       </div>
    </div>
 </div>
+<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="/assets/js/global.ajax.js"></script>
 <script type="text/javascript" src="/assets/js/merchant/category.js"></script>
 @endsection

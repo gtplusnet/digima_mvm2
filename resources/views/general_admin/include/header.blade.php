@@ -142,11 +142,11 @@
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
-                            <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
-                            <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
+                            <li role="presentation"><a href=""><i class="fa fa-user"></i>Profile</a></li>
+                            <li role="presentation"><a href=""><i class="fa fa-calendar"></i>Calendar</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href=""><i class="fa fa-lock"></i>Lock screen</a></li>
+                            <li role="presentation"><a href=""><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
                         </ul>
                     </li>
                     <li>

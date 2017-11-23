@@ -43,10 +43,10 @@ $(document).ready(function(){
 		$.ajax({
 			type:'POST',
 			url:'/merchant/add_payment_method',
-			data:{
-				paymentMethodName: paymentMethodName,
-				
-				},
+			data:
+			{
+				paymentMethodName: paymentMethodName,	
+			},
 			dataType:'text',
 		}).done(function(data){
 			$('#adding_payment_method_success').html(data);
@@ -195,6 +195,7 @@ $(document).ready(function(){
 		
 	});
 });
+
 
 
 

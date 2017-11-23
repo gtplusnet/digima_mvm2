@@ -294,32 +294,34 @@
                         <p class="sendemail-title">MESSAGE US</p>
                     </div>
 
-                    <form role="form" action="/guest/add_messages" method="post">
-
-                        {{csrf_field()}}
-                    <div class="modal-body">
+                    {{-- <form role="form" action="/guest/add_messages" method="post">
+                    {!!csrf_field()!!} --}}
+                    <div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
+                        <img src="/assets/img/loading.gif"/>
+                    </div>
+                    <div class="modal-body" id="hiddenMo">
                         <div class="sendemail-textfield-holder">
                             <label for="input-email" class="sendemail-labels">Email:</label>
-                            <input type="text" name="email" class="sendemail-textfield" required/>
-                            <input type="hidden" name="business_id" value="{{$business_id}}" />
+                            <input type="text" name="email" id="email" class="sendemail-textfield" required/>
+                            <input type="hidden" name="business_id" id="business_id" value="{{$business_id}}" />
                         </div>
 
                         <div class="sendemail-textfield-holder">
                             <label for="input-subject" class="sendemail-labels">Subject:</label>
-                            <input type="text" name="subject" class="sendemail-textfield">
+                            <input type="text" name="subject"  id="subject" class="sendemail-textfield">
                         </div>
 
                         <div class="sendemail-textfield-holder">
                             <label for="input-help" class="sendemail-labels">How Can We Help:</label>
-                            <textarea rows="11" name="messages" id="we_can_help" class="sendemail-textfield message-textarea"></textarea>
+                            <textarea rows="11" name="messages" id="messages" class="sendemail-textfield message-textarea"></textarea>
                         </div>
 
                         <div class="sendemail-btn-holder">
-                            <button type="submit" class="message_send-send-btn" data-toggle="modal" name="message_send" id="message_send"  data-target="#myModal" ><p style="color:#DFDFDF;">SEND MESSAGE</p></button>
+                            <button type="button" class="message_send-send-btn" name="message_send" id="messageSend"><p style="color:#DFDFDF;">SEND MESSAGE</p></button>
                         </div>
 
                     </div>
-                    </form>
+                    {{-- </form> --}}
                 </div>  
             </div>
         </div>
@@ -345,6 +347,6 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_categories.js"></script>
+<script src="/assets/js/front/business.js"></script>
 
 @endsection
