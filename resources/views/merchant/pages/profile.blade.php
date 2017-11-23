@@ -116,20 +116,20 @@ th
                         </div>
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Business Website</label>
-                           <div class="col-sm-10">
+                           <div class="col-sm-4">
                               <input type="text" class="form-control" id="business_website" name="business_website" value="{{$other_info->business_website}}">
                            </div>
                         </div>
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Year Establish</label>
-                           <div class="col-sm-2">
+                           <div class="col-sm-4">
                               <input type="text" class="form-control" id="year_established"  name="year_established" value="{{$other_info->year_established}}">
                            </div>
                         </div>
 
                         <div class="col-md-15">
                            <div class="text-right">
-                              <button type="button" class="btn btn-primary" id="update" style="padding: 5px 18px;">Update</button>
+                              <button type="button" class="btn btn-primary" id="update" style="padding: 5px 18px;"><i class="fa fa-pencil m-r-xs"></i>Update</button>
                            </div>
                         </div>
                      </form>
@@ -168,9 +168,9 @@ th
                            </div>
                         </div>
                         @endforeach
-                        <div class="col-md-12">
+                        <div class="col-md-11">
                            <div class="text-right">
-                              <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="" class="update_hours btn btn-primary"  id="">Update</button>
+                              <button type="submit" data-dismiss="modal" style="padding: 5px 18px;" name="" class="update_hours btn btn-primary"  id=""><i class="fa fa-clock-o m-r-xs"></i>Update</button>
                            </div>
                         </div>
                      </form>
@@ -188,17 +188,17 @@ th
                                  <img src="{{$_images->business_banner}}" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                               <div class="col-md-6 ">
-                                 <label for="input-Default" class="control-label">First Sub Image</label>
+                                 <label for="input-Default" class="control-label">First Image</label>
                                  <img src="{{$_images->other_image_one}}" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                            </div>
                            <div class="col-md-12 file-margin" >
                               <div class="col-md-6">
-                                 <label for="input-Default" class="control-label">Second Sub Image</label>
+                                 <label for="input-Default" class="control-label">Second Image</label>
                                  <img src="{{$_images->other_image_two}}" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                               <div class="col-md-6 ">
-                                 <label for="input-Default" class="control-label">Third Sub Image</label>
+                                 <label for="input-Default" class="control-label">Third Image</label>
                                  <img src="{{$_images->other_image_three}}" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                            </div>
@@ -218,7 +218,7 @@ th
                               </div>
                               <div class="col-md-12 file-margin">
                                  <div class="col-md-4">
-                                    <label for="input-Default" class="control-label">First Sub Image</label>
+                                    <label for="input-Default" class="control-label">First Image</label>
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_one" name="other_image_one">
@@ -227,7 +227,7 @@ th
                               </div>
                               <div class="col-md-12 file-margin">
                                  <div class="col-md-4">
-                                    <label for="input-Default" class="control-label">Second Sub Image</label>
+                                    <label for="input-Default" class="control-label">Second Image</label>
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_two" name="other_image_two">
@@ -236,7 +236,7 @@ th
                               </div>
                               <div class="col-md-12 file-margin">
                                  <div class="col-md-4">
-                                    <label for="input-Default" class="control-label">Third Sub Image</label>
+                                    <label for="input-Default" class="control-label">Third Image</label>
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_three" name="other_image_three">
@@ -244,9 +244,9 @@ th
                                  </div>
                                  <br><br><br>
                               </div>
-                              <div  class="col-md-12">
+                              <div  class="col-md-10">
                                  <div class="text-right">
-                                    <button type="submit" style="padding: 5px 18px;" class="btn btn-primary"  id="">Update</button>
+                                    <button type="submit" style="padding: 5px 18px;" class="btn btn-primary"  id=""><i class="fa fa-image m-r-xs"></i>Update</button>
                                  </div>
                               </div>
                            </form>
@@ -259,17 +259,17 @@ th
                                  <img src="" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                               <div class="col-md-6 ">
-                                 <label for="input-Default" class="control-label">First Sub Image</label>
+                                 <label for="input-Default" class="control-label">First Image</label>
                                  <img src="" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                            </div>
                            <div class="col-md-12 file-margin" >
                               <div class="col-md-6">
-                                 <label for="input-Default" class="control-label">Second Sub Image</label>
+                                 <label for="input-Default" class="control-label">Second Image</label>
                                  <img src="" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                               <div class="col-md-6 ">
-                                 <label for="input-Default" class="control-label">Third Sub Image</label>
+                                 <label for="input-Default" class="control-label">Third Image</label>
                                  <img src="" alt="" class="thumbnail" width="100%" height="auto">
                               </div>
                            </div>
@@ -289,7 +289,7 @@ th
                               </div>
                               <div class="col-md-12 file-margin">
                                  <div class="col-md-4">
-                                    <label for="input-Default" class="control-label">First Sub Image</label>
+                                    <label for="input-Default" class="control-label">First Image</label>
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_one" name="other_image_one">
@@ -298,7 +298,7 @@ th
                               </div>
                               <div class="col-md-12 file-margin">
                                  <div class="col-md-4">
-                                    <label for="input-Default" class="control-label">Second Sub Image</label>
+                                    <label for="input-Default" class="control-label">Second Image</label>
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_two" name="other_image_two">
@@ -307,7 +307,7 @@ th
                               </div>
                               <div class="col-md-12 file-margin">
                                  <div class="col-md-4">
-                                    <label for="input-Default" class="control-label">Third Sub Image</label>
+                                    <label for="input-Default" class="control-label">Third Image</label>
                                  </div>
                                  <div class="col-md-6">
                                     <input type="file" id="other_image_three" name="other_image_three">
@@ -317,7 +317,7 @@ th
                               </div>
                               <div  class="col-md-12">
                                  <div class="text-right">
-                                    <button type="submit" style="padding: 5px 18px;" class="btn btn-primary"  id="">Update</button>
+                                    <button type="submit" style="padding: 5px 18px;" class="btn btn-primary">Update</button>
                                  </div>
                               </div>
                            </form>
@@ -330,13 +330,25 @@ th
                   <div role="tabpanel" class="tab-pane fade" id="PM">
                      <form class="form-horizontal" method="post" action="/merchant/add_payment_method">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                         <div id="adding_payment_method_success" style="margin-top:50px;">
                         </div>
+
+                        <div class="pull-right" style="margin:5px 5px 5px 0px">
+                           <form class="form-inline">
+                               <div class="form-inline">
+                                 <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" >
+                                 <button type="button"  name="savePayment" id="savePayment" class="save_payment btn btn-primary";><i class=" fa fa-file-text-o m-r-xs"></i>Add Payment</button>
+                              </div><br>
+                              </form>
+                        </div>
+
+               
                         <table class="table table-bordered" style="width: 100%; text-align: center;font-size:13px;" cellpadding="1" cellspacing="1"  border="2">
                            <thead>
                               <tr>
-                                 <th >Payment Method Name</th>
-                                 <th >Action</th>
+                                 <th style="text-align: center;font-size: 13px">Payment Method Name</th>
+                                 <th style="text-align: center;font-size: 13px">Action</th>
                               </tr>
                            </thead>
                            @foreach($_payment_method as $data)
@@ -351,18 +363,6 @@ th
                            </tr>
                            @endforeach
                         </table>
-                       
-                        <div class="col-md-4">
-                           <label class="control-label" style="text-align: left;margin-bottom:10px;">&nbsp;&nbsp;Payment Method</label>
-                           <div  class="col-md-12">
-                              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName">
-                           </div>
-                           <div class="col-md-12">
-                              <button type="button" style="padding: 5px;margin-top:10px;" name="savePayment" id="savePayment" class="save_payment btn btn-primary" ;>Add Payment
-                              </button>
-                              
-                           </div>
-                        </div>
                          {!! $_payment_method->render()!!}
                      </form>
                   </div>
@@ -376,7 +376,7 @@ th
                        
                         <div class="form-group"> 
                              <div class="col-sm-3">
-                           <strong style="font-size: 18px;">Change Password</strong>
+                           <strong style="font-size: 17px;">Change Password</strong>
                            </div>
                         </div>  
                 
@@ -403,7 +403,7 @@ th
 
                        <div class="col-md-5">
                            <div class="text-right" >
-                              <button type="button" class="btn btn-primary" id="updatePassword" style="padding: 5px 18px;">Submit</button>
+                              <button type="button" class="btn btn-primary" id="updatePassword" style="padding: 5px 18px;"><i class="fa fa-lock m-r-xs"></i>Submit</button>
                            </div>
                         </div>
                      </form>
@@ -415,6 +415,7 @@ th
       </div>
    </div>
 </div>
+<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/merchant/merchant_profile.js"></script>
 

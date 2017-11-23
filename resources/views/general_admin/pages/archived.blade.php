@@ -134,15 +134,38 @@
 
 		<div id="membership" class=" col-md-12 tab-pane fade in">
 			<div class="row col-md-15" style="background-color: #fff !important;">
-				membership
+				<table class="table table-bordered" style="background-color: #FFFFFF;">
+				<thead>
+					<tr>
+						<th>ID</th>	
+						<th>Membership Name</th>
+						<th>Membership Price</th>
+						<th>Membership Information</th>
+						<th>Archived</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($_membership as $data)
+					<tr>
+						<td>{{ $data->membership_id}}</td>
+						<td>{{ $data->membership_name}}</td>
+						<td>{{ $data->membership_price }}</td>
+						<td>{{ $data->membership_info }}</td>
+						<td>{{ $data->archived }}</td>
+						</td>
+					</tr>
+					@endforeach
+				</tbody>
+				</table>
 			</div>
 		</div>
 
 	</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script src="/assets/js/global.ajax.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_archived.js"></script>
 
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

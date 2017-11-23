@@ -1606,8 +1606,8 @@ class GeneralAdminController extends Controller
       $data['_agent']          = TblAgentModel::get();
       $data['_supervisor']     = TblSupervisorModels::get();
       $data['_team']           = TblTeamModel::get();
+      $data['_membership']     = TblMembeshipModel::get();
     
-
       return view('general_admin.pages.archived',$data);
     }
 

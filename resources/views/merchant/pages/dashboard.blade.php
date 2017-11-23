@@ -154,6 +154,7 @@
    <!-- Row -->
    <!-- Row -->
 </div>
+<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="/assets/agent/assets1/js/chartist.min.js"></script>
 <script type="text/javascript">

@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-md-12">
 
-                                    <strong> <i class="fa fa fa-phone text-info"></i> {{$bills->business_phone}} / {{$bills->business_alt_phone}} </strong>
+                                    <strong> <i class="fa fa fa-phone text-info"></i> {{$bill->business_phone}} / {{$bill->business_alt_phone}} </strong>
 
                                 </div>
                                 <div class="col-md-12">
@@ -105,7 +105,7 @@
                                         <td>Item One</td>
                                         <td>Lorem ipsum dolor sit amet</td>
                                         <td>23</td>
-                                        <td>$3157</td>
+                                        <td>${{$bill->payment_amount}}</td>
                                     </tr>
                                   
                                 </tbody>
