@@ -376,7 +376,7 @@ th
                        
                         <div class="form-group"> 
                              <div class="col-sm-3">
-                           <strong style="font-size: 17px;">Change Password</strong>
+                           <strong style="font-size: 16px;">Change Password</strong>
                            </div>
                         </div>  
                 

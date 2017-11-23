@@ -35,7 +35,10 @@
    {
    padding:10px 10px 10px 10px;
    width:200px;
-   background-color: #10e0bd;
+   background-color: #5b94c1;
+
+   border-radius: 5px;
+   font-size:15px;
    }
    .center {
    margin: auto;
