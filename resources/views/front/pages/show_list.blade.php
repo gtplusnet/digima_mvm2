@@ -142,13 +142,18 @@
 	<div class="col-md-9" >
 		<div class="col-md-12">
 			<div class="business-list-holder">
-				<p class="business-list-title">LOCAL FAVOURITES</p>
+				<p class="business-list-title">FILTERING FAVOURITES</p>
+			</div>
+			<div class="col-md-12">
+				<div class="business-list-holder">
+					<p class="business-list-title">{{count($_business_list)}} Results</p>
+				</div>
 			</div>
 			<div class="business-list-content">
 				@foreach($_business_list as $business_list)
 				<div class="col-md-4 per-business">
 					<div class="business-img-holder">
-						<img src="{{$business_list->business_banner}}">
+						<img class="home-image" src="{{$business_list->business_banner}}">
 					</div>
 					<div class="business-info-holder">
 						<div class="business-list-details">

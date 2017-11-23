@@ -63,7 +63,6 @@ Route::get('/register', 				'FrontController@register');
 Route::get('/redirect', 				'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 			'FrontController@business');
 Route::any('/guest/add_messages', 		'FrontController@add_messages');
-Route::get('/business/details', 		'FrontController@business_details');
 Route::any('/home/get_sub_category', 	'FrontController@get_sub_category');
 
 
@@ -123,6 +122,11 @@ Route::post('/supervisor/add_team', 		'SuperVisorController@supervisor_add_team'
 Route::post('/supervisor/add_agent', 		'SuperVisorController@supervisor_add_agent');
 Route::post('/supervisor/get_agent_info', 	'SuperVisorController@get_agent_info');//wala
 Route::post('/supervisor/assign_agent', 	'SuperVisorController@supervisor_assign_agent');
+
+
+
+
+
 Route::any('/supervisor/delete_team',  		'SuperVisorController@supervisor_delete_team');
 Route::post('/supervisor/delete_agent', 	'SuperVisorController@supervisor_delete_agent');
 Route::any('/supervisor/edit_team', 		'SuperVisorController@edit_team');
@@ -240,11 +244,22 @@ Route::get('/general_admin/decline_user/{id}', 						'GeneralAdminController@gen
 
 Route::post('/general_admin/manage_user/add_agent', 				'GeneralAdminController@general_admin_add_agent');
 Route::post('/general_admin/manage_user/add_team', 					'GeneralAdminController@general_admin_add_team');
+
+
+Route::post('/general_admin/manage_user/view_all_members', 					'GeneralAdminController@general_admin_view_all_members');
+
+
+
+
 Route::post('/general_admin/manage_user/add_supervisor', 			'GeneralAdminController@general_admin_add_supervisor');
 Route::post('/general_admin/manage_user/add_admin', 				'GeneralAdminController@general_admin_add_generaladmin');
 Route::any('/general_admin/manage_user/delete_agent', 				'GeneralAdminController@general_admin_delete_agent');
 Route::any('/general_admin/manage_user/delete_team', 				'GeneralAdminController@general_admin_delete_team');
 Route::any('/general_admin/manage_user/assign_agent', 				'GeneralAdminController@general_admin_assign_agent');
+
+
+Route::post('/general_admin/manage_user/assign_supervisor', 	'GeneralAdminController@general_admin_assign_supervisor');
+
 Route::post('/general_admin/manage_user/update_agent_login', 		'GeneralAdminController@general_admin_update_agent_login');
 Route::post('/general_admin/manage_user/update_team_info', 			'GeneralAdminController@general_admin_update_team_info');
 Route::post('/general_admin/manage_user/update_supervisor_login', 	'GeneralAdminController@general_admin_update_supervisor_login');

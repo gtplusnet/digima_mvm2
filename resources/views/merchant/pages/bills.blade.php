@@ -29,13 +29,14 @@
                                 </tr>
                             </thead>                       
                             <tbody>
+                                @foreach($bills as $bill)
                                 <tr>
-                                    <td>{{$bills->membership_name}}</td>
+                                    <td>{{$bill->membership_name}}</td>
                                     <td><p  class="dropdown-toggle waves-effect waves-button waves-classic">
-                                        {{$method->payment_reference_number}}</a></td>
-                                    <td>{{$method->payment_status}}</td>
+                                        {{$bill->payment_reference_number}}</a></td>
+                                    <td>{{$bill->payment_status}}</td>
                                 </tr>
-                               
+                               @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -77,7 +78,9 @@
                                     <strong> <i class="fa fa fa-user text-info"></i> {{session('full_name')}}</strong>
                                 </div>
                                 <div class="col-md-12">
+
                                     <strong> <i class="fa fa fa-phone text-info"></i> {{$bills->business_phone}} / {{$bills->business_alt_phone}} </strong>
+
                                 </div>
                                 <div class="col-md-12">
                                     <strong> <i class="fa fa fa-envelope-o text-info"></i>  {{session('email')}}   </strong>

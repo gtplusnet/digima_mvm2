@@ -72,9 +72,7 @@
                      <div class="form-group" >
                         <label for="" class="col-sm-2 control-label">Complete Address</label>
                         <div class="col-sm-10">
-                           <textarea class="form-control" rows="5" name="complete_address" id="complete_address" >
-                              @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif
-                              </textarea>
+                           <textarea class="form-control" rows="5" name="complete_address" id="complete_address" >@if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif</textarea>
                         </div>
                      </div>
                      <div class="pull-right" style="">

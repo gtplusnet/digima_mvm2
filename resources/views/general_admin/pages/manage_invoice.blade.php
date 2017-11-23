@@ -15,7 +15,7 @@
 </div>
 <div class="tab-content col-md-12">
 	<div class="text-center pull-right" style="margin:20px 20px 20px 20px;">
-		<form class="form-inline" method="post" action="/general_admin/search_manage_invoice">
+		<form class="form-inline" method="post" >
 			{{csrf_field()}}
 			<div class="form-group">
 				<input type="text" class="form-control" name="search_manage_invoice" id="search_manage_invoice" >

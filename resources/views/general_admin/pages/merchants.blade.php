@@ -7,11 +7,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_merchant.js"></script>
 <script src="/assets/js/global.ajax.js"></script>
-
 <style>
 .date {
-    position: relative;
-    left:500px;
+position: relative;
+left:500px;
 }
 .distance
 {
@@ -30,13 +29,11 @@ color:#fff;
 /*border-radius: 10px;*/
 }
 </style>
-
 <script>
-    $(document).ready(function() {
-    $( ".datepicker" ).datepicker();
-    $( ".datepicker1" ).datepicker();
-
-    });
+$(document).ready(function() {
+$( ".datepicker" ).datepicker();
+$( ".datepicker1" ).datepicker();
+});
 </script>
 <div class="page-title" style="margin-bottom:20px;">
     <h3>Merchant</h3>
@@ -58,9 +55,7 @@ color:#fff;
         </ul>
         
         <div class="tab-content" style="">
-
             <div id="customer" class=" col-md-12 tab-pane fade in  active">
-
                 @if (session('success'))
                 <div class="alert alert-success">
                     Thank you!. Invoice Save and Send Successfully!
@@ -93,9 +88,9 @@ color:#fff;
                                     </div>
                                     <button type="button" class="btn btn-success" name="search_btn_invoice" id="search_btn_invoice">Search</button>
                                 </div>
-                                 
+                                
                             </form>
-                        </div>  
+                        </div>
                         <div class="table-responsive col-md-12"  id="showHere">
                             <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
                                 <thead>
@@ -159,9 +154,9 @@ color:#fff;
                                     </div>
                                     <button type="button" class="btn btn-success" name="search_agent_btn" id="search_agent_btn">Search</button>
                                 </div>
-                                 
+                                
                             </form>
-                        </div> 
+                        </div>
                         <div class="table-responsive col-md-12"  id="showHere1">
                             <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
                                 <thead>
@@ -185,7 +180,7 @@ color:#fff;
                                         <td>
                                             <a target="_blank" href="/general_admin/send_invoice/{{$agentAdd->business_id}}">
                                                 <button class="transaction btn btn-default ">
-                                                    <i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice
+                                                <i class="fa fa-pencil-o" aria-hidden="true"></i>Send Invoice
                                                 </button>
                                             </a>
                                         </td>
@@ -217,9 +212,9 @@ color:#fff;
                                     </div>
                                     <button type="button" class="btn btn-success" name="search_pending_btn" id="search_pending_btn">Search</button>
                                 </div>
-                                 
+                                
                             </form>
-                        </div> 
+                        </div>
                         <div class="table-responsive col-md-12"  id="showHere2">
                             <div id="resendSuccess">
                             </div>
@@ -258,19 +253,20 @@ color:#fff;
                     </div>
                 </div>
                 {{-- modal --}}
-            <div style="margin-top: 150px;" class="modal fade" id="successModals" role="dialog">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-body" style="margin-bottom: 120px;" >
-                            <div class="col-sm-12" id="success_alert">
+                <div style="margin-top: 150px;" class="modal fade" id="successModals" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-body" style="margin-bottom: 120px;" >
+                                <div class="col-sm-12" id="success_alert">
+                                    
+                                </div>
                                 
                             </div>
-                            
                         </div>
                     </div>
                 </div>
-            </div>
-            {{-- modal --}}
+                
+                {{-- modal --}}
             </div>
             <div id="registered" class="tab-pane fade">
                 <div class="row">
@@ -292,11 +288,11 @@ color:#fff;
                                     </div>
                                     <button type="button" class="btn btn-success" name="search_registered_btn" id="search_registered_btn">Search</button>
                                 </div>
-                                 
+                                
                             </form>
                         </div>
                         <div class="table-responsive col-md-12"  id="showHere3">
-                           <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
+                            <table id="example" class="display table table-bordered" style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -318,13 +314,47 @@ color:#fff;
                                         <td>{{$registeredclients->transaction_status}} by: {{$registeredclients->first_name}} {{$registeredclients->last_name}}</td>
                                         <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
                                         <td>
-                                            <select id="" onchange="location = this.value;" class="form-control" style="width:90px;">
+                                            <select id="registerAction"  class="form-control registerAction" style="width:90px;">
                                                 <option >Action</option>
-                                                <option value="/general_admin/send_new_invoice/{{$registeredclients->business_id}}/5">New Invoice</option>
-                                                <option value="/general_admin/decline_user/{{$registeredclients->business_id}}">Deactivate</option>
+                                                <option value="newinvoice">New Invoice</option>
+                                                <option value="deactivate">Deactivate</option>
                                             </select>
                                         </td>
                                     </tr>
+                                    <div style="margin-top: 150px;" class="modal fade" id="confirmModal" role="dialog">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+                                                    <div class="col-sm-12">
+                                                        <h4 class="modal-title">Are You sure You want to deactivate this merchant?</h4>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <center>
+                                                        <input type="hidden" id="delete_team_id" value=""/>
+                                                        <a href="/general_admin/decline_user/{{$registeredclients->business_id}}"><button type="button" class=" btn btn-danger">Yes</button></a>
+                                                        <button type="button" class="btn btn-default"  data-dismiss="modal">No</button></center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 150px;" class="modal fade" id="confirmModalInvoice" role="dialog">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+                                                    <div class="col-sm-12">
+                                                        <h4 class="modal-title">Are You sure?</h4>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <center>
+                                                        <input type="hidden" id="delete_team_id" value=""/>
+                                                        <a href="/general_admin/send_new_invoice/{{$registeredclients->business_id}}/5"><button type="button" class=" btn btn-danger">Yes</button></a>
+                                                        <button type="button" class="btn btn-default"  data-dismiss="modal">No</button></center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -335,5 +365,4 @@ color:#fff;
         </div>
     </div>
 </div>
-
 @endsection

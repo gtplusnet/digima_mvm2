@@ -72,15 +72,32 @@
                         <div class="btn-register">
                             <a href="/registration">Register</a>
                         </div>
+                        <div class="language-selection">
+                            <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
+                                <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
+                            </a>
+                        </div>
+                        <div class="language-selection">
+                            <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
+                                <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
+                            </a>
+                        </div>
                         <div class="language-selection" >
-                            <div id="google_translate_element"></div>
+                            <div id="google_translate_element" style="display:none;"></div>
                             <style>
                             .goog-te-gadget-icon
                             {
                             visibility:hidden;
-                            /*text-align:center;*/
+                            text-align:center;
                             position:absolute;
                             }
+                            /*.goog-te-banner-frame
+                            /*{*/
+                                /*visibility:hidden !important;
+                                height:0px !important;*/
+                            /*}*/
+                            .goog-te-banner-frame.skiptranslate {display: none !important;} 
+                            body { top: 0px !important; }
                             
                             </style>
                             
@@ -198,12 +215,33 @@
                         <script src="/initializr/js/lightbox.min.js"></script>
                         <!-- HANGGANG DITO -->
                         {{-- LANGUAGE --}}
-                        <script type="text/javascript">
+                        {{-- <script type="text/javascript">
 
                         function googleTranslateElementInit() {
                           new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
                         }
                         </script>
-                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> --}}
+                    {{-- translator --}}
+                    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+                    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+                    <script>
+                        function translateLanguage(lang) {
+
+                            var $frame = $('.goog-te-menu-frame:first');
+                            if (!$frame.size()) {
+                                alert("Error: Could not find Google translate frame.");
+                                return false;
+                            }
+                            $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
+                            return false;
+                        }
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+                        }
+                    </script>
+
+
+
                     </body>
                 </html>
