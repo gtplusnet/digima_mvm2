@@ -398,17 +398,12 @@ class FrontController extends Controller
       $data["subject"]           = $request->subject;
       $data["messages"]          = $request->messages;
       $data["business_id"]       = $request->business_id;
+
       TblGuestMessages::insert($data);;
-      // return "<div class='alert alert-success'><strong>Success!</strong> Message Sent.</div>";
-       return Redirect::back();
+      return "<div class='alert alert-success'><strong>Success!</strong> Message Sent.</div>";
     }
 
-      public function add_messages_send(Request $request)
-    { 
-  
-     
-    }
-
+    
 
     public static function getCoordinates_long($address){
         $address        = str_replace(" ", "+", $address); 

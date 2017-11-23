@@ -68,38 +68,18 @@
                     <div class="pull-right">
                          <!-- BUTTONS -->
                         <div class="btn-login">
-                            <a href="">Log in</a>    
+                            <a href="/">Home</a>    
+                        </div>
+                        <div class="btn-login">
+                            <a href="/about">About</a>    
+                        </div>
+                        <div class="btn-login">
+                            <a href="/contact">Contact</a>    
                         </div>
                         <div class="btn-register">
                             <a href="/forgot_password_user">Forgot Password</a>
                         </div>
-                        <div class="language-selection" >
-
-                            <div id="google_translate_element"></div>
-                            <style>
-                            .goog-logo-link
-                            {
-                                visibility:hidden;
-                                margin-right:-20px;
-                            }
-                            .goog-te-combo
-                            {
-                                background-color: black;
-                                color:#fff;
-                                width:140px;
-                            }
-                            .skiptranslate
-                            {
-                                margin-right: -130px;
-                                
-                            }
-                           </style>
-
-                            {{-- <select class="language-select">
-                                <option val="english">English</option>
-                                <option val="croatian">Croatian</option>
-                            </select> --}}
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -177,12 +157,6 @@
        <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>
         <!-- HANGGANG DITO -->
-         <script type="text/javascript">
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
-        }
-        </script>
-
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+         
     </body>
 </html>
