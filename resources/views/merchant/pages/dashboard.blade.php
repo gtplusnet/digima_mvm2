@@ -7,7 +7,7 @@
    <h3>{{ $page }}</h3>
    <div class="page-breadcrumb">
       <ol class="breadcrumb">
-         <li><a href="index.html">Home</a></li>
+         <li><a href="/merchant/dashboard">Home</a></li>
          <li class="active">{{ $page }}</li>
       </ol>
    </div>
@@ -117,7 +117,7 @@
                            </div>
                            <hr>
                            <div class="stats">
-                              <i class="fa fa-clock-o"></i> 
+                              <i class="fa fa-clock-o"></i>Update a minutes ago. 
                            </div>
                         </div>
                      </div>
@@ -138,7 +138,7 @@
                            </div>
                            <hr>
                            <div class="stats">
-                              <i class="fa fa-clock-o"></i> 
+                              <i class="fa fa-clock-o"></i>Update a minutes ago. 
                            </div>
                         </div>
                      </div>
@@ -154,6 +154,7 @@
    <!-- Row -->
    <!-- Row -->
 </div>
+<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="/assets/agent/assets1/js/chartist.min.js"></script>
 <script type="text/javascript">

@@ -147,6 +147,7 @@
                             <li role="presentation"><a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);"><img src="/images/flag_croatia.ico" style="max-width:35px;max-height:15px;margin-right:10px;">CROATIA</a></li>
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href='/merchant/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+
                         </ul>
                     </li>
                     <div id="google_translate_element" style="display:none;">

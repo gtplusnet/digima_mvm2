@@ -91,22 +91,14 @@ Route::any('/merchant/add_images', 						'MerchantController@add_images');
 Route::any('/merchant/delete_messages/{id}', 			'MerchantController@delete_messages');
 Route::any('/merchant/bills', 				   		    'MerchantController@bills');
 Route::any('/merchant/add_other_info', 					'MerchantController@update_other_info');
-
 Route::any('/merchant/update_merchant_info', 		    'MerchantController@update_merchant_info');
 Route::any('/merchant/saving_merchant_info', 			'MerchantController@saving_merchant_info');
 Route::any('/merchant/get_city', 						'MerchantController@get_city');
 Route::any('/merchant/get_zip_code', 					'MerchantController@get_zip_code');
-
-
-
-
-
-
-Route::any('/merchant/add_payment_method', 				'MerchantController@add_payment_method');
+Route::any('/merchant/add_payment_method', 			'MerchantController@add_payment_method');
 Route::any('/merchant/delete_payment_method', 			'MerchantController@delete_payment_method');
 Route::any('/merchant/edit_payment_method', 			'MerchantController@edit_payment_method');
 Route::any('/merchant/view_info', 						'MerchantController@view_info');
-
 Route::any('/merchant/change_password', 				'MerchantController@merchant_change_password');
 Route::any('/merchant/sample', 							'MerchantController@sample');
 
@@ -219,6 +211,7 @@ Route::any('/general_admin/update_about_us', 						'GeneralAdminController@gener
 Route::any('/general_admin/update_contact_us', 						'GeneralAdminController@general_admin_update_contact_us');
 Route::any('/general_admin/update_thank_you', 						'GeneralAdminController@general_admin_update_thank_you');
 Route::any('/general_admin/update_terms', 							'GeneralAdminController@general_admin_update_terms');
+Route::any('/general_admin/archived', 								'GeneralAdminController@general_admin_archived');
 
 
 
@@ -312,8 +305,8 @@ Route::post('/general_admin/manage_user/merchant_update_hours',     'GeneralAdmi
 
 
 
-Route::post('/general_admin/manage_user/add_merchant_payment_method','GeneralAdminController@add_merchant_payment_method');
-Route::post('/general_admin/manage_user/delete_merchant_payment_method',        'GeneralAdminController@delete_merchant_payment_method');
+Route::post('/general_admin/manage_user/add_merchant_payment_method',	'GeneralAdminController@add_merchant_payment_method');
+Route::post('/general_admin/manage_user/delete_merchant_payment_method','GeneralAdminController@delete_merchant_payment_method');
 
 Route::any('/general_admin/search_payment_monitoring', 			     'GeneralAdminController@search_payment_monitoring');
 Route::any('/general_admin/search_manage_invoice', 			         'GeneralAdminController@search_manage_invoice');

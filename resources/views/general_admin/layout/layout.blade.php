@@ -102,19 +102,19 @@
                             <div class="img-holder">
                                 <img src="/images/map_icon.png">
                             </div>
-                            <p class="footer-content">8871 Spruce Street, Elizabeth City, NC 27909</p>
+                            <p class="footer-content"> @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif</p>
                         </div>
                         <div class="contact-content">
                             <div class="img-holder">
                                 <img src="/images/mobile_icon.png">
                             </div>
-                            <p class="footer-content">0926-536-0045</p>
+                            <p class="footer-content"> @if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif</p>
                         </div>
                         <div class="contact-content">
                             <div class="img-holder">
                                 <img src="/images/mail_icon.png">
                             </div>
-                            <p class="footer-content">contact@yoursite.com</p>
+                            <p class="footer-content">@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif</p>
                         </div>
                     </div>
                     <div class="col-md-3">

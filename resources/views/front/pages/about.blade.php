@@ -26,7 +26,7 @@
 				
 			</div>
 			<div class="about-title-container">
-				<button class="about-btn"><a href=""></a>Add My Business</button>
+				<button class="about-btn "><a href="/registration">Add My Business</button>
 			</div>
 			
 		</div>

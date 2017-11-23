@@ -21,7 +21,7 @@
       </ul>
       <div class="tab-content" style="">
          <div id="aboutus" class=" tab-pane fade in  active">
-            <div class="row col-md-12" style="background-color: #fff !important;">
+            <div class="row col-md-15" style="background-color: #fff !important;">
                <div class="panel-body">
                   <form class="form-horizontal" method="POST" action="/general_admin/update_about_us">
                      {{ csrf_field() }}
@@ -50,7 +50,7 @@
             </div>
          </div>
          <div id="contactus" class=" tab-pane fade">
-            <div class="row col-md-12" style="background-color: #fff !important;">
+            <div class="row col-md-15" style="background-color: #fff !important;">
                <div class="panel-body">
                   <form class="form-horizontal" method="POST" action="/general_admin/update_contact_us">
                      {{ csrf_field() }}
@@ -85,7 +85,7 @@
             </div>
          </div>
          <div id="thankyou" class=" tab-pane fade">
-            <div class="row col-md-12" style="background-color: #fff !important;">
+            <div class="row col-md-15" style="background-color: #fff !important;">
                <div class="panel-body">
                   <form class="form-horizontal" method="POST" action="/general_admin/update_thank_you">
                      {{ csrf_field() }}
@@ -114,7 +114,7 @@
             </div>
          </div>
          <div id="termsofoffers" class=" tab-pane fade">
-            <div class="row col-md-12" style="background-color: #fff !important;">
+            <div class="row col-md-15" style="background-color: #fff !important;">
                
                <div class="panel-body">
                   <form class="form-horizontal" method="POST" action="/general_admin/update_terms">
