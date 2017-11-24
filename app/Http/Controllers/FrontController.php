@@ -89,6 +89,7 @@ class FrontController extends Controller
 
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['membership']         = TblMembeshipModel::get();
+        $data['_membership']        = TblMembeshipModel::get();
         $data['countyList']         = Tbl_county::get();
         $data['contact_us']           = TblContactUs::first();
         $data['terms']                = TblTerms::first();

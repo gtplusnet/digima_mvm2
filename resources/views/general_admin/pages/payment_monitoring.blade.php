@@ -68,20 +68,20 @@
 {{-- modal --}}
 
 <div class="modal fade" id="paymentDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-			<button type="button" class="close" onClick="window.location.reload();"  data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Payment Information</h4>
-	      </div>
-	        <div class="modal-body" id="insertPaymentBlade" style="margin-bottom: 450px;" >
-				
-		    </div>
-	      <div class="modal-footer">
-	        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-	      </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<button type="button" class="close" onClick="window.location.reload();"  data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Payment Information</h4>
+      </div>
+        <div class="modal-body" id="insertPaymentBlade" style="margin-bottom: 450px;" >
+			
 	    </div>
-	  </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 <div style="margin-top: 150px;" class="modal fade" id="acceptUser" role="dialog">
         <div class="modal-dialog modal-sm">
