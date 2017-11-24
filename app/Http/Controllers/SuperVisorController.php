@@ -54,17 +54,25 @@ class SuperVisorController extends Controller
         {
             if (password_verify($request->password, $validate_login->password)) 
                 {
+                  if($validate_login->archived==0)
+                      {
+                        Session::put("supervisor_login",true);
 
-                    Session::put("supervisor_login",true);
+                        Session::put("supervisor_id",$validate_login->supervisor_id);
+                        Session::put("full_name_supervisor",$validate_login->first_name." ".$validate_login->last_name);
 
-                    Session::put("supervisor_id",$validate_login->supervisor_id);
-                    Session::put("full_name_supervisor",$validate_login->first_name." ".$validate_login->last_name);
+                        Session::put("email",$validate_login->email);
+                        Session::put("position",$validate_login->position);
+                        $data['page']   = 'Dashboard';
 
-                    Session::put("email",$validate_login->email);
-                    Session::put("position",$validate_login->position);
-                    $data['page']   = 'Dashboard';
+                        return Redirect::to('/supervisor/dashboard');
+                      }
+                      else
+                      {
+                        return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
+                      }
 
-                    return Redirect::to('/supervisor/dashboard');
+                    
                 }
             else
             {
