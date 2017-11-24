@@ -127,7 +127,7 @@
                                 <h2 class="no-m">$0</h2>
                                 <hr>
                                 <h4 class="no-m m-t-md text-success">Total</h4>
-                                <h1 class="no-m text-success">$0</h1>
+                                <h1 class="no-m text-success">${{$bill->payment_amount}}</h1>
                                 <hr>
                             </div>
                         </div>
