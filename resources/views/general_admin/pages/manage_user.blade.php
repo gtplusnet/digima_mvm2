@@ -714,7 +714,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Team</h4>
+						<h4 class="modal-title">Add Admin</h4>
 					</div>
 					<div class="modal-body" style="margin-bottom: 180px;" >
 						<div class="col-sm-12" id="admin_alert">
@@ -745,7 +745,7 @@
 						</div>
 						<div class="col-sm-12">
 							<center>
-							<button type="submit" class="btn btn-primary" name="add_admin" id="add_admin">Add Team</button>
+							<button type="submit" class="btn btn-primary" name="add_admin" id="add_admin">Add Admin</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 							</center>
 						</div>

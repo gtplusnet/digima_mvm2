@@ -245,7 +245,15 @@ Route::any('/general_admin/resend_invoice', 						'GeneralAdminController@genera
 Route::post('/general_admin/accept_and_activate', 					'GeneralAdminController@general_admin_accept_and_activate');
 Route::post('/general_admin/decline_and_deactivate', 				'GeneralAdminController@general_admin_decline_and_deactivate');
 
+
+Route::post('/general_admin/view_payment_details', 					'GeneralAdminController@general_admin_view_payment_details');
+
+
+
+
+
 Route::get('/general_admin/decline_user/{id}', 						'GeneralAdminController@general_admin_decline_user');
+Route::get('/general_admin/deactivate_user/{id}', 						'GeneralAdminController@general_admin_deactivate_user');
 
 
 
@@ -333,6 +341,10 @@ Route::any('/general_admin/search_agent_user', 			         	 'GeneralAdminContro
 Route::any('/general_admin/search_team_user', 			         	 'GeneralAdminController@search_team_user');
 Route::any('/general_admin/search_supervisor_user', 			     'GeneralAdminController@search_supervisor_user');
 Route::any('/general_admin/search_admin_user', 			     		 'GeneralAdminController@search_admin_user');
+
+
+
+Route::any('/developer/website/maintenance', 			     		 'GeneralAdminController@developer_website_maintenance');
 
 
 
