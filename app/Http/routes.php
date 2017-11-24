@@ -147,6 +147,7 @@ Route::any('/supervisor/checking_password', 		'SuperVisorController@checking_pas
 Route::any('/supervisor/saving_profile', 			'SuperVisorController@saving_profile');
 
 
+Route::any('/supervisor/manage_user/view_all_members', 			'SuperVisorController@view_all_members');
 
 
 
@@ -184,6 +185,7 @@ Route::any('/agent/saving_profile', 				'AgentController@saving_profile');
 
 
 
+
 //Routes for General Admin
 Route::any('/general_admin', 										'GeneralAdminController@index');
 Route::any('/general_admin/general_admin_login_submit', 			'GeneralAdminController@general_admin_login_submit');
@@ -205,7 +207,13 @@ Route::any('/general_admin/update_contact_us', 						'GeneralAdminController@gen
 Route::any('/general_admin/update_thank_you', 						'GeneralAdminController@general_admin_update_thank_you');
 Route::any('/general_admin/update_terms', 							'GeneralAdminController@general_admin_update_terms');
 Route::any('/general_admin/archived', 								'GeneralAdminController@general_admin_archived');
+Route::any('/general_admin/archived/restore_merchant', 				'GeneralAdminController@archived_restore_merchant');
 
+Route::any('/general_admin/archived/restore_agent', 				'GeneralAdminController@archived_restore_agent');
+
+Route::any('/general_admin/archived/restore_supervisor', 				'GeneralAdminController@archived_restore_supervisor');
+
+Route::any('/general_admin/archived/restore_admin', 				'GeneralAdminController@archived_restore_admin');
 
 
 
@@ -243,10 +251,17 @@ Route::post('/general_admin/manage_user/add_supervisor', 			'GeneralAdminControl
 Route::post('/general_admin/manage_user/add_admin', 				'GeneralAdminController@general_admin_add_generaladmin');
 Route::any('/general_admin/manage_user/delete_agent', 				'GeneralAdminController@general_admin_delete_agent');
 Route::any('/general_admin/manage_user/delete_team', 				'GeneralAdminController@general_admin_delete_team');
+
+Route::post('/general_admin/manage_user/delete_supervisor',     	'GeneralAdminController@general_admin_delete_supervisor');
+
+Route::post('/general_admin/manage_user/delete_admin',     			'GeneralAdminController@general_admin_delete_admin');
+
+
+
 Route::any('/general_admin/manage_user/assign_agent', 				'GeneralAdminController@general_admin_assign_agent');
 
 
-Route::post('/general_admin/manage_user/assign_supervisor', 	'GeneralAdminController@general_admin_assign_supervisor');
+Route::post('/general_admin/manage_user/assign_supervisor', 		'GeneralAdminController@general_admin_assign_supervisor');
 
 Route::post('/general_admin/manage_user/update_agent_login', 		'GeneralAdminController@general_admin_update_agent_login');
 Route::post('/general_admin/manage_user/update_team_info', 			'GeneralAdminController@general_admin_update_team_info');
@@ -289,7 +304,6 @@ Route::post('/general_admin/manage_user/update_merchant_business_info','GeneralA
 Route::post('/general_admin/manage_user/merchant_update_images',     'GeneralAdminController@merchant_update_images');
 
 Route::post('/general_admin/manage_user/merchant_update_hours',     'GeneralAdminController@merchant_update_hours');
-
 
 
 

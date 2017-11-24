@@ -28,9 +28,32 @@ function manage_user()
 			delete_payment_method();
 			view_members();
 			search_user();
+			decline_and_deactivate();
 		});
 	}
+	function decline_and_deactivate()
+	{
+		
+		$(document).on("click","#deleteMerchants",function(){
 
+			var business_id 	= $('.deleteMerchant').val();
+			alert(business_id);
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/decline_and_deactivate',
+				data:{
+					business_id:business_id,
+					
+					},
+				dataType:'text',
+			}).done(function(data){
+				$('#showSuccesss').html(data);
+					setTimeout(function(){
+					   location.reload();
+					}, 1000);
+			    });
+		});
+	}
 	function add_payment_method()
 	{
 		$(document).on("click","#savePayment",function(){
@@ -121,6 +144,10 @@ function manage_user()
 					    $('#show_merchant_info').html(data);
 					});
 			}
+			if($(this).val() == 'delete')
+			{
+				$('#confirmModal').modal('show');
+			}
 		
 	    });
 	}
@@ -176,6 +203,9 @@ function manage_user()
 			}).done(function(data)
 				{
 				    $('#team_alert').html(data);
+				    setTimeout(function(){
+					   location.reload();
+					}, 1000);
 				});
 	    });
 	}
@@ -427,9 +457,9 @@ function manage_user()
 		    }
 		    if ($(this).val() == "delete") 
 		    {
-		    	var agent_id = $(this).data("id");
-		        $("#delete_agent_id").val(agent_id);
-		        $('#deleteAgent').modal('show');
+		    	var super_id = $(this).data("id");
+		        $("#delete_supervisor_id").val(super_id);
+		        $('#deleteSupervisor').modal('show');
 	        }
 	    });
 	    //admin
@@ -450,9 +480,10 @@ function manage_user()
 	        }
 			if ($(this).val() == "delete") 
 			{
-		    	var agent_id = $(this).data("id");
-		        $("#delete_agent_id").val(agent_id);
-		        $('#deleteAgent').modal('show');
+
+		    	var admin_id = $(this).data("id");
+		    	$("#delete_admin_id").val(admin_id);
+		        $('#deleteAdmin').modal('show');
 	        }
 	    });
 	    //end action box
@@ -493,6 +524,46 @@ function manage_user()
 					}, 1000);
 		 		});
 	    });
+	    $(document).on('click','#supervisorDeleted',function()
+	    {
+		    var delete_supervisor_id = $('#delete_supervisor_id').val();
+
+		    $.ajax({
+
+		 		type:'POST',
+		 		url:'/general_admin/manage_user/delete_supervisor',
+		 		data:{delete_supervisor_id: delete_supervisor_id},
+		 		dataType:'text',
+
+		 	}).done(function(data)
+		 		{
+		 		    $('#deleteSupervisor').modal('hide');
+		 			$('#supervisor_success').html(data);
+		 			setTimeout(function(){
+					   location.reload();
+					}, 1000);
+		 		});
+	    });
+	    $(document).on('click','#adminDeleted',function()
+	    {
+		    var delete_admin_id = $('#delete_admin_id').val();
+		    $.ajax({
+
+		 		type:'POST',
+		 		url:'/general_admin/manage_user/delete_admin',
+		 		data:{delete_admin_id: delete_admin_id},
+		 		dataType:'text',
+
+		 	}).done(function(data)
+		 		{
+		 		    $('#deleteAdmin').modal('hide');
+		 			$('#admin_success').html(data);
+		 			setTimeout(function(){
+					   location.reload();
+					}, 1000);
+		 		});
+	    });
+	    
 	    //end delete
 
 	}

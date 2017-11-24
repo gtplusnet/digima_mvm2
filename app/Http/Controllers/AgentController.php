@@ -111,15 +111,23 @@ class AgentController extends Controller
 		{
 			if (password_verify($request->password, $validate_login->password)) 
 				{
-					Session::put("agent_login",true);
-    				Session::put("agent_id",$validate_login->agent_id);
-    				Session::put("full_name_agent",$validate_login->first_name." ".$validate_login->last_name);
-    				Session::put("email",$validate_login->email);
-    				Session::put("position",$validate_login->position);
-				    $data['page']	= 'Dashboard';
 
-				    return Redirect::to('/agent/dashboard');
-				}
+					if($validate_login->archived==0)
+			          {
+			            Session::put("agent_login",true);
+	    				Session::put("agent_id",$validate_login->agent_id);
+	    				Session::put("full_name_agent",$validate_login->first_name." ".$validate_login->last_name);
+	    				Session::put("email",$validate_login->email);
+	    				Session::put("position",$validate_login->position);
+					    $data['page']	= 'Dashboard';
+
+					    return Redirect::to('/agent/dashboard');
+			          }
+			          else
+			          {
+			            return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
+			          }
+			    }
 			else
 			{
 				$data['page']	= 'Agent Login';

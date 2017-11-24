@@ -92,7 +92,7 @@ $(document).ready(function()
 			});
 	});
 
-    $('#agentAssigned').click(function(){
+    $(document).on('click','#agentAssigned',function(){
 		var agent_id_assign = $('#agent_id_assign').val();
 		var teamAssigned = $('#teamAssigned').val();
 		
@@ -111,7 +111,7 @@ $(document).ready(function()
 			});
 	});
 
-	$('#save_team').click(function(){
+	$(document).on('click','#save_team',function(){
 		var team_name = $('#team_name').val();
 		var team_des = $('#team_des').val();
 		
@@ -129,7 +129,7 @@ $(document).ready(function()
 			});
 	});
 
-	$('#save_agent').click(function(){
+	$(document).on('click','#save_agent',function(){
 		var team_id = $('#team_id').val();
 		var prefix = $('#prefix').val();
 		var first_name = $('#first_name').val();
@@ -163,6 +163,23 @@ $(document).ready(function()
 					}, 1000);
 			});
 	});
+	$(document).on('click','.viewMem',function()
+	    {
+	    	var team_id = $(this).data('id');
+		    $.ajax({
+				type:'POST',
+				url:'/supervisor/manage_user/view_all_members',
+				data:{
+					team_id: team_id,
+					},
+				dataType:'text',
+
+			}).done(function(data)
+				{
+				    $('#viewMemHere').html(data);
+				    $('#myModalViewMem').modal('show');
+				});
+	    });
 });
 
 $(document).ready(function(){

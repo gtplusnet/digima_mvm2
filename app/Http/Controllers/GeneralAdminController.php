@@ -72,13 +72,21 @@ class GeneralAdminController extends Controller
       {
         if (password_verify($request->password, $validate_login->password)) 
         {
-          Session::put("general_admin_login",true);
-          Session::put("admin_id",$validate_login->admin_id);
-          Session::put("full_name_admin",$validate_login->full_name);
-          Session::put("email",$validate_login->email);
-          Session::put("position",$validate_login->position);
-          $data['page']   = 'Dashboard';
-          return Redirect::to('/general_admin/dashboard');
+          if($validate_login->archived==0)
+          {
+            Session::put("general_admin_login",true);
+            Session::put("admin_id",$validate_login->admin_id);
+            Session::put("full_name_admin",$validate_login->full_name);
+            Session::put("email",$validate_login->email);
+            Session::put("position",$validate_login->position);
+            $data['page']   = 'Dashboard';
+            return Redirect::to('/general_admin/dashboard');
+          }
+          else
+          {
+            return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
+          }
+          
         }
         else
         {
@@ -553,7 +561,7 @@ class GeneralAdminController extends Controller
       $user['status'] = 'deactivated';
       $update['date_transact'] = date("Y/m/d"); 
       $invoice['invoice_status'] = 'DECLINED';
-      TblPaymentModel::where('business_id',$business_id)->update($invoice);
+      TblInvoiceModels::where('business_id',$business_id)->update($invoice);
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
       return "<h4 class='modal-title' >Success! Account already deactivated.</h4>";
@@ -566,7 +574,7 @@ class GeneralAdminController extends Controller
       $update['date_transact'] = date("Y/m/d"); 
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
-      Session::flash('deact', "Merchant Already Activated");
+      Session::flash('deact', "Merchant Already Deactivated");
       return Redirect::back();
     }
     public function get_business_list_info(Request $request)
@@ -1165,9 +1173,9 @@ class GeneralAdminController extends Controller
 
   public function general_admin_assign_supervisor(Request $request)
   {
-    $super_id = $request->super_id;
-    $update['team_id'] = $request->team_id;
-    TblSupervisorModels::where('supervisor_id',$super_id)->update($update);
+    $update['supervisor_id'] = $request->super_id;
+    $team_id = $request->team_id;
+    TblTeamModel::where('team_id',$team_id)->update($update);
     return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Assigned Successfully!</div>";
   }
 
@@ -1193,8 +1201,12 @@ class GeneralAdminController extends Controller
   public function general_admin_view_all_members(Request $request)
   {
     $id = $request->team_id;
-    $data['_data_agent'] = TblAgentModel::where('team_id',$id)->get();
-    $data['_supervisor'] = TblSupervisorModels::where('team_id',$id)->get();
+    $data['_supervisor'] = TblTeamModel::where('tbl_team.team_id',$id)
+                          ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+                          ->get();
+    $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->get();
     return view('general_admin.pages.viewmember',$data);
   }
 
@@ -1352,9 +1364,7 @@ class GeneralAdminController extends Controller
     $data['email'] = $request->email;
     $data['position'] = 'supervisor';
     TblSupervisorModels::insert($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
   }
 
    public function edit_supervisor_submit(Request $request)
@@ -1366,11 +1376,12 @@ class GeneralAdminController extends Controller
     TblSupervisorModels::where('supervisor_id',$request->supervisor_id)->update($data);
       return"Success";
    }
-    public function delete_supervisor_submit($id)
+    public function general_admin_delete_supervisor(Request $request)
     {
-      TblSupervisorModels::where('supervisor_id',$id)->delete();
-      Session::flash('message', "Supervisor Deleted");
-      return Redirect::back();
+      $id = $request->delete_supervisor_id;
+      $archived['archived'] = '1';
+      TblSupervisorModels::where('supervisor_id',$id)->update($archived);
+      return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Deleted Successfully!</div>";
     }
 
     public function general_admin_delete_team(Request $request)
@@ -1384,9 +1395,16 @@ class GeneralAdminController extends Controller
     public function general_admin_delete_agent(Request $request)
     {
         $agent_id = $request->delete_agent_id;
-        $archived['position'] = 'agentDeactivated';
+        $archived['archived'] = '1';
         TblAgentModel::where('agent_id',$agent_id)->update($archived);
         return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
+    }
+    public function general_admin_delete_admin(Request $request)
+    {
+        $admin_id = $request->delete_admin_id;
+        $archived['archived'] = '1';
+        TblAdminModels::where('admin_id',$admin_id)->update($archived);
+        return "<div class='alert alert-success'><strong>Success!</strong>Admin Deleted Successfully!</div>";
     }
 
     public function general_admin_view_merchant_info(Request $request)
@@ -1605,13 +1623,66 @@ class GeneralAdminController extends Controller
 
       Self::allow_logged_in_users_only();
       $data['page'] = 'Archived';
-      $data['_admin']          = TblAdminModels::get();
-      $data['_agent']          = TblAgentModel::get();
-      $data['_supervisor']     = TblSupervisorModels::get();
-      $data['_team']           = TblTeamModel::get();
-      $data['_membership']     = TblMembeshipModel::get();
+      $data['_admin']           = TblAdminModels::where('archived',1)->get();
+      $data['_agent']           = TblAgentModel::where('archived',1)->get();
+      $data['_supervisor']      = TblSupervisorModels::where('archived',1)->get();
+      $data['_team']            = TblTeamModel::get();
+      $data['_membership']      = TblMembeshipModel::get();
+      $data['_merchant']        = TblBusinessModel::where('business_status',18)->orWhere('business_status',19)
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                                ->get();
     
       return view('general_admin.pages.archived',$data);
     }
+    public function archived_restore_merchant(Request $request)
+    {
+      $business_id  = $request->id;
+      $status       = $request->status;
+      if($status==18)
+      {
+        $update['business_status'] = '3';//19 for payment deactivated user and 18 for merchant deact.
+        $user['status'] = 'registered';
+        $update['date_transact'] = date("Y/m/d"); 
+        TblBusinessModel::where('business_id',$business_id)->update($update);
+        TblUserAccountModel::where('business_id',$business_id)->update($user);
+        return "<div class='alert alert-success' >Success! Account already restore, goto merchant in merchant TAB to issue invoice.</div>";
+      }
+      elseif($status==19)
+      {
+        $update['business_status'] = '5';
+        $user['status'] = 'activated';
+        $update['date_transact'] = date("Y/m/d"); 
+        $invoice['invoice_status'] = 'paid';
+        TblInvoiceModels::where('business_id',$business_id)->update($invoice);
+        TblBusinessModel::where('business_id',$business_id)->update($update);
+        TblUserAccountModel::where('business_id',$business_id)->update($user);
+        return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+      }
+    }
+    public function archived_restore_agent(Request $request)
+    {
+      $agent_id  = $request->id;
+      $data['archived'] = 0;
+      TblAgentModel::where('agent_id',$agent_id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_supervisor(Request $request)
+    {
+      $sup_id  = $request->id;
+      $data['archived'] = 0;
+      TblSupervisorModels::where('supervisor_id',$sup_id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_admin(Request $request)
+    {
+      $admin_id  = $request->id;
+      $data['archived'] = 0;
+      TblAdminModels::where('admin_id',$admin_id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
 
 }
+
+
+
