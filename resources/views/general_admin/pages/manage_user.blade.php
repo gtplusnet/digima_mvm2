@@ -17,7 +17,7 @@
 	<div class="page-breadcrumb">
 		<h3>Manage Team/Agent</h3>
 		<ol class="breadcrumb">
-			<li><a href="/admin">Home</a></li>
+			<li><a href="/general_admin/dashboard">Home</a></li>
 			<li class="active">Manage Team/Agent</li>
 		</ol>
 	</div>

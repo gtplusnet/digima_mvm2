@@ -35,7 +35,7 @@
    {
    padding:10px 10px 10px 10px;
    width:200px;
-   background-color: #5b94c1;
+   background-color: #337ab7;
 
    border-radius: 5px;
    font-size:15px;
@@ -197,4 +197,15 @@
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="/assets/js/global.ajax.js"></script>
 <script type="text/javascript" src="/assets/js/merchant/category.js"></script>
+
+
+
+
+
+
+
+
+
+
+
 @endsection

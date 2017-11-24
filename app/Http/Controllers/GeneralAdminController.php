@@ -270,6 +270,7 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_send_invoice($id)
     {
+      $data['contact_us'] = TblContactUs::first();
       $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                         ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                         ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -283,6 +284,7 @@ class GeneralAdminController extends Controller
 
     public function general_admin_send_new_invoice($id,$id2)
     {
+      $data['contact_us'] = TblContactUs::first();
       $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -858,6 +860,7 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_manage_website()
     {
+      Self::allow_logged_in_users_only();
       $data['_membership']          = TblMembeshipModel::paginate(5);
       $data['_payment_method']      = TblPaymentMethod::paginate(5);
       $data['_county']              = TblCountyModel::paginate(5);
@@ -956,7 +959,7 @@ class GeneralAdminController extends Controller
 
     public function general_admin_manage_categories()
     {
-
+      Self::allow_logged_in_users_only();
       $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->paginate(10);
       return view('general_admin.pages.manage_categories',$data);
     }

@@ -13,7 +13,7 @@
 	<h3>Manage Categories</h3>
 	<div class="page-breadcrumb">
 		<ol class="breadcrumb">
-			<li><a href="/admin">Home</a></li>
+			<li><a href="/general_admin/dashboard">Home</a></li>
 			<li class="active">Categories</li>
 		</ol>
 	</div>

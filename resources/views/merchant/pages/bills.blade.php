@@ -94,18 +94,20 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Item</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
+                                        
+                                        <th>Business Name</th>
+                                        <th>Membership</th>
                                         <th>Price</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Item One</td>
-                                        <td>Lorem ipsum dolor sit amet</td>
-                                        <td>23</td>
+                                        
+                                        <td>{{$bill->business_name}}</td>
+                                        <td>{{$bill->membership_name}}</td>
                                         <td>${{$bill->payment_amount}}</td>
+                                        <td>{{$bill->payment_status}}</td>
                                     </tr>
                                   
                                 </tbody>
@@ -119,13 +121,13 @@
                         <div class="col-md-4">
                             <div class="text-right">
                                 <h4 class="no-m m-t-sm">Subtotal</h4>
-                                <h2 class="no-m">$7282</h2>
+                                <h2 class="no-m">$0</h2>
                                 <hr>
                                 <h4 class="no-m m-t-sm">Shipping</h4>
-                                <h2 class="no-m">$240</h2>
+                                <h2 class="no-m">$0</h2>
                                 <hr>
                                 <h4 class="no-m m-t-md text-success">Total</h4>
-                                <h1 class="no-m text-success">$7522</h1>
+                                <h1 class="no-m text-success">$0</h1>
                                 <hr>
                             </div>
                         </div>

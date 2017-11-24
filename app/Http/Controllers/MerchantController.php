@@ -680,8 +680,8 @@ class MerchantController extends Controller
 	  {
 		  Self::allow_logged_in_users_only();
 
-      $data['contact_us']     = TblContactUs::first();
-		  $data['page']	= 'Bills';
+      $data['contact_us'] = TblContactUs::first();
+		  $data['page']   	  = 'Bills';
       $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
