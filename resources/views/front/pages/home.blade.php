@@ -256,6 +256,7 @@ width:100%;
 	});
 </script>
 <script type="text/javascript">
+		$('.match-height').matchHeight();
 		$('.carousel .vertical .item').each(function(){
 		var next = $(this).next();
 		if (!next.length) {
