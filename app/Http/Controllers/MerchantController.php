@@ -288,6 +288,7 @@ class MerchantController extends Controller
                             ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                             ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                             ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                            ->where('tbl_invoice.invoice_status','!=','paid')
                             ->first();
 
     return view('front.pages.payment_merchant', $data);
