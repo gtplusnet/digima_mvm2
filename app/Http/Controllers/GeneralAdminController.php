@@ -278,7 +278,7 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_send_invoice($id)
     {
-      $data['contact_us'] = TblContactUs::first();
+      $data['contact_us']   = TblContactUs::first();
       $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                         ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                         ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -286,22 +286,22 @@ class GeneralAdminController extends Controller
                         ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                         ->first();
       $data['id']=$id;
-      $data['status']     = "";
+      $data['status']       = "";
       return view('general_admin.pages.invoice',$data);
     }
 
     public function general_admin_send_new_invoice($id,$id2)
     {
-      $data['contact_us'] = TblContactUs::first();
+      $data['contact_us']   = TblContactUs::first();
       $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                             ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                             ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                             ->first();
-        $data['id']         =$id;
-        $data['status']     = $id2;
-        return view('general_admin.pages.invoice',$data);
+      $data['id']           =$id;
+      $data['status']       = $id2;
+      return view('general_admin.pages.invoice',$data);
     }
 
     public function general_admin_send_save_invoice(Request $request,$id)
@@ -601,9 +601,9 @@ class GeneralAdminController extends Controller
 
     public function business_data($business_name)
     {
-        $business_list = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', 'tbl_user_account.business_id')->orWhere('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
+      $business_list = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', 'tbl_user_account.business_id')->orWhere('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
        
-        return $business_list;
+      return $business_list;
     }
 
     public function email_invoice()
@@ -611,12 +611,17 @@ class GeneralAdminController extends Controller
       Self::allow_logged_in_users_only();
         return view('general_admin.pages.email_invoice');
     }
-    public function general_admin_manage_user()
+    public function general_admin_manage_user(Request $request)
     {
 
+     
+
       Self::allow_logged_in_users_only();
+    
       $data['_data_agent']          = TblAgentModel::where('position','!=','agentDeactivated')->get();
-      $data['_data_team']           = TblTeamModel::get();
+      // $data['_data_team']           = TblTeamModel::get();
+      $data['_data_team']           = TblTeamModel::join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+                                      ->get();
       $data['_data_supervisor']     = TblSupervisorModels::get();
       $data['_data_admin']          = TblAdminModels::get();
       $data['_merchant']            = TblBusinessModel::where('business_status',5)
@@ -637,9 +642,7 @@ class GeneralAdminController extends Controller
       $data['contact_us']           = TblContactUs::first();
       $data['thank_you']            = TblThankYou::first();
       $data['terms']                = TblTerms::first();
-     
-
-       return view('general_admin.pages.manage_front',$data);
+      return view('general_admin.pages.manage_front',$data);
  
     }
 
@@ -648,7 +651,6 @@ class GeneralAdminController extends Controller
       
       $data['information_header'] = $request->information_header;
       $data['information']        = $request->information;
-
       $check = TblAboutUs::count();
 
       if ($check)
@@ -673,7 +675,6 @@ class GeneralAdminController extends Controller
       $data['phone_number']       = $request->phone_number;
       $data['complete_address']   = $request->complete_address;
       $data['email']              = $request->email;
-
       $check = TblContactUs::count();
       if($check)
       {

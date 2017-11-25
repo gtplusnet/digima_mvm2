@@ -19,7 +19,7 @@
                 <div class="panel-body">
                     <div class="info-box-stats">
                         <p class="counter">{{$resultCountM}}</p>
-                        <span class="info-box-title">Registered Merchants</span>
+                        <span class="info-box-title">Merchants</span>
                     </div>
                     <div class="info-box-icon">
                         <i style="color: #00aced ;"" class="fa fa-user"></i>
@@ -62,7 +62,7 @@
                 <div class="panel-body">
                     <div class="info-box-stats">
                         <p class="counter">{{$resultCountS + $resultCountAd}}</p>
-                        <span class="info-box-title">Registered Supervisor/Admin</span>
+                        <span class="info-box-title">Registered Supervisor / Admin</span>
                     </div>
                     <div class="info-box-icon">
                         <i style="color: #00aced ;"" class="fa fa-user"></i>

@@ -89,7 +89,7 @@
 						<th>ID</th>
 						<th>Category Name</th>
 						<th>Category Information</th>
-						<th></th>
+						<th style="text-align: : center;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -98,7 +98,7 @@
 						<td>{{$categories->business_category_id}}</td>
 						<td>{{$categories->business_category_name}}</td>
 						<td>{{$categories->business_category_information}}</td>
-						<td>
+						<td >
 							<select class="form-select form-control category_action" id="category_action" data-info="{{$categories->business_category_information}}" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">
 								<option >Action</option>
 								<option value="edit">Edit</option>
