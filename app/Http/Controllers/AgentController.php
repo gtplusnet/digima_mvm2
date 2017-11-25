@@ -295,8 +295,15 @@ class AgentController extends Controller
 		$update['agent_id']           = session('agent_id'); 
 		$update['date_transact']      = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+
+		$data['client'] = TblBusinessModel::Where('tbl_business.business_id',$trans_id)
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                          ->first();
 	
-			return '';
+		return view('agent.pages.agent_call',$data);
 	}
 
 	public function get_client_transaction_reload(Request $request)

@@ -13,7 +13,7 @@
 .banner-holder
 {
 	border: 1px solid #333;
-    height: 600px;
+    height: auto;
     width: auto;
     margin-left: 23%;
     margin-right: 23%;
@@ -38,6 +38,8 @@
     font-size: 18px;
     margin-top: 22px;
     margin-bottom: 35px;
+    text-align: justify;
+    padding: 10px;
 }
 .continue-btn
 {
@@ -45,4 +47,5 @@
     background-color: #fed600;
     padding: 15px 29px;
     color: #333;
+    margin-bottom: 20px;
 }
