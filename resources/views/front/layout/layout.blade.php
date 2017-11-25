@@ -155,19 +155,19 @@
             <span>BROWSE</span>
             <div class="space1"></div>
             <ul class="links">
-                <a href="">
+                <a href="/">
                     <li>
                         <span><i class="fa fa-home" aria-hidden="true"></i></span>
                         <span>&nbsp;&nbsp;HOME</span>
                     </li>
                 </a>
-                <a href="">
+                <a href="/about">
                     <li>
                         <span><i class="fa fa-building" aria-hidden="true"></i></span>
                         <span>&nbsp;&nbsp;ABOUT</span>
                     </li>
                 </a>
-                <a href="">
+                <a href="/contact">
                     <li>
                         <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         <span>&nbsp;&nbsp;CONTACT US</span>
@@ -203,9 +203,11 @@
                         </div>    
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div class="header-logo-container">
-                            <img  src="/images/croatia_directory_logo.png">
-                        </div>
+                        <a href="/">
+                            <div class="header-logo-container">
+                                <img  src="/images/croatia_directory_logo.png">
+                            </div>
+                        </a>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="right-container">
@@ -351,6 +353,7 @@
             {
                 document.getElementById("overlay").style.display = "block";
                 $("body").css("overflow", "hidden");
+                $("body").css("position", "fixed");
             }
 
             function off()
@@ -358,6 +361,7 @@
                 document.getElementById("overlay").style.display = "none";
                 $('.pushmenu').removeClass("pushmenu-open");
                 $("body").css("overflow", "auto");
+                $("body").css("position", "static");
             }
         </script>
     </body>
