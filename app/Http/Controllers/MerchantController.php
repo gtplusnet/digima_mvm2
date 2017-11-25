@@ -690,6 +690,10 @@ class MerchantController extends Controller
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
                       ->orderBy('tbl_payment.payment_id','DESC')
                       ->get();
+      $data['bill'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
+                      ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                      ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
+                      ->first();
 		  return view ('merchant.pages.bills', $data);		
 	  }
 
