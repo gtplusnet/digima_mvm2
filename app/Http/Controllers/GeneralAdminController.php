@@ -643,14 +643,10 @@ class GeneralAdminController extends Controller
       // // $data['_data_team']           = TblTeamModel::get();
       // $data['_data_team']           = TblTeamModel::join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
       //                                 ->get();
-
       $data['_data_agent']          = TblAgentModel::where('archived',0)->get();
-      $data['_data_team']           = TblTeamModel::where('archived',0)
-                                      ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
-                                      ->get();
+      $data['_data_team']           = TblTeamModel::where('archived',0)->get();
       $data['_data_supervisor']     = TblSupervisorModels::where('archived',0)->get();
       $data['_data_admin']          = TblAdminModels::where('archived',0)->get();
-
       $data['_merchant']            = TblBusinessModel::where('business_status',5)
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')

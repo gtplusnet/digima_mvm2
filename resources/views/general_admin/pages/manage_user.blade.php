@@ -205,7 +205,7 @@
 									<th>Team Name</th>
 									<th>Team Description</th>
 									<th>Team Members</th>
-									<th>Supervisor</th>
+									<th>Supervisor ID</th>
 									<th>Action</th>
 								</tr>
 							</thead>
