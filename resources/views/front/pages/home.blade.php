@@ -21,25 +21,60 @@ width:100%;
 				<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
 				<p class="second-line">FOR BUSINESS</p>
 			</div>
-			<div class="col-md-1">
-			</div>
-			
-			<div class="col-md-1">
-			</div>
 		</div>
 	</div>
 </div>
 
 <div class="business-list-container" id="show_list_filtered_category">
 	<div class="container">
-		<div class="col-md-3">
-			<div class="col-md-12" >
+		<div class="mob-view">
+			<div class="business-list-holder">
+				<p class="business-list-title">LOCAL FAVOURITES</p>
+			</div>
+			<div class="business-list-content row clearfix">
+				@foreach($_business_list as $business_list)
+				<div class="col-md-4 col-sm-4 col-xs-6 per-business">
+					<div class="business-img-holder">
+						<img class="home-image" src="{{$business_list->business_banner}}">
+					</div>
+					<div class="business-info-holder">
+						<div class="business-list-details">
+							<div class="business-list-name" style="height:50px;">
+								@if(strlen($business_list->business_name) <= 30)
+								<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+								@else
+								<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+								@endif
+							</div>
+							<div class="business-list-phone">
+								<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
+							</div>
+							<div class="business-list-map" style="height:70px;">
+								<p  class="map-text"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="social-media-icon">
+						@if($business_list->facebook_url=="")
+						<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                		@else
+						<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                		@endif
+                		<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                	</div>
+				</div>
+				@endforeach
+				<div class="col-md-12 pagination">
+					{!! $_business_list->render() !!}
+				</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-3">
 				<div class="category-filter-holder" >
-					
 					<div class="category-title-holder" id="show_category">
 						<p class="categorylist-title">Category Filter</p>
 					</div>
-					
 					<div class="categorylist-container">
 						<ul class="list-group" >
 							@foreach($_categories as $categories)
@@ -48,8 +83,6 @@ width:100%;
 						</ul>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-12">
 				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
 						<p class="featuredlist-title">FEATURED LIST</p>
@@ -99,33 +132,6 @@ width:100%;
 						</div>
 					</div>
 				</div>
-				<script>
-					$.ajaxSetup({
-						headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
-				</script>
-				<script type="text/javascript">
-						$('.carousel .vertical .item').each(function(){
-						var next = $(this).next();
-						if (!next.length) {
-						next = $(this).siblings(':first');
-						}
-						next.children(':first-child').clone().appendTo($(this));
-						
-						for (var i=1;i<=1;i++) {
-						next=next.next();
-						if (!next.length) {
-							next = $(this).siblings(':first');
-							}
-						
-						next.children(':first-child').clone().appendTo($(this));
-						}
-						});
-				</script>
-			</div>
-			<div class="col-md-12">
 				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
 						<p class="featuredlist-title">MOST VIEWED</p>
@@ -154,86 +160,84 @@ width:100%;
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>	
 			</div>
-			
-		</div>
-		<div class="col-md-9" >
-			<div class="col-md-12">
-				<div class="business-list-holder">
-					<p class="business-list-title">LOCAL FAVOURITES</p>
-				</div>
-				<div class="business-list-content">
-					@foreach($_business_list as $business_list)
-					<div class="col-md-4 per-business">
-						<div class="business-img-holder">
-							<img class="home-image" src="{{$business_list->business_banner}}">
-						</div>
-						<div class="business-info-holder">
-							<div class="business-list-details">
-								<div class="business-list-name" style="height:50px;">
-									@if(strlen($business_list->business_name) <= 30)
-									<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
-									@else
-									<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
-									@endif
-								</div>
-								<div class="business-list-phone">
-									<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
-								</div>
-								<div class="business-list-map" style="height:70px;">
-									<p  class="map-text"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
+			<div class="col-md-9" >
+				<div class="desktop">
+					<div class="business-list-holder">
+						<p class="business-list-title">LOCAL FAVOURITES</p>
+					</div>
+					<div class="business-list-content row clearfix">
+						@foreach($_business_list as $business_list)
+						<div class="col-md-4 col-sm-4 col-xs-6 per-business">
+							<div class="business-img-holder">
+								<img class="home-image" src="{{$business_list->business_banner}}">
+							</div>
+							<div class="business-info-holder">
+								<div class="business-list-details">
+									<div class="business-list-name" style="height:50px;">
+										@if(strlen($business_list->business_name) <= 30)
+										<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+										@else
+										<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+										@endif
+									</div>
+									<div class="business-list-phone">
+										<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
+									</div>
+									<div class="business-list-map" style="height:70px;">
+										<p  class="map-text"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
+									</div>
 								</div>
 							</div>
+							<div class="social-media-icon">
+								@if($business_list->facebook_url=="")
+								<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+	                    		@else
+								<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+	                    		@endif
+	                    		<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+	                    	</div>
 						</div>
-						<div class="social-media-icon">
-							@if($business_list->facebook_url=="")
-							<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                    		@else
-							<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                    		@endif
-                    		<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                    	</div>
-					</div>
-					@endforeach
-					<div class="col-md-12 pagination">
-						{!! $_business_list->render() !!}
+						@endforeach
+						<div class="col-md-12 pagination">
+							{!! $_business_list->render() !!}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="payment-containers col-md-12 " style="margin-bottom:50px;">
-						<div class="payment-title col-md-12">
+				<div class="payment-containers" style="margin-bottom:50px;">
+						<div class="payment-title">
 							SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
 							<br>
 						</div>
-						<div class="col-md-12 payment-content " style="margin-bottom:100px;">
+						<div class="payment-content row clearfix " style="margin-bottom:100px;">
 							@foreach($_membership as $membership)
-							<div class="col-md-5 package-container">
-								<div class="membership-offer">
-									{{$membership->membership_name}}
-								</div>
-								<hr>
-								<div class="membership-price">
-									<span >${{$membership->membership_price}}/</span><span >MONTH</span>
-								</div>
-								<hr>
-								<div class="membership-details">
-									<p class="membership-details-text">
-										{{$membership->membership_info}}
-									</p>
-								</div>
-								<div class="membership-btn">
-									<a href="/registration">
-										<button type="button" class="membership-button">GET STARTED NOW</button>
-									</a>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="package-container">
+									<div class="membership-offer">
+										{{$membership->membership_name}}
+									</div>
+									<hr>
+									<div class="membership-price">
+										<span >${{$membership->membership_price}}/</span><span >MONTH</span>
+									</div>
+									<hr>
+									<div class="membership-details">
+										<p class="membership-details-text">
+											{{$membership->membership_info}}
+										</p>
+									</div>
+									<div class="membership-btn">
+										<a href="/registration">
+											<button type="button" class="membership-button">GET STARTED NOW</button>
+										</a>
+									</div>
 								</div>
 							</div>
 							@endforeach
-							
 						</div>
 				</div>
-		   </div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -241,6 +245,32 @@ width:100%;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/search-registered-business.js"></script>
 <script src="/assets/js/home_categories.js"></script>
+
+<script>
+	$.ajaxSetup({
+		headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+</script>
+<script type="text/javascript">
+		$('.carousel .vertical .item').each(function(){
+		var next = $(this).next();
+		if (!next.length) {
+		next = $(this).siblings(':first');
+		}
+		next.children(':first-child').clone().appendTo($(this));
+		
+		for (var i=1;i<=1;i++) {
+		next=next.next();
+		if (!next.length) {
+			next = $(this).siblings(':first');
+			}
+		
+		next.children(':first-child').clone().appendTo($(this));
+		}
+		});
+</script>
 
 {{-- END OF JAVASCRIPTS --}}
 @endsection
