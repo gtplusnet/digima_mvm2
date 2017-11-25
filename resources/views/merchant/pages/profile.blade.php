@@ -32,10 +32,8 @@ th
                      <li role="presentation" class=""><a href="#OI" role="tab" data-toggle="tab" aria-expanded="false">Other Information</a></li>
                      <li role="presentation" class=""><a href="#BH" role="tab" data-toggle="tab" aria-expanded="false">Business Hours</a></li>
                      <li role="presentation" class=""><a href="#BI" role="tab" data-toggle="tab" aria-expanded="false">Business Image</a></li>
-
                      <li role="presentation" class=""><a href="#PM" role="tab" data-toggle="tab" aria-expanded="false">Payment Method</a></li>
-
-                      <li role="presentation" class=""><a href="#CP" role="tab" data-toggle="tab" aria-expanded="false">Change Password</a></li>
+                     <li role="presentation" class=""><a href="#CP" role="tab" data-toggle="tab" aria-expanded="false">Change Password</a></li>
 
                   </ul>
                </div>
@@ -45,8 +43,12 @@ th
                 
                   <div role="tabpanel" class="tab-pane fade active in" id="MI">
                      <form class="form-horizontal">
-                          {{ csrf_field() }}
-                       
+                        {{ csrf_field() }}
+                        @if(session('success_merchant'))
+                        <div class="alert alert-success" style="margin-top:20px;">
+                           <span>SUCESS!</span> Profile successfully updated
+                        </div>
+                        @endif
                         <div class="form-group" style="margin-top:50px;">
                            <label for="business_name" class="col-sm-2 control-label">Business Name</label>
                            <div class="col-sm-10">

@@ -258,9 +258,10 @@ $( ".datepicker1" ).datepicker();
                         <div class="modal-content">
                             <div class="modal-body" style="margin-bottom: 120px;" >
                                 <div class="col-sm-12" id="success_alert">
-                                    
+                                    <div id="ajax-loader" style="display: none; text-align: center;">
+                                        <img src="/assets/img/loading.gif"/>
+                                    </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>

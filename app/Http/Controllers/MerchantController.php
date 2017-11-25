@@ -187,15 +187,17 @@ class MerchantController extends Controller
 	  }
     public function merchant_redirect()
     {
-      $data['countyList'] = TblCountyModel::get();
-       $data['contact_us']           = TblContactUs::first();
-      return view ('merchant.pages.merchant_redirect',$data);
+      $data['index']            = "unpaid";
+      $data['countyList']       = TblCountyModel::get();
+      $data['contact_us']       = TblContactUs::first();
+      return view ('front.pages.success',$data);
     }
 
     public function merchant_redirect_exist()
     {
+      $data['index'] = 'redirect_exist';
       $data['countyList'] = TblCountyModel::get();
-       return view('merchant.pages.merchant_redirect_exist',$data);
+      return view('front.pages.success',$data);
     }
 
     public function payment()

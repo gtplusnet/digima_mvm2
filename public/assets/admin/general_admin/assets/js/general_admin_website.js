@@ -14,13 +14,10 @@ function manage_website()
 	{
 		$(document).ready(function()
 		{
-			add_category();
 			add_membership();
 			add_payment_method();
 			add_county();
 			add_city();
-			// add_category();
-			// update_membership();
 			action_submit_edit();
 			action_box();
 		});
@@ -132,6 +129,7 @@ function manage_website()
 		        $("#delete_id").val(mem_id);
 		        $("#delete_link").val('delete_membership');
 		        $('#deleteModal').modal('show');
+
 	        }
 	    });
 	    $('.pay_action').change(function()
@@ -301,48 +299,6 @@ function manage_website()
 		 		});
 	     });
 	}
-
-	function add_category()
-	{ 
-		$('#addcategory').click(function(){
-		var business_category_id = $('#business_category_id').val();
-        var business_category_name = $('#business_category_name').val();
-		$.ajax({
-			type:'POST',
-			url:'/merchant/category/add_category',
-			data:{
-				business_category_id: business_category_id, business_category_name: business_category_name,
-				},
-			dataType:'text',
-
-		}).done(function(data){
-			    $('#category_alert').html(data);
-			    setTimeout(location.reload.bind(location), 1000);
-			});
-	    });
-	}
-
-	function add_keywords()
-	{ 
-		$('#addKeywords').click(function(){
-		var business_tag_keywords_id = $('#business_tag_keywords_id').val();
-        var keywords_name = $('#keywords_name').val();
-		$.ajax({
-			type:'POST',
-			url:'/merchant/category/add_keywords',
-			data:{
-				business_tag_keywords_id: business_tag_keywords_id, keywords_name: keywords_name,
-				},
-			dataType:'text',
-
-		}).done(function(data){
-			    $('#category_alert').html(data);
-			    setTimeout(location.reload.bind(location), 1000);
-			});
-	    });
-	}
-
-	
 }
 
 
