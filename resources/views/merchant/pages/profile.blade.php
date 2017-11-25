@@ -338,7 +338,7 @@ th
                            <form class="form-inline">
                                <div class="form-inline">
                                  <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" >
-                                 <button type="button"  name="savePayment" id="savePayment" class="save_payment btn btn-primary";><i class=" fa fa-file-text-o m-r-xs"></i>Add Payment</button>
+                                 <button type="button"  name="savePayment" class="save_payment btn btn-primary";><i class=" fa fa-file-text-o m-r-xs"></i>Add Payment</button>
                               </div><br>
                               </form>
                         </div>
@@ -374,11 +374,11 @@ th
                         <div id="merchant_changepassword_success" style="margin-top:50px;">
                         </div>
                        
-                        <div class="form-group"> 
+                       <!--  <div class="form-group"> 
                              <div class="col-sm-3">
-                           <strong style="font-size: 17px;">Change Password</strong>
+                           <strong style="font-size: 16px;">Change Password</strong>
                            </div>
-                        </div>  
+                        </div>   -->
                 
                         <div class="form-group">
                            <label for="input-Default" class="col-sm-2 control-label">Enter Current Password</label>
@@ -418,6 +418,12 @@ th
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/merchant/merchant_profile.js"></script>
-
+<style>
+     .web-content
+   {
+   margin:20px 20px 20px 20px;
+   /*margin: auto;*/
+   }
+</style>
 
 @endsection

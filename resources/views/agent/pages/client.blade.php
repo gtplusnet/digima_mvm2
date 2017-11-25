@@ -171,15 +171,16 @@ $( ".datepicker1" ).datepicker();
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Business Name</th>
-                                    <th>Contact Person</th>
-                                    <th>Phone 1</th>
-                                    <th>Phone 2</th>
-                                    <th>Membership</th>
-                                    <th>Date Pending</th>
-                                    <th>Status</th>
-                                    <!--   <th>Action</th> -->
+
+                                <th>ID</th>
+                                <th>Business Name</th>
+                                <th>Contact Person</th>
+                                <th>Phone 1</th>
+                                <th>Phone 2</th>
+                                <th>Membership</th>
+                                <th>Date Pending</th>
+                                <th>Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -248,7 +249,6 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$clients_activate->business_phone}}</td>
                                     <td>{{$clients_activate->business_alt_phone}}</td>
                                     <td>{{$clients_activate->membership_name}}</td>
-                                    {{-- <td><!-- {{$clients_activate->transaction_status}} --></td> --}}
                                     <td>{{date("F j, Y",strtotime($clients_activate->date_transact))}}</td>
                                 </tr>
                                 

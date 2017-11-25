@@ -159,10 +159,11 @@ width:25%;
 margin-right:0px;
 margin-left:-1px;
 }
-.modal-header
+.btn-success
 {
-background-color: #24292E;
+
 color:#fff;
 }
+
 </style>
 @endsection

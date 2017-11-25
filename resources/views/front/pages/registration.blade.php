@@ -13,6 +13,7 @@
 	</div>
 </div>
 <div class="container">
+	
 	<form role="form" method="POST" action="/register-business" name="registrationForm" id="registrationForm">
 	{{ csrf_field() }}
 	<div class="col-md-6 form-leftpart">
@@ -68,7 +69,7 @@
 				<div class="col-md-12 dualfield-firstpart">	
 					<label for="password" class="registration-form-label">Membership</label>
 					<select class="form-control" name="membership"  required="true">
-			  			@foreach($membership as $membership)
+			  			@foreach($_membership as $membership)
 							<option value="{{ $membership->membership_id }}">{{ $membership->membership_name }}</option>
 						@endforeach
 	  				</select>
@@ -154,17 +155,74 @@
 		<button type="submit" class="registration-continue-btn" name="continueButton" id="continueButton">CONTINUE</button>
 	</div>
 	</form>
+
+</div>
+<div class="modal fade" id="membershipPopUp" style="margin-top:10px;overflow-y:hidden;">
+	<div class="modal-dialog modal-md">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      <h4 class="modal-title">SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS</h4>
+	    </div>
+	    <div class="modal-body">
+	      <div >
+				<div class="payment-containers">
+					<div class="row-clearfix col-md-12 payment-content ">
+						@foreach($_membership as $membership)
+						<div class="col-md-6 package-container" style="margin:0px !important;">
+							<div style="padding:10px;">
+								<div class="membership-offer">
+									{{$membership->membership_name}}
+								</div>
+								<hr>
+								<div class="membership-price">
+									<span >${{$membership->membership_price}}/</span><span >MONTH</span>
+								</div>
+								<hr>
+								<div class="membership-details">
+									<p class="membership-details-text" style="height:200px;overflow-y: scroll;">
+										{{$membership->membership_info}}
+									</p>
+								</div>
+							</div>
+						</div>
+						@endforeach
+					</div>
+				</div>
+		   </div>
+	    </div>
+	    <div class="modal-footer">
+	      <center><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></center>
+	    </div>
+	  </div>
+	</div>
 </div>
 
-	{{-- JAVASCRIPTS --}}
-	<script src="/assets/js/global.ajax.js"></script>
-	<script src="/assets/js/front/business-registration.js"></script>
-	<script>
-		$.ajaxSetup({
-   			headers: {
-   			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-   			}
-		});
-	</script>
-	{{-- END OF JAVASCRIPTS --}}
+{{-- JAVASCRIPTS --}}
+<script src="/assets/js/global.ajax.js"></script>
+<script src="/assets/js/front/business-registration.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+	$.ajaxSetup({
+			headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+	});
+</script>
+<script>
+	
+	jQuery(document).ready(function($) 
+	{
+	    $('#membershipPopUp').modal('toggle');
+	   	$('html, body').css('overflowY', 'hidden');
+	   	$('.modal-open').css('z-index', '1'); 
+	});
+	$(document).on("click",".fade",function(){
+		$('html, body').css('overflowY', 'auto'); 
+	});
+</script>
+{{-- END OF JAVASCRIPTS --}}
 @endsection
