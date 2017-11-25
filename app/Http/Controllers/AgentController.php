@@ -111,15 +111,23 @@ class AgentController extends Controller
 		{
 			if (password_verify($request->password, $validate_login->password)) 
 				{
-					Session::put("agent_login",true);
-    				Session::put("agent_id",$validate_login->agent_id);
-    				Session::put("full_name_agent",$validate_login->first_name." ".$validate_login->last_name);
-    				Session::put("email",$validate_login->email);
-    				Session::put("position",$validate_login->position);
-				    $data['page']	= 'Dashboard';
 
-				    return Redirect::to('/agent/dashboard');
-				}
+					if($validate_login->archived==0)
+			          {
+			            Session::put("agent_login",true);
+	    				Session::put("agent_id",$validate_login->agent_id);
+	    				Session::put("full_name_agent",$validate_login->first_name." ".$validate_login->last_name);
+	    				Session::put("email",$validate_login->email);
+	    				Session::put("position",$validate_login->position);
+					    $data['page']	= 'Dashboard';
+
+					    return Redirect::to('/agent/dashboard');
+			          }
+			          else
+			          {
+			            return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
+			          }
+			    }
 			else
 			{
 				$data['page']	= 'Agent Login';
@@ -203,35 +211,31 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$data['page']	 = 'Client';
 
-		// $data['clients'] = TblUserAccountModel::where('status','registered')
-		// 								  ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-		// 	                              ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-		// 	                              ->join('tbl_payment_method','tbl_payment_method.payment_method_id','=','tbl_business.membership')
-		// 	                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-		// 	                              ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-		// 	                              ->orderBy('tbl_business.date_created',"asc")
-		// 	                              ->get();
-
-		$data['clients'] = TblBusinessModel::Where('business_status',1)
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
-                          ->paginate(10);
+		$data['clients'] = TblBusinessModel::where('business_status',1)
+							->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+	                        ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+	                        ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+	                        ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+	                        ->orderBy('tbl_business.date_created',"asc")
+	                        ->paginate(10);
         
-        $data['clients_pending'] = TblBusinessModel::where('business_status', 4)->where("agent_id", session("agent_id"))
-                            ->orWhere('business_status', 20)
-                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->orderBy('tbl_business.date_created',"DESC")
+        $data['clients_pending'] = TblBusinessModel::where("agent_id", session("agent_id"))
+        					->where(function($query)
+						       {
+						        $query->where('tbl_business.business_status', 4);
+						        $query->orWhere('tbl_business.business_status', 20);
+						       })
+						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+						    ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+						    ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+	                        ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+						    ->orderBy('tbl_business.date_created',"DESC")
                             ->paginate(10);
 
-        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->orderBy('tbl_business.date_created',"DESC")
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)->where("agent_id", session("agent_id"))
+                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                           ->orderBy('tbl_business.date_created',"DESC")
                            ->paginate(10);
 
     	return view ('agent.pages.client', $data);	
@@ -287,25 +291,48 @@ class AgentController extends Controller
 		$update['agent_id']           = session('agent_id'); 
 		$update['date_transact']      = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+		$data['client'] = TblBusinessModel::Where('tbl_business.business_id',$trans_id)
+						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                          ->first();
 	
-			return '';
+		return view('agent.pages.agent_call',$data);
 	}
 
 	public function get_client_transaction_reload(Request $request)
 	{
 		Self::allow_logged_in_users_only();
-		$trans_id = $request->transaction_id;
-		$update['transaction_status'] = 'called'; 
-		$update['business_status'] = '2';
-		$update['date_transact'] = date("Y/m/d"); 
-		$update['agent_call_date'] = date("Y/m/d"); 
-		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+		$trans_id 	= $request->transaction_id;
+		$status 	= $request->status;
+		if($status==4)
+		{
+			$update['transaction_status'] = 'called'; 
+			$update['date_transact'] = date("Y/m/d"); 
+			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 
-		$count_call = TblAgentModel::where('agent_id',session('agent_id'))->first();
-		$agent['agent_call'] = $count_call->agent_call + 1;
-        TblAgentModel::where('agent_id',session('agent_id'))->update($agent);
-
-		return '';
+			return '';	
+		}
+		elseif($status==20)
+		{
+			$update['transaction_status'] = 'Added'; 
+			$update['date_transact'] = date("Y/m/d"); 
+			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+			return '';
+		}
+		else
+		{
+			$update['transaction_status'] = 'called'; 
+			$update['business_status'] = '2';
+			$update['date_transact'] = date("Y/m/d"); 
+			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
+			$count_call = TblAgentModel::where('agent_id',session('agent_id'))->first();
+			$agent['agent_call'] = $count_call->agent_call + 1;
+	        TblAgentModel::where('agent_id',session('agent_id'))->update($agent);
+			return '';
+		}
+		
 	}
 
 	public function add_client_submit(Request $request)

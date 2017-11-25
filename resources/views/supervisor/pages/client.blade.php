@@ -1,15 +1,11 @@
 @extends('supervisor.layout.layout') 
 @section('content')
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
 <script src="/assets/js/global.ajax.js"></script>
 <script src="/assets/supervisor/supervisor_client.js"></script>
 <script src="/assets/js/supervisor/upload-conversation.js"></script>
 <script src="/assets/js/supervisor/get-client-info.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-{{-- <link rel="stylesheet" href="/resources/demos/style.css"> --}}
-{{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 <style>
 .li_style
 {
@@ -43,19 +39,18 @@ $( ".datepicker1" ).datepicker();
 </div>
 <div id="main-wrapper">
     <div class="tab-content">
-    <div class=" panel-primary">
-        <div class="panel-heading row clearfix">
-            <div class="col-md-8">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs">
-                        <li class="li_style active"><a data-toggle="tab" href="#pendingCustomer">Pending Upload</a></li>
-                        <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Upload Completed</a></li>
-                    </ul>
+        <div class=" panel-primary">
+            <div class="panel-heading row clearfix">
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="li_style active"><a data-toggle="tab" href="#pendingCustomer">Pending Upload</a></li>
+                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Upload Completed</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-     
         <div id="pendingCustomer" class="tab-pane fade in active">
             <div class="col-md-12" style="margin:20px 20px 20px 0px">
                 <form class="form-inline" method="post" action="/supervisor/supervisor_search_client">
@@ -213,9 +208,6 @@ $( ".datepicker1" ).datepicker();
                 </div>
             </div>
         </div>
-        
-       
-        
     </div>
 </div>
 

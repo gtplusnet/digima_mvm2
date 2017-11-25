@@ -53,7 +53,7 @@ padding: 10px;
 	<div class="page-breadcrumb">
 		<h3>Manage Website</h3>
 		<ol class="breadcrumb">
-			<li><a href="/admin">Home</a></li>
+			<li><a href="/general_admin/dashboard">Home</a></li>
 			<li class="active">Manage Website</li>
 		</ol>
 	</div>

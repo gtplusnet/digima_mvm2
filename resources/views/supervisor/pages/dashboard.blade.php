@@ -53,7 +53,7 @@
                                 <h4 class="title">Agent Calls</h4>
                                 <p class="category">Line Charts</p>
                             </div>
-                            <div class="col-md-3  pull-right">
+                            <div class="col-md-4  pull-right">
                                 <select class="form-control " id="agent_calls">
                                     <option value="james">SELECT AGENT</option>
                                     @foreach($_agents as $agents)
@@ -133,9 +133,9 @@
                                 <h4 class="title">Team Calls</h4>
                                 <p class="category">Line Charts</p>
                             </div>
-                            <div class="col-md-3  pull-right">
+                            <div class="col-md-4  pull-right">
                                 <select class="form-control " id="team_calls">
-                                    <option>SLECT TEAM</option>
+                                    <option>SELECT TEAM</option>
                                     @foreach($_teams as $teams)
                                         <option value="{{$teams->team_id}}">{{$teams->team_name}}</option>
                                     @endforeach

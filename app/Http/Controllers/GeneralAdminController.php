@@ -11,7 +11,6 @@ use App\Models\TblAdminModels;
 use App\Models\TblUserAccountModel;
 use App\Models\TblPaymentModel;
 use App\Models\TblBusinessCategoryModel;
-
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblInvoiceModels;
 use App\Models\TblCityModel;
@@ -72,13 +71,21 @@ class GeneralAdminController extends Controller
       {
         if (password_verify($request->password, $validate_login->password)) 
         {
-          Session::put("general_admin_login",true);
-          Session::put("admin_id",$validate_login->admin_id);
-          Session::put("full_name_admin",$validate_login->full_name);
-          Session::put("email",$validate_login->email);
-          Session::put("position",$validate_login->position);
-          $data['page']   = 'Dashboard';
-          return Redirect::to('/general_admin/dashboard');
+          if($validate_login->archived==0)
+          {
+            Session::put("general_admin_login",true);
+            Session::put("admin_id",$validate_login->admin_id);
+            Session::put("full_name_admin",$validate_login->full_name);
+            Session::put("email",$validate_login->email);
+            Session::put("position",$validate_login->position);
+            $data['page']   = 'Dashboard';
+            return Redirect::to('/general_admin/dashboard');
+          }
+          else
+          {
+            return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
+          }
+          
         }
         else
         {
@@ -270,6 +277,7 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_send_invoice($id)
     {
+      $data['contact_us']   = TblContactUs::first();
       $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                         ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                         ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -277,21 +285,22 @@ class GeneralAdminController extends Controller
                         ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                         ->first();
       $data['id']=$id;
-      $data['status']     = "";
+      $data['status']       = "";
       return view('general_admin.pages.invoice',$data);
     }
 
     public function general_admin_send_new_invoice($id,$id2)
     {
+      $data['contact_us']   = TblContactUs::first();
       $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                             ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                             ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                             ->first();
-        $data['id']         =$id;
-        $data['status']     = $id2;
-        return view('general_admin.pages.invoice',$data);
+      $data['id']           =$id;
+      $data['status']       = $id2;
+      return view('general_admin.pages.invoice',$data);
     }
 
     public function general_admin_send_save_invoice(Request $request,$id)
@@ -506,6 +515,16 @@ class GeneralAdminController extends Controller
                           ->paginate(10);
       return view('general_admin.pages.payment_monitoring',$data);
     }
+    public function general_admin_view_payment_details(Request $request)
+    {
+      $payment_id = $request->id;
+      $data['business_item'] = TblPaymentModel::where('payment_id',$payment_id)
+                          ->join('tbl_business','tbl_business.business_id','=','tbl_payment.business_id')
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->first();
+      return view('general_admin.pages.payment_blade',$data);
+    }
     public function general_admin_accept_and_activate(Request $request)
     {
       $business_id = $request->business_id;
@@ -551,7 +570,7 @@ class GeneralAdminController extends Controller
       $user['status'] = 'deactivated';
       $update['date_transact'] = date("Y/m/d"); 
       $invoice['invoice_status'] = 'DECLINED';
-      TblPaymentModel::where('business_id',$business_id)->update($invoice);
+      TblInvoiceModels::where('business_id',$business_id)->update($invoice);
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
       return "<h4 class='modal-title' >Success! Account already deactivated.</h4>";
@@ -564,7 +583,21 @@ class GeneralAdminController extends Controller
       $update['date_transact'] = date("Y/m/d"); 
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
-      Session::flash('deact', "Merchant Already Activated");
+      Session::flash('deact', "Merchant Already Deactivated");
+      return Redirect::back();
+    }
+    public function general_admin_deactivate_user(Request $request,$id)
+    {
+      $business_id = $id;
+      // dd($business_id);
+      $update['business_status'] = '19';//19 for payment deactivated user and 18 for merchant deact.
+      $user['status'] = 'deactivated';
+      $update['date_transact'] = date("Y/m/d"); 
+      $invoice['invoice_status'] = 'DECLINED';
+      TblInvoiceModels::where('business_id',$business_id)->update($invoice);
+      TblBusinessModel::where('business_id',$business_id)->update($update);
+      TblUserAccountModel::where('business_id',$business_id)->update($user);
+      Session::flash('deact', "Merchant Already Deactivated");
       return Redirect::back();
     }
     public function get_business_list_info(Request $request)
@@ -591,9 +624,9 @@ class GeneralAdminController extends Controller
 
     public function business_data($business_name)
     {
-        $business_list = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', 'tbl_user_account.business_id')->orWhere('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
+      $business_list = DB::table('tbl_business')->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')->where('tbl_business.business_id', '=', 'tbl_user_account.business_id')->orWhere('business_name','LIKE', '%'.$business_name.'%')->paginate(5);
        
-        return $business_list;
+      return $business_list;
     }
 
     public function email_invoice()
@@ -601,14 +634,22 @@ class GeneralAdminController extends Controller
       Self::allow_logged_in_users_only();
         return view('general_admin.pages.email_invoice');
     }
-    public function general_admin_manage_user()
+    public function general_admin_manage_user(Request $request)
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent']          = TblAgentModel::where('position','!=','agentDeactivated')->get();
-      $data['_data_team']           = TblTeamModel::get();
-      $data['_data_supervisor']     = TblSupervisorModels::get();
-      $data['_data_admin']          = TblAdminModels::get();
+      // $data['_data_agent']          = TblAgentModel::where('position','!=','agentDeactivated')->get();
+      // // $data['_data_team']           = TblTeamModel::get();
+      // $data['_data_team']           = TblTeamModel::join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+      //                                 ->get();
+      $data['_data_agent']          = TblAgentModel::where('archived',0)->get();
+      $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)
+                                    ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+                                    ->select('tbl_team.team_id as id', 'tbl_team.*','tbl_supervisor.*')
+                                    ->get();
+      $data['_team_select']         = TblTeamModel::where('archived',0)->get();
+      $data['_data_supervisor']     = TblSupervisorModels::where('archived',0)->get();
+      $data['_data_admin']          = TblAdminModels::where('archived',0)->get();
       $data['_merchant']            = TblBusinessModel::where('business_status',5)
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
@@ -627,9 +668,7 @@ class GeneralAdminController extends Controller
       $data['contact_us']           = TblContactUs::first();
       $data['thank_you']            = TblThankYou::first();
       $data['terms']                = TblTerms::first();
-     
-
-       return view('general_admin.pages.manage_front',$data);
+      return view('general_admin.pages.manage_front',$data);
  
     }
 
@@ -638,7 +677,6 @@ class GeneralAdminController extends Controller
       
       $data['information_header'] = $request->information_header;
       $data['information']        = $request->information;
-
       $check = TblAboutUs::count();
 
       if ($check)
@@ -663,7 +701,6 @@ class GeneralAdminController extends Controller
       $data['phone_number']       = $request->phone_number;
       $data['complete_address']   = $request->complete_address;
       $data['email']              = $request->email;
-
       $check = TblContactUs::count();
       if($check)
       {
@@ -858,6 +895,7 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_manage_website()
     {
+      Self::allow_logged_in_users_only();
       $data['_membership']          = TblMembeshipModel::paginate(5);
       $data['_payment_method']      = TblPaymentMethod::paginate(5);
       $data['_county']              = TblCountyModel::paginate(5);
@@ -956,7 +994,7 @@ class GeneralAdminController extends Controller
 
     public function general_admin_manage_categories()
     {
-
+      Self::allow_logged_in_users_only();
       $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->paginate(10);
       return view('general_admin.pages.manage_categories',$data);
     }
@@ -1162,9 +1200,9 @@ class GeneralAdminController extends Controller
 
   public function general_admin_assign_supervisor(Request $request)
   {
-    $super_id = $request->super_id;
-    $update['team_id'] = $request->team_id;
-    TblSupervisorModels::where('supervisor_id',$super_id)->update($update);
+    $update['supervisor_id'] = $request->super_id;
+    $team_id = $request->team_id;
+    TblTeamModel::where('team_id',$team_id)->update($update);
     return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Assigned Successfully!</div>";
   }
 
@@ -1190,8 +1228,12 @@ class GeneralAdminController extends Controller
   public function general_admin_view_all_members(Request $request)
   {
     $id = $request->team_id;
-    $data['_data_agent'] = TblAgentModel::where('team_id',$id)->get();
-    $data['_supervisor'] = TblSupervisorModels::where('team_id',$id)->get();
+    $data['_supervisor'] = TblTeamModel::where('tbl_team.team_id',$id)
+                          ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+                          ->get();
+    $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)
+                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                          ->get();
     return view('general_admin.pages.viewmember',$data);
   }
 
@@ -1281,7 +1323,7 @@ class GeneralAdminController extends Controller
   
   
 
-    public function edit_admin_submit(Request $request)
+  public function edit_admin_submit(Request $request)
   {
     // dd($request->all());
     $data['full_name'] = $request->full_name;
@@ -1349,9 +1391,7 @@ class GeneralAdminController extends Controller
     $data['email'] = $request->email;
     $data['position'] = 'supervisor';
     TblSupervisorModels::insert($data);
-    return "<div class='alert alert-success'  ><center>
-  <span >SUCCESS! </span>
-   </center></div>";
+    return "<div class='alert alert-success'  ><center><span >SUCCESS! </span></center></div>";
   }
 
    public function edit_supervisor_submit(Request $request)
@@ -1363,11 +1403,12 @@ class GeneralAdminController extends Controller
     TblSupervisorModels::where('supervisor_id',$request->supervisor_id)->update($data);
       return"Success";
    }
-    public function delete_supervisor_submit($id)
+    public function general_admin_delete_supervisor(Request $request)
     {
-      TblSupervisorModels::where('supervisor_id',$id)->delete();
-      Session::flash('message', "Supervisor Deleted");
-      return Redirect::back();
+      $id = $request->delete_supervisor_id;
+      $archived['archived'] = '1';
+      TblSupervisorModels::where('supervisor_id',$id)->update($archived);
+      return "<div class='alert alert-success'><strong>Success!</strong>Supervisor Deleted Successfully!</div>";
     }
 
     public function general_admin_delete_team(Request $request)
@@ -1381,9 +1422,16 @@ class GeneralAdminController extends Controller
     public function general_admin_delete_agent(Request $request)
     {
         $agent_id = $request->delete_agent_id;
-        $archived['position'] = 'agentDeactivated';
+        $archived['archived'] = '1';
         TblAgentModel::where('agent_id',$agent_id)->update($archived);
         return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted Successfully!</div>";
+    }
+    public function general_admin_delete_admin(Request $request)
+    {
+        $admin_id = $request->delete_admin_id;
+        $archived['archived'] = '1';
+        TblAdminModels::where('admin_id',$admin_id)->update($archived);
+        return "<div class='alert alert-success'><strong>Success!</strong>Admin Deleted Successfully!</div>";
     }
 
     public function general_admin_view_merchant_info(Request $request)
@@ -1602,13 +1650,487 @@ class GeneralAdminController extends Controller
 
       Self::allow_logged_in_users_only();
       $data['page'] = 'Archived';
-      $data['_admin']          = TblAdminModels::get();
-      $data['_agent']          = TblAgentModel::get();
-      $data['_supervisor']     = TblSupervisorModels::get();
-      $data['_team']           = TblTeamModel::get();
-      $data['_membership']     = TblMembeshipModel::get();
+      $data['_admin']           = TblAdminModels::where('archived',1)->get();
+      $data['_agent']           = TblAgentModel::where('archived',1)->get();
+      $data['_supervisor']      = TblSupervisorModels::where('archived',1)->get();
+      $data['_team']            = TblTeamModel::get();
+      $data['_membership']      = TblMembeshipModel::get();
+      $data['_merchant']        = TblBusinessModel::where('business_status',18)->orWhere('business_status',19)
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                                ->get();
+    $data['_payment_archived']     = TblPaymentMethod::get();
+    $data['_membership_archived']  = TblMembeshipModel::get();
+    $data['_team_archived']        = TblTeamModel::get();
+    $data['_category_archived']    = TblBusinessCategoryModel::get();
+
+
     
       return view('general_admin.pages.archived',$data);
     }
+    public function archived_restore_merchant(Request $request)
+    {
+      $business_id  = $request->id;
+      $status       = $request->status;
+      if($status==18)
+      {
+        $update['business_status'] = '3';//19 for payment deactivated user and 18 for merchant deact.
+        $user['status'] = 'registered';
+        $update['date_transact'] = date("Y/m/d"); 
+        TblBusinessModel::where('business_id',$business_id)->update($update);
+        TblUserAccountModel::where('business_id',$business_id)->update($user);
+        return "<div class='alert alert-success' >Success! Account already restore, goto merchant in merchant TAB to issue invoice.</div>";
+      }
+      elseif($status==19)
+      {
+        $update['business_status'] = '5';
+        $user['status'] = 'Activated';
+        $update['date_transact'] = date("Y/m/d"); 
+        $invoice['invoice_status'] = 'paid';
+        TblInvoiceModels::where('business_id',$business_id)->update($invoice);
+        TblBusinessModel::where('business_id',$business_id)->update($update);
+        TblUserAccountModel::where('business_id',$business_id)->update($user);
+        return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+      }
+    }
+    public function archived_restore_agent(Request $request)
+    {
+      $agent_id  = $request->id;
+      $data['archived'] = 0;
+      TblAgentModel::where('agent_id',$agent_id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_supervisor(Request $request)
+    {
+      $sup_id  = $request->id;
+      $data['archived'] = 0;
+      TblSupervisorModels::where('supervisor_id',$sup_id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_admin(Request $request)
+    {
+      $admin_id  = $request->id;
+      $data['archived'] = 0;
+      TblAdminModels::where('admin_id',$admin_id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    //MAINTENANCE !important function
+    public function developer_website_maintenance()
+    {
+      if (DB::table('tbl_city')->count() <= 0) 
+        {
+            //Cities of Zagreb County
+            $insert[0]["city_id"]        = 1;
+            $insert[0]["city_name"]      = "Zagreb";
+            $insert[0]["postal_code"]    = 10000;
+            $insert[0]["county_id"]      = 1;
+
+            $insert[1]["city_id"]        = 2;
+            $insert[1]["city_name"]      = "Lučko";
+            $insert[1]["postal_code"]    = 10250;
+            $insert[1]["county_id"]      = 1;
+
+            $insert[2]["city_id"]        = 3;
+            $insert[2]["city_name"]      = "Zaprešić";
+            $insert[2]["postal_code"]    = 10290;
+            $insert[2]["county_id"]      = 1;
+
+            //Cities of Dubrovnik-Neretva
+            $insert[3]["city_id"]        = 4;
+            $insert[3]["city_name"]      = "Topolo";
+            $insert[3]["postal_code"]    = 20205;
+            $insert[3]["county_id"]      = 2;
+
+            $insert[4]["city_id"]        = 5;
+            $insert[4]["city_name"]      = "Cavtat";
+            $insert[4]["postal_code"]    = 20210;
+            $insert[4]["county_id"]      = 2;
+
+            $insert[5]["city_id"]        = 6;
+            $insert[5]["city_name"]      = "Gruda";
+            $insert[5]["postal_code"]    = 20215;
+            $insert[5]["county_id"]      = 2;
+
+            //Cities of Split-Dalmatia
+            $insert[6]["city_id"]        = 7;
+            $insert[6]["city_name"]      = "Prgomet";
+            $insert[6]["postal_code"]    = 21201;
+            $insert[6]["county_id"]      = 3;
+
+            $insert[7]["city_id"]        = 8;
+            $insert[7]["city_name"]      = "Lećevica";
+            $insert[7]["postal_code"]    = 21202;
+            $insert[7]["county_id"]      = 3;
+
+            $insert[8]["city_id"]        = 9;
+            $insert[8]["city_name"]      = "Donji Muć";
+            $insert[8]["postal_code"]    = 21203;
+            $insert[8]["county_id"]      = 3;
+
+            //Cities of Šibenik-Knin
+            $insert[9]["city_id"]        = 10;
+            $insert[9]["city_name"]      = "Primošten";
+            $insert[9]["postal_code"]    = 22202;
+            $insert[9]["county_id"]      = 4;
+
+            $insert[10]["city_id"]       = 11;
+            $insert[10]["city_name"]     = "Rogoznica";
+            $insert[10]["postal_code"]   = 22203;
+            $insert[10]["county_id"]     = 4;
+
+            $insert[11]["city_id"]       = 12;
+            $insert[11]["city_name"]     = "Široke";
+            $insert[11]["postal_code"]   = 22204;
+            $insert[11]["county_id"]     = 4;
+
+            //Cities of Zadar
+            $insert[12]["city_id"]       = 13;
+            $insert[12]["city_name"]     = "Bibinje";
+            $insert[12]["postal_code"]   = 23205;
+            $insert[12]["county_id"]     = 5;
+
+            $insert[13]["city_id"]       = 14;
+            $insert[13]["city_name"]     = "Sveti Filip i Jakov";
+            $insert[13]["postal_code"]   = 23207;
+            $insert[13]["county_id"]     = 5;
+
+            $insert[14]["city_id"]       = 15;
+            $insert[14]["city_name"]     = "Biograd na Moru";
+            $insert[14]["postal_code"]   = 23210;
+            $insert[14]["county_id"]     = 5;
+
+            //Cities of Osijek-Baranja
+            $insert[15]["city_id"]       = 16;
+            $insert[15]["city_name"]     = "Bijelo Brdo";
+            $insert[15]["postal_code"]   = 31204;
+            $insert[15]["county_id"]     = 6;
+
+            $insert[16]["city_id"]       = 17;
+            $insert[16]["city_name"]     = "Aljmaš";
+            $insert[16]["postal_code"]   = 31205;
+            $insert[16]["county_id"]     = 6;
+
+            $insert[17]["city_id"]       = 18;
+            $insert[17]["city_name"]     = "Erdut";
+            $insert[17]["postal_code"]   = 31206;
+            $insert[17]["county_id"]     = 6;
+
+            //Cities of Vukovar-Srijem
+            $insert[18]["city_id"]       = 19;
+            $insert[18]["city_name"]     = "Vinkovci";
+            $insert[18]["postal_code"]   = 32100;
+            $insert[18]["county_id"]     = 7;
+
+            $insert[19]["city_id"]       = 20;
+            $insert[19]["city_name"]     = "Ostrovo";
+            $insert[19]["postal_code"]   = 32211;
+            $insert[19]["county_id"]     = 7;
+
+            $insert[20]["city_id"]       = 21;
+            $insert[20]["city_name"]     = "Gaboš";
+            $insert[20]["postal_code"]   = 32212;
+            $insert[20]["county_id"]     = 7;
+
+            //Cities of Virovitica-Podravina
+            $insert[21]["city_id"]       = 22;
+            $insert[21]["city_name"]     = "Špišić Bukovica";
+            $insert[21]["postal_code"]   = 33404;
+            $insert[21]["county_id"]     = 8;
+
+            $insert[22]["city_id"]       = 23;
+            $insert[22]["city_name"]     = "Pitomača";
+            $insert[22]["postal_code"]   = 33405;
+            $insert[22]["county_id"]     = 8;
+
+            $insert[23]["city_id"]       = 24;
+            $insert[23]["city_name"]     = "Lukač";
+            $insert[23]["postal_code"]   = 33406;
+            $insert[23]["county_id"]     = 8;
+
+            //Cities of Požega-Slavonia
+            $insert[24]["city_id"]       = 25;
+            $insert[24]["city_name"]     = "Jakšić";
+            $insert[24]["postal_code"]   = 34308;
+            $insert[24]["county_id"]     = 9;
+
+            $insert[25]["city_id"]       = 26;
+            $insert[25]["city_name"]     = "Pleternica";
+            $insert[25]["postal_code"]   = 34310;
+            $insert[25]["county_id"]     = 9;
+
+            $insert[26]["city_id"]       = 27;
+            $insert[26]["city_name"]     = "Kuzmica";
+            $insert[26]["postal_code"]   = 34311;
+            $insert[26]["county_id"]     = 9;
+
+            //Cities of Brod-Posavina
+            $insert[27]["city_id"]       = 28;
+            $insert[27]["city_name"]     = "Podvinje";
+            $insert[27]["postal_code"]   = 35107;
+            $insert[27]["county_id"]     = 10;
+
+            $insert[28]["city_id"]       = 29;
+            $insert[28]["city_name"]     = "Podcrkavlje";
+            $insert[28]["postal_code"]   = 35201;
+            $insert[28]["county_id"]     = 10;
+
+            $insert[29]["city_id"]       = 30;
+            $insert[29]["city_name"]     = "Gornja Vrba";
+            $insert[29]["postal_code"]   = 35207;
+            $insert[29]["county_id"]     = 10;
+
+            //Cities of Međimurje
+            $insert[30]["city_id"]       = 31;
+            $insert[30]["city_name"]     = "Čakovec";
+            $insert[30]["postal_code"]   = 40000;
+            $insert[30]["county_id"]     = 11;
+
+            $insert[31]["city_id"]       = 32;
+            $insert[31]["city_name"]     = "Nedelišće";
+            $insert[31]["postal_code"]   = 40305;
+            $insert[31]["county_id"]     = 11;
+
+            $insert[32]["city_id"]       = 33;
+            $insert[32]["city_name"]     = "Macinec";
+            $insert[32]["postal_code"]   = 40306;
+            $insert[32]["county_id"]     = 11;
+
+            //Cities of Varaždin
+            $insert[33]["city_id"]       = 34;
+            $insert[33]["city_name"]     = "Beretinec";
+            $insert[33]["postal_code"]   = 42201;
+            $insert[33]["county_id"]     = 12;
+
+            $insert[34]["city_id"]       = 35;
+            $insert[34]["city_name"]     = "Trnovec Bartolovečki";
+            $insert[34]["postal_code"]   = 42202;
+            $insert[34]["county_id"]     = 12;
+
+            $insert[35]["city_id"]       = 36;
+            $insert[35]["city_name"]     = "Jalžabet";
+            $insert[35]["postal_code"]   = 42203;
+            $insert[35]["county_id"]     = 12;
+
+            //Cities of Bjelovar-Bilogora
+            $insert[36]["city_id"]       = 37;
+            $insert[36]["city_name"]     = "Zrinski Topolovac";
+            $insert[36]["postal_code"]   = 43202;
+            $insert[36]["county_id"]     = 13;
+
+            $insert[37]["city_id"]       = 38;
+            $insert[37]["city_name"]     = "Kapela";
+            $insert[37]["postal_code"]   = 43203;
+            $insert[37]["county_id"]     = 13;
+
+            $insert[38]["city_id"]       = 39;
+            $insert[38]["city_name"]     = "Predavac";
+            $insert[38]["postal_code"]   = 43211;
+            $insert[38]["county_id"]     = 13;
+
+            //Cities of Sisak-Moslavina
+            $insert[39]["city_id"]       = 40;
+            $insert[39]["city_name"]     = "Martinska Ves";
+            $insert[39]["postal_code"]   = 44201;
+            $insert[39]["county_id"]     = 14;
+
+            $insert[40]["city_id"]       = 41;
+            $insert[40]["city_name"]     = "Topolovac";
+            $insert[40]["postal_code"]   = 44202;
+            $insert[40]["county_id"]     = 14;
+
+            $insert[41]["city_id"]       = 42;
+            $insert[41]["city_name"]     = "Gušće";
+            $insert[41]["postal_code"]   = 44203;
+            $insert[41]["county_id"]     = 14;
+
+            //Cities of Karlovac
+            $insert[42]["city_id"]       = 43;
+            $insert[42]["city_name"]     = "Draganić";
+            $insert[42]["postal_code"]   = 47201;
+            $insert[42]["county_id"]     = 15;
+
+            $insert[43]["city_id"]       = 44;
+            $insert[43]["city_name"]     = "Rečica";
+            $insert[43]["postal_code"]   = 47203;
+            $insert[43]["county_id"]     = 15;
+
+            $insert[44]["city_id"]       = 45;
+            $insert[44]["city_name"]     = "Šišljavić";
+            $insert[44]["postal_code"]   = 47204;
+            $insert[44]["county_id"]     = 15;
+
+            //Cities of Koprivnica-Križevci
+            $insert[45]["city_id"]       = 46;
+            $insert[45]["city_name"]     = "Sveti Ivan Žabno";
+            $insert[45]["postal_code"]   = 48214;
+            $insert[45]["county_id"]     = 16;
+
+            $insert[46]["city_id"]       = 47;
+            $insert[46]["city_name"]     = "Križevci";
+            $insert[46]["postal_code"]   = 48260;
+            $insert[46]["county_id"]     = 16;
+
+            $insert[47]["city_id"]       = 48;
+            $insert[47]["city_name"]     = "Kloštar Vojakovački";
+            $insert[47]["postal_code"]   = 48264;
+            $insert[47]["county_id"]     = 16;
+
+            //Cities of Krapina-Zagorj
+            $insert[48]["city_id"]       = 49;
+            $insert[48]["city_name"]     = "Zabok";
+            $insert[48]["postal_code"]   = 49210;
+            $insert[48]["county_id"]     = 17;
+
+            $insert[49]["city_id"]       = 50;
+            $insert[49]["city_name"]     = "Veliko Trgovišće";
+            $insert[49]["postal_code"]   = 49214;
+            $insert[49]["county_id"]     = 17;
+
+            $insert[50]["city_id"]       = 51;
+            $insert[50]["city_name"]     = "Tuhelj";
+            $insert[50]["postal_code"]   = 49215;
+            $insert[50]["county_id"]     = 17;
+
+            //Cities of Primorje-Gorski Kotar
+            $insert[51]["city_id"]       = 52;
+            $insert[51]["city_name"]     = "Rijeka";
+            $insert[51]["postal_code"]   = 51000;
+            $insert[51]["county_id"]     = 18;
+
+            $insert[52]["city_id"]       = 53;
+            $insert[52]["city_name"]     = "Matulji";
+            $insert[52]["postal_code"]   = 51211;
+            $insert[52]["county_id"]     = 18;
+
+            $insert[53]["city_id"]       = 54;
+            $insert[53]["city_name"]     = "Vele Mune";
+            $insert[53]["postal_code"]   = 51212;
+            $insert[53]["county_id"]     = 18;
+
+            //Cities of Istria
+            $insert[54]["city_id"]       = 55;
+            $insert[54]["city_name"]     = "Pazin";
+            $insert[54]["postal_code"]   = 52000;
+            $insert[54]["county_id"]     = 19;
+
+            $insert[55]["city_id"]       = 56;
+            $insert[55]["city_name"]     = "Pula";
+            $insert[55]["postal_code"]   = 52100;
+            $insert[55]["county_id"]     = 19;
+
+            $insert[56]["city_id"]       = 57;
+            $insert[56]["city_name"]     = "Medulin";
+            $insert[56]["postal_code"]   = 52203;
+            $insert[56]["county_id"]     = 19;
+
+            //Cities of Lika-Senj
+            $insert[57]["city_id"]       = 58;
+            $insert[57]["city_name"]     = "Gospić";
+            $insert[57]["postal_code"]   = 53000;
+            $insert[57]["county_id"]     = 20;
+
+            $insert[58]["city_id"]       = 59;
+            $insert[58]["city_name"]     = "Lički Osik";
+            $insert[58]["postal_code"]   = 53201;
+            $insert[58]["county_id"]     = 20;
+
+            $insert[59]["city_id"]       = 60;
+            $insert[59]["city_name"]     = "Perušić";
+            $insert[59]["postal_code"]   = 53202;
+            $insert[59]["county_id"]     = 20;
+
+            DB::table('tbl_city')->insert($insert);
+        }
+
+        if (DB::table('tbl_county')->count() <= 0) 
+        {
+            $insert[0]["county_id"]    = 1;
+            $insert[0]["county_name"]  = "Zagreb";
+
+            $insert[1]["county_id"]    = 2;
+            $insert[1]["county_name"]  = "Dubrovnik-Neretva";
+
+            $insert[2]["county_id"]    = 3;
+            $insert[2]["county_name"]  = "Split-Dalmatia";
+
+            $insert[3]["county_id"]    = 4;
+            $insert[3]["county_name"]  = "Šibenik-Knin";
+
+            $insert[4]["county_id"]    = 5;
+            $insert[4]["county_name"]  = "Zadar";
+
+            $insert[5]["county_id"]    = 6;
+            $insert[5]["county_name"]  = "Osijek-Baranja";
+
+            $insert[6]["county_id"]    = 7;
+            $insert[6]["county_name"]  = "Vukovar-Srijem";
+
+            $insert[7]["county_id"]    = 8;
+            $insert[7]["county_name"]  = "Virovitica-Podravina";
+
+            $insert[8]["county_id"]    = 9;
+            $insert[8]["county_name"]  = "Požega-Slavonia";
+
+            $insert[9]["county_id"]    = 10;
+            $insert[9]["county_name"]  = "Brod-Posavina";
+
+            $insert[10]["county_id"]   = 11;
+            $insert[10]["county_name"] = "Međimurje";
+
+            $insert[11]["county_id"]   = 12;
+            $insert[11]["county_name"] = "Varaždin";
+
+            $insert[12]["county_id"]   = 13;
+            $insert[12]["county_name"] = "Bjelovar-Bilogora";
+
+            $insert[13]["county_id"]   = 14;
+            $insert[13]["county_name"] = "Sisak-Moslavina";
+
+            $insert[14]["county_id"]   = 15;
+            $insert[14]["county_name"] = "Karlovac";
+
+            $insert[15]["county_id"]   = 16;
+            $insert[15]["county_name"] = "Koprivnica-Križevci";
+
+            $insert[16]["county_id"]   = 17;
+            $insert[16]["county_name"] = "Krapina-Zagorje";
+
+            $insert[17]["county_id"]   = 18;
+            $insert[17]["county_name"] = "Primorje-Gorski Kotar";
+
+            $insert[18]["county_id"]   = 19;
+            $insert[18]["county_name"] = "Istria";
+
+            $insert[19]["county_id"]   = 20;
+            $insert[19]["county_name"] = "Lika-Senj";
+
+            DB::table('tbl_county')->insert($insert);
+        }
+        if (DB::table('tbl_admin')->count() <= 0) 
+        {
+            $insert[0]["admin_id"]    = 1;
+            $insert[0]["full_name"]   = "Croatia Admin";
+            $insert[0]["password"]    = "$2y$10$87V4FD3kWIgjNstN.6o8pehW/dysjKt/cPklq5EGFeTB3pC1beIjK";
+            $insert[0]["email"]       = "croatiaadmin@gmail.com";
+            $insert[0]["position"]    = "gm";
+            $insert[0]["date_created"]= date("Y/M/D");
+
+
+            $insert[1]["admin_id"]    = 2;
+            $insert[1]["full_name"]   = "Developer Admin";
+            $insert[1]["password"]    = "$2y$10$87V4FD3kWIgjNstN.6o8pehW/dysjKt/cPklq5EGFeTB3pC1beIjK";
+            $insert[1]["email"]       = "croatiadeveloper@gmail.com";
+            $insert[1]["position"]    = "gm";
+            $insert[1]["date_created"]= date("Y/M/D");
+            
+
+            
+
+            DB::table('tbl_admin')->insert($insert);
+        }
+    }
 
 }
+
+
+

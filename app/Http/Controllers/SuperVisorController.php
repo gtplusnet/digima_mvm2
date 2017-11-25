@@ -54,17 +54,25 @@ class SuperVisorController extends Controller
         {
             if (password_verify($request->password, $validate_login->password)) 
                 {
+                  if($validate_login->archived==0)
+                      {
+                        Session::put("supervisor_login",true);
 
-                    Session::put("supervisor_login",true);
+                        Session::put("supervisor_id",$validate_login->supervisor_id);
+                        Session::put("full_name_supervisor",$validate_login->first_name." ".$validate_login->last_name);
 
-                    Session::put("supervisor_id",$validate_login->supervisor_id);
-                    Session::put("full_name_supervisor",$validate_login->first_name." ".$validate_login->last_name);
+                        Session::put("email",$validate_login->email);
+                        Session::put("position",$validate_login->position);
+                        $data['page']   = 'Dashboard';
 
-                    Session::put("email",$validate_login->email);
-                    Session::put("position",$validate_login->position);
-                    $data['page']   = 'Dashboard';
+                        return Redirect::to('/supervisor/dashboard');
+                      }
+                      else
+                      {
+                        return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
+                      }
 
-                    return Redirect::to('/supervisor/dashboard');
+                    
                 }
             else
             {
@@ -87,53 +95,53 @@ class SuperVisorController extends Controller
   	}
 
     public function update_profile(Request $request)
-  {
-    $data['transaction'] = 'profile';
-    $data['profile'] = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
-    return view('supervisor.pages.update_profile',$data); 
-  }
-  public function update_password(Request $request)
-  {   
-    $data['transaction'] = 'password';
-    return  view('supervisor.pages.update_profile',$data);
-  }
-  public function checking_password(Request $request )
-  {
-    $user = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
-    if(password_verify($request->currentPassword,$user->password))
     {
-      if($request->newPassword == $request->confirmPassword)
+      $data['transaction'] = 'profile';
+      $data['profile'] = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
+      return view('supervisor.pages.update_profile',$data); 
+    }
+    public function update_password(Request $request)
+    {   
+      $data['transaction'] = 'password';
+      return  view('supervisor.pages.update_profile',$data);
+    }
+    public function checking_password(Request $request )
+    {
+      $user = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
+      if(password_verify($request->currentPassword,$user->password))
       {
-        $data['password'] = password_hash($request->newPassword, PASSWORD_DEFAULT);
-        TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
-        return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+        if($request->newPassword == $request->confirmPassword)
+        {
+          $data['password'] = password_hash($request->newPassword, PASSWORD_DEFAULT);
+          TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
+          return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+        }
+        else
+        {
+          return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+        }
       }
       else
       {
-        return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+        return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
       }
     }
-    else
+    public function saving_profile(Request $request)
     {
-      return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
+      $data['primary_phone']    = $request->primaryPhone;
+      $data['secondary_phone']  = $request->secondaryPhone;
+      $data['other_info']     = $request->otherInfo;
+      $data['address']      = $request->address;
+      $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
+      if($check)
+      {
+        return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+      }
+      else
+      {
+        return "<div class='alert alert-danger'><strong>Sorry!</strong> Transaction failure.</div>"; 
+      }
     }
-  }
-  public function saving_profile(Request $request)
-  {
-    $data['primary_phone']    = $request->primaryPhone;
-    $data['secondary_phone']  = $request->secondaryPhone;
-    $data['other_info']     = $request->otherInfo;
-    $data['address']      = $request->address;
-    $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
-    if($check)
-    {
-      return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
-    }
-    else
-    {
-      return "<div class='alert alert-danger'><strong>Sorry!</strong> Transaction failure.</div>"; 
-    }
-  }
 
   	public function client()
   	{
@@ -178,19 +186,13 @@ class SuperVisorController extends Controller
                           ->get();
         return view('supervisor.pages.filtered1',$data);
     }
-    
-
     public function get_client_transaction(Request $request)
     {
         $trans_id = $request->transaction_id;
-        // dd($request->transaction_id);
         $update['transaction_status'] = 'call in progress'; 
         $update['agent_id'] = session('agent_id'); 
         $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-        
-
-            return '';
-        
+        return '';
     }
 
     public function get_client_transaction_reload(Request $request)
@@ -200,16 +202,15 @@ class SuperVisorController extends Controller
         $update['business_status'] = '2'; 
         $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
         return '';
-        
     }
     
     public function supervisor_add_team(Request $request)
     {
         $data['team_name']  = $request->team_name;
         $data['team_information']  = $request->team_des;
+        $data['supervisor_id']  = session('supervisor_id');
         TblTeamModel::insert($data);
         return "<div class='alert alert-success'><strong>Success!</strong>Team Added.</div>";
-
     }
     public function get_agent_info()
     {
@@ -430,13 +431,27 @@ class SuperVisorController extends Controller
     {
         Self::allow_logged_in_users_only();
         $data['page']       = 'Manage Team/Agent';
-        $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
+        $data['viewteam']   = TblTeamModel::where('supervisor_id',session('supervisor_id'))
                             ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->groupBy('team_id')->get();
-        $data['_agent_team']= TblTeamModel::get();
-        $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+                            -> selectRaw('sum(agent_call) as sum, tbl_team.*,tbl_team.team_id as id')
+                            ->groupBy('tbl_team.team_id')
+                            ->get();
+        $data['_agent_team']= TblTeamModel::where('supervisor_id',session('supervisor_id'))->get();
+        $data['viewagent']  = TblTeamModel::where('supervisor_id',session('supervisor_id'))
+                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
                             ->get();
         return view ('supervisor.pages.manage_user', $data); 
+    }
+    public function view_all_members(Request $request)
+    {
+      $id = $request->team_id;
+      $data['_supervisor'] = TblTeamModel::where('tbl_team.team_id',$id)
+                            ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+                            ->get();
+      $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)
+                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                            ->get();
+      return view('supervisor.pages.viewmember',$data);
     }
     public function supervisor_delete_team(Request $request)
     {
@@ -580,7 +595,7 @@ class SuperVisorController extends Controller
     {
 
     $search_key_team = $request->search_key_team;
-     $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
+    $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
                           ->where('team_name','like','%'.$search_key_team.'%')
                           ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
                           ->groupBy('team_id')->get();

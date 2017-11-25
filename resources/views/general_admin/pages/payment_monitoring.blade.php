@@ -8,11 +8,12 @@
 	<h3>Payment Monitoring</h3>
 	<div class="page-breadcrumb">
 		<ol class="breadcrumb">
-			<li><a href="/admin">Home</a></li>
+			<li><a href="/general_admin/dashboard">Home</a></li>
 			<li class="active">Payment Monitoring</li>
 		</ol>
 	</div>
 </div>
+<form method="post">
 <div class="tab-content col-md-12">
 
 	<div class="text-center pull-right" style="margin:20px 20px 20px 20px;">
@@ -52,96 +53,11 @@
 						<td>{{ $business_item->payment_reference_number }}</td>
 						<td>₱ {{ $business_item->payment_amount }}</td>
 						<td>{{ $business_item->date_created }}</td>
-						<td><a href="#"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong{{ $business_item->business_id}}" data-id="{{ $business_item->business_id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button></td>
+						<td>
+							<button type="button"  class="btn btn-info viewPayment"  data-id="{{ $business_item->payment_id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+						</td>
 					</tr>
-					<div class="modal fade" id="exampleModalLong{{ $business_item->business_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-							<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Payment Information</h4>
-					      </div>
-					        <div class="modal-body" style="margin-bottom: 450px;" >
-								<div id="showHere1">
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group col-md-3">
-										<label for="business_name" >Business Name</label>
-									</div>
-									<div class="form-group col-md-9">
-										<input value="{{ $business_item->business_name }}" type="text" class="form-control" name="cat_name" id="cat_name"  style="width:100%;margin-bottom: 20px;" readonly/>
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group col-md-3">
-										<label for="business_name" >Business Address</label>
-									</div>
-									<div class="form-group col-md-9">
-										<input value="{{ $business_item->business_complete_address }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
-										<input value="{{ $business_item->business_id }}" type="hidden" name="action_business_id" id="action_business_id" />
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group col-md-3">
-										<label for="business_name" >Business Membership</label>
-									</div>
-									<div class="form-group col-md-9">
-										<input value="{{ $business_item->membership_name }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group col-md-3">
-										<label for="business_name" >Payment Reference number</label>
-									</div>
-									<div class="form-group col-md-9">
-										<input value="{{ $business_item->payment_reference_number }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group col-md-3">
-										<label for="business_name" >Payment Amount</label>
-									</div>
-									<div class="form-group col-md-9">
-										<input value="{{ $business_item->payment_amount }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group col-md-3">
-										<label for="business_name" >Invoice Number</label>
-									</div>
-									<div class="form-group col-md-9">
-										<input value="{{ $business_item->business_id }}" type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%" readonly/>
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group col-md-5">
-										<label for="business_name" >Proof of Payment</label>
-									</div>
-									<div class="form-group col-md-7">
-										@if($business_item->payment_file_name=='Image Not Available')
-										<center>
-											Image Not Available
-										</center>
-										@else
-										<a href="{{ $business_item->payment_file_name }}"  target="_blank">
-											click here to view image!
-										</a>
-										@endif
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<center>
-										<button type="button" class="btn btn-primary" id="acceptBtn">Accept Payment</button>
-										<button type="button" class="btn btn-danger"  id="declinedBtn">Declined Payment</button>
-									</center>
-								</div>
-						    </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
+					
 					@endforeach
 				</tbody>
 			</table>
@@ -150,18 +66,38 @@
 	</div>
 </div>
 {{-- modal --}}
+
+<div class="modal fade" id="paymentDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<button type="button" class="close" onClick="window.location.reload();"  data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Payment Information</h4>
+      </div>
+        <div class="modal-body" id="insertPaymentBlade" style="margin-bottom: 450px;" >
+			
+	    </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div style="margin-top: 150px;" class="modal fade" id="acceptUser" role="dialog">
         <div class="modal-dialog modal-sm">
         	<form method="post" action="/general_admin/accept_and_activate">
             <div class="modal-content">
+
                 <div class="modal-body" style="margin-bottom: 150px;" >
                     <div class="col-sm-12">
                         <h4 class="modal-title">Are You sure You want to accept this payment and activate this user's account?</h4>
                     </div>
-                    <div class="col-sm-12" style="margin-top:30px;">
+                    <div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
+						<img src="/assets/img/loading.gif"/>
+					</div>
+                    <div class="col-sm-12 hideMe" style="margin-top:30px;">
                         <center>
-
-                        <input type="hidden" id="accept_business_id"/>
+							<input type="hidden" id="acceptBusinessId"/>
                             <button type="button" class=" btn btn-success" id="acceptUserBtn">Yes</button>
                         
                         <button type="button" class="btn btn-danger"  data-dismiss="modal">No</button></center>
@@ -207,7 +143,7 @@
             </div>
         </div>
     </div>
-    
+</form>    
     {{-- Modal --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_payment_monitoring.js"></script>

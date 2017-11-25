@@ -39,7 +39,7 @@ $( ".datepicker1" ).datepicker();
     <h3>Merchant</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="/admin">Home</a></li>
+            <li><a href="/general_admin/dashboard">Home</a></li>
             <li class="active">Merchant</li>
         </ol>
     </div>
@@ -331,7 +331,7 @@ $( ".datepicker1" ).datepicker();
                                                     <div class="col-sm-12">
                                                         <center>
                                                         <input type="hidden" id="delete_team_id" value=""/>
-                                                        <a href="/general_admin/decline_user/{{$registeredclients->business_id}}"><button type="button" class=" btn btn-danger">Yes</button></a>
+                                                        <a href="/general_admin/deactivate_user/{{$registeredclients->business_id}}"><button type="button" class=" btn btn-danger">Yes</button></a>
                                                         <button type="button" class="btn btn-default"  data-dismiss="modal">No</button></center>
                                                     </div>
                                                 </div>

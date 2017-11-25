@@ -67,109 +67,7 @@ text-align: center;
             </div>
         </div>
     </div>
-    <div style="margin-top: 40px;" class="modal fade" id="myModalAgent" role="dialog">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add Agent</h4>
-                </div>
-                <div class="modal-body" style="margin-bottom: 600px;" >
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Team</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <select name="team_id" class='form-control' id="team_id">
-                                @foreach($_agent_team as $agent_team)
-                                <option value = '{{$agent_team->team_id}}'>{{$agent_team->team_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Prefix</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <select name="prefix" class='form-control' id="prefix">
-                                <option value = 'Mr'>Mr</option>
-                                <option  value = 'Ms'>Ms</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >First Name</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="first_name" id="first_name"  style="width:100%;margin-bottom: 20px;" required/>
-                        </div>
-                    </div>
-                    <div class="col-sm-12" id="agent_success">
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Last Name</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="last_name" id="last_name"  style="width:100%;margin-bottom: 20px;" required/>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Email</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="email" id="email"  style="width:100%;margin-bottom: 20px;" required/>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Password</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="password" id="password"  style="width:100%;margin-bottom: 20px;" required/>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Primary Phone</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="primary" id="primary"  style="width:100%;margin-bottom: 20px;" required/>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Secondary Phone</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="secondary" id="secondary"  style="width:100%;margin-bottom: 20px;"/>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group col-md-3">
-                            <label for="business_name" >Other Information</label>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" name="other_info" id="other_info"  style="width:100%;margin-bottom: 20px;"/>
-                        </div>
-                    </div>
-                    
-                    <div class="col-sm-12">
-                        <center>
-                        <button type="submit" class="save_category btn btn-primary" name="save_agent" id="save_agent">Save Agent</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </center>
-                    </div>
-                </div>
-                <div class="modal-footer" style="border:0px;">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <div style="margin-top: 150px;" class="modal fade" id="teamEditModal" role="dialog">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
@@ -256,7 +154,7 @@ text-align: center;
                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>Team ID</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Team Members</th>
@@ -267,10 +165,10 @@ text-align: center;
                         <tbody>
                             @foreach ($viewteam as $newteam)
                             <tr>
-                                <td></td>
+                                <td>{{ $newteam->id}}</td>
                                 <td>{{ $newteam->team_name}}</td>
                                 <td>{{ $newteam->team_information}}</td>
-                                <td>View All Members</td>
+                                <td><i data-id="{{ $newteam->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
                                 <td>{{ $newteam->sum}}</td>
                                 <td>
                                     <select class="teamAction" id="actionbox" data-info="{{ $newteam->team_information}}" data-name="{{ $newteam->team_name}}" data-id="{{ $newteam->team_id}}">
@@ -295,9 +193,9 @@ text-align: center;
                 <div class="table-responsive" id="agent_delete_success">
                     <div class="col-md-12">
 
-                        <div class="pull-left" style="margin:20px 0px 20px 20px">
+                        {{-- <div class="pull-left" style="margin:20px 0px 20px 20px">
                             <button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
-                        </div>
+                        </div> --}}
 
                         <div class="pull-right" style="margin:20px 20px 20px 0px">
                             <form class="form-inline" method="post"  action="/supervisor/supervisor_search_agent" method="post">
@@ -346,6 +244,22 @@ text-align: center;
             </form>
         </div>
         {{--  modal --}}
+        <div class="modal fade" id="myModalViewMem" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"  data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Team Members</h4>
+                    </div>
+                    <div class="modal-body" id="viewMemHere">
+                        
+                        
+                    </div>
+                    <div class="modal-footer" style="border:0px;">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div style="margin-top: 150px;" class="modal fade" id="assignAgent" role="dialog">
             <div class="modal-dialog modal-md">
                 <div class="modal-content">
