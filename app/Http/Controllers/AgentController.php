@@ -228,17 +228,21 @@ class AgentController extends Controller
                           ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                           ->paginate(10);
         
-        $data['clients_pending'] = TblBusinessModel::where('business_status', 4)->where("agent_id", session("agent_id"))
-                            ->orWhere('business_status', 20)
-                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->orderBy('tbl_business.date_created',"DESC")
-                            ->paginate(10);
+        $data['clients_pending'] = TblBusinessModel::where("agent_id", session("agent_id"))
+        					     ->where(function($query)
+        					       {
+							        $query->where('tbl_business.business_status', 4);
+							        $query->orWhere('tbl_business.business_status', 20);
+							       })
+						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+						    ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+						    ->orderBy('tbl_business.date_created',"DESC")
+                           ->paginate(10);
 
-        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)->where("agent_id", session("agent_id"))
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          // ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"DESC")
                            ->paginate(10);
 

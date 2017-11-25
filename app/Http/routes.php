@@ -32,14 +32,9 @@ Route::any('/reset/user/password',      'PasswordController@reset_user_password'
 
 
 
-
-
-
-
-
 Route::any('/forgot_password_user',       					'PasswordController@forgot_password_user');
 Route::any('/forgot_password_user/reset_password',       	'PasswordController@forgot_password_user_reset_password');
-Route::any('/forgot_password_user/reset_link/{code}/{id}/{post}',       		'PasswordController@forgot_password_user_reset_link');
+Route::any('/forgot_password_user/reset_link/{code}/{id}/{post}',     'PasswordController@forgot_password_user_reset_link');
 Route::any('/forgot_password_user/submit_reset_password',   'PasswordController@forgot_password_user_submit_reset_password');
 
 
@@ -95,7 +90,7 @@ Route::any('/merchant/update_merchant_info', 		    'MerchantController@update_me
 Route::any('/merchant/saving_merchant_info', 			'MerchantController@saving_merchant_info');
 Route::any('/merchant/get_city', 						'MerchantController@get_city');
 Route::any('/merchant/get_zip_code', 					'MerchantController@get_zip_code');
-Route::any('/merchant/add_payment_method', 			'MerchantController@add_payment_method');
+Route::any('/merchant/add_payment_method', 				'MerchantController@add_payment_method');
 Route::any('/merchant/delete_payment_method', 			'MerchantController@delete_payment_method');
 Route::any('/merchant/edit_payment_method', 			'MerchantController@edit_payment_method');
 Route::any('/merchant/view_info', 						'MerchantController@view_info');
@@ -179,11 +174,9 @@ Route::post('/add_client_submit',   				'AgentController@add_client_submit');
 Route::any('/agent/get_city', 						'AgentController@get_city');
 Route::any('/agent/get_postal_code', 				'AgentController@get_zip_code');
 Route::any('/agent/logout', 						'AgentController@agent_logout');
-
 Route::any('/agent/update_profile', 				'AgentController@update_profile');
 Route::any('/agent/update_password', 				'AgentController@update_password');
 Route::any('/agent/checking_password', 				'AgentController@checking_password');
-
 Route::any('/agent/saving_profile', 				'AgentController@saving_profile');
 
 
@@ -236,9 +229,7 @@ Route::any('/general_admin/get_sub_category', 						'GeneralAdminController@gene
 
 Route::any('/general_admin/edit_sub_category', 						'GeneralAdminController@general_admin_edit_sub_category');
 Route::any('/general_admin/send_invoice/{id}', 						'GeneralAdminController@general_admin_send_invoice');
-
 Route::any('/general_admin/send_new_invoice/{id}/{id2}', 			'GeneralAdminController@general_admin_send_new_invoice');
-
 Route::any('/general_admin/send_save_invoice/{id}', 				'GeneralAdminController@general_admin_send_save_invoice');
 Route::any('/general_admin/manage_invoice', 						'GeneralAdminController@general_admin_manage_invoice');
 Route::any('/general_admin/resend_invoice', 						'GeneralAdminController@general_admin_resend_invoice');
@@ -260,9 +251,7 @@ Route::get('/general_admin/deactivate_user/{id}', 						'GeneralAdminController@
 
 Route::post('/general_admin/manage_user/add_agent', 				'GeneralAdminController@general_admin_add_agent');
 Route::post('/general_admin/manage_user/add_team', 					'GeneralAdminController@general_admin_add_team');
-
-
-Route::post('/general_admin/manage_user/view_all_members', 					'GeneralAdminController@general_admin_view_all_members');
+Route::post('/general_admin/manage_user/view_all_members', 			'GeneralAdminController@general_admin_view_all_members');
 
 
 

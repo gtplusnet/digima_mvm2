@@ -16,8 +16,9 @@
                             <div class="col-md-4">
                                 <h1 class="m-b-md"><b>CROATIA Directory</b></h1>
                                 <address>
-                                    Zagreb, Croatia<br>
-                                    P: (123) 456-7890
+                                <i class="fa fa fa-map-marker text-info"></i> @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br>
+                               <i class="fa fa fa-phone text-info"></i>@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif<br>
+                               <i class="fa fa fa-envelope-o text-info"></i> @if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif
                                 </address>
                             </div>
                             <div class="col-md-4">

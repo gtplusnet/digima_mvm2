@@ -17,7 +17,7 @@
 	<div class="page-breadcrumb">
 		<h3>Manage User</h3>
 		<ol class="breadcrumb">
-			<li><a href="/admin">Home</a></li>
+			<li><a href="/general_admin/dashboard">Home</a></li>
 			<li class="active">Manage Team/Agent</li>
 		</ol>
 	</div>
@@ -201,20 +201,25 @@
 						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 							<thead>
 								<tr>
-									<th>ID</th>
+									<!-- <th>ID</th> -->
 									<th>Team Name</th>
 									<th>Team Description</th>
 									<th>Team Members</th>
+									<th>Supervisor ID</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach($_data_team as $data_team)
 								<tr>
-									<td>{{ $data_team->team_id}}</td>
+									<!-- <td>{{ $data_team->team_id}}</td> -->
 									<td>{{ $data_team->team_name}}</td>
 									<td>{{ $data_team->team_information}}</td>
 									<td><i data-id="{{ $data_team->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
+									<td>
+									{{ $data_team->supervisor_id}}
+									{{ $data_team->first_name}} {{ $data_team->last_name}}
+									</td>
 									<td>
 										<select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox" data-name="{{ $data_team->team_name}}" data-info="{{ $data_team->team_information}}" data-id="{{ $data_team->team_id}}">
 											<option value="">Action</option>
@@ -322,7 +327,6 @@
 									<th>ID</th>
 									<th>Full Name</th>
 									<th>Email</th>
-									<th>Position</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -331,8 +335,7 @@
 								<tr>
 									<td>{{$data_admin->admin_id}}</td>
 									<td>{{$data_admin->full_name}}</td>
-									<td>{{$data_admin->email}}</td>
-									<td>{{$data_admin->position}}</td>
+									<td>{{$data_admin->email}}</td>							
 									<td><select style="height:30px;width:80px;" class="admin_actionbox" data-email="{{$data_admin->email}}" data-name="{{$data_admin->full_name}}" id="admin_actionbox" data-name="{{$data_admin->first_name}} {{$data_admin->last_name}}" data-id="{{ $data_admin->admin_id}}">
 										<option value="">Action</option>
 										<option value="edit">Edit</option>

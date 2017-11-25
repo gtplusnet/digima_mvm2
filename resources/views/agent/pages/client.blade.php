@@ -270,14 +270,13 @@ $( ".datepicker1" ).datepicker();
                             <thead>
                                 <tr>
                                 <th>ID</th>
-                                <th>Business Name</th>
+                                <th>Business Name{{session("agent_id")}}</th>
                                 <th>Contact Person</th>
                                 <th>Phone 1</th>
                                 <th>Phone 2</th>
                                 <th>Membership</th>
                                 <th>Date Pending</th>
                                 <th>Status</th>
-                                  <!--   <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>

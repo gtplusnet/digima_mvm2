@@ -622,7 +622,6 @@ class MerchantController extends Controller
 
      public function add_tag_category(Request $request)
     {
-
       $data_id = $request->checkbox;
       foreach($data_id as $key=>$id)
       {
@@ -638,11 +637,13 @@ class MerchantController extends Controller
           elseif($_check2<6)
           {
             Session::flash('message1', "Done Tagging!");
-           $_insert = TblBusinessTagCategoryModel::whereIn('business_id',session('business_id'))->insert($data);
+            $_insert = TblBusinessTagCategoryModel::whereIn('business_id',session('business_id'))->insert($data);
           }  
       }  
       return Redirect::back();
     }
+
+
 
       public function delete_tag_category($id)
     {
@@ -680,8 +681,8 @@ class MerchantController extends Controller
 	  {
 		  Self::allow_logged_in_users_only();
 
-      $data['contact_us']     = TblContactUs::first();
-		  $data['page']	= 'Bills';
+      $data['contact_us'] = TblContactUs::first();
+		  $data['page']   	  = 'Bills';
       $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
