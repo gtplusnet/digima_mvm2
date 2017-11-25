@@ -352,8 +352,12 @@
             function on() 
             {
                 document.getElementById("overlay").style.display = "block";
-                $("body").css("overflow", "hidden");
-                $("body").css("position", "fixed");
+                $("body").css({"overflow": "hidden","position": "fixed","margin": "0","padding": "0","right": "0","left": "0"});
+                // $("body").css("position", "fixed");
+                // $("body").css("margin", "0");
+                // $("body").css("padding", "0");
+                // $("body").css("right", "0");
+                // $("body").css("left", "0");
             }
 
             function off()
