@@ -6,19 +6,19 @@
     <div class="row">
         <div class="invoice" style="margin:0% 20% 10% 20%">
             <form method="post" id="form_print" action="/general_admin/send_save_invoice/{{$id}}">
-            {{csrf_field()}}
+                {{csrf_field()}}
                 @if(Session::has('error'))
                 <div class='alert alert-danger'><strong>Failed!</strong> Transaction Failed! Invoice number has already been issued to another person.</div>
-                @endif 
+                @endif
                 <div class="panel panel-white">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <h1 class="m-b-md"><b>CROATIA Directory</b></h1>
                                 <address>
-                                <i class="fa fa fa-map-marker text-info"></i> @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br>
-                               <i class="fa fa fa-phone text-info"></i>@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif<br>
-                               <i class="fa fa fa-envelope-o text-info"></i> @if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif
+                                    <i class="fa fa fa-map-marker text-info"></i> @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br>
+                                    <i class="fa fa fa-phone text-info"></i>@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif<br>
+                                    <i class="fa fa fa-envelope-o text-info"></i> @if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif
                                 </address>
                             </div>
                             <div class="col-md-4">
@@ -46,7 +46,7 @@
                                     <strong>EMAIL: {{$invoice_info->user_email}}</strong>
                                 </div>
                             </div>
-                            <div class="col-md-12" id="showHere1s"> 
+                            <div class="col-md-12" id="showHere1s">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -91,7 +91,7 @@
                             </div>
                             
                         </div>
-                       
+                        
                     </div>
                 </div>
                 <div class="col-md-12">

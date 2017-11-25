@@ -48,5 +48,4 @@
 		{!! $_reports->render() !!}
 	</div>
 </div>
-
 @endsection

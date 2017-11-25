@@ -461,6 +461,7 @@ class FrontController extends Controller
     }
     public function contact_send(Request $request)
     {
+        $data['index']          = "register";
         $contact_name           = $request->name;
         $contact_email_add      = $request->email_add;
         $contact_subject        = $request->subject;

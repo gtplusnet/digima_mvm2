@@ -1,4 +1,4 @@
-@extends('supervisor.layout.layouts')
+@extends('supervisor.layout.layout')
 @section('content')
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 <script src='/assets/admin/general_admin/assets/plugins/chartsjs/Chart.min.js'></script>

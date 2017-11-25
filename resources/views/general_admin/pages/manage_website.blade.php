@@ -59,239 +59,236 @@ padding: 10px;
 	</div>
 </div>
 {{-- modal --}}
-
-
-
 {{-- modal end --}}
 <div id="main-wraper">
 	<form method="POST">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-5 website-container">
-				<div class="website-title">
-					Add Membership
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5 website-container">
+					<div class="website-title">
+						Add Membership
+					</div>
+					<div class="website-content col-md-12">
+						<div class="web-content" id="membership_alert">
+						</div>
+						<div class="web-content">
+							<input type="text" class="form-text center" id="membershipName" placeholder="Membership Name" required/>
+						</div>
+						<div class="web-content">
+							<input type="text" class="form-text center" id="membershipPrice" placeholder="Membership Price" required/>
+						</div>
+						<div class="web-content">
+							<textarea class="form-text center" id="membershipInfo" rows="5">Membership Information</textarea>
+						</div>
+						<div class="web-content">
+							<button type="button" id="addMembership" class="form-button  center" >Add Membership</button>
+						</div>
+					</div>
 				</div>
-				<div class="website-content col-md-12">
-					<div class="web-content" id="membership_alert">
+				<div class="col-md-6 website-container">
+					<div class="website-title">
+						Membership List
 					</div>
-					<div class="web-content">
-						<input type="text" class="form-text center" id="membershipName" placeholder="Membership Name" required/>
-					</div>
-					<div class="web-content">
-						<input type="text" class="form-text center" id="membershipPrice" placeholder="Membership Price" required/>
-					</div>
-					<div class="web-content">
-						<textarea class="form-text center" id="membershipInfo" rows="5">Membership Information</textarea>
-					</div>
-					<div class="web-content">
-						<button type="button" id="addMembership" class="form-button  center" >Add Membership</button>
+					<div class="website-content col-md-12">
+						
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Membership Name</th>
+									<th>Price</th>
+									<th>Info</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_membership as $membership)
+								<tr>
+									<td>{{$membership->membership_id}}</td>
+									<td>{{$membership->membership_name}}</td>
+									<td>{{$membership->membership_price}}</td>
+									<td>{{$membership->membership_info}}</td>
+									<td>
+										<select class="form-select mem_action" data-info="{{$membership->membership_info}}" data-price="{{$membership->membership_price}}" data-name="{{$membership->membership_name}}" data-id="{{$membership->membership_id}}" id="mem_action">
+											<option >Action</option>
+											<option value="edit" >Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_membership->render() !!}
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 website-container">
-				<div class="website-title">
-					Membership List
+			<div class="row">
+				<div class="col-md-5 website-container">
+					<div class="website-title">
+						Add Payment Method
+					</div>
+					<div class="website-content col-md-12">
+						<div class="web-content" id="payment_method_alert">
+						</div>
+						<div class="web-content">
+							<input type="text" class="form-text center" id="paymentMethodName" placeholder="Payment Method Name" required/>
+						</div>
+						<div class="web-content">
+							<button type="button" id="addPaymentMethod" class="form-button  center" >Add Payment Method</button>
+						</div>
+					</div>
 				</div>
-				<div class="website-content col-md-12">
-					
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Membership Name</th>
-								<th>Price</th>
-								<th>Info</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_membership as $membership)
-							<tr>
-								<td>{{$membership->membership_id}}</td>
-								<td>{{$membership->membership_name}}</td>
-								<td>{{$membership->membership_price}}</td>
-								<td>{{$membership->membership_info}}</td>
-								<td>
-									<select class="form-select mem_action" data-info="{{$membership->membership_info}}" data-price="{{$membership->membership_price}}" data-name="{{$membership->membership_name}}" data-id="{{$membership->membership_id}}" id="mem_action">
-										<option >Action</option>
-										<option value="edit" >Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_membership->render() !!}
+				<div class="col-md-6 website-container">
+					<div class="website-title">
+						Payment Method List
+					</div>
+					<div class="website-content col-md-12">
+						
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Payment Method Name</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_payment_method as $payment_method)
+								<tr>
+									<td>{{$payment_method->payment_method_id}}</td>
+									<td>{{$payment_method->payment_method_name}}</td>
+									<td>
+										<select class="form-select pay_action" data-name="{{$payment_method->payment_method_name}}" data-id="{{$payment_method->payment_method_id}}" id="pay_action">
+											<option >Action</option>
+											<option value="edit" >Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_payment_method->render() !!}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 website-container">
+					<div class="website-title">
+						Add County
+					</div>
+					<div class="website-content col-md-12">
+						<div class="web-content" id="county_alert">
+						</div>
+						<div class="web-content">
+							<input type="text" id="countyName" class="form-text center" placeholder="County Name" required/>
+						</div>
+						<div class="web-content">
+							<button type="button" id="addCounty" class="form-button center" >Add County</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 website-container">
+					<div class="website-title">
+						County List
+					</div>
+					<div class="website-content col-md-12">
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>County Name</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_county as $county)
+								<tr>
+									<td>{{$county->county_id}}</td>
+									<td>{{$county->county_name}}</td>
+									<td>
+										<select class="form-select count_action" data-name="{{$county->county_name}}" data-id="{{$county->county_id}}" id="count_action">
+											<option >Action</option>
+											<option value="edit">Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_county->render() !!}
+					</div>
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="col-md-5 website-container">
+					<div class="website-title">
+						Add City
+					</div>
+					<div class="website-content col-md-12">
+						<div class="web-content" id="city_alert">
+						</div>
+						<div class="web-content">
+							<select class="form-text center" id="countyID">
+								<option>County Name</option>
+								@foreach($_county_city as $county_city)
+								<option value="{{$county_city->county_id}}">{{$county_city->county_name}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="web-content">
+							<input type="text" id="cityName" class="form-text center" placeholder="City Name" required/>
+						</div>
+						<div class="web-content">
+							<input type="text" id="cityZip" class="form-text center" placeholder="Zip Code" required/>
+						</div>
+						<div class="web-content">
+							<button type="button" id="addCity" class="form-button  center" >Add City</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-6 website-container">
+					<div class="website-title">
+						City List
+					</div>
+					<div class="website-content col-md-12">
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>County Name</th>
+									<th>City Name</th>
+									<th>Zip Code</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_city as $city)
+								<tr>
+									<td>{{$city->city_id}}</td>
+									<td>{{$city->county_name}}</td>
+									<td>{{$city->city_name}}</td>
+									<td>{{$city->postal_code}}</td>
+									<td>
+										<select class="form-select city_action" data-county_name="{{$city->county_name}}" id="city_action" data-zip="{{$city->postal_code}}" data-name="{{$city->city_name}}" data-id="{{$city->city_id}}">
+											<option >Action</option>
+											<option value="edit">Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_city->render() !!}
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-5 website-container">
-				<div class="website-title">
-					Add Payment Method
-				</div>
-				<div class="website-content col-md-12">
-					<div class="web-content" id="payment_method_alert">
-					</div>
-					<div class="web-content">
-						<input type="text" class="form-text center" id="paymentMethodName" placeholder="Payment Method Name" required/>
-					</div>
-					<div class="web-content">
-						<button type="button" id="addPaymentMethod" class="form-button  center" >Add Payment Method</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 website-container">
-				<div class="website-title">
-					Payment Method List
-				</div>
-				<div class="website-content col-md-12">
-					
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Payment Method Name</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_payment_method as $payment_method)
-							<tr>
-								<td>{{$payment_method->payment_method_id}}</td>
-								<td>{{$payment_method->payment_method_name}}</td>
-								<td>
-									<select class="form-select pay_action" data-name="{{$payment_method->payment_method_name}}" data-id="{{$payment_method->payment_method_id}}" id="pay_action">
-										<option >Action</option>
-										<option value="edit" >Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_payment_method->render() !!}
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-5 website-container">
-				<div class="website-title">
-					Add County
-				</div>
-				<div class="website-content col-md-12">
-					<div class="web-content" id="county_alert">
-					</div>
-					<div class="web-content">
-						<input type="text" id="countyName" class="form-text center" placeholder="County Name" required/>
-					</div>
-					<div class="web-content">
-						<button type="button" id="addCounty" class="form-button center" >Add County</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 website-container">
-				<div class="website-title">
-					County List
-				</div>
-				<div class="website-content col-md-12">
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>County Name</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_county as $county)
-							<tr>
-								<td>{{$county->county_id}}</td>
-								<td>{{$county->county_name}}</td>
-								<td>
-									<select class="form-select count_action" data-name="{{$county->county_name}}" data-id="{{$county->county_id}}" id="count_action">
-										<option >Action</option>
-										<option value="edit">Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_county->render() !!}
-				</div>
-			</div>
-			
-		</div>
-		<div class="row">
-			<div class="col-md-5 website-container">
-				<div class="website-title">
-					Add City
-				</div>
-				<div class="website-content col-md-12">
-					<div class="web-content" id="city_alert">
-					</div>
-					<div class="web-content">
-						<select class="form-text center" id="countyID">
-							<option>County Name</option>
-							@foreach($_county_city as $county_city)
-							<option value="{{$county_city->county_id}}">{{$county_city->county_name}}</option>
-							@endforeach
-						</select>
-					</div>
-					<div class="web-content">
-						<input type="text" id="cityName" class="form-text center" placeholder="City Name" required/>
-					</div>
-					<div class="web-content">
-						<input type="text" id="cityZip" class="form-text center" placeholder="Zip Code" required/>
-					</div>
-					<div class="web-content">
-						<button type="button" id="addCity" class="form-button  center" >Add City</button>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-md-6 website-container">
-				<div class="website-title">
-					City List
-				</div>
-				<div class="website-content col-md-12">
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>County Name</th>
-								<th>City Name</th>
-								<th>Zip Code</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_city as $city)
-							<tr>
-								<td>{{$city->city_id}}</td>
-								<td>{{$city->county_name}}</td>
-								<td>{{$city->city_name}}</td>
-								<td>{{$city->postal_code}}</td>
-								<td>
-									<select class="form-select city_action" data-county_name="{{$city->county_name}}" id="city_action" data-zip="{{$city->postal_code}}" data-name="{{$city->city_name}}" data-id="{{$city->city_id}}">
-										<option >Action</option>
-										<option value="edit">Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_city->render() !!}
-				</div>
-			</div>
-		</div>
-	</div>
 	</form>
 </div>
 {{-- modal --}}

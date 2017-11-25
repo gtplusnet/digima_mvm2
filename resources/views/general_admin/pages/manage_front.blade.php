@@ -161,9 +161,7 @@ margin-left:-1px;
 }
 .btn-success
 {
-
 color:#fff;
 }
-
 </style>
 @endsection
