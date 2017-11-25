@@ -219,7 +219,7 @@
 	{
 		
         margin-bottom: 20px;
-        margin-left:10px;
+
         .business-list-title
         {
         	color: #555555;
@@ -238,6 +238,19 @@
     	{
     		height: 190px;
     		overflow: hidden;
+
+    		@media screen and (max-width: 425px)
+    		{
+    			height: 140px;
+    		}
+    		@media screen and (max-width: 375px)
+    		{
+    			height: 130px;
+    		}
+    		@media screen and (max-width: 320px)
+    		{
+    			height: 100px;
+    		}
 
     		.show-list-img
     		{
@@ -268,6 +281,16 @@
 				    a
 				    {
 						color:#555555;
+				    }
+
+				    @media screen and (max-width: 425px)
+				    {
+				    	font-size: 17px;
+				    }
+
+				    @media screen and (max-width: 375px)
+				    {
+				    	font-size: 15px;
 				    }
 				}
 				.business-list-phone
