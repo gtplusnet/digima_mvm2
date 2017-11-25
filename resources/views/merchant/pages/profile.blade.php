@@ -206,7 +206,9 @@ th
                         <div class="col-md-6">
                            <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/merchant/add_images" style="">
                                    {{ csrf_field() }}
-                              
+                              <div class="col-md-12 file-margin" >
+                                 <p>Minimum Image Dimension (800x600)</p>
+                              </div>
                               <div class="col-md-12 file-margin" >
                                  <div class="col-md-4">
                                     <label for="input-Default" class="control-label">Business Banner:</label>
