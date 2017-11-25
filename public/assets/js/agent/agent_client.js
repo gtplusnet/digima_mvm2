@@ -118,10 +118,11 @@ $(document).ready(function(){
 
 	$(document).on('click','#endMerchantCall',function(){
 		var transaction_id = $(this).data("id");
+		var status = $(this).data("status");
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client_transaction_reload',
-			data:{transaction_id: transaction_id},
+			data:{transaction_id: transaction_id,status:status},
 			dataType:'text',
 		}).done(function(data){
 				location.reload();

@@ -2,47 +2,44 @@
 @section('content')
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-{{-- <link rel="stylesheet" href="/resources/demos/style.css"> --}}
-{{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
-{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 <script type="text/javascript" src="/assets/js/global.ajax.js"></script>
 <script src="/assets/js/agent/agent_client.js"></script>
 <style>
-.distance
-{
-margin:10px 0px 10px 0px;
-}
-.li_style{
-padding:0px;
-width:33.31%;
-margin-right:0px;
-margin-left:-1px;
-}
-.modal-header
-{
-background-color: #24292E;
-color:#fff;
-/*border-radius: 10px;*/
-}
-.call
-{
-color:green;
-margin-right: 5px;
-font-size:20px;
-}
-.callme
-{
-color:white;
-margin-right: 0px;
-width:35px;
-font-size:20px;
-}
-</style>
-<script>
-$( function() {
-$( ".datepicker" ).datepicker();
-$( ".datepicker1" ).datepicker();
-});
+    .distance
+    {
+    margin:10px 0px 10px 0px;
+    }
+    .li_style{
+    padding:0px;
+    width:33.31%;
+    margin-right:0px;
+    margin-left:-1px;
+    }
+    .modal-header
+    {
+    background-color: #24292E;
+    color:#fff;
+    /*border-radius: 10px;*/
+    }
+    .call
+    {
+    color:green;
+    margin-right: 5px;
+    font-size:20px;
+    }
+    .callme
+    {
+    color:white;
+    margin-right: 0px;
+    width:35px;
+    font-size:20px;
+    }
+    </style>
+    <script>
+    $( function() {
+    $( ".datepicker" ).datepicker();
+    $( ".datepicker1" ).datepicker();
+    });
 </script>
 <div class="page-title">
     <h3>Merchant</h3>
@@ -99,8 +96,6 @@ $( ".datepicker1" ).datepicker();
                                     <th>ID</th>
                                     <th>Business Name</th>
                                     <th>Contact Person</th>
-                                    <th>Phone 1</th>
-                                    <th>Phone 2</th>
                                     <th>Membership</th>
                                     <th>Date Register</th>
                                     <th>Status</th>
@@ -113,8 +108,6 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$client->business_id}}</td>
                                     <td>{{$client->business_name}}</td>
                                     <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
-                                    <td>{{$client->business_phone}}</td>
-                                    <td>{{$client->business_alt_phone}}</td>
                                     <td>{{$client->membership_name}}</td>
                                     <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
                                     <td>{{$client->transaction_status}}</td>
@@ -141,10 +134,11 @@ $( ".datepicker1" ).datepicker();
                 </div>
             </div>
         </div>
-        <!-- modal -->
-        <div class="modal fade" id="agentCallModal" role="dialog" >
+        <!-- modal !important-->
+        <div class="modal fade" id="agentCallModal" role="dialog" style="overflow-y:inherit;">
             
         </div>
+        <!-- pending -->
         <div id="pendingCustomer" class="tab-pane fade">
             <div class="col-md-12" style="margin:20px 20px 20px 0px">
                 <form class="form-inline" method="post" action="/agent/search_client_pending">
@@ -175,11 +169,10 @@ $( ".datepicker1" ).datepicker();
                                 <th>ID</th>
                                 <th>Business Name</th>
                                 <th>Contact Person</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
                                 <th>Membership</th>
                                 <th>Date Pending</th>
                                 <th>Status</th>
+                                <th>Action</th>
 
                                 </tr>
                             </thead>
@@ -189,11 +182,14 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$clients_pendingss->business_id}}</td>
                                     <td>{{$clients_pendingss->business_name}}</td>
                                     <td>{{$clients_pendingss->contact_first_name}}  {{$clients_pendingss->contact_last_name}}</td>
-                                    <td>{{$clients_pendingss->business_phone}}</td>
-                                    <td>{{$clients_pendingss->business_alt_phone}}</td>
                                     <td>{{$clients_pendingss->membership_name}}</td>
                                     <td>{{date("F j, Y",strtotime($clients_pendingss->date_transact))}}</td>
                                     <td>{{$clients_pendingss->transaction_status}}</td>
+                                    <td>
+                                        <button type="button" class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" >
+                                            <i class="fa fa-phone call" aria-hidden="true"></i>call
+                                        </button>
+                                    </td>
                                 </tr>
                                 
                                 @endforeach

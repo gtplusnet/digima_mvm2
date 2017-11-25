@@ -1,4 +1,4 @@
-<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                  <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                         <thead>
                             <tr>
                                 <th style="text-align: center;">Name</th>

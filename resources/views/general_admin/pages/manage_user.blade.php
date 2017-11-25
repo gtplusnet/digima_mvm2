@@ -201,7 +201,7 @@
 						<table class="display table table-bordered agent_container"  style="background-color: #FFFFFF;width: 100%; cellspacing: 0;">
 							<thead>
 								<tr>
-									<!-- <th>ID</th> -->
+									<th>ID</th>
 									<th>Team Name</th>
 									<th>Team Description</th>
 									<th>Team Members</th>
@@ -212,7 +212,7 @@
 							<tbody>
 								@foreach($_data_team as $data_team)
 								<tr>
-									<!-- <td>{{ $data_team->team_id}}</td> -->
+									<td>{{ $data_team->id}}</td>
 									<td>{{ $data_team->team_name}}</td>
 									<td>{{ $data_team->team_information}}</td>
 									<td><i data-id="{{ $data_team->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
@@ -381,7 +381,7 @@
 							</div>
 							<div class="form-group col-md-9">
 								<select name="team_id" class='form-control' id="team_id">
-									@foreach ($_data_team as $data_team)
+									@foreach ($_team_select as $data_team)
 									<option value = '{{$data_team->team_id}}'>{{$data_team->team_name}}</option>
 									@endforeach
 								</select>
@@ -838,7 +838,7 @@
 							</div>
 							<div class="form-group col-md-9">
 								<select id="teamAssigned" class="form-control" >
-									@foreach($_data_team as $data_team)
+									@foreach($_team_select as $data_team)
 									<option value="{{$data_team->team_id}}">{{$data_team->team_name}}</option>
 									@endforeach
 								</select>
@@ -884,7 +884,7 @@
 							</div>
 							<div class="form-group col-md-9">
 								<select id="teamAssign" class="form-control" >
-									@foreach($_data_team as $data_team)
+									@foreach($_team_select as $data_team)
 									<option value="{{$data_team->team_id}}">{{$data_team->team_name}}</option>
 									@endforeach
 								</select>
