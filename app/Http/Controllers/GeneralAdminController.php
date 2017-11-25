@@ -11,7 +11,6 @@ use App\Models\TblAdminModels;
 use App\Models\TblUserAccountModel;
 use App\Models\TblPaymentModel;
 use App\Models\TblBusinessCategoryModel;
-
 use App\Models\TblBusinessContactPersonModel;
 use App\Models\TblInvoiceModels;
 use App\Models\TblCityModel;
@@ -1656,6 +1655,12 @@ class GeneralAdminController extends Controller
                                 ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                 ->get();
+    $data['_payment_archived']     = TblPaymentMethod::get();
+    $data['_membership_archived']  = TblMembeshipModel::get();
+    $data['_team_archived']        = TblTeamModel::get();
+    $data['_category_archived']    = TblBusinessCategoryModel::get();
+
+
     
       return view('general_admin.pages.archived',$data);
     }
