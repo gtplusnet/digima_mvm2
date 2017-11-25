@@ -141,8 +141,12 @@
   width: 100%;
   height: auto; }
 .business-list-container .business-list-holder {
+<<<<<<< HEAD
   margin-bottom: 20px;
   margin-left: 10px; }
+=======
+  margin-bottom: 20px; }
+>>>>>>> mod_fig_mvm_mobile
 .business-list-container .business-list-holder .business-list-title {
   color: #555555;
   font-family: "Quicksand",sans-serif;
@@ -154,9 +158,21 @@
 .business-list-container .per-business .business-img-holder {
   height: 190px;
   overflow: hidden; }
+<<<<<<< HEAD
 @media screen and (max-width: 375px) {
   .business-list-container .per-business .business-img-holder {
     height: 120px; } }
+=======
+@media screen and (max-width: 425px) {
+  .business-list-container .per-business .business-img-holder {
+    height: 140px; } }
+@media screen and (max-width: 375px) {
+  .business-list-container .per-business .business-img-holder {
+    height: 130px; } }
+@media screen and (max-width: 320px) {
+  .business-list-container .per-business .business-img-holder {
+    height: 100px; } }
+>>>>>>> mod_fig_mvm_mobile
 .business-list-container .per-business .business-img-holder .show-list-img {
   width: 100%;
   background-size: cover; }
@@ -174,6 +190,15 @@
   margin-bottom: 10px; }
 .business-list-container .per-business .business-info-holder .business-list-details .business-list-name a {
   color: #555555; }
+<<<<<<< HEAD
+=======
+@media screen and (max-width: 425px) {
+  .business-list-container .per-business .business-info-holder .business-list-details .business-list-name {
+    font-size: 17px; } }
+@media screen and (max-width: 375px) {
+  .business-list-container .per-business .business-info-holder .business-list-details .business-list-name {
+    font-size: 15px; } }
+>>>>>>> mod_fig_mvm_mobile
 .business-list-container .per-business .business-info-holder .business-list-details .business-list-phone .phone-text {
   font-family: "Poppins",sans-serif;
   font-size: 12px;
