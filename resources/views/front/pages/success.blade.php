@@ -32,6 +32,13 @@
 			<p class="success-message">If you have now the invoice and already paid.<br>Please click <a href="/merchant/payment">here</a>. </p>
 			<a href="/"><button class="continue-btn">CONTINUE</button></a>
 		</div>
+		@elseif($index == 'deactivated')
+		<div class="banner-holder" >
+			<p class="message-intro" style="text-align:center;">Sorry! {{session('full_name')}},</p>
+			<p class="success-message" style="text-align:center;"><br>Your account has been deactivated.</p>
+			<p class="success-message" style="text-align:center;">If you think that this is a wrong action,<br>Please contact the <a href="/contact">Administrator</a>. </p>
+			<a href="/"><button class="continue-btn">CONTINUE</button></a>
+		</div>
 		@endif
 	</div>
 </div>

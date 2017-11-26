@@ -51,20 +51,16 @@
             <div class="panel panel-white">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <h1 class="m-b-md"><b>CROATIA Directory</b></h1>
                             <address>
-                                <i class="fa fa fa-map-marker text-info"></i> @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br>
-                               <i class="fa fa fa-phone text-info"></i>@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif<br>
-                               <i class="fa fa fa-envelope-o text-info"></i> @if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif
+                                <i class="fa fa fa-map-marker text-info"></i>&nbsp;&nbsp;@if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br>
+                                <i class="fa fa fa-phone text-info"></i>&nbsp;&nbsp;@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif<br>
+                                <i class="fa fa fa-envelope-o text-info"></i>&nbsp;&nbsp;@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif
                             </address>
                         </div>
                         <div class="col-md-8 text-right">
                             <h1>RECEIPT</h1>
-                           <!--  <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
-                            <button type="button" class="btn btn-default"><a class="fa fa-print" href="javascript:if(window.print)window.print()"> Print</a></button>
-
-
                         </div>
                         <div class="col-md-12">
                             
@@ -103,7 +99,6 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        
                                         <td>{{$bill->business_name}}</td>
                                         <td>{{$bill->membership_name}}</td>
                                         <td>${{$bill->payment_amount}}</td>
