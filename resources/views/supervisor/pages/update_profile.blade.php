@@ -5,11 +5,11 @@
     <div class="form-group">
         <label for="input-Default" class="col-sm-2 control-label">Profile Picture</label>
         <div class="col-sm-4">
-            <input type="file" class="form-control input-rounded" id="image">
+            <input type="file" class="form-control input-rounded" id="image" accept="image/x-png,image/jpeg">
             <input type="hidden" id="imageText" value="{{$profile->profile}}">
         </div>
         <div class="col-sm-6">
-            <img src="/company_profile/user_pictures.png" class="img-thumbnail" alt="profile picture">
+            <img src="/company_profile/user_pictures.png" >
         </div>
     </div>
     <hr>

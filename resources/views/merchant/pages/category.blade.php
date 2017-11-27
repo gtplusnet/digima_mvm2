@@ -199,13 +199,4 @@
 <script type="text/javascript" src="/assets/js/merchant/category.js"></script>
 
 
-
-
-
-
-
-
-
-
-
 @endsection

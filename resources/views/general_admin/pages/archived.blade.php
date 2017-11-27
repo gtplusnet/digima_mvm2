@@ -2,23 +2,7 @@
 @section('title', 'archived')
 @section('description', 'archived')
 @section('content')
-<style>
-	.li_me
-	{
-		width:20%;
-	}
-	.li
-	{
-		width:25%;
-	}
-	.li_me_to
-	{
-		width:25%;
-		padding:0px;
-		width:25%;
-	
-	}
-</style>
+
 <div class="page-title">
 	<div class="page-breadcrumb">
 		<h3>Archived</h3>
@@ -164,6 +148,7 @@
 				<div class="tab-content" style="background-color: #fcfcfc !important;">
 					<div id="Paymentmethod" class=" tab-pane fade in active">
 						<div class="row">
+
 							<table class="table table-bordered" style="background-color: #fff !important;width:100%; font-style: 50px" >
 								<thead>
 									<tr>
@@ -183,6 +168,7 @@
 									</tr>
 									@endforeach
 								</tbody>
+
 							</table>
 						</div>
 					</div>
@@ -308,6 +294,25 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.li_me
+	{
+		width:20%;
+	}
+
+	.li
+	{
+		width:25%;
+	}
+
+	.li_me_to
+	{
+		width:25%;
+		padding:0px;
+		width:25%;
+	}
+</style>
 
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="/assets/js/global.ajax.js"></script>

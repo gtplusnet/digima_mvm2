@@ -65,13 +65,14 @@ class MerchantController extends Controller
 	public function login()
     {
       	Self::allow_logged_out_users_only();
+
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['contact_us']         = TblContactUs::first();
         $data['page']   = 'login';
         Session::forget("merchant_login");
         return view('front.pages.login', $data);
     }
-    public function login_submit(Request $request)
+  public function login_submit(Request $request)
     {
         $validate_login = TblUserAccountModel::where('user_email',$request->email)->first();
                        
@@ -85,6 +86,7 @@ class MerchantController extends Controller
                                 ->first();
                     Session::put("merchant_login",true);
                     Session::put("business_id",$user_info->business_id);
+                    Session::put("business_banner",$validate_login->business_banner);
                     Session::put("email",$validate_login->user_email);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     $data['page']   = 'Dashboard';
@@ -131,13 +133,13 @@ class MerchantController extends Controller
       }
    }
 
-   public function logout()
+  public function logout()
 	 {
 		  Session::forget("merchant_login");
       return Redirect::to("/login");
 	 }
 
-	 public function index()
+	public function index()
 	 {	
 		Self::allow_logged_in_users_only();
 
@@ -185,25 +187,29 @@ class MerchantController extends Controller
 	  }
     public function merchant_redirect()
     {
+
       $data['index']            = "unpaid";
       $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
       $data['contact_us']       = TblContactUs::first();
       return view ('front.pages.success',$data);
+
     }
 
     public function merchant_redirect_exist()
     {
+
       $data['index'] = 'redirect_exist';
       $data['countyList'] = TblCountyModel::get();
       return view('front.pages.success',$data);
+
     }
 
     public function payment()
     {
-      $data['page']       = 'payment';
-      $data['countyList'] = TblCountyModel::get();
-      $data['method']     = TblPaymentMethod::get();
-      $data['picture']    = TblPaymentModel::get();
+      $data['page']             = 'payment';
+      $data['countyList']       = TblCountyModel::get();
+      $data['method']           = TblPaymentMethod::get();
+      $data['picture']          = TblPaymentModel::get();
       $check = TblPaymentModel::where('business_id',session('business_id'))->first();
         if($check)
         {
@@ -211,8 +217,8 @@ class MerchantController extends Controller
         }
         else
         {
-          $data['method'] = TblPaymentMethod::get();
-          $data['countyList'] = TblCountyModel::get();
+          $data['method']        = TblPaymentMethod::get();
+          $data['countyList']    = TblCountyModel::get();
           $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -230,13 +236,13 @@ class MerchantController extends Controller
         $file = $request->file('payment_file_name');
         if($file==null||$file=='')
         {
-          $data['payment_reference_number'] = $request->payment_reference_number;
-          $data['payment_amount']           = $request->payment_amount;
-          $data['payment_method']           = $request->payment_method;
-          $data['payment_file_name']        = 'Image Not Available';
+          $data['payment_reference_number']   = $request->payment_reference_number;
+          $data['payment_amount']             = $request->payment_amount;
+          $data['payment_method']             = $request->payment_method;
+          $data['payment_file_name']          = 'Image Not Available';
           $data['business_contact_person_id'] = $request->contact_id;
-          $data['business_id']              = $request->business_id;
-          $data['payment_status']           = 'submitted';
+          $data['business_id']                = $request->business_id;
+          $data['payment_status']             = 'submitted';
           $check_insert = TblPaymentModel::insert($data);
           if($check_insert)
           {
@@ -256,13 +262,13 @@ class MerchantController extends Controller
           $check=$file->move($destinationPath, $filename);   
             if($check)
             {
-              $data['payment_reference_number'] = $request->payment_reference_number;
-              $data['payment_amount']           = $request->payment_amount;
-              $data['payment_method']           = $request->payment_method;
-              $data['payment_file_name']        = $filename;
+              $data['payment_reference_number']   = $request->payment_reference_number;
+              $data['payment_amount']             = $request->payment_amount;
+              $data['payment_method']             = $request->payment_method;
+              $data['payment_file_name']          = $filename;
               $data['business_contact_person_id'] = $request->contact_id;
-              $data['business_id']              = $request->business_id;
-              $data['payment_status']           = 'submitted';
+              $data['business_id']                = $request->business_id;
+              $data['payment_status']             = 'submitted';
               $check_insert = TblPaymentModel::insert($data);
             if($check_insert)
               {
@@ -418,7 +424,7 @@ class MerchantController extends Controller
       {
           $data['business_hours_from']  = $business_hours_f;
           $data['business_hours_to']    = $business_hours_to[$key]; 
-          $data['act']               = $desc[$key]; 
+          $data['act']                  = $desc[$key]; 
           
           $check  = TblBusinessHoursmodels::where('business_id',$business_id[$key])->where('days',$days[$key])->update($data);
 
@@ -431,7 +437,6 @@ class MerchantController extends Controller
 
      public function add_payment_method(Request $request)
     {
-
       $data["payment_method_name"] = $request->paymentMethodName;
       $data["payment_method_info"] = "not available";
       $data["business_id"]         = session("business_id");
@@ -560,10 +565,10 @@ class MerchantController extends Controller
           $check=$file3->move($destinationPath, $filename3);
         }
 
-        $data['business_banner'] = $filename;
-        $data['business_id']    =  session("business_id");
-        $data['other_image_one'] = $filename1;
-        $data['other_image_two'] = $filename2;
+        $data['business_banner']   = $filename;
+        $data['business_id']       =  session("business_id");
+        $data['other_image_one']   = $filename1;
+        $data['other_image_two']   = $filename2;
         $data['other_image_three'] = $filename3;
         // dd($data);
         $check_data = TblBusinessImages::where('business_id',session('business_id'))->count();
@@ -594,10 +599,7 @@ class MerchantController extends Controller
             Session::flash('success_merchant', "success");
             return Redirect::back();
           }
-        }
-          
-        
-        
+        }       
     }
      
 	  public function category()
@@ -623,27 +625,31 @@ class MerchantController extends Controller
      public function add_tag_category(Request $request)
     {
       $data_id = $request->checkbox;
-      foreach($data_id as $key=>$id)
+      if ($data_id) 
       {
-        $data['business_category_id'] = $id;
-        $data['business_id'] = session('business_id');
-        $_check = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->where('business_category_id',$id)->first();
-        $_check2 = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->count();
-      
+       foreach($data_id as $key=>$id)
+        {
+          $data['business_category_id'] = $id;
+          $data['business_id'] = session('business_id');
+          $_check  = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->where('business_category_id',$id)->first();
+          $_check2 = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->count();
           if($_check)
           {
             echo "hi";
-          }
+          } 
           elseif($_check2<6)
           {
             Session::flash('message1', "Done Tagging!");
             $_insert = TblBusinessTagCategoryModel::whereIn('business_id',session('business_id'))->insert($data);
           }  
-      }  
+        }  
+      }
+      else
+      {
+
+      }
       return Redirect::back();
     }
-
-
 
       public function delete_tag_category($id)
     {
@@ -655,7 +661,7 @@ class MerchantController extends Controller
        public function add_keywords(Request $request)
     {
       $data['keywords_name'] = $request->keywords_name;
-      $data['business_id'] = session('business_id');
+      $data['business_id']   = session('business_id');
       TblBusinessKeywordsModel::insert($data);
       Session::flash('message', "Keyword Successfully Added!");
       return Redirect::back();
@@ -672,7 +678,7 @@ class MerchantController extends Controller
     public function messages(Request $request)
     {
       Self::allow_logged_in_users_only();
-      $data['page'] = 'Messages';
+      $data['page']              = 'Messages';
       $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->paginate(8);
       return view ('merchant.pages.messages', $data);  
     }
@@ -683,6 +689,7 @@ class MerchantController extends Controller
 
       $data['contact_us'] = TblContactUs::first();
 		  $data['page']   	  = 'Bills';
+
       $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
@@ -692,6 +699,7 @@ class MerchantController extends Controller
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
                       ->first();
+
                       // dd($data['bill']);
 		  return view ('merchant.pages.bills', $data);		
 	  }

@@ -127,40 +127,42 @@ class SuperVisorController extends Controller
       }
     }
     public function saving_profile(Request $request)
-    {
-      
+    { 
       Self::allow_logged_in_users_only();
       if($request->ajax())
       {
-        if($request->stats=='null')
-        {
-          $data['primary_phone']    = $request->primaryPhone;
-          $data['secondary_phone']  = $request->secondaryPhone;
-          $data['other_info']       = $request->otherInfo;
-          $data['address']          = $request->address;
-          $data['profile']          = $request->imageText;;
-
-          // dd($data);
-          $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
-          if($check)
+          if($request->stats=='null')
           {
-            return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+            $data['primary_phone']    = $request->primaryPhone;
+            $data['secondary_phone']  = $request->secondaryPhone;
+            $data['other_info']       = $request->otherInfo;
+            $data['address']          = $request->address;
+            $data['profile']          = $request->imageText;;
+
+            $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
+            if($check)
+            {
+              return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+            }
+            else
+            {
+              return "<div class='alert alert-waring'><strong>Sorry!</strong> Nothing has change.</div>"; 
+            }
+
           }
           else
           {
-            return "<div class='alert alert-waring'><strong>Sorry!</strong> Nothing has change.</div>"; 
+            $unique=uniqid();
+            $fileConvo = $request->file("file");
+            $file_name = '/company_profile/'.$unique."-".$fileConvo->getClientOriginalName().'';
+            $fileConvo->move('company_profile', $file_name);
+            $data['profile']          = $file_name; 
+            $data['primary_phone']    = $request->primaryPhone;
+            $data['secondary_phone']  = $request->secondaryPhone;
+            $data['other_info']       = $request->otherInfo;
+            $data['address']          = $request->address;
+            TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
           }
-        }
-        else
-        {
-          $unique=uniqid();
-          $fileConvo = $request->file("file");
-          $file_name = '/company_profile/'.$unique."-".$fileConvo->getClientOriginalName().'';
-          $fileConvo->move('company_profile', $file_name);
-          $update['profile'] = $file_name; 
-          TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($update);
-        }
-        
       }
     }
 

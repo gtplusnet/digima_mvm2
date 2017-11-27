@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-3 profile-image">
                     <div class="profile-image-container">
-                        <img src="/company_profile/user_profile.jpg" alt="">
+                         <img src="{{$agent_info->profile}}" alt="" style="min-width: 200px;min-height: 200px;max-height: 200px;max-width: 200px;">
                     </div>
                 </div>
             </div>
@@ -23,7 +23,8 @@
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-md-3 user-profile">
-
+                    <br>
+                    <hr>
                     <h3 class="text-center">{{session('full_name_agent')}}</h3>
                     <p class="text-center">{{$agent_info->email}}</p>
                      <p class="text-center">{{$team->team_name}}</p>
