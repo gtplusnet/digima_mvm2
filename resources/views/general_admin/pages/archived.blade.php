@@ -2,23 +2,7 @@
 @section('title', 'archived')
 @section('description', 'archived')
 @section('content')
-<style>
-	.li_me
-	{
-		width:20%;
-	}
-	.li
-	{
-		width:25%;
-	}
-	.li_me_to
-	{
-		width:25%;
-		padding:0px;
-		width:25%;
-	
-	}
-</style>
+
 <div class="page-title">
 	<div class="page-breadcrumb">
 		<h3>Archived</h3>
@@ -310,6 +294,7 @@
 		</div>
 	</div>
 </div>
+
 <style>
 	.li_me
 	{

@@ -137,7 +137,7 @@ padding: 10px;
 						<div class="web-content">
 							<button type="button" id="addPaymentMethod" class="form-button  center" >Add Payment Method</button>
 						</div>
-					</div>
+					</div>	
 				</div>
 				<div class="col-md-6 website-container">
 					<div class="website-title">
