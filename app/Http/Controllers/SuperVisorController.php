@@ -298,14 +298,12 @@ class SuperVisorController extends Controller
       $data['fri'] = TblBusinessModel::where('agent_call_date',$fri)->count();
       $data['sat'] = TblBusinessModel::where('agent_call_date',$sat)->count();
       $data['sun'] = TblBusinessModel::where('agent_call_date',$sun)->count();
-
-
       $data['_agents']   = TblAgentModel::get();
       $data['_teams']   = TblTeamModel::get();
-
       $data['page']	= 'Dashboard';
-  	  return view ('supervisor.pages.dashboard', $data);	
+      return view ('supervisor.pages.dashboard', $data);	
     }
+    
     public function supervisor_show_agent_calls(Request $request)
     {
       $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));

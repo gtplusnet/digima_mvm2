@@ -21,7 +21,7 @@
 			<p class="registration-form-title">PERSONAL INFORMATION</p>
 		</div>	
 		<div class="col-md-12 form-upper-container">			
-			<div class="col-md-12 registration-form-container">
+			<div class=" registration-form-container">
 				<div class="col-md-3 form-firstpart">
 				  	<label for="prefix" class="registration-form-label">Prefix:</label>
 				    <select class="form-control" name="prefix" id="prefix" required="true">
@@ -46,7 +46,7 @@
 				<label for="emailAddress" class="registration-form-label">Email Address:(will be used as login)</label>
 				<input type="email" class="form-control" name="emailAddress" id="emailAddress" required="true">
 			</div>
-			<div class="col-md-12 registration-form-container">
+			<div class="registration-form-container">
 				<div class="col-md-6 dualfield-firstpart">	
 					<label for="password" class="registration-form-label">Password:</label>
 					<input type="password" class="form-control" name="password" id="password" required="true">
@@ -66,7 +66,7 @@
 			    <input type="text" class="form-control" name="businessName" id="businessName" required="true">
 			</div>
 			<div class="col-md-12 registration-form-container">
-				<div class="col-md-12 dualfield-firstpart">	
+				<div class="dualfield-firstpart">	
 					<label for="password" class="registration-form-label">Membership</label>
 					<select class="form-control" name="membership"  required="true">
 			  			@foreach($_membership as $membership)
@@ -77,25 +77,25 @@
 				<div class="col-md-6 dualfield-secondpart">
 				</div>
 			</div>
-			<div class="col-md-12 registration-form-container">
+			<div class="registration-form-container">
 				<div class="col-md-4 form-firstpart">
 					<label for="primaryPhone" class="registration-form-label">Primary Phone:</label>
-				    <input type="text" class="form-control" name="primaryPhone" id="primaryPhone" required="true">
+				    <input type="text" class="form-control" maxlength="7" name="primaryPhone" id="primaryPhone" placeholder="last 7 numbers" required="true">
 				</div>
 				<div class="col-md-4 form-secondpart">
 					<label for="alternatePhone" class="registration-form-label">Alternative Phone:</label>
-				    <input type="text" class="form-control" name="alternatePhone" id="alternatePhone" required="true">
+				    <input type="text" class="form-control" maxlength="7" name="alternatePhone" id="alternatePhone" placeholder="last 7 numbers" required="true">
 				</div>
 				<div class="col-md-4 form-thirdpart">
 					<label for="faxNumber" class="registration-form-label">Fax Number:</label>
-				   	<input type="text" class="form-control" name="faxNumber" id="faxNumber" required="true">
+				   	<input type="text" class="form-control" name="faxNumber" id="faxNumber">
 				</div>
 			</div>
 			<div class="col-md-12 registration-form-container">
 				<label for="businessAddress" class="registration-form-label">Complete Business Address:</label>
 				<textarea rows="5" name="businessAddress" id="businessAddress" class="businessadd-textarea" required="true"></textarea>
 			</div>
-			<div class="col-md-12 registration-form-container">
+			<div class=" registration-form-container">
 				<div class="col-md-5 form-firstpart">
 					<label for="countyDropdown" class="registration-form-label">County:</label>
 			  		<select class="form-control countyDropdown" name="countyDropdown" id="countyDropdown" required="true">
@@ -157,8 +157,8 @@
 	</form>
 
 </div>
-<div class="modal fade" id="membershipPopUp" style="margin-top:10px;overflow-y:hidden;">
-	<div class="modal-dialog modal-md">
+<div class="modal fade" id="membershipPopUp" style="margin-top:10px;border:none">
+	<div class="modal-dialog modal-lg">
 	  <div class="modal-content">
 	    <div class="modal-header">
 	      <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -167,10 +167,10 @@
 	    <div class="modal-body">
 	      <div >
 				<div class="payment-containers">
-					<div class="row-clearfix col-md-12 payment-content ">
+					<div class="row-clearfix payment-content ">
 						@foreach($_membership as $membership)
-						<div class="col-md-6 package-container" style="margin:0px !important;">
-							<div style="padding:10px;">
+						<div class="col-md-6 package-container" style="margin:0px !important;padding:10px;    border: none !important;">
+							<div style="padding:10px;border:1px solid black;">
 								<div class="membership-offer">
 									{{$membership->membership_name}}
 								</div>
@@ -180,7 +180,7 @@
 								</div>
 								<hr>
 								<div class="membership-details">
-									<p class="membership-details-text" style="height:200px;overflow-y: scroll;">
+									<p class="membership-details-text" style="height:200px;overflow: hidden;">
 										{{$membership->membership_info}}
 									</p>
 								</div>
