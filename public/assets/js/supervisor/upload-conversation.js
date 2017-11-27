@@ -33,20 +33,27 @@ $(document).ready(function () {
         $("*#selAudioBtn*").attr("class", "btn btn-primary btn-rounded");
     });
 
-    $(document).on('click', '#uploadBtn', function () {
+    $(document).on('click', '#uploadBtn', function () 
+    {
         var name = document.getElementById("convoFile").files[0].name;
         var businessId = document.getElementById("businessId").value;
         var contactId = document.getElementById("contactId").value;
         var form_data = new FormData();
         var ext = name.split('.').pop().toLowerCase();
-        if (ext != 'mp3') {
+        if (ext != 'mp3') 
+        {
             toastr.warning('Please select an audio file.');
-        } else {
+        } 
+        else 
+        {
             var f = document.getElementById("convoFile").files[0];
             var fsize = f.size || f.fileSize;
-            if (fsize > 1073741824) {
+            if (fsize > 1073741824) 
+            {
                 toastr.warning("Cannot upload audio, file size is very big.");
-            } else {
+            } 
+            else 
+            {
                 form_data.append("file", document.getElementById('convoFile').files[0]);
                 form_data.append("businessId", businessId);
                 form_data.append("contactId", contactId);

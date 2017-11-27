@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-3 profile-image">
                     <div class="profile-image-container">
-                        <img src="/assets/admin/merchant/assets/images/avatar4.png" alt="">
+                        <img src="/company_profile/user_profile.jpg" alt="">
                     </div>
                 </div>
             </div>

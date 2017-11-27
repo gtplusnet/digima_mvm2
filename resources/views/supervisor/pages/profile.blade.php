@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-3 profile-image">
                     <div class="profile-image-container">
-                        <img src="/assets/admin/merchant/assets/images/avatar4.png" alt="">
+                        <img src="{{$profile->profile}}" alt="" style="min-width: 200px;min-height: 200px;">
                     </div>
                 </div>
             </div>
