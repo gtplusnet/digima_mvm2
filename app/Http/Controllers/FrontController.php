@@ -61,7 +61,7 @@ class FrontController extends Controller
         Self::allow_logged_out_users_only();
         
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
-         $data['contact_us']           = TblContactUs::first();
+        $data['contact_us']         = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::get();
         $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
@@ -88,11 +88,9 @@ class FrontController extends Controller
     {
 
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
-        $data['membership']         = TblMembeshipModel::get();
-        $data['_membership']        = TblMembeshipModel::get();
-        $data['countyList']         = Tbl_county::get();
-        $data['contact_us']           = TblContactUs::first();
-        $data['terms']                = TblTerms::first();
+        $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
+        $data['contact_us']         = TblContactUs::first();
+        $data['terms']              = TblTerms::first();
         
         return view('front.pages.registration', $data);
     }
@@ -175,7 +173,9 @@ class FrontController extends Controller
     }
     public function redirect_deactivated()
     {
-        return view('front.pages.deactivated_account');
+        $data['index']              = 'deactivated';
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        return view('front.pages.success',$data);
     }
 
     public function getCity(Request $request)

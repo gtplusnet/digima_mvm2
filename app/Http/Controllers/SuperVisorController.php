@@ -57,7 +57,7 @@ class SuperVisorController extends Controller
                   if($validate_login->archived==0)
                       {
                         Session::put("supervisor_login",true);
-
+                        Session::put("profile",$validate_login->profile);
                         Session::put("supervisor_id",$validate_login->supervisor_id);
                         Session::put("full_name_supervisor",$validate_login->first_name." ".$validate_login->last_name);
 
@@ -128,18 +128,39 @@ class SuperVisorController extends Controller
     }
     public function saving_profile(Request $request)
     {
-      $data['primary_phone']    = $request->primaryPhone;
-      $data['secondary_phone']  = $request->secondaryPhone;
-      $data['other_info']     = $request->otherInfo;
-      $data['address']      = $request->address;
-      $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
-      if($check)
+      
+      Self::allow_logged_in_users_only();
+      if($request->ajax())
       {
-        return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
-      }
-      else
-      {
-        return "<div class='alert alert-danger'><strong>Sorry!</strong> Transaction failure.</div>"; 
+        if($request->stats=='null')
+        {
+          $data['primary_phone']    = $request->primaryPhone;
+          $data['secondary_phone']  = $request->secondaryPhone;
+          $data['other_info']       = $request->otherInfo;
+          $data['address']          = $request->address;
+          $data['profile']          = $request->imageText;;
+
+          // dd($data);
+          $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
+          if($check)
+          {
+            return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+          }
+          else
+          {
+            return "<div class='alert alert-waring'><strong>Sorry!</strong> Nothing has change.</div>"; 
+          }
+        }
+        else
+        {
+          $unique=uniqid();
+          $fileConvo = $request->file("file");
+          $file_name = '/company_profile/'.$unique."-".$fileConvo->getClientOriginalName().'';
+          $fileConvo->move('company_profile', $file_name);
+          $update['profile'] = $file_name; 
+          TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($update);
+        }
+        
       }
     }
 

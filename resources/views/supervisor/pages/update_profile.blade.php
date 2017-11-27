@@ -3,6 +3,17 @@
 <form class="form-horizontal" method="POST" action="/supervisor/saving_profile">
     {{csrf_field()}}
     <div class="form-group">
+        <label for="input-Default" class="col-sm-2 control-label">Profile Picture</label>
+        <div class="col-sm-4">
+            <input type="file" class="form-control input-rounded" id="image">
+            <input type="hidden" id="imageText" value="{{$profile->profile}}">
+        </div>
+        <div class="col-sm-6">
+            <img src="/company_profile/user_pictures.png" class="img-thumbnail" alt="profile picture">
+        </div>
+    </div>
+    <hr>
+    <div class="form-group">
         <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
         <div class="col-sm-2">
             <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$profile->prefix}}" readonly>

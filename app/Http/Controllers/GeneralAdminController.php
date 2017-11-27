@@ -1224,6 +1224,7 @@ class GeneralAdminController extends Controller
     $ins['address'] = 'none';
     $ins['other_info'] = 'none';
     $ins['date_created'] = date("Y/m/d");
+    $ins['profile']         = '/company_profile/user_profile.jpg';
     $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
 
         if($ins['password']=='')

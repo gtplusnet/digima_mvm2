@@ -1,28 +1,23 @@
- <div class="navbar">
+<div class="navbar">
     <div class="navbar-inner">
         <div class="sidebar-pusher">
             <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
                 <i class="fa fa-bars"></i>
             </a>
         </div>
-        
-       {{--  <div class="logo-box">
-            <a href="index.html" class="logo-text"><span>CROATIA</span></a>
-        </div><!-- Logo Box --> --}}
         <div class="logo-box">
-            
             <a href="/supervisor/dashboard" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
-        </div><!-- Logo Box -->
+        </div>
         <div class="topmenu-outer">
             <div class="top-menu">
                 <ul class="nav navbar-nav navbar-left">
-                    <li>        
+                    <li>
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
                     </li>
                     <li>
                         <a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>
                     </li>
-                    <li>        
+                    <li>
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
                     </li>
                     <li class="dropdown">
@@ -33,7 +28,7 @@
                             <li class="li-group">
                                 <ul class="list-unstyled">
                                     <li class="no-link" role="presentation">
-                                        Fixed Header 
+                                        Fixed Header
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right fixed-header-check" checked>
                                         </div>
@@ -43,31 +38,31 @@
                             <li class="li-group">
                                 <ul class="list-unstyled">
                                     <li class="no-link" role="presentation">
-                                        Fixed Sidebar 
+                                        Fixed Sidebar
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right fixed-sidebar-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Horizontal bar 
+                                        Horizontal bar
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right horizontal-bar-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Toggle Sidebar 
+                                        Toggle Sidebar
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right toggle-sidebar-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Compact Menu 
+                                        Compact Menu
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right compact-menu-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Hover Menu 
+                                        Hover Menu
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right hover-menu-check">
                                         </div>
@@ -77,7 +72,7 @@
                             <li class="li-group">
                                 <ul class="list-unstyled">
                                     <li class="no-link" role="presentation">
-                                        Boxed Layout 
+                                        Boxed Layout
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right boxed-layout-check">
                                         </div>
@@ -103,7 +98,7 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">                               
+                <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-success pull-right">3</span></a>
                         <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
@@ -139,38 +134,39 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                             <span class="user-name">{{session('full_name_supervisor')}}<i class="fa fa-angle-down"></i></span>
-                            <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
-                        </a>
+                            <img class="img-circle avatar" src="{{session('profile')}}" width="40" height="40" alt="">
+                        </a>    
                         <ul class="dropdown-menu dropdown-list" role="menu">
-                            <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
-                            <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
+                            <li role="presentation" style="margin:10px;"><i class="fa fa-user"></i>Select Language</li>
+                            <li role="presentation"><a href="javascript:;" id="English" onclick="translateLanguage(this.id);"><img src="/images/flag_usa.ico" style="max-width:35px;max-height:15px;margin-right:10px;">USA</a></li>
+                            <li role="presentation"><a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);"><img src="/images/flag_croatia.ico" style="max-width:35px;max-height:15px;margin-right:10px;">CROATIA</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="/supervisor_logout"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href='/supervisor/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+
                         </ul>
                     </li>
-                    <li>
-
-                    @if(session("supervisor_login"))
-                    <a style="font-size:15px",  href='/supervisor/logout'>
-                    <span>
-                    <i class="fa fa-sign-out m-r-xs"></i>
-                    Log out
-                    </span>
-                    </a>
-                    @else
-                    <a style="font-size:15px",  href="">
-                    <span>
-                    <i class="fa fa-sign-out m-r-xs"></i>
-                    Hi Guest
-                    </span>
-                    </a>  
-                     @endif        
-
-                 
-                    </li>
-                </ul><!-- Nav -->
-            </div><!-- Top Menu -->
+                    <div id="google_translate_element" style="display:none;">
+                        <style>
+                            .goog-te-gadget-icon
+                            {
+                                visibility:hidden;
+                                text-align:center;
+                                position:absolute;
+                            }
+                            
+                            .goog-te-banner-frame.skiptranslate 
+                            {
+                                display: none !important;
+                            } 
+                            body 
+                            { 
+                                top: 0px !important; 
+                            }
+                            
+                            </style>
+                    </div>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

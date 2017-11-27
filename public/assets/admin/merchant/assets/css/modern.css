@@ -4243,7 +4243,7 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
 /* Profile */
 
 .profile-cover {
-    background: url('../images/profile-cover.png');
+    background: url('/images/croatiacover.jpg');
     background-size: cover;
     width: 100%;
     height: 300px;

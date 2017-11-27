@@ -24,9 +24,7 @@ use App\Models\TblReportsModel;
 use App\Models\TblBusinessTagCategoryModel;
 use App\Models\TblCityModel;
 use App\Models\TblContactUs;
-
 use App\Models\TblABusinessPaymentMethodModel;
-
 use Redirect;
 use insert;
 use DB;
@@ -67,9 +65,10 @@ class MerchantController extends Controller
 	public function login()
     {
       	Self::allow_logged_out_users_only();
-        $data['countyList']       = TblCountyModel::get();
-        $data['contact_us']       = TblContactUs::first();
-        $data['page']             = 'login';
+
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
+        $data['page']   = 'login';
         Session::forget("merchant_login");
         return view('front.pages.login', $data);
     }
@@ -189,7 +188,7 @@ class MerchantController extends Controller
     {
 
       $data['index']            = "unpaid";
-      $data['countyList']       = TblCountyModel::get();
+      $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
       $data['contact_us']       = TblContactUs::first();
       return view ('front.pages.success',$data);
 
@@ -701,6 +700,7 @@ class MerchantController extends Controller
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
                       ->first();
 
+                      // dd($data['bill']);
 		  return view ('merchant.pages.bills', $data);		
 	  }
 
