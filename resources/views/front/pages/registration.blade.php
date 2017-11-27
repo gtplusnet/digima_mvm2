@@ -95,7 +95,7 @@
 				<label for="businessAddress" class="registration-form-label">Complete Business Address:</label>
 				<textarea rows="5" name="businessAddress" id="businessAddress" class="businessadd-textarea" required="true"></textarea>
 			</div>
-			<div class=" registration-form-container">
+			<div class="registration-form-container">
 				<div class="col-md-5 form-firstpart">
 					<label for="countyDropdown" class="registration-form-label">County:</label>
 			  		<select class="form-control countyDropdown" name="countyDropdown" id="countyDropdown" required="true">
