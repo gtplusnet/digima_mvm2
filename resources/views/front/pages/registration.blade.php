@@ -7,8 +7,8 @@
 
 <div class="banner-registration" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
-		<div class="pull-left">
-			<img src="/images/registration_icon.png" class="registration-bg">
+		<div class="title-holder-page" style="">
+			REGISTRATION
 		</div>
 	</div>
 </div>

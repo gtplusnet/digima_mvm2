@@ -105,11 +105,11 @@ class GeneralAdminController extends Controller
         return Redirect::to("/general_admin");
     }
 
-    public function general_admin_business_list(Request $request)
-    {
-      $data['business_list'] = $this->business_data($request['business_name']);
-      return view('general_admin.pages.business',$data)->render();
-    }
+    // public function general_admin_business_list(Request $request)
+    // {
+    //   $data['business_list'] = $this->business_data($request['business_name']);
+    //   return view('general_admin.pages.business',$data)->render();
+    // }
     public function general_admin_dashboard()
     {
          Self::allow_logged_in_users_only();
@@ -596,27 +596,9 @@ class GeneralAdminController extends Controller
       Session::flash('deact', "Merchant Already Deactivated");
       return Redirect::back();
     }
-    public function get_business_list_info(Request $request)
-    {
-        if($request->ajax())
-        {
-            $business_list = $this->business_data($request['business_name']);
     
-            $business_name = $request['business_name'];
-            $view = view('general_admin.pages.business_list', compact('business_list', 'business_name'))->render();
-            return Response::json($view);
-        }
-    }
 
-    public function get_business_info(Request $request)
-    {
-        $business_info = DB::table('tbl_business')
-                      ->join('tbl_business_contact_person', 'tbl_business.business_id', '=', 'tbl_business_contact_person.business_id')
-                      ->where('tbl_business.business_id', '=', $request->business_id)->first();
-
-        $view = view('general_admin.pages.business_info', compact('business_info'))->render();
-        return Response::json($view);
-    }
+    
 
     public function business_data($business_name)
     {
@@ -625,19 +607,11 @@ class GeneralAdminController extends Controller
       return $business_list;
     }
 
-    public function email_invoice()
-    {
-      Self::allow_logged_in_users_only();
-        return view('general_admin.pages.email_invoice');
-    }
+    
     public function general_admin_manage_user(Request $request)
     {
 
       Self::allow_logged_in_users_only();
-      // $data['_data_agent']          = TblAgentModel::where('position','!=','agentDeactivated')->get();
-      // // $data['_data_team']           = TblTeamModel::get();
-      // $data['_data_team']           = TblTeamModel::join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
-      //                                 ->get();
       $data['_data_agent']          = TblAgentModel::where('archived',0)->get();
       $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)
                                     ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
@@ -892,8 +866,8 @@ class GeneralAdminController extends Controller
     public function general_admin_manage_website()
     {
       Self::allow_logged_in_users_only();
-      $data['_membership']          = TblMembeshipModel::paginate(5);
-      $data['_payment_method']      = TblPaymentMethod::paginate(5);
+      $data['_membership']          = TblMembeshipModel::where('archived',0)->paginate(5);
+      $data['_payment_method']      = TblPaymentMethod::where('archived',0)->paginate(5);
       $data['_county']              = TblCountyModel::paginate(5);
       $data['_county_city']         = TblCountyModel::get();
       $data['_city']                = TblCityModel::join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
@@ -923,8 +897,10 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_delete_payment_method(Request $request)
     {
-      $payment_method_id = $request->delete_id;
-      TblPaymentMethod::where('payment_method_id',$payment_method_id)->delete();
+      $payment_method_id  = $request->delete_id;
+      $data['archived']   = 1;
+      TblPaymentMethod::where('payment_method_id',$payment_method_id)->update($data);
+      return "<div class='alert alert-success'><strong>Success!</strong>Payment Method Deleted.</div>";
     }
     public function general_admin_update_membership(Request $request)
     {
@@ -938,7 +914,8 @@ class GeneralAdminController extends Controller
     public function general_admin_delete_membership(Request $request)
     {
       $membership_id = $request->delete_id;
-      TblMembeshipModel::where('membership_id',$membership_id)->delete();
+      $data['archived'] =1;
+      TblMembeshipModel::where('membership_id',$membership_id)->update($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Membership Deleted.</div>";
       
     }
@@ -1019,7 +996,8 @@ class GeneralAdminController extends Controller
     public function general_admin_delete_category(Request $request)
     {
       $id=$request->delete_id;
-      TblBusinessCategoryModel::where('business_category_id',$id)->delete();
+      $data['archived'] =1;
+      TblBusinessCategoryModel::where('business_category_id',$id)->update($data);
       return "<div class='alert alert-success'><strong>Success!</strong>Category Deleted.</div>";
     }
     public function general_admin_get_sub_category(Request $request)
@@ -1410,7 +1388,9 @@ class GeneralAdminController extends Controller
     public function general_admin_delete_team(Request $request)
     {
        $team_id = $request->delete_team_id;
-       TblTeamModel::where('team_id',$team_id)->delete();
+       $data['archived'] =1;
+       // dd($team_id);
+       TblTeamModel::where('team_id',$team_id)->update($data);
        return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted Successfully!</div>";
     }
 
@@ -1655,10 +1635,11 @@ class GeneralAdminController extends Controller
                                 ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                 ->get();
-      $data['_payment_archived']     = TblPaymentMethod::get();
-      $data['_membership_archived']  = TblMembeshipModel::get();
-      $data['_team_archived']        = TblTeamModel::get();
-      $data['_category_archived']    = TblBusinessCategoryModel::get();
+
+      $data['_payment_archived']     = TblPaymentMethod::where('archived',1)->get();
+      $data['_membership_archived']  = TblMembeshipModel::where('archived',1)->get();
+      $data['_team_archived']        = TblTeamModel::where('archived',1)->get();
+      $data['_category_archived']    = TblBusinessCategoryModel::where('archived',1)->get();
 
 
     
@@ -1708,6 +1689,34 @@ class GeneralAdminController extends Controller
       $admin_id  = $request->id;
       $data['archived'] = 0;
       TblAdminModels::where('admin_id',$admin_id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_payment(Request $request)
+    {
+      $id  = $request->id;
+      $data['archived'] = 0;
+      TblPaymentMethod::where('payment_method_id',$id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_membership(Request $request)
+    {
+      $id  = $request->id;
+      $data['archived'] = 0;
+      TblMembeshipModel::where('membership_id',$id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_team(Request $request)
+    {
+      $id  = $request->id;
+      $data['archived'] = 0;
+      TblTeamModel::where('team_id',$id)->update($data);
+      return "<div class='alert alert-success' >Success! Account already Activated.</div>";
+    }
+    public function archived_restore_category(Request $request)
+    {
+      $id  = $request->id;
+      $data['archived'] = 0;
+      TblBusinessCategoryModel::where('business_category_id',$id)->update($data);
       return "<div class='alert alert-success' >Success! Account already Activated.</div>";
     }
     //MAINTENANCE !important function

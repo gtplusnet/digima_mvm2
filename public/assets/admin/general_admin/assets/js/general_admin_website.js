@@ -14,13 +14,10 @@ function manage_website()
 	{
 		$(document).ready(function()
 		{
-			add_category();
 			add_membership();
 			add_payment_method();
 			add_county();
 			add_city();
-			// add_category();
-			// update_membership();
 			action_submit_edit();
 			action_box();
 		});
@@ -132,6 +129,7 @@ function manage_website()
 		        $("#delete_id").val(mem_id);
 		        $("#delete_link").val('delete_membership');
 		        $('#deleteModal').modal('show');
+
 	        }
 	    });
 	    $('.pay_action').change(function()

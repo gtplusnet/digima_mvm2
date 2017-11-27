@@ -187,15 +187,21 @@ class MerchantController extends Controller
 	  }
     public function merchant_redirect()
     {
-      $data['countyList']      = TblCountyModel::get();
-       $data['contact_us']     = TblContactUs::first();
-      return view ('merchant.pages.merchant_redirect',$data);
+
+      $data['index']            = "unpaid";
+      $data['countyList']       = TblCountyModel::get();
+      $data['contact_us']       = TblContactUs::first();
+      return view ('front.pages.success',$data);
+
     }
 
     public function merchant_redirect_exist()
     {
-      $data['countyList']       = TblCountyModel::get();
-       return view('merchant.pages.merchant_redirect_exist',$data);
+
+      $data['index'] = 'redirect_exist';
+      $data['countyList'] = TblCountyModel::get();
+      return view('front.pages.success',$data);
+
     }
 
     public function payment()
@@ -680,11 +686,23 @@ class MerchantController extends Controller
 
       $data['contact_us'] = TblContactUs::first();
 		  $data['page']   	  = 'Bills';
+<<<<<<< HEAD
       $data['bills']      = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                             ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
                             ->orderBy('tbl_payment.payment_id','DESC')
                             ->get();
+=======
+      $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
+                      ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                      ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
+                      ->orderBy('tbl_payment.payment_id','DESC')
+                      ->get();
+      $data['bill'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
+                      ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                      ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
+                      ->first();
+>>>>>>> 15dee79fc5b99770a5335479ebae7f71fba98bce
 		  return view ('merchant.pages.bills', $data);		
 	  }
 

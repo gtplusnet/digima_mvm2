@@ -16,6 +16,11 @@
     padding-right: 30px;
     margin-top: 65px;
     margin-bottom: 100px;
+
+    @media screen and (max-width: 768px)
+    {
+        padding-right: 0;
+    }
 }
 .contact-container-right
 {
@@ -23,11 +28,21 @@
     padding-right: 0px;
     margin-top: 65px;
     margin-bottom: 100px;
+
+    @media screen and (max-width: 768px)
+    {
+        padding-left: 0;
+    }
 }
 .contact-title-container
 {
     background-color: #ffffff;
     padding: 7px 20px;
+
+    @media screen and (max-width: 425px)
+    {
+        text-align: center;
+    }
 }
 .contact-title
 {
@@ -61,14 +76,29 @@
 {
     max-width: 498px;
     min-height: 237px;
+
+    @media screen and (max-width: 768px)
+    {
+        max-width: 100%;
+    }
 }
 .contact-textfield-left-holder
 {
     padding-left: 0px;
+
+    @media screen and (max-width: 768px)
+    {
+        padding-right: 0;
+    }
 }
 .contact-textfield-right-holder
 {
     padding-right: 0px;
+
+    @media screen and (max-width: 768px)
+    {
+        padding-left: 0;
+    }
 }
 .contact-textfield-holder
 {
@@ -89,6 +119,11 @@
     font-size: 15px;
     padding: 13px 20px;
     border-radius:4px;
+
+    @media screen and (max-width: 425px)
+    {
+        width: 100%;
+    }
 }
 .map-container
 {
@@ -122,6 +157,16 @@
     width: 203px;
     height: 100%;
     margin-left: 10px;
+
+    @media screen and (max-width: 768px)
+    {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 425px)
+    {
+        width: 85%;
+    }
 }
 .details-info
 {

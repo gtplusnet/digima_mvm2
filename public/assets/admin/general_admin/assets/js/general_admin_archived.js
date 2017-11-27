@@ -18,7 +18,10 @@ function archived()
 			admin();
 			supervisor();
 			agent();
+			payment();
+			membership();
 			team();
+			categories();
 			action_restore();
 		});
 
@@ -69,9 +72,49 @@ function archived()
 			$('#confirmModal').modal('show');
 		});
 	}
+	function payment()
+	{
+		$(document).on("click",".payment-restore",function()
+		{
+			var id		= $(this).data('id');
+			$('#restore_id').val(id);
+			$('#restore_link').val('restore_payment');
+			$('#confirmModal').modal('show');
+		});
+
+	}
+	function membership()
+	{
+		$(document).on("click",".membership-restore",function()
+		{
+			var id		= $(this).data('id');
+			$('#restore_id').val(id);
+			$('#restore_link').val('restore_membership');
+			$('#confirmModal').modal('show');
+		});
+
+	}
+			
+	function categories()
+	{
+		$(document).on("click",".category-restore",function()
+		{
+			var id		= $(this).data('id');
+			$('#restore_id').val(id);
+			$('#restore_link').val('restore_category');
+			$('#confirmModal').modal('show');
+		});
+	}
+
 	function team()
 	{
-
+		$(document).on("click",".team-restore",function()
+		{
+			var id		= $(this).data('id');
+			$('#restore_id').val(id);
+			$('#restore_link').val('restore_team');
+			$('#confirmModal').modal('show');
+		});
 	}
 
 	function action_restore()
@@ -79,7 +122,7 @@ function archived()
 		
 		$(document).on("click","#restoreBtn",function()
 		{
-			alert();
+			
 			var id 		= $('#restore_id').val();
 			var link 	= $('#restore_link').val();
 			var status 	= $('#restore_status').val();

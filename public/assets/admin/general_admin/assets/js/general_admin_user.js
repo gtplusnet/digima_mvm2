@@ -620,7 +620,7 @@ function manage_user()
 		$(document).on('click','.viewMem',function()
 	    {
 	    	var team_id = $(this).data('id');
-		    $.ajax({
+	    	$.ajax({
 				type:'POST',
 				url:'/general_admin/manage_user/view_all_members',
 				data:{
