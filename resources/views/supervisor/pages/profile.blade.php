@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-3 profile-image">
                     <div class="profile-image-container">
-                        <img src="{{$profile->profile}}" alt="" style="min-width: 200px;min-height: 200px;">
+                        <img src="{{$profile->profile}}" alt="" style="min-width: 200px;min-height: 200px;max-height: 200px;max-width: 200px;">
                     </div>
                 </div>
             </div>
@@ -25,6 +25,7 @@
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-md-3 user-profile">
+                    <br>
                     <hr>
                     <ul class="list-unstyled text-center">
                         <li><h3 class="text-center">{{$profile->prefix}} {{$profile->first_name}} {{$profile->last_name}}</h3></li>

@@ -40,6 +40,7 @@ $(document).ready(function(){
 
 	$(document).on("click","#savePayment",function(){
 		var paymentMethodName = $('#paymentMethodName').val();
+
 		$.ajax({
 			type:'POST',
 			url:'/merchant/add_payment_method',

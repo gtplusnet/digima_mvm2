@@ -1,9 +1,19 @@
 
-
 @if($transaction=='profile')
 <h4>Update Personal Information</h4>
 <form class="form-horizontal" method="POST" action="/agent/saving_profile">
-    {{csrf_field()}}
+      {{csrf_field()}}
+  <div class="form-group">
+        <label for="input-Default" class="col-sm-2 control-label">Profile Picture</label>
+        <div class="col-sm-4">
+            <input type="file" class="form-control input-rounded" id="image" accept="image/x-png,image/jpeg">
+            <input type="hidden" id="imageText" value="{{$agent_info->profile}}">
+        </div>
+        <div class="col-sm-6">
+            <img src="/company_profile/user_pictures.png" class="" alt="">
+        </div>
+    </div>
+    <hr>
     <div class="form-group">
         <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
         <div class="col-sm-2">

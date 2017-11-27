@@ -86,6 +86,7 @@ class MerchantController extends Controller
                                 ->first();
                     Session::put("merchant_login",true);
                     Session::put("business_id",$user_info->business_id);
+                    Session::put("business_banner",$validate_login->business_banner);
                     Session::put("email",$validate_login->user_email);
                     Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
                     $data['page']   = 'Dashboard';
@@ -436,7 +437,6 @@ class MerchantController extends Controller
 
      public function add_payment_method(Request $request)
     {
-
       $data["payment_method_name"] = $request->paymentMethodName;
       $data["payment_method_info"] = "not available";
       $data["business_id"]         = session("business_id");

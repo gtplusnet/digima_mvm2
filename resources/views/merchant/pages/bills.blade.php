@@ -62,7 +62,7 @@
                             </address>
                         </div>
                         <div class="col-md-8 text-right">
-                            <h1>RECEIPT</h1>
+                          <!--   <h1>RECEIPT</h1> -->
                         </div>
                         <div class="col-md-12">
                             

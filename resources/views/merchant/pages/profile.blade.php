@@ -342,12 +342,12 @@ th
                            <form class="form-inline">
                                <div class="form-inline">
                                  <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" >
-                                 <button type="button"  name="savePayment" class="save_payment btn btn-primary";><i class=" fa fa-file-text-o m-r-xs"></i>Add Payment</button>
+                                 <button type="button"  name="savePayment" id="savePayment" class="save_payment btn btn-primary";><i class=" fa fa-file-text-o m-r-xs"></i>Add Payment</button>
                               </div><br>
                               </form>
                         </div>
 
-               
+            
                         <table class="table table-bordered" style="width: 100%; text-align: center;font-size:13px;" cellpadding="1" cellspacing="1"  border="2">
                            <thead>
                               <tr>
