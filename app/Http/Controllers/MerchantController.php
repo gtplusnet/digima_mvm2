@@ -686,13 +686,7 @@ class MerchantController extends Controller
 
       $data['contact_us'] = TblContactUs::first();
 		  $data['page']   	  = 'Bills';
-<<<<<<< HEAD
-      $data['bills']      = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
-                            ->orderBy('tbl_payment.payment_id','DESC')
-                            ->get();
-=======
+
       $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
@@ -702,7 +696,7 @@ class MerchantController extends Controller
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
                       ->first();
->>>>>>> 15dee79fc5b99770a5335479ebae7f71fba98bce
+
 		  return view ('merchant.pages.bills', $data);		
 	  }
 
