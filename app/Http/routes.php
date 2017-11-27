@@ -211,10 +211,6 @@ Route::any('/general_admin/archived/restore_agent', 				'GeneralAdminController@
 Route::any('/general_admin/archived/restore_supervisor', 			'GeneralAdminController@archived_restore_supervisor');
 Route::any('/general_admin/archived/restore_admin', 				'GeneralAdminController@archived_restore_admin');
 
-
-
-
-
 Route::any('/general_admin/archived/restore_payment', 				'GeneralAdminController@archived_restore_payment');
 Route::any('/general_admin/archived/restore_membership', 			'GeneralAdminController@archived_restore_membership');
 Route::any('/general_admin/archived/restore_team', 					'GeneralAdminController@archived_restore_team');

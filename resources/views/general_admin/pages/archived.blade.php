@@ -310,8 +310,6 @@
 		</div>
 	</div>
 </div>
-
-<<<<<<< HEAD
 <style>
 	.li_me
 	{
@@ -331,8 +329,6 @@
 	}
 </style>
 
-=======
->>>>>>> 15dee79fc5b99770a5335479ebae7f71fba98bce
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="/assets/js/global.ajax.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -626,27 +626,31 @@ class MerchantController extends Controller
      public function add_tag_category(Request $request)
     {
       $data_id = $request->checkbox;
-      foreach($data_id as $key=>$id)
+      if ($data_id) 
       {
-        $data['business_category_id'] = $id;
-        $data['business_id'] = session('business_id');
-        $_check  = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->where('business_category_id',$id)->first();
-        $_check2 = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->count();
-      
+       foreach($data_id as $key=>$id)
+        {
+          $data['business_category_id'] = $id;
+          $data['business_id'] = session('business_id');
+          $_check  = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->where('business_category_id',$id)->first();
+          $_check2 = TblBusinessTagCategoryModel::where('business_id',session('business_id'))->count();
           if($_check)
           {
             echo "hi";
-          }
+          } 
           elseif($_check2<6)
           {
             Session::flash('message1', "Done Tagging!");
             $_insert = TblBusinessTagCategoryModel::whereIn('business_id',session('business_id'))->insert($data);
           }  
-      }  
+        }  
+      }
+      else
+      {
+
+      }
       return Redirect::back();
     }
-
-
 
       public function delete_tag_category($id)
     {
