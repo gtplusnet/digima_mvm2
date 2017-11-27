@@ -301,48 +301,6 @@ function manage_website()
 		 		});
 	     });
 	}
-
-	function add_category()
-	{ 
-		$('#addcategory').click(function(){
-		var business_category_id = $('#business_category_id').val();
-        var business_category_name = $('#business_category_name').val();
-		$.ajax({
-			type:'POST',
-			url:'/merchant/category/add_category',
-			data:{
-				business_category_id: business_category_id, business_category_name: business_category_name,
-				},
-			dataType:'text',
-
-		}).done(function(data){
-			    $('#category_alert').html(data);
-			    setTimeout(location.reload.bind(location), 1000);
-			});
-	    });
-	}
-
-	function add_keywords()
-	{ 
-		$('#addKeywords').click(function(){
-		var business_tag_keywords_id = $('#business_tag_keywords_id').val();
-        var keywords_name = $('#keywords_name').val();
-		$.ajax({
-			type:'POST',
-			url:'/merchant/category/add_keywords',
-			data:{
-				business_tag_keywords_id: business_tag_keywords_id, keywords_name: keywords_name,
-				},
-			dataType:'text',
-
-		}).done(function(data){
-			    $('#category_alert').html(data);
-			    setTimeout(location.reload.bind(location), 1000);
-			});
-	    });
-	}
-
-	
 }
 
 

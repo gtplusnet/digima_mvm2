@@ -155,7 +155,7 @@
 						<div class="row">
 							<div id="">
 							</div>
-							<table class="table table-bordered" style="background-color: #fff !important;width:100%; font-style: 50px" >
+							<table class="table table-bordered"  >
 							<thead>
 								<tr>
 									<th>Payment ID</th>
@@ -332,7 +332,6 @@
 		width:25%;
 		padding:0px;
 		width:25%;
-	
 	}
 </style>
 

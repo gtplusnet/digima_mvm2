@@ -216,10 +216,6 @@ class GeneralAdminController extends Controller
         return view('general_admin.pages.merchants',$data);
     }
 
-
-
-
-
     public function get_client(Request $request)
     {
         $s_date = $request->date_start;
@@ -1659,10 +1655,10 @@ class GeneralAdminController extends Controller
                                 ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                 ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                 ->get();
-    $data['_payment_archived']     = TblPaymentMethod::get();
-    $data['_membership_archived']  = TblMembeshipModel::get();
-    $data['_team_archived']        = TblTeamModel::get();
-    $data['_category_archived']    = TblBusinessCategoryModel::get();
+      $data['_payment_archived']     = TblPaymentMethod::get();
+      $data['_membership_archived']  = TblMembeshipModel::get();
+      $data['_team_archived']        = TblTeamModel::get();
+      $data['_category_archived']    = TblBusinessCategoryModel::get();
 
 
     
