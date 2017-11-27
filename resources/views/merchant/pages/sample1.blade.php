@@ -7,6 +7,10 @@
     <div id="google_translate_element" style="display: none">
     </div>
     
+    <div class="container">
+        <a href="http://twitcount.com/btn" class="twitcount-button" data-count="horizontal" data-size="" data-url="" data-text="" data-related="" data-hashtag="" data-via="iAmJames_35836">TwitCount Button</a><script type="text/javascript" src="https://static1.twitcount.com/js/button.js"></script>
+    </div>
+    
     <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script>

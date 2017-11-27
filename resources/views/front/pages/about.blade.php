@@ -10,6 +10,7 @@
 	</div>
 </div>
 <div class="container">
+	
 	<div class="about-container col-md-6">
 		<div class="about-holder">
 			<div class="about-title-container">

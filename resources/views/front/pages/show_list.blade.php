@@ -15,13 +15,13 @@
 		</div>
 		<div class="category-filter-holder" >
 			
-			<div class="category-title-holder" id="show_category">
-				<p class="categorylist-title">Category Filter <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></p>
+			<div class="category-title-holder" >
+				<p class="categorylist-title">Category Filter </p>
 			</div>
 			
 			<div class="categorylist-container">
 				<ul class="category navbar-nav list-group" style="">
-					<li class="list-group-item categories" id="" ></li>
+					<li class="list-group-item categories" style="cursor:pointer;" id="show_category" ></li>
 					@foreach($_categories_list as $categories_list)
 					
 					<li  style="cursor:pointer;" class="list-group-item categoryList" data-name="{{$categories_list->business_category_name}}" data-id="{{$categories_list->business_category_id}}">{{$categories_list->business_category_name}}</li>
@@ -36,7 +36,7 @@
 							<ul class="list-group" >
 								@foreach($_categories as $categories)
 								
-								<li class="list-group-item categoryList" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
+								<li class="list-group-item categoryList" style="cursor:pointer;" data-name="{{$categories->business_category_name}}" data-id="{{$categories->business_category_id}}">{{$categories->business_category_name}}</li>
 								
 								@endforeach
 							</ul>
