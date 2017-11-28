@@ -21,7 +21,6 @@ $(document).ready(function(){
         $('#acceptBtn').modal('hide');
     	$('#acceptUser').modal('show');
         var business_id = $(this).data('id');
-        alert(business_id);
         $("#acceptBusinessId").val(business_id);
 	});
     $(document).on('click','#declinedBtn',function(){
