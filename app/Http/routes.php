@@ -191,10 +191,11 @@ Route::any('/general_admin', 										'GeneralAdminController@index');
 Route::any('/general_admin/general_admin_login_submit', 			'GeneralAdminController@general_admin_login_submit');
 Route::any('/general_admin/get_business_list', 						'GeneralAdminController@get_business_list');
 Route::any('/general_admin/get_business_list_info', 				'GeneralAdminController@get_business_list_info');
-
+Route::any('/general_admin/get_business_info',						'GeneralAdminController@get_business_info');
+Route::any('/general_admin/email_invoice', 							'GeneralAdminController@email_invoice');
 Route::any('/general_admin/report', 								'GeneralAdminController@report');
 Route::any('/general_admin/dashboard', 								'GeneralAdminController@general_admin_dashboard');
-
+Route::any('/general_admin/business_list', 							'GeneralAdminController@general_admin_business_list');
 Route::any('/general_admin/logout', 								'GeneralAdminController@general_admin_logout');
 Route::any('/general_admin/merchants', 								'GeneralAdminController@general_admin_merchants');
 Route::any('/general_admin/payment_monitoring', 					'GeneralAdminController@general_admin_payment_monitoring');
@@ -207,23 +208,12 @@ Route::any('/general_admin/update_thank_you', 						'GeneralAdminController@gene
 Route::any('/general_admin/update_terms', 							'GeneralAdminController@general_admin_update_terms');
 Route::any('/general_admin/archived', 								'GeneralAdminController@general_admin_archived');
 Route::any('/general_admin/archived/restore_merchant', 				'GeneralAdminController@archived_restore_merchant');
+
 Route::any('/general_admin/archived/restore_agent', 				'GeneralAdminController@archived_restore_agent');
-Route::any('/general_admin/archived/restore_supervisor', 			'GeneralAdminController@archived_restore_supervisor');
+
+Route::any('/general_admin/archived/restore_supervisor', 				'GeneralAdminController@archived_restore_supervisor');
+
 Route::any('/general_admin/archived/restore_admin', 				'GeneralAdminController@archived_restore_admin');
-
-
-
-
-
-Route::any('/general_admin/archived/restore_payment', 				'GeneralAdminController@archived_restore_payment');
-Route::any('/general_admin/archived/restore_membership', 			'GeneralAdminController@archived_restore_membership');
-Route::any('/general_admin/archived/restore_team', 					'GeneralAdminController@archived_restore_team');
-Route::any('/general_admin/archived/restore_category', 				'GeneralAdminController@archived_restore_category');
-
-
-
-
-
 
 
 

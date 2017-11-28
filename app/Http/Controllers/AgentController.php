@@ -52,15 +52,15 @@ class AgentController extends Controller
 	public function login()
 	{
 		Self::allow_logged_out_users_only();
-		$data['page']	    = 'Agent Login';
-		$data['countyList'] = TblCountyModel::get();
-		 $data['contact_us']           = TblContactUs::first();
+		$data['page']	      = 'Agent Login';
+		$data['countyList']   = TblCountyModel::get();
+		 $data['contact_us']  = TblContactUs::first();
 		return view ('agent.pages.login', $data);
 	}
 
 	public function dashboard()
     {
-    	$data['page']	           = 'Dashboard';
+    	$data['page']	          = 'Dashboard';
         $count_merchant_signup    = TblBusinessModel::get();
     	$count_merchant_signup    = TblBusinessModel::where('business_status',1)->get();
         $count_merchant_pending   = TblBusinessModel::where('business_status',2)->get();
@@ -116,6 +116,7 @@ class AgentController extends Controller
 			          {
 			            Session::put("agent_login",true);
 	    				Session::put("agent_id",$validate_login->agent_id);
+	    				Session::put("profile",$validate_login->profile);
 	    				Session::put("full_name_agent",$validate_login->first_name." ".$validate_login->last_name);
 	    				Session::put("email",$validate_login->email);
 	    				Session::put("position",$validate_login->position);
@@ -144,7 +145,7 @@ class AgentController extends Controller
 	public function profile()
 	{	
 		Self::allow_logged_in_users_only();
-		$data['page']	    = 'Profile';
+		$data['page']		= 'Profile';
 		$data['profile']    = TblAgentModel::get();
 		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))->first();
 		$data['team']	    = TblAgentModel::where('agent_id',session('agent_id'))
@@ -155,7 +156,7 @@ class AgentController extends Controller
 	public function update_profile(Request $request)
 	{
 		$data['transaction'] = 'profile';
-		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))->first();			
+		$data['agent_info']  = TblAgentModel::where('agent_id',session('agent_id'))->first();			
 		return view('agent.pages.update_profile',$data); 
 	}
 	public function update_password(Request $request)
@@ -191,18 +192,40 @@ class AgentController extends Controller
 	}
 	public function saving_profile(Request $request)
 	{
-		$data['primary_phone']		= $request->primaryPhone;
-		$data['secondary_phone']	= $request->secondaryPhone;
-		$data['other_info']			= $request->otherInfo;
-		$data['address']			= $request->address;
-		$check = TblAgentModel::where('agent_id',session('agent_id'))->update($data);
-		if($check)
-		{
-			return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
-		}
-		else
-		{
-			return "<div class='alert alert-danger'><strong>Sorry!</strong> Transaction failure.</div>"; 
+		Self::allow_logged_in_users_only();
+	  	if($request->ajax())
+	  	{
+	  		if($request->stats=='null')
+	    	{	
+				$data['primary_phone']		= $request->primaryPhone;
+				$data['secondary_phone']	= $request->secondaryPhone;
+				$data['other_info']			= $request->otherInfo;
+				$data['address']			= $request->address;
+				$data['profile']          	= $request->imageText;;
+				
+				$check = TblAgentModel::where('agent_id',session('agent_id'))->update($data);
+				if($check)
+				{
+					return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+				}
+				else
+				{
+					return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
+				}
+			}
+			else
+	        {
+	          $unique=uniqid();
+	          $fileConvo = $request->file("file");
+	          $file_name = '/company_profile/'.$unique."-".$fileConvo->getClientOriginalName().'';
+	          $fileConvo->move('company_profile', $file_name);
+	          $data['profile'] 			= $file_name;
+	          $data['primary_phone']	= $request->primaryPhone;
+			  $data['secondary_phone']	= $request->secondaryPhone;
+			  $data['other_info']		= $request->otherInfo;
+			  $data['address']			= $request->address;
+	          TblAgentModel::where('agent_id',session('agent_id'))->update($data);
+	        }
 		}
 	}
 		  
@@ -309,7 +332,7 @@ class AgentController extends Controller
 		if($status==4)
 		{
 			$update['transaction_status'] = 'called'; 
-			$update['date_transact'] = date("Y/m/d"); 
+			$update['date_transact']      = date("Y/m/d"); 
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 
 			return '';	
@@ -465,9 +488,7 @@ class AgentController extends Controller
 
     }
 
-
-
-	public function filter_clients(request $request)
+	public function filter_clients(request $request) 
 	{
 	    Self::allow_logged_in_users_only();
 		$sdate = $request->start_date;
@@ -496,7 +517,7 @@ class AgentController extends Controller
 
     public function get_zip_code(Request $request)
     {
-        $city_id = $request->city_id;
+        $city_id 	 = $request->city_id;
         $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
 
         return $postal_code->postal_code;

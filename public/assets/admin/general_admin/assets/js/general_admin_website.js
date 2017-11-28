@@ -20,6 +20,7 @@ function manage_website()
 			add_city();
 			action_submit_edit();
 			action_box();
+		
 		});
 	}
 

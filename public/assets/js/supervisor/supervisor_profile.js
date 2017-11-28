@@ -50,10 +50,9 @@ $(document).ready(function()
 		var stats			= 'null';
 		var imageText 		= document.getElementById("imageText").value;
 		
-
 		if( document.getElementById("image").files.length == 0 )
 		{
-			alert('juames');
+			// alert('juames');
 			$.ajax({
 			type:'POST',
 			url:'/supervisor/saving_profile',
@@ -77,16 +76,23 @@ $(document).ready(function()
 		}
 
 
-
 		else
 		{
 			var name 			= document.getElementById("image").files[0].name;
 			var form_data = new FormData();
 	        var f = document.getElementById("image").files[0];
 	        var fsize = f.size || f.fileSize;
+
+	        var ext = $('#image').val().split('.').pop().toLowerCase();
+
 	        if (fsize > 1073741824) 
 	        {
 	            toastr.warning("Cannot upload image, file size is very big.");
+	        } 
+	        else if ($.inArray(ext, ['gif','png','jpg','jpeg','bmp']) == -1) 
+	        {
+
+	            toastr.warning("Cannot upload image, file is not valid! input image only.");
 	        } 
 	        else 
 	        {
