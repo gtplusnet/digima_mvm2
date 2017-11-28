@@ -7,7 +7,7 @@
 			<div class="categorylist-container">
 				<ul class="category navbar-nav list-group">
 					@foreach($_filtered as $key=>$filtered)
-					<li class="list-group-item" id="" >{{$filtered}}<i  data-name="{{$filtered}}" data-id="{{$value[$key]}}" class="fa fa-check pull-right go_back" aria-hidden="true"></i></li>
+					<li class="list-group-item" id="" style="cursor:pointer;">{{$filtered}}<i  data-name="{{$filtered}}" data-id="{{$value[$key]}}" class="fa fa-check pull-right go_back"  aria-hidden="true"></i></li>
 					@endforeach
 					
 				</ul>

@@ -63,7 +63,7 @@ class FrontController extends Controller
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['contact_us']         = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
-        $data['_membership']        = TblMembeshipModel::get();
+        $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
         $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->orderBy('tbl_business.business_name','ASC')
@@ -77,6 +77,7 @@ class FrontController extends Controller
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                                    ->where('business_status',5)
                                     ->orderBy('tbl_reports.business_views','ASC')
                                     ->groupBy('tbl_business.business_id')
                                     ->limit(4)
@@ -145,7 +146,7 @@ class FrontController extends Controller
         $data['value']              = $cat1;
         $data['_filtered']          = $cat;
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->get();
-        $data['_membership']        = TblMembeshipModel::get();
+        $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
         $data["_business_list"]     = TblBusinessTagCategoryModel::where('tbl_business.membership',1)->where('business_category_id',$request->parent_id)->where('business_status',5)
                                     ->join('tbl_business','tbl_business.business_id','=','tbl_business_tag_category.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')

@@ -79,7 +79,7 @@ class MerchantController extends Controller
         {
             if (password_verify($request->password, $validate_login->user_password)) 
                 {
-                   if($validate_login->status=="activated")
+                   if($validate_login->status=="Activated"||$validate_login->status=="activated")
                    {
                     $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
                                 ->first();
@@ -90,7 +90,7 @@ class MerchantController extends Controller
                     $data['page']   = 'Dashboard';
                     return Redirect::to('/merchant/dashboard');
                    }
-                   elseif($validate_login->status=="registered")
+                   elseif($validate_login->status=="registered"||$validate_login->status=="Registered")
                    {
                     $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
                                           ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
@@ -108,11 +108,11 @@ class MerchantController extends Controller
                     Session::put("city_state",$user_info->city_name.", ".$user_info->county_name);
                     Session::put("zip_code",$user_info->postal_code);
                    
-                    $data['page']   = 'Dashboard';
+                    $data['page']   = 'Redirect';
 
                     return Redirect::to('/merchant/redirect');
                    }
-                   else
+                   elseif($validate_login->status=="deactivated"||$validate_login->status=="Deactivated")
                    {
                      $data['page']   = 'Merchant Login';
                      return Redirect::to('/redirect');
