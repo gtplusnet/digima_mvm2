@@ -50,8 +50,9 @@ $(document).ready(function(){
 			},
 			dataType:'text',
 		}).done(function(data){
-			$('#adding_payment_method_success').html(data);
-				setTimeout(function(){
+			$('#success_merchant').html(data);
+				setTimeout(function()
+				{
 				   location.reload();
 				}, 1000);
 		    });
@@ -67,7 +68,7 @@ $(document).ready(function(){
 				},
 			dataType:'text',
 		}).done(function(data){
-			$('#adding_payment_method_success').html(data);
+			$('#delete_payment_method_success').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);
