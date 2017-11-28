@@ -10,7 +10,7 @@
             <input type="hidden" id="imageText" value="{{$agent_info->profile}}">
         </div>
         <div class="col-sm-6">
-            <img src="/company_profile/user_pictures.png" class="" alt="">
+            <img src="{{$agent_info->profile}}" class="" alt="">
         </div>
     </div>
     <hr>

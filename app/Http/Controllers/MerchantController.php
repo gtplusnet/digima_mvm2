@@ -234,6 +234,9 @@ class MerchantController extends Controller
     public function upload_payment(Request $request)
     {
         $file = $request->file('payment_file_name');
+        $link = $request->link;
+        
+
         if($file==null||$file=='')
         {
           $data['payment_reference_number']   = $request->payment_reference_number;
@@ -246,6 +249,7 @@ class MerchantController extends Controller
           $check_insert = TblPaymentModel::insert($data);
           if($check_insert)
           {
+            Session::flash('sucess_payment',$link );
             return Redirect::to('/merchant/redirect/exist');
           }
            else
@@ -270,8 +274,9 @@ class MerchantController extends Controller
               $data['business_id']                = $request->business_id;
               $data['payment_status']             = 'submitted';
               $check_insert = TblPaymentModel::insert($data);
-            if($check_insert)
+              if($check_insert)
               {
+                Session::flash('sucess_payment',$link);
                 return Redirect::to('/merchant/redirect/exist');
               }
                else

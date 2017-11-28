@@ -25,7 +25,7 @@
 						<label for="input-method" class="payment-label">Method of Payment:</label>
 						<select class="payment-dropdown"  name="payment_method" required/>
 							@foreach($method as $methods)
-							<option value="{{$methods->payment_method_id}}">{{$methods->payment_method_name}}</option>
+								<option value="{{$methods->payment_method_id}}">{{$methods->payment_method_name}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -36,6 +36,7 @@
 						<input type="text" name="payment_amount" class="payment-textfield" required/>
 						<input type="hidden" name="business_id" value="{{$merchant_info->business_id}}">
 						<input type="hidden" name="contact_id" value="{{$merchant_info->business_contact_person_id}}">
+						<input type="hidden" name="link" value="/merchant/payment/{{$merchant_info->business_id}}/edit_my_payment">
 					</div>
 					<div class="col-md-5 payment-right-area">
 						<label for="proof-of-payment" class="payment-label">Upload Proof of Payment:</label>
@@ -134,28 +135,25 @@
 				<div class="col-md-12 payment-form-seperator">
 					<div class="col-md-12 payment-form-upperpart">
 						<div class="col-md-6 payment-left-area">
-							<p class="payment-invoice-content-label">Description</p>
-							<p class="payment-invoice-content-label">Advertising Package</p>
+							<p class="payment-invoice-content-label">Package</p>
+							<p class="payment-invoice-content-label">{{$merchant_info->membership_name}}</p>
 						</div>
-						<div class="col-md-3">
-							<p class="payment-cost-label">Unit Cost</p>
-							<p class="payment-cost-label">$4</p>
+						<div class="col-md-6">
+							<p class="payment-cost-label">Membership Cost</p>
+							<p class="payment-cost-label">${{$merchant_info->membership_price}}</p>
 						</div>
-						<div class="col-md-3">
-							<p class="payment-cost-label">Amount</p>
-							<p class="payment-cost-label">4</p>
-						</div>
+						
 					</div>
 				</div>
 				<div class="col-md-12 payment-form-lastpart">
 					<div class="col-md-6"></div>
 					<div class="col-md-3 payment-subtotal-container">
-						<p class="payment-invoice-content-label">Subtotal</p>
-						<p class="payment-invoice-content-label">Tax</p>
+						<p class="payment-invoice-content-label">Total</p>
+						
 					</div>
 					<div class="col-md-3">
-						<p class="payment-cost-label">$4</p>
-						<p class="payment-cost-label">$5</p>
+						<p class="payment-cost-label">${{$merchant_info->membership_price}}</p>
+						
 					</div>
 				</div>
 			</div>
