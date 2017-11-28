@@ -332,8 +332,8 @@ th
                   </div>
 
                   <div role="tabpanel" class="tab-pane fade" id="PM">
-                     <form class="form-horizontal" method="post" action="/merchant/add_payment_method">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                     <form class="form-horizontal" >
+                        {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
 
                         <div id="delete_payment_method_success" style="margin-top:50px;">
                         </div>

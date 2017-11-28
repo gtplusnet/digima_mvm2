@@ -435,7 +435,7 @@ class GeneralAdminController extends Controller
                   $email_name       = $data['invoice_info']->contact_first_name; 
                   $email_email      = $data['invoice_info']->user_email;
                   $date             = date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
-                  $link             = "http://mvm.digimahouse.com/".$business_id."/".$email_name;
+                  $link             = "http://mvm.digimahouse.com/merchant/payment/".$business_id."/".$email_name;
                   $data             = array('name'=>$email_name,'date'=>$date,'email'=>$email_email,'business_id'=>$business_id,'path'=>'invoice/'.$file_name,'remarks'=>'Please Pay As Soon As Possible.','link'=>$link);
                   $pathfile         ='invoice/'.$file_name;
                   $mail_send        = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile)
@@ -471,7 +471,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                          ->orderBy('tbl_invoice.date_send',"DESC")
+                          ->orderBy('tbl_invoice.business_id',"DESC")
                           ->paginate(10);
       return view('general_admin.pages.manage_invoice',$data);
     }
@@ -1503,11 +1503,11 @@ class GeneralAdminController extends Controller
     {
       $search_key1 = $request->search_key1;
       $data['_invoice'] = TblBusinessModel::where('business_name','like','%'.$search_key1.'%')
-                          ->where('business_status', 4)->orWhere('business_status', 5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->orWhere('tbl_invoice.invoice_number','like','%'.$search_key1.'%')
                           ->orderBy('tbl_invoice.invoice_id',"asc")
                           ->get();
 

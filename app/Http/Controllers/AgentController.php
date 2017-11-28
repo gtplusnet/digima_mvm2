@@ -253,8 +253,8 @@ class AgentController extends Controller
 	        {
 	          $unique=uniqid();
 	          $fileConvo = $request->file("file");
-	          $file_name = '/company_profile/'.$unique."-".$fileConvo->getClientOriginalName().'';
-	          $fileConvo->move('company_profile', $file_name);
+	          $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
+	          $fileConvo->move('business_images', $file_name);
 	          $data['profile'] 			= $file_name;
 	          $data['primary_phone']	= $request->primaryPhone;
 			  $data['secondary_phone']	= $request->secondaryPhone;

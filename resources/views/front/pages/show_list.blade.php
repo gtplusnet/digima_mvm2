@@ -7,7 +7,7 @@
 			<div class="categorylist-container">
 				<ul class="category navbar-nav list-group">
 					@foreach($_filtered as $key=>$filtered)
-					<li class="list-group-item" id="" >{{$filtered}}<i  data-name="{{$filtered}}" data-id="{{$value[$key]}}" class="fa fa-check pull-right go_back" aria-hidden="true"></i></li>
+					<li class="list-group-item" id="" style="cursor:pointer;">{{$filtered}}<i  data-name="{{$filtered}}" data-id="{{$value[$key]}}" class="fa fa-check pull-right go_back"  aria-hidden="true"></i></li>
 					@endforeach
 					
 				</ul>
@@ -170,15 +170,15 @@
 				{!! $_business_list->render() !!}
 			</div>
 		</div>
-		<div class="col-md-12">
-			<div class="payment-containers">
-				<div class="payment-title">
-					SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
-					<br>
-				</div>
-				<div class="col-md-12 payment-content">
-					@foreach($_membership as $membership)
-					<div class="col-md-5 package-container">
+		<div class="payment-containers" style="margin-bottom:50px;">
+			<div class="payment-title">
+				SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
+				<br>
+			</div>
+			<div class="payment-content row clearfix " style="margin-bottom:100px;">
+				@foreach($_membership as $membership)
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="package-container match-height">
 						<div class="membership-offer">
 							{{$membership->membership_name}}
 						</div>
@@ -189,9 +189,7 @@
 						<hr>
 						<div class="membership-details">
 							<p class="membership-details-text">
-								Sadly, none of them were ok, and I can't seem to find out any other option.
-								The first and second button are displayed
-								on same line, but the third is displayed lower... Can you help me?
+								{{$membership->membership_info}}
 							</p>
 						</div>
 						<div class="membership-btn">
@@ -200,9 +198,8 @@
 							</a>
 						</div>
 					</div>
-					@endforeach
-					
 				</div>
+				@endforeach
 			</div>
 		</div>
 	</div>
