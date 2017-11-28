@@ -65,6 +65,7 @@
                                 <label for="input-Default" class="col-sm-2 control-label">Business Address</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$client->business_complete_address}}</textarea>
+                
                                 </div>
                             </div>
                         </div>

@@ -133,7 +133,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
-                            <span class="user-name">{{session('full_name_agent')}}<i class="fa fa-angle-down"></i></span>
+                            <span class="user-name">{{session('full_name_admin')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>    
                         <ul class="dropdown-menu dropdown-list" role="menu">
@@ -141,7 +141,7 @@
                             <li role="presentation"><a href="javascript:;" id="English" onclick="translateLanguage(this.id);"><img src="/images/flag_usa.ico" style="max-width:35px;max-height:15px;margin-right:10px;">USA</a></li>
                             <li role="presentation"><a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);"><img src="/images/flag_croatia.ico" style="max-width:35px;max-height:15px;margin-right:10px;">CROATIA</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href='/agent/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href='/general_admin/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
 
                         </ul>
                     </li>

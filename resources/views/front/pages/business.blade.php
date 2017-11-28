@@ -176,6 +176,12 @@
                    
                 </div>
             </div>
+            <div class="details-container">
+                <div class="business-details-rightpart-title">
+                    <i class="fa fa-calendar icon-size"></i><p class="title-margin"> YEAR ESTABLISHED:</p>
+                </div>
+                <p class="business-details-rightpart-content">{{ $business_info->year_established }}</p>
+            </div>
            
             <div class="details-container">
                 <div class="business-details-rightpart-title">

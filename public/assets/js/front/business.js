@@ -22,7 +22,7 @@ function business()
 	{
 		$(document).on('click','#messageSend',function()
 		{
-			alert();
+		
 			$('#ajax-loader').show();
 			$('#hiddenMo').hide();
 

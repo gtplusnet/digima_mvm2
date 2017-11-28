@@ -14,7 +14,7 @@
 </div>
 <div class="tab-content col-md-12">
 	<div class="text-center pull-right" style="margin:20px 20px 20px 20px;">
-		<form class="form-inline" method="post" >
+		<form class="form-inline" method="post">
 			{{csrf_field()}}
 			<div class="form-group">
 				<input type="text" class="form-control" name="search_manage_invoice" id="search_manage_invoice" >
@@ -23,7 +23,7 @@
 		</form>
 	</div>
 	<div  class="tab-pane fade in active col-md-12">
-		<div class="table-responsive" id="ipakitamo">
+		<div class="table-responsive" id="ipakitamo" name="ipakitamo">
 			<table class="table table-bordered" style="background-color: #FFFFFF;">
 				<thead>
 					<tr>
