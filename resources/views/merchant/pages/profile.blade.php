@@ -1,4 +1,4 @@
-@extends('merchant.layout.layout')
+\@extends('merchant.layout.layout')
 @section('content')
 <style>
 .file-margin
