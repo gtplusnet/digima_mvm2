@@ -1,4 +1,4 @@
-\@extends('merchant.layout.layout')
+@extends('merchant.layout.layout')
 @section('content')
 <style>
 .file-margin
@@ -45,9 +45,9 @@ th
                      <form class="form-horizontal">
                         {{ csrf_field() }}
                         @if(session('success_merchant'))
-                           <div class="alert alert-success" style="margin-top:20px;">
-                              <span>SUCESS!</span> Profile successfully updated
-                           </div>
+                        <div class="alert alert-success" style="margin-top:20px;">
+                           <span>SUCESS!</span> Profile successfully updated
+                        </div>
                         @endif
                         <div class="form-group" style="margin-top:50px;">
                            <label for="business_name" class="col-sm-2 control-label">Business Name</label>
@@ -85,6 +85,7 @@ th
                               <input type="text" class="form-control" id="input-default" value="{{$merchant_info->postal_code}}" readonly>
                            </div>
                         </div>
+                      
                         <div class="form-group">
                            <label for="twitter_url" class="col-sm-2 control-label">Twitter</label>
                            <div class="col-sm-4">
@@ -95,11 +96,13 @@ th
                               <input type="text" class="form-control" id="facebook_url" name="facebook_url" value="{{$merchant_info->facebook_url}}" readonly>
                            </div>
                         </div>
+                     
                         <div class="col-md-15">
                            <div class="text-right">
                               <button type="button" class="btn btn-primary" id="updateprofile" style="padding: 5px 18px;"><i class="fa fa-pencil m-r-xs"></i>Update Information</button>
                            </div>
                         </div>
+
                      </form>
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="OI">
