@@ -18,6 +18,10 @@
             <div class="panel info-box panel-white">
                 <div class="panel-body">
                     <div class="info-box-stats">
+                        <?php
+                        $timestamp = strtotime('+3 years');
+                        echo date('Y-m-d H:i:s', $timestamp);
+                        ?>
                         <p class="counter">{{$resultCountM}}</p>
                         <span class="info-box-title">Merchants</span>
                     </div>
@@ -99,44 +103,40 @@
         <div class="content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Registered Per Month</h4>
-                                <p class="category">Merchant Statistic</p>
-                            </div>
-                            <div class="content">
-                                <canvas id="signUp" width="600"  class="ct-chart "></canvas>
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class=""></i>Merchants
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> Updated 3 minutes ago
-                                    </div>
+                    <div class="col-md-7 card">
+                        <div class="header">
+                            <h4 class="title">Registered Per Month</h4>
+                            <p class="category">Merchant Statistic</p>
+                        </div>
+                        <div class="content">
+                            <canvas id="signUp" width="600"  class="ct-chart "></canvas>
+                            <div class="footer">
+                                <div class="legend">
+                                    <i class=""></i>Merchants
+                                </div>
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-clock-o"></i> Updated 3 minutes ago
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" >
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">User Level Task</h4>
-                                <p class="category">Over All</p>
-                            </div>
-                            <div class="content" style="">
-                                <canvas id="countries"  class="ct-chart "></canvas>
-                                <div class="footer">
-                                    <div class="legend">
-                                    <i class="fa fa-circle text-info"></i>Agent Task
-                                    <i class="fa fa-circle text-danger"></i>Supervisor Task
-                                    <i class="fa fa-circle text-warning"></i>Admin Task
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                                    </div>
+                    <div class="col-md-5 card">
+                        <div class="header">
+                            <h4 class="title">User Level Task</h4>
+                            <p class="category">Over All</p>
+                        </div>
+                        <div class="content" style="">
+                            <canvas id="countries"  class="ct-chart "></canvas>
+                            <div class="footer">
+                                <div class="legend">
+                                <i class="fa fa-circle text-info"></i>Agent Task
+                                <i class="fa fa-circle text-danger"></i>Supervisor Task
+                                <i class="fa fa-circle text-warning"></i>Admin Task
+                                </div>
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-history"></i> Updated 3 minutes ago
                                 </div>
                             </div>
                         </div>
@@ -149,15 +149,15 @@
             <div class="container">
                 <div class="row">
                     
-                    <div class="col-md-11" >
-                        <div class="card">
+                    <div class="" >
+                        <div class=" col-md-12 card ">
                             <div class="header">
                                 <h4 class="title">Registered - Activated Per Month</h4>
                                 <p class="category">Merchant Statistic</p>
                             </div>
                             <div class="content" style="">
                             
-                                <canvas id="income" width="1000" class="ct-chart"></canvas>
+                                <canvas id="income" width="1140" class="ct-chart" style="width: 100% !important;height: auto !important;"></canvas>
                            
                                 <div class="footer">
                                     <div class="legend">
