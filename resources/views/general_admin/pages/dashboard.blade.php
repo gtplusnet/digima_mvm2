@@ -108,7 +108,7 @@
                             <h4 class="title">Registered Per Month</h4>
                             <p class="category">Merchant Statistic</p>
                         </div>
-                        <div class="content">
+                        <div class="content" style="overflow-x: scroll;">
                             <canvas id="signUp" width="600"  class="ct-chart "></canvas>
                             <div class="footer">
                                 <div class="legend">
@@ -126,7 +126,7 @@
                             <h4 class="title">User Level Task</h4>
                             <p class="category">Over All</p>
                         </div>
-                        <div class="content" style="">
+                        <div class="content" style="overflow-x: scroll;">
                             <canvas id="countries"  class="ct-chart "></canvas>
                             <div class="footer">
                                 <div class="legend">
@@ -155,7 +155,7 @@
                                 <h4 class="title">Registered - Activated Per Month</h4>
                                 <p class="category">Merchant Statistic</p>
                             </div>
-                            <div class="content" style="">
+                            <div class="content" style="overflow-x: scroll;">
                             
                                 <canvas id="income" width="1140" class="ct-chart" style="width: 100% !important;height: auto !important;"></canvas>
                            
