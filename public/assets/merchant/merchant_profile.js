@@ -50,7 +50,7 @@ $(document).ready(function(){
 			},
 			dataType:'text',
 		}).done(function(data){
-			$('#success_merchant').html(data);
+			$('#add_payment_method_success').html(data);
 				setTimeout(function()
 				{
 				   location.reload();

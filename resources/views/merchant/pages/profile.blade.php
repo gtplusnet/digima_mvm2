@@ -337,6 +337,8 @@ th
 
                         <div id="delete_payment_method_success" style="margin-top:50px;">
                         </div>
+                        <div id="add_payment_method_success" style="margin-top:50px;">
+                        </div>
                
                         <div class="pull-right" style="margin:5px 5px 5px 0px">
                            <form class="form-inline">
