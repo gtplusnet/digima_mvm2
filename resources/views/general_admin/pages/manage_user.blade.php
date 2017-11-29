@@ -59,10 +59,10 @@
 					<form class="form-inline" method="post" action="/general_admin/search_payment_monitoring">
 						{{csrf_field()}}
 						<div class="col-md-4 col-sm-12 pull-right">
-							<div class="form-group col-md-6 col-sm-5 col-xs-8" style="padding:0px;">
+							<div class="form-group col-md-7 col-sm-5 col-xs-8" style="padding:0px;">
 								<input type="text" class="form-control" name="search_merchant" id="search_merchant">
 							</div>
-							<div class="col-md-5 col-sm-5 col-xs-4">
+							<div class="col-md-4 col-sm-5 col-xs-4">
 								<button type="button" class="btn btn-success" name="search_btn_merchant" id="search_btn_merchant">Search</button>
 							</div>
 						</div>
@@ -136,7 +136,7 @@
                         <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
                             <form class="form-inline">
                                 {{csrf_field()}}
-                                <div class="form-group col-md-6 col-xs-8 " style="padding:0px;padding-right:3px;">
+                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
                                     <input type="text" class="form-control" name="search_agent" id="search_agent">
                                 </div>
                                 <div class=" col-md-4 col-xs-4" style="padding:0px;">
@@ -201,7 +201,7 @@
                         <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
                             <form class="form-inline">
                                 {{csrf_field()}}
-                                <div class="form-group col-md-6 col-xs-8 " style="padding:0px;padding-right:3px;">
+                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
                                     <input type="text" class="form-control" name="search_team" id="search_team">
                                 </div>
                                 <div class=" col-md-4 col-xs-4" style="padding:0px;">
@@ -264,7 +264,7 @@
                         <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
                             <form class="form-inline">
                                 {{csrf_field()}}
-                                <div class="form-group col-md-6 col-xs-8 " style="padding:0px;padding-right:3px;">
+                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
                                     <input type="text" class="form-control" name="search_supervisor" id="search_supervisor">
                                 </div>
                                 <div class=" col-md-4 col-xs-4" style="padding:0px;">
@@ -332,7 +332,7 @@
                         <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
                             <form class="form-inline">
                                 {{csrf_field()}}
-                                <div class="form-group col-md-6 col-xs-8 " style="padding:0px;padding-right:3px;">
+                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
                                     <input type="text" class="form-control" name="search_admin" id="search_admin">
                                 </div>
                                 <div class=" col-md-4 col-xs-4" style="padding:0px;">

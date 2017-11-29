@@ -74,7 +74,7 @@
                     <div class="col-md-12 col-sm-12">
                         <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
                                 <div class="col-md-6" style="padding:0px;">
                                     <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                 </div>
@@ -82,7 +82,7 @@
                                     <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right" style="padding:0px;">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right" style="padding:0px;">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_send_invoice" id="search_send_invoice" >
                                 </div>
