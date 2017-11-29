@@ -49,6 +49,9 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
         
+        <!-- MultiLevelMenu -->
+        <link rel="stylesheet" type="text/css" href="/assets/multilevel_menu/css/component.css">
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
@@ -149,7 +152,7 @@
             </div>
         </div>
         <!-- MOBILE NAV -->
-        <nav class="pushmenu pushmenu-left">
+        {{-- <nav class="pushmenu pushmenu-left">
             <div class="space2"></div>
             <div class="space1"></div>
             <span>BROWSE</span>
@@ -175,8 +178,8 @@
                 </a>
             </ul>
         </nav>
-        <div id="overlay" onclick="off()"></div>
-        <div class="header-wrapper">
+        <div id="overlay" onclick="off()"></div> --}}
+        <div class="header-wrapper" style="display: none;">
             <div class="mob-top-header">
                 <div class="left-container">
                     <div class="language-selection">
@@ -231,6 +234,33 @@
                     </button>
                 </form>
             </div>
+        </div>
+
+        <!-- PUSH MENU V2 -->
+        <div id="dl-menu" class="dl-menuwrapper">
+            <button class="dl-trigger">
+            </button>
+            <ul class="dl-menu">
+                <li>
+                    <a href="#">Category 1</a>
+                    <ul class="dl-submenu">
+                        <li><a href="#">Sub Category 1</a></li>
+                        <li><a href="#">Sub Category 2</a></li>
+                        <li><a href="#">Sub Category 3</a></li>
+                        <li>
+                            <a href="#">Sub Category 1</a>
+                            <ul class="dl-submenu">
+                                <li><a href="#">Sub-sub Cat 1</a></li>
+                                <li><a href="#">Sub-sub Cat 1</a></li>
+                                <li><a href="#">Sub-sub Cat 1</a></li>
+                                <li><a href="#">Sub-sub Cat 1</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">Category 2</a></li>
+                <li><a href="#">Category 3</a></li>
+            </ul>
         </div>
         
         @yield('content')
@@ -301,6 +331,11 @@
         <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>
         <!-- HANGGANG DITO -->
+        
+
+        <!-- MultiLevelMenu -->
+        <script src="/assets/multilevel_menu/js/jquery.dlmenu.js"></script>
+
         {{-- LANGUAGE --}}
         {{-- <script type="text/javascript">
 
@@ -312,6 +347,7 @@
     {{-- translator --}}
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 
         <script>
             function translateLanguage(lang) {
@@ -347,6 +383,12 @@
                     $(this).toggleClass('active');
                     $menuLeft.toggleClass('pushmenu-open');
                 });
+
+
+                $( '#dl-menu' ).dlmenu({
+                    animationClasses : { classin : 'dl-animate-in-2', classout : 'dl-animate-out-2' }
+                });
+
             });
 
 
