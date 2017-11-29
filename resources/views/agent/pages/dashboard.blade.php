@@ -2,15 +2,16 @@
 @section('content')
 <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+<script src='/assets/admin/general_admin/assets/plugins/chartsjs/Chart.min.js'></script>
 <div class="page-title">
-    <h3>{{ $page }}</h3>
-    <div class="page-breadcrumb">
-        <ol class="breadcrumb">
-            <li><a href="/agent">Home</a></li>
-            <li class="active">{{ $page }}</li>
-        </ol>
-    </div>
-</div> 
+   <h3>{{ $page }}</h3>
+   <div class="page-breadcrumb">
+      <ol class="breadcrumb">
+         <li><a href="/agent">Home</a></li>
+         <li class="active">{{ $page }}</li>
+      </ol>
+   </div>
+</div>
 <div id="main-wrapper">
     <div class="content">
         <div class="container">
@@ -99,90 +100,94 @@
         </div>
     </div>
 </div>
-<script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="/assets/agent/assets1/js/chartist.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function()
-{
 
-
-  initChartist();
-
-});
-
-function initChartist()
-{    
-        
-        var data1 = {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          series: [
-            [450, 303, 220, 350, 350, 453, 326, 220, 350, 350, 453, 326],
-            [152, 180, 280, 300, 280, 353, 300, 220, 350, 350, 453, 326]
-          ]
-        };
-        
-        var options1 = {
-            seriesBarDistance: 10,
-            axisX: {
-                showGrid: false
-            },
-            height: "230px"
-        };
-        
-        var responsiveOptions1 = [
-          ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-              labelInterpolationFnc: function (value) {
-                return value[0];
-              }
-            }
-          }]
-        ];
-        
-        Chartist.Bar('#chartActivityPerMonth', data1, options1, responsiveOptions1);
-        
-        var data = {
-          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
-          series: [
-            [{{$mon}}, {{$tue}}, {{$wed}}, {{$thu}}, {{$fri}}, {{$sat}}, {{$sun}}],
-            [{{$mona}}, {{$tuea}}, {{$weda}}, {{$thua}}, {{$fria}}, {{$sata}}, {{$suna}}],
-          ]
-        };
-        
-        var options = {
-            seriesBarDistance: 10,
-            axisX: {
-                showGrid: false
-            },
-            height: "230px"
-        };
-        
-        var responsiveOptions = [
-          ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-              labelInterpolationFnc: function (value) {
-                return value[0];
-              }
-            }
-          }]
-        ];
-        
-        Chartist.Bar('#chartActivityPerDay', data, options, responsiveOptions);
-    
-        
-        
-        Chartist.Pie('#chartPreferencesPerWeek', {
-          labels: ['{{$total_c}}%','{{$total_r}}%'],
-          series: [{{$total_c}}, {{$total_r}} ]
-        });  
-        Chartist.Pie('#chartPreferencesPerYear', {
-          labels: ['80%','20%'],
-          series: [80, 20 ]
-        });   
-}
+<script>
+   var pieOptions = 
+       {
+           segmentShowStroke : false,
+           animateScale : true
+       }
+   
+   var barData = 
+       {
+           labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+           datasets : [
+               {
+                   fillColor : "#87CB19",
+                   strokeColor : "#5D6D7E",
+                   data : [{{$count_jan}},{{$count_feb}},{{$count_mar}},{{$count_apr}},{{$count_may}},{{$count_jun}},{{$count_jul}},{{$count_aug}},{{$count_sep}},{{$count_oct}},{{$count_nov}},{{$count_dec}}]
+               },
+               {
+                   fillColor : "#1DC7EA",
+                   strokeColor : "#5D6D7E",
+                   data : [{{$counts_jan}},{{$counts_feb}},{{$counts_mar}},{{$counts_apr}},{{$counts_may}},{{$counts_jun}},{{$counts_jul}},{{$counts_aug}},{{$counts_sep}},{{$counts_oct}},{{$counts_nov}},{{$counts_dec}}]
+               }
+           ]
+       }
+   var activeReg = document.getElementById("Activated").getContext("2d");
+   new Chart(activeReg).Bar(barData);
 </script>
 
+<script type="text/javascript">
+   $(document).ready(function()
+   {
+   
+   
+     initChartist();
+   
+   });
+   
+   function initChartist()
+   {          
+       var data1 = {};
+       var options1 = {};        
+       var responsiveOptions1 = [];
+       
+       Chartist.Bar('#chartActivityPerMonth', data1, options1, responsiveOptions1);
+       
+       var data = {
+         labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+         series: [
+            [{{$mona}}, {{$tuea}}, {{$weda}}, {{$thua}}, {{$fria}}, {{$sata}}, {{$suna}}],
+            [{{$mon}}, {{$tue}}, {{$wed}}, {{$thu}}, {{$fri}}, {{$sat}}, {{$sun}}]
+         ]
+       };
+       
+       var options = {
+           seriesBarDistance: 100,
+           axisX: {
+               showGrid: false
+           },
+           height: "200px"
+       };
+       
+       var responsiveOptions = [
+         ['screen and (max-width: 640px)', {
+           seriesBarDistance: 5,
+           axisX: {
+             labelInterpolationFnc: function (value) {
+               return value[0];
+             }
+           }
+         }]
+       ];
+       
+       Chartist.Bar('#chartActivityPerDay', data, options, responsiveOptions);
+   
+       
+       Chartist.Pie('#chartPreferencesPerWeek', 
+       {
+         labels: ['{{$total_c}}%','{{$total_r}}%'],
+         series: [{{$total_c}}, {{$total_r}} ]
+       });  
+       Chartist.Pie('#chartPreferencesPerYear', {
+         labels: ['80%','20%'],
+         series: [80, 20 ]
+       });   
+   }
+</script>
 
+<script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="/assets/agent/assets1/js/chartist.min.js"></script>
+<script src="/assets/js/global.ajax.js"></script>
 @endsection

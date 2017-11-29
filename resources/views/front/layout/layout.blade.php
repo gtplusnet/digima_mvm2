@@ -8,6 +8,7 @@
     </style>
     <head>
         <!-- Title -->
+
         <title>Žute Stranice | @yield('title')</title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>

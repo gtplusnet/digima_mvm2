@@ -141,7 +141,7 @@
                             <li role="presentation"><a href="javascript:;" id="English" onclick="translateLanguage(this.id);"><img src="/images/flag_usa.ico" style="max-width:35px;max-height:15px;margin-right:10px;">USA</a></li>
                             <li role="presentation"><a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);"><img src="/images/flag_croatia.ico" style="max-width:35px;max-height:15px;margin-right:10px;">CROATIA</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href='/agent/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href='/general_admin/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
 
                         </ul>
                     </li>

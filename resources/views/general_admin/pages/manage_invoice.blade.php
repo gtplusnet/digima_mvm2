@@ -77,6 +77,7 @@
 					{!! $_invoice->render() !!}
 				</div>
 			</div>
+
 		</div>
 	</div>
 

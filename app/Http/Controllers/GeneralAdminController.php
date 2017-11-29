@@ -35,7 +35,6 @@ use DB;
 use Response;
 use Session;
 use Redirect;
-
 use PDF2;
 use PDF;
 use Mail;
