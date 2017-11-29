@@ -5,41 +5,41 @@
 <script type="text/javascript" src="/assets/js/global.ajax.js"></script>
 <script src="/assets/js/agent/agent_client.js"></script>
 <style>
-    .distance
-    {
-    margin:10px 0px 10px 0px;
-    }
-    .li_style{
-    padding:0px;
-    width:33.31%;
-    margin-right:0px;
-    margin-left:-1px;
-    }
-    .modal-header
-    {
-    background-color: #24292E;
-    color:#fff;
-    /*border-radius: 10px;*/
-    }
-    .call
-    {
-    color:green;
-    margin-right: 5px;
-    font-size:20px;
-    }
-    .callme
-    {
-    color:white;
-    margin-right: 0px;
-    width:35px;
-    font-size:20px;
-    }
-    </style>
-    <script>
-    $( function() {
-    $( ".datepicker" ).datepicker();
-    $( ".datepicker1" ).datepicker();
-    });
+.distance
+{
+margin:10px 0px 10px 0px;
+}
+.li_style{
+padding:0px;
+width:33.31%;
+margin-right:0px;
+margin-left:-1px;
+}
+.modal-header
+{
+background-color: #24292E;
+color:#fff;
+/*border-radius: 10px;*/
+}
+.call
+{
+color:green;
+margin-right: 5px;
+font-size:20px;
+}
+.callme
+{
+color:white;
+margin-right: 0px;
+width:35px;
+font-size:20px;
+}
+</style>
+<script>
+$( function() {
+$( ".datepicker" ).datepicker();
+$( ".datepicker1" ).datepicker();
+});
 </script>
 <div class="page-title">
     <h3>Merchant</h3>
@@ -70,18 +70,18 @@
         <div id="customer" class="tab-pane fade in active">
             <div class="row">
                 <div class="panel-body">
-                    <div class="col-md-12" style="margin:20px 20px 20px 0px">
+                    <div class="col-md-12 col-sm-12" >
                         <form class="form-inline" method="post" action="/agent/search_client">
                             {{csrf_field()}}
-                            <div class="col-md-5 pull-left">
-                                <div class="col-md-6">
+                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
+                                <div class="col-md-6" style="padding:0px;">
                                     <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="padding:0px;">
                                     <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-4 pull-right">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_key1" id="search_key1">
                                 </div>
@@ -89,6 +89,11 @@
                             </div>
                         </form>
                     </div>
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel-body">
                     <div class="table-responsive col-md-12"  id="showHere_signup">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
@@ -124,11 +129,10 @@
                                         
                                     </td>
                                 </tr>
-                               
+                                
                                 @endforeach
                             </tbody>
                         </table>
-                        
                         {!! $clients->render() !!}
                     </div>
                 </div>
@@ -140,40 +144,43 @@
         </div>
         <!-- pending -->
         <div id="pendingCustomer" class="tab-pane fade">
-            <div class="col-md-12" style="margin:20px 20px 20px 0px">
-                <form class="form-inline" method="post" action="/agent/search_client_pending">
-                    {{csrf_field()}}
-                    <div class="col-md-5 pull-left">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
-                        </div>
-                    </div>
-                    <div class="col-md-4 pull-right">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="search_key12" id="search_key12">
-                        </div>
-                        <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Search</button>
-                    </div>
-                </form>
-            </div>
             <div class="row">
+                <div class="panel-body">
+                    <div class="col-md-12 col-sm-12" >
+                        <form class="form-inline" method="post" action="/agent/search_client_pending">
+                            {{csrf_field()}}
+                            <div class="col-md-5 col-sm-12 col-xs-12  pull-left">
+                                <div class="col-md-6" style="padding:0px;">
+                                    <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
+                                </div>
+                                <div class="col-md-6" style="padding:0px;">
+                                    <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="search_key12" id="search_key12">
+                                </div>
+                                <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+             <div class="row">
                 <div class="panel-body">
                     <div class="table-responsive col-md-12"  id="showHere_pending">
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-
-                                <th>ID</th>
-                                <th>Business Name</th>
-                                <th>Contact Person</th>
-                                <th>Membership</th>
-                                <th>Date Pending</th>
-                                <th>Status</th>
-                                <th>Action</th>
-
+                                    <th>ID</th>
+                                    <th>Business Name</th>
+                                    <th>Contact Person</th>
+                                    <th>Membership</th>
+                                    <th>Date Pending</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -187,39 +194,41 @@
                                     <td>{{$clients_pendingss->transaction_status}}</td>
                                     <td>
                                         <button type="button" class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" >
-                                            <i class="fa fa-phone call" aria-hidden="true"></i>call
+                                        <i class="fa fa-phone call" aria-hidden="true"></i>call
                                         </button>
                                     </td>
                                 </tr>
-                                
                                 @endforeach
                             </tbody>
                         </table>
-                        
                         {!! $clients_pending->render() !!}
                     </div>
                 </div>
             </div>
         </div>
         <div id="activatedCustomer" class="tab-pane fade">
-            <div class="col-md-12" style="margin:20px 20px 20px 0px">
-                <form class="form-inline" method="post" action="/agent/search_client_pending">
-                    {{csrf_field()}}
-                    <div class="col-md-5 pull-left">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
-                        </div>
+             <div class="row">
+                <div class="panel-body">
+                    <div class="col-md-12 col-sm-12" >
+                        <form class="form-inline" method="post" action="/agent/search_client_pending">
+                            {{csrf_field()}}
+                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
+                                <div class="col-md-6" style="padding:0px;">
+                                    <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
+                                </div>
+                                <div class="col-md-6" style="padding:0px;">
+                                    <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="search_key3" id="search_key3">
+                                </div>
+                                <button type="button" class="btn btn-success" name="search_button123" id="search_button123">Search</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-md-4 pull-right">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="search_key3" id="search_key3">
-                        </div>
-                        <button type="button" class="btn btn-success" name="search_button123" id="search_button123">Search</button>
-                    </div>
-                </form>
+                </div>
             </div>
             <div class="row">
                 <div class="panel-body">

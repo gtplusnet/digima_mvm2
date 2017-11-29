@@ -12,113 +12,92 @@
     </div>
 </div> 
 <div id="main-wrapper">
+    <div class="content">
+        <div class="container">
+            <div class="row-clearfix">
+                <div class="card col-md-4">
+                    <div class="header">
+                        <h4 class="title">Merchant Statistics</h4>
+                        <p class="category">Registered / Activated -Per Week</p>
+                    </div>
+                    <div class="content">
+                        <div id="chartPreferencesPerWeek" class="ct-chart ct-perfect-fourth"></div>
 
-
-        
-        <div class="content">
-            <div class="container">
-
-                <div class="row col-md-12">
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered / Activated -Per Week</p>
+                        <div class="footer">
+                            <div class="legend">
+                                <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                <i class="fa fa-circle text-info"></i> Activated Merchant
                             </div>
-                            <div class="content">
-                                <div id="chartPreferencesPerWeek" class="ct-chart ct-perfect-fourth"></div>
-
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                        <i class="fa fa-circle text-info"></i> Activated Merchant
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history-o"></i> Updated a minute ago
-                                    </div>
-                                </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history-o"></i> Updated a minute ago
                             </div>
                         </div>
                     </div>
-
-                   
-
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered / Activated -Per Day</p>
+                </div>
+                <div class="card col-md-8">
+                    <div class="header">
+                        <h4 class="title">Merchant Statistics</h4>
+                        <p class="category">Registered / Activated -Per Day</p>
+                    </div>
+                    <div class="content">
+                        <div id="chartActivityPerDay" class="ct-chart"></div>
+                        <div class="footer">
+                            <div class="legend">
+                                <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                <i class="fa fa-circle text-info"></i> Activated Merchant
                             </div>
-                            <div class="content">
-                                <div id="chartActivityPerDay" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                        <i class="fa fa-circle text-info"></i> Activated Merchant
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated a minute ago
-                                    </div>
-                                </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history"></i> Updated a minute ago
                             </div>
                         </div>
                     </div>
-                </div >
-                <div class="row col-md-12">
+                </div>
+            </div >
+            <div class="row-clearfix">
+                <div class="card col-md-4">
+                    <div class="header">
+                        <h4 class="title">Merchant Statistics</h4>
+                        <p class="category">Registered / Activated -Per Year</p>
+                    </div>
+                    <div class="content">
+                        <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
 
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered / Activated -Per Year</p>
+                        <div class="footer">
+                            <div class="legend">
+                                <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                <i class="fa fa-circle text-info"></i> Activated Merchant
                             </div>
-                            <div class="content">
-                                <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
-
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                        <i class="fa fa-circle text-info"></i> Activated Merchant
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history-o"></i> Updated a minute ago
-                                    </div>
-                                </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history-o"></i> Updated a minute ago
                             </div>
                         </div>
                     </div>
-
-                   
-
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Merchant Statistics</h4>
-                                <p class="category">Registered / Activated -Per Month</p>
+                </div>
+                <div class="card col-md-8">
+                    <div class="header">
+                        <h4 class="title">Merchant Statistics</h4>
+                        <p class="category">Registered / Activated -Per Month</p>
+                    </div>
+                    <div class="content">
+                        <div id="chartActivityPerMonth" class="ct-chart"></div>
+                        <div class="footer">
+                            <div class="legend">
+                                <i class="fa fa-circle text-danger"></i> Registered Merchant
+                                <i class="fa fa-circle text-info"></i> Activated Merchant
                             </div>
-                            <div class="content">
-                                <div id="chartActivityPerMonth" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                        <i class="fa fa-circle text-info"></i> Activated Merchant
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated a minute ago
-                                    </div>
-                                </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="fa fa-history"></i> Updated a minute ago
                             </div>
                         </div>
                     </div>
-                </div >
-            </div>
+                </div>
+            </div >
         </div>
-   
+    </div>
 </div>
 <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="/assets/agent/assets1/js/chartist.min.js"></script>

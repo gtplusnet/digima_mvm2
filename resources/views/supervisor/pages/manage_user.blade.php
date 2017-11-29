@@ -23,9 +23,6 @@ text-align: center;
 <div id="main-wrapper">
     <!---james modal-->
     <div style="margin-top: 150px;" class="modal fade" id="myModal" role="dialog">
-
-
-
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -35,7 +32,6 @@ text-align: center;
                 <div class="modal-body" style="margin-bottom: 150px;" >
                     <div id="team_success">
                     </div>
-
                     <div class="col-sm-12">
                         <div class="form-group col-md-3">
                             <label for="business_name" >Team Name</label>
@@ -67,7 +63,7 @@ text-align: center;
             </div>
         </div>
     </div>
-   
+    
     <div style="margin-top: 150px;" class="modal fade" id="teamEditModal" role="dialog">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
@@ -127,121 +123,123 @@ text-align: center;
             </div>
         </div>
         <div  class="tab-pane fade in active " id="team">
-            <form class="form-horizontal">
-                {{csrf_field()}}
-                
-                <div class="table-responsive" id="showHere_team">
-                    <div class="col-md-12">
-                        <div class="pull-left" style="margin:20px 0px 20px 20px">
+            <div class="row">
+                <div class="panel-body">
+                    <div class="col-md-12 col-sm-12">
+                        
+                        <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+                            <form class="form-inline" method="post"  action="/supervisor/supervisor_search_team" method="post">
+                                {{csrf_field()}}
+                                <div class="form-group col-md-6 col-xs-8 " style="padding:0px;">
+                                    <input type="text" class="form-control" name="search_key1" id="search_key1">
+                                </div>
+                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
+                                    <button type="button" class="btn btn-success" name="search_button_team" id="search_button_team">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
                             <button type="button"  data-toggle="modal" data-target="#myModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
                         </div>
-
-                        <div class="pull-right" style="margin:20px 20px 20px 0px">
-                            <form class="form-inline" method="post"  action="/supervisor/supervisor_search_team" method="post">
-                            {{csrf_field()}}
-                            <div class="form-inline">
-                                <input type="text" class="form-control" name="search_key1" id="search_key1">
-                                 <button type="button" class="btn btn-success" name="search_button_team" id="search_button_team">Search</button>
-                            </div>
-                            
-                            </form>
-                        </div>
-
                     </div>
-                    <div id="team_delete_success">
-                    </div>
-
-                    <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
-                        <thead>
-                            <tr>
-                                <th>Team ID</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Team Members</th>
-                                <th>Team Calls</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($viewteam as $newteam)
-                            <tr>
-                                <td>{{ $newteam->id}}</td>
-                                <td>{{ $newteam->team_name}}</td>
-                                <td>{{ $newteam->team_information}}</td>
-                                <td><i data-id="{{ $newteam->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
-                                <td>{{ $newteam->sum}}</td>
-                                <td>
-                                    <select class="teamAction" id="actionbox" data-info="{{ $newteam->team_information}}" data-name="{{ $newteam->team_name}}" data-id="{{ $newteam->team_id}}">
-                                        <option value="">Action</option>
-                                        <option value="edit">Edit</option>
-                                        <option value="delete">Delete</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            
-                            @endforeach
-                        </tbody>
-                    </table>
                 </div>
-            </form>
+            </div>
+            <div class="row">
+                <div class="panel-body">
+                    <div class="table-responsive" id="showHere_team">
+                        <div id="team_delete_success">
+                        </div>
+                        <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                            <thead>
+                                <tr>
+                                    <th>Team ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Team Members</th>
+                                    <th>Team Calls</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($viewteam as $newteam)
+                                <tr>
+                                    <td>{{ $newteam->id}}</td>
+                                    <td>{{ $newteam->team_name}}</td>
+                                    <td>{{ $newteam->team_information}}</td>
+                                    <td><i data-id="{{ $newteam->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
+                                    <td>{{ $newteam->sum}}</td>
+                                    <td>
+                                        <select class="teamAction" id="actionbox" data-info="{{ $newteam->team_information}}" data-name="{{ $newteam->team_name}}" data-id="{{ $newteam->team_id}}">
+                                            <option value="">Action</option>
+                                            <option value="edit">Edit</option>
+                                            <option value="delete">Delete</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-
         <div  class="tab-pane fade" id="agent">
-            <form class="form-horizontal">
-                {{csrf_field()}}
-                
-                <div class="table-responsive" id="agent_delete_success">
+            <div class="row">
+                <div class="panel-body">
                     <div class="col-md-12">
-
-                        {{-- <div class="pull-left" style="margin:20px 0px 20px 20px">
-                            <button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
-                        </div> --}}
-
-                        <div class="pull-right" style="margin:20px 20px 20px 0px">
+                        <div class=" col-md-4 col-sm-12 col-xs-12  pull-right" style="padding:0px;">
                             <form class="form-inline" method="post"  action="/supervisor/supervisor_search_agent" method="post">
-                            {{csrf_field()}}
-                            <div class="form-inline">
-                                <input type="text" class="form-control" name="search_key2" id="search_key2">
-                                <button type="button" class="btn btn-success" name="search_button_agent" id="search_button_agent">Search</button>
-                            </div>
-                             
+                                {{csrf_field()}}
+                                <div class="form-group col-md-6 col-xs-8" style="padding:0px;">
+                                    <input type="text" class="form-control" name="search_key2" id="search_key2">
+                                 </div>
+                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
+                                       <button type="button" class="btn btn-success" name="search_button_agent" id="search_button_agent">Search</button>
+                                </div>
                             </form>
                         </div>
                     </div>
-                    <table id="example" class="display table" style="text-align:center;width: 100%; cellspacing: 0;">
-                        <thead >
-                            <tr >
-                                <th>Agent ID</th>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Agent Calls</th>
-                                <th>Team </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($viewagent as $newagent)
-                            <tr>
-                                <td>{{ $newagent->agent_id}}</td>
-                                <td>{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}</td>
-                                <td>{{ $newagent->email}}</td>
-                                <td>{{ $newagent->primary_phone}}</td>
-                                <td>{{ $newagent->agent_call}}</td>
-                                <td>{{ $newagent->team_name}}</td>
-                                <td>
-                                    <select class="actionbox" id="actionbox" data-name="{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}" data-id="{{ $newagent->agent_id}}">
-                                        <option value="">Action</option>
-                                        <option value="assign">Assign</option>
-                                        <option value="delete">Delete</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 </div>
-            </form>
+            </div>
+            <div class="row">
+                <div class="panel-body">
+                    <div class="table-responsive" id="agent_delete_success">
+                        <table id="example" class="display table" style="text-align:center;width: 100%; cellspacing: 0;">
+                            <thead >
+                                <tr >
+                                    <th>Agent ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Agent Calls</th>
+                                    <th>Team </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($viewagent as $newagent)
+                                <tr>
+                                    <td>{{ $newagent->agent_id}}</td>
+                                    <td>{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}</td>
+                                    <td>{{ $newagent->email}}</td>
+                                    <td>{{ $newagent->primary_phone}}</td>
+                                    <td>{{ $newagent->agent_call}}</td>
+                                    <td>{{ $newagent->team_name}}</td>
+                                    <td>
+                                        <select class="actionbox" id="actionbox" data-name="{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}" data-id="{{ $newagent->agent_id}}">
+                                            <option value="">Action</option>
+                                            <option value="assign">Assign</option>
+                                            <option value="delete">Delete</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
         {{--  modal --}}
         <div class="modal fade" id="myModalViewMem" role="dialog">

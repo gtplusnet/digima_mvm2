@@ -12,63 +12,75 @@
 		</ol>
 	</div>
 </div>
-<div class="tab-content col-md-12">
-	<div class="text-center pull-right" style="margin:20px 20px 20px 20px;">
-		<form class="form-inline" method="post" >
-			{{csrf_field()}}
-			<div class="form-group">
-				<input type="text" class="form-control" name="search_manage_invoice" id="search_manage_invoice" >
-			</div>
-			<button type="button" class="btn btn-success" name="search_btn_invoice" id="search_btn_invoice">Search</button>
-		</form>
-	</div>
-	<div  class="tab-pane fade in active col-md-12">
-		<div class="table-responsive" id="ipakitamo">
-			<table class="table table-bordered" style="background-color: #FFFFFF;">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Business Name</th>
-						<th>Business Contact Person</th>
-						<th>Invoice Number</th>
-						<th>Membership</th>
-						<th>Date Issued</th>
-						<th>Status</th>
-						<th></th>
-						
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($_invoice as $invoice)
-					<tr>
-						<td>{{ $invoice->business_id}}</td>
-						<td>{{ $invoice->business_name }}</td>
-						<td>{{ $invoice->contact_first_name }} {{ $invoice->contact_last_name }}</td>
-						<td><a target="blank" href="{{$invoice->invoice_path}}" >{{ $invoice->invoice_number }}</a></td>
-						<td>{{ $invoice->membership_name }}</td>
-						<td>{{date("F j, Y",strtotime($invoice->date_transact))}}</td>
-						<td>{{ $invoice->invoice_status }}</td>
-						<td>
-							<div class="form-group">
-								<select id="invoice_action" data-contact_name="{{ $invoice->contact_first_name}}" data-b_id="{{ $invoice->business_id}}" data-name="{{ $invoice->invoice_name }}" data-email="{{ $invoice->user_email }}" data-path="{{$invoice->invoice_path}}" class="form-control invoice_action" id="sel1" style="width:90px;">
-									
-									<option>Action</option>
-									@if($invoice->invoice_status=='Paid')
-									<option value="view">View</option>
-									@else
-									<option value="view">View</option>
-									<option value="resend">Resend</option>
-									@endif
-								</select>
-							</div>
-						</td>
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-			{!! $_invoice->render() !!}
+<div class="tab-content">
+	<div class="row">
+        <div class="panel-body">
+        	<form class="form-inline" method="post" >
+				{{csrf_field()}}
+				<div class="col-md-4 col-sm-12 pull-right">
+					<div class="form-group col-md-7 col-sm-5 col-xs-8" style="padding:0px;">
+						<input type="text" class="form-control" name="search_manage_invoice" id="search_manage_invoice" >
+					</div>
+					<div class="col-md-5 col-sm-5 col-xs-4">
+						<button type="button" class="btn btn-success" name="search_btn_invoice" id="search_btn_invoice">Search</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
+	<div class="row">
+        <div class="panel-body">
+			<div  class="tab-pane fade in active">
+				<div class="table-responsive" id="ipakitamo">
+					<table class="table table-bordered" style="background-color: #FFFFFF;">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Business Name</th>
+								<th>Business Contact Person</th>
+								<th>Invoice Number</th>
+								<th>Membership</th>
+								<th>Date Issued</th>
+								<th>Status</th>
+								<th></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($_invoice as $invoice)
+							<tr>
+								<td>{{ $invoice->business_id}}</td>
+								<td>{{ $invoice->business_name }}</td>
+								<td>{{ $invoice->contact_first_name }} {{ $invoice->contact_last_name }}</td>
+								<td><a target="blank" href="{{$invoice->invoice_path}}" >{{ $invoice->invoice_number }}</a></td>
+								<td>{{ $invoice->membership_name }}</td>
+								<td>{{date("F j, Y",strtotime($invoice->date_transact))}}</td>
+								<td>{{ $invoice->invoice_status }}</td>
+								<td>
+									<div class="form-group">
+										<select id="invoice_action" data-contact_name="{{ $invoice->contact_first_name}}" data-b_id="{{ $invoice->business_id}}" data-name="{{ $invoice->invoice_name }}" data-email="{{ $invoice->user_email }}" data-path="{{$invoice->invoice_path}}" class="form-control invoice_action" id="sel1" style="width:90px;">
+											
+											<option>Action</option>
+											@if($invoice->invoice_status=='Paid')
+											<option value="view">View</option>
+											@else
+											<option value="view">View</option>
+											<option value="resend">Resend</option>
+											@endif
+										</select>
+									</div>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					{!! $_invoice->render() !!}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<div style="margin-top: 150px;" class="modal fade" id="resendModal" role="dialog">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">

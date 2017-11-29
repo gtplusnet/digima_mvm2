@@ -3,7 +3,7 @@
     <head>
         
         <!-- Title -->
-        <title>CROTIA Directory | {{ $page }}</title>
+        <title>Žute Stranice | {{ $page }}</title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <meta charset="UTF-8">

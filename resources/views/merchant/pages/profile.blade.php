@@ -26,16 +26,25 @@ th
             <div class="panel-body">
                <!-- Nav tabs -->
                <div role="tabpanel">
-                  <ul class="nav nav-pills" role="tablist">
-
-                     <li role="presentation" class="active"><a href="#MI" role="tab" data-toggle="tab" aria-expanded="true">Merchant Information</a></li>
-                     <li role="presentation" class=""><a href="#OI" role="tab" data-toggle="tab" aria-expanded="false">Other Information</a></li>
-                     <li role="presentation" class=""><a href="#BH" role="tab" data-toggle="tab" aria-expanded="false">Business Hours</a></li>
-                     <li role="presentation" class=""><a href="#BI" role="tab" data-toggle="tab" aria-expanded="false">Business Image</a></li>
-                     <li role="presentation" class=""><a href="#PM" role="tab" data-toggle="tab" aria-expanded="false">Payment Method</a></li>
-                     <li role="presentation" class=""><a href="#CP" role="tab" data-toggle="tab" aria-expanded="false">Change Password</a></li>
+                  <ul class="nav nav-pills col-md-12" role="tablist">
+                     <li role="presentation" class="active tab-mobile"><a href="#MI" role="tab" data-toggle="tab" aria-expanded="true">Merchant Information</a></li>
+                     <li role="presentation" class="tab-mobile"><a href="#OI" role="tab" data-toggle="tab" aria-expanded="false">Other Information</a></li>
+                     <li role="presentation" class="tab-mobile"><a href="#BH" role="tab" data-toggle="tab" aria-expanded="false">Business Hours</a></li>
+                     <li role="presentation" class="tab-mobile"><a href="#BI" role="tab" data-toggle="tab" aria-expanded="false">Business Image</a></li>
+                     <li role="presentation" class="tab-mobile"><a href="#PM" role="tab" data-toggle="tab" aria-expanded="false">Payment Method</a></li>
+                     <li role="presentation" class="tab-mobile"><a href="#CP" role="tab" data-toggle="tab" aria-expanded="false">Change Password</a></li>
 
                   </ul>
+                  <style>
+                     @media screen and (max-width: 480px) 
+                     {
+                         .tab-mobile
+                         {
+                           width:100%;
+                           text-align:center;
+                         }
+                     }
+                  </style>
                </div>
                <!-- Tab panes -->
 

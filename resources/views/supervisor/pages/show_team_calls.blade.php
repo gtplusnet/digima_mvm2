@@ -1,28 +1,29 @@
 <div class="card">
     <div class="header col-md-12" style="display:inline-block;">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <h4 class="title">Team Calls</h4>
             <p class="category">Line Charts</p>
         </div>
-        <div class="col-md-3  pull-right">
+        <div class="col-md-4  pull-right">
             <select class="form-control " id="team_calls">
-                <option>SLECT TEAM</option>
+                <option>SELECT TEAM</option>
                 @foreach($_teams as $teams)
                 <option value="{{$teams->team_id}}">{{$teams->team_name}}</option>
                 @endforeach
             </select>
         </div>
     </div>
-    <div class="content">
+    <div class="content"  style="overflow-x:scroll;">
         <canvas id="teamCallsLine" width="600"  class="ct-chart "></canvas>
-        <div class="footer">
-            <div class="legend">
-                <i class=""></i>Merchants
-            </div>
-            <hr>
-            <div class="stats">
-                <i class="fa fa-clock-o"></i> Updated 3 minutes ago
-            </div>
+        
+    </div>
+    <div class="footer">
+        <div class="legend">
+            <i class=""></i>Merchants
+        </div>
+        <hr>
+        <div class="stats">
+            <i class="fa fa-clock-o"></i> Updated 3 minutes ago
         </div>
     </div>
 </div>
