@@ -4,11 +4,7 @@ $(document).ready(function(){
 		$(document).on('click','#search_button',function()
 		{
 			var search_key = $('#search_key1').val();
-			
-			
-
 			$.ajax({
-
 				type:'POST',
 				url:'/supervisor/supervisor_search_client',
 				data:{
@@ -17,16 +13,11 @@ $(document).ready(function(){
 				dataType:'text',
 			}).done(function(data)
 				{		
-					
 					$('#showHere_pending').html(data);
-					
-			    });
+				});
 	    });
-});
-	
 
-$(document).ready(function(){
-	$(document).on('click','#search_button1',function(){
+	    $(document).on('click','#search_button1',function(){
 		var search_key_act = $('#search_key2').val();
 		$.ajax({
 			type:'POST',
@@ -39,13 +30,9 @@ $(document).ready(function(){
 			{		
 				$('#showHere_activated').html(data);
 			});
-    });
-});
+    	});
 
-
-$(document).ready(function(){
-
-	$('#date_end').change(function(){
+    	$(document).on('change','#date_end',function(){
 		var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
@@ -56,12 +43,9 @@ $(document).ready(function(){
 		}).done(function(data){
 				$('#showHere_pending').html(data)
 			});
-	});
-});
+		});
 
-$(document).ready(function(){
-
-	$('#date_end1').change(function(){
+		$(document).on('change','#date_end1',function(){
 		var date_start1 = $('#date_start1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		var date_end1 = $('#date_end1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
@@ -72,9 +56,8 @@ $(document).ready(function(){
 		}).done(function(data){
 				$('#showHere_activated').html(data);
 			});
-	});
+		});
 });
-
 
 
 $(document).ready(function(){

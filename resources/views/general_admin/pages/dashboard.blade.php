@@ -18,10 +18,7 @@
         <div class="panel info-box panel-white">
             <div class="panel-body">
                 <div class="info-box-stats">
-                    <?php
-                    $timestamp = strtotime('+3 years');
-                    echo date('Y-m-d H:i:s', $timestamp);
-                    ?>
+                    
                     <p class="counter">{{$resultCountM}}</p>
                     <span class="info-box-title">Merchants</span>
                 </div>
@@ -105,7 +102,7 @@
             <div class="row">
                 <div class="col-md-7 card">
                     <div class="header">
-                        <h4 class="title">Registered Per Month</h4>
+                        <h4 class="title">Registered Per Year</h4>
                         <p class="category">Merchant Statistic</p>
                     </div>
                     <div class="content" style="overflow-x: scroll;">
@@ -182,14 +179,14 @@
         <script>
             // line chart data
             var buyerData = {
-                labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+                labels : ["{{$year1}}","{{$year2}}","{{$year3}}","{{$year4}}","{{$year5}}","{{$year6}}","{{$year7}}"],
                 datasets : [
                 {
                     fillColor : "rgba(172,194,132,0.4)",
                     strokeColor : "#ACC26D",
                     pointColor : "#fff",
                     pointStrokeColor : "#9DB86D",
-                    data : [{{$count_jan}},{{$count_feb}},{{$count_mar}},{{$count_apr}},{{$count_may}},{{$count_jun}},{{$count_jul}},{{$count_aug}},{{$count_sep}},{{$count_oct}},{{$count_nov}},{{$count_dec}}]
+                    data : [{{$count_year1}},{{$count_year2}},{{$count_year3}},{{$count_year4}},{{$count_year5}},{{$count_year6}},{{$count_year7}}]
                 }
             ]
             }

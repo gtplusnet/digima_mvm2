@@ -1,4 +1,4 @@
-<div class="card ">
+<div class="card col-md-8">
     <div class="header col-md-12" style="display:inline-block;">
         <div class="col-md-8">
             <h4 class="title">Agent Calls</h4>
@@ -30,16 +30,16 @@
 <script>
 var agentData =
 {
-labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
-datasets : [
-{
-fillColor : "rgba(172,194,132,0.4)",
-strokeColor : "#ACC26D",
-pointColor : "#fff",
-pointStrokeColor : "#9DB86D",
-data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
-}
-]
+    labels : ["Mon {{$date_mon}}","Tue {{$date_tue}}","Wed {{$date_wed}}","Thu {{$date_thu}}","Fri {{$date_fri}}","Sat {{$date_sat}}","Sun {{$date_sun}}"],
+    datasets : [
+    {
+        fillColor : "rgba(172,194,132,0.4)",
+        strokeColor : "#ACC26D",
+        pointColor : "#fff",
+        pointStrokeColor : "#9DB86D",
+        data : [{{$mon}},{{$tue}},{{$wed}},{{$thu}},{{$fri}},{{$sat}},{{$sun}}]
+    }
+    ]
 }
 var agents = document.getElementById('agentCallsLine').getContext('2d');
 new Chart(agents).Line(agentData);

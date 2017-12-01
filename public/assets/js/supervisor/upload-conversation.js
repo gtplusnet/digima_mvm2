@@ -1,9 +1,17 @@
 $(document).ready(function () {
     //jamess
-    $(document).on("click", "#forceBtn", function () {
-
+    $(document).on('click','#proceedBtn',function()
+    {
         var businessId = document.getElementById("businessId").value;
         var contactId = document.getElementById("contactId").value;
+        $('#businessId1').val(businessId);
+        $('#businessId1').val(contactId);
+        $('#confirmModal').modal('show');
+    });
+    $(document).on("click", "#forceBtn", function () {
+
+        var businessId = document.getElementById("businessId1").value;
+        var contactId = document.getElementById("contactId1").value;
         $.ajax({
             type:'POST',
             url:'/supervisor/force_activate',
@@ -12,6 +20,7 @@ $(document).ready(function () {
         }).done(function(data){
                 $('#forceSuccess').html(data);
                 setTimeout(function(){
+                    $('#confirmModal').modal('hide');
                     $('#uploadModal').modal('hide');
                        location.reload();
                     }, 1000);

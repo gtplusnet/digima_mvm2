@@ -82,7 +82,7 @@
 	</div>
 </div>
 {{-- MOdal --}}
-<d◘iv style="margin-top: 150px;" class="modal fade" id="myModal" role="dialog">
+<div style="margin-top: 150px;" class="modal fade" id="myModal" role="dialog">
 <div class="modal-dialog modal-md">
 	<div class="modal-content">
 		<div class="modal-header">

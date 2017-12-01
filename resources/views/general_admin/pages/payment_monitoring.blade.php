@@ -19,7 +19,7 @@
 				{{csrf_field()}}
 				<div class="col-md-4 col-sm-12 pull-right">
 					<div class="form-group col-md-7 col-sm-5 col-xs-8" style="padding:0px;">
-						<input type="text" class="form-control" name="search_payment_admin" id="search_payment_admin" >
+						<input type="text" class="form-control" name="search_payment_admin" id="search_payment_admin" style="width:100%;">
 					</div>
 					<div class="col-md-5 col-sm-5 col-xs-4">
 						<button type="button" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
@@ -40,8 +40,8 @@
 									<th>Business Name</th>
 									<th>Business Address</th>
 									<th>Membership</th>
-									<th>Payment reference</th>
-									<th>Payment Ammount</th>
+									<th>Reference Number</th>
+									<th>Payment Amount</th>
 									<th>Date Submit</th>
 									<th>Action</th>
 									

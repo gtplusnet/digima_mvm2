@@ -6,6 +6,9 @@
 <script src="/assets/js/supervisor/get-client-info.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+
+
 <style>
 .li_style
 {
@@ -121,13 +124,35 @@ $( ".datepicker1" ).datepicker();
                                         <input type="hidden" name="contactId" id="contactId">
                                     </div>
                                     <div class="modal-footer" style="background-color: #34425A; padding-top: 20px;">
-                                        <button type="button" class="btn btn-warning btn-rounded" name="forceBtn" id="forceBtn" data-dismiss="">Proceed without MP3</button>
+                                        <button type="button" class="btn btn-warning btn-rounded" name="proceedBtn" id="proceedBtn" data-dismiss="">Proceed without MP3</button>
                                         <button type="button" class="btn btn-info btn-rounded" name="uploadBtn" id="uploadBtn" data-dismiss="">Upload</button>
                                         <button type="button" class="btn btn-danger btn-rounded closeBtn" name="closeBtn" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Confirmation modal -->
+                        <div style="margin-top: 150px;" class="modal fade" id="confirmModal" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+                                        <div class="col-sm-12">
+                                            <h4 class="modal-title">Are You Sure You Want To Proceed Without MP3?</h4>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="hidden" name="businessId1" id="businessId1">
+                                            <input type="hidden" name="contactId1" id="contactId1">
+                                            <center>
+                                                <input type="hidden" id="delete_team_id" value=""/>
+                                                <button type="button" class=" btn btn-danger" id="forceBtn">Yes</button>
+                                                <button type="button" class="btn btn-default"  data-dismiss="modal">No</button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

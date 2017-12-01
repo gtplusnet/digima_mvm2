@@ -74,7 +74,7 @@
                     <div class="col-md-12 col-sm-12">
                         <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
                             {{csrf_field()}}
-                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
                                 <div class="col-md-6" style="padding:0px;">
                                     <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                 </div>
@@ -317,7 +317,7 @@
                                     <th>Business Name</th>
                                     <th>membership</th>
                                     <th>Transaction</th>
-                                    <th>Days</th>
+                                    <th>Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

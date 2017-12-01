@@ -367,8 +367,9 @@ class AgentController extends Controller
 		$status 	= $request->status;
 		if($status==4)
 		{
-			$update['transaction_status'] = 'called'; 
-			$update['date_transact']      = date("Y/m/d"); 
+			$update['transaction_status'] 	= 'called'; 
+			$update['date_transact']      	= date("Y/m/d");
+			$update['agent_call_date']		= date("Y/m/d"); 
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 
 			return '';	
