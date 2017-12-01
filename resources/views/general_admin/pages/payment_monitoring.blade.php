@@ -117,7 +117,7 @@
 		<div class="modal-content">
 			<div class="modal-body" style="margin-bottom: 150px;" >
 				<div class="col-sm-12">
-					<h4 class="modal-title">Are You sure You want to accept this payment and activate this user's account?</h4>
+					<h4 class="modal-title">Are You sure You want to DECLINED this payment and DEACTIVATE this user's account?</h4>
 				</div>
 				<div class="col-sm-12" style="margin-top:30px;">
 					<center>

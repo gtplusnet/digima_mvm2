@@ -227,8 +227,8 @@ class FrontController extends Controller
             $businessData->county_id = $request->countyDropdown;
             $businessData->city_id = $request->cityDropdown;
             $businessData->business_complete_address = $request->businessAddress;
-            $businessData->business_phone = Self::phone_number_format($request->primaryPhone);
-            $businessData->business_alt_phone = Self::phone_number_format($request->alternatePhone);
+            $businessData->business_phone = $request->primaryPhone;
+            $businessData->business_alt_phone = $request->alternatePhone;
             $businessData->business_fax = $request->faxNumber;
             $businessData->facebook_url = $request->facebookUrl;
             $businessData->twitter_url = $request->twitterUsername;
@@ -289,16 +289,16 @@ class FrontController extends Controller
         }
 
 	}
-    public static function phone_number_format($number) 
-    {
-      $number   = preg_replace("/[^\d]/","",$number);
-      $length   = strlen($number);
-      $first_3  = substr($number,0,3);
-      $first_4  = substr($number,3);
-      $number   = '+385-43'."-".$first_3."-".$first_4;
-      return $number;
+    // public static function phone_number_format($number) 
+    // {
+    //   $number   = preg_replace("/[^\d]/","",$number);
+    //   $length   = strlen($number);
+    //   $first_3  = substr($number,-9);
+    //   $first_4  = substr($number,3);
+    //   $number   = '+385-43'."-".$first_3."-".$first_4;
+    //   return $number;
      
-    }
+    // }
     public function businessSearch(Request $request)
     {
         return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown&cityOrpostalCode=$request->postalCode");

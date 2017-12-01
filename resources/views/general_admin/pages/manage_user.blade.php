@@ -832,7 +832,7 @@
 					</div>
 					<div class="col-sm-12">
 						<center>
-						<button type="submit" class="updateAgent btn btn-primary" name="updateAdmin" id="updateAdmin">Update Supervisor</button>
+						<button type="submit" class="updateAgent btn btn-primary" name="updateAdmin" id="updateAdmin">Update Admin</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 						</center>
 					</div>
