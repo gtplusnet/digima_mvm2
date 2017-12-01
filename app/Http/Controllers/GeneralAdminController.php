@@ -1007,7 +1007,7 @@ class GeneralAdminController extends Controller
     public function general_admin_search_category(Request $request)
     {
       $search_key = $request->search_key;
-      $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->orWhere('business_category_information','like','%'.$search_key.'%')->paginate(10);
+      $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->where('archived',0)->paginate(10);
       return view('general_admin.pages.search_blade',$data);
     }
     public function general_admin_delete_category(Request $request)
@@ -1020,7 +1020,7 @@ class GeneralAdminController extends Controller
     public function general_admin_get_sub_category(Request $request)
     {
       $business_category_id = $request->cat_id;
-      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$business_category_id)->get();
+      $data['_sub_category'] = TblBusinessCategoryModel::where('parent_id',$business_category_id)->where('archived',0)->get();
       return view('general_admin.pages.get_sub_category',$data);
     }
 
