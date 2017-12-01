@@ -985,7 +985,7 @@ class GeneralAdminController extends Controller
     public function general_admin_manage_categories()
     {
       Self::allow_logged_in_users_only();
-      $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->paginate(10);
+      $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->paginate(10);
       return view('general_admin.pages.manage_categories',$data);
     }
     public function general_admin_add_category(Request $request)
