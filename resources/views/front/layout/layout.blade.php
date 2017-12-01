@@ -49,14 +49,16 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
         
-        <!-- MultiLevelMenu -->
-        <link rel="stylesheet" type="text/css" href="/assets/multilevel_menu/css/component.css">
+        <!-- MULTILEVEL PUSHMENU -->
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/multilevel_push.css">
+        
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
     </head>
-    <body>
+    <body class="mp-pusher" id="mp-pusher">
         <!-- HEADER -->
         <div class="header-nav ">
             <div class="container">
@@ -177,9 +179,9 @@
                     </li>
                 </a>
             </ul>
-        </nav>
-        <div id="overlay" onclick="off()"></div> --}}
-        <div class="header-wrapper" style="display: none;">
+        </nav> --}}
+        {{-- <div id="overlay" onclick="off()"></div> --}}
+        <div class="header-wrapper">
             <div class="mob-top-header">
                 <div class="left-container">
                     <div class="language-selection">
@@ -202,7 +204,8 @@
                 <div class="row-no-padding clearfix">
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="left-container">
-                            <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i>
+                            {{-- <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i> --}}
+                            <p><a style="text-decoration: none;" href="#" id="trigger" class="fa fa-bars hamburger"></a></p>
                         </div>    
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -236,32 +239,128 @@
             </div>
         </div>
 
-        <!-- PUSH MENU V2 -->
-        <div id="dl-menu" class="dl-menuwrapper">
-            <button class="dl-trigger">
-            </button>
-            <ul class="dl-menu">
-                <li>
-                    <a href="#">Category 1</a>
-                    <ul class="dl-submenu">
-                        <li><a href="#">Sub Category 1</a></li>
-                        <li><a href="#">Sub Category 2</a></li>
-                        <li><a href="#">Sub Category 3</a></li>
-                        <li>
-                            <a href="#">Sub Category 1</a>
-                            <ul class="dl-submenu">
-                                <li><a href="#">Sub-sub Cat 1</a></li>
-                                <li><a href="#">Sub-sub Cat 1</a></li>
-                                <li><a href="#">Sub-sub Cat 1</a></li>
-                                <li><a href="#">Sub-sub Cat 1</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">Category 2</a></li>
-                <li><a href="#">Category 3</a></li>
+        <!-- MULTILEVEL PUSH MENU -->
+        <nav id="mp-menu" class="mp-menu">
+          <div class="mp-level">
+            <h2 class="ion-earth">All Categories</h2>
+            <ul>
+              <li class="ion-chevron-left">
+                <a class="ion-monitor" href="#">Devices</a>
+                <div class="mp-level">
+                  <h2 class="ion-monitor">Devices</h2>
+                  <a class="mp-back" href="#">back</a>
+                  <ul>
+                    <li class="ion-chevron-left">
+                      <a class="ion-iphone" href="#">Mobile Phones</a>
+                      <div class="mp-level">
+                        <h2>Mobile Phones</h2>
+                        <a class="mp-back" href="#">back</a>
+                        <ul>
+                          <li><a href="#">Super Smart Phone</a></li>
+                          <li><a href="#">Thin Magic Mobile</a></li>
+                          <li><a href="#">Performance Crusher</a></li>
+                          <li><a href="#">Futuristic Experience</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="ion-chevron-left">
+                      <a class="ion-monitor" href="#">Televisions</a>
+                      <div class="mp-level">
+                        <h2>Televisions</h2>
+                        <a class="mp-back" href="#">back</a>
+                        <ul>
+                          <li><a href="#">Flat Superscreen</a></li>
+                          <li><a href="#">Gigantic LED</a></li>
+                          <li><a href="#">Power Eater</a></li>
+                          <li><a href="#">3D Experience</a></li>
+                          <li><a href="#">Classic Comfort</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="ion-chevron-left">
+                      <a class="ion-camera" href="#">Cameras</a>
+                      <div class="mp-level">
+                        <h2>Cameras</h2>
+                        <a class="mp-back" href="#">back</a>
+                        <ul>
+                          <li><a href="#">Smart Shot</a></li>
+                          <li><a href="#">Power Shooter</a></li>
+                          <li><a href="#">Easy Photo Maker</a></li>
+                          <li><a href="#">Super Pixel</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="ion-chevron-left">
+                <a class="ion-document-text" href="#">Magazines</a>
+                <div class="mp-level">
+                  <h2 class="ion-document-text">Magazines</h2>
+                  <a class="mp-back" href="#">back</a>
+                  <ul>
+                    <li><a href="#">National Geographic</a></li>
+                    <li><a href="#">Scientific American</a></li>
+                    <li><a href="#">The Spectator</a></li>
+                    <li><a href="#">The Rambler</a></li>
+                    <li><a href="#">Physics World</a></li>
+                    <li><a href="#">The New Scientist</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="ion-chevron-left">
+                <a class="ion-bag" href="#">Store</a>
+                <div class="mp-level">
+                  <h2 class="ion-bag">Store</h2>
+                  <a class="mp-back" href="#">back</a>
+                  <ul>
+                    <li class="ion-chevron-left">
+                      <a class="ion-tshirt-outline" href="#">Clothes</a>
+                      <div class="mp-level">
+                        <h2 class="ion-tshirt-outline">Clothes</h2>
+                        <a class="mp-back" href="#">back</a>
+                        <ul>
+                          <li class="ion-chevron-left">
+                            <a class="ion-woman" href="#">Women's Clothing</a>
+                            <div class="mp-level">
+                              <h2 class="ion-woman">Women's Clothing</h2>
+                              <a class="mp-back" href="#">back</a>
+                              <ul>
+                                <li><a href="#">Tops</a></li>
+                                <li><a href="#">Dresses</a></li>
+                                <li><a href="#">Trousers</a></li>
+                                <li><a href="#">Shoes</a></li>
+                                <li><a href="#">Sale</a></li>
+                              </ul>
+                            </div>
+                          </li>
+                          <li class="ion-chevron-left">
+                            <a class="ion-man" href="#">Men's Clothing</a>
+                            <div class="mp-level">
+                              <h2 class="ion-man">Men's Clothing</h2>
+                              <a class="mp-back" href="#">back</a>
+                              <ul>
+                                <li><a href="#">Shirts</a></li>
+                                <li><a href="#">Trousers</a></li>
+                                <li><a href="#">Shoes</a></li>
+                                <li><a href="#">Sale</a></li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li><a class="ion-star" href="#">Jewelry</a></li>
+                    <li><a class="ion-music-note" href="#">Music</a></li>
+                    <li><a class="ion-coffee" href="#">Grocery</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a class="ion-image" href="#">Collections</a></li>
+              <li><a class="ion-card" href="#">Credits</a></li>
             </ul>
-        </div>
+          </div>
+        </nav>
         
         @yield('content')
         
@@ -330,11 +429,11 @@
         <script src="/assets/js/toastr/toastr.js"></script>
         <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>
+
+        <!-- MULTILEVEL PUSH MENU -->
+        <script src="/assets/js/front/multilevel_push.js"></script>
         <!-- HANGGANG DITO -->
         
-
-        <!-- MultiLevelMenu -->
-        <script src="/assets/multilevel_menu/js/jquery.dlmenu.js"></script>
 
         {{-- LANGUAGE --}}
         {{-- <script type="text/javascript">
@@ -376,18 +475,15 @@
                 });
 
                 /*PUSH NAV*/
-                $menuLeft = $('.pushmenu-left');
-                $nav_list = $('#nav_list');
+                // $menuLeft = $('.pushmenu-left');
+                // $nav_list = $('#nav_list');
 
-                $nav_list.click(function() {
-                    $(this).toggleClass('active');
-                    $menuLeft.toggleClass('pushmenu-open');
-                });
+                // $nav_list.click(function() {
+                //     $(this).toggleClass('active');
+                //     $menuLeft.toggleClass('pushmenu-open');
+                // });
 
-
-                $( '#dl-menu' ).dlmenu({
-                    animationClasses : { classin : 'dl-animate-in-2', classout : 'dl-animate-out-2' }
-                });
+                
 
             });
 
