@@ -12,58 +12,65 @@
 		</ol>
 	</div>
 </div>
-<div class="tab-content col-md-12">
-	<div class="col-md-12" style="margin:20px 20px 20px 20px;">
-		<form class="form-inline" method="post" action="/general_admin/search_payment_monitoring">
-			{{csrf_field()}}
-			<div class="col-md-4 pull-right">
-				<div class="form-group">
-					<input type="text" class="form-control" name="search_payment_admin" id="search_payment_admin" >
+<div class="tab-content">
+	<div class="row">
+        <div class="panel-body">
+			<form class="form-inline" method="post" action="/general_admin/search_payment_monitoring">
+				{{csrf_field()}}
+				<div class="col-md-4 col-sm-12 pull-right">
+					<div class="form-group col-md-7 col-sm-5 col-xs-8" style="padding:0px;">
+						<input type="text" class="form-control" name="search_payment_admin" id="search_payment_admin" >
+					</div>
+					<div class="col-md-5 col-sm-5 col-xs-4">
+						<button type="button" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
+					</div>
 				</div>
-				<button type="button" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
-			</div>
-			
-		</form>
-	</div>
-	<form method="post">
-		<div  class="tab-pane fade in active col-md-12">
-			<div class="table-responsive" id="success_activation">
-				<table class="table table-bordered" style="background-color: #FFFFFF;">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Business Name</th>
-							<th>Business Address</th>
-							<th>Membership</th>
-							<th>Payment reference</th>
-							<th>Payment Ammount</th>
-							<th>Date Submit</th>
-							<th>Action</th>
-							
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($business_list as $business_item)
-						<tr>
-							<td>{{ $business_item->payment_id}}</td>
-							<td>{{ $business_item->business_name }}</td>
-							<td>{{ $business_item->business_complete_address }}</td>
-							<td>{{ $business_item->membership_name }}</td>
-							<td>{{ $business_item->payment_reference_number }}</td>
-							<td>₱ {{ $business_item->payment_amount }}</td>
-							<td>{{ $business_item->date_created }}</td>
-							<td>
-								<button type="button"  class="btn btn-info viewPayment"  data-id="{{ $business_item->payment_id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button>
-							</td>
-						</tr>
-						
-						@endforeach
-					</tbody>
-				</table>
-				{!! $business_list->render() !!}
-			</div>
+			</form>
 		</div>
-	</form>
+	</div>
+	<div class="row">
+        <div class="panel-body">
+			<form method="post">
+				<div  class="tab-pane fade in active">
+					<div class="table-responsive" id="success_activation">
+						<table class="table table-bordered" style="background-color: #FFFFFF;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Business Name</th>
+									<th>Business Address</th>
+									<th>Membership</th>
+									<th>Payment reference</th>
+									<th>Payment Ammount</th>
+									<th>Date Submit</th>
+									<th>Action</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($business_list as $business_item)
+								<tr>
+									<td>{{ $business_item->payment_id}}</td>
+									<td>{{ $business_item->business_name }}</td>
+									<td>{{ $business_item->business_complete_address }}</td>
+									<td>{{ $business_item->membership_name }}</td>
+									<td>{{ $business_item->payment_reference_number }}</td>
+									<td>₱ {{ $business_item->payment_amount }}</td>
+									<td>{{ $business_item->date_created }}</td>
+									<td>
+										<button type="button"  class="btn btn-info viewPayment"  data-id="{{ $business_item->payment_id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+									</td>
+								</tr>
+								
+								@endforeach
+							</tbody>
+						</table>
+						{!! $business_list->render() !!}
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 {{-- modal --}}
 <div class="modal fade" id="paymentDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

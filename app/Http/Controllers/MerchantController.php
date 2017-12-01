@@ -439,14 +439,14 @@ class MerchantController extends Controller
     
     }
 
-
      public function add_payment_method(Request $request)
     {
       $data["payment_method_name"] = $request->paymentMethodName;
       $data["payment_method_info"] = "not available";
       $data["business_id"]         = session("business_id");
       TblABusinessPaymentMethodModel::insert($data); 
-      return "<div class='alert alert-success'><strong>Success!</strong> Payment Method Added.</div>";
+      Session::flash('add_payment_method_success', 'success');
+      return  "<div class='alert alert-success'><strong>Success!</strong> Payment Method Added.</div>"; 
     }
 
      public function delete_payment_method(Request $request)

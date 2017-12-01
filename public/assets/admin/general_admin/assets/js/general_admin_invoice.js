@@ -57,8 +57,6 @@ $(document).ready(function()
     $(document).on('click','#search_btn_invoice',function()
     {
         var search_key1 = $('#search_manage_invoice').val();
-        // alert(search_key1);
-        
 
         $.ajax({
 

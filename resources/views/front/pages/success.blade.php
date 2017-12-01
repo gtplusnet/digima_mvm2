@@ -15,7 +15,9 @@
 			<i class="fa fa-check-circle-o check-icon"></i>
 			<p class="message-intro">@if(isset($thank_you->header)==null)@else {{$thank_you->header}}@endif</p>
 			<p class="success-message" style="text-align:center;">INSTRUCTION</p>
-			<p class="success-message" style="text-align:center;">@if(isset($thank_you->information_thank_you)==null)@else {{$thank_you->information_thank_you}}@endif</p>
+			<p class="success-message" style="text-align: center;">@if(isset($thank_you->information_thank_you)==null)@else {{$thank_you->information_thank_you}}@endif</p>
+
+
 			<a href="/"><button class="continue-btn">CONTINUE</button></a>
 		</div>
 		@elseif($index == 'redirect_exist')

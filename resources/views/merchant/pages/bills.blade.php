@@ -88,7 +88,7 @@
                                
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="overflow-x: scroll;">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>

@@ -8,7 +8,8 @@
     </style>
     <head>
         <!-- Title -->
-        <title>CROATIA Directory | @yield('title')</title>
+
+        <title>Žute Stranice | @yield('title')</title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <meta name="csrf-token" content="{{ csrf_token() }}" />

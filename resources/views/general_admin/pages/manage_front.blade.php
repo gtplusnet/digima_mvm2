@@ -2,6 +2,26 @@
 @section('title', 'manage front')
 @section('description', 'manage front')
 @section('content')
+<style>
+.li_me
+{
+   width:25%;
+}
+.btn-success
+{
+   color:#fff;
+}
+
+@media only screen and (max-width: 500px) 
+   {
+       .li_me
+      {
+         width:100%;
+         text-align: center;
+      }
+      
+   }
+</style>
 <div class="page-title" style="margin-bottom:20px;">
    <h3>Manage Front</h3>
    <div class="page-breadcrumb">
@@ -144,24 +164,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/global.ajax.js"></script>
 <script src="/assets/admin/general_admin/assets/js/general_admin_front.js"></script>
-<style>
-.date {
-position: relative;
-left:500px;
-}
-.distance
-{
-margin:10px 0px 10px 0px;
-}
-.li_me{
-padding:0px;
-width:25%;
-margin-right:0px;
-margin-left:-1px;
-}
-.btn-success
-{
-color:#fff;
-}
-</style>
+
 @endsection

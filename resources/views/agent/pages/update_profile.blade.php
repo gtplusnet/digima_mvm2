@@ -3,14 +3,16 @@
 <h4>Update Personal Information</h4>
 <form class="form-horizontal" method="POST" action="/agent/saving_profile">
       {{csrf_field()}}
-  <div class="form-group">
+    <div class="form-group">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-4">
+            <img src="{{$agent_info->profile}}" width="150" height="100" class="img-thumbnail" alt="">
+        </div>
         <label for="input-Default" class="col-sm-2 control-label">Profile Picture</label>
         <div class="col-sm-4">
             <input type="file" class="form-control input-rounded" id="image" accept="image/x-png,image/jpeg">
             <input type="hidden" id="imageText" value="{{$agent_info->profile}}">
-        </div>
-        <div class="col-sm-6">
-            <img src="{{$agent_info->profile}}" class="" alt="">
         </div>
     </div>
     <hr>

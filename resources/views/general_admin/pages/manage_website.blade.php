@@ -19,7 +19,7 @@
 .form-text
 {
 	text-align: center;
-	width:350px;
+	width:100%;
 	padding:10px 10px 10px 10px;
 }
 .form-select
@@ -89,7 +89,7 @@ padding: 10px;
 					<div class="website-title">
 						Membership List
 					</div>
-					<div class="website-content col-md-12">
+					<div class="table-responsive website-content col-md-12">
 						
 						<table class="table table-bordered" style="margin-top:10px;">
 							<thead>
@@ -143,7 +143,7 @@ padding: 10px;
 					<div class="website-title">
 						Payment Method List
 					</div>
-					<div class="website-content col-md-12">
+					<div class="table-responsive  website-content col-md-12">
 						
 						<table class="table table-bordered" style="margin-top:10px;">
 							<thead>
@@ -193,7 +193,7 @@ padding: 10px;
 					<div class="website-title">
 						County List
 					</div>
-					<div class="website-content col-md-12">
+					<div class=" table-responsive  website-content col-md-12">
 						<table class="table table-bordered" style="margin-top:10px;">
 							<thead>
 								<tr>
@@ -255,7 +255,7 @@ padding: 10px;
 					<div class="website-title">
 						City List
 					</div>
-					<div class="website-content col-md-12">
+					<div class="table-responsive  website-content col-md-12">
 						<table class="table table-bordered" style="margin-top:10px;">
 							<thead>
 								<tr>

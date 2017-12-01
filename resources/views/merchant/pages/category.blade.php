@@ -17,7 +17,7 @@
    .form-text
    {
    text-align: center;
-   width:350px;
+   width:100%;
    padding:10px 10px 10px 10px;
    }
    .form-select
