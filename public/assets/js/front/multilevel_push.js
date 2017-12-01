@@ -170,12 +170,18 @@
       this.trigger.addEventListener(this.eventtype, function(ev) {
         ev.stopPropagation();
         ev.preventDefault();
+
+        $("body").css({"overflow": "hidden","position": "fixed","margin": "0","padding": "0","right": "0","left": "0"});
+        
         if (self.open) {
           self._resetMenu();
         } else {
           self._openMenu();
           // the menu should close if clicking somewhere on the body (excluding clicks on the menu)
           document.addEventListener(self.eventtype, function(ev) {
+
+            $("body").css({"overflow": "auto","position": "static"});
+
             if (self.open && !hasParent(ev.target, self.el.id)) {
               bodyClickFn(this);
             }

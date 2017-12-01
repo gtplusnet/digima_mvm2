@@ -48,35 +48,275 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/sendemail.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
+
+        <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         
         <!-- MULTILEVEL PUSHMENU -->
         <link rel="stylesheet" type="text/css" href="/assets/front/css/multilevel_push.css">
         
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
     </head>
-    <body class="mp-pusher" id="mp-pusher">
-        <!-- HEADER -->
-        <div class="header-nav ">
-            <div class="container">
-                <div class="menu-bar">
-                    <div class="pull-left">
-                        <!-- TAB BAR -->
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
-                        <li class="nav-tab last {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+    <body>
+        <div class="main-wrapper mp-pusher" id="mp-pusher">
+            <!-- MULTILEVEL PUSH MENU -->
+            <nav id="mp-menu" class="mp-menu">
+              <div class="mp-level">
+                <h2 class="ion-earth">Category Filter</h2>
+                <ul>
+                  <li class="ion-chevron-left">
+                    <a href="#">Devices</a>
+                    <div class="mp-level">
+                      <h2>Devices</h2>
+                      <a class="mp-back" href="#">back</a>
+                      <ul>
+                        <li class="ion-chevron-left">
+                          <a href="#">Mobile Phones</a>
+                          <div class="mp-level">
+                            <h2>Mobile Phones</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <ul>
+                              <li><a href="#">Super Smart Phone</a></li>
+                              <li><a href="#">Thin Magic Mobile</a></li>
+                              <li><a href="#">Performance Crusher</a></li>
+                              <li><a href="#">Futuristic Experience</a></li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li class="ion-chevron-left">
+                          <a href="#">Televisions</a>
+                          <div class="mp-level">
+                            <h2>Televisions</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <ul>
+                              <li><a href="#">Flat Superscreen</a></li>
+                              <li><a href="#">Gigantic LED</a></li>
+                              <li><a href="#">Power Eater</a></li>
+                              <li><a href="#">3D Experience</a></li>
+                              <li><a href="#">Classic Comfort</a></li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li class="ion-chevron-left">
+                          <a href="#">Cameras</a>
+                          <div class="mp-level">
+                            <h2>Cameras</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <ul>
+                              <li><a href="#">Smart Shot</a></li>
+                              <li><a href="#">Power Shooter</a></li>
+                              <li><a href="#">Easy Photo Maker</a></li>
+                              <li><a href="#">Super Pixel</a></li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
-                    <div class="pull-right">
-                        <!-- BUTTONS -->
-                        <div class="btn-login">
-                            <a href="/login">Log in</a>
+                  </li>
+                  <li class="ion-chevron-left">
+                    <a href="#">Magazines</a>
+                    <div class="mp-level">
+                      <h2>Magazines</h2>
+                      <a class="mp-back" href="#">back</a>
+                      <ul>
+                        <li><a href="#">National Geographic</a></li>
+                        <li><a href="#">Scientific American</a></li>
+                        <li><a href="#">The Spectator</a></li>
+                        <li><a href="#">The Rambler</a></li>
+                        <li><a href="#">Physics World</a></li>
+                        <li><a href="#">The New Scientist</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="ion-chevron-left">
+                    <a href="#">Store</a>
+                    <div class="mp-level">
+                      <h2>Store</h2>
+                      <a class="mp-back" href="#">back</a>
+                      <ul>
+                        <li class="ion-chevron-left">
+                          <a href="#">Clothes</a>
+                          <div class="mp-level">
+                            <h2>Clothes</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <ul>
+                              <li class="ion-chevron-left">
+                                <a href="#">Women's Clothing</a>
+                                <div class="mp-level">
+                                  <h2>Women's Clothing</h2>
+                                  <a class="mp-back" href="#">back</a>
+                                  <ul>
+                                    <li><a href="#">Tops</a></li>
+                                    <li><a href="#">Dresses</a></li>
+                                    <li><a href="#">Trousers</a></li>
+                                    <li><a href="#">Shoes</a></li>
+                                    <li><a href="#">Sale</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                              <li class="ion-chevron-left">
+                                <a href="#">Men's Clothing</a>
+                                <div class="mp-level">
+                                  <h2>Men's Clothing</h2>
+                                  <a class="mp-back" href="#">back</a>
+                                  <ul>
+                                    <li><a href="#">Shirts</a></li>
+                                    <li><a href="#">Trousers</a></li>
+                                    <li><a href="#">Shoes</a></li>
+                                    <li><a href="#">Sale</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li><a href="#">Jewelry</a></li>
+                        <li><a href="#">Music</a></li>
+                        <li><a href="#">Grocery</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li><a href="#">Collections</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">Credits</a></li>
+                  <li><a href="#">End</a></li>
+
+                </ul>
+              </div>
+            </nav>
+            <!-- HEADER -->
+            <div class="header-nav ">
+                <div class="container">
+                    <div class="menu-bar">
+                        <div class="pull-left">
+                            <!-- TAB BAR -->
+                            <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
+                            <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
+                            <li class="nav-tab last {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
                         </div>
-                        <div class="btn-register">
-                            <a href="/registration">Register</a>
+                        <div class="pull-right">
+                            <!-- BUTTONS -->
+                            <div class="btn-login">
+                                <a href="/login">Log in</a>
+                            </div>
+                            <div class="btn-register">
+                                <a href="/registration">Register</a>
+                            </div>
+                            <div class="language-selection">
+                                <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
+                                    <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
+                                </a>
+                            </div>
+                            <div class="language-selection">
+                                <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
+                                    <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
+                                </a>
+                            </div>
+                            <div class="language-selection" >
+                                <div id="google_translate_element" style="display:none;"></div>
+                                <style>
+                                .goog-te-gadget-icon
+                                {
+                                visibility:hidden;
+                                text-align:center;
+                                position:absolute;
+                                }
+                                /*.goog-te-banner-frame
+                                /*{*/
+                                    /*visibility:hidden !important;
+                                    height:0px !important;*/
+                                /*}*/
+                                .goog-te-banner-frame.skiptranslate {display: none !important;} 
+                                body { top: 0px !important; }
+                                
+                                </style>
+                                
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-nav-bottom">
+                <div class="container">
+                    <div class="col-md-2" style="padding: 0px;">
+                        <img  src="/images/croatia_directory_logo.png">
+                    </div>
+                    <div class="menu-bar col-md-10">
+                        <div class="searchbox-holder">
+                            <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
+                                {{ csrf_field() }}
+                                <div class="col-md-4 searchfields-format ">
+                                    <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
+                                </div>
+                                <div class="col-md-3 searchfields-format ">
+                                    <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
+                                        <option value="" disabled selected><div>--County--</div></option>
+                                        @foreach($countyList as $countyListItem)
+                                        <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <style>
+                                    select:required:invalid {
+                                          color: gray;
+                                        }
+                                        option[value=""][disabled] {
+                                          display: none;
+                                        }
+                                        option {
+                                          color: black;
+                                        }
+                                    </style>
+                                </div>
+                                <div class="col-md-2 searchfields-format ">
+                                    <input class="zipcode-textbox" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
+                                </div>
+                                <div class="col-md-2 searchfields-format ">
+                                    <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MOBILE NAV -->
+            {{-- <nav class="pushmenu pushmenu-left">
+                <div class="space2"></div>
+                <div class="space1"></div>
+                <span>BROWSE</span>
+                <div class="space1"></div>
+                <ul class="links">
+                    <a href="/">
+                        <li>
+                            <span><i class="fa fa-home" aria-hidden="true"></i></span>
+                            <span>&nbsp;&nbsp;HOME</span>
+                        </li>
+                    </a>
+                    <a href="/about">
+                        <li>
+                            <span><i class="fa fa-building" aria-hidden="true"></i></span>
+                            <span>&nbsp;&nbsp;ABOUT</span>
+                        </li>
+                    </a>
+                    <a href="/contact">
+                        <li>
+                            <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                            <span>&nbsp;&nbsp;CONTACT US</span>
+                        </li>
+                    </a>
+                </ul>
+            </nav> --}}
+            {{-- <div id="overlay" onclick="off()"></div> --}}
+            <div class="header-wrapper">
+                <div class="mob-top-header">
+                    <div class="left-container">
                         <div class="language-selection">
                             <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
                                 <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
@@ -87,328 +327,99 @@
                                 <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
                             </a>
                         </div>
-                        <div class="language-selection" >
-                            <div id="google_translate_element" style="display:none;"></div>
-                            <style>
-                            .goog-te-gadget-icon
-                            {
-                            visibility:hidden;
-                            text-align:center;
-                            position:absolute;
-                            }
-                            /*.goog-te-banner-frame
-                            /*{*/
-                                /*visibility:hidden !important;
-                                height:0px !important;*/
-                            /*}*/
-                            .goog-te-banner-frame.skiptranslate {display: none !important;} 
-                            body { top: 0px !important; }
-                            
-                            </style>
-                            
+                    </div>
+                    <div class="right-container">
+                        <span class="login">Login</span>
+                        <span class="reg">Register</span>
+                    </div>
+                </div>
+                <div class="mob-main-header">
+                    <div class="row-no-padding clearfix">
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <div class="left-container">
+                                {{-- <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i> --}}
+                                <p><a style="text-decoration: none;" href="#" id="trigger" class="fa fa-bars hamburger"></a></p>
+                            </div>    
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <a href="/">
+                                <div class="header-logo-container">
+                                    <img  src="/images/croatia_directory_logo.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <div class="right-container">
+                               <i id="show" class="fa fa-search"></i> 
+                            </div> 
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="header-nav-bottom">
-            <div class="container">
-                <div class="col-md-2" style="padding: 0px;">
-                    <img  src="/images/croatia_directory_logo.png">
-                </div>
-                <div class="menu-bar col-md-10">
-                    <div class="searchbox-holder">
-                        <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
-                            {{ csrf_field() }}
-                            <div class="col-md-4 searchfields-format ">
-                                <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
-                            </div>
-                            <div class="col-md-3 searchfields-format ">
-                                <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
-                                    <option value="" disabled selected><div>--County--</div></option>
-                                    @foreach($countyList as $countyListItem)
-                                    <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
-                                    @endforeach
-                                </select>
-                                <style>
-                                select:required:invalid {
-                                      color: gray;
-                                    }
-                                    option[value=""][disabled] {
-                                      display: none;
-                                    }
-                                    option {
-                                      color: black;
-                                    }
-                                </style>
-                            </div>
-                            <div class="col-md-2 searchfields-format ">
-                                <input class="zipcode-textbox" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
-                            </div>
-                            <div class="col-md-2 searchfields-format ">
-                                <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
-                            </div>
-                        </form>
-                    </div>
+                <div id="search_nav" class="search-container">
+                    <form>
+                        <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
+                        <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
+                            <option value="" disabled selected><div>--County--</div></option>
+                            @foreach($countyList as $countyListItem)
+                            <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+                            @endforeach
+                        </select>
+                        <input class="search-control" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
+                        <button type="submit" class="btn btn-search" name="searchButton" id="searchButton">
+                            <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Search</span>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </div>
-        <!-- MOBILE NAV -->
-        {{-- <nav class="pushmenu pushmenu-left">
-            <div class="space2"></div>
-            <div class="space1"></div>
-            <span>BROWSE</span>
-            <div class="space1"></div>
-            <ul class="links">
-                <a href="/">
-                    <li>
-                        <span><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;HOME</span>
-                    </li>
-                </a>
-                <a href="/about">
-                    <li>
-                        <span><i class="fa fa-building" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;ABOUT</span>
-                    </li>
-                </a>
-                <a href="/contact">
-                    <li>
-                        <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;CONTACT US</span>
-                    </li>
-                </a>
-            </ul>
-        </nav> --}}
-        {{-- <div id="overlay" onclick="off()"></div> --}}
-        <div class="header-wrapper">
-            <div class="mob-top-header">
-                <div class="left-container">
-                    <div class="language-selection">
-                        <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
-                            <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                        </a>
-                    </div>
-                    <div class="language-selection">
-                        <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
-                            <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                        </a>
-                    </div>
-                </div>
-                <div class="right-container">
-                    <span class="login">Login</span>
-                    <span class="reg">Register</span>
-                </div>
-            </div>
-            <div class="mob-main-header">
-                <div class="row-no-padding clearfix">
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                        <div class="left-container">
-                            {{-- <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i> --}}
-                            <p><a style="text-decoration: none;" href="#" id="trigger" class="fa fa-bars hamburger"></a></p>
-                        </div>    
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="/">
-                            <div class="header-logo-container">
-                                <img  src="/images/croatia_directory_logo.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                        <div class="right-container">
-                           <i id="show" class="fa fa-search"></i> 
-                        </div> 
-                    </div>
-                </div>
-            </div>
-            <div id="search_nav" class="search-container">
-                <form>
-                    <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
-                    <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
-                        <option value="" disabled selected><div>--County--</div></option>
-                        @foreach($countyList as $countyListItem)
-                        <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
-                        @endforeach
-                    </select>
-                    <input class="search-control" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
-                    <button type="submit" class="btn btn-search" name="searchButton" id="searchButton">
-                        <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Search</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <!-- MULTILEVEL PUSH MENU -->
-        <nav id="mp-menu" class="mp-menu">
-          <div class="mp-level">
-            <h2 class="ion-earth">All Categories</h2>
-            <ul>
-              <li class="ion-chevron-left">
-                <a class="ion-monitor" href="#">Devices</a>
-                <div class="mp-level">
-                  <h2 class="ion-monitor">Devices</h2>
-                  <a class="mp-back" href="#">back</a>
-                  <ul>
-                    <li class="ion-chevron-left">
-                      <a class="ion-iphone" href="#">Mobile Phones</a>
-                      <div class="mp-level">
-                        <h2>Mobile Phones</h2>
-                        <a class="mp-back" href="#">back</a>
-                        <ul>
-                          <li><a href="#">Super Smart Phone</a></li>
-                          <li><a href="#">Thin Magic Mobile</a></li>
-                          <li><a href="#">Performance Crusher</a></li>
-                          <li><a href="#">Futuristic Experience</a></li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li class="ion-chevron-left">
-                      <a class="ion-monitor" href="#">Televisions</a>
-                      <div class="mp-level">
-                        <h2>Televisions</h2>
-                        <a class="mp-back" href="#">back</a>
-                        <ul>
-                          <li><a href="#">Flat Superscreen</a></li>
-                          <li><a href="#">Gigantic LED</a></li>
-                          <li><a href="#">Power Eater</a></li>
-                          <li><a href="#">3D Experience</a></li>
-                          <li><a href="#">Classic Comfort</a></li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li class="ion-chevron-left">
-                      <a class="ion-camera" href="#">Cameras</a>
-                      <div class="mp-level">
-                        <h2>Cameras</h2>
-                        <a class="mp-back" href="#">back</a>
-                        <ul>
-                          <li><a href="#">Smart Shot</a></li>
-                          <li><a href="#">Power Shooter</a></li>
-                          <li><a href="#">Easy Photo Maker</a></li>
-                          <li><a href="#">Super Pixel</a></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="ion-chevron-left">
-                <a class="ion-document-text" href="#">Magazines</a>
-                <div class="mp-level">
-                  <h2 class="ion-document-text">Magazines</h2>
-                  <a class="mp-back" href="#">back</a>
-                  <ul>
-                    <li><a href="#">National Geographic</a></li>
-                    <li><a href="#">Scientific American</a></li>
-                    <li><a href="#">The Spectator</a></li>
-                    <li><a href="#">The Rambler</a></li>
-                    <li><a href="#">Physics World</a></li>
-                    <li><a href="#">The New Scientist</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="ion-chevron-left">
-                <a class="ion-bag" href="#">Store</a>
-                <div class="mp-level">
-                  <h2 class="ion-bag">Store</h2>
-                  <a class="mp-back" href="#">back</a>
-                  <ul>
-                    <li class="ion-chevron-left">
-                      <a class="ion-tshirt-outline" href="#">Clothes</a>
-                      <div class="mp-level">
-                        <h2 class="ion-tshirt-outline">Clothes</h2>
-                        <a class="mp-back" href="#">back</a>
-                        <ul>
-                          <li class="ion-chevron-left">
-                            <a class="ion-woman" href="#">Women's Clothing</a>
-                            <div class="mp-level">
-                              <h2 class="ion-woman">Women's Clothing</h2>
-                              <a class="mp-back" href="#">back</a>
-                              <ul>
-                                <li><a href="#">Tops</a></li>
-                                <li><a href="#">Dresses</a></li>
-                                <li><a href="#">Trousers</a></li>
-                                <li><a href="#">Shoes</a></li>
-                                <li><a href="#">Sale</a></li>
-                              </ul>
-                            </div>
-                          </li>
-                          <li class="ion-chevron-left">
-                            <a class="ion-man" href="#">Men's Clothing</a>
-                            <div class="mp-level">
-                              <h2 class="ion-man">Men's Clothing</h2>
-                              <a class="mp-back" href="#">back</a>
-                              <ul>
-                                <li><a href="#">Shirts</a></li>
-                                <li><a href="#">Trousers</a></li>
-                                <li><a href="#">Shoes</a></li>
-                                <li><a href="#">Sale</a></li>
-                              </ul>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li><a class="ion-star" href="#">Jewelry</a></li>
-                    <li><a class="ion-music-note" href="#">Music</a></li>
-                    <li><a class="ion-coffee" href="#">Grocery</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li><a class="ion-image" href="#">Collections</a></li>
-              <li><a class="ion-card" href="#">Credits</a></li>
-            </ul>
-          </div>
-        </nav>
-        
-        @yield('content')
-        
-        <!-- FOOTER HERE -->
-        <div class="footer-upper">
-            <div class="container">
-                <div class="col-md-12 no-padding footer-body">
-                    <div class="col-md-5">
-                        <p class="footer-title">SUBSCRIBE TO OUR NEWSLETTER</p>
-                        <p class="footer-content newsletter-content">Join today to recieve latest offers</p>
-                        <input type="text" class="input-emailadd" placeholder="Your Email Address">
-                    </div>
-                    <div class="col-md-4">
-                        <p class="footer-title">CONTACT US</p>
-                        <div class="contact-content">
-                            <div class="img-holder">
-                                <img src="/images/map_icon.png">
-                            </div>
-                            <p class="footer-content">
-                                @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif
-                            </p>
+            
+            @yield('content')
+            
+            <!-- FOOTER HERE -->
+            <div class="footer-upper">
+                <div class="container">
+                    <div class="col-md-12 no-padding footer-body">
+                        <div class="col-md-5">
+                            <p class="footer-title">SUBSCRIBE TO OUR NEWSLETTER</p>
+                            <p class="footer-content newsletter-content">Join today to recieve latest offers</p>
+                            <input type="text" class="input-emailadd" placeholder="Your Email Address">
                         </div>
-                        <div class="contact-content">
-                            <div class="img-holder">
-                                <img src="/images/mobile_icon.png">
-                            </div>
-                            <p class="footer-content">
-                                 @if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif
+                        <div class="col-md-4">
+                            <p class="footer-title">CONTACT US</p>
+                            <div class="contact-content">
+                                <div class="img-holder">
+                                    <img src="/images/map_icon.png">
+                                </div>
+                                <p class="footer-content">
+                                    @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif
                                 </p>
-                        </div>
-                        <div class="contact-content">
-                            <div class="img-holder">
-                                <img src="/images/mail_icon.png">
                             </div>
-                            <p class="footer-content">@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif</p>
+                            <div class="contact-content">
+                                <div class="img-holder">
+                                    <img src="/images/mobile_icon.png">
+                                </div>
+                                <p class="footer-content">
+                                     @if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif
+                                    </p>
+                            </div>
+                            <div class="contact-content">
+                                <div class="img-holder">
+                                    <img src="/images/mail_icon.png">
+                                </div>
+                                <p class="footer-content">@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <p class="footer-title">ABOUT US</p>
-                        <img src="/images/footer_logo.png">
-                        <p class="footer-content aboutus-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <div class="col-md-3">
+                            <p class="footer-title">ABOUT US</p>
+                            <img src="/images/footer_logo.png">
+                            <p class="footer-content aboutus-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- footer-upper -->
-        <div class="footer-bottom">
-            <div class="container">
-                <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
+            </div><!-- footer-upper -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
+                </div>
             </div>
         </div>
         <!-- footer-bottom -->
@@ -446,6 +457,7 @@
     {{-- translator --}}
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 
         <script>
@@ -488,24 +500,18 @@
             });
 
 
-            function on() 
-            {
-                document.getElementById("overlay").style.display = "block";
-                $("body").css({"overflow": "hidden","position": "fixed","margin": "0","padding": "0","right": "0","left": "0"});
-                // $("body").css("position", "fixed");
-                // $("body").css("margin", "0");
-                // $("body").css("padding", "0");
-                // $("body").css("right", "0");
-                // $("body").css("left", "0");
-            }
+            // function on() 
+            // {
+            //     document.getElementById("overlay").style.display = "block";
+            //     $("body").css({"overflow": "hidden","position": "fixed","margin": "0","padding": "0","right": "0","left": "0"});
+            // }
 
-            function off()
-            {
-                document.getElementById("overlay").style.display = "none";
-                $('.pushmenu').removeClass("pushmenu-open");
-                $("body").css("overflow", "auto");
-                $("body").css("position", "static");
-            }
+            // function off()
+            // {
+            //     document.getElementById("overlay").style.display = "none";
+            //     $('.pushmenu').removeClass("pushmenu-open");
+            //     $("body").css({"overflow": "auto","position": "static"});
+            // }
         </script>
     </body>
 </html>
