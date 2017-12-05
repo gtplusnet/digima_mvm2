@@ -172,8 +172,8 @@
 					<div class="row-clearfix payment-content ">
 						@foreach($_membership as $membership)
 						<div class="col-md-6 package-container" style="margin:0px !important;padding:10px;    border: none !important;">
-							<div style="padding:10px;border:1px solid black;">
-								<div class="membership-offer">
+							<div style="padding:10px;border:1px solid #92a5c0;">
+								<div class="membership-offer" style="font-weight: bold; color: #3d516d;">
 									{{$membership->membership_name}}
 								</div>
 								<hr>

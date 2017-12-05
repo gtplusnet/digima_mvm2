@@ -1,9 +1,79 @@
 .login-background
 {
+    background-image: url('/images/background_login.jpg');
     background-size: cover;
     background-position: center;
     min-height: 756px;
     position: relative;
+    padding-bottom: 50px;
+
+    @media screen and (max-width: 768px)
+    {   
+        background-image: none;
+        background-color: #ededed;
+        position: relative;
+    }
+    @media screen and (max-width: 375px)
+    {   
+        min-height: 544px;
+    }
+    /* MOBILE LOGIN */
+    .login-wrapper 
+    {
+        display: none;
+        @media screen and (min-width: 768px)
+        {
+            padding: 0px 85px;
+        }
+        @media screen and (max-width: 768px)
+        {
+            display: block;
+        }
+
+        .mob-login
+        {
+            margin-top: 65px;
+            border-radius: 10px;
+            overflow: hidden;
+
+            @media screen and (max-width: 320px)
+            {
+                margin-top: 35px;
+            }
+
+
+            .top-container 
+            {
+                img 
+                {
+                    width: 100%;
+                }
+            }
+            .bot-container
+            {
+                background-color: #fff;
+                padding: 25px 25px 35px 25px;
+
+                .caption 
+                {
+                    text-align: center;
+                    font-size: 21px;
+                    font-weight: bold;
+                }
+
+                input 
+                {
+                    padding: 22px;
+                    text-align: center;
+                }
+
+                button 
+                {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
 }
 .login-container-background 
 {
@@ -152,6 +222,11 @@
     margin-top: 160px;
     margin-bottom: 160px;
     display: -webkit-box;
+
+    @media screen and (max-width: 768px)
+    {
+        display: none;
+    }
 }
 .login-textfield-container
 {
