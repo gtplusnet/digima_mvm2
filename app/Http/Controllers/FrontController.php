@@ -269,19 +269,19 @@ class FrontController extends Controller
 
             $businessHoursData = new Tbl_business_hours;
             $businessHoursData->insert(array(
-                array('days' => 'Monday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Ponedjeljak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $businessData->business_id),
-                array('days' => 'Tuesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Utorak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $businessData->business_id),
-                array('days' => 'Wednesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Srijeda', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $businessData->business_id),
-                array('days' => 'Thursday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Četvrtak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $businessData->business_id),
-                array('days' => 'Friday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Petak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $businessData->business_id),
-                array('days' => 'Saturday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Subota', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $businessData->business_id),
-                array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Nedjelja', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $businessData->business_id)
             ));
             return response()->json(['status' => 'success', 'url' => '/success']); 
@@ -306,7 +306,6 @@ class FrontController extends Controller
 
     public function businessSearchResult(Request $request)
     {
-        $data['contact_us']           = TblContactUs::first();
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID'] = $countyID = $request->countyId;
         $data['postal_code'] = $postalCode = $request->cityOrpostalCode;
@@ -326,23 +325,36 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.membership','DESC')
                                     ->paginate(9);  
         }
-        $data['countyList']         = TblCountyModel::get();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
-        $data['_membership']        = TblMembeshipModel::get();
-        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)
-                                    ->groupBy('tbl_business.business_id')
-                                    ->orderBy('tbl_business.membership','ASC')
-                                    ->paginate(9);
-        $data["_featured_list"]     = TblBusinessModel::where('membership',2)->where('business_status',5)  
-                                    ->groupBy('tbl_business.business_id')
+        $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
+        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                                    ->orderBy('tbl_business.business_name','ASC')
+                                    ->groupBy('tbl_business.business_id')
+                                    ->paginate(9);
+        $data["_featured_list"]     = TblBusinessModel::where('membership',1)->where('business_status',5) 
+                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                                    ->orderBy('tbl_business.business_name','DESC')
+                                    ->groupBy('tbl_business.business_id')
                                     ->get();
-        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->get();
+        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_reports.business_views','DESC')
+                                    ->where('business_status',5)
+                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->groupBy('tbl_business.business_id')
                                     ->limit(4)
                                     ->get();
+
+
+
+        
+        
+        
+        
+        
         return view('front.pages.searchresult',$data); 
     }
     public function business(Request $request,$id)

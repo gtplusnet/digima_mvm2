@@ -3,11 +3,11 @@
 @section('content')
 
 
-<div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">s
+<div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">
     <div class="container">
         <div class="pull-left">
             <div class="pull-right">
-                <p class="search-text">Search ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
+                <p class="search-text">Tražilica ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
             </div>
             <div class="businesses-info-containers">
                 <div  class="businesses-details-containers">
@@ -22,8 +22,8 @@
                         <i class="fa fa-map-marker map" style=""></i>{{$business_info->business_complete_address}}
                     </div>
                     <div class="pull-right">
-                            <a href="skype:{{$business_info->business_phone}}"><button class=" btn-skype"><i class="fa fa-skype skype" aria-hidden="true"></i>Call on Skype</button></a>
-                            <buton class=" btn-email" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope email" aria-hidden="true"></i>Send Email</buton>
+                            <a href="skype:{{$business_info->business_phone}}"><button class=" btn-skype"><i class="fa fa-skype skype" aria-hidden="true"></i>Pozovi na Skype</button></a>
+                            <buton class=" btn-email" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope email" aria-hidden="true"></i>Pošalji Email</buton>
                     </div>
                 </div>
             </div>
@@ -112,13 +112,13 @@
            {{--  @endif --}}
             <div>
                 <div class="overview-container">
-                    <p class="overview-title">OVERVIEW</p>
+                    <p class="overview-title">PREGLED</p>
                 </div>
                 <div class="overview-content">
                     <p class="overview-content-text">{{ $business_info->company_information }}</p>
                 </div>
                 <div class="overview-container">
-                    <p class="overview-title">CATEGORY</p>
+                    <p class="overview-title">KATEGORIJE</p>
                 </div>
                 <div class="category-content">
                     <p class="overview-content-text">
@@ -178,26 +178,26 @@
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
-                    <i class="fa fa-calendar icon-size"></i><p class="title-margin"> YEAR ESTABLISHED:</p>
+                    <i class="fa fa-calendar icon-size"></i><p class="title-margin"> GODINA OSNIVANJA:</p>
                 </div>
                 <p class="business-details-rightpart-content">{{ $business_info->year_established }}</p>
             </div>
            
             <div class="details-container">
                 <div class="business-details-rightpart-title">
-                    <i class="fa fa-globe icon-size"></i><p class="title-margin"> WEBSITE:</p>
+                    <i class="fa fa-globe icon-size"></i><p class="title-margin">WEB STRANICA:</p>
                 </div>
                 <p class="business-details-rightpart-content">{{ $business_info->business_website }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
-                    <i class="fa fa-envelope-o icon-size"></i><p class="title-margin"> EMAIL:</p>
+                    <i class="fa fa-envelope-o icon-size"></i><p class="title-margin"> E-MAIL:</p>
                 </div>
                 <p class="business-details-rightpart-content">{{ $business_info->user_email }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
-                    <i class="material-icons">access_time</i><p class="title-margin-mi">TIME:</p>
+                    <i class="material-icons">access_time</i><p class="title-margin-mi">VRIJEME:</p>
                 </div>
                 @foreach($_business_hours as $business_hours)
                     <p class="business-details-rightpart-content">
@@ -210,7 +210,7 @@
             </div>
             <div class="details-container-last">
                 <div class="business-details-rightpart-title">
-                    <i class="material-icons">payment</i><p class="title-margin-mi">PAYMENT METHODS:</p>
+                    <i class="material-icons">payment</i><p class="title-margin-mi">NAČINI PLAĆANJA:</p>
                 </div>
                 <ul class="business-details-paymentmethods">
                     @foreach($_payment_method as $payment_method)

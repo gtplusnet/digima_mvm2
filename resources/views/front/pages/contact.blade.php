@@ -6,7 +6,7 @@
 <div class="banner-contact" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		<div class="title-holder-page" style="">
-			CONTACT US
+			KONTAKTIRAJTE NAS
 		</div>
 	</div>
 </div>
@@ -14,7 +14,7 @@
 	<div class="col-md-6 contact-container-left">
 		 @if (session('success'))
            <div class="alert alert-success">
-                Thank you!. Your Message Send Successfully!
+                Hvala vam! Poruka je uspješno poslana.
             </div>
             @elseif(session('error'))
             <div class="alert alert-danger">
@@ -22,7 +22,7 @@
             </div>
            @endif
 		<div class="contact-title-container">
-			<p class="contact-title">Support and Contact Inquery</p>
+			<p class="contact-title">Potpora i Kontakt Upit</p>
 		</div>
 		<div>
 			<form role="form" action="/contact_send" method="post">
@@ -30,7 +30,7 @@
 			<div class=" col-md-12 contact-form-container">
 				<div class="col-md-12 contact-textfield-holder">
 					<div class="col-md-6 contact-textfield-left-holder">
-						<label for="input-name" class="contact-labels">Name:</label>
+						<label for="input-name" class="contact-labels">Ime:</label>
 						<input type="text" name="name" class="contact-textfield" required/>
 					</div>
 					<div class="col-md-6 contact-textfield-right-holder">
@@ -39,15 +39,15 @@
 					</div>
 				</div>
 				<div class="col-md-12 contact-textfield-holder">
-					<label for="input-subject" class="contact-labels">Subject:</label>
+					<label for="input-subject" class="contact-labels">Predmet:</label>
 					<input type="text" name="subject" class="contact-textfield" required/>
 				</div>
 				<div class="col-md-12 contact-textfield-holder">
-					<label for="input-help" class="contact-labels">How Can We Help:</label>
+					<label for="input-help" class="contact-labels">Kako Vam Možemo Pomoći:</label>
 					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea" required/></textarea>
 				</div>
 				<div class="col-md-12 contact-btn-holder">
-					<button class="contact-send-btn">SEND MESSAGE</button>
+					<button class="contact-send-btn">Pošalji Poruku</button>
 				</div>
 			</div>
 			</form>
@@ -55,7 +55,7 @@
 	</div>
 	<div class="col-md-6 contact-container-right">
 		<div class="contact-title-container">
-			<p class="contact-title">Address and Contact Info</p>
+			<p class="contact-title">Adresa i Kontakt Informacije</p>
 		</div>
 		<div class="contact-details">
 			<div class="details-info-holder">

@@ -27,10 +27,10 @@
                         <table class="table table-bordered" style="width: 100%; text-align: center;" cellpadding="0" cellspacing="0"  border="1">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;font-size: 13px">MAIL TO</th>
-                                    <th style="text-align: center;font-size: 13px">SUBJECT</th>
-                                    <th style="text-align: center;font-size: 13px">MESSAGES</th>
-                                    <th style="text-align: center;font-size: 13px">ACTION</th>
+                                    <th style="text-align: center;font-size: 13px">Mail Na Adresu</th>
+                                    <th style="text-align: center;font-size: 13px">Predmet</th>
+                                    <th style="text-align: center;font-size: 13px">Poruke</th>
+                                    <th style="text-align: center;font-size: 13px">Radnja</th>
                                 </tr>
                             </thead>
                             @foreach($guest_messages as $data)
@@ -41,7 +41,7 @@
                                 <td>
                                     <a href="/merchant/delete_messages/{{$data->guest_messages_id}}">
                                         <button type="button" class="btn btn-danger" id="deletemessages" name="deletemessages">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>Delete
+                                        <i class="fa fa-trash" aria-hidden="true"></i>Izbrisati
                                         </button>
                                     </a>
                                 </td>
