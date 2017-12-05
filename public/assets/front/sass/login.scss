@@ -72,7 +72,25 @@
                     font-size: 15px;
                 }
             }
+            .bottom-link
+            {
+                text-align: center;
+                padding-top: 15px;
+
+                span 
+                {
+                    color: #3d516d;
+                    font-weight: bold;
+                }
+            }
         }
+    }
+
+    /* MOBILE FORGOT PASSWORD */
+    .mob-forgot-password
+    {
+        padding: 25px;
+        background-color: #fff;
     }
 }
 .login-container-background 

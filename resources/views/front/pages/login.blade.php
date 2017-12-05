@@ -63,7 +63,7 @@
 					</form>
 					<button class="login-btn">LOGIN</button>
 				</div>
-				<a href=""><span></span></a>
+				<div class="bottom-link"><a href="/forgot/password"><span>Forgot Password?</span></a></div>
 			</div>
 		</div>
 	</div>

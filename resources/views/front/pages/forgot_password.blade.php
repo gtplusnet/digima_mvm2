@@ -1,7 +1,7 @@
 @extends('front.layout.layout')
 @section('title', 'Registration')
 @section('content')
-<div class="login-background" style="background-image: url('/images/background_login.jpg')">
+<div class="login-background">
 	<div class="container">
 		<div class="col-md-2"></div>
 		<div class="col-md-8 login-form-container">
@@ -44,7 +44,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>	
+		<div class="col-md-2"></div>
+		<div class="mob-forgot-password">
+			
+		</div>	
 	</div>
 </div>
 @endsection

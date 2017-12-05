@@ -149,9 +149,9 @@
 			
 		</div>
 	</div>
-	<div class="col-md-12 form-singleupper-container">
-		<input type="checkbox" value="" name="agreeCheckbox" id="agreeCheckbox" required="true"> 
-		<label class="registration-form-label">I am interested in receiving special offers from Croatia Directory and its partners.</label>
+	<div style="text-align: center;">
+		<span><input type="checkbox" value="" name="agreeCheckbox" id="agreeCheckbox" required="true"></span> 
+		<span>I am interested in receiving special offers from Croatia Directory and its partners.</span>
 	</div>
 	<div class="col-md-12 form-singlebottom-container">
 		<button type="submit" class="registration-continue-btn" name="continueButton" id="continueButton">CONTINUE</button>
