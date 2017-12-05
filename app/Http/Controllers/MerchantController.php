@@ -69,7 +69,6 @@ class MerchantController extends Controller
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['contact_us']         = TblContactUs::first();
         $data['page']   = 'login';
-        Session::forget("merchant_login");
         return view('front.pages.login', $data);
     }
   public function login_submit(Request $request)

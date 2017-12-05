@@ -123,7 +123,7 @@
                      </div>
                   </div>
                </div>
-               <div class="col-md-7">
+               <div class="col-md-8">
                   <div class="card">
                      <div class="header">
                         <h4 class="title">Guest Statistics</h4>

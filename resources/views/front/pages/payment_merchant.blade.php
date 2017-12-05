@@ -33,7 +33,7 @@
 				<div class="col-md-12 payment-form-bottompart">
 					<div class="col-md-6 payment-left-area">
 						<label for="input-amount" class="payment-label">Amount:</label>
-						<input type="text" name="payment_amount" class="payment-textfield" required/>
+						<input type="text" name="payment_amount" class="payment-textfield" value="{{$merchant_info->membership_price}}" required/>
 						<input type="hidden" name="business_id" value="{{$merchant_info->business_id}}">
 						<input type="hidden" name="contact_id" value="{{$merchant_info->business_contact_person_id}}">
 						<input type="hidden" name="link" value="/merchant/payment/{{$merchant_info->business_id}}/edit_my_payment">
