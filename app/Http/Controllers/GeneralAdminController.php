@@ -60,9 +60,14 @@ class GeneralAdminController extends Controller
     public function index()
     {
 
-      $data['countyList']           = TblCountyModel::get();
-      $data['contact_us']           = TblContactUs::first();
-      return view('general_admin.pages.general_admin_login',$data);
+      Self::allow_logged_out_users_only();
+
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
+        $data['page']   = 'Admin Login';
+        Session::forget("merchant_login");
+        return view('front.pages.login', $data);
+
     }
     public function general_admin_login_submit(Request $request)
     {

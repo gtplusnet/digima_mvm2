@@ -36,9 +36,11 @@ class SuperVisorController extends Controller
     public function index()
     {
         Self::allow_logged_out_users_only();
-        $data['page'] = 'Supervisor Login';
-        $data['contact_us']           = TblContactUs::first();
-        return view ('supervisor.pages.supervisor_login', $data);
+
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
+        $data['page']   = 'login';
+        return view('front.pages.login', $data);
     }
     public function supervisor_logout()
     {

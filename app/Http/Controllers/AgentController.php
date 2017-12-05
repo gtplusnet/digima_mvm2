@@ -52,10 +52,11 @@ class AgentController extends Controller
 	public function login()
 	{
 		Self::allow_logged_out_users_only();
-		$data['page']	      = 'Agent Login';
-		$data['countyList']   = TblCountyModel::get();
-		 $data['contact_us']  = TblContactUs::first();
-		return view ('agent.pages.login', $data);
+
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
+        $data['page']   = 'login';
+        return view('front.pages.login', $data);
 	}
 
 	public function dashboard()
