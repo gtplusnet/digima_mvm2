@@ -49,6 +49,10 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/sendemail.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
+<<<<<<< HEAD
+=======
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/dl-menu.css">
+>>>>>>> mod_fig_mvm_mobile2
 
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
@@ -148,6 +152,90 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+        <div class="header-wrapper">
+            <div class="mob-top-header">
+                <div class="left-container">
+                    <div class="language-selection">
+                        <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
+                            <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
+                        </a>
+                    </div>
+                    <div class="language-selection">
+                        <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
+                            <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="right-container">
+                    <a href="/login"><span class="login">Login</span></a>
+                    <a href="/registration"><span class="reg">Register</span></a>
+                </div>
+            </div>
+            <div class="mob-main-header">
+                <div class="row-no-padding clearfix">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <div class="left-container">
+                            {{-- <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i> --}}
+                        </div>    
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <a href="/">
+                            <div class="header-logo-container">
+                                <img  src="/images/croatia_directory_logo.png">
+                            </div>
+                        </a>
+                    </div>
+                    <div style="z-index: 9;" class="col-md-3 col-sm-3 col-xs-3">
+                        <div class="right-container">
+                           <i id="show" class="fa fa-search"></i> 
+                        </div> 
+                    </div>
+                </div>
+                <!-- MOBILE PUSH MENU -->
+                <div id="dl-menu" class="dl-menuwrapper">
+                    <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
+                    <ul class="dl-menu">
+                        <li>
+                            <a href="#">Item 1</a>
+                            <ul class="dl-submenu">
+                                <li><a href="#">Sub-Item 1</a></li>
+                                <li><a href="#">Sub-Item 2</a></li>
+                                <li><a href="#">Sub-Item 3</a></li>
+                                <li>
+                                    <a href="#">Sub-Item 4</a>
+                                    <ul class="dl-submenu">
+                                        <li><a href="#">Sub-Sub-Item 1</a></li>
+                                        <li><a href="#">Sub-Sub-Item 2</a></li>
+                                        <li><a href="#">Sub-Sub-Item 3</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 2</a></li>
+                        <li><a href="#">Item 3</a></li>
+                        <li><a href="#">Item 4</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="search_nav" class="search-container">
+                <form>
+                    <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
+                    <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
+                        <option value="" disabled selected><div>--County--</div></option>
+                        @foreach($countyList as $countyListItem)
+                        <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+                        @endforeach
+                    </select>
+                    <input class="search-control" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
+                    <button type="submit" class="btn btn-search" name="searchButton" id="searchButton">
+                        <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Search</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+>>>>>>> mod_fig_mvm_mobile2
         
         @yield('content')
         
@@ -202,6 +290,7 @@
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> --}}
+
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js">')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <!-- FOR GOOGLEMAP -->
@@ -217,6 +306,8 @@
         <script src="/assets/js/toastr/toastr.js"></script>
         <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>
+
+        <script src="/assets/js/dl-menu.js"></script>
         <!-- HANGGANG DITO -->
         {{-- LANGUAGE --}}
         {{-- <script type="text/javascript">
@@ -254,6 +345,12 @@
                 $('#show').click(function() {
                     $('#search_nav').toggleClass('search-mob-show');
                 });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function() {
+                $( '#dl-menu' ).dlmenu();
             });
         </script>
     </body>
