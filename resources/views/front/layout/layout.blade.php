@@ -149,90 +149,6 @@
                 </div>
             </div>
         </div>
-        <!-- MOBILE NAV -->
-        <nav class="pushmenu pushmenu-left">
-            <div class="space2"></div>
-            <div class="space1"></div>
-            <span>BROWSE</span>
-            <div class="space1"></div>
-            <ul class="links">
-                <a href="/">
-                    <li>
-                        <span><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;HOME</span>
-                    </li>
-                </a>
-                <a href="/about">
-                    <li>
-                        <span><i class="fa fa-building" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;ABOUT</span>
-                    </li>
-                </a>
-                <a href="/contact">
-                    <li>
-                        <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;CONTACT US</span>
-                    </li>
-                </a>
-            </ul>
-        </nav>
-        <div id="overlay" onclick="off()"></div>
-        <div class="header-wrapper">
-            <div class="mob-top-header">
-                <div class="left-container">
-                    <div class="language-selection">
-                        <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
-                            <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                        </a>
-                    </div>
-                    <div class="language-selection">
-                        <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
-                            <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                        </a>
-                    </div>
-                </div>
-                <div class="right-container">
-                    <a href="/login"><span class="login">Login</span></a>
-                    <a href="/registration"><span class="reg">Register</span></a>
-                </div>
-            </div>
-            <div class="mob-main-header">
-                <div class="row-no-padding clearfix">
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                        <div class="left-container">
-                            <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i>
-                        </div>    
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="/">
-                            <div class="header-logo-container">
-                                <img  src="/images/croatia_directory_logo.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                        <div class="right-container">
-                           <i id="show" class="fa fa-search"></i> 
-                        </div> 
-                    </div>
-                </div>
-            </div>
-            <div id="search_nav" class="search-container">
-                <form>
-                    <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
-                    <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
-                        <option value="" disabled selected><div>--County--</div></option>
-                        @foreach($countyList as $countyListItem)
-                        <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
-                        @endforeach
-                    </select>
-                    <input class="search-control" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
-                    <button type="submit" class="btn btn-search" name="searchButton" id="searchButton">
-                        <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Search</span>
-                    </button>
-                </form>
-            </div>
-        </div>
         
         @yield('content')
         
@@ -312,16 +228,16 @@
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> --}}
     {{-- translator --}}
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        {{-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> --}}
 
         <script>
             function translateLanguage(lang) {
 
                 var $frame = $('.goog-te-menu-frame:first');
-                if (!$frame.size()) {
-                    alert("Error: Could not find Google translate frame.");
-                    return false;
-                }
+                // if (!$frame.size()) {
+                //     alert("Error: Could not find Google translate frame.");
+                //     return false;
+                // }
                 $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
                 return false;
             }
@@ -338,36 +254,7 @@
                 $('#show').click(function() {
                     $('#search_nav').toggleClass('search-mob-show');
                 });
-
-                /*PUSH NAV*/
-                $menuLeft = $('.pushmenu-left');
-                $nav_list = $('#nav_list');
-
-                $nav_list.click(function() {
-                    $(this).toggleClass('active');
-                    $menuLeft.toggleClass('pushmenu-open');
-                });
             });
-
-
-            function on() 
-            {
-                document.getElementById("overlay").style.display = "block";
-                $("body").css({"overflow": "hidden","position": "fixed","margin": "0","padding": "0","right": "0","left": "0"});
-                // $("body").css("position", "fixed");
-                // $("body").css("margin", "0");
-                // $("body").css("padding", "0");
-                // $("body").css("right", "0");
-                // $("body").css("left", "0");
-            }
-
-            function off()
-            {
-                document.getElementById("overlay").style.display = "none";
-                $('.pushmenu').removeClass("pushmenu-open");
-                $("body").css("overflow", "auto");
-                $("body").css("position", "static");
-            }
         </script>
     </body>
 </html>
