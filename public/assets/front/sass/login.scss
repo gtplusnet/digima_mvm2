@@ -13,7 +13,7 @@
         background-color: #ededed;
         position: relative;
     }
-    @media screen and (max-width: 375px)
+    @media screen and (max-width: 425px)
     {   
         min-height: 544px;
     }
@@ -87,10 +87,35 @@
     }
 
     /* MOBILE FORGOT PASSWORD */
-    .mob-forgot-password
+    .forgot-password-wrapper
     {
-        padding: 25px;
-        background-color: #fff;
+        display: none;
+        @media screen and (min-width: 768px)
+        {
+            padding: 0px 85px;   
+        }
+        @media screen and (max-width: 768px)
+        {
+            display: block;    
+        }
+
+        .mob-forgot-password
+        {
+            padding: 25px;
+            background-color: #fff;
+            margin-top: 65px;
+            border-radius: 10px;
+
+            input 
+            {
+                padding: 21px;
+            }
+
+            button 
+            {
+                width: 100%;
+            }
+        }
     }
 }
 .login-container-background 
