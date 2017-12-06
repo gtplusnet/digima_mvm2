@@ -147,9 +147,9 @@ width:100%;
 										</div>
 										<div class="detail-name-container">
 											@if(strlen($most_viewed->business_name) <= 14)
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 											@else
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 											@endif
 											
 										</div>

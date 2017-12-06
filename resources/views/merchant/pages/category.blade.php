@@ -86,13 +86,13 @@ padding: 10px;
                   </table>
                   {!! $_category->render() !!}
                   <div class="web-content" >
-                     <button type="submit" class="form-button center" name="business_id"  >Tag</button>
+                     <button type="submit" class="form-button center" name="business_id"  >Označiti</button>
                   </div>
                </div>
             </div>
             <div class="col-md-6" style="margin:10px 10px 10px 10px;background-color: #F1F4F9;">
                <div class="website-title">
-                  Tag List
+                  Popis oznaka
                </div>
                <div class="website-content col-md-12">
                   @if (Session::has('delete1'))
@@ -109,7 +109,7 @@ padding: 10px;
                   <table class="table table-bordered" style="margin-top:10px;">
                      <thead>
                         <tr>
-                           <th class="col-md-10">Name</th>
+                           <th class="col-md-10">Ime Kategorije</th>
                            <th style="text-align: center;">Radnja</th>
                         </tr>
                      </thead>
@@ -119,7 +119,7 @@ padding: 10px;
                            <td>{{$subcategory->business_category_name }}</td>
                            <td>
                               <a href="/merchant/delete_tag_category/{{$subcategory->business_tag_category_id }}"><button type="button"  class="btn btn-danger center">
-                                 <i class="fa fa-trash" name="business_id" aria-hidden="true"></i>Delete</button>
+                                 <i class="fa fa-trash" name="business_id" aria-hidden="true"></i> Izbrisati</button>
                               </td>
                            </tr>
                            @endforeach
@@ -173,7 +173,7 @@ padding: 10px;
                               <td class="col-md-10">{{$keywords->keywords_name}}</td>
                               <td style="text-align: center;">
                                  <a href="/merchant/category/delete_keywords/{{$keywords->business_tag_keywords_id}}"><button type="button" class="btn btn-danger center">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Izbrisati</button>
                                  </td>
                               </tr>
                               @endforeach

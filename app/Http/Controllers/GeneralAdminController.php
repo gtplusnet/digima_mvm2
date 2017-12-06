@@ -539,6 +539,7 @@ class GeneralAdminController extends Controller
       $payment_id = $request->id;
       $data['business_item'] = TblPaymentModel::where('payment_id',$payment_id)
                           ->join('tbl_business','tbl_business.business_id','=','tbl_payment.business_id')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->first();
@@ -546,27 +547,27 @@ class GeneralAdminController extends Controller
     }
     public function general_admin_accept_and_activate(Request $request)
     {
-      $business_id = $request->business_id;
-      $update['business_status'] = '5';
-      $user['status'] = 'activated';
-      $update['date_transact'] = date("Y/m/d"); 
-      $payment['payment_status'] = 'Paid';
+      $business_id                = $request->business_id;
+      $update['business_status']  = '5';
+      $user['status']             = 'activated';
+      $update['date_transact']    = date("Y/m/d"); 
+      $payment['payment_status']  = 'Paid';
       $check_insert = TblPaymentModel::where('business_id',$business_id)->update($payment);
-      TblBusinessModel::where('business_id',$business_id)->update($update);
-      TblUserAccountModel::where('business_id',$business_id)->update($user);
-      $info = TblBusinessModel::where('tbl_business.business_id',$business_id)
+                      TblBusinessModel::where('business_id',$business_id)->update($update);
+                      TblUserAccountModel::where('business_id',$business_id)->update($user);
+      $info         = TblBusinessModel::where('tbl_business.business_id',$business_id)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                           ->first();
-      $name = $info->contact_prefix." ".$info->contact_first_name." ".$info->contact_last_name;
-      $email = $info->user_email;
-      $checking = TblBusinessModel::where('business_id',$business_id)->first();
+      $name         = $info->contact_prefix." ".$info->contact_first_name." ".$info->contact_last_name;
+      $email        = $info->user_email;
+      $checking     = TblBusinessModel::where('business_id',$business_id)->first();
       if($checking->transaction_status=='Added')
       {
-        $new_password = mt_rand(100000, 99999999);
-        $up['user_password'] = password_hash($new_password, PASSWORD_DEFAULT);
-        $checking = TblUserAccountModel::where('business_id',$business_id)->update($up);
-        $password = $new_password;
+        $new_password         = mt_rand(100000, 99999999);
+        $up['user_password']  = password_hash($new_password, PASSWORD_DEFAULT);
+        $checking             = TblUserAccountModel::where('business_id',$business_id)->update($up);
+        $password             = $new_password;
 
       }
       else

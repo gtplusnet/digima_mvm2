@@ -297,7 +297,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <p class="sendemail-title">MESSAGE US</p>
+                        <p class="sendemail-title">Posaljite Nam Poruku</p>
                     </div>
 
                     {{-- <form role="form" action="/guest/add_messages" method="post">
@@ -307,23 +307,23 @@
                     </div>
                     <div class="modal-body" id="hiddenMo">
                         <div class="sendemail-textfield-holder">
-                            <label for="input-email" class="sendemail-labels">Email:</label>
+                            <label for="input-email" class="sendemail-labels">E-mail:</label>
                             <input type="text" name="email" id="email" class="sendemail-textfield" required/>
                             <input type="hidden" name="business_id" id="business_id" value="{{$business_id}}" />
                         </div>
 
                         <div class="sendemail-textfield-holder">
-                            <label for="input-subject" class="sendemail-labels">Subject:</label>
+                            <label for="input-subject" class="sendemail-labels">Predmet:</label>
                             <input type="text" name="subject"  id="subject" class="sendemail-textfield">
                         </div>
 
                         <div class="sendemail-textfield-holder">
-                            <label for="input-help" class="sendemail-labels">How Can We Help:</label>
+                            <label for="input-help" class="sendemail-labels">Kako vam možemo pomoći:</label>
                             <textarea rows="11" name="messages" id="messages" class="sendemail-textfield message-textarea"></textarea>
                         </div>
 
                         <div class="sendemail-btn-holder">
-                            <button type="button" class="message_send-send-btn" name="message_send" id="messageSend"><p style="color:#DFDFDF;">SEND MESSAGE</p></button>
+                            <button type="button" class="message_send-send-btn" name="message_send" id="messageSend"><p style="color:#DFDFDF;">Pošalji Poruku</p></button>
                         </div>
 
                     </div>
@@ -341,7 +341,7 @@
                         </div>
                          <div class="col-sm-12">
                          <center>
-                        <button type="button" class="btn btn-success" onClick="window.location.reload();"  data-dismiss="modal">OKAY</button>
+                        <button type="button" class="btn btn-success" onClick="window.location.reload();"  data-dismiss="modal">Gotovo</button>
                     </center>
                     </div>
                     </div>

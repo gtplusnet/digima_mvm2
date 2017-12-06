@@ -15,7 +15,7 @@
         <div class="col-md-13">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h3 class="panel-title">Messages</h3>
+                    <h3 class="panel-title">Poruke</h3>
                 </div>
                 <div class="panel-body" style="overflow-x: scroll;">
                     <form class="form-horizontal" method="POST" action="/merchant/messages" style="">

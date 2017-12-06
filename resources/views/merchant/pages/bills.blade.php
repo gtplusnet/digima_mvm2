@@ -15,7 +15,7 @@
         <div class="col-md-5">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">List</h4>
+                    <h4 class="panel-title">Popis</h4>
                 </div>
              
                 <div class="panel-body">
@@ -23,8 +23,8 @@
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Membership</th>
-                                    <th>Reference #</th>
+                                    <th>Članstvo</th>
+                                    <th>Referentni Broj</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>                       
@@ -55,9 +55,9 @@
                             <h1 class="m-b-md"><b>CROATIA Directory</b></h1>
                             <address>
 
-                                <i class="fa  text-info"></i> @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br>
-                               <i class="fa e text-info"></i>@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif<br>
-                               <i class="fa  text-info"></i> @if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif
+                                <strong>@if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br></strong>
+                                <strong>@if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif<br></strong>
+                                <strong>@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif</strong>
 
                             </address>
                         </div>
@@ -69,19 +69,17 @@
                              <div class="col-md-15">
                                 <hr>
                                 <p>
-                                    <h3>Invoice to</h3><br>
+                                    <h3>Faktura Za</h3><br>
                                 </p>
                                 
                                 <div class="col-md-12">
-                                    <strong> <i class="fa fa fa-user text-info"></i> {{session('full_name')}}</strong>
+                                    <strong>  {{session('full_name')}}</strong>
                                 </div>
                                 <div class="col-md-12">
-
-                                    <strong> <i class="fa fa fa-phone text-info"></i> {{$bill->business_phone}} / {{$bill->business_alt_phone}} </strong>
-
+                                    <strong>  {{$bill->business_phone}} / {{$bill->business_alt_phone}} </strong>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong> <i class="fa fa fa-envelope-o text-info"></i>  {{session('email')}}   </strong>
+                                    <strong>   {{session('email')}}   </strong>
                                 </div>
                                 <br><br>
                                 <br><br>
@@ -93,9 +91,9 @@
                                 <thead>
                                     <tr>
                                         
-                                        <th>Business Name</th>
-                                        <th>Membership</th>
-                                        <th>Price</th>
+                                        <th>Naziv Tvrtke</th>
+                                        <th>Članstvo</th>
+                                        <th>Cijena</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -111,19 +109,14 @@
                             </table>
                         </div>
                         <div class="col-md-8">
-                            <h3>Thank you !</h3>
+                            <h3>Hvala Vam!</h3>
                             <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
                             <img src="/assets/admin/merchant/assets/images/signature.png" height="150" class="m-t-lg" alt="">
                         </div>
                         <div class="col-md-4">
                             <div class="text-right">
-                                <h4 class="no-m m-t-sm">Subtotal</h4>
-                                <h2 class="no-m">$0</h2>
                                 <hr>
-                                <h4 class="no-m m-t-sm">Shipping</h4>
-                                <h2 class="no-m">$0</h2>
-                                <hr>
-                                <h4 class="no-m m-t-md text-success">Total</h4>
+                                <h4 class="no-m m-t-md text-success">Ukupno</h4>
                                 <h1 class="no-m text-success">${{$bill->payment_amount}}</h1>
                                 <hr>
                             </div>

@@ -105,14 +105,14 @@
                   <div class="card">
                      <div class="header">
                         <h4 class="title">Statistika Gostiju</h4>
-                        <p class="category">Views</p>
+                        <p class="category">Pregledi</p>
                      </div>
                      <div class="content">
                         <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
                         <div class="footer">
                            <div class="legend">
-                              <i class="fa fa-circle text-info"></i>Views
-                              <i class="fa fa-circle text-danger"></i>Merchants
+                              <i class="fa fa-circle text-info"></i>Pregledi
+                              <i class="fa fa-circle text-danger"></i>Trgovci
                            </div>
                            <hr>
                            <div class="stats">
@@ -132,8 +132,8 @@
                         <div id="chartActivityPerMonth" class="ct-chart ct-perfect-fourth"></div>
                         <div class="footer">
                            <div class="legend">
-                              <i class="fa fa-circle text-info"></i>Views
-                              <i class="fa fa-circle text-danger"></i>Merchants
+                              <i class="fa fa-circle text-info"></i>Pregledi
+                              <i class="fa fa-circle text-danger"></i>Trgovci
                            </div>
                            <hr>
                            <div class="stats">
