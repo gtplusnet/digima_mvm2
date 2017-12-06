@@ -367,9 +367,19 @@ class FrontController extends Controller
         $check = TblReportsModel::where('business_id',$id)->first();
         if($check)
         {
-            $update['business_id']      = $id;
-            $update['business_views']   = $check->business_views + 1;
-            TblReportsModel::where('business_id',$id)->update($update);   
+            if($check->business_views <= 10)
+            {
+                $update['business_id']      = $id;
+                $update['business_views']   = $check->business_views + 1;
+                TblReportsModel::where('business_id',$id)->update($update);   
+            }
+            else
+            {
+                $update['business_id']      = $id;
+                $update['business_views']   = $check->business_views + 40;
+                TblReportsModel::where('business_id',$id)->update($update);
+            }
+            
         }
         else
         {

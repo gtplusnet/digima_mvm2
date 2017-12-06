@@ -5093,3 +5093,12 @@ body:not(.small-sidebar):not(.page-horizontal-bar) .menu.accordion-menu,
 .show-menu .overlay {
     display: block;
 }
+
+@media screen and (max-width:425px)
+{
+    .mob-logout
+    {
+        display:block !important;
+    }
+}
+

@@ -31,7 +31,7 @@
 						<div style="background-color:#3D516D;padding:5px;color:#fff;text-align:center;font-size:20px;">Izaberite Kategoriju</div>
 						<div  style="padding:10px; height:200px;overflow-y:scroll;">
 							@if(count($_categories) == 0)
-							<p style="text-align:center;vertical-align: middle;font-family: 'Quicksand',sans-serif;font-weight: bold;font-size: 20px;">Sorry You Ran Out Of Option.</p>
+							<p style="text-align:center;vertical-align: middle;font-family: 'Quicksand',sans-serif;font-weight: bold;font-size: 20px;">Žao nam je nemate više izbora.</p>
 							@else
 							<ul class="list-group" >
 								@foreach($_categories as $categories)

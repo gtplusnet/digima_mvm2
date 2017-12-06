@@ -61,83 +61,75 @@ class AgentController extends Controller
 
 	public function dashboard()
     {
-    	$data['page']	          = 'Dashboard';
-     	$count_merchant_agent = TblBusinessModel::where('business_status',1)->get();
-        $count_merchant_supervisor = TblBusinessModel::where('business_status',2)->get();
-        $count_merchant_admin = TblBusinessModel::where('business_status',3)->get();
-        $count_merchant_admin_payment = TblBusinessModel::where('business_status',4)->get();
-        $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
-        $data['countCall'] = $count_merchant_agent->count();
-        $data['countMP3'] = $count_merchant_supervisor->count();
-        $data['countInvoice'] = $count_merchant_admin->count();
-        $data['countPayment'] = $count_merchant_admin_payment->count();
-        $data['countActivated'] = $count_merchant_admin_activated->count();
-        $count_merchant_signup    = TblBusinessModel::get();
-    	$count_merchant_signup    = TblBusinessModel::where('business_status',1)->get();
-        $count_merchant_pending   = TblBusinessModel::where('business_status',2)->get();
-        $count_merchant_activated = TblBusinessModel::where('business_status',3)->get();
-        $data['countSignup']      = $count_merchant_signup->count();
-        $data['countPending']     = $count_merchant_pending->count();
-        $data['countActivated']   = $count_merchant_activated->count();
+    	$data['page']	          		= 'Dashboard';
+     	$count_merchant_signup    		= TblBusinessModel::get();
+    	$count_merchant_signup    		= TblBusinessModel::where('business_status',1)->get();
+        $count_merchant_pending   		= TblBusinessModel::where('business_status',4)->get();
+        $count_merchant_activated 		= TblBusinessModel::where('business_status',5)->get();
+        $data['countSignup']      		= $count_merchant_signup->count();
+        $data['countPending']     		= $count_merchant_pending->count();
+        $data['countActivated']   		= $count_merchant_activated->count();
 
 
-        $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
-	    $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
-	    $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
-	    $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
-	    $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
-	    $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
-	    $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+        $data['date_mon'] 		= $mon =date('Y/m/d',strtotime('monday this week'));
+	    $data['date_tue'] 		= $tue =date('Y/m/d',strtotime('tuesday this week'));
+	    $data['date_wed'] 		= $wed =date('Y/m/d',strtotime('wednesday this week'));
+	    $data['date_thu'] 		= $thu =date('Y/m/d',strtotime('Thursday this week'));
+	    $data['date_fri'] 		= $fri =date('Y/m/d',strtotime('Friday this week'));
+	    $data['date_sat'] 		= $sat =date('Y/m/d',strtotime('Saturday this week'));
+	    $data['date_sun'] 		= $sun =date('Y/m/d',strtotime('Sunday this week'));
 
-	    $data['mon'] = $monr = TblBusinessModel::where('date_created',$mon)->count();
-	    $data['tue'] = $tuer = TblBusinessModel::where('date_created',$tue)->count();
-	    $data['wed'] = $wedr = TblBusinessModel::where('date_created',$wed)->count();
-	    $data['thu'] = $thur = TblBusinessModel::where('date_created',$thu)->count();
-	    $data['fri'] = $frir = TblBusinessModel::where('date_created',$fri)->count();
-	    $data['sat'] = $satr = TblBusinessModel::where('date_created',$sat)->count();
-	    $data['sun'] = $sunr = TblBusinessModel::where('date_created',$sun)->count();
+	    $data['mon'] = $monr 	= TblBusinessModel::where('date_created',$mon)->count();
+	    $data['tue'] = $tuer 	= TblBusinessModel::where('date_created',$tue)->count();
+	    $data['wed'] = $wedr 	= TblBusinessModel::where('date_created',$wed)->count();
+	    $data['thu'] = $thur 	= TblBusinessModel::where('date_created',$thu)->count();
+	    $data['fri'] = $frir 	= TblBusinessModel::where('date_created',$fri)->count();
+	    $data['sat'] = $satr 	= TblBusinessModel::where('date_created',$sat)->count();
+	    $data['sun'] = $sunr 	= TblBusinessModel::where('date_created',$sun)->count();
 
-	    $data['total_r'] = $monr+$tuer+$wedr+$thur+$frir+$satr+$sunr;
+	    $data['mona'] = $monc 	= TblBusinessModel::where('date_transact',$mon)->where('business_status',5)->count();
+	    $data['tuea'] = $tuec 	= TblBusinessModel::where('date_transact',$tue)->where('business_status',5)->count();
+	    $data['weda'] = $wedc 	= TblBusinessModel::where('date_transact',$wed)->where('business_status',5)->count();
+	    $data['thua'] = $thuc 	= TblBusinessModel::where('date_transact',$thu)->where('business_status',5)->count();
+	    $data['fria'] = $fric 	= TblBusinessModel::where('date_transact',$fri)->where('business_status',5)->count();
+	    $data['sata'] = $satc 	= TblBusinessModel::where('date_transact',$sat)->where('business_status',5)->count();
+	    $data['suna'] = $sunc 	= TblBusinessModel::where('date_transact',$sun)->where('business_status',5)->count();
 
-	    $data['mona'] = $monc = TblBusinessModel::where('date_transact',$mon)->where('business_status',5)->count();
-	    $data['tuea'] = $tuec = TblBusinessModel::where('date_transact',$tue)->where('business_status',5)->count();
-	    $data['weda'] = $wedc = TblBusinessModel::where('date_transact',$wed)->where('business_status',5)->count();
-	    $data['thua'] = $thuc = TblBusinessModel::where('date_transact',$thu)->where('business_status',5)->count();
-	    $data['fria'] = $fric = TblBusinessModel::where('date_transact',$fri)->where('business_status',5)->count();
-	    $data['sata'] = $satc = TblBusinessModel::where('date_transact',$sat)->where('business_status',5)->count();
-	    $data['suna'] = $sunc = TblBusinessModel::where('date_transact',$sun)->where('business_status',5)->count();
-	    $data['count_jan']  = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->count();
-        $data['count_feb']  = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->count();
-        $data['count_mar']  = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->count();
-        $data['count_apr']  = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->count();
-        $data['count_may']  = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->count();
-        $data['count_jun']  = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->count();
-        $data['count_jul']  = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->count();
-        $data['count_aug']  = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->count();
-        $data['count_sep']  = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->count();
-        $data['count_oct']  = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->count();
-        $data['count_nov']  = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->count();
-        $data['count_dec']  = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->count();
-        $data['counts_jan']  = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->count();
-        $data['counts_feb']  = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->count();
-        $data['counts_mar']  = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->count();
-        $data['counts_apr']  = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->count();
-        $data['counts_may']  = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->count();
-        $data['counts_jun']  = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->count();
-        $data['counts_jul']  = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->count();
-        $data['counts_aug']  = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->count();
-        $data['counts_sep']  = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->count();
-        $data['counts_oct']  = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->count();
-        $data['counts_nov']  = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->count();
-        $data['counts_dec']  = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->count();
-        $data['_agents']   = TblAgentModel::get();
-        $data['_teams']   = TblTeamModel::get();
+	    $data['total_r'] 		= $monr+$tuer+$wedr+$thur+$frir+$satr+$sunr;
+	    $data['total_c'] 		= $monc +$tuec+$wedc+$thuc+$fric+$satc+$sunc;
+
+	    $data['count_jan']  	= TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_feb']  	= TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_mar']  	= TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_apr']  	= TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_may']  	= TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_jun']  	= TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_jul']  	= TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_aug']  	= TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_sep']  	= TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_oct']  	= TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_nov']  	= TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+        $data['count_dec']  	= TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+
+        $data['counts_jan']  	= TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_feb']  	= TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_mar']  	= TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_apr']  	= TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_may']  	= TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_jun']  	= TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_jul']  	= TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_aug']  	= TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_sep']  	= TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_oct']  	= TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_nov']  	= TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_dec']  	= TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        
 	    
-	    $data['total_c'] = $monc+$tuec+$wedc+$thuc+$fric+$satc+$sunc;
 	    // dd($data['date_mon']);
     
 		return view ('agent.pages.dashboard', $data);	
     }
+
 
 	public function agent_login(Request $request)
 	{
