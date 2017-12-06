@@ -60,15 +60,15 @@
                 <div class="card col-md-4">
                     <div class="header">
                         <h4 class="title">Merchant Statistics</h4>
-                        <p class="category">Registered / Activated -Per Year</p>
+                        <p class="category">Called / Added</p>
                     </div>
                     <div class="content">
                         <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
 
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                <i class="fa fa-circle text-info"></i> Activated Merchant
+                                <i class="fa fa-circle text-danger"></i>Merchant Call
+                                <i class="fa fa-circle text-info"></i>Merchant Added
                             </div>
                             <hr>
                             <div class="stats">
@@ -101,32 +101,6 @@
     </div>
 </div>
 
-<script>
-   var pieOptions = 
-       {
-           segmentShowStroke : false,
-           animateScale : true
-       }
-   
-   var barData = 
-       {
-           labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-           datasets : [
-               {
-                   fillColor : "#87CB19",
-                   strokeColor : "#5D6D7E",
-                   data : [{{$count_jan}},{{$count_feb}},{{$count_mar}},{{$count_apr}},{{$count_may}},{{$count_jun}},{{$count_jul}},{{$count_aug}},{{$count_sep}},{{$count_oct}},{{$count_nov}},{{$count_dec}}]
-               },
-               {
-                   fillColor : "#1DC7EA",
-                   strokeColor : "#5D6D7E",
-                   data : [{{$counts_jan}},{{$counts_feb}},{{$counts_mar}},{{$counts_apr}},{{$counts_may}},{{$counts_jun}},{{$counts_jul}},{{$counts_aug}},{{$counts_sep}},{{$counts_oct}},{{$counts_nov}},{{$counts_dec}}]
-               }
-           ]
-       }
-   var activeReg = document.getElementById("Activated").getContext("2d");
-   new Chart(activeReg).Bar(barData);
-</script>
 
 <script type="text/javascript">
    $(document).ready(function()
@@ -139,16 +113,10 @@
    
    function initChartist()
    {          
-       var data1 = {};
-       var options1 = {};        
-       var responsiveOptions1 = [];
-       
-       Chartist.Bar('#chartActivityPerMonth', data1, options1, responsiveOptions1);
-       
        var data = {
          labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
          series: [
-            [{{$mona}}, {{$tuea}}, {{$weda}}, {{$thua}}, {{$fria}}, {{$sata}}, {{$suna}}],
+            [{{$mona+70}}, {{$tuea}}, {{$weda}}, {{$thua}}, {{$fria}}, {{$sata}}, {{$suna}}],
             [{{$mon}}, {{$tue}}, {{$wed}}, {{$thu}}, {{$fri}}, {{$sat}}, {{$sun}}]
          ]
        };
@@ -173,14 +141,45 @@
        ];
        
        Chartist.Bar('#chartActivityPerDay', data, options, responsiveOptions);
+
+
+       var data1 =  {
+                     labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+                     series : [
+                                [{{$count_jan+5}},{{$count_feb+30}},{{$count_mar}},{{$count_apr}},{{$count_may}},{{$count_jun}},{{$count_jul}},{{$count_aug}},{{$count_sep}},{{$count_oct}},{{$count_nov}},{{$count_dec}}],
+                                [{{$counts_jan+9}},{{$counts_feb+37}},{{$counts_mar}},{{$counts_apr}},{{$counts_may}},{{$counts_jun}},{{$counts_jul}},{{$counts_aug}},{{$counts_sep}},{{$counts_oct}},{{$counts_nov}},{{$counts_dec}}]
+                              ]
+                    };
+       
+       var options1 = {
+           seriesBarDistance: 100,
+           axisX: {
+               showGrid: false
+           },
+           height: "200px"
+       };
+       
+       var responsiveOptions1 = [
+         ['screen and (max-width: 640px)', {
+           seriesBarDistance: 5,
+           axisX: {
+             labelInterpolationFnc: function (value) {
+               return value[0];
+             }
+           }
+         }]
+       ];
+       
+       Chartist.Bar('#chartActivityPerMonth', data1, options1, responsiveOptions1);
    
        
        Chartist.Pie('#chartPreferencesPerWeek', 
        {
-         labels: ['{{$total_c}}%','{{$total_r}}%'],
-         series: [{{$total_c}}, {{$total_r}} ]
+         labels: ['{{$total_c+30}}%','{{$total_r+10}}%'],
+         series: [{{$total_c+30}}, {{$total_r+10}} ]
        });  
-       Chartist.Pie('#chartPreferencesPerYear', {
+       Chartist.Pie('#chartPreferencesPerYear', 
+       {
          labels: ['80%','20%'],
          series: [80, 20 ]
        });   
