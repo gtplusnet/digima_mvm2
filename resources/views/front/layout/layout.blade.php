@@ -192,8 +192,8 @@
                     </div>
                 </div>
                 <div class="right-container">
-                    <span class="login">Login</span>
-                    <span class="reg">Register</span>
+                    <a href="/login"><span class="login">Login</span></a>
+                    <a href="/registration"><span class="reg">Register</span></a>
                 </div>
             </div>
             <div class="mob-main-header">

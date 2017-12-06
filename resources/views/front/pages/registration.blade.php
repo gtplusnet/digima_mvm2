@@ -116,7 +116,6 @@
 						<input type="text" class="form-control postalCode" name="postalCode" id="postalCode" disabled="true">
 					</div>
 				</div>
-				
 			</div>
 		</div>
 		<div class="col-md-6 form-rightpart">
@@ -148,6 +147,7 @@
 				
 			</div>
 		</div>
+
 		<div class="col-md-12 form-singleupper-container">
 			<input type="checkbox" value="" name="agreeCheckbox" id="agreeCheckbox" required="true">
 			<label class="registration-form-label">Zanima me primanje posebnih ponuda iz Žute Stranice i njegovih partnera.</label>
@@ -155,10 +155,12 @@
 		<div class="col-md-12 form-singlebottom-container">
 			<button type="submit" class="registration-continue-btn" name="continueButton" id="continueButton">Nastaviti</button>
 		</div>
+
 	</form>
 </div>
 <div class="modal fade" id="membershipPopUp" style="margin-top:10px;border:none">
 	<div class="modal-dialog modal-lg">
+
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -184,6 +186,7 @@
 											{{$membership->membership_info}}
 										</p>
 									</div>
+
 								</div>
 							</div>
 							@endforeach
