@@ -199,11 +199,11 @@ table[class=hide], img[class=hide], td[class=hide] {
                     <td align="left" style="padding:50px 50px 50px 50px"><p style="color:#262626; font-size:24px; text-align:left; font-family: Verdana, Geneva, sans-serif"><strong>Hi, {{$name}}</strong>,</p>
                       <p style="color:#000000; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif; line-height:22px ">You are now activated member. Use credentials below to access your dashboard.
                         <br /><br /><br />
-                        Email: {{$email}}
+                        E-mail: {{$email}}
                         <br />
-                        Password: {{$password}}
+                        Lozinka: {{$password}}
                         <br />
-                        Link: {{$link}} or simply click the dashboard button.
+                         Kliknite {{$link}}  ili jednostavno kliknite gumb nadzorne ploče.
                          <br />
                         <br />
                         <br />
