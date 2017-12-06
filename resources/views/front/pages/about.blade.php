@@ -5,7 +5,7 @@
 <div class="banner-about" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		<div class="title-holder-page" style="">
-			ABOUT US
+			O NAMA
 		</div>
 	</div>
 </div>
@@ -27,7 +27,7 @@
 				
 			</div>
 			<div class="about-title-container">
-				<button class="about-btn "><a href="/registration">Add My Business</button>
+				<button class="about-btn "><a href="/registration">Dodajte Moju Tvrtku</button>
 			</div>
 			
 		</div>

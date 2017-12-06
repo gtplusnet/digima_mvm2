@@ -61,17 +61,17 @@
                 <div class="menu-bar">
                     <div class="pull-left">
                         <!-- TAB BAR -->
-                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Home</a></li>
-                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">About</a></li>
-                        <li class="nav-tab last {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Contact Us</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == '' ? 'active-link' : '' }}"><a class="nav" href="/">Početna</a></li>
+                        <li class="nav-tab {{ Request::segment(1) == 'about' ? 'active-link' : '' }}"><a class="nav" href="/about">O nama</a></li>
+                        <li class="nav-tab last {{ Request::segment(1) == 'contact' ? 'active-link' : '' }}"><a class="nav" href="/contact">Kontaktirajte Nas</a></li>
                     </div>
                     <div class="pull-right">
                         <!-- BUTTONS -->
                         <div class="btn-login">
-                            <a href="/login">Log in</a>
+                            <a href="/login">Prijava</a>
                         </div>
                         <div class="btn-register">
-                            <a href="/registration">Register</a>
+                            <a href="/registration">Registrirajte se</a>
                         </div>
                         <div class="language-selection">
                             <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
@@ -117,11 +117,11 @@
                         <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
                             {{ csrf_field() }}
                             <div class="col-md-4 searchfields-format ">
-                                <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
+                                <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
                             </div>
                             <div class="col-md-3 searchfields-format ">
                                 <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
-                                    <option value="" disabled selected><div>--County--</div></option>
+                                    <option value="" disabled selected><div>--Županja--</div></option>
                                     @foreach($countyList as $countyListItem)
                                     <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                                     @endforeach
@@ -139,10 +139,10 @@
                                 </style>
                             </div>
                             <div class="col-md-2 searchfields-format ">
-                                <input class="zipcode-textbox" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
+                                <input class="zipcode-textbox" type="text" placeholder="grad ili poštanski broj" name="postalCode" id="postalCode">
                             </div>
                             <div class="col-md-2 searchfields-format ">
-                                <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Search</p></button>
+                                <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Tražilica</p></button>
                             </div>
                         </form>
                     </div>
@@ -241,12 +241,12 @@
             <div class="container">
                 <div class="col-md-12 no-padding footer-body">
                     <div class="col-md-5">
-                        <p class="footer-title">SUBSCRIBE TO OUR NEWSLETTER</p>
-                        <p class="footer-content newsletter-content">Join today to recieve latest offers</p>
+                        <p class="footer-title">PRETPLATITE SE NA NAŠE OBAVIJESTI</p>
+                        <p class="footer-content newsletter-content">Pridružite se danas da biste primali najnovije ponude</p>
                         <input type="text" class="input-emailadd" placeholder="Your Email Address">
                     </div>
                     <div class="col-md-4">
-                        <p class="footer-title">CONTACT US</p>
+                        <p class="footer-title">KONTAKTIRAJTE NAS</p>
                         <div class="contact-content">
                             <div class="img-holder">
                                 <img src="/images/map_icon.png">
@@ -271,9 +271,9 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <p class="footer-title">ABOUT US</p>
+                        <p class="footer-title">O NAMA</p>
                         <img src="/images/footer_logo.png">
-                        <p class="footer-content aboutus-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p class="footer-content aboutus-content">The Right Place For Business.</p>
                     </div>
                 </div>
             </div>
@@ -326,10 +326,9 @@
                 return false;
             }
             function googleTranslateElementInit() {
-                new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+                new google.translate.TranslateElement({ pageLanguage: 'hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
             }
         </script>
-
         
 
         <!-- SEARCH SHOW -->

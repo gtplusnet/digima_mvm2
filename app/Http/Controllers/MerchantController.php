@@ -643,7 +643,7 @@ class MerchantController extends Controller
           } 
           elseif($_check2<6)
           {
-            Session::flash('message1', "Done Tagging!");
+            Session::flash('message1', "Gotovo Označavanje!");
             $_insert = TblBusinessTagCategoryModel::whereIn('business_id',session('business_id'))->insert($data);
           }  
         }  
@@ -658,7 +658,7 @@ class MerchantController extends Controller
       public function delete_tag_category($id)
     {
       TblBusinessTagCategoryModel::where('business_tag_category_id',$id)->delete();
-      Session::flash('delete1', "Tag Category Deleted!");
+      Session::flash('delete1', "Kategorija Oznaka Izbrisana Je!");
       return Redirect::back();
     }
 
@@ -667,7 +667,7 @@ class MerchantController extends Controller
       $data['keywords_name'] = $request->keywords_name;
       $data['business_id']   = session('business_id');
       TblBusinessKeywordsModel::insert($data);
-      Session::flash('message', "Keyword Successfully Added!");
+      Session::flash('message', "Uspješno dodana ključna riječ!");
       return Redirect::back();
     }
 

@@ -3,7 +3,7 @@
     <head>
         
         <!-- Title -->
-        <title>CROTIA Directory | {{ $page }}</title>
+        <title>Žute Stranice  | {{ $page }}</title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <meta charset="UTF-8">
@@ -51,7 +51,7 @@
                 return false;
             }
             function googleTranslateElementInit() {
-                new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+                new google.translate.TranslateElement({ pageLanguage: 'hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
             }
         </script>
        

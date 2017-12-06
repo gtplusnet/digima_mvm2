@@ -1,6 +1,5 @@
 @extends('merchant.layout.layout')
 @section('content')
-<!-- <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" /> -->
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
 <div class="page-title">
@@ -23,7 +22,7 @@
                   
                   <p class="counter">{{$page_view}}</p>
                  
-                  <span class="info-box-title">Page views</span>
+                  <span class="info-box-title">Prikazi Stranice</span>
                </div>
                <div class="info-box-icon">
                   <i class="icon-eye"></i>
@@ -47,7 +46,7 @@
                </div>
                <div class="info-box-stats">
                   <p class="counter">{{$fb}}</p>
-                  <span class="info-box-title">Facebook Page Likes</span>
+                  <span class="info-box-title">Facebook Stranica Lajkovi</span>
                </div>
                <div class="info-box-progress">
                   <div class="progress progress-xs progress-squared bs-n">
@@ -64,7 +63,7 @@
             <div class="panel-body">
                <div class="info-box-stats">
                   <p class="counter">680</p>
-                  <span class="info-box-title">Page tweet</span>
+                  <span class="info-box-title">Stranica Tweet</span>
                </div>
                <div class="info-box-icon">
                   <i style="color:#00aced;" class="fa fa-twitter"></i>
@@ -84,7 +83,7 @@
             <div class="panel-body">
                <div class="info-box-stats">
                   <p class="counter">{{$guest_messages}}</p>
-                  <span class="info-box-title">Guest Messages</span>
+                  <span class="info-box-title">Poruka Gostiju</span>
                </div>
                <div class="info-box-icon">
                   <i class="icon-envelope"></i>
@@ -105,19 +104,19 @@
                <div class="col-md-4">
                   <div class="card">
                      <div class="header">
-                        <h4 class="title">Guest Statistics</h4>
-                        <p class="category">Views</p>
+                        <h4 class="title">Statistika Gostiju</h4>
+                        <p class="category">Pregledi</p>
                      </div>
                      <div class="content">
                         <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
                         <div class="footer">
                            <div class="legend">
-                              <i class="fa fa-circle text-info"></i>Views
-                              <i class="fa fa-circle text-danger"></i>Merchants
+                              <i class="fa fa-circle text-info"></i>Pregledi
+                              <i class="fa fa-circle text-danger"></i>Trgovci
                            </div>
                            <hr>
                            <div class="stats">
-                              <i class="fa fa-clock-o"></i>Update a minutes ago. 
+                              <i class="fa fa-clock-o"></i>Ažurirajte prije nekoliko minuta. 
                            </div>
                         </div>
                      </div>
@@ -126,19 +125,19 @@
                <div class="col-md-8">
                   <div class="card">
                      <div class="header">
-                        <h4 class="title">Guest Statistics</h4>
-                        <p class="category">Likes</p>
+                        <h4 class="title">Statistika Gostiju</h4>
+                        <p class="category">Lajkovi</p>
                      </div>
                      <div class="content">
                         <div id="chartActivityPerMonth" class="ct-chart ct-perfect-fourth"></div>
                         <div class="footer">
                            <div class="legend">
-                              <i class="fa fa-circle text-info"></i>Views
-                              <i class="fa fa-circle text-danger"></i>Merchants
+                              <i class="fa fa-circle text-info"></i>Pregledi
+                              <i class="fa fa-circle text-danger"></i>Trgovci
                            </div>
                            <hr>
                            <div class="stats">
-                              <i class="fa fa-clock-o"></i>Update a minutes ago. 
+                              <i class="fa fa-clock-o"></i>Ažurirajte prije nekoliko minuta. 
                            </div>
                         </div>
                      </div>

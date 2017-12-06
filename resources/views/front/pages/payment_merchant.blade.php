@@ -3,7 +3,7 @@
 <div class="banner-payment" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
 		<div class="title-holder-page" style="">
-			PROOF OF PAYMENT
+			DOKAZ o UPLATI
 		</div>
 	</div>
 </div>
@@ -11,18 +11,18 @@
 	<div class="col-md-3"></div>
 	<div class="col-md-6 payment-container">
 		<div class="payment-title-container">
-			<p class="payment-title">ENTER YOUR PROOF OF PAYMENT</p>
+			<p class="payment-title">Unesite Dokaz Plaćanja</p>
 		</div>
 		<form action="/merchant/upload_payment" method="post" enctype="multipart/form-data">
 			{{csrf_field()}}
 			<div class="col-md-12 payment-form-container">
 				<div class="col-md-12 payment-form-upperpart">
 					<div class="col-md-6 payment-left-area">
-						<label for="input-reference-number" class="payment-label">Reference Number:</label>
+						<label for="input-reference-number" class="payment-label">Referentni Broj:</label>
 						<input type="text" name="payment_reference_number" class="payment-textfield"/>
 					</div>
 					<div class="col-md-6 payment-right-area">
-						<label for="input-method" class="payment-label">Method of Payment:</label>
+						<label for="input-method" class="payment-label">Način Plaćanja:</label>
 						<select class="payment-dropdown"  name="payment_method" required/>
 							@foreach($method as $methods)
 								<option value="{{$methods->payment_method_id}}">{{$methods->payment_method_name}}</option>
@@ -32,15 +32,15 @@
 				</div>
 				<div class="col-md-12 payment-form-bottompart">
 					<div class="col-md-6 payment-left-area">
-						<label for="input-amount" class="payment-label">Amount:</label>
-						<input type="text" name="payment_amount" class="payment-textfield" value="{{$merchant_info->membership_price}}" required/>
+						<label for="input-amount" class="payment-label">Iznos:</label>
+						<input type="text" name="payment_amount" class="payment-textfield" value="{{$merchant_info->membership_price}}" readOnly/>
 						<input type="hidden" name="business_id" value="{{$merchant_info->business_id}}">
 						<input type="hidden" name="contact_id" value="{{$merchant_info->business_contact_person_id}}">
 						<input type="hidden" name="link" value="/merchant/payment/{{$merchant_info->business_id}}/edit_my_payment">
 					</div>
 					<div class="col-md-5 payment-right-area">
-						<label for="proof-of-payment" class="payment-label">Upload Proof of Payment:</label>
-						<input id="uploadFile"  value="No File" placeholder="Choose File" disabled="disabled" />
+						<label for="proof-of-payment" class="payment-label">Prenesite Dokaz o Uplati:</label>
+						<input id="uploadFile"  value="Nema Datoteke" placeholder="Odaberite Datoteku" disabled="disabled" />
 					</div>
 					<div class="col-md-1 payment-upload-icon-container">
 						<div class="fileUpload payment-upload-holder fa fa-upload payment-upload-icon">
@@ -51,12 +51,12 @@
 				
 			</div>
 			<div class="col-md-12 payment-title-container">
-				<p class="payment-title">INVOICE</p>
+				<p class="payment-title">FAKTURA</p>
 			</div>
 			<div class="col-md-12 payment-form-container">
 				<div class="col-md-12 payment-form-upperpart">
 					<div class="col-md-4 payment-left-area">
-						<p class="payment-invoice-label">Invoice No : {{$merchant_info->invoice_number}}</p>
+						<p class="payment-invoice-label">Broj Fakture : {{$merchant_info->invoice_number}}</p>
 					</div>
 					<div class="col-md-8 payment-email-right-area">
 						<p class="payment-invoice-label">{{$merchant_info->user_email}}</p>
@@ -65,7 +65,7 @@
 				<div class="col-md-12 payment-form-seperator">
 					<div class="col-md-12 payment-form-upperpart">
 						<div class="col-md-6 payment-left-area">
-							<p class="payment-invoice-content-label">Client Name:</p>
+							<p class="payment-invoice-content-label">Ime Klijenta:</p>
 							
 						</div>
 						<div class="col-md-6 payment-right-area">
@@ -76,7 +76,7 @@
 					<div class="col-md-12 payment-form-upperpart">
 						<div class="col-md-6 payment-left-area">
 							
-							<p class="payment-invoice-content-label">Business Name:</p>
+							<p class="payment-invoice-content-label">Naziv Tvrtke:</p>
 							
 						</div>
 						<div class="col-md-6 payment-right-area">
@@ -88,7 +88,7 @@
 					<div class="col-md-12 payment-form-upperpart">
 						<div class="col-md-6 payment-left-area">
 							
-							<p class="payment-invoice-content-label">Business Address:</p>
+							<p class="payment-invoice-content-label">Cijela Poslovna Adresa:</p>
 							
 						</div>
 						<div class="col-md-6 payment-right-area">

@@ -118,7 +118,6 @@
 							<tr>
 								<th>ID</th>
 								<th>Full Name</th>
-								<th>Position</th>
 								<th>Email</th>
 								<th>Action</th>
 							</tr>
@@ -128,7 +127,6 @@
 							<tr>
 								<td>{{ $data->supervisor_id}}</td>
 								<td>{{$data->first_name}} {{$data->last_name}}</td>
-								<td>{{ $data->position }}</td>
 								<td>{{ $data->email }}</td>
 								<td>
 									<button type="button" data-id="{{ $data->supervisor_id}}" class="btn btn-primary supervisor-restore">RESTORE</button>
@@ -148,7 +146,6 @@
 							<tr>
 								<th>ID</th>
 								<th>Full Name</th>
-								<th>Position</th>
 								<th>Email</th>
 								<th>Action</th>
 							</tr>
@@ -158,7 +155,6 @@
 							<tr>
 								<td>{{ $data->agent_id}}</td>
 								<td>{{$data->first_name}} {{$data->last_name}}</td>
-								<td>{{ $data->position }}</td>
 								<td>{{ $data->email }}</td>
 								<td>
 									<button type="button" data-id="{{ $data->agent_id}}" class="btn btn-primary agent-restore">RESTORE</button>

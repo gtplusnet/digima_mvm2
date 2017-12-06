@@ -206,14 +206,21 @@ Route::any('/general_admin/update_about_us', 						'GeneralAdminController@gener
 Route::any('/general_admin/update_contact_us', 						'GeneralAdminController@general_admin_update_contact_us');
 Route::any('/general_admin/update_thank_you', 						'GeneralAdminController@general_admin_update_thank_you');
 Route::any('/general_admin/update_terms', 							'GeneralAdminController@general_admin_update_terms');
+
+
 Route::any('/general_admin/archived', 								'GeneralAdminController@general_admin_archived');
 Route::any('/general_admin/archived/restore_merchant', 				'GeneralAdminController@archived_restore_merchant');
-
 Route::any('/general_admin/archived/restore_agent', 				'GeneralAdminController@archived_restore_agent');
-
-Route::any('/general_admin/archived/restore_supervisor', 				'GeneralAdminController@archived_restore_supervisor');
-
+Route::any('/general_admin/archived/restore_supervisor', 			'GeneralAdminController@archived_restore_supervisor');
 Route::any('/general_admin/archived/restore_admin', 				'GeneralAdminController@archived_restore_admin');
+
+
+
+Route::post('/general_admin/archived/restore_payment', 				'GeneralAdminController@archived_restore_payment');
+Route::post('/general_admin/archived/restore_membership', 			'GeneralAdminController@archived_restore_membership');
+Route::post('/general_admin/archived/restore_category', 			'GeneralAdminController@archived_restore_category');
+Route::post('/general_admin/archived/restore_team', 				'GeneralAdminController@archived_restore_team');
+
 
 
 

@@ -311,7 +311,7 @@ class SuperVisorController extends Controller
       $data['_agents']   = TblTeamModel::where('supervisor_id',session('supervisor_id'))
                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
                          ->get();
-      $data['_teams']   = TblTeamModel::get();
+      $data['_teams']   = TblTeamModel::where('archived',0)->where('supervisor_id',session('supervisor_id'))->get();
       $data['page']	= 'Dashboard';
       return view ('supervisor.pages.dashboard', $data);	
     }

@@ -18,8 +18,8 @@ width:100%;
 	<div class="container">
 		<div class="">
 			<div class="col-md-12 searchbox-container">
-				<p class="introduction">THE <font class="yellow">RIGHT</font> PLACE</p>
-				<p class="second-line">FOR BUSINESS</p>
+				<p class="introduction"><font class="yellow">PRAVO</font> MJESTO</p>
+				<p class="second-line">ZA POSAO</p>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,7 @@ width:100%;
 			<div class="col-md-3">
 				<div class="category-filter-holder" >
 					<div class="category-title-holder" id="show_category">
-						<p class="categorylist-title">Category Filter</p>
+						<p class="categorylist-title">Filter Kategorije</p>
 					</div>
 					<div class="categorylist-container">
 						<ul class="list-group" >
@@ -85,7 +85,7 @@ width:100%;
 				</div>
 				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
-						<p class="featuredlist-title">FEATURED LIST</p>
+						<p class="featuredlist-title">Istaknuti Popis</p>
 					</div>
 					<div class="featuredlist-container side-list-padding">
 						<div id="carousel-pager" class="carousel slide featured-carousel" data-ride="carousel" data-interval="3000">
@@ -134,7 +134,7 @@ width:100%;
 				</div>
 				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
-						<p class="featuredlist-title">MOST VIEWED</p>
+						<p class="featuredlist-title">Nagledaniji</p>
 					</div>
 					<div class="featuredlist-container side-list-padding">
 						<div  class="featured-carousel" >
@@ -147,9 +147,9 @@ width:100%;
 										</div>
 										<div class="detail-name-container">
 											@if(strlen($most_viewed->business_name) <= 14)
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 											@else
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">views: {{$most_viewed->business_views}}</font></p>
+											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 											@endif
 											
 										</div>
@@ -165,7 +165,7 @@ width:100%;
 			<div class="col-md-9" >
 				<div class="desktop">
 					<div class="business-list-holder">
-						<p class="business-list-title">LOCAL FAVOURITES</p>
+						<p class="business-list-title">LOKALNI FAVORITI</p>
 					</div>
 					<div class="business-list-content row clearfix">
 						@foreach($_business_list as $business_list)
@@ -207,7 +207,7 @@ width:100%;
 				</div>
 				<div class="payment-containers" style="margin-bottom:50px;">
 						<div class="payment-title">
-							SUBMIT YOUR BUSINESS UNDER THE BEST OFFERS
+							PREDAJTE VAŠE POSLOVNE DJELE U NAJVEĆE PONUDE
 							<br>
 						</div>
 						<div class="payment-content row clearfix " style="margin-bottom:100px;">
@@ -219,7 +219,7 @@ width:100%;
 									</div>
 									<hr>
 									<div class="membership-price">
-										<span >${{$membership->membership_price}}/</span><span >MONTH</span>
+										<span >${{$membership->membership_price}}/</span><span >MJESEC</span>
 									</div>
 									<hr>
 									<div class="membership-details">
@@ -229,7 +229,7 @@ width:100%;
 									</div>
 									<div class="membership-btn">
 										<a href="/registration">
-											<button type="button" class="membership-button">GET STARTED NOW</button>
+											<button type="button" class="membership-button">Započni Sada</button>
 										</a>
 									</div>
 								</div>
