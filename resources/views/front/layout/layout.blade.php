@@ -49,8 +49,7 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/sendemail.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
     </head>
@@ -286,6 +285,7 @@
         <!-- footer-bottom -->
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> --}}
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js">')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <!-- FOR GOOGLEMAP -->

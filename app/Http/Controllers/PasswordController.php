@@ -20,17 +20,17 @@ class PasswordController extends Controller
 
     public function forgot_password_user()
     {
-        $data['countyList'] = TblCountyModel::get();
-         $data['contact_us']           = TblContactUs::first();
-        $data['page']   = 'Forgot Password';
-        return view('password_blade.forgot_user_password',$data);
+        $data['countyList']     = TblCountyModel::get();
+         $data['contact_us']    = TblContactUs::first();
+        $data['page']           = 'Forgot Password';
+        return view('front.pages.forgot_password',$data);
     }
     public function forgot_password_user_reset_password(Request $request)
     {
         $data['page']   = 'Forgot Password';
-        $email = $request->email;
-        $phone = $request->phone;
-        $check = TblAgentModel::where('email',$email)->where('primary_phone',$phone)->first();
+        $email          = $request->email;
+        $phone          = $request->phone;
+        $check          = TblAgentModel::where('email',$email)->where('primary_phone',$phone)->first();
         if($check==true)
         {
             $date=date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));

@@ -101,7 +101,6 @@ Route::any('/merchant/sample', 							'MerchantController@sample');
 /*Routes for Supervisor*/
 Route::any('/supervisor', 				    'SuperVisorController@index');
 Route::post('/supervisor_login_submit',     'SuperVisorController@supervisor_login_submit');
-Route::any('/supervisor_logout', 			'SuperVisorController@supervisor_logout');
 Route::any('/supervisor/logout', 			'SuperVisorController@supervisor_logout');
 Route::get('/supervisor/dashboard', 		'SuperVisorController@dashboard');
 Route::get('/supervisor/profile', 			'SuperVisorController@profile');
