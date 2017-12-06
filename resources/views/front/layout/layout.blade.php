@@ -49,10 +49,8 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/sendemail.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
-<<<<<<< HEAD
-=======
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dl-menu.css">
->>>>>>> mod_fig_mvm_mobile2
+
 
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
@@ -152,8 +150,7 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-=======
+
         <div class="header-wrapper">
             <div class="mob-top-header">
                 <div class="left-container">
@@ -235,7 +232,6 @@
                 </form>
             </div>
         </div>
->>>>>>> mod_fig_mvm_mobile2
         
         @yield('content')
         
