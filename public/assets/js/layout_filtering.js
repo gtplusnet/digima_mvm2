@@ -21,14 +21,14 @@ function filtering()
 	}
 	function parent_filter()
 	{
-		alert();
+		
 		$(document).on("click",".aGALIT",function()
 		{
-			alert();
+			
 		});
 		$(document).on("click","#parent_filtered",function()
 		{
-			alert();
+			
 		});
 
 
