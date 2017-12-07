@@ -1,7 +1,7 @@
 <div class="card col-md-8">
     <div class="header col-md-12" style="display:inline-block;">
         <div class="col-md-8">
-            <h4 class="title">Agent Calls</h4>
+            <h4 class="title">Agent Calls ({{$active_agent->first_name." ".$active_agent->last_name}})</h4>
             <p class="category">Line Charts</p>
         </div>
         <div class="col-md-4  pull-right">

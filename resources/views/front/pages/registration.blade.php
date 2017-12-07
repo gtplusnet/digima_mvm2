@@ -112,7 +112,7 @@
 						</select>
 					</div>
 					<div class="col-md-3 form-thirdpart">
-						<label for="postalCode" class="registration-form-label">Poštanski broj:</label>
+						<label for="postalCode" class="registration-form-label">Poštanski Broj:</label>
 						<input type="text" class="form-control postalCode" name="postalCode" id="postalCode" disabled="true">
 					</div>
 				</div>

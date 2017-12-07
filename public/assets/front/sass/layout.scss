@@ -6,6 +6,16 @@ body
 {
 	font-family: $display-text;
 }
+/* for fixed header */
+.sticky 
+{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  border-top: 0;
+}
 
 /* HEADER */
 .header-nav
@@ -128,7 +138,7 @@ body
 }
 .header-nav-bottom
 {
-	padding: 3px 0px 3px 0px;
+	padding: 15px 0px 15px 0px;
 	background-color:#273a54;
 
 	@media screen and (max-width: 768px)

@@ -55,8 +55,7 @@
     </head>
     <body>
         <!-- HEADER -->
-
-        <div class="header-nav">
+        <div class="header-nav ">
             <div class="container">
                 <div class="menu-bar">
                     <div class="pull-left">
@@ -107,45 +106,48 @@
                 </div>
             </div>
         </div>
-        <div class="header-nav-bottom" id="navbar">
-            <div class="container searchbox-holder">
-                <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
-                    {{ csrf_field() }}
-                    <div class="col-md-2" >
-                        <img  src="/images/croatia_directory_logo.png">
+        <div class="header-nav-bottom">
+            <div class="container">
+                <div class="col-md-2" style="padding: 0px;">
+                    <img  src="/images/croatia_directory_logo.png">
+                </div>
+                <div class="menu-bar col-md-10">
+                    <div class="searchbox-holder">
+                        <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
+                            {{ csrf_field() }}
+                            <div class="col-md-4 searchfields-format ">
+                                <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
+                            </div>
+                            <div class="col-md-3 searchfields-format ">
+                                <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
+                                    <option value="" disabled selected><div>--Županja--</div></option>
+                                    @foreach($countyList as $countyListItem)
+                                    <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+                                    @endforeach
+                                </select>
+                                <style>
+                                select:required:invalid {
+                                      color: gray;
+                                    }
+                                    option[value=""][disabled] {
+                                      display: none;
+                                    }
+                                    option {
+                                      color: black;
+                                    }
+                                </style>
+                            </div>
+                            <div class="col-md-2 searchfields-format ">
+                                <input class="zipcode-textbox" type="text" placeholder="grad ili poštanski broj" name="postalCode" id="postalCode">
+                            </div>
+                            <div class="col-md-2 searchfields-format ">
+                                <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Tražilica</p></button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-md-3 searchfields-format ">
-                        <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
-                    </div>
-                    <div class="col-md-3 searchfields-format ">
-                        <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
-                            <option value="" disabled selected><div>--Županja--</div></option>
-                            @foreach($countyList as $countyListItem)
-                            <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
-                            @endforeach
-                        </select>
-                        <style>
-                        select:required:invalid {
-                              color: gray;
-                            }
-                            option[value=""][disabled] {
-                              display: none;
-                            }
-                            option {
-                              color: black;
-                            }
-                        </style>
-                    </div>
-                    <div class="col-md-2 searchfields-format ">
-                        <input class="zipcode-textbox" type="text" placeholder="grad ili poštanski broj" name="postalCode" id="postalCode">
-                    </div>
-                    <div class="col-md-2 searchfields-format ">
-                        <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Tražilica</p></button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-
         <!-- MOBILE NAV -->
         <nav class="pushmenu pushmenu-left">
             <div class="space2"></div>
@@ -327,19 +329,7 @@
                 new google.translate.TranslateElement({ pageLanguage: 'hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
             }
         </script>
-        <!-- FOR FIXED HEADER -->
-        <script>
-            window.onscroll = function() {myFunction()};
-            var navbar = document.getElementById("navbar");
-            var sticky = navbar.offsetTop;
-            function myFunction() {
-              if (window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky")
-              } else {
-                navbar.classList.remove("sticky");
-              }
-            }
-        </script>
+        
 
         <!-- SEARCH SHOW -->
         <script type="text/javascript">
@@ -381,5 +371,3 @@
         </script>
     </body>
 </html>
-
-
