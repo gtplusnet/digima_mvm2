@@ -18,39 +18,39 @@
             <div class="row-clearfix">
                 <div class="card col-md-4">
                     <div class="header">
-                        <h4 class="title">Merchant Statistics</h4>
-                        <p class="category">Registered / Activated -Per Week</p>
+                        <h4 class="title">Statistika Trgovca</h4>
+                        <p class="category">Registrirano / aktivirano - po tjednu</p>
                     </div>
                     <div class="content">
                         <div id="chartPreferencesPerWeek" class="ct-chart ct-perfect-fourth"></div>
 
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                <i class="fa fa-circle text-info"></i> Activated Merchant
+                                <i class="fa fa-circle text-danger"></i> Registrirani trgovac
+                                <i class="fa fa-circle text-info"></i> Aktivirani trgovac
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history-o"></i> Updated a minute ago
+                                <i class="fa fa-history-o"></i> Ažurirano prije minutu
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card col-md-8">
                     <div class="header">
-                        <h4 class="title">Merchant Statistics</h4>
-                        <p class="category">Registered / Activated -Per Day</p>
+                        <h4 class="title">Statistika Trgovca</h4>
+                        <p class="category">Registrirano / aktivirano - po danu</p>
                     </div>
                     <div class="content">
                         <div id="chartActivityPerDay" class="ct-chart"></div>
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                <i class="fa fa-circle text-info"></i> Activated Merchant
+                                <i class="fa fa-circle text-danger"></i> Registrirani trgovac
+                                <i class="fa fa-circle text-info"></i> Aktivirani trgovac
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history"></i> Updated a minute ago
+                                <i class="fa fa-history"></i> Ažurirano prije minutu
                             </div>
                         </div>
                     </div>
@@ -59,39 +59,39 @@
             <div class="row-clearfix">
                 <div class="card col-md-4">
                     <div class="header">
-                        <h4 class="title">Merchant Statistics</h4>
-                        <p class="category">Called / Added</p>
+                        <h4 class="title">Statistika Trgovca</h4>
+                        <p class="category">Nazvan / Dodan</p>
                     </div>
                     <div class="content">
                         <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
 
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i>Merchant Call
+                                <i class="fa fa-circle text-danger"></i>Merchant Called
                                 <i class="fa fa-circle text-info"></i>Merchant Added
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history-o"></i> Updated a minute ago
+                                <i class="fa fa-history-o"></i> Ažurirano prije minutu
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card col-md-8">
                     <div class="header">
-                        <h4 class="title">Merchant Statistics</h4>
-                        <p class="category">Registered / Activated -Per Month</p>
+                        <h4 class="title">Statistika Trgovca</h4>
+                        <p class="category">Registrirano / aktivirano - mjesečno</p>
                     </div>
                     <div class="content">
                         <div id="chartActivityPerMonth" class="ct-chart"></div>
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i> Registered Merchant
-                                <i class="fa fa-circle text-info"></i> Activated Merchant
+                                <i class="fa fa-circle text-danger"></i> Registrirani trgovac
+                                <i class="fa fa-circle text-info"></i> Aktivirani trgovac
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history"></i> Updated a minute ago
+                                <i class="fa fa-history"></i> Ažurirano prije minutu
                             </div>
                         </div>
                     </div>

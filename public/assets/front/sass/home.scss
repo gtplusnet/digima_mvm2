@@ -83,15 +83,15 @@
 	padding: 0px;
 	.searchfields-format
     {
-    	padding: 0px;
-    	margin:2px 2px 2px 2px;
+    	padding: 2px;
+    	// margin:2px 2px 2px 2px;
     }
 	.business-name-textbox
 	{
 	    border-radius: 1px;
 	    border: 1px solid #ccc;
 	    width: 100%;
-	    padding: 6px 0px 6px 0px;
+	    padding: 6px 0px 9px 0px;
 	    text-align:center;
 	    font-family: "Quicksand",sans-serif;
 	    color:#555555;
@@ -106,7 +106,7 @@
 	}
 	.zipcode-textbox
 	{
-		padding: 6px 0px 6px 10px;
+		padding: 6px 0px 10px 10px;
     	width: 100%;
 	    border-radius: 1px;
 	    border: 1px solid #ccc;
@@ -120,7 +120,7 @@
 	    border-radius: 3px;
 	    color: #333;
 	    margin-bottom: 2px;
-	    padding: 8px 40px 8px 40px;
+	    padding: 10px 40px 10px 40px;
 	    width: 100%;
 		
 	}

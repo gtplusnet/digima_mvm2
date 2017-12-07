@@ -22,8 +22,6 @@ function supervisor_dashboard()
 	{
 		$(document).on('change','#agent_calls',function(){
 		var agent_id = $(this).val();
-		alert(agent_id);
-		
 		$.ajax({
 			type:'POST',
 			url:'/supervisor/show_agent_calls',
@@ -40,8 +38,6 @@ function supervisor_dashboard()
 	{
 		$(document).on('change','#team_calls',function(){
 		var team_id = $(this).val();
-		alert(team_id);
-		
 		$.ajax({
 			type:'POST',
 			url:'/supervisor/show_team_calls',

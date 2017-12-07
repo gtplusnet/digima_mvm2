@@ -327,7 +327,6 @@ class SuperVisorController extends Controller
       $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
 
       $agent_id = $request->agent_id;
-      // dd($agent_id);
       $data['mon'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
                     ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
                     ->where('agent_call_date',$mon)
@@ -357,8 +356,11 @@ class SuperVisorController extends Controller
                     ->where('agent_call_date',$sun)
                     ->count();
       $data['_agents']   = TblAgentModel::get();
+      $data['active_agent'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
+                    ->first();
       // dd($data);
       return view('supervisor.pages.show_agent_calls',$data);
+
     }
     public function supervisor_show_team_calls(Request $request)
     {
@@ -405,8 +407,8 @@ class SuperVisorController extends Controller
                             ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
                             ->where('agent_call_date',$sun)
                             ->count();                      
-                            // dd($data['viewteam']);
-      $data['_teams']   = TblTeamModel::get();                     
+      $data['_teams']   = TblTeamModel::get(); 
+      $data['active_teams']   = TblTeamModel::where('team_id',$request->team_id)->first();                         
       return view('supervisor.pages.show_team_calls',$data);
     }
     // supervisor_add_agent

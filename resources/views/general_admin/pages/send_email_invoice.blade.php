@@ -255,15 +255,15 @@
                     <td align="left" style="padding:0px 40px 40px 40px"><p style="color:#5b5f65; font-size:15px; text-align:left; font-family: Verdana, Geneva, sans-serif">
                       <br>
                       <br>
-                      Hi {{$name}};
+                      Bok {{$name}};
                       <br>
                       <br>
-                      &nbsp;&nbsp;&nbsp;&nbsp;This is your invoice for the activation of your membership. Please see Attachment.
+                      &nbsp;&nbsp;&nbsp;&nbsp;Ovo je vaša faktura za aktiviranje vašeg članstva.
                       <br><br>
                       <p><font color="red"> {{$remarks}}</font></p>
                       <br>
-                      After you pay your membership.
-                      Click this link : <center>{{$link}}<br>or<br> just click the UPLOAD BUTTON.</center><br>
+                      Nakon što platite svoje članstvo.
+                      <center>{{$link}}<br>or<br> Samo kliknite gumb UPLOAD</center><br>
                     </p>
                     
                     
@@ -283,7 +283,7 @@
                           <tr>
                             <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
                               <tr>
-                                <td width="250" height="60" align="center" bgcolor="#BBB929"><a href="{{$link}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: black; background:#BBB929" class="button_link">Upload Payment</a></td>
+                                <td width="250" height="60" align="center" bgcolor="#BBB929"><a href="{{$link}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: black; background:#BBB929" class="button_link">UPLOAD</a></td>
                               </tr>
                             </table></td>
                           </tr>

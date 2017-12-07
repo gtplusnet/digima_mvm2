@@ -374,7 +374,7 @@ class AgentController extends Controller
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 			return '';
 		}
-		else
+		elseif($status==1)
 		{
 			$update['transaction_status'] = 'called'; 
 			$update['business_status'] = '2';
