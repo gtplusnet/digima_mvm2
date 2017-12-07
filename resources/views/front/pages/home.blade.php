@@ -241,10 +241,11 @@ width:100%;
 		</div>
 	</div>
 </div>
-{{-- JAVASCRIPTS --}}
+<!-- JAVASCRIPTS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/search-registered-business.js"></script>
 <script src="/assets/js/home_categories.js"></script>
+
 <!-- MATCH HEIGHT -->
 <script src="/assets/js/front/match-height.js"></script>
 

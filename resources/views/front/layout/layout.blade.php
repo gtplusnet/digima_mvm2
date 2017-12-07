@@ -191,16 +191,64 @@
                 <div id="dl-menu" class="dl-menuwrapper">
                     <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
                     <ul class="dl-menu">
-                        @foreach($_categories->where('parent_id','=',0) as $categories)
-                        <li>
-                            <a href="#">{{$categories->business_category_name}}</a>
+                        <li class="menu-title">Navigation</li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li class="menu-title">Category Filter</li>
+
+                        @foreach($_mob_categories->where('parent_id','=',0)->where('archived',0) as $categories)
+                        <li class="aGALIT">
+                            {{$categories->business_category_name}}dddd
                             <?php
-                                $children = $_categories->where('parent_id', $categories->business_category_id);
+                                $children = $_mob_categories->where('parent_id', $categories->business_category_id)->where('archived',0);
                             ?>
                             @if($children!=null)
                                 <ul class="dl-submenu">
+                                    <li class="menu-title">{{$categories->business_category_name}}</li>
                                     @foreach($children->sortBy('parent_id') as $child)
-                                        <li><a href="#">{{ $child->business_category_name }}</a></li>
+                                        <li>
+                                            <a class="parent_filtered" id="parent_filtered">{{ $child->business_category_name }}</a>
+                                            <?php
+                                                $children1 = $_mob_categories->where('parent_id', $child->business_category_id)->where('archived',0);
+                                            ?>
+                                            @if($children1!=null)
+                                                <ul class="dl-submenu">
+                                                    <li class="menu-title">{{ $child->business_category_name }}</li>
+                                                    @foreach($children1->sortBy('parent_id') as $child1)
+                                                        <li>
+                                                            <a href="#">{{ $child1->business_category_name }}</a>
+                                                            <?php
+                                                                $children2 = $_mob_categories->where('parent_id', $child1->business_category_id)->where('archived',0);
+                                                            ?>
+                                                            @if($children2!=null)
+                                                                <ul class="dl-submenu">
+                                                                    <li class="menu-title">{{ $child1->business_category_name }}</li>
+                                                                    @foreach($children2->sortBy('parent_id') as $child2)
+                                                                        <li>
+                                                                            <a href="#">{{ $child2->business_category_name }}</a>
+                                                                            <?php
+                                                                                $children2 = $_mob_categories->where('parent_id', $child1->business_category_id)->where('archived',0);
+                                                                            ?>
+                                                                            @if($children2!=null)
+                                                                            <ul class="dl-submenu">
+                                                                                <li class="menu-title">{{ $child2->business_category_name }}</li>
+                                                                                @foreach($children2->sortBy('parent_id') as $child2)
+                                                                                <li>
+                                                                                    <a href="#">{{ $child2->business_category_name }}</a>
+                                                                                </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                            @endif
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
                                     @endforeach
                                 </ul>
                             @endif
@@ -279,8 +327,9 @@
         <!-- footer-bottom -->
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> --}}
-
+        <!-- FOR FILTER -->
+        <script src="/assets/js/layout_filtering.js"></script>
+         <!-- EWAN KO DITO DI AKO GUMAWA -->
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js">')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <!-- FOR GOOGLEMAP -->
@@ -299,30 +348,15 @@
 
         <script src="/assets/js/dl-menu.js"></script>
         <!-- HANGGANG DITO -->
-        {{-- LANGUAGE --}}
-        {{-- <script type="text/javascript">
-
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
-        </script>
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> --}}
-    {{-- translator --}}
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-        {{-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> --}}
-
         <script>
             function translateLanguage(lang) {
-
                 var $frame = $('.goog-te-menu-frame:first');
-                // if (!$frame.size()) {
-                //     alert("Error: Could not find Google translate frame.");
-                //     return false;
-                // }
                 $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
                 return false;
             }
-            function googleTranslateElementInit() {
+            function googleTranslateElementInit() 
+            {
                 new google.translate.TranslateElement({ pageLanguage: 'hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
             }
         </script>

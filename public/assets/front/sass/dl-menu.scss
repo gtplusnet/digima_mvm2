@@ -44,7 +44,7 @@
 .dl-menuwrapper button:hover,
 .dl-menuwrapper button.dl-active,
 .dl-menuwrapper ul {
-	background: #aaa;
+	background: #1d2d43;
 }
 
 .dl-menuwrapper button:after {
@@ -75,11 +75,17 @@
 	display: block;
 	position: relative;
 	padding: 15px 20px;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 20px;
 	font-weight: 300;
 	color: #fff;
 	outline: none;
+}
+
+.menu-title
+{
+	padding: 15px 15px 5px 18px;
+	color: rgba(255,255,255, 0.3);
 }
 
 .no-touch .dl-menuwrapper li a:hover {
@@ -91,16 +97,16 @@
 	background: rgba(0,0,0,0.1);
 }
 
-.dl-menuwrapper li.dl-back:after,
-.dl-menuwrapper li > a:not(:only-child):after {
-	position: absolute;
-	top: 0;
-	line-height: 50px;
-	font-family: 'icomoon';
-	speak: none;
-	-webkit-font-smoothing: antialiased;
-	content: "\e000";
-}
+// .dl-menuwrapper li.dl-back:after,
+// .dl-menuwrapper li > a:not(:only-child):after {
+// 	position: absolute;
+// 	top: 0;
+// 	line-height: 50px;
+// 	font-family: 'icomoon';
+// 	speak: none;
+// 	-webkit-font-smoothing: antialiased;
+// 	content: "\e000";
+// }
 
 .dl-menuwrapper li.dl-back:after {
 	left: 10px;
@@ -781,46 +787,46 @@ All this is done for any sub-level being entered.
 	background: #9e1847;
 }
 
-/* Demo 2 */
-.demo-2 .dl-menuwrapper button {
-	background: #e86814;
-}
+// /* Demo 2 */
+// .demo-2 .dl-menuwrapper button {
+// 	background: #e86814;
+// }
 
-.demo-2 .dl-menuwrapper button:hover,
-.demo-2 .dl-menuwrapper button.dl-active,
-.demo-2 .dl-menuwrapper ul {
-	background: #D35400;
-}
+// .demo-2 .dl-menuwrapper button:hover,
+// .demo-2 .dl-menuwrapper button.dl-active,
+// .demo-2 .dl-menuwrapper ul {
+// 	background: #D35400;
+// }
 
-/* Demo 3 */
-.demo-3 .dl-menuwrapper button {
-	background: #08cbc4;
-}
+// /* Demo 3 */
+// .demo-3 .dl-menuwrapper button {
+// 	background: #08cbc4;
+// }
 
-.demo-3 .dl-menuwrapper button:hover,
-.demo-3 .dl-menuwrapper button.dl-active,
-.demo-3 .dl-menuwrapper ul {
-	background: #00b4ae;
-}
+// .demo-3 .dl-menuwrapper button:hover,
+// .demo-3 .dl-menuwrapper button.dl-active,
+// .demo-3 .dl-menuwrapper ul {
+// 	background: #00b4ae;
+// }
 
-/* Demo 4 */
-.demo-4 .dl-menuwrapper button {
-	background: #90b912;
-}
+// /* Demo 4 */
+// .demo-4 .dl-menuwrapper button {
+// 	background: #90b912;
+// }
 
-.demo-4 .dl-menuwrapper button:hover,
-.demo-4 .dl-menuwrapper button.dl-active,
-.demo-4 .dl-menuwrapper ul {
-	background: #79a002;
-}
+// .demo-4 .dl-menuwrapper button:hover,
+// .demo-4 .dl-menuwrapper button.dl-active,
+// .demo-4 .dl-menuwrapper ul {
+// 	background: #79a002;
+// }
 
-/* Demo 5 */
-.demo-5 .dl-menuwrapper button {
-	background: #744783;
-}
+// /* Demo 5 */
+// .demo-5 .dl-menuwrapper button {
+// 	background: #744783;
+// }
 
-.demo-5 .dl-menuwrapper button:hover,
-.demo-5 .dl-menuwrapper button.dl-active,
-.demo-5 .dl-menuwrapper ul {
-	background: #643771;
-}
+// .demo-5 .dl-menuwrapper button:hover,
+// .demo-5 .dl-menuwrapper button.dl-active,
+// .demo-5 .dl-menuwrapper ul {
+// 	background: #643771;
+// }

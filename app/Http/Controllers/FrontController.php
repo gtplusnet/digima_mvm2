@@ -74,34 +74,8 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.business_name','DESC')
                                     ->groupBy('tbl_business.business_id')
                                     ->get();
-        $data['_categories']        = $cat = TblBusinessCategoryModel::all();
-
-
-
-        
-        foreach($cat as $key=>$val)
-        {
-            $id = $val->business_category_id;
-            print_r($id);
-            $data['sub_categories'] = $cats = TblBusinessCategoryModel::where('parent_id',$id)
-                                    ->where('archived',0)
-                                    ->select('tbl_business_category.business_category_id as category_id')
-                                    ->get();
-            // print_r($cats->category_id[$key]);                        
-            // foreach($cats as $key=>$val)
-            // {
-            //     $id = $val->category_id;
-            //     $data['sub_categories1'] = $catss = TblBusinessCategoryModel::where('parent_id',$id)
-            //                             ->where('archived',0)
-            //                             ->select('tbl_business_category.business_category_id as category_id')
-            //                             ->get();
-                
-                
-            // }
-        }
-        
-
-
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
 
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
@@ -119,7 +93,7 @@ class FrontController extends Controller
     }
     public function registration()
     {
-
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['_membership']        = TblMembeshipModel::where('archived',0)->where('archived',0)->limit(2)->get();
         $data['contact_us']         = TblContactUs::first();
@@ -186,6 +160,7 @@ class FrontController extends Controller
                                     ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_business.membership',"ASC")
                                     ->paginate(9);
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)
                                     ->where('archived',0)
                                     ->get();
@@ -208,6 +183,7 @@ class FrontController extends Controller
     public function redirect_deactivated()
     {
         $data['index']              = 'deactivated';
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         return view('front.pages.success',$data);
     }
@@ -371,6 +347,8 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.business_name','DESC')
                                     ->groupBy('tbl_business.business_id')
                                     ->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
@@ -380,21 +358,15 @@ class FrontController extends Controller
                                     ->limit(4)
                                     ->get();
 
-
-
-        
-        
-        
-        
-        
         return view('front.pages.searchresult',$data); 
     }
     public function business(Request $request,$id)
     {
-        $data['contact_us']     = TblContactUs::first();
-        $data['page']           = 'business';
-        $data['countyList']     = TblCountyModel::get();
-        $data['business_id']    = $id;
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
+        $data['page']               = 'business';
+        $data['business_id']        = $id;
 
         $check = TblReportsModel::where('business_id',$id)->first();
         if($check)
@@ -493,7 +465,8 @@ class FrontController extends Controller
     public function success()
     {
         $data['index']          = 'register';
-        $data['countyList']     = TblCountyModel::get();
+        $data['_mob_categories']= TblBusinessCategoryModel::all();
+        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['contact_us']     = TblContactUs::first();
         $data['thank_you']      = TblThankYou::first();
         return view('front.pages.success',$data);
@@ -501,8 +474,10 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-        $data['countyList']     = TblCountyModel::get();
-        $data['contact_us']           = TblContactUs::first();
+        $data['_mob_categories']= TblBusinessCategoryModel::all();
+        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']     = TblContactUs::first();
+        $data['_mob_categories']= TblBusinessCategoryModel::all();
         $data['business_info']  = DB::table('tbl_business')
                                 ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
                                 ->where('tbl_business.business_id', '=', $request->business_id)
@@ -512,17 +487,19 @@ class FrontController extends Controller
 
     public function about()
     {
-        $data['page']           = 'About';
-        $data['countyList']     = TblCountyModel::get();
-        $data['_about_us']      = TblAboutUs::first();
-         $data['contact_us']           = TblContactUs::first();
+        $data['page']               = 'About';
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['_about_us']          = TblAboutUs::first();
+         $data['contact_us']        = TblContactUs::first();
         return view('front.pages.about', $data);
     }
     public function contact()
     {
-        $data['page']           = 'Contact';
-        $data['countyList']     = TblCountyModel::get();
-        $data['contact_us']     = TblContactUs::first();
+        $data['page']               = 'Contact';
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
         return view('front.pages.contact', $data);
 
     }
