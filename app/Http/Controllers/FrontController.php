@@ -74,7 +74,35 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.business_name','DESC')
                                     ->groupBy('tbl_business.business_id')
                                     ->get();
-        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
+        $data['_categories']        = $cat = TblBusinessCategoryModel::all();
+
+
+
+        
+        foreach($cat as $key=>$val)
+        {
+            $id = $val->business_category_id;
+            print_r($id);
+            $data['sub_categories'] = $cats = TblBusinessCategoryModel::where('parent_id',$id)
+                                    ->where('archived',0)
+                                    ->select('tbl_business_category.business_category_id as category_id')
+                                    ->get();
+            // print_r($cats->category_id[$key]);                        
+            // foreach($cats as $key=>$val)
+            // {
+            //     $id = $val->category_id;
+            //     $data['sub_categories1'] = $catss = TblBusinessCategoryModel::where('parent_id',$id)
+            //                             ->where('archived',0)
+            //                             ->select('tbl_business_category.business_category_id as category_id')
+            //                             ->get();
+                
+                
+            // }
+        }
+        
+
+
+
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->where('business_status',5)
@@ -82,6 +110,10 @@ class FrontController extends Controller
                                     ->groupBy('tbl_business.business_id')
                                     ->limit(4)
                                     ->get();
+
+
+
+
         return view('front.pages.home',$data);
 
     }

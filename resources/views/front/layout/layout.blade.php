@@ -49,6 +49,8 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/sendemail.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
+        <link rel="stylesheet" type="text/css" href="/assets/front/css/dl-menu.css">
+
 
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
@@ -146,34 +148,6 @@
             </div>
         </div>
 
-        <!-- MOBILE NAV -->
-        <nav class="pushmenu pushmenu-left">
-            <div class="space2"></div>
-            <div class="space1"></div>
-            <span>BROWSE</span>
-            <div class="space1"></div>
-            <ul class="links">
-                <a href="/">
-                    <li>
-                        <span><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;HOME</span>
-                    </li>
-                </a>
-                <a href="/about">
-                    <li>
-                        <span><i class="fa fa-building" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;ABOUT</span>
-                    </li>
-                </a>
-                <a href="/contact">
-                    <li>
-                        <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span>&nbsp;&nbsp;CONTACT US</span>
-                    </li>
-                </a>
-            </ul>
-        </nav>
-        <div id="overlay" onclick="off()"></div>
         <div class="header-wrapper">
             <div class="mob-top-header">
                 <div class="left-container">
@@ -197,7 +171,7 @@
                 <div class="row-no-padding clearfix">
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="left-container">
-                            <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i>
+                            {{-- <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i> --}}
                         </div>    
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -207,11 +181,33 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div style="z-index: 9;" class="col-md-3 col-sm-3 col-xs-3">
                         <div class="right-container">
                            <i id="show" class="fa fa-search"></i> 
                         </div> 
                     </div>
+                </div>
+                <!-- MOBILE PUSH MENU -->
+                <div id="dl-menu" class="dl-menuwrapper">
+                    <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
+                    <ul class="dl-menu">
+                        @foreach($_categories->where('parent_id','=',0) as $categories)
+                        <li>
+                            <a href="#">{{$categories->business_category_name}}</a>
+                            <?php
+                                $children = $_categories->where('parent_id', $categories->business_category_id);
+                            ?>
+                            @if($children!=null)
+                                <ul class="dl-submenu">
+                                    @foreach($children->sortBy('parent_id') as $child)
+                                        <li><a href="#">{{ $child->business_category_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                        @endforeach
+                        
+                    </ul>
                 </div>
             </div>
             <div id="search_nav" class="search-container">
@@ -284,6 +280,7 @@
         <!-- DITO ANG SCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> --}}
+
         <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js">')</script>
         <script src="/initializr/js/vendor/bootstrap.min.js"></script>
         <!-- FOR GOOGLEMAP -->
@@ -299,6 +296,8 @@
         <script src="/assets/js/toastr/toastr.js"></script>
         <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>
+
+        <script src="/assets/js/dl-menu.js"></script>
         <!-- HANGGANG DITO -->
         {{-- LANGUAGE --}}
         {{-- <script type="text/javascript">
@@ -310,16 +309,16 @@
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> --}}
     {{-- translator --}}
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        {{-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> --}}
 
         <script>
             function translateLanguage(lang) {
 
                 var $frame = $('.goog-te-menu-frame:first');
-                if (!$frame.size()) {
-                    alert("Error: Could not find Google translate frame.");
-                    return false;
-                }
+                // if (!$frame.size()) {
+                //     alert("Error: Could not find Google translate frame.");
+                //     return false;
+                // }
                 $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
                 return false;
             }
@@ -348,36 +347,13 @@
                 $('#show').click(function() {
                     $('#search_nav').toggleClass('search-mob-show');
                 });
-
-                /*PUSH NAV*/
-                $menuLeft = $('.pushmenu-left');
-                $nav_list = $('#nav_list');
-
-                $nav_list.click(function() {
-                    $(this).toggleClass('active');
-                    $menuLeft.toggleClass('pushmenu-open');
-                });
             });
+        </script>
 
-
-            function on() 
-            {
-                document.getElementById("overlay").style.display = "block";
-                $("body").css({"overflow": "hidden","position": "fixed","margin": "0","padding": "0","right": "0","left": "0"});
-                // $("body").css("position", "fixed");
-                // $("body").css("margin", "0");
-                // $("body").css("padding", "0");
-                // $("body").css("right", "0");
-                // $("body").css("left", "0");
-            }
-
-            function off()
-            {
-                document.getElementById("overlay").style.display = "none";
-                $('.pushmenu').removeClass("pushmenu-open");
-                $("body").css("overflow", "auto");
-                $("body").css("position", "static");
-            }
+        <script type="text/javascript">
+            $(function() {
+                $( '#dl-menu' ).dlmenu();
+            });
         </script>
     </body>
 </html>
