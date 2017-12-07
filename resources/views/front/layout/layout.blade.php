@@ -194,15 +194,22 @@
                 <div id="dl-menu" class="dl-menuwrapper">
                     <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
                     <ul class="dl-menu">
+                        <li class="menu-title">Navigation</li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li class="menu-title">Category Filter</li>
                         <li>
                             <a href="#">Item 1</a>
                             <ul class="dl-submenu">
+                                <li class="menu-title">Navigation</li>
                                 <li><a href="#">Sub-Item 1</a></li>
                                 <li><a href="#">Sub-Item 2</a></li>
                                 <li><a href="#">Sub-Item 3</a></li>
                                 <li>
                                     <a href="#">Sub-Item 4</a>
                                     <ul class="dl-submenu">
+                                        <li class="menu-title">Navigation</li>
                                         <li><a href="#">Sub-Sub-Item 1</a></li>
                                         <li><a href="#">Sub-Sub-Item 2</a></li>
                                         <li><a href="#">Sub-Sub-Item 3</a></li>
