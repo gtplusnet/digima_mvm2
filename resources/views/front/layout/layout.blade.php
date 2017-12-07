@@ -199,7 +199,7 @@
 
                         @foreach($_mob_categories->where('parent_id','=',0)->where('archived',0) as $categories)
                         <li class="aGALIT">
-                            {{$categories->business_category_name}}dddd
+                            <a href="">{{$categories->business_category_name}}</a>
                             <?php
                                 $children = $_mob_categories->where('parent_id', $categories->business_category_id)->where('archived',0);
                             ?>
