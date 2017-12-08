@@ -188,6 +188,7 @@
                     </div>
                 </div>
                 <!-- MOBILE PUSH MENU -->
+
                 <div id="dl-menu" class="dl-menuwrapper">
                     <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
                     <ul class="dl-menu">
@@ -348,6 +349,17 @@
 
         <script src="/assets/js/dl-menu.js"></script>
         <!-- HANGGANG DITO -->
+        <script>
+            $(document).ready(function()
+            {
+                $(document).on('click', '.dl-menuwrapper li a:only-child', function () 
+                {
+                    alert();
+                    console.log('it works');
+                });
+            });
+        </script>
+        <!-- GOOGLE TRANSLATE -->
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
         <script>
             function translateLanguage(lang) {

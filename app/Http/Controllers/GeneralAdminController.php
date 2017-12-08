@@ -63,6 +63,7 @@ class GeneralAdminController extends Controller
       Self::allow_logged_out_users_only();
 
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['contact_us']         = TblContactUs::first();
         $data['page']   = 'Admin Login';
         Session::forget("merchant_login");

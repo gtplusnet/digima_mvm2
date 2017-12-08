@@ -67,6 +67,7 @@ class MerchantController extends Controller
       	Self::allow_logged_out_users_only();
 
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['contact_us']         = TblContactUs::first();
         $data['page']   = 'login';
         return view('front.pages.login', $data);
