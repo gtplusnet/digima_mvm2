@@ -32,7 +32,7 @@ function filtering()
 		});
 		$(document).on('click', '.dl-menuwrapper li a:only-child', function () 
 		{
-			console.log('it works');
+			alert('james');
 		});
 
 

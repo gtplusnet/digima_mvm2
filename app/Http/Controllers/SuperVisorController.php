@@ -12,6 +12,7 @@ use App\Models\TblSupervisorModels;
 use App\Models\TblBusinessModel;
 use App\Models\Tbl_conversation;
 use App\Models\TblContactUs;
+use App\Models\TblBusinessCategoryModel;
 use Session;
 use Redirect;
 use Validator;
