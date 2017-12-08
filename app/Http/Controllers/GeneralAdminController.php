@@ -31,7 +31,6 @@ use App\Models\TblAboutUs;
 use App\Models\TblContactUs;
 use App\Models\TblTerms;
 use App\Models\TblThankYou;
-use App\Models\TblBusinessCategoryModel;
 use DB;
 use Response;
 use Session;
