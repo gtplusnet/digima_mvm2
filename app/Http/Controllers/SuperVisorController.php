@@ -16,7 +16,6 @@ use App\Models\TblBusinessCategoryModel;
 use Session;
 use Redirect;
 use Validator;
-use App\Models\TblBusinessCategoryModel;
 use Carbon\Carbon;
 
 class SuperVisorController extends Controller
