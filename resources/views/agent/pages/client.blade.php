@@ -118,7 +118,7 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$client->transaction_status}}</td>
                                     <td>
                                         @if($client->transaction_status == 'call in progress' && $client->agent_id !=session('agent_id'))
-                                        <button type="button" class="transaction btn btn-default "  data-id="{{$client->business_id}}" disabled>
+                                        <button type="button" class="transaction btn btn-default "  data-status="{{$client->business_status}}" data-id="{{$client->business_id}}" disabled>
                                         <i class="fa fa-phone call" aria-hidden="true"></i>Busy
                                         </button>
                                         @else
@@ -141,6 +141,26 @@ $( ".datepicker1" ).datepicker();
         <!-- modal !important-->
         <div class="modal fade" id="agentCallModal" role="dialog" style="overflow-y:inherit;">
             
+        </div>
+        <div style="margin-top:80px;" class="modal fade" id="endModals" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" style="margin-bottom:40%;">
+                        <div class="col-sm-12">
+                            <h4 class="modal-title">Are You sure You want to END this CALL?</h4>
+                        </div>
+                        <div class="col-sm-12" style="margin-top:40px;">
+                            <center>
+                            <input type="hidden" id="end_merchant_id" value=""/>
+                            <input type="hidden" id="end_merchant_status" value=""/>
+                            <button type="button" class=" btn btn-danger" id="endMerchantCall">Yes</button>
+                            <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                            </center>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
         <!-- pending -->
         <div id="pendingCustomer" class="tab-pane fade">

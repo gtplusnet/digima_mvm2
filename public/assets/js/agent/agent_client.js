@@ -1,4 +1,13 @@
-
+$(document).ready(function(){
+	$(document).on('click','.end-call',function()
+	{
+		var id = $(this).data('id');
+		var status = $(this).data("status");
+		$('#end_merchant_id').val(id);
+		$('#end_merchant_status').val(status);
+		$('#endModals').modal('show');
+    });
+});
 
 
 $(document).ready(function(){
@@ -117,8 +126,8 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click','#endMerchantCall',function(){
-		var transaction_id = $(this).data("id");
-		var status = $(this).data("status");
+		var transaction_id = $('#end_merchant_id').val();
+		var status = $('#end_merchant_status').val();
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client_transaction_reload',

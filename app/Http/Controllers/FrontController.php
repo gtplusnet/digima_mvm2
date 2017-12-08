@@ -221,11 +221,11 @@ class FrontController extends Controller
             $phoneAvailability = TblBusinessModel::checkPhone($request->primaryPhone,$request->alternatePhone)->first();
             if(count($emailAvailability) == 1)
             {
-                return response()->json(['status' => 'used', 'message' => 'Email has already been used.']); 
+                return response()->json(['status' => 'used', 'message' => 'E-pošta je već korištena.']); 
             }
             elseif(count($phoneAvailability) != 0)
             {
-                return response()->json(['status' => 'used', 'message' => 'Primary or Secondary Phone has already been used.']); 
+                return response()->json(['status' => 'used', 'message' => 'Primarni ili sekundarni telefon već je korišten.']); 
             }
             else
             {
@@ -439,7 +439,7 @@ class FrontController extends Controller
       $data["business_id"]       = $request->business_id;
 
       TblGuestMessages::insert($data);;
-      return "<div class='alert alert-success'><strong>Success!</strong> Message Sent.</div>";
+      return "<div class='alert alert-success'><strong>Uspjeh!</strong> Poruka je poslana.</div>";
     }
 
     
@@ -524,12 +524,12 @@ class FrontController extends Controller
         $data['guest_messages'] = TblBusinessContactPersonModel::get(); 
         if($check_mail)
         {
-            Session::flash('success', 'Thank you!. Your Message Send Successfully!');
+            Session::flash('success', 'Uspjeh! Poruka je poslana.');
             return Redirect::to('/contact');
         }
         else
         {
-            Session::flash('error', 'Sorry!. Network error, Transaction Fail!');
+            Session::flash('error', 'Žao mi je!. Pogreška mreže, transakcija nije uspjela!');
             return Redirect::to('/contact');
         }
     }
@@ -553,7 +553,7 @@ class FrontController extends Controller
         }
         else if($file->getClientOriginalExtension() != "mp3") 
         {
-            echo "File is not an audio, please select audio file.";
+            echo "Datoteka nije audio, odaberite audio datoteku.";
         }
         else 
         {

@@ -360,6 +360,7 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$trans_id 	= $request->transaction_id;
 		$status 	= $request->status;
+
 		if($status==4)
 		{
 			$update['transaction_status'] 	= 'called'; 
@@ -371,16 +372,17 @@ class AgentController extends Controller
 		}
 		elseif($status==20)
 		{
-			$update['transaction_status'] = 'Added'; 
-			$update['date_transact'] = date("Y/m/d"); 
+			$update['transaction_status'] 	= 'Added'; 
+			$update['date_transact'] 		= date("Y/m/d"); 
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 			return '';
 		}
 		elseif($status==1)
 		{
-			$update['transaction_status'] = 'called'; 
-			$update['business_status'] = '2';
-			$update['date_transact'] = date("Y/m/d"); 
+			$update['transaction_status'] 	= 'called'; 
+			$update['business_status'] 		= '2';
+			$update['date_transact'] 		= date("Y/m/d");
+			$update['agent_call_date']		= date("Y/m/d");  
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 			$count_call = TblAgentModel::where('agent_id',session('agent_id'))->first();
 			$agent['agent_call'] = $count_call->agent_call + 1;

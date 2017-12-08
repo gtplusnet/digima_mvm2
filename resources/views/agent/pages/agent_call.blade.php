@@ -14,7 +14,7 @@
                     <p ><center>{{session('_Timer')}}</center></p>
                 </div>
                 <div >
-                    <center><button type="button" id="endMerchantCall" class="btn btn-danger " data-status="{{$client->business_business_status}}" data-id="{{$client->business_id}}"  data-dismiss="modal" ><i class="fa fa-phone callme" aria-hidden="true"></i>Završi Poziv</button></center>
+                    <center><button type="button" id="" class="btn btn-danger end-call" data-status="{{$client->business_status}}" data-id="{{$client->business_id}}"  ><i class="fa fa-phone " aria-hidden="true"></i>Završi Poziv</button></center>
                 </div>
             </div>
             
