@@ -473,8 +473,8 @@ class SuperVisorController extends Controller
                             -> selectRaw('sum(agent_call) as sum, tbl_team.*,tbl_team.team_id as id')
                             ->groupBy('tbl_team.team_id')
                             ->get();
-        $data['_agent_team']= TblTeamModel::where('supervisor_id',session('supervisor_id'))->get();
-        $data['viewagent']  = TblTeamModel::where('supervisor_id',session('supervisor_id'))
+        $data['_agent_team']= TblTeamModel::where('archived',0)->where('supervisor_id',session('supervisor_id'))->get();
+        $data['viewagent']  = TblTeamModel::where('tbl_team.archived',0)->where('supervisor_id',session('supervisor_id'))
                             ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
                             ->get();
         return view ('supervisor.pages.manage_user', $data); 

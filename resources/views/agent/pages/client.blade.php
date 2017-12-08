@@ -147,7 +147,7 @@ $( ".datepicker1" ).datepicker();
                 <div class="modal-content">
                     <div class="modal-body" style="margin-bottom:40%;">
                         <div class="col-sm-12">
-                            <h4 class="modal-title">Are You sure You want to END this CALL?</h4>
+                            <h4 class="modal-title">Jeste li sigurni da želite prekinuti ovaj poziv?</h4>
                         </div>
                         <div class="col-sm-12" style="margin-top:40px;">
                             <center>

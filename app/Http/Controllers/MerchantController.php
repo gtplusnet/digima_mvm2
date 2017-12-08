@@ -200,7 +200,8 @@ class MerchantController extends Controller
     {
 
       $data['index'] = 'redirect_exist';
-      $data['countyList'] = TblCountyModel::get();
+      $data['_mob_categories']  = TblBusinessCategoryModel::all();
+      $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
       return view('front.pages.success',$data);
 
     }
@@ -209,10 +210,10 @@ class MerchantController extends Controller
     {
       $data['page']             = 'payment';
       $data['_mob_categories']  = TblBusinessCategoryModel::all();
-        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
-      $data['method']           = TblPaymentMethod::get();
+      $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+      $data['method']           = TblPaymentMethod::where('archived',0)->get();
       $data['picture']          = TblPaymentModel::get();
-      $check = TblPaymentModel::where('business_id',session('business_id'))->first();
+      $check                    = TblPaymentModel::where('business_id',session('business_id'))->first();
         if($check)
         {
             return Redirect::to('/merchant/redirect/exist');
@@ -223,14 +224,14 @@ class MerchantController extends Controller
           $data['_mob_categories']  = TblBusinessCategoryModel::all();
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
           $data["merchant_info"]    = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
-                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                            ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
-                            ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                            ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                            ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                            ->first();  
+                                    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                                    ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                                    ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                    ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                    ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                                    ->first();  
           return view('front.pages.payment_merchant', $data);
         }
     }
