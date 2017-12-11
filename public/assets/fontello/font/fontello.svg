@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2017 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="home" unicode="&#xe800;" d="M888 336q16-16 11-27t-27-11l-84 0 0-310q0-14-1-21t-8-13-23-6l-204 0 0 310-204 0 0-310-194 0q-28 0-35 10t-7 30l0 310-84 0q-22 0-27 11t11 27l400 402q16 16 38 16t38-16z" horiz-adv-x="900" />
+
+<glyph glyph-name="th-list" unicode="&#xe801;" d="M860 90q43 0 73-31t31-74q0-43-31-73t-73-31l-365 0q-44 0-74 31t-31 73 31 74 74 31l365 0z m0 364q43 0 73-31t31-73-31-73-73-31l-365 0q-44 0-74 31t-31 73 31 73 74 31l365 0z m0 365q43 0 73-31t31-73q0-44-31-74t-73-31l-365 0q-42 0-74 31t-31 74 31 73 74 31l365 0z m-860-834q0 130 130 130t130-130-130-130-130 130z m0 365q0 130 130 130t130-130-130-130-130 130z m0 365q0 130 130 130t130-130-130-130-130 130z" horiz-adv-x="964" />
+
+<glyph glyph-name="phone" unicode="&#xe802;" d="M0 615q0 50 28 76l138 138q45 37 77-13l113-211q18-39-14-71l-51-52q-5-6-5-14 25-98 132-195l31-30t36-34 34-26 41-25 40-14q20-6 27 2l61 60q39 30 72 12l203-121q22-14 25-37t-13-39l-141-139q-27-27-74-27-140 4-318 121-258 185-375 406-72 151-67 233z" horiz-adv-x="988" />
+
+<glyph glyph-name="commerical-building" unicode="&#xe811;" d="M50 800c-28 0-50-22-50-50 0 0 0-533 0-800 0-25 25-50 50-50 83 0 250 0 250 0l0 150c0 28 26 50 50 50l50 0c24 0 50-22 50-50 0-50 0-100 0-150 0 0 167 0 250 0 25 0 50 25 50 50 0 267 0 800 0 800 0 28-22 50-50 50z m100-150l150 0 0-100-150 0z m300 0l150 0 0-100-150 0z m-300-300l150 0 0-100-150 0z m300 0l150 0 0-100-150 0z" horiz-adv-x="750" />
+</font>
+</defs>
+</svg>

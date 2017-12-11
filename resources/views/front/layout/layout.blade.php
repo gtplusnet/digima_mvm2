@@ -50,6 +50,7 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dl-menu.css">
+        <link rel="stylesheet" type="text/css" href="/assets/fontello/css/fontello.css">
 
 
         <!-- Toastr Plugin CSS -->
@@ -195,9 +196,9 @@
                     <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
                     <ul class="dl-menu">
                         <li class="menu-title">Navigation</li>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/"><i class="icon-home"></i><span>&nbsp;&nbsp;Home</span></a></li>
+                        <li><a href="/about"><i class="icon-th-list"></i><span>&nbsp;&nbsp;About Us</span></a></li>
+                        <li><a href="/contact"><i class="icon-phone"></i><span>&nbsp;&nbsp;Contact Us</span></a></li>
                         <li class="menu-title">Category Filter</li>
                         <li>
                             <a href="#">Item 1</a>
