@@ -203,14 +203,14 @@
                         <li>
                             <a href="#">Item 1</a>
                             <ul class="dl-submenu">
-                                <li class="menu-title">Navigation</li>
+                                <li class="menu-title">Item 1</li>
                                 <li><a href="#">Sub-Item 1</a></li>
                                 <li><a href="#">Sub-Item 2</a></li>
                                 <li><a href="#">Sub-Item 3</a></li>
                                 <li>
                                     <a href="#">Sub-Item 4</a>
                                     <ul class="dl-submenu">
-                                        <li class="menu-title">Navigation</li>
+                                        <li class="menu-title">Sub-Item 4</li>
                                         <li><a href="#">Sub-Sub-Item 1</a></li>
                                         <li><a href="#">Sub-Sub-Item 2</a></li>
                                         <li><a href="#">Sub-Sub-Item 3</a></li>
