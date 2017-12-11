@@ -63,6 +63,7 @@ class GeneralAdminController extends Controller
       Self::allow_logged_out_users_only();
 
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['contact_us']         = TblContactUs::first();
         $data['page']   = 'Admin Login';
         Session::forget("merchant_login");
@@ -1602,6 +1603,7 @@ class GeneralAdminController extends Controller
                           ->where('business_status',5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->get();
        return view('general_admin.pages.search_merchant',$data);
     }

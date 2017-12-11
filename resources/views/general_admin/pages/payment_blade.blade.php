@@ -45,7 +45,7 @@
 		<label for="business_name" >Invoice Number</label>
 	</div>
 	<div class="form-group col-md-9">
-		<input value="{{ $business_item->business_id }}" type="text" class="form-control" style="width:100%" readonly/>
+		<input value="{{ $business_item->invoice_number }}" type="text" class="form-control" style="width:100%" readonly/>
 	</div>
 </div>
 <div class="col-sm-12">

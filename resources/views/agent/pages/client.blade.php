@@ -57,9 +57,9 @@ $( ".datepicker1" ).datepicker();
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
-                            <li class="active li_style"><a data-toggle="tab" href="#customer">Registered Merchant</a></li>
-                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Merchant</a></li>
-                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Merchant</a></li>
+                            <li class="active li_style"><a data-toggle="tab" href="#customer">Registrirani Trgovac</a></li>
+                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Trgovac na čekanju</a></li>
+                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Aktivirani Trgovac</a></li>
                         </ul>
                     </div>
                 </div>
@@ -75,17 +75,17 @@ $( ".datepicker1" ).datepicker();
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
+                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Datum Od" value="">
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
+                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Datum Do" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_key1" id="search_key1">
                                 </div>
-                                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
+                                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Tražilica</button>
                             </div>
                         </form>
                     </div>
@@ -98,13 +98,13 @@ $( ".datepicker1" ).datepicker();
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Business Name</th>
-                                    <th>Contact Person</th>
-                                    <th>Membership</th>
-                                    <th>Date Register</th>
+                                    <th>Iskaznica</th>
+                                    <th>Naziv Tvrtke</th>
+                                    <th>Osoba za Kontakt</th>
+                                    <th>Članstvo</th>
+                                    <th>Datum je Registriran</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Radnja</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,12 +118,12 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$client->transaction_status}}</td>
                                     <td>
                                         @if($client->transaction_status == 'call in progress' && $client->agent_id !=session('agent_id'))
-                                        <button type="button" class="transaction btn btn-default "  data-id="{{$client->business_id}}" disabled>
+                                        <button type="button" class="transaction btn btn-default "  data-status="{{$client->business_status}}" data-id="{{$client->business_id}}" disabled>
                                         <i class="fa fa-phone call" aria-hidden="true"></i>Busy
                                         </button>
                                         @else
                                         <button type="button" class="transaction btn btn-default "  data-id="{{$client->business_id}}" >
-                                        <i class="fa fa-phone call" aria-hidden="true"></i>call
+                                        <i class="fa fa-phone call" aria-hidden="true"></i>Poziv
                                         </button>
                                         @endif
                                         
@@ -142,6 +142,26 @@ $( ".datepicker1" ).datepicker();
         <div class="modal fade" id="agentCallModal" role="dialog" style="overflow-y:inherit;">
             
         </div>
+        <div style="margin-top:80px;" class="modal fade" id="endModals" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" style="margin-bottom:40%;">
+                        <div class="col-sm-12">
+                            <h4 class="modal-title">Jeste li sigurni da želite prekinuti ovaj poziv?</h4>
+                        </div>
+                        <div class="col-sm-12" style="margin-top:40px;">
+                            <center>
+                            <input type="hidden" id="end_merchant_id" value=""/>
+                            <input type="hidden" id="end_merchant_status" value=""/>
+                            <button type="button" class=" btn btn-danger" id="endMerchantCall">Yes</button>
+                            <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                            </center>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
         <!-- pending -->
         <div id="pendingCustomer" class="tab-pane fade">
             <div class="row">
@@ -151,17 +171,17 @@ $( ".datepicker1" ).datepicker();
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12  pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
+                                    <input type="text" class="form-control datepicker" id="date_start1" placeholder="Datum Od" value="">
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
+                                    <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Datum Do" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_key12" id="search_key12">
                                 </div>
-                                <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Search</button>
+                                <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Tražilica</button>
                             </div>
                         </form>
                     </div>
@@ -174,13 +194,13 @@ $( ".datepicker1" ).datepicker();
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Business Name</th>
-                                    <th>Contact Person</th>
-                                    <th>Membership</th>
-                                    <th>Date Pending</th>
+                                    <th>Iskaznica</th>
+                                    <th>Naziv Tvrtke</th>
+                                    <th>Osoba za Kontakt</th>
+                                    <th>Članstvo</th>
+                                    <th>Datum na čekanju</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Radnja</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -194,7 +214,7 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$clients_pendingss->transaction_status}}</td>
                                     <td>
                                         <button type="button" class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" >
-                                        <i class="fa fa-phone call" aria-hidden="true"></i>call
+                                        <i class="fa fa-phone call" aria-hidden="true"></i>Poziv
                                         </button>
                                     </td>
                                 </tr>
@@ -214,17 +234,17 @@ $( ".datepicker1" ).datepicker();
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
+                                    <input type="text" class="form-control datepicker" id="date_start2" placeholder="Datum Od" value="">
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
+                                    <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Datum Do" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_key3" id="search_key3">
                                 </div>
-                                <button type="button" class="btn btn-success" name="search_button123" id="search_button123">Search</button>
+                                <button type="button" class="btn btn-success" name="search_button123" id="search_button123">Tražilica</button>
                             </div>
                         </form>
                     </div>
@@ -236,13 +256,13 @@ $( ".datepicker1" ).datepicker();
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Business Name</th>
-                                    <th>Contact Person</th>
-                                    <th>Phone 1</th>
-                                    <th>Phone 2</th>
-                                    <th>Membership</th>
-                                    <th>Date Activated</th>
+                                    <th>Iskaznica</th>
+                                    <th>Naziv Tvrtke</th>
+                                    <th>Osoba za Kontakt</th>
+                                    <th>Telefon 1</th>
+                                    <th>Telefon 2</th>
+                                    <th>Članstvo</th>
+                                    <th>Aktivirani Trgovac</th>
                                 </tr>
                             </thead>
                             <tbody>

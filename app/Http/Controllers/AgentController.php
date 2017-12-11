@@ -18,6 +18,7 @@ use App\Models\TblMembeshipModel;
 use App\Models\TblTeamModel;
 use App\Models\TblContactUs;
 use Carbon\Carbon;
+use App\Models\TblBusinessCategoryModel;
 use Input;
 use Mail;
 use Session;
@@ -54,6 +55,7 @@ class AgentController extends Controller
 		Self::allow_logged_out_users_only();
 
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['contact_us']         = TblContactUs::first();
         $data['page']   = 'login';
         return view('front.pages.login', $data);
@@ -358,6 +360,7 @@ class AgentController extends Controller
 		Self::allow_logged_in_users_only();
 		$trans_id 	= $request->transaction_id;
 		$status 	= $request->status;
+
 		if($status==4)
 		{
 			$update['transaction_status'] 	= 'called'; 
@@ -369,16 +372,17 @@ class AgentController extends Controller
 		}
 		elseif($status==20)
 		{
-			$update['transaction_status'] = 'Added'; 
-			$update['date_transact'] = date("Y/m/d"); 
+			$update['transaction_status'] 	= 'Added'; 
+			$update['date_transact'] 		= date("Y/m/d"); 
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 			return '';
 		}
-		else
+		elseif($status==1)
 		{
-			$update['transaction_status'] = 'called'; 
-			$update['business_status'] = '2';
-			$update['date_transact'] = date("Y/m/d"); 
+			$update['transaction_status'] 	= 'called'; 
+			$update['business_status'] 		= '2';
+			$update['date_transact'] 		= date("Y/m/d");
+			$update['agent_call_date']		= date("Y/m/d");  
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 			$count_call = TblAgentModel::where('agent_id',session('agent_id'))->first();
 			$agent['agent_call'] = $count_call->agent_call + 1;

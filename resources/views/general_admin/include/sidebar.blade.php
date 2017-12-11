@@ -10,7 +10,7 @@
             <li class="{{ (Request::segment(2)=='manage_website') ? 'active' : ''  }}"><a href="/general_admin/manage_website" class="waves-effect waves-button"><span class="menu-icon fa fa-windows"></span><p>Manage Website</p></a></li>
             <li class="{{ (Request::segment(2)=='manage_front') ? 'active' : ''  }}"><a href="/general_admin/manage_front" class="waves-effect waves-button"><span class="menu-icon fa fa-desktop"></span><p>Manage Front</p></a></li>
             <li class="{{ (Request::segment(2)=='archived') ? 'active' : ''  }}"><a href="/general_admin/archived" class="waves-effect waves-button"><span class="menu-icon fa fa-trash"></span><p>Archived</p></a></li>
-            <li class="{{ (Request::segment(2)=='report') ? 'active' : ''  }}"><a href="/general_admin/report" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Report</p></a></li>
+            {{-- <li class="{{ (Request::segment(2)=='report') ? 'active' : ''  }}"><a href="/general_admin/report" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-file"></span><p>Report</p></a></li> --}}
             <li style="display:none;" class="mob-logout"><a href="/general_admin/logout" class="waves-effect waves-button"><span class="menu-icon fa fa-sign-out"></span><p>Sign Out</p></a></li>  
         </ul>
     </div>

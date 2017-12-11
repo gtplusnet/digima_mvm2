@@ -74,7 +74,9 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.business_name','DESC')
                                     ->groupBy('tbl_business.business_id')
                                     ->get();
-        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
+
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->where('business_status',5)
@@ -82,12 +84,16 @@ class FrontController extends Controller
                                     ->groupBy('tbl_business.business_id')
                                     ->limit(4)
                                     ->get();
+
+
+
+
         return view('front.pages.home',$data);
 
     }
     public function registration()
     {
-
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['_membership']        = TblMembeshipModel::where('archived',0)->where('archived',0)->limit(2)->get();
         $data['contact_us']         = TblContactUs::first();
@@ -154,6 +160,7 @@ class FrontController extends Controller
                                     ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_business.membership',"ASC")
                                     ->paginate(9);
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)
                                     ->where('archived',0)
                                     ->get();
@@ -176,6 +183,7 @@ class FrontController extends Controller
     public function redirect_deactivated()
     {
         $data['index']              = 'deactivated';
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         return view('front.pages.success',$data);
     }
@@ -213,11 +221,11 @@ class FrontController extends Controller
             $phoneAvailability = TblBusinessModel::checkPhone($request->primaryPhone,$request->alternatePhone)->first();
             if(count($emailAvailability) == 1)
             {
-                return response()->json(['status' => 'used', 'message' => 'Email has already been used.']); 
+                return response()->json(['status' => 'used', 'message' => 'E-pošta je već korištena.']); 
             }
             elseif(count($phoneAvailability) != 0)
             {
-                return response()->json(['status' => 'used', 'message' => 'Primary or Secondary Phone has already been used.']); 
+                return response()->json(['status' => 'used', 'message' => 'Primarni ili sekundarni telefon već je korišten.']); 
             }
             else
             {
@@ -339,6 +347,8 @@ class FrontController extends Controller
                                     ->orderBy('tbl_business.business_name','DESC')
                                     ->groupBy('tbl_business.business_id')
                                     ->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
@@ -348,21 +358,15 @@ class FrontController extends Controller
                                     ->limit(4)
                                     ->get();
 
-
-
-        
-        
-        
-        
-        
         return view('front.pages.searchresult',$data); 
     }
     public function business(Request $request,$id)
     {
-        $data['contact_us']     = TblContactUs::first();
-        $data['page']           = 'business';
-        $data['countyList']     = TblCountyModel::get();
-        $data['business_id']    = $id;
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
+        $data['page']               = 'business';
+        $data['business_id']        = $id;
 
         $check = TblReportsModel::where('business_id',$id)->first();
         if($check)
@@ -435,7 +439,7 @@ class FrontController extends Controller
       $data["business_id"]       = $request->business_id;
 
       TblGuestMessages::insert($data);;
-      return "<div class='alert alert-success'><strong>Success!</strong> Message Sent.</div>";
+      return "<div class='alert alert-success'><strong>Uspjeh!</strong> Poruka je poslana.</div>";
     }
 
     
@@ -461,7 +465,8 @@ class FrontController extends Controller
     public function success()
     {
         $data['index']          = 'register';
-        $data['countyList']     = TblCountyModel::get();
+        $data['_mob_categories']= TblBusinessCategoryModel::all();
+        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['contact_us']     = TblContactUs::first();
         $data['thank_you']      = TblThankYou::first();
         return view('front.pages.success',$data);
@@ -469,8 +474,10 @@ class FrontController extends Controller
 
     public function business_info(Request $request)
     {
-        $data['countyList']     = TblCountyModel::get();
-        $data['contact_us']           = TblContactUs::first();
+        $data['_mob_categories']= TblBusinessCategoryModel::all();
+        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']     = TblContactUs::first();
+        $data['_mob_categories']= TblBusinessCategoryModel::all();
         $data['business_info']  = DB::table('tbl_business')
                                 ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
                                 ->where('tbl_business.business_id', '=', $request->business_id)
@@ -480,17 +487,19 @@ class FrontController extends Controller
 
     public function about()
     {
-        $data['page']           = 'About';
-        $data['countyList']     = TblCountyModel::get();
-        $data['_about_us']      = TblAboutUs::first();
-         $data['contact_us']           = TblContactUs::first();
+        $data['page']               = 'About';
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['_about_us']          = TblAboutUs::first();
+         $data['contact_us']        = TblContactUs::first();
         return view('front.pages.about', $data);
     }
     public function contact()
     {
-        $data['page']           = 'Contact';
-        $data['countyList']     = TblCountyModel::get();
-        $data['contact_us']     = TblContactUs::first();
+        $data['page']               = 'Contact';
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']         = TblContactUs::first();
         return view('front.pages.contact', $data);
 
     }
@@ -503,21 +512,24 @@ class FrontController extends Controller
         $contact_help_message   = $request->help_message;
         $date                   = date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
 
-        $data                   = array('name'=>$contact_name,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
-        $check_mail             = Mail::send('front.pages.merchant_sending_email', $data, function($message) {
-                                  $message->to('guardians35836@gmail.com', 'Croatia Team')->subject
+        $contact = TblContactUs::first();
+        $contacts = $contact->email; 
+
+        $data                   = array('name'=>$contact_name,'email_to'=>$contacts,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
+        $check_mail             = Mail::send('front.pages.merchant_sending_email', $data, function($message) use ($data) {
+                                  $message->to($data['email_to'], 'Croatia Team')->subject
                                     ('THE RIGHT PLACE FOR BUSINESS');
                                   $message->from('guardians35836@gmail.com','Croatia Customer');
         });
         $data['guest_messages'] = TblBusinessContactPersonModel::get(); 
         if($check_mail)
         {
-            Session::flash('success', 'Thank you!. Your Message Send Successfully!');
+            Session::flash('success', 'Uspjeh! Poruka je poslana.');
             return Redirect::to('/contact');
         }
         else
         {
-            Session::flash('error', 'Sorry!. Network error, Transaction Fail!');
+            Session::flash('error', 'Žao mi je!. Pogreška mreže, transakcija nije uspjela!');
             return Redirect::to('/contact');
         }
     }
@@ -541,7 +553,7 @@ class FrontController extends Controller
         }
         else if($file->getClientOriginalExtension() != "mp3") 
         {
-            echo "File is not an audio, please select audio file.";
+            echo "Datoteka nije audio, odaberite audio datoteku.";
         }
         else 
         {
