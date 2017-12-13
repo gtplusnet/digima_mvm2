@@ -5,8 +5,8 @@
 
 <div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">
     <div class="container">
-        <div class="pull-left">
-            <div class="pull-right">
+        <div class="top-detail-container">
+            <div class="top-detail">
                 <p class="search-text">Tražilica ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
             </div>
             <div class="businesses-info-containers">

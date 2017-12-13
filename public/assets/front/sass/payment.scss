@@ -103,8 +103,8 @@
 	background-color: #fed600;
     vertical-align: middle;
     padding: 2px;
-    margin-top: 26px;
-    width: 35px;
+    // margin-top: 26px;
+    // width: 35px;
 }
 .payment-upload-icon
 {
@@ -146,4 +146,60 @@
     font-size: 15px;
     padding: 15px 48px;
     font-weight: 700;
+}
+
+/* NEW */
+.payment-wrapper
+{
+    max-width: 625px;
+    margin: auto;
+    padding-top: 35px;
+
+    .bottom-container  
+    {
+        padding-top: 20px;
+    }
+
+    .payment-title
+    {
+        padding-bottom: 10px;
+    }
+
+    .content 
+    {
+        border: 1px solid #ededed;
+        padding: 15px;
+        .payment-upload-holder
+        {
+            text-align: center;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+    }
+
+    .mid 
+    {
+        border: 1px solid #ededed;
+        padding: 15px 0px;
+        margin-top: -1px;
+    }
+    .bottom 
+    {
+        border: 1px solid #ededed;
+        padding: 15px 0px;
+        margin-top: -1px;
+    }
+}
+
+.mob-align
+{
+    @media screen and (max-width: 768px)
+    {
+        text-align: center;
+    }
+}
+
+.bold 
+{
+    font-weight: bold;
 }
