@@ -49,8 +49,11 @@
         <link rel="stylesheet" type="text/css" href="/assets/front/css/sendemail.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/google_translate.css">
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dummypage.css">
+        <!-- MOBILE PUSH NAV -->
         <link rel="stylesheet" type="text/css" href="/assets/front/css/dl-menu.css">
         <link rel="stylesheet" type="text/css" href="/assets/fontello/css/fontello.css">
+        <!-- LIGHT SLIDER -->
+        <link rel="stylesheet" type="text/css" href="/assets/light-slider/css/lightslider.css">
 
 
         <!-- Toastr Plugin CSS -->
@@ -445,8 +448,13 @@
         <script src="/assets/js/toastr/toastr.js"></script>
         <!-- LIGHTBOX SCRIPT -->
         <script src="/initializr/js/lightbox.min.js"></script>
+        
 
         <script src="/assets/js/dl-menu.js"></script>
+
+        <!-- LIGHT SLIDER -->
+        <script src="/assets/light-slider/js/lightslider.js"></script>
+        
         <!-- HANGGANG DITO -->
         <script>
             $(document).ready(function()

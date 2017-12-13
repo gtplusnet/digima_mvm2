@@ -1,9 +1,12 @@
 .businesses-info-containers
 {
-     margin-bottom: 0px;
+    margin-bottom: 0px;
     margin-top: 144px;
-    margin-left: 224px;
-    width: 800px;
+
+    @media screen and (max-width: 425px)
+    {
+        margin-top: 75px;
+    }
 
 }
 .businesses-name
@@ -20,6 +23,22 @@
 {
     width:100%;
     display:inline-block;
+    
+    p 
+    {
+        @media screen and (max-width: 425px)
+        {
+            margin-left: 0;
+        }
+    }
+
+    .social-button
+    {
+        @media screen and (max-width: 425px)
+        {
+            float: none !important;
+        }
+    }
 }
 .businesses-phone
 {
@@ -38,6 +57,11 @@
     margin-bottom: 0px;
     margin-top: 0px;
     margin-left: 20px;
+
+    @media screen and (max-width: 425px)
+    {
+        margin-left: 0;
+    }
 }
 
 .border-line
@@ -84,12 +108,17 @@
 
 .main-pic-container
 {
-	
+	.item
+    {
+        max-height: 520px;
+        overflow: hidden;
+
+        img 
+        {
+            width: 100%;
+        }
+    }
 }
-// .main-pic
-// {
-// 	width: 100%;
-// }
 .business-carousel
 {
     padding: 0px;
@@ -152,17 +181,14 @@
 	color: #404040;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 35px;
+    // margin-left: 35px;
     margin-bottom: 0px;
     font-family: "Quicksand",sans-serif;
 }
 .overview-content
 {
 	border:1px solid #e6e6e6;
-    padding-top: 25px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-bottom: 95px;
+    padding: 15px 25px;
 }
 .overview-content-text
 {
@@ -175,10 +201,7 @@
 .category-content
 {
 	border:1px solid #e6e6e6;
-    padding-top: 25px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-bottom: 30px;
+    padding: 15px 25px;
     
 }
 .business-details-container-rightpart
@@ -377,11 +400,76 @@
 
 .top-detail-container
 {
-    float: left !important;
 
-    
+
+    @media screen and (max-width: 768px)
+    {
+        float: none !important;
+    }
+    @media screen and (max-width: 425px)
+    {
+        text-align: center;
+    }
+
     .top-detail
     {
         float: right !important;
+        @media screen and (max-width: 425px)
+        {
+            display: none;
+        }
+
+        .search-text
+        {
+            @media screen and (max-width: 425px)
+            {
+                padding-right: 0;
+            }
+        }
     }
+}
+.top-detail-mob 
+{
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+
+    p 
+    {
+        padding-right: 0;
+    }
+    
+    @media screen and (max-width: 425px)
+    {
+        display: block;
+    }
+}
+
+
+.demo 
+{
+    width: 100%;
+
+    ul 
+    {
+        list-style: none outside none;
+        padding-left: 0;
+        margin-bottom:0;
+
+        li 
+        {
+            display: block;
+            float: left;
+            margin-right: 6px;
+            cursor:pointer;
+
+            img 
+            {
+                display: block;
+                height: auto;
+                width: 100%;
+            }
+        }
+    }
+
 }
