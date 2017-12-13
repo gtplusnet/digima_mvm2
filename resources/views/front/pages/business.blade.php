@@ -5,6 +5,9 @@
 
 <div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">
     <div class="container">
+        <div class="top-detail-mob">
+            <p class="search-text">Tražilica ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
+        </div>
         <div class="top-detail-container">
             <div class="top-detail">
                 <p class="search-text">Tražilica ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
@@ -21,7 +24,7 @@
                     <div class="businesses-map" >
                         <i class="fa fa-map-marker map" style=""></i>{{$business_info->business_complete_address}}
                     </div>
-                    <div class="pull-right">
+                    <div class="pull-right social-button">
                             <a href="skype:{{$business_info->business_phone}}"><button class=" btn-skype"><i class="fa fa-skype skype" aria-hidden="true"></i>Pozovi na Skype</button></a>
                             <buton class=" btn-email" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope email" aria-hidden="true"></i>Pošalji Email</buton>
                     </div>
@@ -34,7 +37,8 @@
 <div class="container business-containers">
     <div class="col-md-8 business-details-containers">
         <div class="border-line" >
-            <div class="main-pic-container">
+            <!-- OLD CAROUSEL -->
+            {{-- <div class="main-pic-container">
                 <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators business-indicators">
@@ -46,16 +50,24 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="{{$business_info->business_banner}}" style="height:529px;width:745px;">
+                            <img src="{{$business_info->business_banner}}">
                         </div>
-                        <div class="item">
-                            <img src="{{$business_info->other_image_one}}" style="height:529px;width:745px;">
-                        </div>
-                        <div class="item">
-                            <img src="{{$business_info->other_image_two}}" style="height:529px;width:745px;">
-                        </div>
-                        <div class="item">
-                            <img src="{{$business_info->other_image_three}}" style="height:529px;width:745px;">
+                        <div class="row clearfix">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="item">
+                                    <img src="{{$business_info->other_image_one}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="item">
+                                    <img src="{{$business_info->other_image_two}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="item">
+                                    <img src="{{$business_info->other_image_three}}">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- Left and right controls -->
@@ -68,36 +80,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-               {{--  @endif --}}
-                <!-- CAROUSEL SCRIPT -->
-                <script type="text/javascript">
-                    // INTERVAL
-                    $(document).ready(function() 
-                    {
-                        $('#myCarousel').carousel({interval: 2000})
-                    });
-                    // Enable Carousel Indicators
-                    $(".item1").click(function(){
-                        $("#myCarousel").carousel(0);
-                    });
-                    $(".item2").click(function(){
-                        $("#myCarousel").carousel(1);
-                    });
-                    $(".item3").click(function(){
-                        $("#myCarousel").carousel(2);
-                    });
-                    $(".item4").click(function(){
-                        $("#myCarousel").carousel(3);
-                    });
-                    // Enable Carousel Controls
-                    $(".left").click(function(){
-                        $("#myCarousel").carousel("prev");
-                    });
-                    $(".right").click(function(){
-                        $("#myCarousel").carousel("next");
-                    });
-                </script>
-            </div><!-- MAIN PIC -->
+            </div>
             <div class="secondary-pics-container">
                 <a href="{{$business_info->other_image_one}}" data-lightbox="roadtrip">
                     <img class="secondary-pics" src="{{$business_info->other_image_one}}">
@@ -108,8 +91,26 @@
                 <a href="{{$business_info->other_image_three}}" data-lightbox="roadtrip">
                     <img class="secondary-pics-last" src="{{$business_info->other_image_three}}">
                 </a>
+            </div> --}}
+
+            <!-- LIGHT SLIDER -->
+            <div class="demo">
+                <ul id="lightSlider">
+                    <li data-thumb="{{$business_info->business_banner}}">
+                        <img src="{{$business_info->business_banner}}" />
+                    </li>
+                    <li data-thumb="{{$business_info->other_image_one}}">
+                        <img src="{{$business_info->other_image_one}}" />
+                    </li>
+                    <li data-thumb="{{$business_info->other_image_two}}">
+                        <img src="{{$business_info->other_image_two}}" />
+                    </li>
+                    <li data-thumb="{{$business_info->other_image_three}}">
+                        <img src="{{$business_info->other_image_three}}" />
+                    </li>
+                </ul>
             </div>
-           {{--  @endif --}}
+
             <div>
                 <div class="overview-container">
                     <p class="overview-title">PREGLED</p>
@@ -354,5 +355,51 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/front/business.js"></script>
+
+
+
+
+
+
+<!-- CAROUSEL SCRIPT -->
+<script type="text/javascript">
+    // INTERVAL
+    $(document).ready(function() 
+    {
+        $('#myCarousel').carousel({interval: 2000})
+
+
+        /*LIGHT SLIDER*/
+        $('#lightSlider').lightSlider({
+            gallery: true,
+            item: 1,
+            loop: true,
+            slideMargin: 0,
+            thumbItem: 9
+        });
+
+
+    });
+    // Enable Carousel Indicators
+    $(".item1").click(function(){
+        $("#myCarousel").carousel(0);
+    });
+    $(".item2").click(function(){
+        $("#myCarousel").carousel(1);
+    });
+    $(".item3").click(function(){
+        $("#myCarousel").carousel(2);
+    });
+    $(".item4").click(function(){
+        $("#myCarousel").carousel(3);
+    });
+    // Enable Carousel Controls
+    $(".left").click(function(){
+        $("#myCarousel").carousel("prev");
+    });
+    $(".right").click(function(){
+        $("#myCarousel").carousel("next");
+    });
+</script>
 
 @endsection
