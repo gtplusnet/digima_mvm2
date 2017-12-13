@@ -119,15 +119,21 @@
                               </li>
                             </ul>
                             <style>
-                            .goog-te-banner-frame.skiptranslate {display: none !important;} 
-                            body { top: 0px !important; }
-                            .language-flag
-                            {
-                                height:25px;
-                                width:40px;
-                            }
-                            
-                            .ct-topbar {
+                                .goog-te-banner-frame.skiptranslate 
+                                {
+                                    display: none !important;
+                                } 
+                                body 
+                                { 
+                                    top: 0px !important; 
+                                }
+                                .language-flag
+                                {
+                                    height:25px;
+                                    width:40px;
+                                }
+                                
+                                .ct-topbar {
                                   text-align: right;
                                   background: #eee;
                                 }
@@ -182,9 +188,9 @@
                                 }
                                 .ct-language{
                                     position: relative;
-                                  background: #00aced;
+                                  background: #3b9ccadb;
                                   color: #fff;
-                                  padding: 10px 0;
+                                  padding: 5px;
                                 }
                                 .ct-language:hover .ct-language__dropdown{
                                     max-height: 500px;
@@ -195,45 +201,6 @@
                                     list-style: none;
                                 }
 
-                                .navbar-brand>img {
-                                  padding-top: 11px;
-                                  width: 130px;
-                                  margin-left: 15px;
-                                }
-                                .navbar-brand {
-                                    height: auto;
-                                    margin: 0;
-                                    padding: 0;
-                                    margin-right: 20px;
-                                }
-                                .navbar {
-                                  background-color: #000000;
-                                }
-                                .navbar-default .navbar-nav > .active > a {
-                                  padding: 8px 19px 9px !important;
-                                }
-                                .navbar-nav > li.active {
-                                  padding: 8px 0px 9px 0;
-                                }
-                                .navbar-right {
-                                  padding-top: 0;
-                                }
-                                .navbar-default .navbar-nav > li > a::after {
-                                  background-color: transparent;
-                                  border-bottom: 3px solid #d2282e;
-                                }
-                                .navbar-default .navbar-nav>li {
-                                  display: inline-block;
-                                  text-align: center;
-                                  float: none;
-                                }
-                                .navbar-default .navbar-nav>li>a {
-                                    color: #fff;
-                                }
-                                .navbar-default .navbar-nav>li>a:hover {
-                                    color: #fff;
-                                    background-color: #0392CC;
-                                }
                             </style>
                             
                         </div>
@@ -253,7 +220,7 @@
                     </div>
                     <div class="col-md-3 searchfields-format ">
                         <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
-                            <option value="" disabled selected><div>--Županja--</div></option>
+                            <option value="" disabled selected>--Županja--</option>
                             @foreach($countyList as $countyListItem)
                             <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                             @endforeach
@@ -531,6 +498,47 @@
       location.reload();
 
     });
+    /*PLACEHOLDER*/
+    var placeholders = document.querySelectorAll('input[placeholder]');
+
+if (placeholders.length) {
+     // convert to array
+    placeholders = Array.prototype.slice.call(placeholders);
+    
+    // copy placeholder text to a hidden div
+    var div = $('<div id="placeholders" style="display:none;"></div>');
+    
+    placeholders.forEach(function(input){
+      var text = input.placeholder;
+      div.append('<div>' + text + '</div>');    
+    });
+    
+    $('body').append(div);
+    
+    // save the first placeholder in a closure
+    var originalPH = placeholders[0].placeholder;
+    
+    // check for changes and update as needed
+    setInterval(function(){
+      if (isTranslated()) {
+        updatePlaceholders();
+        originalPH = placeholders[0].placeholder;
+      }
+    }, 500);
+    
+    // hoisted ---------------------------
+    function isTranslated() { // true if the text has been translated
+       var currentPH = $($('#placeholders > div')[0]).text();
+       return !(originalPH == currentPH);
+    }
+    
+    function updatePlaceholders() {
+      $('#placeholders > div').each(function(i, div){
+        placeholders[i].placeholder = $(div).text();
+      });
+    }
+}
+
   </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <!-- FOR FIXED HEADER -->
