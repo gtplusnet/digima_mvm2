@@ -449,6 +449,7 @@
             </div>
             <div id="search_nav" class="search-container">
                 <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm" >
+                    {{csrf_field()}}
                     <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
                     <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
                         <option value="" disabled selected><div>--County--</div></option>
