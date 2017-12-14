@@ -221,7 +221,7 @@
                     <div class="col-md-3 searchfields-format ">
                         <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
                     </div>
-                    <div class="col-md-3 searchfields-format ">
+                    <div class="col-md-2 searchfields-format ">
                         <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
                             <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
@@ -240,7 +240,7 @@
                             }
                         </style>
                     </div>
-                    <div class="col-md-2 searchfields-format ">
+                    <div class="col-md-3 searchfields-format ">
                         <input class="zipcode-textbox" type="text" placeholder="grad ili poštanski broj" name="postalCode" id="postalCode">
                     </div>
                     <div class="col-md-2 searchfields-format ">
