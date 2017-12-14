@@ -3,6 +3,10 @@
 
 
 /*Routes for SAMPLE PAGES*/
+Route::get('/excel','GeneralAdminController@export_excel');
+
+
+
 Route::get('/pdfview',               'GeneralAdminController@pdfview');
 Route::get('sendbasicemail',         'MailController@basic_email');
 Route::get('sendhtmlemail',          'MailController@html_email');

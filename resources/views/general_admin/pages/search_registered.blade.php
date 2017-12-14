@@ -7,11 +7,11 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Date/Added</th>
             <th>Business Name</th>
-            <th>membership</th>
+            <th>Membership</th>
             <th>Transaction</th>
-            <th>Date</th>
+            <th>Date Paid</th>
+            <th>Date to be Paid</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -19,11 +19,25 @@
         @foreach($registered_clients as $registeredclients)
         <tr>
             <td>{{$registeredclients->contact_first_name}}  {{$registeredclients->contact_last_name}}</td>
-            <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
             <td>{{$registeredclients->business_name}}</td>
             <td>{{$registeredclients->membership_name}}</td>
             <td>{{$registeredclients->transaction_status}} by: {{$registeredclients->first_name}} {{$registeredclients->last_name}}</td>
             <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
+            @if(date("F j, Y", strtotime("+5 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+            <td style="color: #a200ff;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+            @elseif(date("F j, Y", strtotime("+4 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+            <td style="color: #a200ff;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+            @elseif(date("F j, Y", strtotime("+3days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+            <td style="color:#22baa0,text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+            @elseif(date("F j, Y", strtotime("+2 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+            <td style="background-color: #ffffff;color: #ff0000;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+            @elseif(date("F j, Y", strtotime("+1 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+            <td style="background-color: #ffffff;color: #ff0000;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+            @elseif(date("F j, Y")==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+            <td style="background-color: #ffffff;color: #ff0000;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+            @else
+            <td >{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+            @endif
             <td>
                 <select id="registerAction"  class="form-control registerAction" style="width:90px;">
                     <option >Action</option>

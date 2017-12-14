@@ -79,35 +79,7 @@
                         <div class="btn-register">
                             <a href="/registration">Registrirajte se</a>
                         </div>
-                        {{-- <div class="language-selection">
-                            <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
-                                <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                            </a>
-                        </div>
-                        <div class="language-selection">
-                            <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
-                                <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                            </a>
-                        </div> --}}
-
                         <div class="language-selection" >
-                            <!-- <div id="google_translate_element" style="display:none;"></div>
-                            <style>
-                            .goog-te-gadget-icon
-                            {
-                            visibility:hidden;
-                            text-align:center;
-                            position:absolute;
-                            } -->
-                            <!-- /*.goog-te-banner-frame
-                            /*{*/
-                                /*visibility:hidden !important;
-                                height:0px !important;*/
-                            /*}*/
-                            .goog-te-banner-frame.skiptranslate {display: none !important;} 
-                            body { top: 0px !important; } -->
-                            
-                            {{-- </style> --}}
                             <ul class="list-unstyled list-inline ct-topbar__list">
                               <li class="ct-language">Language <i class="fa fa-arrow-down"></i>
                                 <ul class="list-unstyled ct-language__dropdown">
@@ -476,7 +448,8 @@
                 </div>
             </div>
             <div id="search_nav" class="search-container">
-                <form>
+                <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm" >
+                    {{csrf_field()}}
                     <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
                     <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
                         <option value="" disabled selected><div>--County--</div></option>
