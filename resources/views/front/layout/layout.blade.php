@@ -281,7 +281,7 @@
                         
                         {{-- </style> --}}
                         <ul class="list-unstyled list-inline ct-topbar__list">
-                          <li class="ct-language">Language <i class="fa fa-arrow-down"></i>
+                          <li class="ct-language">Language <i class="fa fa-angle-down" aria-hidden="true"></i></i>
                             <ul class="list-unstyled ct-language__dropdown">
                                 <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
                               
@@ -363,9 +363,9 @@
                             }
                             .ct-language{
                                 position: relative;
-                              background: #3b9ccadb;
-                              color: #fff;
-                              padding: 5px;
+                                background: #3b9ccadb;
+                                color: #fff;
+                                padding: 0 5px;
                             }
                             .ct-language:hover .ct-language__dropdown{
                                 max-height: 500px;
