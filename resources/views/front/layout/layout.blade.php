@@ -205,7 +205,6 @@
                                 }
 
                             </style>
-                            
                         </div>
                     </div>
                 </div>
@@ -253,7 +252,7 @@
         <div class="header-wrapper">
             <div class="mob-top-header">
                 <div class="left-container">
-                    <div class="language-selection">
+                    {{-- <div class="language-selection">
                         <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
                             <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
                         </a>
@@ -262,6 +261,122 @@
                         <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
                             <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
                         </a>
+                    </div> --}}
+                    <div class="language-selection" >
+                        <!-- <div id="google_translate_element" style="display:none;"></div>
+                        <style>
+                        .goog-te-gadget-icon
+                        {
+                        visibility:hidden;
+                        text-align:center;
+                        position:absolute;
+                        } -->
+                        <!-- /*.goog-te-banner-frame
+                        /*{*/
+                            /*visibility:hidden !important;
+                            height:0px !important;*/
+                        /*}*/
+                        .goog-te-banner-frame.skiptranslate {display: none !important;} 
+                        body { top: 0px !important; } -->
+                        
+                        {{-- </style> --}}
+                        <ul class="list-unstyled list-inline ct-topbar__list">
+                          <li class="ct-language">Language <i class="fa fa-angle-down" aria-hidden="true"></i></i>
+                            <ul class="list-unstyled ct-language__dropdown">
+                                <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
+                              
+                              <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
+                              <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
+                              <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
+                              <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
+                              <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                        <style>
+                            .goog-te-banner-frame.skiptranslate 
+                            {
+                                display: none !important;
+                            } 
+                            body 
+                            { 
+                                top: 0px !important; 
+                            }
+                            .language-flag
+                            {
+                                height:25px;
+                                width:40px;
+                            }
+                            
+                            .ct-topbar {
+                              text-align: right;
+                              background: #eee;
+                            }
+                            .ct-topbar__list {
+                              margin-bottom: 0px;
+                            }
+                            .ct-language__dropdown{
+                                padding-top: 8px;
+                                max-height: 0;
+                                overflow: hidden;
+                                position: absolute;
+                                top: 110%;
+                                left: -3px;
+                                -webkit-transition: all 0.25s ease-in-out;
+                                transition: all 0.25s ease-in-out;
+                                width: 100px;
+                                text-align: center;
+                                padding-top: 0;
+                              z-index:200;
+                            }
+                            .ct-language__dropdown li{
+                                background: #222;
+                                padding: 5px;
+                            }
+                            .ct-language__dropdown li a{
+                                display: block;
+                            }
+                            .ct-language__dropdown li:first-child{
+                                padding-top: 10px;
+                                border-radius: 3px 3px 0 0;
+                            }
+                            .ct-language__dropdown li:last-child{
+                                padding-bottom: 10px;
+                                border-radius: 0 0 3px 3px;
+                            }
+                            .ct-language__dropdown li:hover{
+                                background: #444;
+                            }
+                            .ct-language__dropdown:before{
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                margin: auto;
+                                width: 8px;
+                                height: 0;
+                                border: 0 solid transparent;
+                                border-right-width: 8px;
+                                border-left-width: 8px;
+                                border-bottom: 8px solid #222;
+                            }
+                            .ct-language{
+                                position: relative;
+                                background: #3b9ccadb;
+                                color: #fff;
+                                padding: 0 5px;
+                            }
+                            .ct-language:hover .ct-language__dropdown{
+                                max-height: 500px;
+                                padding-top: 8px;
+                            }
+                            .list-unstyled {
+                                padding-left: 0;
+                                list-style: none;
+                            }
+
+                        </style>
                     </div>
                 </div>
                 <div class="right-container">
@@ -356,8 +471,7 @@
                                 </ul>
                             @endif
                         </li>
-                        @endforeach
-                        
+                        @endforeach      
                     </ul>
                 </div>
             </div>
