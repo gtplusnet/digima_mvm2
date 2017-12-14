@@ -212,7 +212,6 @@ class MerchantController extends Controller
       $data['_mob_categories']  = TblBusinessCategoryModel::all();
       $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
       $data['method']           = TblPaymentMethod::where('archived',0)->get();
-      $data['picture']          = TblPaymentModel::get();
       $check                    = TblPaymentModel::where('business_id',session('business_id'))->first();
         if($check)
         {
@@ -220,9 +219,9 @@ class MerchantController extends Controller
         }
         else
         {
-          $data['method']           = TblPaymentMethod::get();
+          $data['method']           = TblPaymentMethod::where('archived',0)->get();
           $data['_mob_categories']  = TblBusinessCategoryModel::all();
-        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+          $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
           $data["merchant_info"]    = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -293,7 +292,7 @@ class MerchantController extends Controller
 
     public function payment_merchant(Request $request,$id)
     {
-      $data['method']           = TblPaymentMethod::get();
+      $data['method']           = TblPaymentMethod::where('archived',0)->get();
       $data['_mob_categories']  = TblBusinessCategoryModel::all();
         $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
       $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', $id)

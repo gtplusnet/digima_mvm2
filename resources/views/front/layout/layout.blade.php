@@ -79,7 +79,7 @@
                         <div class="btn-register">
                             <a href="/registration">Registrirajte se</a>
                         </div>
-                        <div class="language-selection">
+                        {{-- <div class="language-selection">
                             <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
                                 <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
                             </a>
@@ -88,24 +88,122 @@
                             <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
                                 <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
                             </a>
-                        </div>
+                        </div> --}}
+
                         <div class="language-selection" >
-                            <div id="google_translate_element" style="display:none;"></div>
+                            <!-- <div id="google_translate_element" style="display:none;"></div>
                             <style>
                             .goog-te-gadget-icon
                             {
                             visibility:hidden;
                             text-align:center;
                             position:absolute;
-                            }
-                            /*.goog-te-banner-frame
+                            } -->
+                            <!-- /*.goog-te-banner-frame
                             /*{*/
                                 /*visibility:hidden !important;
                                 height:0px !important;*/
                             /*}*/
                             .goog-te-banner-frame.skiptranslate {display: none !important;} 
-                            body { top: 0px !important; }
+                            body { top: 0px !important; } -->
                             
+                            {{-- </style> --}}
+                            <ul class="list-unstyled list-inline ct-topbar__list">
+                              <li class="ct-language">Language <i class="fa fa-arrow-down"></i>
+                                <ul class="list-unstyled ct-language__dropdown">
+                                    <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
+                                  
+                                  <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
+                                  <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
+                                  <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
+                                  <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
+                                  <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                            <style>
+                                .goog-te-banner-frame.skiptranslate 
+                                {
+                                    display: none !important;
+                                } 
+                                body 
+                                { 
+                                    top: 0px !important; 
+                                }
+                                .language-flag
+                                {
+                                    height:25px;
+                                    width:40px;
+                                }
+                                
+                                .ct-topbar {
+                                  text-align: right;
+                                  background: #eee;
+                                }
+                                .ct-topbar__list {
+                                  margin-bottom: 0px;
+                                }
+                                .ct-language__dropdown{
+                                    padding-top: 8px;
+                                    max-height: 0;
+                                    overflow: hidden;
+                                    position: absolute;
+                                    top: 110%;
+                                    left: -3px;
+                                    -webkit-transition: all 0.25s ease-in-out;
+                                    transition: all 0.25s ease-in-out;
+                                    width: 100px;
+                                    text-align: center;
+                                    padding-top: 0;
+                                  z-index:200;
+                                }
+                                .ct-language__dropdown li{
+                                    background: #222;
+                                    padding: 5px;
+                                }
+                                .ct-language__dropdown li a{
+                                    display: block;
+                                }
+                                .ct-language__dropdown li:first-child{
+                                    padding-top: 10px;
+                                    border-radius: 3px 3px 0 0;
+                                }
+                                .ct-language__dropdown li:last-child{
+                                    padding-bottom: 10px;
+                                    border-radius: 0 0 3px 3px;
+                                }
+                                .ct-language__dropdown li:hover{
+                                    background: #444;
+                                }
+                                .ct-language__dropdown:before{
+                                    content: '';
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    right: 0;
+                                    margin: auto;
+                                    width: 8px;
+                                    height: 0;
+                                    border: 0 solid transparent;
+                                    border-right-width: 8px;
+                                    border-left-width: 8px;
+                                    border-bottom: 8px solid #222;
+                                }
+                                .ct-language{
+                                    position: relative;
+                                  background: #3b9ccadb;
+                                  color: #fff;
+                                  padding: 5px;
+                                }
+                                .ct-language:hover .ct-language__dropdown{
+                                    max-height: 500px;
+                                    padding-top: 8px;
+                                }
+                                .list-unstyled {
+                                    padding-left: 0;
+                                    list-style: none;
+                                }
+
                             </style>
                             
                         </div>
@@ -123,9 +221,9 @@
                     <div class="col-md-3 searchfields-format ">
                         <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
                     </div>
-                    <div class="col-md-3 searchfields-format ">
+                    <div class="col-md-2 searchfields-format ">
                         <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
-                            <option value="" disabled selected><div>--Županja--</div></option>
+                            <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
                             <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                             @endforeach
@@ -142,7 +240,7 @@
                             }
                         </style>
                     </div>
-                    <div class="col-md-2 searchfields-format ">
+                    <div class="col-md-3 searchfields-format ">
                         <input class="zipcode-textbox" type="text" placeholder="grad ili poštanski broj" name="postalCode" id="postalCode">
                     </div>
                     <div class="col-md-2 searchfields-format ">
@@ -340,11 +438,6 @@
         <!-- FOR GOOGLEMAP -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
         </script>
-        <!--  <script type="text/javascript" scr="/assets/js/front/rangeslider.js"></script> -->
-        <!-- Registration JS -->
-        {{-- <script src="/assets/js/front/registration.js"></script> --}}
-        {{-- <script src="/assets/js/front/business-registration.js"></script> --}}
-        
         
         <!-- Toastr Plugin JS !-->
         <script src="/assets/js/toastr/toastr.js"></script>
@@ -368,19 +461,79 @@
                 });
             });
         </script>
-        <!-- GOOGLE TRANSLATE -->
-        <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-        <script>
-            function translateLanguage(lang) {
-                var $frame = $('.goog-te-menu-frame:first');
-                $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
-                return false;
-            }
+        
+        <script type="text/javascript">
             function googleTranslateElementInit() 
             {
-                new google.translate.TranslateElement({ pageLanguage: 'hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+              new google.translate.TranslateElement({pageLanguage: 'hr', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
             }
+
+            function triggerHtmlEvent(element, eventName) 
+            {
+              var event;
+              if (document.createEvent) {
+                event = document.createEvent('HTMLEvents');
+                event.initEvent(eventName, true, true);
+                element.dispatchEvent(event);
+              } else {
+                event = document.createEventObject();
+                event.eventType = eventName;
+                element.fireEvent('on' + event.eventType, event);
+              }
+            }
+
+            jQuery('.lang-select').click(function() {
+              var theLang = jQuery(this).attr('data-lang');
+              jQuery('.goog-te-combo').val(theLang);
+
+              //alert(jQuery(this).attr('href'));
+              window.location = jQuery(this).attr('href');
+              location.reload();
+
+            });
+            /*PLACEHOLDER*/
+            var placeholders = document.querySelectorAll('input[placeholder]');
+
+            if (placeholders.length) {
+                 // convert to array
+                placeholders = Array.prototype.slice.call(placeholders);
+                
+                // copy placeholder text to a hidden div
+                var div = $('<div id="placeholders" style="display:none;"></div>');
+                
+                placeholders.forEach(function(input){
+                  var text = input.placeholder;
+                  div.append('<div>' + text + '</div>');    
+                });
+                
+                $('body').append(div);
+                
+                // save the first placeholder in a closure
+                var originalPH = placeholders[0].placeholder;
+                
+                // check for changes and update as needed
+                setInterval(function(){
+                  if (isTranslated()) {
+                    updatePlaceholders();
+                    originalPH = placeholders[0].placeholder;
+                  }
+                }, 500);
+                
+                // hoisted ---------------------------
+                function isTranslated() { // true if the text has been translated
+                   var currentPH = $($('#placeholders > div')[0]).text();
+                   return !(originalPH == currentPH);
+                }
+                
+                function updatePlaceholders() {
+                  $('#placeholders > div').each(function(i, div){
+                    placeholders[i].placeholder = $(div).text();
+                  });
+                }
+            }
+
         </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <!-- FOR FIXED HEADER -->
         <script>
             window.onscroll = function() {myFunction()};

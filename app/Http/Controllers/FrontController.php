@@ -80,14 +80,11 @@ class FrontController extends Controller
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->where('business_status',5)
-                                    ->orderBy('tbl_reports.business_views','ASC')
+                                    ->where('membership',1)
+                                    ->orderBy('business_views','DESC')
                                     ->groupBy('tbl_business.business_id')
-                                    ->limit(4)
+                                    // ->limit(4)
                                     ->get();
-
-
-
-
         return view('front.pages.home',$data);
 
     }
@@ -353,6 +350,7 @@ class FrontController extends Controller
         $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
                                     ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                                     ->where('business_status',5)
+                                    ->where('tbl_business.membership',1)
                                     ->orderBy('tbl_reports.business_views','ASC')
                                     ->groupBy('tbl_business.business_id')
                                     ->limit(4)
