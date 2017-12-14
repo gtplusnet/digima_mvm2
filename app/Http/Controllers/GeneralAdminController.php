@@ -518,7 +518,9 @@ class GeneralAdminController extends Controller
                 });
                   if($mail_send)
                   {
-                     return "<div class='alert alert-success'><strong>Success!</strong>Invoice Send.</div><br><center><button type='button' class='btn btn-default' onClick='window.location.reload();'' data-dismiss='modal'>Close</button></center>";
+                    $invoice['invoice_status']  = 'sent';
+                    TblInvoiceModels::where('business_id',$business_id)->update($invoice);
+                    return "<div class='alert alert-success'><strong>Success!</strong>Invoice Send.</div><br><center><button type='button' class='btn btn-default' onClick='window.location.reload();'' data-dismiss='modal'>Close</button></center>";
                   }
                   else
                   {
@@ -553,9 +555,11 @@ class GeneralAdminController extends Controller
       $user['status']             = 'activated';
       $update['date_transact']    = date("Y/m/d"); 
       $payment['payment_status']  = 'Paid';
+      $invoice['invoice_status']  = 'Paid';
       $check_insert = TblPaymentModel::where('business_id',$business_id)->update($payment);
                       TblBusinessModel::where('business_id',$business_id)->update($update);
                       TblUserAccountModel::where('business_id',$business_id)->update($user);
+                      TblInvoiceModels::where('business_id',$business_id)->update($invoice);
       $info         = TblBusinessModel::where('tbl_business.business_id',$business_id)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
