@@ -38,6 +38,7 @@ use Redirect;
 use PDF2;
 use PDF;
 use Mail;
+use Excel;
 
 
 
@@ -57,6 +58,24 @@ class GeneralAdminController extends Controller
           return Redirect::to("/general_admin/dashboard")->send();
       }
     }
+    public function export_excel()
+    {
+      $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+
+      Excel::create("Government Forms HDMF",function($excel) use ($data)
+      {
+        $excel->sheet('clients',function($sheet) use ($data)
+        {
+          $sheet->loadView('general_admin.pages.search_registered',$data);
+        });
+      })->download('xls');    
+    }
+
     public function index()
     {
 
@@ -239,6 +258,7 @@ class GeneralAdminController extends Controller
       
         return view('general_admin.pages.merchants',$data);
     }
+    
 
     public function get_client(Request $request)
     {

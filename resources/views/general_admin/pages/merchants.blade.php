@@ -30,6 +30,10 @@
         color:#fff;
     /*border-radius: 10px;*/
     }
+    .padding-close
+    {
+        padding:0px;
+    }
 </style>
 <script>
     $(document).ready(function() 
@@ -74,15 +78,15 @@
                     <div class="col-md-12 col-sm-12">
                         <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                                <div class="col-md-6" style="padding:0px;">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close" >
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                 </div>
-                                <div class="col-md-6" style="padding:0px;">
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right" style="padding:0px;">
+                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_send_invoice" id="search_send_invoice" >
                                 </div>
@@ -144,15 +148,15 @@
                     <div class="col-md-12 col-sm-12">
                         <form class="form-inline" method="post" action="/general_admin/search_agent_added">
                             {{csrf_field()}}
-                             <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                                <div class="col-md-6" style="padding:0px;">
+                             <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close">
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
                                 </div>
-                                <div class="col-md-6" style="padding:0px;">
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right" style="padding:0px;">
+                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_agent" id="search_agent" >
                                 </div>
@@ -206,15 +210,15 @@
                     <div class="col-md-12 col-sm-12" >
                         <form class="form-inline" method="post" action="/general_admin/search_pending">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                                <div class="col-md-6" style="padding:0px;">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close">
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
                                 </div>
-                                <div class="col-md-6" style="padding:0px;">
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right" style="padding:0px;">
+                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_pending" id="search_pending" >
                                 </div>
@@ -287,15 +291,18 @@
                     <div class="col-md-12 col-sm-12" >
                         <form class="form-inline" method="post" action="/general_admin/search_registered">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                                <div class="col-md-6" style="padding:0px;">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close">
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start3" placeholder="Date From" value="" >
                                 </div>
-                                <div class="col-md-6" style="padding:0px;">
+                                <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker1" id="date_end3" placeholder="Date To" value="" >
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right" style="padding:0px;">
+                            <div class="col-md-5 col-sm-12 col-xs-12 padding-close">
+                                <button type="button" class="btn btn-success pull-right" style="background-color:#7DC246;margin-right:2px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Excell</button>
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_registered" id="search_registered" >
                                 </div>
@@ -313,11 +320,11 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Date/Added</th>
                                     <th>Business Name</th>
-                                    <th>membership</th>
+                                    <th>Membership</th>
                                     <th>Transaction</th>
-                                    <th>Date</th>
+                                    <th>Date Paid</th>
+                                    <th>Date to be Paid</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -325,11 +332,25 @@
                             @foreach($registered_clients as $registeredclients)
                                 <tr>
                                     <td>{{$registeredclients->contact_first_name}}  {{$registeredclients->contact_last_name}}</td>
-                                    <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
                                     <td>{{$registeredclients->business_name}}</td>
                                     <td>{{$registeredclients->membership_name}}</td>
                                     <td>{{$registeredclients->transaction_status}} by: {{$registeredclients->first_name}} {{$registeredclients->last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
+                                    @if(date("F j, Y", strtotime("+5 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+                                        <td style="color: #a200ff;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+                                    @elseif(date("F j, Y", strtotime("+4 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+                                        <td style="color: #a200ff;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+                                    @elseif(date("F j, Y", strtotime("+3days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+                                        <td style="color:#22baa0,text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+                                    @elseif(date("F j, Y", strtotime("+2 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+                                        <td style="background-color: #ffffff;color: #ff0000;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+                                    @elseif(date("F j, Y", strtotime("+1 days"))==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+                                        <td style="background-color: #ffffff;color: #ff0000;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+                                    @elseif(date("F j, Y")==date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact))))
+                                        <td style="background-color: #ffffff;color: #ff0000;text-decoration: underline;">{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+                                    @else
+                                        <td >{{ date("F j, Y", strtotime('+1 month', strtotime($registeredclients->date_transact)))}}</td>
+                                    @endif
                                     <td>
                                         <select id="registerAction"  class="form-control registerAction" style="width:90px;">
                                             <option >Action</option>
