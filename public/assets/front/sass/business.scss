@@ -204,6 +204,13 @@
     padding: 15px 25px;
     
 }
+.business-details-containers 
+{
+    @media screen and (max-width: 425px)
+    {
+        padding: 0 0 20px 0;
+    }
+}
 .business-details-container-rightpart
 {
 	padding-left: 0px;
@@ -449,6 +456,7 @@
 .demo 
 {
     width: 100%;
+    padding-bottom: 20px;
 
     ul 
     {
