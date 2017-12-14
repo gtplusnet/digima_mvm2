@@ -83,7 +83,7 @@ class FrontController extends Controller
                                     ->where('membership',1)
                                     ->orderBy('business_views','DESC')
                                     ->groupBy('tbl_business.business_id')
-                                    // ->limit(4)
+                                    ->limit(4)
                                     ->get();
         return view('front.pages.home',$data);
 

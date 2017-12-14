@@ -255,16 +255,43 @@ class GeneralAdminController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
+        $data['first']      = '0';
+        $data['second']     = '0';
+        foreach ($data['registered_clients'] as $key => $registered_clients) 
+        {
+          $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
+        }
       
         return view('general_admin.pages.merchants',$data);
     }
+    public function filter_due_date(Request $request)
+    {
+      $dueDate = $request->dueDate;
+      $data['first']      = '1';
+      $data['second']     = '1';
+      $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        $data['dueDate']  = date("F j, Y", strtotime("+".$dueDate." days"));
+        $data['link']     = '/general_admin/export_data/0/{{$dueDate}}';
+        foreach ($data['registered_clients'] as $key => $registered_clients) 
+        {
+          $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
+        }
+        return view('general_admin.pages.search_registered',$data);
+     
+    }
+
     
 
     public function get_client(Request $request)
     {
-        $s_date = $request->date_start;
-        $e_date = $request->date_end;
-        $data['clients'] = TblBusinessModel::where('business_status', 3)
+        $data['first']    = $s_date = $request->date_start;
+        $data['second']   = $e_date = $request->date_end;
+        $data['clients']  = TblBusinessModel::where('business_status', 3)
                           ->whereBetween('date_transact',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -276,8 +303,8 @@ class GeneralAdminController extends Controller
     }
     public function get_client1(Request $request)
     {
-        $s_date = $request->date_start1;
-        $e_date = $request->date_end1;
+        $data['first']    = $s_date = $request->date_start1;
+        $data['second']   = $e_date = $request->date_end1;
         $data['agentAdded'] = TblBusinessModel::where('business_status',20)
                           ->whereBetween('date_transact',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -289,8 +316,8 @@ class GeneralAdminController extends Controller
     }
     public function get_client2(Request $request)
     {
-        $s_date = $request->date_start2;
-        $e_date = $request->date_end2;
+        $data['first']    = $s_date = $request->date_start2;
+        $data['second']   = $e_date = $request->date_end2;
         $data['pending_clients'] = TblBusinessModel::where('business_status',4)
                           ->whereBetween('date_transact',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -304,15 +331,21 @@ class GeneralAdminController extends Controller
     }
     public function get_client3(Request $request)
     {
-        $s_date = $request->date_start3;
-        $e_date = $request->date_end3;
-        $data['registered_clients'] = TblBusinessModel::where('business_status',5)
+        $data['first']    = $s_date = $request->date_start3;
+        $data['second']   = $e_date = $request->date_end3;
+        $data['dueDate'] = 6;
+        $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
                           ->whereBetween('date_transact',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
+        foreach ($data['registered_clients'] as $key => $registered_clients) 
+        {
+          $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
+        }
+      
         return view('general_admin.pages.search_registered',$data);
     }
     public function general_admin_send_invoice($id)

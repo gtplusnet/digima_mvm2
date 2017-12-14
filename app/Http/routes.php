@@ -291,6 +291,8 @@ Route::post('/general_admin/manage_user/update_supervisor_login', 	'GeneralAdmin
 Route::post('/general_admin/manage_user/update_admin_login', 		'GeneralAdminController@general_admin_update_admin_login');
 
 
+Route::post('/general_admin/filter_due_date', 						'GeneralAdminController@filter_due_date');
+
 Route::post('/general_admin/get_client', 							'GeneralAdminController@get_client');
 Route::post('/general_admin/get_client1', 							'GeneralAdminController@get_client1');
 Route::post('/general_admin/get_client2', 							'GeneralAdminController@get_client2');

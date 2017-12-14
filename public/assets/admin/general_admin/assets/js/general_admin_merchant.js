@@ -25,6 +25,7 @@ function merchant()
 			search_pending();
 			search_activated();
 			deactivate_merchant();
+			dueDate();
 		});
 	}
 	function deactivate_merchant()
@@ -90,7 +91,7 @@ function merchant()
 				data:{date_start: date_start,date_end: date_end},
 				dataType:'text',
 			}).done(function(data){
-					$('#showHere').html(data)
+					$('#customerShow').html(data)
 				});
 		});
 	}
@@ -105,7 +106,7 @@ function merchant()
 				data:{date_start1: date_start1,date_end1: date_end1},
 				dataType:'text',
 			}).done(function(data){
-					$('#showHere1').html(data)
+					$('#agentShow').html(data)
 				});
 		});
 	}
@@ -120,7 +121,7 @@ function merchant()
 				data:{date_start2: date_start2,date_end2: date_end2},
 				dataType:'text',
 			}).done(function(data){
-					$('#showHere2').html(data)
+					$('#pendingShow').html(data)
 				});
 		});
 	}
@@ -135,13 +136,10 @@ function merchant()
 				data:{date_start3: date_start3,date_end3: date_end3},
 				dataType:'text',
 			}).done(function(data){
-					$('#showHere3').html(data)
+					$('#registeredShow').html(data)
 				});
 		});
 	}
-
-
-
 	function search_invoice()
 	{
 		$(document).on('click','#search_btn_invoice',function()
@@ -159,7 +157,7 @@ function merchant()
 				dataType:'text',
 			}).done(function(data)
 				{		
-					$('#showHere').html(data);
+					$('#customerShow').html(data);
 					
 			    });
 	    });
@@ -179,7 +177,7 @@ function merchant()
 				dataType:'text',
 			}).done(function(data)
 				{		
-					$('#showHere1').html(data);
+					$('#agentShow').html(data);
 				});
 	    });
 	}
@@ -198,7 +196,7 @@ function merchant()
 				dataType:'text',
 			}).done(function(data)
 				{		
-					$('#showHere2').html(data);
+					$('#pendingShow').html(data);
 				 });
 	    });
 	}
@@ -208,7 +206,6 @@ function merchant()
 		{
 			var search_key4 = $('#search_registered').val();
 			$.ajax({
-
 				type:'POST',
 				url:'/general_admin/search_registered',
 				data:{
@@ -217,7 +214,25 @@ function merchant()
 				dataType:'text',
 			}).done(function(data)
 				{		
-					$('#showHere3').html(data);
+					$('#registeredShow').html(data);
+				});
+	    });
+	}
+	function dueDate()
+	{
+		$(document).on('change','#dueDate',function()
+		{
+			var dueDate = $(this).val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/filter_due_date',
+				data:{
+					dueDate: dueDate,
+				},
+				dataType:'text',
+			}).done(function(data)
+				{		
+					$('#registeredShow').html(data);
 				});
 	    });
 	}
