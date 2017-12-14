@@ -223,7 +223,7 @@
                     </div>
                     <div class="col-md-3 searchfields-format ">
                         <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
-                            <option value="" disabled selected>--Županja--</option>
+                            <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
                             <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                             @endforeach
@@ -438,11 +438,6 @@
         <!-- FOR GOOGLEMAP -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
         </script>
-        <!--  <script type="text/javascript" scr="/assets/js/front/rangeslider.js"></script> -->
-        <!-- Registration JS -->
-        {{-- <script src="/assets/js/front/registration.js"></script> --}}
-        {{-- <script src="/assets/js/front/business-registration.js"></script> --}}
-        
         
         <!-- Toastr Plugin JS !-->
         <script src="/assets/js/toastr/toastr.js"></script>
@@ -466,89 +461,79 @@
                 });
             });
         </script>
-        <!-- GOOGLE TRANSLATE -->
-        <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-        <script>
-            function translateLanguage(lang) {
-                var $frame = $('.goog-te-menu-frame:first');
-                $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
-                return false;
-            }
+        
+        <script type="text/javascript">
             function googleTranslateElementInit() 
             {
-                new google.translate.TranslateElement({ pageLanguage: 'hr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+              new google.translate.TranslateElement({pageLanguage: 'hr', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
             }
-        </script> -->
-        <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'hr', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
-    }
 
-    function triggerHtmlEvent(element, eventName) {
-      var event;
-      if (document.createEvent) {
-        event = document.createEvent('HTMLEvents');
-        event.initEvent(eventName, true, true);
-        element.dispatchEvent(event);
-      } else {
-        event = document.createEventObject();
-        event.eventType = eventName;
-        element.fireEvent('on' + event.eventType, event);
-      }
-    }
+            function triggerHtmlEvent(element, eventName) 
+            {
+              var event;
+              if (document.createEvent) {
+                event = document.createEvent('HTMLEvents');
+                event.initEvent(eventName, true, true);
+                element.dispatchEvent(event);
+              } else {
+                event = document.createEventObject();
+                event.eventType = eventName;
+                element.fireEvent('on' + event.eventType, event);
+              }
+            }
 
-    jQuery('.lang-select').click(function() {
-      var theLang = jQuery(this).attr('data-lang');
-      jQuery('.goog-te-combo').val(theLang);
+            jQuery('.lang-select').click(function() {
+              var theLang = jQuery(this).attr('data-lang');
+              jQuery('.goog-te-combo').val(theLang);
 
-      //alert(jQuery(this).attr('href'));
-      window.location = jQuery(this).attr('href');
-      location.reload();
+              //alert(jQuery(this).attr('href'));
+              window.location = jQuery(this).attr('href');
+              location.reload();
 
-    });
-    /*PLACEHOLDER*/
-    var placeholders = document.querySelectorAll('input[placeholder]');
+            });
+            /*PLACEHOLDER*/
+            var placeholders = document.querySelectorAll('input[placeholder]');
 
-if (placeholders.length) {
-     // convert to array
-    placeholders = Array.prototype.slice.call(placeholders);
-    
-    // copy placeholder text to a hidden div
-    var div = $('<div id="placeholders" style="display:none;"></div>');
-    
-    placeholders.forEach(function(input){
-      var text = input.placeholder;
-      div.append('<div>' + text + '</div>');    
-    });
-    
-    $('body').append(div);
-    
-    // save the first placeholder in a closure
-    var originalPH = placeholders[0].placeholder;
-    
-    // check for changes and update as needed
-    setInterval(function(){
-      if (isTranslated()) {
-        updatePlaceholders();
-        originalPH = placeholders[0].placeholder;
-      }
-    }, 500);
-    
-    // hoisted ---------------------------
-    function isTranslated() { // true if the text has been translated
-       var currentPH = $($('#placeholders > div')[0]).text();
-       return !(originalPH == currentPH);
-    }
-    
-    function updatePlaceholders() {
-      $('#placeholders > div').each(function(i, div){
-        placeholders[i].placeholder = $(div).text();
-      });
-    }
-}
+            if (placeholders.length) {
+                 // convert to array
+                placeholders = Array.prototype.slice.call(placeholders);
+                
+                // copy placeholder text to a hidden div
+                var div = $('<div id="placeholders" style="display:none;"></div>');
+                
+                placeholders.forEach(function(input){
+                  var text = input.placeholder;
+                  div.append('<div>' + text + '</div>');    
+                });
+                
+                $('body').append(div);
+                
+                // save the first placeholder in a closure
+                var originalPH = placeholders[0].placeholder;
+                
+                // check for changes and update as needed
+                setInterval(function(){
+                  if (isTranslated()) {
+                    updatePlaceholders();
+                    originalPH = placeholders[0].placeholder;
+                  }
+                }, 500);
+                
+                // hoisted ---------------------------
+                function isTranslated() { // true if the text has been translated
+                   var currentPH = $($('#placeholders > div')[0]).text();
+                   return !(originalPH == currentPH);
+                }
+                
+                function updatePlaceholders() {
+                  $('#placeholders > div').each(function(i, div){
+                    placeholders[i].placeholder = $(div).text();
+                  });
+                }
+            }
 
-  </script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <!-- FOR FIXED HEADER -->
         <script>
             window.onscroll = function() {myFunction()};
