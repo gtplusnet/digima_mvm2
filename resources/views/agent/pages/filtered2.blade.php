@@ -9,10 +9,10 @@
             <th>ID</th>
             <th>Business Name</th>
             <th>Contact Person</th>
-            <th>Phone 1</th>
-            <th>Phone 2</th>
+            <th>Primary Phone</th>
+            <th>Secondary Phone</th>
             <th>Membership</th>
-            <th>Date Registered</th>
+            <th>Date Activated</th>
         </tr>
     </thead>
     <tbody>
@@ -24,10 +24,8 @@
             <td>{{$clients_activate->business_phone}}</td>
             <td>{{$clients_activate->business_alt_phone}}</td>
             <td>{{$clients_activate->membership_name}}</td>
-            <!--     <td>{{$clients_activate->transaction_status}}</td> -->
             <td>{{date("F j, Y",strtotime($clients_activate->date_transact))}}</td>
         </tr>
-        
         @endforeach
     </tbody>
 </table>

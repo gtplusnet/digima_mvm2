@@ -18,39 +18,39 @@
             <div class="row-clearfix">
                 <div class="card col-md-4">
                     <div class="header">
-                        <h4 class="title">Statistika Trgovca</h4>
-                        <p class="category">Registrirano / aktivirano - po tjednu</p>
+                        <h4 class="title">Merchant Statistic</h4>
+                        <p class="category">Registered / Activated</p>
                     </div>
                     <div class="content">
                         <div id="chartPreferencesPerWeek" class="ct-chart ct-perfect-fourth"></div>
 
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i> Registrirani trgovac
-                                <i class="fa fa-circle text-info"></i> Aktivirani trgovac
+                                <i class="fa fa-circle text-danger"></i> Registered
+                                <i class="fa fa-circle text-info"></i> Activated
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history-o"></i> Ažurirano prije minutu
+                                <i class="fa fa-history-o"></i> Update 3 Min Ago
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card col-md-8">
                     <div class="header">
-                        <h4 class="title">Statistika Trgovca</h4>
-                        <p class="category">Registrirano / aktivirano - po danu</p>
+                        <h4 class="title">Merchant Statistic</h4>
+                        <p class="category">Registered / Activated</p>
                     </div>
                     <div class="content">
                         <div id="chartActivityPerDay" class="ct-chart"></div>
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i> Registrirani trgovac
-                                <i class="fa fa-circle text-info"></i> Aktivirani trgovac
+                                <i class="fa fa-circle text-danger"></i> Registered
+                                <i class="fa fa-circle text-info"></i> Activated
                             </div>
                             <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Ažurirano prije minutu
+                             <div class="stats">
+                                <i class="fa fa-history-o"></i> Update 3 Min Ago
                             </div>
                         </div>
                     </div>
@@ -72,26 +72,26 @@
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history-o"></i> Ažurirano prije minutu
+                                <i class="fa fa-history-o"></i> Update 3 Min Ago
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card col-md-8">
                     <div class="header">
-                        <h4 class="title">Statistika Trgovca</h4>
-                        <p class="category">Registrirano / aktivirano - mjesečno</p>
+                        <h4 class="title">Merchant Statistic</h4>
+                        <p class="category">Registered / Activated</p>
                     </div>
                     <div class="content">
                         <div id="chartActivityPerMonth" class="ct-chart"></div>
                         <div class="footer">
                             <div class="legend">
-                                <i class="fa fa-circle text-danger"></i> Registrirani trgovac
-                                <i class="fa fa-circle text-info"></i> Aktivirani trgovac
+                                <i class="fa fa-circle text-danger"></i> Registered
+                                <i class="fa fa-circle text-info"></i> Activated
                             </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history"></i> Ažurirano prije minutu
+                                <i class="fa fa-history-o"></i> Update 3 Min Ago
                             </div>
                         </div>
                     </div>

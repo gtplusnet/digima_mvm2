@@ -3,7 +3,7 @@
         
         <div class="modal-header">
             <button type="button" class="close" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Osobne Informacije</h4>
+            <h4 class="modal-title">Personal Information</h4>
         </div>
         <div class="modal-body">
             <div>
@@ -14,7 +14,7 @@
                     <p ><center>{{session('_Timer')}}</center></p>
                 </div>
                 <div >
-                    <center><button type="button" id="" class="btn btn-danger end-call" data-status="{{$client->business_status}}" data-id="{{$client->business_id}}"  ><i class="fa fa-phone " aria-hidden="true"></i>Završi Poziv</button></center>
+                    <center><button type="button" id="" class="btn btn-danger end-call" data-status="{{$client->business_status}}" data-id="{{$client->business_id}}"  ><i class="fa fa-phone " aria-hidden="true"></i>End Call</button></center>
                 </div>
             </div>
             
@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-md-12 distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Ime</label>
+                                <label for="input-Default" class="col-sm-2 control-label">Name</label>
                                 <div class="col-md-2">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="Mr." readonly>
                                 </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-md-12 distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Naziv Tvrtke</label>
+                                <label for="input-Default" class="col-sm-2 control-label">Business NAme</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_name}}" readonly>
                                 </div>
@@ -50,11 +50,11 @@
                         </div>
                         <div class="col-md-12 distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Telefone 1</label>
+                                <label for="input-Default" class="col-sm-2 control-label">Primary Number</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_phone}}" readonly>
                                 </div>
-                                <label for="input-Default" class="col-sm-2 control-label">Telefone 2</label>
+                                <label for="input-Default" class="col-sm-2 control-label">Secondary Number</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_alt_phone}}" readonly>
                                 </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-12 distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Cijela poslovna adresa</label>
+                                <label for="input-Default" class="col-sm-2 control-label">Complete Address</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$client->business_complete_address}}</textarea>
                 
@@ -71,15 +71,15 @@
                         </div>
                         <div class="col-md-12 distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-1 control-label">Županja</label>
+                                <label for="input-Default" class="col-sm-1 control-label">County</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->county_name}}" readonly>
                                 </div>
-                                <label for="input-Default" class="col-sm-1 control-label">Grad</label>
+                                <label for="input-Default" class="col-sm-1 control-label">City</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->city_name}}" readonly>
                                 </div>
-                                <label for="input-Default" class="col-sm-1 control-label">Poštanski Broj</label>
+                                <label for="input-Default" class="col-sm-1 control-label">Postal Code</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_code}}" readonly>
                                 </div>

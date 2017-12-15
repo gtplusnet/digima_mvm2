@@ -368,7 +368,7 @@ text-align: center;
                            </tr>
                            @endforeach
                         </table>
-                        {{$_payment_method->total()/10}}
+                        
                         {!! $_payment_method->render()!!}
                      </form>
                   </div>

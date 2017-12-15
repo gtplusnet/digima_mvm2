@@ -167,6 +167,9 @@ width:100%;
 					<div class="business-list-holder">
 						<p class="business-list-title">LOKALNI FAVORITI</p>
 					</div>
+					<div class="business-list-holder">
+						<p style="font-size: 15px;">{{number_format(count($_business_list))}} Platinum</p>
+					</div>
 					<div class="business-list-content row clearfix">
 						@foreach($_business_list as $business_list)
 						<div class="col-md-4 col-sm-4 col-xs-6 per-business">

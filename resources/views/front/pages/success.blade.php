@@ -21,8 +21,8 @@
 		@elseif($index == 'redirect_exist')
 		<div class="banner-holder" >
 			<p class="message-intro" >Hvala Vam! {{session('full_name')}},</p>
-			<p class="success-message" style="text-align:center;"><br>Please wait the email to confirm your payment.</p>
-			<p class="success-message" style="text-align:center;">If you think that you submit a wrong information for your payment,<br>Molimo kliknite <a href="{{Session::get('sucess_payment')}}">ovdje</a>. </p>
+			<p class="success-message" style="text-align:center;"><br>Pričekajte e-poštu za potvrdu o plaćanju.</p>
+			<p class="success-message" style="text-align:center;">Ako mislite da šaljete pogrešne podatke o plaćanju,<br>Molimo kliknite <a href="{{Session::get('sucess_payment')}}">ovdje</a>. </p>
 			<a href="/"><button class="continue-btn">NASTAVITI</button></a>
 		</div>
 		@elseif($index == 'unpaid')

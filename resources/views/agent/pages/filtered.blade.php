@@ -9,8 +9,6 @@
             <th>ID</th>
             <th>Business Name</th>
             <th>Contact Person</th>
-            <th>Phone 1</th>
-            <th>Phone 2</th>
             <th>Membership</th>
             <th>Date Register</th>
             <th>Status</th>
@@ -23,21 +21,20 @@
             <td>{{$client->business_id}}</td>
             <td>{{$client->business_name}}</td>
             <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
-            <td>{{$client->business_phone}}</td>
-            <td>{{$client->business_alt_phone}}</td>
             <td>{{$client->membership_name}}</td>
             <td>{{date("F j, Y",strtotime($client->date_created))}}</td>
             <td>{{$client->transaction_status}}</td>
             <td>
-                @if($client->transaction_status == 'call in progress')
-                <button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}" disabled>
+                @if($client->transaction_status == 'call in progress' && $client->agent_id !=session('agent_id'))
+                <button type="button" class="transaction btn btn-default "  data-status="{{$client->business_status}}" data-id="{{$client->business_id}}" disabled>
                 <i class="fa fa-phone call" aria-hidden="true"></i>Busy
                 </button>
                 @else
-                <button class="transaction btn btn-default "  data-id="{{$client->business_id}}" data-toggle="modal"  data-target="#myModal{{$client->business_id}}">
-                <i class="fa fa-phone call" aria-hidden="true"></i>call
+                <button type="button" class="transaction btn btn-default "  data-id="{{$client->business_id}}" >
+                <i class="fa fa-phone call" aria-hidden="true"></i>Call
                 </button>
                 @endif
+                
             </td>
         </tr>
         

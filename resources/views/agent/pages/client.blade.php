@@ -57,9 +57,9 @@ $( ".datepicker1" ).datepicker();
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
-                            <li class="active li_style"><a data-toggle="tab" href="#customer">Registrirani Trgovac</a></li>
-                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Trgovac na čekanju</a></li>
-                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Aktivirani Trgovac</a></li>
+                            <li class="active li_style"><a data-toggle="tab" href="#customer">Registered Merchant</a></li>
+                            <li class="li_style"><a data-toggle="tab" href="#pendingCustomer">Pending Merchant</a></li>
+                            <li class="li_style marg"><a data-toggle="tab" href="#activatedCustomer">Activated Merchant</a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ $( ".datepicker1" ).datepicker();
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_key1" id="search_key1">
                                 </div>
-                                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Tražilica</button>
+                                <button type="button" class="btn btn-success" name="search_button1" id="search_button1">Search</button>
                             </div>
                         </form>
                     </div>
@@ -98,13 +98,13 @@ $( ".datepicker1" ).datepicker();
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Iskaznica</th>
-                                    <th>Naziv Tvrtke</th>
-                                    <th>Osoba za Kontakt</th>
-                                    <th>Članstvo</th>
-                                    <th>Datum je Registriran</th>
+                                    <th>ID</th>
+                                    <th>Business Name</th>
+                                    <th>Contact Person</th>
+                                    <th>Membership</th>
+                                    <th>Date Register</th>
                                     <th>Status</th>
-                                    <th>Radnja</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,7 +123,7 @@ $( ".datepicker1" ).datepicker();
                                         </button>
                                         @else
                                         <button type="button" class="transaction btn btn-default "  data-id="{{$client->business_id}}" >
-                                        <i class="fa fa-phone call" aria-hidden="true"></i>Poziv
+                                        <i class="fa fa-phone call" aria-hidden="true"></i>Call
                                         </button>
                                         @endif
                                         
@@ -147,7 +147,7 @@ $( ".datepicker1" ).datepicker();
                 <div class="modal-content">
                     <div class="modal-body" style="margin-bottom:40%;">
                         <div class="col-sm-12">
-                            <h4 class="modal-title">Jeste li sigurni da želite prekinuti ovaj poziv?</h4>
+                            <h4 class="modal-title">Are you sure you want to end this CALL?</h4>
                         </div>
                         <div class="col-sm-12" style="margin-top:40px;">
                             <center>
@@ -181,7 +181,7 @@ $( ".datepicker1" ).datepicker();
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_key12" id="search_key12">
                                 </div>
-                                <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Tražilica</button>
+                                <button type="button" class="btn btn-success" name="search_button12" id="search_button12">Search</button>
                             </div>
                         </form>
                     </div>
@@ -194,13 +194,13 @@ $( ".datepicker1" ).datepicker();
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Iskaznica</th>
-                                    <th>Naziv Tvrtke</th>
-                                    <th>Osoba za Kontakt</th>
-                                    <th>Članstvo</th>
-                                    <th>Datum na čekanju</th>
+                                    <th>ID</th>
+                                    <th>Business Name</th>
+                                    <th>Contact Person</th>
+                                    <th>Membership</th>
+                                    <th>Date Pending</th>
                                     <th>Status</th>
-                                    <th>Radnja</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -214,7 +214,7 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$clients_pendingss->transaction_status}}</td>
                                     <td>
                                         <button type="button" class="transaction btn btn-default "  data-id="{{$clients_pendingss->business_id}}" >
-                                        <i class="fa fa-phone call" aria-hidden="true"></i>Poziv
+                                        <i class="fa fa-phone call" aria-hidden="true"></i>Call
                                         </button>
                                     </td>
                                 </tr>
@@ -256,13 +256,13 @@ $( ".datepicker1" ).datepicker();
                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                             <thead>
                                 <tr>
-                                    <th>Iskaznica</th>
-                                    <th>Naziv Tvrtke</th>
-                                    <th>Osoba za Kontakt</th>
-                                    <th>Telefon 1</th>
-                                    <th>Telefon 2</th>
-                                    <th>Članstvo</th>
-                                    <th>Aktivirani Trgovac</th>
+                                    <th>ID</th>
+                                    <th>Business Name</th>
+                                    <th>Contact Person</th>
+                                    <th>Primary Phone</th>
+                                    <th>Secondary Phone</th>
+                                    <th>Membership</th>
+                                    <th>Date Activated</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -276,7 +276,6 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$clients_activate->membership_name}}</td>
                                     <td>{{date("F j, Y",strtotime($clients_activate->date_transact))}}</td>
                                 </tr>
-                                
                                 @endforeach
                             </tbody>
                         </table>
