@@ -58,23 +58,7 @@ class GeneralAdminController extends Controller
           return Redirect::to("/general_admin/dashboard")->send();
       }
     }
-    public function export_excel()
-    {
-      $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
 
-      Excel::create("Government Forms HDMF",function($excel) use ($data)
-      {
-        $excel->sheet('clients',function($sheet) use ($data)
-        {
-          $sheet->loadView('general_admin.pages.search_registered',$data);
-        });
-      })->download('xls');    
-    }
 
     public function index()
     {
@@ -255,8 +239,6 @@ class GeneralAdminController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
                           ->get();
-        $data['first']      = '0';
-        $data['second']     = '0';
         foreach ($data['registered_clients'] as $key => $registered_clients) 
         {
           $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
@@ -264,11 +246,66 @@ class GeneralAdminController extends Controller
       
         return view('general_admin.pages.merchants',$data);
     }
+    public function export_report_excel(Request $request,$params,$param)
+    {
+      $data['param'] = $param;
+      if($param=='merchant')
+      {
+        $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        foreach ($data['registered_clients'] as $key => $registered_clients) 
+        {
+          $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
+        }
+            
+      }
+      elseif($param=='due')
+      {
+        $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        $data['dueDate']  = date("F j, Y", strtotime("+".$params." days"));
+        foreach ($data['registered_clients'] as $key => $registered_clients) 
+        {
+          $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
+        }
+      }
+      else
+      {
+        $start = date("Y/m/d",strtotime($params));
+        $end = date("Y/m/d",strtotime($param));
+        $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
+                          ->whereBetween('date_transact',[$start,$end])
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        foreach ($data['registered_clients'] as $key => $registered_clients) 
+        {
+          $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
+        }
+      }
+      Excel::create("MERCHANT LIST",function($excel) use ($data)
+        {
+          $excel->sheet('clients',function($sheet) use ($data)
+          {
+            $sheet->loadView('general_admin.pages.export_report_excel',$data);
+          });
+        })->download('xls');
+      
+    }
     public function filter_due_date(Request $request)
     {
-      $dueDate = $request->dueDate;
-      $data['first']      = '1';
-      $data['second']     = '1';
+      $data['first']      = $dueDate = $request->dueDate;
+      $data['second']     = 'due';
       $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -282,7 +319,6 @@ class GeneralAdminController extends Controller
           $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
         }
         return view('general_admin.pages.search_registered',$data);
-     
     }
 
     
@@ -331,9 +367,11 @@ class GeneralAdminController extends Controller
     }
     public function get_client3(Request $request)
     {
-        $data['first']    = $s_date = $request->date_start3;
-        $data['second']   = $e_date = $request->date_end3;
-        $data['dueDate'] = 6;
+        $s_date = $request->date_start3;
+        $e_date = $request->date_end3;
+        $data['first']    = date("Y-m-d",strtotime($s_date));
+        $data['second']   = date("Y-m-d",strtotime($e_date));
+        
         $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
                           ->whereBetween('date_transact',[$s_date,$e_date])
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
@@ -348,6 +386,63 @@ class GeneralAdminController extends Controller
       
         return view('general_admin.pages.search_registered',$data);
     }
+    public function search_send_invoice(Request $request)
+    {
+      $search_key1 = $request->search_key1;
+      $data['clients'] = TblBusinessModel::where('business_name','like','%'.$search_key1.'%')->where('business_status', 3)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+      return view('general_admin.pages.search_merchant_invoice',$data);
+    }
+
+    public function search_agent(Request $request)
+    {
+       $search_key2 = $request->search_key2;
+       $data['agentAdded'] = TblBusinessModel::where('business_name','like','%'.$search_key2.'%')->where('business_status', 20)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+       return view('general_admin.pages.search_agent_added',$data);
+
+    }
+
+    public function search_pending(Request $request)
+    {
+        $search_key3 = $request->search_key3;
+        $data['pending_clients'] = TblBusinessModel::where('business_name','like','%'.$search_key3.'%')
+                          ->where('business_status', 4)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_pending',$data);
+    }
+
+    public function search_registered(Request $request)
+    {
+      
+        $data['first'] = $search_key4 = $request->search_key4;
+        $data['second']= 'search';
+        $data['registered_clients'] = TblBusinessModel::where('business_name','like','%'.$search_key4.'%')
+                          ->where('business_status', 5)
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+        return view('general_admin.pages.search_registered',$data);
+        
+    }
+
     public function general_admin_send_invoice($id)
     {
       $data['contact_us']   = TblContactUs::first();
@@ -1596,61 +1691,7 @@ class GeneralAdminController extends Controller
       return view('general_admin.pages.search_manage_invoice',$data);
     }
 
-    public function search_send_invoice(Request $request)
-    {
-      $search_key1 = $request->search_key1;
-      $data['clients'] = TblBusinessModel::where('business_name','like','%'.$search_key1.'%')->where('business_status', 3)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
-      return view('general_admin.pages.search_merchant_invoice',$data);
-    }
-
-    public function search_agent(Request $request)
-    {
-       $search_key2 = $request->search_key2;
-       $data['agentAdded'] = TblBusinessModel::where('business_name','like','%'.$search_key2.'%')->where('business_status', 20)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
-       return view('general_admin.pages.search_agent_added',$data);
-
-    }
-
-    public function search_pending(Request $request)
-    {
-        $search_key3 = $request->search_key3;
-        $data['pending_clients'] = TblBusinessModel::where('business_name','like','%'.$search_key3.'%')
-                          ->where('business_status', 4)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
-                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
-        return view('general_admin.pages.search_pending',$data);
-    }
-
-    public function search_registered(Request $request)
-    {
-      
-        $search_key4 = $request->search_key4;
-        $data['registered_clients'] = TblBusinessModel::where('business_name','like','%'.$search_key4.'%')
-                          ->where('business_status', 5)
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
-        return view('general_admin.pages.search_registered',$data);
-        
-    }
+    
 
     public function search_merchant(Request $request)
     {

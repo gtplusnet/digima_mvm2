@@ -315,7 +315,7 @@ $( ".datepicker1" ).datepicker();
                                     <option value="0">Due this day</option>
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-success" style="background-color:#7DC246;margin-left: 2px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export</button>
+                            <a href="/general_admin/export_report_excel/0/merchant"><button  id="exportExcel" type="button" class="btn btn-success" style="background-color:#7DC246;margin-left: 2px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export</button></a>
                         </div>
                     </form>
                 </div>
@@ -329,7 +329,7 @@ $( ".datepicker1" ).datepicker();
                                     <th>Membership</th>
                                     <th>Transaction</th>
                                     <th>Date Paid</th>
-                                    <th>Date to be Paid</th>
+                                    <th>Due Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

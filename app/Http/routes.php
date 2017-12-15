@@ -3,9 +3,6 @@
 
 
 /*Routes for SAMPLE PAGES*/
-Route::get('/excel','GeneralAdminController@export_excel');
-
-
 
 Route::get('/pdfview',               'GeneralAdminController@pdfview');
 Route::get('sendbasicemail',         'MailController@basic_email');
@@ -292,6 +289,7 @@ Route::post('/general_admin/manage_user/update_admin_login', 		'GeneralAdminCont
 
 
 Route::post('/general_admin/filter_due_date', 						'GeneralAdminController@filter_due_date');
+Route::get('/general_admin/export_report_excel/{params}/{param}','GeneralAdminController@export_report_excel');
 
 Route::post('/general_admin/get_client', 							'GeneralAdminController@get_client');
 Route::post('/general_admin/get_client1', 							'GeneralAdminController@get_client1');

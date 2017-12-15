@@ -17,15 +17,10 @@ function merchant()
 			
 			resend_invoice();
 			get_client();
-			get_client1();
-			get_client2();
-			get_client3();
-			search_invoice();
-			search_agent_added();
-			search_pending();
-			search_activated();
+			search_merchant();
 			deactivate_merchant();
 			dueDate();
+			
 		});
 	}
 	function deactivate_merchant()
@@ -50,9 +45,7 @@ function merchant()
 		{
 		if ($(this).val() == "resend") 
 			   {
-			   	
-			   	
-		    	var resend_email 			= $(this).data('email');
+			   	var resend_email 			= $(this).data('email');
 				var remarks					= "Please pay your Invoice or It will be deleted after 1 month";
 				var invoice_name_resend 	= $(this).data('name');
 				var resend_business_id 		= $(this).data('b_id');
@@ -82,7 +75,7 @@ function merchant()
 	}
 	function get_client()
 	{
-		$('#date_end').change(function(){
+		$(document).on('change','#date_end',function(){
 			var date_start 	= $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			var date_end 	= $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			$.ajax({
@@ -94,10 +87,7 @@ function merchant()
 					$('#customerShow').html(data)
 				});
 		});
-	}
-	function get_client1()
-	{
-		$('#date_end1').change(function(){
+		$(document).on('change','#date_end1',function(){
 			var date_start1 	= $('#date_start1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			var date_end1	= $('#date_end1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			$.ajax({
@@ -109,10 +99,7 @@ function merchant()
 					$('#agentShow').html(data)
 				});
 		});
-	}
-	function get_client2()
-	{
-		$('#date_end2').change(function(){
+		$(document).on('change','#date_end2',function(){
 			var date_start2 	= $('#date_start2').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			var date_end2	= $('#date_end2').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			$.ajax({
@@ -124,10 +111,7 @@ function merchant()
 					$('#pendingShow').html(data)
 				});
 		});
-	}
-	function get_client3()
-	{
-		$('#date_end3').change(function(){
+		$(document).on('change','#date_end3',function(){
 			var date_start3 	= $('#date_start3').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			var date_end3	= $('#date_end3').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			$.ajax({
@@ -140,15 +124,13 @@ function merchant()
 				});
 		});
 	}
-	function search_invoice()
+	
+	function search_merchant()
 	{
 		$(document).on('click','#search_btn_invoice',function()
 		{
 			var search_key1 = $('#search_send_invoice').val();
-		
-			
 			$.ajax({
-
 				type:'POST',
 				url:'/general_admin/search_send_invoice',
 				data:{
@@ -158,13 +140,9 @@ function merchant()
 			}).done(function(data)
 				{		
 					$('#customerShow').html(data);
-					
-			    });
+				});
 	    });
-	}
-	function search_agent_added()
-	{
-		$(document).on('click','#search_agent_btn',function()
+	    $(document).on('click','#search_agent_btn',function()
 		{
 			var search_key2 = $('#search_agent').val();
 			$.ajax({
@@ -180,10 +158,7 @@ function merchant()
 					$('#agentShow').html(data);
 				});
 	    });
-	}
-	function search_pending()
-	{
-		$(document).on('click','#search_pending_btn',function()
+	    $(document).on('click','#search_pending_btn',function()
 		{
 			var search_key3 = $('#search_pending').val();
 			$.ajax({
@@ -199,10 +174,7 @@ function merchant()
 					$('#pendingShow').html(data);
 				 });
 	    });
-	}
-	function search_activated()
-	{
-		$(document).on('click','#search_registered_btn',function()
+	    $(document).on('click','#search_registered_btn',function()
 		{
 			var search_key4 = $('#search_registered').val();
 			$.ajax({
@@ -218,6 +190,7 @@ function merchant()
 				});
 	    });
 	}
+	
 	function dueDate()
 	{
 		$(document).on('change','#dueDate',function()
@@ -236,6 +209,7 @@ function merchant()
 				});
 	    });
 	}
+	
 }
 
 
