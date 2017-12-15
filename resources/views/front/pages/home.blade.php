@@ -168,7 +168,7 @@ width:100%;
 						<p class="business-list-title">LOKALNI FAVORITI</p>
 					</div>
 					<div class="business-list-holder">
-						<p style="font-size: 15px;">{{number_format(count($_business_list))}} Platinum</p>
+						<p style="font-size: 15px;">{{number_format(count($_business_count))}} Platinum</p>
 					</div>
 					<div class="business-list-content row clearfix">
 						@foreach($_business_list as $business_list)
@@ -203,7 +203,7 @@ width:100%;
 	                    	</div>
 						</div>
 						@endforeach
-						<div class="col-md-12 pagination">
+						<div class="col-md-12">
 							{!! $_business_list->render() !!}
 						</div>
 					</div>

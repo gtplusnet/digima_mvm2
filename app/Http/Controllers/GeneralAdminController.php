@@ -31,6 +31,7 @@ use App\Models\TblAboutUs;
 use App\Models\TblContactUs;
 use App\Models\TblTerms;
 use App\Models\TblThankYou;
+use App\Models\TblBusinessTagCategoryModel;
 use DB;
 use Response;
 use Session;
@@ -1175,6 +1176,8 @@ class GeneralAdminController extends Controller
       $id=$request->delete_id;
       $data['archived'] =1;
       TblBusinessCategoryModel::where('business_category_id',$id)->update($data);
+      TblBusinessTagCategoryModel::where('business_category_id',$id)->delete();
+
       return "<div class='alert alert-success'><strong>Success!</strong>Category Deleted.</div>";
     }
     public function general_admin_get_sub_category(Request $request)
