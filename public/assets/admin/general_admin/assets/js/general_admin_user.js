@@ -502,6 +502,9 @@ function manage_user()
 		 		{
 		 		    $('#deleteAgent').modal('hide');
 		 			$('#agent_success1').html(data);
+		 			setTimeout(function(){
+					   location.reload();
+					}, 1000);
 		 		});
 	    });
 	    $(document).on('click','#teamDeleted',function()

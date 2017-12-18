@@ -21,19 +21,22 @@ function filtering()
 	}
 	function parent_filter()
 	{
+		// $('#click a').click(function(e) {
+  //     		alert();
+		// });
 		
-		$(document).on("click",".aGALIT",function()
-		{
+		// $(document).on("click","li",function()
+		// {
+		// 	alert();
+		// });
+		// $(document).on("click","#parent_filtered",function()
+		// {
 			
-		});
-		$(document).on("click","#parent_filtered",function()
-		{
-			
-		});
-		$(document).on('click', '.dl-menuwrapper li a:only-child', function () 
-		{
-			alert('james');
-		});
+		// });
+		// $(document).on('click', '.dl-menuwrapper li a:only-child', function () 
+		// {
+		// 	alert('james');
+		// });
 
 
 	}

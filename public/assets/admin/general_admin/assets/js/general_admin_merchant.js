@@ -28,14 +28,18 @@ function merchant()
 		$(document).on('change','.registerAction',function(){
 			if($(this).val()=="newinvoice")
 			{
+				$('#business_id').val($(this).data('business_id'))
 				$('#confirmModalInvoice').modal('show');
 			}
 			else if($(this).val()=="deactivate")
 			{
 				$('#confirmModal').modal('show');
 			}
-			
-		
+		});
+		$(document).on('click','.newInvoiceSend',function()
+		{
+			var id = $('#business_id').val();
+			window.location.assign("/general_admin/send_new_invoice/"+id+"/5")
 		});
 	}
 

@@ -32,6 +32,7 @@ use App\Models\TblContactUs;
 use App\Models\TblTerms;
 use App\Models\TblThankYou;
 use App\Models\TblBusinessTagCategoryModel;
+
 use DB;
 use Response;
 use Session;
@@ -461,15 +462,27 @@ class GeneralAdminController extends Controller
     public function general_admin_send_new_invoice($id,$id2)
     {
       $data['contact_us']   = TblContactUs::first();
-      $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
+      $check = TblInvoiceModels::where('business_id',$id)->where('invoice_status','!=','paid')->count();
+      // dd($check);
+      if($check!=0)
+      {
+        Session::flash('invoice_error', 'USER has pending INVOICE. Resend his/her old Invoice at Manage Invoice!');
+        return Redirect::back();
+      }
+      else
+      {
+        $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                             ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                             ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                             ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                             ->first();
-      $data['id']           =$id;
-      $data['status']       = $id2;
-      return view('general_admin.pages.invoice',$data);
+        $data['id']           =$id;
+        $data['status']       = $id2;
+        return view('general_admin.pages.invoice',$data);
+      }
+      
+      
     }
 
     public function general_admin_send_save_invoice(Request $request,$id)
@@ -791,7 +804,7 @@ class GeneralAdminController extends Controller
 
       Self::allow_logged_in_users_only();
       $data['_data_agent']          = TblAgentModel::where('archived',0)->get();
-      $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)
+      $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)->where('tbl_supervisor.archived',0)
                                     ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
                                     ->select('tbl_team.team_id as id', 'tbl_team.*','tbl_supervisor.*')
                                     ->get();
@@ -1383,9 +1396,11 @@ class GeneralAdminController extends Controller
   {
     $id = $request->team_id;
     $data['_supervisor'] = TblTeamModel::where('tbl_team.team_id',$id)
+                          ->where('tbl_team.archived',0)
+                          ->where('tbl_supervisor.archived',0)
                           ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
                           ->get();
-    $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)
+    $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)->where('tbl_agent.archived',0)
                           ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
                           ->get();
     return view('general_admin.pages.viewmember',$data);

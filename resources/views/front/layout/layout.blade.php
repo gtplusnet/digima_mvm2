@@ -385,11 +385,11 @@
                         <li><a href="/"><i class="icon-home"></i><span>&nbsp;&nbsp;Home</span></a></li>
                         <li><a href="/about"><i class="icon-th-list"></i><span>&nbsp;&nbsp;About Us</span></a></li>
                         <li><a href="/contact"><i class="icon-phone"></i><span>&nbsp;&nbsp;Contact Us</span></a></li>
-                        <li class="menu-title">Category Filter</li>
+                        <li class="menu-title aGALIT" id="click">Category Filter</li>
 
                         @foreach($_mob_categories->where('parent_id','=',0)->where('archived',0) as $categories)
                         <li class="aGALIT">
-                            <a href="">{{$categories->business_category_name}}</a>
+                            <a class="aGALIT">{{$categories->business_category_name}}</a>
                             <?php
                                 $children = $_mob_categories->where('parent_id', $categories->business_category_id)->where('archived',0);
                             ?>

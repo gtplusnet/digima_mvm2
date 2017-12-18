@@ -73,6 +73,10 @@ $( ".datepicker1" ).datepicker();
             <div class="alert alert-danger">
                 Transaction Failed! The file was save but failed to send. Note: goto Invoice to Resend the invoice!
             </div>
+            @elseif(session('invoice_error'))
+            <div class="alert alert-danger">
+                {{ Session::get('invoice_error') }}
+            </div>
             @elseif(session('deact'))
             <div class="alert alert-success">
                 Success! User Already Deactivated!
@@ -357,7 +361,7 @@ $( ".datepicker1" ).datepicker();
                                     <td >{{$registeredclients->due_date}}</td>
                                     @endif
                                     <td>
-                                        <select id="registerAction"  class="form-control registerAction" style="width:90px;">
+                                        <select id="registerAction"  data-business_id="{{$registeredclients->business_id}}" class="form-control registerAction" style="width:90px;">
                                             <option >Action</option>
                                             <option value="newinvoice">New Invoice</option>
                                             <option value="deactivate">Deactivate</option>
@@ -381,23 +385,7 @@ $( ".datepicker1" ).datepicker();
                                         </div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 150px;" class="modal fade" id="confirmModalInvoice" role="dialog">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
-                                                <div class="col-sm-12">
-                                                    <h4 class="modal-title">Are You sure?</h4>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <center>
-                                                    <input type="hidden" id="delete_team_id" value=""/>
-                                                    <a href="/general_admin/send_new_invoice/{{$registeredclients->business_id}}/5"><button type="button" class=" btn btn-danger">Yes</button></a>
-                                                    <button type="button" class="btn btn-default"  data-dismiss="modal">No</button></center>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 @endforeach
                             </tbody>
                         </table>
@@ -406,6 +394,23 @@ $( ".datepicker1" ).datepicker();
             </div>
         </div>
         {{-- modal --}}
+        <div style="margin-top: 150px;" class="modal fade" id="confirmModalInvoice" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+                        <div class="col-sm-12">
+                            <h4 class="modal-title">Are You sure?</h4>
+                        </div>
+                        <div class="col-sm-12">
+                            <center>
+                            <input type="hidden" id="business_id" value=""/>
+                            <button type="button" class="newInvoiceSend btn btn-danger">Yes</button>
+                            <button type="button" class="btn btn-default"  data-dismiss="modal">No</button></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div style="margin-top: 150px;" class="modal fade" id="successModals" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
