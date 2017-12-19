@@ -1,5 +1,5 @@
 @extends('general_admin.pages.general_admin_layout')
-@section('title', 'merchants')
+@section('title', 'Merchants')
 @section('description', 'merchants')
 @section('content')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -67,19 +67,16 @@ $( ".datepicker1" ).datepicker();
         <div id="customer" class="tab-pane fade in  active">
             @if (session('success'))
             <div class="alert alert-success">
-                Thank you!. Invoice Save and Send Successfully!
+                {{ Session::get('success') }}
             </div>
             @elseif(session('error'))
             <div class="alert alert-danger">
-                Transaction Failed! The file was save but failed to send. Note: goto Invoice to Resend the invoice!
+                {{ Session::get('error') }}
             </div>
-            @elseif(session('invoice_error'))
-            <div class="alert alert-danger">
-                {{ Session::get('invoice_error') }}
-            </div>
+            
             @elseif(session('deact'))
             <div class="alert alert-success">
-                Success! User Already Deactivated!
+                {{ Session::get('deact') }}
             </div>
             @endif
             <div class="row">
@@ -87,7 +84,7 @@ $( ".datepicker1" ).datepicker();
                     <div class="col-md-12 col-sm-12">
                         <form class="form-inline" method="post" action="/general_admin/search_send_invoice">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close" >
+                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close" >
                                 <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
                                 </div>
@@ -95,7 +92,7 @@ $( ".datepicker1" ).datepicker();
                                     <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_send_invoice" id="search_send_invoice" >
                                 </div>
@@ -157,7 +154,7 @@ $( ".datepicker1" ).datepicker();
                     <div class="col-md-12 col-sm-12">
                         <form class="form-inline" method="post" action="/general_admin/search_agent_added">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close">
+                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close">
                                 <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
                                 </div>
@@ -165,7 +162,7 @@ $( ".datepicker1" ).datepicker();
                                     <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_agent" id="search_agent" >
                                 </div>
@@ -219,7 +216,7 @@ $( ".datepicker1" ).datepicker();
                     <div class="col-md-12 col-sm-12" >
                         <form class="form-inline" method="post" action="/general_admin/search_pending">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close">
+                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close">
                                 <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
                                 </div>
@@ -227,7 +224,7 @@ $( ".datepicker1" ).datepicker();
                                     <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_pending" id="search_pending" >
                                 </div>
@@ -285,7 +282,7 @@ $( ".datepicker1" ).datepicker();
                     <div class="col-md-12 col-sm-12" >
                         <form class="form-inline" method="post" action="/general_admin/search_registered">
                             {{csrf_field()}}
-                            <div class="col-md-4 col-sm-12 col-xs-12 pull-left padding-close">
+                            <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close">
                                 <div class="col-md-6 padding-close">
                                     <input type="text" class="form-control datepicker" id="date_start3" placeholder="Date From" value="" >
                                 </div>
@@ -293,7 +290,7 @@ $( ".datepicker1" ).datepicker();
                                     <input type="text" class="form-control datepicker1" id="date_end3" placeholder="Date To" value="" >
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 pull-right padding-close">
+                            <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close" style="padding-left:68px;">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="search_registered" id="search_registered" >
                                 </div>

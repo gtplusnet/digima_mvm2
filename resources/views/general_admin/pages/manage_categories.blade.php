@@ -21,9 +21,9 @@
 <div class="tab-content" >
 	<div class="row">
 		<div class="panel-body">
-			<div class="col-md-5 pull-right">
+			<div class="col-md-4 pull-right">
 				<form class="form-inline">
-					<div class="form-group col-md-6 col-sm-5 col-xs-8" style="padding:0px;">
+					<div class="form-group col-md-7 col-sm-5 col-xs-8" style="padding:0px;">
 						<input type="text" class="form-control" name="search_key" id="search_key">
 					</div>
 					<div class="col-md-4 col-sm-5 col-xs-4">

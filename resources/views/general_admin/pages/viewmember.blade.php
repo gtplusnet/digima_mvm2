@@ -1,7 +1,12 @@
 
 @foreach($_supervisor as $supervisor)
 <div style="text-align:center,font-size:20px;font-weight: bold;margin:20px;">
-	Supervisor : {{$supervisor->prefix}} {{$supervisor->first_name}} {{$supervisor->last_name}}
+	@if($supervisor->archived==0)
+		Supervisor : {{$supervisor->prefix}} {{$supervisor->first_name}} {{$supervisor->last_name}}
+    @else
+		SUPERVISOR : <font color="red">{{$supervisor->prefix}} {{$supervisor->first_name}} {{$supervisor->last_name}} - DELETED</font>
+	@endif
+	
 </div>
 @endforeach
 

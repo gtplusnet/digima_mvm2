@@ -14,7 +14,7 @@
     </div>
 </div>
 <div id="main-wrapper">
-     <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-6">
         <div class="panel info-box panel-white">
             <div class="panel-body">
                 <div class="info-box-stats">
@@ -34,9 +34,6 @@
             </div>
         </div>
     </div>
-    <!--   Facebook
-    -->
-    
     <div class="col-lg-3 col-md-6">
         <div class="panel info-box panel-white">
             <div class="panel-body">
@@ -56,8 +53,6 @@
             </div>
         </div>
     </div>
-    <!--   Others-->
-    
     <div class="col-lg-3 col-md-6">
         <div class="panel info-box panel-white">
             <div class="panel-body">
@@ -97,148 +92,142 @@
             </div>
         </div>
     </div>
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 card">
-                    <div class="header">
-                        <h4 class="title">Registered Per Year</h4>
-                        <p class="category">Merchant Statistic</p>
+    <div class="container">
+        <div class="col-md-7 " style="padding-left:0px;">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Registered Per Year</h4>
+                    <p class="category">Merchant Statistic</p>
+                </div>
+                <div class="content" style="overflow-x: scroll;">
+                    <canvas id="signUp" width="600"  class="ct-chart "></canvas>
+                    
+                </div>
+                <div class="footer">
+                    <div class="legend">
+                        <i class=""></i>Merchants
                     </div>
-                    <div class="content" style="overflow-x: scroll;">
-                        <canvas id="signUp" width="600"  class="ct-chart "></canvas>
-                        
-                    </div>
-                    <div class="footer">
-                        <div class="legend">
-                            <i class=""></i>Merchants
-                        </div>
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-clock-o"></i> Updated 3 minutes ago
-                        </div>
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-clock-o"></i> Updated 3 minutes ago
                     </div>
                 </div>
-                <div class="col-md-5 card">
-                    <div class="header">
-                        <h4 class="title">User Level Task</h4>
-                        <p class="category">Over All</p>
-                    </div>
-                    <div class="content" style="overflow-x: scroll;">
-                        <canvas id="countries"  class="ct-chart "></canvas>
-                        
-                    </div>
-                    <div class="footer">
-                        <div class="legend">
+            </div>
+        </div>
+        <div class="col-md-4" style="padding-left:0px;">
+            <div class=" card">
+                <div class="header">
+                    <h4 class="title">User Level Task</h4>
+                    <p class="category">Over All</p>
+                </div>
+                <div class="content" style="overflow-x: scroll;">
+                    <canvas id="countries"  class="ct-chart "></canvas>
+                    
+                </div>
+                <div class="footer">
+                    <div class="legend">
                         <i class="fa fa-circle text-info"></i>Agent Task
                         <i class="fa fa-circle text-danger"></i>Supervisor Task
                         <i class="fa fa-circle text-warning"></i>Admin Task
-                        </div>
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-history"></i> Updated 3 minutes ago
-                        </div>
+                    </div>
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-history"></i> Updated 3 minutes ago
                     </div>
                 </div>
             </div>
-            
         </div>
-    </div>
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                
-                <div class="" >
-                    <div class=" col-md-12 card ">
-                        <div class="header">
-                            <h4 class="title">Registered - Activated Per Month</h4>
-                            <p class="category">Merchant Statistic</p>
-                        </div>
-                        <div class="content" style="overflow-x: scroll;">
-                            <canvas id="income" width="1140" class="ct-chart" style="width: 100% !important;height: auto !important;"></canvas>
-                        </div>
-                        <div class="footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-success"></i>Registered
-                                <i class="fa fa-circle text-primary"></i>Activated Task
-                            </div>
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Updated 3 minutes ago
-                            </div>
-                        </div>
+        <div class="col-md-11">
+            <div class="  card ">
+                <div class="header">
+                    <h4 class="title">Registered - Activated Per Month</h4>
+                    <p class="category">Merchant Statistic</p>
+                </div>
+                <div class="content" style="overflow-x: scroll;">
+                    <canvas id="income" width="1140" class="ct-chart" style="width: 100% !important;height: auto !important;"></canvas>
+                </div>
+                <div class="footer">
+                    <div class="legend">
+                        <i class="fa fa-circle text-success"></i>Registered
+                        <i class="fa fa-circle text-primary"></i>Activated Task
+                    </div>
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-history"></i> Updated 3 minutes ago
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
     
-       
- </div>       
-        <script>
-            // line chart data
-            var buyerData = {
-                labels : ["{{$year1}}","{{$year2}}","{{$year3}}","{{$year4}}","{{$year5}}","{{$year6}}","{{$year7}}"],
-                datasets : [
-                {
-                    fillColor : "rgba(172,194,132,0.4)",
-                    strokeColor : "#ACC26D",
-                    pointColor : "#fff",
-                    pointStrokeColor : "#9DB86D",
-                    data : [{{$count_year1}},{{$count_year2}},{{$count_year3}},{{$count_year4}},{{$count_year5}},{{$count_year6}},{{$count_year7}}]
-                }
-            ]
-            }
-            // get line chart canvas
-            var buyers = document.getElementById('signUp').getContext('2d');
-            // draw line chart
-            new Chart(buyers).Line(buyerData);
-            // pie chart data
-            var pieData = [
-                {
-                    value: {{$countCall}},
-                    color:"#1DC7EA"
-                },
-                {
-                    value : {{$countMP3}},
-                    color : "#FF4A55"
-                },
-                {
-                    value : {{$countInvoice + $countPayment}},
-                    color : "#FF9500"
-                },
-                
-                
-            ];
-            // pie chart options
-            var pieOptions = {
-                 segmentShowStroke : false,
-                 animateScale : true
-            }
-            // get pie chart canvas
-            var countries= document.getElementById("countries").getContext("2d");
-            // draw pie chart
-            new Chart(countries).Pie(pieData, pieOptions);
-            // bar chart data
-            var barData = {
-                labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-                datasets : [
-                    {
-                        fillColor : "#87CB16",
-                        strokeColor : "#5D6D7E",
-                        data : [{{$count_jan}},{{$count_feb}},{{$count_mar}},{{$count_apr}},{{$count_may}},{{$count_jun}},{{$count_jul}},{{$count_aug}},{{$count_sep}},{{$count_oct}},{{$count_nov}},{{$count_dec}}]
-                    },
-                    {
-                        fillColor : "#1D62F0",
-                        strokeColor : "#5D6D7E",
-                        data : [{{$counts_jan}},{{$counts_feb}},{{$counts_mar}},{{$counts_apr}},{{$counts_may}},{{$counts_jun}},{{$counts_jul}},{{$counts_aug}},{{$counts_sep}},{{$counts_oct}},{{$counts_nov}},{{$counts_dec}}]
-                    }
-                ]
-            }
-            // get bar chart canvas
-            var income = document.getElementById("income").getContext("2d");
-            // draw bar chart
-            new Chart(income).Bar(barData);
-        </script>
-   @endsection
+    
+    
+    
+    
+</div>
+<script>
+// line chart data
+var buyerData = {
+labels : ["{{$year1}}","{{$year2}}","{{$year3}}","{{$year4}}","{{$year5}}","{{$year6}}","{{$year7}}"],
+datasets : [
+{
+fillColor : "rgba(172,194,132,0.4)",
+strokeColor : "#ACC26D",
+pointColor : "#fff",
+pointStrokeColor : "#9DB86D",
+data : [{{$count_year1}},{{$count_year2}},{{$count_year3}},{{$count_year4}},{{$count_year5}},{{$count_year6}},{{$count_year7}}]
+}
+]
+}
+// get line chart canvas
+var buyers = document.getElementById('signUp').getContext('2d');
+// draw line chart
+new Chart(buyers).Line(buyerData);
+// pie chart data
+var pieData = [
+{
+value: {{$countCall}},
+color:"#1DC7EA"
+},
+{
+value : {{$countMP3}},
+color : "#FF4A55"
+},
+{
+value : {{$countInvoice + $countPayment}},
+color : "#FF9500"
+},
+
+
+];
+// pie chart options
+var pieOptions = {
+segmentShowStroke : false,
+animateScale : true
+}
+// get pie chart canvas
+var countries= document.getElementById("countries").getContext("2d");
+// draw pie chart
+new Chart(countries).Pie(pieData, pieOptions);
+// bar chart data
+var barData = {
+labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+datasets : [
+{
+fillColor : "#87CB16",
+strokeColor : "#5D6D7E",
+data : [{{$count_jan}},{{$count_feb}},{{$count_mar}},{{$count_apr}},{{$count_may}},{{$count_jun}},{{$count_jul}},{{$count_aug}},{{$count_sep}},{{$count_oct}},{{$count_nov}},{{$count_dec}}]
+},
+{
+fillColor : "#1D62F0",
+strokeColor : "#5D6D7E",
+data : [{{$counts_jan}},{{$counts_feb}},{{$counts_mar}},{{$counts_apr}},{{$counts_may}},{{$counts_jun}},{{$counts_jul}},{{$counts_aug}},{{$counts_sep}},{{$counts_oct}},{{$counts_nov}},{{$counts_dec}}]
+}
+]
+}
+// get bar chart canvas
+var income = document.getElementById("income").getContext("2d");
+// draw bar chart
+new Chart(income).Bar(barData);
+</script>
+@endsection

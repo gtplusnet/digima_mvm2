@@ -1,5 +1,5 @@
 @extends('front.layout.layout')
-@section('title', 'Registration')
+@section('title', 'Login')
 @section('content')
 @if(Request::segment(1)=="login")
 <div class="login-background">

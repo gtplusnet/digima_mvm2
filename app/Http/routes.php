@@ -132,7 +132,10 @@ Route::any('/supervisor/get_city', 			'SuperVisorController@get_city');
 Route::any('/supervisor/get_zip_code', 		'SuperVisorController@get_zip_code');
 Route::any('/supervisor/upload-convo', 		'SuperVisorController@uploadConvo');
 Route::any('/supervisor/force_activate', 	'SuperVisorController@force_activate');
-Route::any('/agent/upload-convo', 			'SuperVisorController@uploadConvo');
+// Route::any('/agent/upload-convo', 			'SuperVisorController@uploadConvo');
+
+Route::any('/supervisor/changeAudioFile', 			'SuperVisorController@changeAudioFile');
+
 
 Route::any('/supervisor/show_agent_calls', 			'SuperVisorController@supervisor_show_agent_calls');
 Route::any('/supervisor/show_team_calls', 			'SuperVisorController@supervisor_show_team_calls');

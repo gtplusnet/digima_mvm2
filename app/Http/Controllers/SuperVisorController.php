@@ -569,9 +569,10 @@ class SuperVisorController extends Controller
   		if($request->ajax())
       {
   			$fileConvo = $request->file("file");
-              $fileConvo->move('conversations', $fileConvo->getClientOriginalName());
+              $file_ref = uniqid().$fileConvo->getClientOriginalName();
+              $fileConvo->move('conversations',$file_ref );
               $convoInfo = new Tbl_conversation;
-              $convoInfo->file_path = '/conversations/'.$fileConvo->getClientOriginalName().'';
+              $convoInfo->file_path = '/conversations/'.$file_ref .'';
               $convoInfo->file_name = $fileConvo->getClientOriginalName();
               $convoInfo->business_id = $request->input("businessId");
               $convoInfo->business_contact_person_id = $request->input("contactId");
@@ -581,6 +582,25 @@ class SuperVisorController extends Controller
               $update['date_transact'] = date("Y/m/d"); 
               TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
       }
+    }
+    public function changeAudioFile(Request $request)
+    {
+      Self::allow_logged_in_users_only();
+      if($request->ajax())
+      {
+        $fileConvo = $request->file("file");
+              $file_ref = uniqid().$fileConvo->getClientOriginalName();
+              $fileConvo->move('conversations', $file_ref);
+              $change['file_path'] = '/conversations/'.$file_ref.'';
+              $change['file_name'] = $fileConvo->getClientOriginalName();
+              $conversation_id = $request->input("conversation_id");
+              
+              Tbl_conversation::where('conversation_id',$conversation_id)->update($change);
+              $update['business_status'] = "3";
+              $update['date_transact'] = date("Y/m/d"); 
+              TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
+      }
+
     }
     public function force_activate(Request $request)
     {

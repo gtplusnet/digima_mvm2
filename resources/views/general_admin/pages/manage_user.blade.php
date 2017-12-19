@@ -159,12 +159,11 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>First Name</th>
-									<th>Last Name</th>
+									<th>Agent Name</th>
 									<th>Email</th>
 									<th>Primary Phone</th>
 									<th>Secondary Phone</th>
-									<th>Other Information</th>
+									<th>Assigned Team</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -172,12 +171,11 @@
 								@foreach($_data_agent as $data_agent)
 								<tr>
 									<td>{{$data_agent->agent_id}}</td>
-									<td>{{$data_agent->first_name}}</td>
-									<td>{{$data_agent->last_name}}</td>
+									<td>{{$data_agent->first_name}} {{$data_agent->last_name}}</td>
 									<td>{{$data_agent->email}}</td>
 									<td>{{$data_agent->primary_phone}}</td>
 									<td>{{$data_agent->secondary_phone}}</td>
-									<td>{{$data_agent->other_info}}</td>
+									<td>{{$data_agent->team_name}}</td>
 									<td>
 										<select style="height:30px;width:80px;" class="agent_actionbox" id="agent_actionbox" data-email="{{$data_agent->email}}"  data-name="{{$data_agent->first_name}} {{$data_agent->last_name}}" data-id="{{ $data_agent->agent_id}}">
 											<option value="">Action</option>
@@ -227,7 +225,7 @@
 									<th>Team Name</th>
 									<th>Team Description</th>
 									<th>Team Members</th>
-									<th>Supervisor ID</th>
+									<th>Assigned Supervisor</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -239,8 +237,11 @@
 									<td>{{ $data_team->team_information}}</td>
 									<td><i data-id="{{ $data_team->id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
 									<td>
-										{{ $data_team->supervisor_id}}
-										{{ $data_team->first_name}} {{ $data_team->last_name}}
+										@if($data_team->archived==0)
+											{{ $data_team->first_name}} {{ $data_team->last_name}}
+									    @else
+											<font color="red">{{ $data_team->first_name}} {{ $data_team->last_name}} - DELETED</font>
+										@endif
 									</td>
 									<td>
 										<select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox" data-name="{{ $data_team->team_name}}" data-info="{{ $data_team->team_information}}" data-id="{{ $data_team->id}}">
@@ -289,25 +290,25 @@
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>First Name</th>
-										<th>Last Name</th>
+										<th>Supervisor Name</th>
 										<th>Email</th>
 										<th>Primary Phone</th>
-										<th>Secondary Phone</th>
-										<th>Other Information</th>
+										<th>Assigned Team</th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($_data_supervisor as $data_supervisor)
+									@foreach($_data_supervisor as  $data_supervisor)
 									<tr>
 										<td>{{$data_supervisor->supervisor_id}}</td>
-										<td>{{$data_supervisor->first_name}}</td>
-										<td>{{$data_supervisor->last_name}}</td>
+										<td>{{$data_supervisor->first_name}} {{$data_supervisor->last_name}}</td>
 										<td>{{$data_supervisor->email}}</td>
 										<td>{{$data_supervisor->primary_phone}}</td>
-										<td>{{$data_supervisor->secondary_phone}}</td>
-										<td>{{$data_supervisor->other_info}}</td>
+										<td>
+											@foreach($_teams->where('supervisor_id',$data_supervisor->supervisor_id) as $team)
+											{{$team->team_name}}, 
+											@endforeach
+                                        </td>
 										<td>
 											<select style="height:30px;width:80px;" class="supervisor_actionbox" id="supervisor_actionbox" data-name="{{$data_supervisor->first_name}} {{$data_supervisor->last_name}}" data-email="{{$data_supervisor->email}}"  data-id="{{ $data_supervisor->supervisor_id}}">
 												<option value="">Action</option>

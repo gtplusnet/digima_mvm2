@@ -1,5 +1,5 @@
 @extends('general_admin.pages.general_admin_layout')
-@section('title', 'manage_invoice')
+@section('title', 'Manage Invoice')
 @section('description', 'manage_invoice')
 @section('content')
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

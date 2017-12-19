@@ -466,7 +466,7 @@ class GeneralAdminController extends Controller
       // dd($check);
       if($check!=0)
       {
-        Session::flash('invoice_error', 'USER has pending INVOICE. Resend his/her old Invoice at Manage Invoice!');
+        Session::flash('error', 'USER has pending INVOICE. Resend his/her old Invoice at Manage Invoice!');
         return Redirect::back();
       }
       else
@@ -770,7 +770,7 @@ class GeneralAdminController extends Controller
       $update['date_transact'] = date("Y/m/d"); 
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
-      Session::flash('deact', "Merchant Already Deactivated");
+      Session::flash('success', "Merchant Already Deactivated");
       return Redirect::back();
     }
     public function general_admin_deactivate_user(Request $request,$id)
@@ -784,7 +784,7 @@ class GeneralAdminController extends Controller
       TblInvoiceModels::where('business_id',$business_id)->update($invoice);
       TblBusinessModel::where('business_id',$business_id)->update($update);
       TblUserAccountModel::where('business_id',$business_id)->update($user);
-      Session::flash('deact', "Merchant Already Deactivated");
+      Session::flash('success', "Merchant Already Deactivated");
       return Redirect::back();
     }
     
@@ -803,12 +803,15 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent']          = TblAgentModel::where('archived',0)->get();
-      $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)->where('tbl_supervisor.archived',0)
+      $data['_data_agent']          = TblAgentModel::where('tbl_agent.archived',0)
+                                    ->join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+                                    ->get();
+      $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)
                                     ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
-                                    ->select('tbl_team.team_id as id', 'tbl_team.*','tbl_supervisor.*')
+                                    ->select('tbl_team.team_id as id','tbl_team.archived as archive', 'tbl_team.*','tbl_supervisor.*')
                                     ->get();
       $data['_team_select']         = TblTeamModel::where('archived',0)->get();
+      $data['_teams']               = TblTeamModel::all();
       $data['_data_supervisor']     = TblSupervisorModels::where('archived',0)->get();
       $data['_data_admin']          = TblAdminModels::where('archived',0)->get();
       $data['_merchant']            = TblBusinessModel::where('business_status',5)
@@ -1397,8 +1400,8 @@ class GeneralAdminController extends Controller
     $id = $request->team_id;
     $data['_supervisor'] = TblTeamModel::where('tbl_team.team_id',$id)
                           ->where('tbl_team.archived',0)
-                          ->where('tbl_supervisor.archived',0)
                           ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+                          ->select('tbl_team.archived as archive', 'tbl_team.*','tbl_supervisor.*')
                           ->get();
     $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)->where('tbl_agent.archived',0)
                           ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
@@ -1452,7 +1455,7 @@ class GeneralAdminController extends Controller
             }
             else
             {
-                return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
+              return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
             }
         }  
     }

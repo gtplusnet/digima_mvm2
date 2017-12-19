@@ -1,4 +1,61 @@
 
+$(document).ready(function()
+{
+	$(document).on('click','.playAudio',function()
+	{
+		var audioFile = $(this).data('path'); 
+		$('#viewMp3Modal').modal('show');
+        $('#audioFile').attr('src',audioFile);
+
+    });
+    $(document).on('click','.changeMP3',function()
+	{
+		var conversation_id = $(this).data('id');
+		$('#conversation_id').val(conversation_id);
+		$('#changeMp3Modal').modal('show');
+    });
+
+    $(document).on('click', '#editMp3Btn', function () 
+    {
+        var name = document.getElementById("newConvoFile").files[0].name;
+        var conversation_id = $('#conversation_id').val();
+        var form_data = new FormData();
+        var ext = name.split('.').pop().toLowerCase();
+        if (ext != 'mp3') 
+        {
+            toastr.warning('Please select an audio file.');
+        } 
+        else 
+        {
+            var f = document.getElementById("newConvoFile").files[0];
+            var fsize = f.size || f.fileSize;
+            if (fsize > 1073741824) 
+            {
+                toastr.warning("Cannot upload audio, file size is very big.");
+            } 
+            else 
+            {
+                form_data.append("file", document.getElementById('newConvoFile').files[0]);
+                form_data.append("conversation_id", conversation_id);
+                $.ajax({
+                    url: "/supervisor/changeAudioFile",
+                    method: "POST",
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        $('#changeMp3Modal').modal('hide');
+                        toastr.success("New audio file uploaded successfully!");
+                        setTimeout(function(){location.reload();},3000);
+                       
+                    }
+                });
+            }
+        }
+    });
+    
+});
 $(document).ready(function(){
 
 		$(document).on('click','#search_button',function()

@@ -74,7 +74,7 @@
                 <!-- Main Wrapper -->
 
                 <div class="page-footer">
-                    <p class="no-s">2017 &copy; Modern by DigimaHouse.dev</p>
+                    <p class="no-s">2017 &copy; Modern by DigimaHouse.com</p>
                 </div>
 
             </div><!-- Page Inner -->
