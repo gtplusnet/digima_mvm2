@@ -50,7 +50,6 @@
 							</div>
 						</div>
 					</div>
-					
 				</div>
 				<div class="payment-title-container">
 					<p class="payment-title">FAKTURA</p>
@@ -132,7 +131,6 @@
 								<p class="payment-invoice-content-label">{{$merchant_info->date_transact}}</p>
 							</div>
 						</div>
-						
 					</div>
 					<div class="row clearfix payment-form-seperator">
 						<div class="col-md-12 payment-form-upperpart">
@@ -155,7 +153,6 @@
 						</div>
 						<div class="col-md-3">
 							<p class="payment-cost-label">${{$merchant_info->membership_price}}</p>
-							
 						</div>
 					</div>
 				</div>

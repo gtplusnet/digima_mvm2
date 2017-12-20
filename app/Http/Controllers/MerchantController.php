@@ -616,12 +616,12 @@ class MerchantController extends Controller
 		  Self::allow_logged_in_users_only();
 
 		  $data['page']			    = 'Category';
-      $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->paginate(6);
+      $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->paginate(6, ['*'], 'category');
       $data['_subcategory'] = TblBusinessTagCategoryModel::where('business_id',session('business_id'))
                             ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
                             ->paginate(10);
 
-      $data['_keywords'] = TblBusinessKeywordsModel::where('business_id',session('business_id'))->paginate(10);
+      $data['_keywords'] = TblBusinessKeywordsModel::where('business_id',session('business_id'))->paginate(10, ['*'], 'keywords');
 		  return view('merchant.pages.category', $data);		
   	}
 

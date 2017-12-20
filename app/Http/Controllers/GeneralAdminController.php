@@ -1060,12 +1060,12 @@ class GeneralAdminController extends Controller
     public function general_admin_manage_website()
     {
       Self::allow_logged_in_users_only();
-      $data['_membership']          = TblMembeshipModel::where('archived',0)->paginate(5);
-      $data['_payment_method']      = TblPaymentMethod::where('archived',0)->paginate(5);
-      $data['_county']              = TblCountyModel::paginate(5);
+      $data['_membership']          = TblMembeshipModel::where('archived',0)->paginate(5, ['*'], 'membership');
+      $data['_payment_method']      = TblPaymentMethod::where('archived',0)->paginate(5, ['*'], 'payment');
+      $data['_county']              = TblCountyModel::paginate(5, ['*'], 'county');
       $data['_county_city']         = TblCountyModel::get();
       $data['_city']                = TblCityModel::join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                    ->paginate(5);
+                                    ->paginate(5, ['*'], 'city');
       return view('general_admin.pages.manage_website',$data);
     }
     public function general_admin_add_membership(Request $request)
@@ -1162,7 +1162,7 @@ class GeneralAdminController extends Controller
     public function general_admin_manage_categories()
     {
       Self::allow_logged_in_users_only();
-      $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->paginate(10);
+      $data['category'] = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->paginate(10, ['*'], 'category');
       return view('general_admin.pages.manage_categories',$data);
     }
     public function general_admin_add_category(Request $request)
@@ -1184,7 +1184,7 @@ class GeneralAdminController extends Controller
     public function general_admin_search_category(Request $request)
     {
       $search_key = $request->search_key;
-      $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->where('archived',0)->paginate(10);
+      $data['category'] = TblBusinessCategoryModel::where('business_category_name','like','%'.$search_key.'%')->where('archived',0)->paginate(10, ['*'], 'search_result_category');
       return view('general_admin.pages.search_blade',$data);
     }
     public function general_admin_delete_category(Request $request)
@@ -1661,31 +1661,11 @@ class GeneralAdminController extends Controller
     public function report()
     {
       Self::allow_logged_in_users_only();
-      $data['_reports'] = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')->paginate(10);
+      $data['_reports'] = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')->paginate(10, ['*'], 'reports');
       return view('general_admin.pages.report',$data);
     }
 
-    public function sample_invoice()
-    {
-      return view('general_admin.pages.invoice');
-    }
-
-      public function pdfview(Request $request)
-    {
-        // $items = DB::table("tbl_business")->get();
-        // view()->share('items',$items);
-
-        // if($request->has('download')){
-            $pdf = PDF::loadView('pdfview');
-            return $pdf->download('pdfview.pdf');
-        // }
-
-        return view('pdfview');
-    }
-
-
-
-     public function  search_payment_monitoring(Request $request)
+    public function  search_payment_monitoring(Request $request)
     {
       $search_key = $request->search_key;
       $data['business_list'] = TblPaymentModel::where('payment_status','submitted')
