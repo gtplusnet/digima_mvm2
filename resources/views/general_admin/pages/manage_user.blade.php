@@ -162,7 +162,7 @@
 									<th>Agent Name</th>
 									<th>Email</th>
 									<th>Primary Phone</th>
-									<th>Secondary Phone</th>
+									<th>Merchant Calls/Added</th>
 									<th>Assigned Team</th>
 									<th></th>
 								</tr>
@@ -174,7 +174,7 @@
 									<td>{{$data_agent->first_name}} {{$data_agent->last_name}}</td>
 									<td>{{$data_agent->email}}</td>
 									<td>{{$data_agent->primary_phone}}</td>
-									<td>{{$data_agent->secondary_phone}}</td>
+									<td>{{count($agent_merchant->where('agent_id',$data_agent->agent_id))}}</td>
 									<td>{{$data_agent->team_name}}</td>
 									<td>
 										<select style="height:30px;width:80px;" class="agent_actionbox" id="agent_actionbox" data-email="{{$data_agent->email}}"  data-name="{{$data_agent->first_name}} {{$data_agent->last_name}}" data-id="{{ $data_agent->agent_id}}">

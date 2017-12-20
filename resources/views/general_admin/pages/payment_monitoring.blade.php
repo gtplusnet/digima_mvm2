@@ -72,7 +72,7 @@
 		</div>
 	</div>
 </div>
-{{-- modal --}}
+<!-- MODALS -->
 <div class="modal fade" id="paymentDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -140,7 +140,7 @@
 				<div class="col-sm-12" style="margin-top:30px;">
 					<center>
 					<input type="hidden" id="decline_business_id"/>
-					<button type="button" class="btn btn-default"  data-dismiss="modal">Okay</button></center>
+					<button type="button" class="btn btn-default"  data-dismiss="modal">OKAY</button></center>
 				</div>
 			</div>
 		</div>

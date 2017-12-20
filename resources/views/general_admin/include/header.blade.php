@@ -131,40 +131,101 @@
                             <li class="drop-all"><a href="#" class="text-center">All Tasks</a></li>
                         </ul>
                     </li>
+                    
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                             <span class="user-name">{{session('full_name_admin')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
-                        </a>    
+                        </a>   
                         <ul class="dropdown-menu dropdown-list" role="menu">
-                            <li role="presentation" style="margin:10px;"><i class="fa fa-user"></i>Select Language</li>
-                            <li role="presentation"><a href="javascript:;" id="English" onclick="translateLanguage(this.id);"><img src="/images/flag_usa.ico" style="max-width:35px;max-height:15px;margin-right:10px;">USA</a></li>
-                            <li role="presentation"><a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);"><img src="/images/flag_croatia.ico" style="max-width:35px;max-height:15px;margin-right:10px;">CROATIA</a></li>
+                            <li role="presentation" class="text-center">LANGUAGE</li>
+                            <li role="presentation" class="divider"></li>
+                            <li><a href="#googtrans(en|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA">CROATIA</a></li>
+                            <li><a href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA">USA</a></li>
+                            <li><a href="#googtrans(en|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO">MEXICO</a></li>
+                            <li><a href="#googtrans(en|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE">FRANCE</a></li>
+                            <li><a href="#googtrans(en|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA">CHINA</a></li>
+                            <li><a href="#googtrans(en|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN">JAPAN</a></li>
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href='/general_admin/logout'><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
-
                         </ul>
                     </li>
+                    <script type="text/javascript">
+                        function googleTranslateElementInit()
+                        {
+                        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
+                        }
+                        function triggerHtmlEvent(element, eventName)
+                        {
+                        var event;
+                        if (document.createEvent) {
+                        event = document.createEvent('HTMLEvents');
+                        event.initEvent(eventName, true, true);
+                        element.dispatchEvent(event);
+                        } else {
+                        event = document.createEventObject();
+                        event.eventType = eventName;
+                        element.fireEvent('on' + event.eventType, event);
+                        }
+                        }
+                        jQuery('.lang-select').click(function() {
+                        var theLang = jQuery(this).attr('data-lang');
+                        jQuery('.goog-te-combo').val(theLang);
+                        window.location = jQuery(this).attr('href');
+                        location.reload();
+                        });
+                        var placeholders = document.querySelectorAll('input[placeholder]');
+                        if (placeholders.length) {
+                        placeholders = Array.prototype.slice.call(placeholders);
+                        var div = $('<div id="placeholders" style="display:none;"></div>');
+                        placeholders.forEach(function(input){
+                        var text = input.placeholder;
+                        div.append('<div>' + text + '</div>');
+                        });
+                        
+                        $('body').append(div);
+                        var originalPH = placeholders[0].placeholder;
+                        setInterval(function(){
+                        if (isTranslated()) {
+                        updatePlaceholders();
+                        originalPH = placeholders[0].placeholder;
+                        }
+                        }, 500);
+                        function isTranslated() {
+                        var currentPH = $($('#placeholders > div')[0]).text();
+                        return !(originalPH == currentPH);
+                        }
+                        function updatePlaceholders() {
+                        $('#placeholders > div').each(function(i, div){
+                        placeholders[i].placeholder = $(div).text();
+                        });
+                        }
+                        }
+                    </script>
+                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                     <div id="google_translate_element" style="display:none;">
                         <style>
-                            .goog-te-gadget-icon
-                            {
-                                visibility:hidden;
-                                text-align:center;
-                                position:absolute;
-                            }
-                            
-                            .goog-te-banner-frame.skiptranslate 
-                            {
-                                display: none !important;
-                            } 
-                            body 
-                            { 
-                                top: 0px !important; 
-                            }
-                            
-                            </style>
+                        .goog-te-banner-frame.skiptranslate
+                        {
+                        display: none !important;
+                        }
+                        body
+                        {
+                        top: 0px !important;
+                        }
+                        .language-flag
+                        {
+                        height:25px;
+                        width:40px;
+                        margin:5px;
+                        }
+                        .list-unstyled {
+                        padding-left: 0;
+                        list-style: none;
+                        }
+                        </style>
                     </div>
+
                 </ul>
             </div>
         </div>

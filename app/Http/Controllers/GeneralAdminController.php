@@ -188,11 +188,7 @@ class GeneralAdminController extends Controller
         $data['count_year5']  = TblBusinessModel::whereBetween("date_transact",[$year5.'/01/01',$year5.'/12/31'])->count();
         $data['count_year6']  = TblBusinessModel::whereBetween("date_transact",[$year6.'/01/01',$year6.'/12/31'])->count();
         $data['count_year7']  = TblBusinessModel::whereBetween("date_transact",[$year7.'/01/01',$year7.'/12/31'])->count();
-
-
-        // dd($data['year1'].$data['year2'].$data['year3'].$data['year4'].$data['year5'].$data['year6']);
-        
-        return view('general_admin.pages.dashboard',$data);
+      return view('general_admin.pages.dashboard',$data);
     }
 
     public function get_business_list(Request $request)
@@ -220,13 +216,13 @@ class GeneralAdminController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'client');
         $data['agentAdded'] = TblBusinessModel::where('business_status', 20)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'agent_added');
         $data['pending_clients'] = TblBusinessModel::where('business_status', 4)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -234,13 +230,13 @@ class GeneralAdminController extends Controller
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'pending_client');
         $data['registered_clients'] = TblBusinessModel::where('business_status', 5)
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'registered_client');
         foreach ($data['registered_clients'] as $key => $registered_clients) 
         {
           $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
@@ -258,7 +254,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'registered_client');
         foreach ($data['registered_clients'] as $key => $registered_clients) 
         {
           $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
@@ -272,7 +268,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'registered_client');
         $data['dueDate']  = date("F j, Y", strtotime("+".$params." days"));
         foreach ($data['registered_clients'] as $key => $registered_clients) 
         {
@@ -289,7 +285,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'registered_client');
         foreach ($data['registered_clients'] as $key => $registered_clients) 
         {
           $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
@@ -313,7 +309,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'registered_client');
         $data['dueDate']  = date("F j, Y", strtotime("+".$dueDate." days"));
         $data['link']     = '/general_admin/export_data/0/{{$dueDate}}';
         foreach ($data['registered_clients'] as $key => $registered_clients) 
@@ -336,7 +332,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'client');
         return view('general_admin.pages.search_merchant_invoice',$data);
     }
     public function get_client1(Request $request)
@@ -349,7 +345,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'agent_added');
         return view('general_admin.pages.search_agent_added',$data);
     }
     public function get_client2(Request $request)
@@ -364,7 +360,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'pending_client');
         return view('general_admin.pages.search_pending',$data);
     }
     public function get_client3(Request $request)
@@ -380,7 +376,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'registered_client');
         foreach ($data['registered_clients'] as $key => $registered_clients) 
         {
           $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
@@ -397,7 +393,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'client');
       return view('general_admin.pages.search_merchant_invoice',$data);
     }
 
@@ -409,7 +405,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'agent_added');
        return view('general_admin.pages.search_agent_added',$data);
 
     }
@@ -425,7 +421,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'pending_client');
         return view('general_admin.pages.search_pending',$data);
     }
 
@@ -440,7 +436,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                           ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
                           ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
+                          ->paginate(10, ['*'], 'registered_client');
         return view('general_admin.pages.search_registered',$data);
         
     }
@@ -806,20 +802,21 @@ class GeneralAdminController extends Controller
       Self::allow_logged_in_users_only();
       $data['_data_agent']          = TblAgentModel::where('tbl_agent.archived',0)
                                     ->join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
-                                    ->get();
+                                    ->paginate(10, ['*'], 'agent');
       $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)
                                     ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
                                     ->select('tbl_team.team_id as id','tbl_team.archived as archive', 'tbl_team.*','tbl_supervisor.*')
-                                    ->get();
+                                    ->paginate(10, ['*'], 'team');
       $data['_team_select']         = TblTeamModel::where('archived',0)->get();
       $data['_teams']               = TblTeamModel::all();
-      $data['_data_supervisor']     = TblSupervisorModels::where('archived',0)->get();
-      $data['_data_admin']          = TblAdminModels::where('archived',0)->get();
+      $data['agent_merchant']       = TblBusinessModel::where('business_status',5)->get();
+      $data['_data_supervisor']     = TblSupervisorModels::where('archived',0)->paginate(10, ['*'], 'supervisor');
+      $data['_data_admin']          = TblAdminModels::where('archived',0)->paginate(10, ['*'], 'admin');
       $data['_merchant']            = TblBusinessModel::where('business_status',5)
                                     ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                     ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                                     ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                                    ->paginate(10);
+                                    ->paginate(10, ['*'], 'registered_client');
       $data['page'] = 'Manage Users';
       return view('general_admin.pages.manage_user', $data);
 
