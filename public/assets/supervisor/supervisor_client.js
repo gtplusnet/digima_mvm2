@@ -4,9 +4,8 @@ $(document).ready(function()
 	$(document).on('click','.playAudio',function()
 	{
 		var audioFile = $(this).data('path'); 
+		$('audio').attr('src',audioFile);
 		$('#viewMp3Modal').modal('show');
-        $('#audioFile').attr('src',audioFile);
-
     });
     $(document).on('click','.changeMP3',function()
 	{

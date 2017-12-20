@@ -6,6 +6,7 @@
 <script src="/assets/js/supervisor/get-client-info.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 
@@ -211,7 +212,7 @@ $( ".datepicker1" ).datepicker();
                                         <button type="button" class="btn btn-primary btn-sm btn-rounded playAudio"  data-path="{{$clients_activate->file_path}}" >
                                         Play Audio
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm btn-rounded changeMP3"  data-id="{{$clients_activate->conversation_id}}" data-path="{{$clients_activate->file_path}}" data-bid="{{ $clients_activate->business_id }}" data-cid="{{ $clients_activate->business_contact_person_id }}" id="playAudioBtn">
+                                        <button type="button" class="btn btn-danger btn-sm btn-rounded changeMP3"  data-id="{{$clients_activate->conversation_id}}" data-path="{{$clients_activate->file_path}}"  id="playAudioBtn">
                                         Change MP3
                                         </button>
                                         @endif
@@ -233,8 +234,7 @@ $( ".datepicker1" ).datepicker();
                                     </div>
                                     <div class="modal-body" style="padding-top: 30px; padding-bottom: 30px;">
                                         <div class="row col-md-12 ">
-                                            <audio controls style="width:500px">
-                                                <source src="{{$clients_activate->file_path}}" id="audioFile" type="audio/mpeg" width="100%" />
+                                            <audio id="audioPlayer" src="" controls style="width:500px">
                                             </audio>
                                         </div>
                                     </div>
