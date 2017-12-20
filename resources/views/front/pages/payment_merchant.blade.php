@@ -165,16 +165,17 @@
 	</div>
 	<!-- NEW -->
 	<div class="payment-wrapper">
-		<div class="top-container">
-			<div class="payment-title">
-				Enter Evidence Payments
-			</div>
-			<div class="content">
-				<form action="/merchant/upload_payment" method="post" enctype="multipart/form-data">
+		<form action="/merchant/upload_payment" method="post" enctype="multipart/form-data">
+			{{csrf_field()}}
+			<div class="top-container">
+				<div class="payment-title">
+					Enter Evidence Payments
+				</div>
+				<div class="content">
 					<div class="row clearfix">
 						<div class="col-md-6">
 							<label for="input-reference-number" class="payment-label">Referentni Broj:</label>
-							<input type="text" name="payment_reference_number" class="payment-textfield"/>
+							<input type="text" name="payment_reference_number" class="payment-textfield" required/>
 						</div>
 						<div class="col-md-6">
 							<label for="input-method" class="payment-label">Način Plaćanja:</label>
@@ -205,88 +206,88 @@
 							</div>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
-		<div class="bottom-container">
-			<div class="payment-title">
-				INVOICE
-			</div>
-			<div class="content mob-align">
-				<div class="top">
-					<div class="row clearfix">
-						<div class="col-md-6">
-							<p class="payment-invoice-label"><span class="bold">Broj Fakture :&nbsp;&nbsp;</span><span>{{$merchant_info->invoice_number}}</span></p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label bold">{{$merchant_info->user_email}}</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label bold">Ime Klijenta:</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label">{{$merchant_info->contact_prefix}} {{$merchant_info->contact_first_name}} {{$merchant_info->contact_last_name}}
-							</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label bold">Naziv Tvrtke:</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label">{{$merchant_info->business_name}}</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label bold">Cijela Poslovna Adresa:</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label">{{$merchant_info->business_complete_address}}</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label bold">City, State:</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label">{{$merchant_info->city_name}} {{$merchant_info->county_name}}</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label bold">ZIP Code:</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label">{{$merchant_info->postal_code}}</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label bold">Date  if Issue:</p>
-						</div>
-						<div class="col-md-6">
-							<p class="payment-invoice-label">{{$merchant_info->date_transact}}</p>
+			<div class="bottom-container">
+				<div class="payment-title">
+					INVOICE
+				</div>
+				<div class="content mob-align">
+					<div class="top">
+						<div class="row clearfix">
+							<div class="col-md-6">
+								<p class="payment-invoice-label"><span class="bold">Broj Fakture :&nbsp;&nbsp;</span><span>{{$merchant_info->invoice_number}}</span></p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label bold">{{$merchant_info->user_email}}</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label bold">Ime Klijenta:</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label">{{$merchant_info->contact_prefix}} {{$merchant_info->contact_first_name}} {{$merchant_info->contact_last_name}}
+								</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label bold">Naziv Tvrtke:</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label">{{$merchant_info->business_name}}</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label bold">Cijela Poslovna Adresa:</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label">{{$merchant_info->business_complete_address}}</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label bold">City, State:</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label">{{$merchant_info->city_name}} {{$merchant_info->county_name}}</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label bold">ZIP Code:</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label">{{$merchant_info->postal_code}}</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label bold">Date  if Issue:</p>
+							</div>
+							<div class="col-md-6">
+								<p class="payment-invoice-label">{{$merchant_info->date_transact}}</p>
+							</div>
 						</div>
 					</div>
 				</div>
+				<div class="mid mob-align row-no-padding clearfix">
+					<div class="col-md-6">
+						<p class="payment-invoice-label bold">Package</p>
+					</div>
+					<div class="col-md-6">
+						<p class="payment-invoice-label">{{$merchant_info->membership_name}}</p>
+					</div>
+					<div class="col-md-6">
+						<p class="payment-invoice-label bold">Membership Cost</p>
+					</div>
+					<div class="col-md-6">
+						<p class="payment-invoice-label">${{$merchant_info->membership_price}}</p>
+					</div>
+				</div>
+				<div class="bottom mob-align row-no-padding clearfix">
+					<div class="col-md-6">
+						<p class="payment-invoice-label bold">Total</p>
+					</div>
+					<div class="col-md-6">
+						<p class="payment-invoice-label">${{$merchant_info->membership_price}}</p>
+					</div>
+				</div>
 			</div>
-			<div class="mid mob-align row-no-padding clearfix">
-				<div class="col-md-6">
-					<p class="payment-invoice-label bold">Package</p>
-				</div>
-				<div class="col-md-6">
-					<p class="payment-invoice-label">{{$merchant_info->membership_name}}</p>
-				</div>
-				<div class="col-md-6">
-					<p class="payment-invoice-label bold">Membership Cost</p>
-				</div>
-				<div class="col-md-6">
-					<p class="payment-invoice-label">${{$merchant_info->membership_price}}</p>
-				</div>
+			<div class="payment-btn-container">
+				<button class="payment-submit-btn">SUBMIT</button>
 			</div>
-			<div class="bottom mob-align row-no-padding clearfix">
-				<div class="col-md-6">
-					<p class="payment-invoice-label bold">Total</p>
-				</div>
-				<div class="col-md-6">
-					<p class="payment-invoice-label">${{$merchant_info->membership_price}}</p>
-				</div>
-			</div>
-		</div>
-		<div class="payment-btn-container">
-			<button class="payment-submit-btn">SUBMIT</button>
-		</div>
+		</form>
 	</div>
 </div>
 <style>
