@@ -707,6 +707,7 @@ class GeneralAdminController extends Controller
                           ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_contact_person_id','=','tbl_payment.business_contact_person_id')
                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->where('tbl_invoice','tbl_invoice.invoice_status','!=','paid')
                           ->first();
       return view('general_admin.pages.payment_blade',$data);
     }
