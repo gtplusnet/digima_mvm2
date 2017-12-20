@@ -173,7 +173,7 @@ class SuperVisorController extends Controller
   	public function client()
   	{
       Self::allow_logged_in_users_only();
-  		$data['page']	= 'Client';
+  		$data['page']	= 'Merchant';
 
       $data['clients'] = TblTeamModel::where('tbl_team.supervisor_id', session('supervisor_id'))
                             ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
