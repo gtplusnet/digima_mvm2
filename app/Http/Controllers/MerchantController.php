@@ -171,7 +171,15 @@ class MerchantController extends Controller
           $result       = curl_exec($curl);  
           curl_close($curl);
           $details      = json_decode($result,true);
-          $data['fb']   = $details['fan_count'];
+          
+          if(isset($details['fan_count']) == null)
+          {
+            $data['fb']   = '0';
+          }
+          else
+          {
+            $data['fb']   = $details['fan_count'];
+          }
           if($views==0)
           {
             $data['page_view']  ="0";
