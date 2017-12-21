@@ -45,13 +45,7 @@
                   <i style="color: royalblue ;"" class="fa fa-facebook"></i>
                </div>
                <div class="info-box-stats">
-                  <p class="counter">
-                    @if($fb!=null)
-                    {{$fb}}
-                    @else
-                    {{$fb}}
-                    @endif
-                  </p>
+                  <p class="counter">{{$fb}}</p>
                   <span class="info-box-title">Facebook Stranica Lajkovi</span>
                </div>
                <div class="info-box-progress">
@@ -128,7 +122,7 @@
                      </div>
                   </div>
                </div>
-               <div class="col-md-8">
+               <div class="col-md-7">
                   <div class="card">
                      <div class="header">
                         <h4 class="title">Statistika Gostiju</h4>
