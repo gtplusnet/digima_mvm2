@@ -454,7 +454,7 @@
                             <div class="img-holder">
                                 <img src="/images/map_icon.png">
                             </div>
-                            <p class="footer-content">
+                            <p class="footer-content notranslate">
                                 @if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif
                             </p>
                         </div>
@@ -462,7 +462,7 @@
                             <div class="img-holder">
                                 <img src="/images/mobile_icon.png">
                             </div>
-                            <p class="footer-content">
+                            <p class="footer-content notranslate">
                                  @if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif
                                 </p>
                         </div>
@@ -470,13 +470,13 @@
                             <div class="img-holder">
                                 <img src="/images/mail_icon.png">
                             </div>
-                            <p class="footer-content">@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif</p>
+                            <p class="footer-content notranslate">@if(isset($contact_us->email)==null)@else {{$contact_us->email}}@endif</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <p class="footer-title">O NAMA</p>
                         <img src="/images/footer_logo.png">
-                        <p class="footer-content aboutus-content">The Right Place For Business.</p>
+                        <p class="footer-content aboutus-content notranslate">PRAVO MJESTO ZA POSAO</p>
                     </div>
                 </div>
             </div>
