@@ -475,7 +475,7 @@
                     </div>
                     <div class="col-md-3">
                         <p class="footer-title">O NAMA</p>
-                        <img src="/images/croatia_directory_logo.png">
+                        <img src="/images/footer_logo.png">
                         <p class="footer-content aboutus-content">The Right Place For Business.</p>
                     </div>
                 </div>
