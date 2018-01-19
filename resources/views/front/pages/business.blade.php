@@ -6,22 +6,22 @@
 <div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">
     <div class="container">
         <div class="top-detail-mob">
-            <p class="search-text">Tražilica ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
+            <p class="search-text">Tražilica ><a class="search-link  notranslate" href=""> {{ $business_info->business_name }}</a></p>
         </div>
         <div class="top-detail-container">
             <div class="top-detail">
-                <p class="search-text">Tražilica ><a class="search-link" href=""> {{ $business_info->business_name }}</a></p>
+                <p class="search-text">Tražilica ><a class="search-link  notranslate" href=""> {{ $business_info->business_name }}</a></p>
             </div>
             <div class="businesses-info-containers">
                 <div  class="businesses-details-containers">
-                    <p class="businesses-name">{{ $business_info->business_name }}</p>
+                    <p class="businesses-name  notranslate">{{ $business_info->business_name }}</p>
                 </div>
                 <div  class="businesses-details-containers">
-                    <p class="businesses-phone"><i class="fa fa-phone phone" style=""></i>{{$business_info->business_phone}}</p>
+                    <p class="businesses-phone  notranslate"><i class="fa fa-phone phone" style=""></i>{{$business_info->business_phone}}</p>
                 </div>
                 <div class="businesses-details-containers" style="">
                     
-                    <div class="businesses-map" >
+                    <div class="businesses-map  notranslate" >
                         <i class="fa fa-map-marker map" style=""></i>{{$business_info->business_complete_address}}
                     </div>
                     <div class="pull-right social-button">
@@ -37,62 +37,6 @@
 <div class="container business-containers">
     <div class="col-md-8 business-details-containers">
         <div class="border-line" >
-            <!-- OLD CAROUSEL -->
-            {{-- <div class="main-pic-container">
-                <div id="myCarousel" class="carousel slide business-carousel" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators business-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                    </ol>
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="{{$business_info->business_banner}}">
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <div class="item">
-                                    <img src="{{$business_info->other_image_one}}">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <div class="item">
-                                    <img src="{{$business_info->other_image_two}}">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                <div class="item">
-                                    <img src="{{$business_info->other_image_three}}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control business-carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control business-carousel-control" href="#myCarousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-            <div class="secondary-pics-container">
-                <a href="{{$business_info->other_image_one}}" data-lightbox="roadtrip">
-                    <img class="secondary-pics" src="{{$business_info->other_image_one}}">
-                </a>
-                <a href="{{$business_info->other_image_two}}" data-lightbox="roadtrip">
-                    <img class="secondary-pics" src="{{$business_info->other_image_two}}">
-                </a>
-                <a href="{{$business_info->other_image_three}}" data-lightbox="roadtrip">
-                    <img class="secondary-pics-last" src="{{$business_info->other_image_three}}">
-                </a>
-            </div> --}}
-
             <!-- LIGHT SLIDER -->
             <div class="demo">
                 <ul id="lightSlider">
@@ -126,7 +70,6 @@
                         @foreach($_tag_category as $tag_category)
                         {{$tag_category->business_category_name}}<br>
                         @endforeach
-                    
                     </p>
                 </div>
             </div>
@@ -139,7 +82,6 @@
             <script>
                 function initMap() {
                     var uluru = {lat: {{$coordinates1}}, lng: {{$coordinates}}};
-                    // var uluru = {lat: -25.363, lng: 131.044};
                     var map = new google.maps.Map(document.getElementById('business-map'), {
                       zoom: 17,
                       center: uluru
@@ -188,13 +130,13 @@
                 <div class="business-details-rightpart-title">
                     <i class="fa fa-globe icon-size"></i><p class="title-margin">WEB STRANICA:</p>
                 </div>
-                <p class="business-details-rightpart-content">{{ $business_info->business_website }}</p>
+                <p class="business-details-rightpart-content  notranslate">{{ $business_info->business_website }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
                     <i class="fa fa-envelope-o icon-size"></i><p class="title-margin"> E-MAIL:</p>
                 </div>
-                <p class="business-details-rightpart-content">{{ $business_info->user_email }}</p>
+                <p class="business-details-rightpart-content  notranslate">{{ $business_info->user_email }}</p>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">

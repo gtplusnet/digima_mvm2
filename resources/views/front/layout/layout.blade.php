@@ -196,7 +196,7 @@
                         <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
                             <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
-                            <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+                            <option class="notranslate" value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                             @endforeach
                         </select>
                         <style>
@@ -224,44 +224,16 @@
         <div class="header-wrapper">
             <div class="mob-top-header">
                 <div class="left-container">
-                    {{-- <div class="language-selection">
-                        <a href="javascript:;" id="English" onclick="translateLanguage(this.id);">
-                            <img src="/images/flag_usa.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                        </a>
-                    </div>
-                    <div class="language-selection">
-                        <a href="javascript:;" id="Croatia" onclick="translateLanguage(this.id);">
-                            <img src="/images/flag_croatia.ico" style="max-height:20px;border: 1px solid #fff;"/>
-                        </a>
-                    </div> --}}
                     <div class="language-selection" >
-                        <!-- <div id="google_translate_element" style="display:none;"></div>
-                        <style>
-                        .goog-te-gadget-icon
-                        {
-                        visibility:hidden;
-                        text-align:center;
-                        position:absolute;
-                        } -->
-                        <!-- /*.goog-te-banner-frame
-                        /*{*/
-                            /*visibility:hidden !important;
-                            height:0px !important;*/
-                        /*}*/
-                        .goog-te-banner-frame.skiptranslate {display: none !important;} 
-                        body { top: 0px !important; } -->
-                        
-                        {{-- </style> --}}
                         <ul class="list-unstyled list-inline ct-topbar__list">
                           <li class="ct-language">Language <i class="fa fa-angle-down" aria-hidden="true"></i></i>
                             <ul class="list-unstyled ct-language__dropdown">
                                 <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
-                              
-                              <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
-                              <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
-                              <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
-                              <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
-                              <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
+                                <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
+                                <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
+                                <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
+                                <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
+                                <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
                             </ul>
                           </li>
                         </ul>
@@ -454,7 +426,7 @@
                     <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
                         <option value="" disabled selected><div>--County--</div></option>
                         @foreach($countyList as $countyListItem)
-                        <option value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
+                        <option value="{{ $countyListItem->county_id }}" class="notranslate">{{ $countyListItem->county_name }}</option>
                         @endforeach
                     </select>
                     <input class="search-control" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
@@ -503,7 +475,7 @@
                     </div>
                     <div class="col-md-3">
                         <p class="footer-title">O NAMA</p>
-                        <img src="/images/footer_logo.png">
+                        <img src="/images/croatia_directory_logo.png">
                         <p class="footer-content aboutus-content">The Right Place For Business.</p>
                     </div>
                 </div>
@@ -619,8 +591,8 @@
                 navbar.classList.remove("sticky");
               }
             }
-        </script>
 
+        </script>
         <!-- SEARCH SHOW -->
         <script type="text/javascript">
             $(document).ready(function()

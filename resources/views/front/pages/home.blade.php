@@ -24,7 +24,6 @@ width:100%;
 		</div>
 	</div>
 </div>
-
 <div class="business-list-container" id="show_list_filtered_category">
 	<div class="container">
 		<div class="mob-view">
@@ -41,27 +40,27 @@ width:100%;
 						<div class="business-list-details">
 							<div class="business-list-name" style="height:50px;">
 								@if(strlen($business_list->business_name) <= 30)
-								<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+								<a class="notranslate" href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
 								@else
-								<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+								<a  class="notranslate" href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
 								@endif
 							</div>
 							<div class="business-list-phone">
-								<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
+								<p class="phone-text notranslate"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 							</div>
 							<div class="business-list-map" style="height:70px;">
-								<p  class="map-text"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
+								<p  class="map-text notranslate"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
 							</div>
 						</div>
 					</div>
 					<div class="social-media-icon">
 						@if($business_list->facebook_url=="")
 						<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href=http://www.facebook.com/digimawebsolutions&width=88&layout=button&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="65" height="40" title="Facebook Like Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                		@else
+						@else
 						<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="80" height="40" title="Facebook Like Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                		@endif
-                		<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="80" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                	</div>
+						@endif
+						<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="80" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+					</div>
 				</div>
 				@endforeach
 				<div class="col-md-12 pagination">
@@ -109,13 +108,11 @@ width:100%;
 										<div class="detail-name-container">
 											<div class="detail-name-container">
 												@if(strlen($featured_list->business_name) <= 14)
-												<p class="detail-name-title"><a href="/business/{{$featured_list->business_id}}">{{$featured_list->business_name}}</a></p>
+												<p class="detail-name-title notranslate"><a href="/business/{{$featured_list->business_id}}">{{$featured_list->business_name}}</a></p>
 												@else
-												<p class="detail-name-title"><a href="/business/{{$featured_list->business_id}}">{{substr($featured_list->business_name,0, 13)}}...</a></p>
+												<p class="detail-name-title notranslate"><a href="/business/{{$featured_list->business_id}}">{{substr($featured_list->business_name,0, 13)}}...</a></p>
 												@endif
-											
 											</div>
-											
 										</div>
 									</div>
 								</div>
@@ -134,7 +131,7 @@ width:100%;
 				</div>
 				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
-						<p class="featuredlist-title">Nagledaniji</p>
+						<p class="featuredlist-title">Najgledanije</p>
 					</div>
 					<div class="featuredlist-container side-list-padding">
 						<div  class="featured-carousel" >
@@ -147,9 +144,9 @@ width:100%;
 										</div>
 										<div class="detail-name-container">
 											@if(strlen($most_viewed->business_name) <= 14)
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
+											<p class="detail-name-title notranslate"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 											@else
-											<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
+											<p class="detail-name-title notranslate"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 											@endif
 											
 										</div>
@@ -160,7 +157,7 @@ width:100%;
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</div>
 			<div class="col-md-9" >
 				<div class="desktop">
@@ -180,16 +177,16 @@ width:100%;
 								<div class="business-list-details">
 									<div class="business-list-name" style="height:50px;">
 										@if(strlen($business_list->business_name) <= 30)
-										<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+										<a  class="notranslate"  href="/business/{{$business_list->business_id}}" class="notranslate">{{$business_list->business_name}}</a>
 										@else
-										<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+										<a class="notranslate"  href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
 										@endif
 									</div>
 									<div class="business-list-phone">
-										<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
+										<p class="phone-text notranslate"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 									</div>
 									<div class="business-list-map" style="height:70px;">
-										<p  class="map-text"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
+										<p  class="map-text notranslate"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
 									</div>
 								</div>
 							</div>
@@ -198,9 +195,9 @@ width:100%;
 								<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=63&layout=button&action=like&size=large&show_faces=true&share=false&height=65&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 								@else
 								<iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_list->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-	                    		@endif
-	                    		<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-	                    	</div>
+								@endif
+								<iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_list->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+							</div>
 						</div>
 						@endforeach
 						<div class="col-md-12">
@@ -209,36 +206,36 @@ width:100%;
 					</div>
 				</div>
 				<div class="payment-containers" style="margin-bottom:50px;">
-						<div class="payment-title">
-							PREDAJTE VAŠE POSLOVNE DJELE U NAJVEĆE PONUDE
-							<br>
-						</div>
-						<div class="payment-content row clearfix " style="margin-bottom:100px;">
-							@foreach($_membership as $membership)
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="package-container match-height">
-									<div class="membership-offer">
-										{{$membership->membership_name}}
-									</div>
-									<hr>
-									<div class="membership-price">
-										<span >${{$membership->membership_price}}/</span><span >MJESEC</span>
-									</div>
-									<hr>
-									<div class="membership-details">
-										<p class="membership-details-text">
-											{{$membership->membership_info}}
-										</p>
-									</div>
-									<div class="membership-btn">
-										<a href="/registration">
-											<button type="button" class="membership-button">Započni Sada</button>
-										</a>
-									</div>
+					<div class="payment-title">
+						PREDAJTE VAŠE POSLOVNE DJELE U NAJVEĆE PONUDE
+						<br>
+					</div>
+					<div class="payment-content row clearfix " style="margin-bottom:100px;">
+						@foreach($_membership as $membership)
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="package-container match-height">
+								<div class="membership-offer">
+									{{$membership->membership_name}}
+								</div>
+								<hr>
+								<div class="membership-price">
+									<span >${{$membership->membership_price}}/</span><span >MJESEC</span>
+								</div>
+								<hr>
+								<div class="membership-details">
+									<p class="membership-details-text">
+										{{$membership->membership_info}}
+									</p>
+								</div>
+								<div class="membership-btn">
+									<a href="/registration">
+										<button type="button" class="membership-button">Započni Sada</button>
+									</a>
 								</div>
 							</div>
-							@endforeach
 						</div>
+						@endforeach
+					</div>
 				</div>
 			</div>
 		</div>
@@ -249,10 +246,8 @@ width:100%;
 <script src="/assets/js/front/search-registered-business.js"></script>
 <script src="/assets/js/home_categories.js"></script>
 <script src="/assets/js/layout_filtering.js"></script>
-
 <!-- MATCH HEIGHT -->
 <script src="/assets/js/front/match-height.js"></script>
-
 <script>
 	$.ajaxSetup({
 		headers: {
@@ -279,6 +274,5 @@ width:100%;
 		}
 		});
 </script>
-
 {{-- END OF JAVASCRIPTS --}}
 @endsection

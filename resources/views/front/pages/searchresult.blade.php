@@ -64,9 +64,9 @@ width:100%;
 											<div class="detail-name-container">
 												<div class="detail-name-container">
 													@if(strlen($featured_list->business_name) <= 14)
-													<p class="detail-name-title"><a href="/business/{{$featured_list->business_id}}">{{$featured_list->business_name}}</a></p>
+													<p class="detail-name-title notranslate"><a href="/business/{{$featured_list->business_id}}">{{$featured_list->business_name}}</a></p>
 													@else
-													<p class="detail-name-title"><a href="/business/{{$featured_list->business_id}}">{{substr($featured_list->business_name,0, 13)}}...</a></p>
+													<p class="detail-name-title notranslate"><a href="/business/{{$featured_list->business_id}}">{{substr($featured_list->business_name,0, 13)}}...</a></p>
 													@endif
 												
 												</div>
@@ -102,9 +102,9 @@ width:100%;
 											</div>
 											<div class="detail-name-container">
 												@if(strlen($most_viewed->business_name) <= 14)
-												<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
+												<p class="detail-name-title notranslate"><a href="/business/{{$most_viewed->business_id}}">{{$most_viewed->business_name}}</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 												@else
-												<p class="detail-name-title"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
+												<p class="detail-name-title notranslate"><a href="/business/{{$most_viewed->business_id}}">{{substr($most_viewed->business_name,0, 13)}}...</a><br><font size="1">Pregledi: {{$most_viewed->business_views}}</font></p>
 												@endif
 												
 											</div>
@@ -145,16 +145,16 @@ width:100%;
 									<div class="business-list-details">
 										<div class="business-list-name" style="height:50px;">
 											@if(strlen($business_list->business_name) <= 30)
-											<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+											<a  class="notranslate" href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
 											@else
-											<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+											<a  class="notranslate" href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
 											@endif
 										</div>
 										<div class="business-list-phone">
-											<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
+											<p class="phone-text notranslate"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 										</div>
 										<div class="business-list-map" style="height:70px;">
-											<p  class="map-text"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
+											<p  class="map-text notranslate"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
 										</div>
 									</div>
 								</div>
@@ -201,16 +201,16 @@ width:100%;
 									<div class="business-list-details">
 										<div class="business-list-name" style="height:50px;">
 											@if(strlen($business_list->business_name) <= 30)
-											<a href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
+											<a  class="notranslate" href="/business/{{$business_list->business_id}}">{{$business_list->business_name}}</a>
 											@else
-											<a href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+											<a class="notranslate"  href="/business/{{$business_list->business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
 											@endif
 										</div>
 										<div class="business-list-phone">
-											<p class="phone-text"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
+											<p class="phone-text notranslate"><i class="fa fa-phone phone"></i>{{$business_list->business_phone}}</p>
 										</div>
 										<div class="business-list-map" style="height:70px;">
-											<p  class="map-text"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
+											<p  class="map-text notranslate"><i class="fa fa-map-marker map" ></i>{{$business_list->business_complete_address}}</p>
 										</div>
 									</div>
 								</div>
