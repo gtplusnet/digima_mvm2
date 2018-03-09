@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="logo-box">
-            <a href="index.html" class="logo-text">{{-- <span>CROATIA</span> --}}<img class="img-circle avatar" src="/assets/admin/merchant/assets/images/CroatiaLogo.jpg" width="200" height="80" alt=""></a>
+            <a href="index.html" class="logo-text">{{-- <span>CROATIA</span> --}}<img class="img-circle avatar" src="/images/merchant_logo.jpg" width="200" height="80" alt=""></a>
         </div><!-- Logo Box -->
         <div class="topmenu-outer">
             <div class="top-menu">

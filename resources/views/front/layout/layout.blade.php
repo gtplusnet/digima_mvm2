@@ -190,12 +190,13 @@
                         <img  src="/images/croatia_directory_logo.png">
                     </div>
                     <div class="col-md-3 searchfields-format ">
-                        <input  type="text" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
+                        <input  type="text" translate="yes" class="business-name-textbox" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
                     </div>
                     <div class="col-md-2 searchfields-format ">
                         <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
                             <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
+
                             <option class="notranslate" value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                             @endforeach
                         </select>

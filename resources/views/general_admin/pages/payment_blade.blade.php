@@ -1,6 +1,7 @@
 <div id="showHere1">
 </div>
-<div class="col-sm-12">
+
+<div class=" col-sm-12">
 	<div class="form-group col-md-3">
 		<label for="business_name" >Business Name</label>
 	</div>

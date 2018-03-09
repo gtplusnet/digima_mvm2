@@ -76,12 +76,14 @@
 <div class="modal fade" id="paymentDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class=" modal-header">
 				<button type="button" class="close" onClick="window.location.reload();"  data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Payment Information</h4>
 			</div>
-			<div class="modal-body" id="insertPaymentBlade" style="margin-bottom: 450px;" >
-				
+			<div class=" modal-body"   >
+				<div class="row" id="insertPaymentBlade">
+					
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -93,7 +95,7 @@
 	<div class="modal-dialog modal-sm">
 		<form method="post" action="/general_admin/accept_and_activate">
 			<div class="modal-content">
-				<div class="modal-body" style="margin-bottom: 150px;" >
+				<div class=" modal-body" style="margin-bottom: 150px;" >
 					<div class="col-sm-12">
 						<h4 class="modal-title">Are You sure You want to accept this payment and activate this user's account?</h4>
 					</div>

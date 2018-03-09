@@ -72,8 +72,7 @@ class AgentController extends Controller
         $data['countPending']     		= $count_merchant_pending->count();
         $data['countActivated']   		= $count_merchant_activated->count();
 
-
-        $data['date_mon'] 		= $mon =date('Y/m/d',strtotime('monday this week'));
+		$data['date_mon'] 		= $mon =date('Y/m/d',strtotime('monday this week'));
 	    $data['date_tue'] 		= $tue =date('Y/m/d',strtotime('tuesday this week'));
 	    $data['date_wed'] 		= $wed =date('Y/m/d',strtotime('wednesday this week'));
 	    $data['date_thu'] 		= $thu =date('Y/m/d',strtotime('Thursday this week'));
@@ -126,11 +125,8 @@ class AgentController extends Controller
         $data['counts_nov']  	= TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
         $data['counts_dec']  	= TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
         
-	    
-	    // dd($data['date_mon']);
-    
-		return view ('agent.pages.dashboard', $data);	
-    }
+	    return view ('agent.pages.dashboard', $data);	
+	}
 
 
 	public function agent_login(Request $request)
