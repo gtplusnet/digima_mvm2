@@ -204,6 +204,10 @@ Route::any('/general_admin/merchants', 								'GeneralAdminController@general_a
 Route::any('/general_admin/payment_monitoring', 					'GeneralAdminController@general_admin_payment_monitoring');
 Route::any('/general_admin/manage_user', 							'GeneralAdminController@general_admin_manage_user');
 
+Route::any('/general_admin/manage_user/user_details', 				'GeneralAdminController@general_admin_manage_user_details');
+
+
+
 Route::any('/general_admin/manage_front', 							'GeneralAdminController@general_admin_manage_front');
 Route::any('/general_admin/update_about_us', 						'GeneralAdminController@general_admin_update_about_us');
 Route::any('/general_admin/update_contact_us', 						'GeneralAdminController@general_admin_update_contact_us');
@@ -259,7 +263,7 @@ Route::get('/general_admin/deactivate_user/{id}', 						'GeneralAdminController@
 
 
 
-Route::post('/general_admin/manage_user/add_agent', 				'GeneralAdminController@general_admin_add_agent');
+Route::post('/general_admin/manage_user/add_user', 				'GeneralAdminController@general_admin_add_user');
 Route::post('/general_admin/manage_user/add_team', 					'GeneralAdminController@general_admin_add_team');
 Route::post('/general_admin/manage_user/view_all_members', 			'GeneralAdminController@general_admin_view_all_members');
 

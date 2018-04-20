@@ -7,6 +7,7 @@
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+        
         <meta charset="UTF-8">
         <meta name="description" content="Admin Dashboard Template" />
         <meta name="keywords" content="admin,dashboard" />
@@ -14,37 +15,40 @@
         
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-        <link href="/assets/admin/general_admin/assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
-        <link href="/assets/admin/general_admin/assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
-        <link href="/assets/admin/general_admin/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/admin/general_admin/assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/admin/general_admin/assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css"/>	
-        <link href="/assets/admin/general_admin/assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" rel="stylesheet" type="text/css"/>	
-        <link href="/assets/admin/general_admin/assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css"/>	
-        <link href="/assets/admin/general_admin/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/admin/general_admin/assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/admin/general_admin/assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/>	
-        <link href="/assets/admin/general_admin/assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet" type="text/css"/>	
-        <link href="/assets/admin/general_admin/assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet" type="text/css"/>	
-        	
+        <link href="/assets/user_assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
+        <link href="/assets/user_assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
+        <link href="/assets/user_assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/user_assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/user_assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css"/>    
+        <link href="/assets/user_assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" rel="stylesheet" type="text/css"/> 
+        <link href="/assets/user_assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css"/> 
+        <link href="/assets/user_assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/user_assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/user_assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/>    
+        <link href="/assets/user_assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet" type="text/css"/>  
+        <link href="/assets/user_assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet" type="text/css"/> 
+            
         <!-- Theme Styles -->
-        <link href="/assets/admin/general_admin/assets/css/modern.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/admin/general_admin/assets/css/themes/white.css" class="theme-color" rel="stylesheet" type="text/css"/>
-        <link href="/assets/admin/general_admin/assets/css/custom.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/user_assets/css/modern.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/user_assets/css/themes/white.css" class="theme-color" rel="stylesheet" type="text/css"/>
+        <link href="/assets/user_assets/css/custom.css" rel="stylesheet" type="text/css"/>
 
         <link rel="stylesheet" href="/assets/js/iziToast/dist/css/iziToast.min.css">
         
-        <script src="/assets/admin/general_admin/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+        <script src="/assets/user_assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
+        <script src="/assets/user_assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
 
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        
-      
-        
-    </head>
+
+        <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- TOASTR -->
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+     
+  </head>
     <body class="page-header-fixed">
-        <main class="page-content content-wrap">
+        <main class="page-content content-wrap" >
             @include('general_admin.include.header');
             @include('general_admin.include.sidebar');
             {{-- End Sidebar --}}    
@@ -59,45 +63,60 @@
                 @yield('content')    
                 <!-- Main Wrapper -->
 
-                <div class="page-footer">
+                
+            </div><!-- Page Inner -->
+            <div class="page-footer">
                     <p class="no-s">2017 &copy; Modern by DigimaHouse.com</p>
                 </div>
 
-            </div><!-- Page Inner -->
         </main><!-- Page Content -->
 
         @include('general_admin.include.menu')
 
         <div class="cd-overlay"></div>
        
-	
+    
 
         <!-- Javascripts -->
-        <script src="/assets/admin/general_admin/assets/plugins/jquery/jquery-2.1.3.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/pace-master/pace.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/switchery/switchery.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/uniform/jquery.uniform.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/offcanvasmenueffects/js/classie.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/offcanvasmenueffects/js/main.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/waves/waves.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/3d-bold-navigation/js/main.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/waypoints/jquery.waypoints.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/jquery-counterup/jquery.counterup.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/flot/jquery.flot.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/flot/jquery.flot.time.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/flot/jquery.flot.symbol.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/flot/jquery.flot.resize.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/curvedlines/curvedLines.js"></script>
-        <script src="/assets/admin/general_admin/assets/plugins/metrojs/MetroJs.min.js"></script>
-        <script src="/assets/admin/general_admin/assets/js/modern.js"></script>
-        <script src="/assets/admin/general_admin/assets/js/pages/dashboard.js"></script>
+        <script src="/assets/user_assets/plugins/jquery/jquery-2.1.3.min.js"></script>
+        <script src="/assets/user_assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/assets/user_assets/plugins/pace-master/pace.min.js"></script>
+        <script src="/assets/user_assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+        <script src="/assets/user_assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/user_assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="/assets/user_assets/plugins/switchery/switchery.min.js"></script>
+        <script src="/assets/user_assets/plugins/uniform/jquery.uniform.min.js"></script>
+        <script src="/assets/user_assets/plugins/offcanvasmenueffects/js/classie.js"></script>
+        <script src="/assets/user_assets/plugins/offcanvasmenueffects/js/main.js"></script>
+        <script src="/assets/user_assets/plugins/waves/waves.min.js"></script>
+        <script src="/assets/user_assets/plugins/3d-bold-navigation/js/main.js"></script>
+        <script src="/assets/user_assets/plugins/waypoints/jquery.waypoints.min.js"></script>
+        <script src="/assets/user_assets/plugins/jquery-counterup/jquery.counterup.min.js"></script>
+        <script src="/assets/user_assets/plugins/flot/jquery.flot.min.js"></script>
+        <script src="/assets/user_assets/plugins/flot/jquery.flot.time.min.js"></script>
+        <script src="/assets/user_assets/plugins/flot/jquery.flot.symbol.min.js"></script>
+        <script src="/assets/user_assets/plugins/flot/jquery.flot.resize.min.js"></script>
+        <script src="/assets/user_assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="/assets/user_assets/plugins/curvedlines/curvedLines.js"></script>
+        <script src="/assets/user_assets/plugins/metrojs/MetroJs.min.js"></script>
+        <script src="/assets/user_assets/js/modern.js"></script>
+        <script src="/assets/user_assets/js/pages/dashboard.js"></script>
         <script src="https://use.fontawesome.com/6e78a1b40e.js"></script>
         <script src="/assets/js/iziToast/dist/js/iziToast.min.js"></script>
+        <!-- FOR PAGES -->
+
+        {{-- <script src="/assets/js/global.ajax.js"></script> --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {{-- <script src="/assets/js/globals.js"></script> --}}
+        <script src="/assets/user_assets/js/general_admin_user.js"></script>
+        
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       
+        
+
+
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {

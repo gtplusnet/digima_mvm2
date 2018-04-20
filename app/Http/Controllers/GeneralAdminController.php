@@ -33,6 +33,12 @@ use App\Models\TblTerms;
 use App\Models\TblThankYou;
 use App\Models\TblBusinessTagCategoryModel;
 
+use App\Models\TblUserModel;
+use App\Models\TblUserInfoModel;
+
+
+use App\Models\TblAgentTeamModel;
+
 use DB;
 use Response;
 use Session;
@@ -41,6 +47,10 @@ use PDF2;
 use PDF;
 use Mail;
 use Excel;
+use Crypt;
+use Carbon\Carbon;
+
+
 
 
 
@@ -800,9 +810,12 @@ class GeneralAdminController extends Controller
     {
 
       Self::allow_logged_in_users_only();
-      $data['_data_agent']          = TblAgentModel::where('tbl_agent.archived',0)
-                                    ->join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+      $data['_data_agent']          = TblUserModel::where('tbl_user.archived',0)->where('user_access_level',2)
+                                    ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                                    ->join('tbl_agent_team','tbl_agent_team.user_id','=','tbl_user.user_id')
+                                    ->join('tbl_team','tbl_team.team_id','=','tbl_agent_team.team_id')
                                     ->paginate(10, ['*'], 'agent');
+
       $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)
                                     ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
                                     ->select('tbl_team.team_id as id','tbl_team.archived as archive', 'tbl_team.*','tbl_supervisor.*')
@@ -821,7 +834,15 @@ class GeneralAdminController extends Controller
       return view('general_admin.pages.manage_user', $data);
 
     }
-
+    public function general_admin_manage_user_details(Request $request)
+    {
+      $data['user_details'] = TblUserModel::where('tbl_user.user_id',$request->user_id)
+                            ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                            ->join('tbl_agent_team','tbl_agent_team.user_id','=','tbl_user.user_id')
+                            ->join('tbl_team','tbl_team.team_id','=','tbl_agent_team.team_id')
+                            ->first();
+      return view('general_admin.pages.user_details', $data);
+    }
     public function general_admin_manage_front()
     {
       Self::allow_logged_in_users_only();
@@ -1234,56 +1255,52 @@ class GeneralAdminController extends Controller
       }
     }
     
-  public function general_admin_add_agent(Request $request)
+  public function general_admin_add_user(Request $request)
   { 
+    $password   = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz1234567890"), 0,8);
+    
+    $userData = new TblUserModel;
+    $userData->user_email         = $request->user_email;
+    $userData->user_password      = Crypt::encrypt($password);
+    $userData->user_access_level  = $request->user_access_level;
+    $userData->save();
 
-    $ins['prefix'] = $request->prefix;
-    $ins['first_name'] = $request->first_name;
-    $ins['last_name'] = $request->last_name;
-    $ins['email'] = $request->email;
-    $ins['position'] = 'agent';
-    $ins['team_id'] = $request->team_id;
-    $ins['primary_phone'] = $request->primary;
-    $ins['secondary_phone'] = 'none';
-    $ins['address'] = 'none';
-    $ins['other_info'] = 'none';
-    $ins['date_created'] = date("Y/m/d");
-    $ins['agent_call'] = '0';
-    $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-        if($ins['password']=='')
-        {
-            return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
-        }
-        else if($ins['first_name']=='')
-        {
-            return "<div class='alert alert-danger'><strong>Please!</strong>Input First Name.</div>";
-        }
-        else if($ins['last_name']=='')
-        {
-            return "<div class='alert alert-danger'><strong>Please!</strong>Input Last Name.</div>";
-        }
-        else if($ins['email']=='')
-        {
-            return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
-        }
-        else if($ins['primary_phone']=='')
-        {
-            return "<div class='alert alert-danger'><strong>Please!</strong>Input Primary Phone.</div>";
-        }
+    $userInfoData = new TblUserInfoModel;
+    $userInfoData->user_profile     = '/user_profile/default_profile.jpg';
+    $userInfoData->user_first_name  = $request->user_first_name ;
+    $userInfoData->user_last_name   = $request->user_last_name ;
+    $userInfoData->user_gender      = $request->user_gender ;
+    $userInfoData->user_phone_number = $request->user_phone_number ;
+    $userInfoData->user_address     = $request->user_address ;
+    $userInfoData->user_created     = Carbon::now();
+    $userInfoData->user_id          = $userData->user_id;
+    $userInfoData->save();
+
+    $teamData = new TblAgentTeamModel;
+    $teamData->team_id          = $request->team_id;
+    $teamData->user_id          = $userData->user_id;
+    $teamData->agent_added      = Carbon::now();
+    $teamData->save();
+
+    $name       = $request->user_first_name." ".$request->user_last_name;
+    $email      = $userData->user_email;
+    $password   = Crypt::decrypt($userData->user_password);
+    $link       = 'http://mvm.digimahouse.com/login';
+    $data       = array('name'=>$name,'email'=>$email,'password'=>$password,'link'=>$link);
+    $check_mail = Mail::send('email.email_file', $data, function($message) use($data) 
+                {
+                  $message->to($data['email'], 'MVM Password')->subject('MVM Login');
+                  $message->from('croatiaadmin@admin.com','Croatia Assistance');
+                });
+    if($userInfoData->save()&&$teamData->save())
+    {
+      return "success";
+    }
+    else 
+    {
+      return "error";
+    }
         
-        else
-        {
-            $check_insert = TblAgentModel::insert($ins);
-            
-            if($check_insert)
-            {
-              return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
-            }
-            else
-            {
-                return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
-            }
-        }
   }
   public function general_admin_update_agent_login(Request $request)
   {

@@ -2,7 +2,6 @@
 @section('title', 'manage user')
 @section('description', 'manage user')
 @section('content')
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <style>
 	.li_me
 	{
@@ -12,10 +11,9 @@
 	{
 		width:25%;
 	}
-
-	@media only screen and (max-width: 500px) 
+	@media only screen and (max-width: 500px)
 	{
-	    .li_me
+	.li_me
 		{
 			width:100%;
 			text-align: center;
@@ -36,7 +34,7 @@
 		</ol>
 	</div>
 </div>
-<div id="main-wrapper">
+<div id="main-wrapper" style="min-height:600px;">
 	<ul class="nav nav-tabs">
 		<li class="active li_me"><a data-toggle="pill" href="#merchant">Merchant</a></li>
 		<li class="li_me"><a data-toggle="pill" href="#agent">Agent</a></li>
@@ -55,7 +53,7 @@
 	<div class="tab-content" style="">
 		<div id="merchant" class=" tab-pane fade in  active">
 			<div class="row">
-		        <div class="panel-body">
+				<div class="panel-body">
 					<form class="form-inline" method="post" action="/general_admin/search_payment_monitoring">
 						{{csrf_field()}}
 						<div class="col-md-4 col-sm-12 pull-right">
@@ -112,9 +110,9 @@
 												</div>
 												<div class="col-sm-12">
 													<center>
-														<input type="hidden" class="deleteMerchant" value="{{$merchant->business_id}}"/>
-														<button type="button" class=" btn btn-danger" id="deleteMerchants">Yes</button>
-														<button type="button" class="btn btn-default"  data-dismiss="modal">No</button>
+													<input type="hidden" class="deleteMerchant" value="{{$merchant->business_id}}"/>
+													<button type="button" class=" btn btn-danger" id="deleteMerchants">Yes</button>
+													<button type="button" class="btn btn-default"  data-dismiss="modal">No</button>
 													</center>
 												</div>
 											</div>
@@ -130,26 +128,27 @@
 			</div>
 		</div>
 		<div id="agent" class="tab-pane fade in">
+			
 			<div class="row">
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                            <form class="form-inline">
-                                {{csrf_field()}}
-                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
-                                    <input type="text" class="form-control" name="search_agent" id="search_agent">
-                                </div>
-                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
-                                    <button type="button" class="btn btn-success" name="search_btn_agent" id="search_btn_agent">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-                            <button type="button"  data-toggle="modal" data-target="#myModalAgent"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Agent</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div class="panel-body">
+					
+						<div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+							<form class="form-inline">
+								{{csrf_field()}}
+								<div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
+									<input type="text" class="form-control" name="search_agent" id="search_agent">
+								</div>
+								<div class=" col-md-4 col-xs-4" style="padding:0px;">
+									<button type="button" class="btn btn-success" name="search_btn_agent" id="search_btn_agent">Search</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
+							<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New User</button>
+						</div>
+					
+				</div>
+			</div>
 			<div class="row">
 				<div class="panel-body">
 					<div class="table-responsive" id="showHere_agent">
@@ -161,7 +160,7 @@
 									<th>ID</th>
 									<th>Agent Name</th>
 									<th>Email</th>
-									<th>Primary Phone</th>
+									<th>Phone Number</th>
 									<th>Merchant Calls/Added</th>
 									<th>Assigned Team</th>
 									<th></th>
@@ -170,16 +169,16 @@
 							<tbody>
 								@foreach($_data_agent as $data_agent)
 								<tr>
-									<td>{{$data_agent->agent_id}}</td>
-									<td>{{$data_agent->first_name}} {{$data_agent->last_name}}</td>
-									<td>{{$data_agent->email}}</td>
-									<td>{{$data_agent->primary_phone}}</td>
+									<td>{{$data_agent->user_id}}</td>
+									<td>{{$data_agent->user_first_name}} {{$data_agent->user_last_name}}</td>
+									<td>{{$data_agent->user_email}}</td>
+									<td>{{$data_agent->user_phone_number}}</td>
 									<td>{{count($agent_merchant->where('agent_id',$data_agent->agent_id))}}</td>
 									<td>{{$data_agent->team_name}}</td>
 									<td>
-										<select style="height:30px;width:80px;" class="agent_actionbox" id="agent_actionbox" data-email="{{$data_agent->email}}"  data-name="{{$data_agent->first_name}} {{$data_agent->last_name}}" data-id="{{ $data_agent->agent_id}}">
+										<select style="height:30px;width:80px;" class="view_user_details" data-email="{{$data_agent->email}}"  data-name="{{$data_agent->first_name}} {{$data_agent->last_name}}" data-id="{{ $data_agent->user_id}}">
 											<option value="">Action</option>
-											<option value="edit">Edit</option>
+											<option value="view">View</option>
 											<option value="assign">Assign</option>
 											<option value="delete">Delete</option>
 										</select>
@@ -194,25 +193,25 @@
 		</div>
 		<div id="team" class="tab-pane fade in">
 			<div class="row">
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                            <form class="form-inline">
-                                {{csrf_field()}}
-                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
-                                    <input type="text" class="form-control" name="search_team" id="search_team">
-                                </div>
-                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
-                                    <button type="button" class="btn btn-success" name="search_btn_team" id="search_btn_team">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-                            <button type="button"  data-toggle="modal" data-target="#myModalTeam"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div class="panel-body">
+					
+						<div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+							<form class="form-inline">
+								{{csrf_field()}}
+								<div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
+									<input type="text" class="form-control" name="search_team" id="search_team">
+								</div>
+								<div class=" col-md-4 col-xs-4" style="padding:0px;">
+									<button type="button" class="btn btn-success" name="search_btn_team" id="search_btn_team">Search</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
+							<button type="button"  data-toggle="modal" data-target="#myModalTeam"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
+						</div>
+					
+				</div>
+			</div>
 			<div class="row">
 				<div class="panel-body">
 					<div class="table-responsive" id="showHere_team">
@@ -238,9 +237,9 @@
 									<td><i data-id="{{ $data_team->id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
 									<td>
 										@if($data_team->archived==0)
-											{{ $data_team->first_name}} {{ $data_team->last_name}}
-									    @else
-											<font color="red">{{ $data_team->first_name}} {{ $data_team->last_name}} - DELETED</font>
+										{{ $data_team->first_name}} {{ $data_team->last_name}}
+										@else
+										<font color="red">{{ $data_team->first_name}} {{ $data_team->last_name}} - DELETED</font>
 										@endif
 									</td>
 									<td>
@@ -255,30 +254,31 @@
 							</tbody>
 						</table>
 					</div>
+					{!! $_data_team->render() !!}
 				</div>
 			</div>
 		</div>
 		<div id="supervisor" class="tab-pane fade in">
 			<div class="row">
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                            <form class="form-inline">
-                                {{csrf_field()}}
-                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
-                                    <input type="text" class="form-control" name="search_supervisor" id="search_supervisor">
-                                </div>
-                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
-                                    <button type="button" class="btn btn-success" name="search_btn_supervisor" id="search_btn_supervisor">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-                            <button type="button"  data-toggle="modal" data-target="#myModalSupervisor"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Supervisor</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div class="panel-body">
+					<div class="col-sm-12">
+						<div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+							<form class="form-inline">
+								{{csrf_field()}}
+								<div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
+									<input type="text" class="form-control" name="search_supervisor" id="search_supervisor">
+								</div>
+								<div class=" col-md-4 col-xs-4" style="padding:0px;">
+									<button type="button" class="btn btn-success" name="search_btn_supervisor" id="search_btn_supervisor">Search</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
+							<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New User</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row">
 				<form method="post">
 					{{csrf_field()}}
@@ -306,9 +306,9 @@
 										<td>{{$data_supervisor->primary_phone}}</td>
 										<td>
 											@foreach($_teams->where('supervisor_id',$data_supervisor->supervisor_id) as $team)
-											{{$team->team_name}}, 
+											{{$team->team_name}},
 											@endforeach
-                                        </td>
+										</td>
 										<td>
 											<select style="height:30px;width:80px;" class="supervisor_actionbox" id="supervisor_actionbox" data-name="{{$data_supervisor->first_name}} {{$data_supervisor->last_name}}" data-email="{{$data_supervisor->email}}"  data-id="{{ $data_supervisor->supervisor_id}}">
 												<option value="">Action</option>
@@ -328,25 +328,25 @@
 		</div>
 		<div id="admin" class="tab-pane fade in">
 			<div class="row">
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                            <form class="form-inline">
-                                {{csrf_field()}}
-                                <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
-                                    <input type="text" class="form-control" name="search_admin" id="search_admin">
-                                </div>
-                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
-                                    <button type="button" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-                            <button type="button"  data-toggle="modal" data-target="#myModalAdmin"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Admin</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div class="panel-body">
+					<div class="col-sm-12">
+						<div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+							<form class="form-inline">
+								{{csrf_field()}}
+								<div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
+									<input type="text" class="form-control" name="search_admin" id="search_admin">
+								</div>
+								<div class=" col-md-4 col-xs-4" style="padding:0px;">
+									<button type="button" class="btn btn-success" name="search_btn_admin" id="search_btn_admin">Search</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
+							<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New User</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row">
 				<div class="panel-body">
 					<div class="table-responsive" id="showHere_admin">
@@ -398,143 +398,100 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="myModalAgent" role="dialog">
-		<div class="modal-dialog modal-md">
+	<div class="modal fade" id="myModalUser" role="dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Add Agent</h4>
+					<h4 class="modal-title">ADD USER</h4>
 				</div>
-				<div class="modal-body" style="margin-bottom: 530px;" >
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
+				<div class="modal-body row">
+					<div class="body-content">
+						<div class="form-group col-md-2">
 							<label for="business_name" >Team</label>
 						</div>
-						<div class="form-group col-md-9">
+						<div class="form-group col-md-4">
 							<select name="team_id" class='form-control' id="team_id">
+								<option value="0">SELECT TEAM</option>
 								@foreach ($_team_select as $data_team)
 								<option value = '{{$data_team->team_id}}'>{{$data_team->team_name}}</option>
 								@endforeach
 							</select>
 						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Prefix</label>
+						<div class="form-group col-md-2">
+							<label for="business_name" >Position</label>
 						</div>
-						<div class="form-group col-md-9">
-							<select name="prefix" class='form-control' id="prefix">
-								<option value = 'Mr'>Mr</option>
-								<option  value = 'Ms'>Ms</option>
+						<div class="form-group col-md-4">
+							<select name="user_access_level" class='form-control' id="user_access_level">
+								<option value="0">SELECT POSITION</option>
+								<option value="2">AGENT</option>
+								<option value="3">SUPERVISOR</option>
+								<option value="4">ADMIN</option>
 							</select>
 						</div>
+						
 					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
+					<div class="body-content">
+						<div class="form-group col-md-2">
 							<label for="business_name" >First Name</label>
 						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="first_name" id="first_name"  style="width:100%;margin-bottom: 20px;" required/>
+						<div class="form-group col-md-4">
+							<input type="text" class="form-control" name="user_first_name" id="user_first_name" required/>
 						</div>
-					</div>
-					<div class="col-sm-12" id="agent_success">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-2">
 							<label for="business_name" >Last Name</label>
 						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="last_name" id="last_name"  style="width:100%;margin-bottom: 20px;" required/>
+						<div class="form-group col-md-4">
+							<input type="text" class="form-control" name="user_last_name" id="user_last_name" required/>
 						</div>
 					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
+					<div class="body-content">
+						<div class="form-group col-md-2">
+							<label for="business_name" >Gender</label>
+						</div>
+						<div class="form-group col-md-4">
+							<input type="text" class="form-control" name="user_gender" id="user_gender" required/>
+						</div>
+						<div class="form-group col-md-2">
 							<label for="business_name" >Email</label>
 						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="email" id="email"  style="width:100%;margin-bottom: 20px;" required/>
+						<div class="form-group col-md-4">
+							<input type="text" class="form-control" name="user_email" id="user_email" required/>
 						</div>
 					</div>
-					<div class="col-sm-12" id="agent_alert">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Password</label>
+					<div class="body-content">
+						<div class="form-group col-md-2">
+							<label for="business_name" >Address</label>
 						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="password" id="password"  style="width:100%;margin-bottom: 20px;" required/>
+						<div class="form-group col-md-4">
+							<textarea type="text" class="form-control" name="user_address" id="user_address" /></textarea>
 						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Primary Phone</label>
+						<div class="form-group col-md-2">
+							<label for="business_name" >Phone Number</label>
 						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="primary" id="primary"  style="width:100%;margin-bottom: 20px;" required/>
+						<div class="form-group col-md-4">
+							<input type="text" class="form-control" name="user_phone_number" id="user_phone_number" required/>
 						</div>
 					</div>
 					
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="add_agent btn btn-primary" name="add_agent" id="add_agent">Add Agent</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
+					<div class="body-content">
+						
 					</div>
 				</div>
+				
 				<div class="modal-footer" style="border:0px;">
+					<center>
+					<button type="submit" class="addUserBtn btn btn-primary" name="addUserBtn" id="addUserBtn">ADD AGENT</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
+					</center>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="myModalAgentEdit" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Edit Agent Login</h4>
-				</div>
-				<div class="modal-body" style="margin-bottom: 300px;" >
-					<div class="col-sm-12" id="agent_alerts">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Full Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="first_name" id="agFullname"  style="width:100%;margin-bottom: 20px;" readOnly/>
-						</div>
-					</div>
-					
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Email</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="last_name" id="agEmail"  style="width:100%;margin-bottom: 20px;" required/>
-							<input type="hidden"  id="agAgentId" />
-							<input type="hidden"  id="agOldEmail" />
-							
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Password</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="password" class="form-control" name="email" id="agPassword"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					<div class="col-sm-12" id="agent_alert">
-					</div>
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="updateAgent btn btn-primary" name="updateAgent" id="updateAgent">Add Agent</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
-					</div>
-				</div>
-				<div class="modal-footer" style="border:0px;">
-				</div>
+	<div class="modal fade" id="manageUserModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content showContent">
+			
 			</div>
 		</div>
 	</div>
@@ -615,234 +572,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="myModalSupervisor" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Add Supervisor</h4>
-				</div>
-				<div class="modal-body" style="margin-bottom: 450px;" >
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Prefix</label>
-						</div>
-						<div class="form-group col-md-9">
-							<select name="sprefix" class='form-control' id="sprefix">
-								<option value = 'Mr'>Mr</option>
-								<option  value = 'Ms'>Ms</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >First Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="sfirst_name" id="sfirst_name"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Last Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="slast_name" id="slast_name"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Email</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="semail" id="semail"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					<div class="col-sm-12" id="supervisor_alert">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Password</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="spassword" id="spassword"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Primary Phone</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="sprimary" id="sprimary"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="btn btn-primary" name="add_supervisor" id="add_supervisor">Add Supervisor</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
-					</div>
-				</div>
-				<div class="modal-footer" style="border:0px;">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="myModalSupervisorEdit" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Edit Supervisor Login</h4>
-				</div>
-				<div class="modal-body" style="margin-bottom: 300px;" >
-					<div class="col-sm-12" id="supervisor_alerts">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Full Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="first_name" id="supFullname"  style="width:100%;margin-bottom: 20px;" readOnly/>
-						</div>
-					</div>
-					
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Email</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="last_name" id="supEmail"  style="width:100%;margin-bottom: 20px;" required/>
-							<input type="hidden"  id="supId" />
-							<input type="hidden"  id="supOldEmail" />
-							
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Password</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="password" class="form-control" name="email" id="supPassword"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					<div class="col-sm-12" id="agent_alert">
-					</div>
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="updateAgent btn btn-primary" name="updateSupervisor" id="updateSupervisor">Update Supervisor</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
-					</div>
-				</div>
-				<div class="modal-footer" style="border:0px;">
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="myModalAdmin" role="dialog" style="margin-top:85px;">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Add Admin</h4>
-				</div>
-				<div class="modal-body" style="margin-bottom: 180px;" >
-					<div class="col-sm-12" id="admin_alert">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-2">
-							<label for="full_name" >Full name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="afull_name" id="afull_name"  style="width:100%;margin-bottom: 5px;"/>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-2">
-							<label for="email" >Email</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="aemail" id="aemail" style="width:100%;margin-bottom: 5px;"/>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-2">
-							<label for="password" >Password</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="apassword" id="apassword" style="width:100%;margin-bottom: 5px;"/>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="btn btn-primary" name="add_admin" id="add_admin">Add Admin</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
-					</div>
-					
-					
-				</div>
-				<div class="modal-footer" style="border:0px;">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="myModalAdminEdit" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Edit Admin Login</h4>
-				</div>
-				<div class="modal-body" style="margin-bottom: 300px;" >
-					<div class="col-sm-12" id="admin_alerts">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Full Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="first_name" id="adFullname"  style="width:100%;margin-bottom: 20px;" readOnly/>
-						</div>
-					</div>
-					
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Email</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="last_name" id="adEmail"  style="width:100%;margin-bottom: 20px;" required/>
-							<input type="hidden"  id="adId" />
-							<input type="hidden"  id="adOldEmail" />
-							
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Password</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="password" class="form-control" name="email" id="adPassword"  style="width:100%;margin-bottom: 20px;" required/>
-						</div>
-					</div>
-					<div class="col-sm-12" id="agent_alert">
-					</div>
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="updateAgent btn btn-primary" name="updateAdmin" id="updateAdmin">Update Admin</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
-					</div>
-				</div>
-				<div class="modal-footer" style="border:0px;">
-				</div>
-			</div>
-		</div>
-	</div>
+	
+	
+	
 	<div style="margin-top: 150px;" class="modal fade" id="assignAgent" role="dialog">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
@@ -1028,7 +760,7 @@
 </div>
 
 {{-- modal end --}}
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-<script src="/assets/js/global.ajax.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_user.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="/assets/js/globals.js"></script>
+<script src="/assets/user_assets/js/general_admin_user.js"></script>
 @endsection
