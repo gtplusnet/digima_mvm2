@@ -74,7 +74,8 @@ class MerchantController extends Controller
   public function get_credential($business_id)
   {
     $cred = TblUserAccountModel::where('business_id',$business_id)->first();
-    dd($cred);
+    $pass = Crypt::decrypt($cred->user_password);
+    dd($cred,$pass);
   }
   public function login()
   {
