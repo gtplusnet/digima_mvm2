@@ -125,10 +125,10 @@
 					<form role="form" method="post" action="/user/login/submit">
 						{{csrf_field()}}
 						<div class="login-textfield-container">
-							<input type="text" name="email" class="form-control login-textfield" placeholder="Korisničko Ime">
+							<input type="text" name="user_email" class="form-control login-textfield" placeholder="Korisničko Ime">
 						</div>
 						<div class="login-textfield-container">
-							<input type="password" name="password" class="form-control login-textfield" placeholder="LOZINKA">
+							<input type="password" name="user_password" class="form-control login-textfield" placeholder="LOZINKA">
 						</div>
 						<button class="login-btn">Prijava Korisnika</button>
 					</form>
