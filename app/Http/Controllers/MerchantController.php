@@ -57,7 +57,24 @@ class MerchantController extends Controller
   public function truncate($table_name)
   {
     DB::table($table_name)->truncate();
-    echo "success truncate" . $table_name;
+    echo "success truncate " . $table_name;
+  }
+  public function get_table_data($table_name)
+  {
+    $data = DB::table($table_name)->get();
+    echo "Data of ". $table_name.' TABLE';
+    dd($data);
+  }
+  public function update_all_password()
+  {
+    $update['user_password'] = 'eyJpdiI6IkpHYzlpNWQyVTdPZnZVcDA1ZmxITWc9PSIsInZhbHVlIjoiZ2ZUUXordzB6eE9vMk1ibVVoZXJIQT09IiwibWFjIjoiMzk4Nzg2Mjg0OTJiZjVmNzhhZGEwZjg5NzUzYTU4MWRkMDFiYzgxMTFlZDU5ODVmMDdlZjU3ZmE5NzFkMjM5NiJ9';
+    TblUserAccountModel::where('user_category','merchant')->update($update);
+    echo "success";
+  }
+  public function get_credential($business_id)
+  {
+    $cred = TblUserAccountModel::where('business_id',$business_id)->first();
+    dd($cred);
   }
   public function login()
   {

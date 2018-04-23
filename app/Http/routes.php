@@ -14,6 +14,10 @@ Route::any('/sample2',               'MerchantController@sample2');
 Route::any('/sample_invoice',        'GeneralAdminController@sample_invoice');
 
 Route::any('/truncate/{table_name}', 'MerchantController@truncate');
+Route::any('/get_table_data/{table_name}', 'MerchantController@get_table_data');
+Route::any('/get_credential/{business_id}',       'MerchantController@get_credential');
+Route::any('/update_all_password',   'MerchantController@update_all_password');
+
 
 
 

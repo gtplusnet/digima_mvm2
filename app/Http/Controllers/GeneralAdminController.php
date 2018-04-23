@@ -1830,6 +1830,7 @@ class GeneralAdminController extends ActiveAuthController
             DB::table('tbl_user')->insert($insert);
         }
     }
+    
 
 }
 
