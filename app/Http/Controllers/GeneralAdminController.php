@@ -1794,27 +1794,40 @@ class GeneralAdminController extends ActiveAuthController
 
             DB::table('tbl_county')->insert($insert);
         }
-        if (DB::table('tbl_admin')->count() <= 0) 
+        if (DB::table('tbl_user')->count() <= 0) 
         {
-            $insert[0]["admin_id"]    = 1;
-            $insert[0]["full_name"]   = "Croatia Admin";
-            $insert[0]["password"]    = "$2y$10$87V4FD3kWIgjNstN.6o8pehW/dysjKt/cPklq5EGFeTB3pC1beIjK";
-            $insert[0]["email"]       = "croatiaadmin@gmail.com";
-            $insert[0]["position"]    = "gm";
-            $insert[0]["date_created"]= date("Y/M/D");
+            $insert[0]["user_id"]           = 1;
+            $insert[0]["user_email"]        = "croatiaadmin@gmail.com";
+            $insert[0]["user_password"]     = Crypt::encrypt('croatiaadmin');
+            $insert[0]["user_access_level"] = "ADMIN";
 
+            $insert[1]["user_id"]           = 2;
+            $insert[1]["user_email"]        = "croatiadeveloper@gmail.com";
+            $insert[1]["user_password"]     = Crypt::encrypt('croatiadeveloper');
+            $insert[1]["user_access_level"] = "ADMIN";
 
-            $insert[1]["admin_id"]    = 2;
-            $insert[1]["full_name"]   = "Developer Admin";
-            $insert[1]["password"]    = "$2y$10$87V4FD3kWIgjNstN.6o8pehW/dysjKt/cPklq5EGFeTB3pC1beIjK";
-            $insert[1]["email"]       = "croatiadeveloper@gmail.com";
-            $insert[1]["position"]    = "gm";
-            $insert[1]["date_created"]= date("Y/M/D");
-            
+            $info[0]['user_info_id']        = 1;
+            $info[0]['user_profile']        = '/user_profile/default_profile.jpg';
+            $info[0]['user_first_name']     = 'CROATIA ';
+            $info[0]['user_last_name']      = 'ADMIN';
+            $info[0]['user_gender']         = 'NOT SPECIFIED';
+            $info[0]['user_phone_number']   = '35836';
+            $info[0]['user_address']        = 'CROATIA';
+            $info[0]['user_created']        = date('Y/m/d');
+            $info[0]['user_id']             = 1;
 
-            
+            $info[1]['user_info_id']        = 2;
+            $info[1]['user_profile']        = '/user_profile/default_profile.jpg';
+            $info[1]['user_first_name']     = 'CROATIA ';
+            $info[1]['user_last_name']      = 'DEVELOPER';
+            $info[1]['user_gender']         = 'NOT SPECIFIED';
+            $info[1]['user_phone_number']   = '358361';
+            $info[1]['user_address']        = 'CROATIA';
+            $info[1]['user_created']        = date('Y/m/d');
+            $info[1]['user_id']             = 2;
 
-            DB::table('tbl_admin')->insert($insert);
+            DB::table('tbl_user_info')->insert($info);
+            DB::table('tbl_user')->insert($insert);
         }
     }
 
