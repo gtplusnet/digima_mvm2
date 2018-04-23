@@ -37,6 +37,7 @@ use Carbon\Carbon;
 use Redirect;
 use DB;
 use Mail;
+use Crypt;
 
 class FrontController extends Controller
 {
@@ -244,7 +245,7 @@ class FrontController extends Controller
             $businessData->twitter_url = $request->twitterUsername;
             $businessData->membership = $request->membership;
             $businessData->business_status = '1';
-            $businessData->agent_call_date = '';
+            $businessData->user_call_date = '';
             $businessData->date_transact = date("Y/m/d");
             $businessData->date_created = date("Y/m/d");
 
@@ -260,7 +261,7 @@ class FrontController extends Controller
 
             $accountData = new Tbl_user_account;
             $accountData->user_email = $request->emailAddress;
-            $accountData->user_password =  password_hash($request->password, PASSWORD_DEFAULT);
+            $accountData->user_password =  Crypt::encrypt($request->password);
             $accountData->user_category = 'merchant';
             $accountData->status = 'registered';
             $accountData->string_password = "none";
@@ -374,19 +375,18 @@ class FrontController extends Controller
         $check = TblReportsModel::where('business_id',$id)->first();
         if($check)
         {
-            if($check->business_views <= 10)
+            if(($check->business_views)%10)
             {
                 $update['business_id']      = $id;
-                $update['business_views']   = $check->business_views + 1;
-                TblReportsModel::where('business_id',$id)->update($update);   
+                $update['business_views']   = $check->business_views + 10;
+                TblReportsModel::where('business_id',$id)->update($update);
             }
             else
             {
                 $update['business_id']      = $id;
-                $update['business_views']   = $check->business_views + 40;
-                TblReportsModel::where('business_id',$id)->update($update);
+                $update['business_views']   = $check->business_views + 1;
+                TblReportsModel::where('business_id',$id)->update($update);  
             }
-            
         }
         else
         {
@@ -395,18 +395,13 @@ class FrontController extends Controller
             TblReportsModel::insert($insert);   
         }
         $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
-                               ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                               ->join('tbl_business_other_info','tbl_business_other_info.business_id','=','tbl_business.business_id')
-                               ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                               ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                               ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                               ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                               ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                               ->BusinessInfo()
                                ->first();
 
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
-        $data['coordinates']            = Self::getCoordinates_long($address);
-        $data['coordinates1']           = Self::getCoordinates_lat($address); 
+        $location                       = Self::getCoordinates_location($address);
+        $data['coordinates']            = $location['long'];
+        $data['coordinates1']           = $location['lat'];
 
         $data['_tag_category']          = TblBusinessTagCategoryModel::where('business_id',$id)
                                         ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
@@ -444,24 +439,15 @@ class FrontController extends Controller
       TblGuestMessages::insert($data);;
       return "<div class='alert alert-success'><strong>Uspjeh!</strong> Poruka je poslana.</div>";
     }
-
-    
-
-    public static function getCoordinates_long($address){
-        $address        = str_replace(" ", "+", $address); 
-        $url            = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
-        $response       = file_get_contents($url);
-        $json           = json_decode($response,TRUE); 
-        $long           = $json['results'][0]['geometry']['location']['lng'];
-        return $long;
-    }
-    public static function getCoordinates_lat($address){
-        $address        = str_replace(" ", "+", $address); 
-        $url            = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
-        $response       = file_get_contents($url);
-        $json           = json_decode($response,TRUE); 
-        $lat            = $json['results'][0]['geometry']['location']['lat'];
-        return $lat;
+    public static function getCoordinates_location($address)
+    {
+        $address            = str_replace(" ", "+", $address); 
+        $url                = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
+        $response           = file_get_contents($url);
+        $json               = json_decode($response,TRUE); 
+        $location['lat']    = $json['results'][0]['geometry']['location']['lat'];
+        $location['long']   = $json['results'][0]['geometry']['location']['lng'];
+        return $location;
     }
     
 
@@ -518,12 +504,11 @@ class FrontController extends Controller
         $contact = TblContactUs::first();
         $contacts = $contact->email; 
 
-        $data                   = array('name'=>$contact_name,'email_to'=>$contacts,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
-        $check_mail             = Mail::send('front.pages.merchant_sending_email', $data, function($message) use ($data) {
-                                  $message->to($data['email_to'], 'Croatia Team')->subject
-                                    ('THE RIGHT PLACE FOR BUSINESS');
-                                  $message->from('guardians35836@gmail.com','Croatia Customer');
-        });
+        $data                   =   array('name'=>$contact_name,'email_to'=>$contacts,'email_add'=>$contact_email_add,'subject'=>$contact_subject,'help_message'=>$contact_help_message,'date'=>$date);
+        $check_mail             =   Mail::send('front.pages.merchant_sending_email', $data, function($message) use ($data) {
+                                        $message->to($data['email_to'], 'Zute Stranice')->subject('THE RIGHT PLACE FOR BUSINESS');
+                                        $message->from('guardians35836@gmail.com','Zute Stranice');
+                                    });
         $data['guest_messages'] = TblBusinessContactPersonModel::get(); 
         if($check_mail)
         {
@@ -534,37 +519,6 @@ class FrontController extends Controller
         {
             Session::flash('error', 'Žao mi je!. Pogreška mreže, transakcija nije uspjela!');
             return Redirect::to('/contact');
-        }
-    }
-
-    public function admin()
-    {
-        $data['page']                 = 'generaladmin';
-        $data['contact_us']           = TblContactUs::first();
-        return view('generaladmin');
-    }
-
-    public function sampleUpload() {
-        return view('practice-page.upload');
-    }
-    //UPLOAD FILE SAMPLE
-    public function uploadFile(Request $request) {
-        $file = $request->file("file");
-        if ($file == "") 
-        {
-            echo "File is empty.";
-        }
-        else if($file->getClientOriginalExtension() != "mp3") 
-        {
-            echo "Datoteka nije audio, odaberite audio datoteku.";
-        }
-        else 
-        {
-            $file->move('uploads', $file->getClientOriginalName());
-            $audioInfo = new Tbl_audio;
-            $audioInfo ->audio_name = $file->getClientOriginalName();
-            $audioInfo->audio_path = '/uploads/'.$file->getClientOriginalName().'';
-            $audioInfo->save();
         }
     }
 }

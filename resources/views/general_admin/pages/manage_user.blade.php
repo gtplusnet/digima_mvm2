@@ -158,7 +158,7 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Agent Name</th>
+									<th>Name</th>
 									<th>Email</th>
 									<th>Phone Number</th>
 									<th>Merchant Calls/Added</th>
@@ -176,7 +176,7 @@
 									<td>{{count($agent_merchant->where('agent_id',$data_agent->agent_id))}}</td>
 									<td>{{$data_agent->team_name}}</td>
 									<td>
-										<select style="height:30px;width:80px;" class="view_user_details" data-email="{{$data_agent->email}}"  data-name="{{$data_agent->first_name}} {{$data_agent->last_name}}" data-id="{{ $data_agent->user_id}}">
+										<select style="height:30px;width:80px;" class="view_user_details" data-email="{{$data_agent->user_email}}"  data-name="{{$data_agent->user_first_name}} {{$data_agent->user_last_name}}" data-id="{{ $data_agent->user_id}}">
 											<option value="">Action</option>
 											<option value="view">View</option>
 											<option value="assign">Assign</option>
@@ -231,20 +231,20 @@
 							<tbody>
 								@foreach($_data_team as $data_team)
 								<tr>
-									<td>{{ $data_team->id}}</td>
+									<td>{{ $data_team->team_id}}</td>
 									<td>{{ $data_team->team_name}}</td>
 									<td>{{ $data_team->team_information}}</td>
-									<td><i data-id="{{ $data_team->id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
+									<td><i data-id="{{ $data_team->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
 									<td>
 										@if($data_team->archived==0)
-										{{ $data_team->first_name}} {{ $data_team->last_name}}
+										{{ $data_team->user_first_name}} {{ $data_team->user_last_name}}
 										@else
-										<font color="red">{{ $data_team->first_name}} {{ $data_team->last_name}} - DELETED</font>
+										<font color="red">{{ $data_team->user_first_name}} {{ $data_team->user_last_name}} - DELETED</font>
 										@endif
 									</td>
 									<td>
-										<select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox" data-name="{{ $data_team->team_name}}" data-info="{{ $data_team->team_information}}" data-id="{{ $data_team->id}}">
-											<option value="">Action</option>
+										<select style="height:30px;width:80px;" class="team_actionbox" id="team_actionbox" data-name="{{ $data_team->team_name}}" data-info="{{ $data_team->team_information}}" data-id="{{ $data_team->team_id}}">
+											<option value="">Action </option>
 											<option value="edit">Edit</option>
 											<option value="delete">Delete</option>
 										</select>
@@ -300,8 +300,8 @@
 								<tbody>
 									@foreach($_data_supervisor as  $data_supervisor)
 									<tr>
-										<td>{{$data_supervisor->supervisor_id}}</td>
-										<td>{{$data_supervisor->first_name}} {{$data_supervisor->last_name}}</td>
+										<td>{{$data_supervisor->user_id}}</td>
+										<td>{{$data_supervisor->user_first_name}} {{$data_supervisor->user_last_name}}</td>
 										<td>{{$data_supervisor->email}}</td>
 										<td>{{$data_supervisor->primary_phone}}</td>
 										<td>
@@ -424,9 +424,9 @@
 						<div class="form-group col-md-4">
 							<select name="user_access_level" class='form-control' id="user_access_level">
 								<option value="0">SELECT POSITION</option>
-								<option value="2">AGENT</option>
-								<option value="3">SUPERVISOR</option>
-								<option value="4">ADMIN</option>
+								<option value="AGENT">AGENT</option>
+								<option value="SUPERVISOR">SUPERVISOR</option>
+								<option value="ADMIN">ADMIN</option>
 							</select>
 						</div>
 						
@@ -481,9 +481,71 @@
 				
 				<div class="modal-footer" style="border:0px;">
 					<center>
-					<button type="submit" class="addUserBtn btn btn-primary" name="addUserBtn" id="addUserBtn">ADD AGENT</button>
+					<button type="button" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Action" class="addUserBtn btn btn-primary" name="addUserBtn" id="addUserBtn">ADD USER</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
 					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div  class="modal fade" id="assignUser" role="dialog">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Assign User</h4>
+				</div>
+				<div class="modal-body row">
+					<div id="assign_success">
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group col-md-3">
+							<label for="business_name" >Name</label>
+						</div>
+						<div class="form-group col-md-9">
+							<input type="text" class="form-control" name="agent_name" id="name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
+							<input type="hidden" class="form-control" name="agent_id" id="id_assign"  />
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group col-md-3">
+							<label for="business_name" >Team Name</label>
+						</div>
+						<div class="form-group col-md-9">
+							<select id="teamAssigned" class="form-control" >
+								@foreach($_team_select as $data_team)
+								<option value="{{$data_team->team_id}}">{{$data_team->team_name}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<center>
+						<button type="submit" class="save_category btn btn-primary" name="userAssigned" id="userAssigned">Assign Agent</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+						</center>
+					</div>
+				</div>
+				<div class="modal-footer" style="border:none;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 150px;" class="modal fade" id="deleteUser" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+					<div class="col-sm-12">
+						<h4 class="modal-title">Are You sure You want to delete this User?</h4>
+					</div>
+					<div class="col-sm-12">
+						<center>
+						<input type="hidden" id="delete_user_id" value=""/>
+						<button type="button" class=" btn btn-danger" id="userDeleted">Delete</button>
+						
+						<button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button></center>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -495,14 +557,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="myModalTeam" role="dialog" style="margin-top:85px;">
+	<div class="modal fade" id="myModalTeam" role="dialog" >
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Add Team</h4>
 				</div>
-				<div class="modal-body" style="margin-bottom: 150px;" >
+				<div class="modal-body row"  >
 					<div id="team_alert">
 					</div>
 					<div class="col-sm-12">
@@ -519,6 +581,18 @@
 						</div>
 						<div class="form-group col-md-9">
 							<input type="text" class="form-control" name="team_info" id="team_info" style="width:100%"/>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group col-md-3">
+							<label for="business_name" >Team Supervisor</label>
+						</div>
+						<div class="form-group col-md-9">
+							<select name="" id="team_super" class="form-control">
+								@foreach($_team_super as $team_super)
+								<option value="{{$team_super->user_id}}">{{$team_super->user_first_name.' '.$team_super->user_last_name}}</option>
+							    @endforeach
+							</select>
 						</div>
 					</div>
 					<div class="col-sm-12">
@@ -575,98 +649,7 @@
 	
 	
 	
-	<div style="margin-top: 150px;" class="modal fade" id="assignAgent" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Assign Agent</h4>
-				</div>
-				<div class="modal-body" style="margin-bottom: 150px;" >
-					<div id="assign_success">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Agent Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="agent_name" id="agent_name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
-							<input type="hidden" class="form-control" name="agent_id" id="agent_id_assign"  />
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Team Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<select id="teamAssigned" class="form-control" >
-								@foreach($_team_select as $data_team)
-								<option value="{{$data_team->team_id}}">{{$data_team->team_name}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="save_category btn btn-primary" name="agentAssigned" id="agentAssigned">Assign Agent</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
-					</div>
-					
-					
-				</div>
-				<div class="modal-footer">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<div style="margin-top: 150px;" class="modal fade" id="assignSupervisor" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Assign Supervisor</h4>
-				</div>
-				<div class="modal-body" style="margin-bottom: 150px;" >
-					<div id="assignSuccess">
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Supervisor Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="super_name" id="super_name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
-							<input type="hidden" class="form-control" name="super_id" id="super_id_assign"  />
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group col-md-3">
-							<label for="business_name" >Team Name</label>
-						</div>
-						<div class="form-group col-md-9">
-							<select id="teamAssign" class="form-control" >
-								@foreach($_team_select as $data_team)
-								<option value="{{$data_team->team_id}}">{{$data_team->team_name}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<center>
-						<button type="submit" class="save_category btn btn-primary" name="superAssigned" id="superAssigned">Assign Supervisor</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						</center>
-					</div>
-					
-					
-				</div>
-				<div class="modal-footer">
-					
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div style="margin-top: 150px;" class="modal fade" id="deleteAdmin" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
@@ -685,24 +668,7 @@
 			</div>
 		</div>
 	</div>
-	<div style="margin-top: 150px;" class="modal fade" id="deleteAgent" role="dialog">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
-					<div class="col-sm-12">
-						<h4 class="modal-title">Are You sure You want to delete this Agent?</h4>
-					</div>
-					<div class="col-sm-12">
-						<center>
-						<input type="hidden" id="delete_agent_id" value=""/>
-						<button type="button" class=" btn btn-danger" id="agentDeleted">Delete</button>
-						
-						<button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button></center>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<div style="margin-top: 150px;" class="modal fade" id="deleteTeam" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
@@ -759,8 +725,5 @@
 	</div>
 </div>
 
-{{-- modal end --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="/assets/js/globals.js"></script>
 <script src="/assets/user_assets/js/general_admin_user.js"></script>
 @endsection

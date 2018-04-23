@@ -1,7 +1,7 @@
 @extends('merchant.layout.layout')
 @section('content')
 <div class="page-title">
-    <h3>{{ $page }}</h3>
+    <h3 class="transform-uppercase">{{ $page }}</h3>
     <div class="page-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/merchant/dashboard">Home</a></li>
@@ -52,7 +52,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <h1 class="m-b-md"><b>CROATIA Directory</b></h1>
+                            <h1 class="m-b-md transform-uppercase"><b>ŽUTE STRANICE</b></h1>
                             <address>
 
                                 <strong>@if(isset($contact_us->complete_address)==null)@else {{$contact_us->complete_address}}@endif<br></strong>

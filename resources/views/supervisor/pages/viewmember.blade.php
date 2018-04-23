@@ -1,7 +1,7 @@
 
 @foreach($_supervisor as $supervisor)
 <div style="text-align:center,font-size:20px;font-weight: bold;margin:20px;">
-	Supervisor : {{$supervisor->prefix}} {{$supervisor->first_name}} {{$supervisor->last_name}}
+	Supervisor : {{$supervisor->user_first_name}} {{$supervisor->user_last_name}}
 </div>
 @endforeach
 
@@ -19,12 +19,11 @@
 	<tbody>
 		@foreach($_data_agent as $data_agent)
 		<tr>
-			<td>{{$data_agent->agent_id}}</td>
-			<td>{{$data_agent->first_name}}</td>
-			<td>{{$data_agent->last_name}}</td>
-			<td>{{$data_agent->email}}</td>
-			<td>{{$data_agent->primary_phone}}</td>
-			
+			<td>{{$data_agent->user_id}}</td>
+			<td>{{$data_agent->user_first_name}}</td>
+			<td>{{$data_agent->user_last_name}}</td>
+			<td>{{$data_agent->user_email}}</td>
+			<td>{{$data_agent->user_phone_number}}</td>
 		</tr>
 		@endforeach
 	</tbody>

@@ -41,6 +41,40 @@
         
     </head>
     <body class="page-header-fixed">
+        <style>
+            button 
+            {
+                text-transform:capitalize !important;
+            }
+            .website-title
+            {
+                text-transform:capitalize !important;
+            }
+            .page-breadcrumb
+            {
+                text-transform:capitalize !important;
+            }
+            .transform-uppercase
+            {
+                text-transform:uppercase !important;
+            }
+            .transform-lowercase
+            {
+                text-transform:lowercase !important;
+            }
+            .transform-capitalize
+            {
+                text-transform:capitalize !important;
+            }
+            th
+            {
+                text-transform:capitalize !important;
+            }
+            label
+            {
+                text-transform:capitalize !important;
+            }
+        </style>
         <main class="page-content content-wrap">
             
             {{-- Header and Nav Bar --}}
@@ -92,6 +126,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
                 });
+                
                 </script>
             </body>
         </html>

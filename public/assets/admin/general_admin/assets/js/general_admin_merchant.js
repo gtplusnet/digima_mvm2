@@ -25,7 +25,7 @@ function merchant()
 	}
 	function deactivate_merchant()
 	{
-		$(document).on('change','.registerAction',function(){
+		$('body').on('change','.registerAction',function(){
 			if($(this).val()=="newinvoice")
 			{
 				$('#business_id').val($(this).data('business_id'))
@@ -36,7 +36,7 @@ function merchant()
 				$('#confirmModal').modal('show');
 			}
 		});
-		$(document).on('click','.newInvoiceSend',function()
+		$('body').on('click','.newInvoiceSend',function()
 		{
 			var id = $('#business_id').val();
 			window.location.assign("/general_admin/send_new_invoice/"+id+"/5")
@@ -45,7 +45,7 @@ function merchant()
 
 	function resend_invoice()
 	{ 
-		$(document).on('change','.resendAction',function()
+		$('body').on('change','.resendAction',function()
 		{
 		if ($(this).val() == "resend") 
 			   {

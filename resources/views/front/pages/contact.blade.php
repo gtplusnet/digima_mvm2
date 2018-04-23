@@ -47,7 +47,7 @@
 					<textarea rows="11" name="help_message" id="we_can_help" class="contact-textfield message-textarea" required/></textarea>
 				</div>
 				<div class="col-md-12 contact-btn-holder">
-					<button class="contact-send-btn">Pošalji Poruku</button>
+					<button class="contact-send-btn transform-capitalize">Pošalji Poruku</button>
 				</div>
 			</div>
 			</form>

@@ -2,7 +2,7 @@
 	<div class="col-md-3">
 		<div class="category-filter-holder" >
 			<div class="category-title-holder" >
-				<p class="categorylist-title">Tvoj  Filter<a href="/"><i class="fa fa-trash-o pull-right" style="font-size:20px;color:#fff;" aria-hidden="true"></i></a></p>
+				<p class="categorylist-title transform-capitalize">Tvoj  Filter<a href="/"><i class="fa fa-trash-o pull-right" style="font-size:20px;color:#fff;" aria-hidden="true"></i></a></p>
 			</div>
 			<div class="categorylist-container">
 				<ul class="category navbar-nav list-group">
@@ -16,7 +16,7 @@
 		<div class="category-filter-holder" >
 			
 			<div class="category-title-holder" >
-				<p class="categorylist-title">Filter Kategorije</p>
+				<p class="categorylist-title transform-capitalize">Filter Kategorije</p>
 			</div>
 			
 			<div class="categorylist-container">
@@ -52,7 +52,7 @@
 		</div>
 		<div class="featuredlist-holder">
 			<div class="featuredlist-title-holder">
-				<p class="featuredlist-title">Istaknuti Popis</p>
+				<p class="featuredlist-title transform-capitalize">Istaknuti Popis</p>
 			</div>
 			<div class="featuredlist-container side-list-padding">
 				<div id="carousel-pager" class="carousel slide featured-carousel" data-ride="carousel" data-interval="3000">
@@ -101,7 +101,7 @@
 		</div>
 		<div class="featuredlist-holder">
 			<div class="featuredlist-title-holder">
-				<p class="featuredlist-title">Nagledaniji</p>
+				<p class="featuredlist-title transform-capitalize">Najgledanije</p>
 			</div>
 			<div class="featuredlist-container side-list-padding">
 				<div  class="featured-carousel" >
@@ -131,7 +131,7 @@
 	</div>
 	<div class="col-md-9" >
 		<div class="business-list-holder">
-			<p class="business-list-title">FILTIRANJE FAVORITA</p>
+			<p class="business-list-title transform-uppercase">FILTIRANJE FAVORITA</p>
 		</div>
 		<div class="business-list-holder">
 			<p class="business-list-title">{{count($_business_list)}} Rezultat </p>
@@ -174,7 +174,7 @@
 			</div>
 		</div>
 		<div class="payment-containers" style="margin-bottom:50px;">
-			<div class="payment-title">
+			<div class="payment-title transform-uppercase">
 				PREDAJTE VAŠE POSLOVNE DJELE U NAJVEĆE PONUDE
 				<br>
 			</div>

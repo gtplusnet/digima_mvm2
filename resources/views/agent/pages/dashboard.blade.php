@@ -1,4 +1,6 @@
-@extends('agent.layout.layout')
+@extends('layout.general_layout')
+@section('title', 'Dashboard')
+@section('description', 'Dashboard')
 @section('content')
 <link href="/assets/agent/assets1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>

@@ -1,6 +1,5 @@
-@extends('supervisor.layout.layout')
+@extends('layout.general_layout')
 @section('content')
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <style>
 th
 {
@@ -10,7 +9,12 @@ td
 {
 text-align: center;
 }
+.li_style
+{
+width:50%;
+}
 </style>
+
 <div class="page-title clearfix">
     <h3>{{ $page }}</h3>
     <div class="page-breadcrumb">
@@ -22,14 +26,14 @@ text-align: center;
 </div>
 <div id="main-wrapper">
     <!---james modal-->
-    <div style="margin-top: 150px;" class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Add Team</h4>
                 </div>
-                <div class="modal-body" style="margin-bottom: 150px;" >
+                <div class="modal-body row" >
                     <div id="team_success">
                     </div>
                     <div class="col-sm-12">
@@ -64,7 +68,7 @@ text-align: center;
         </div>
     </div>
     
-    <div style="margin-top: 150px;" class="modal fade" id="teamEditModal" role="dialog">
+    <div class="modal fade" id="teamEditModal" role="dialog">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -72,7 +76,7 @@ text-align: center;
                     <h4 class="modal-title">Edit Team</h4>
                 </div>
                 
-                <div class="modal-body" style="margin-bottom: 150px;" >
+                <div class="modal-body row"  >
                     <div id="team_update_success">
                     </div>
                     <div class="col-sm-12">
@@ -163,11 +167,11 @@ text-align: center;
                             <tbody>
                                 @foreach ($viewteam as $newteam)
                                 <tr>
-                                    <td>{{ $newteam->id}}</td>
+                                    <td>{{ $newteam->team_id}}</td>
                                     <td>{{ $newteam->team_name}}</td>
                                     <td>{{ $newteam->team_information}}</td>
                                     <td><i data-id="{{ $newteam->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
-                                    <td>{{ $newteam->sum}}</td>
+                                    <td>{{ $newteam->sum_of_calls}}</td>
                                     <td>
                                         <select class="teamAction" id="actionbox" data-info="{{ $newteam->team_information}}" data-name="{{ $newteam->team_name}}" data-id="{{ $newteam->team_id}}">
                                             <option value="">Action</option>
@@ -176,7 +180,6 @@ text-align: center;
                                         </select>
                                     </td>
                                 </tr>
-                                
                                 @endforeach
                             </tbody>
                         </table>
@@ -218,22 +221,24 @@ text-align: center;
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($viewagent as $newagent)
+                                @foreach($viewteam as $viewteam)
+                                @foreach ($viewteam->viewagent as $newagent)
                                 <tr>
-                                    <td>{{ $newagent->agent_id}}</td>
-                                    <td>{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}</td>
-                                    <td>{{ $newagent->email}}</td>
-                                    <td>{{ $newagent->primary_phone}}</td>
-                                    <td>{{ $newagent->agent_call}}</td>
+                                    <td>{{ $newagent->user_id}}</td>
+                                    <td>{{ $newagent->user_first_name.' '.$newagent->user_last_name}}</td>
+                                    <td>{{ $newagent->user_email}}</td>
+                                    <td>{{ $newagent->user_phone_number}}</td>
+                                    <td>{{ $newagent->user_calls}}</td>
                                     <td>{{ $newagent->team_name}}</td>
                                     <td>
-                                        <select class="actionbox" id="actionbox" data-name="{{ $newagent->prefix}} {{ $newagent->first_name}} {{ $newagent->last_name}}" data-id="{{ $newagent->agent_id}}">
+                                        <select class="actionbox" id="actionbox" data-name="{{ $newagent->user_first_name}} {{ $newagent->user_last_name}}" data-id="{{ $newagent->user_id}}">
                                             <option value="">Action</option>
                                             <option value="assign">Assign</option>
                                             <option value="delete">Delete</option>
                                         </select>
                                     </td>
                                 </tr>
+                                @endforeach
                                 @endforeach
                             </tbody>
                         </table>
@@ -258,14 +263,14 @@ text-align: center;
                 </div>
             </div>
         </div>
-        <div style="margin-top: 150px;" class="modal fade" id="assignAgent" role="dialog">
+        <div class="modal fade" id="assignAgent" role="dialog">
             <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Assign Agent</h4>
                     </div>
-                    <div class="modal-body" style="margin-bottom: 150px;" >
+                    <div class="modal-body row">
                         <div id="assign_success">
                         </div>
                         <div class="col-sm-12">
@@ -296,16 +301,16 @@ text-align: center;
                             </center>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer " style="border:none;">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div style="margin-top: 150px;" class="modal fade" id="deleteTeam" role="dialog">
+        <div class="modal fade" id="deleteTeam" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <div class="modal-body" style="margin-bottom: 80px;" >
+                    <div class="modal-body row" >
                         <div class="col-sm-12">
                             <h4 class="modal-title">Are You sure You want to delete this Team?</h4>
                         </div>
@@ -320,10 +325,10 @@ text-align: center;
                 </div>
             </div>
         </div>
-        <div style="margin-top: 150px;" class="modal fade" id="deleteAgent" role="dialog">
+        <div class="modal fade" id="deleteAgent" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <div class="modal-body" style="margin-bottom: 80px;" >
+                    <div class="modal-body row">
                         <div class="col-sm-12">
                             <h4 class="modal-title">Are You sure You want to delete this Agent?</h4>
                         </div>
@@ -341,12 +346,6 @@ text-align: center;
         {{--  end modal --}}
     </div>
 </div>
-<style>
-.li_style
-{
-width:50%;
-}
-</style>
-<script src="/assets/js/global.ajax.js"></script>
+
 <script src="/assets/supervisor/supervisor_user.js"></script>
 @endsection

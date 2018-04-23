@@ -287,11 +287,14 @@ table[class=hide], img[class=hide], td[class=hide] {
                     
                       </p>
                       @if($name=='user')
-                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"> <br/>Bok, {{$email}}<br><br>
+                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"> <br/>Hi, {{$name}}<br><br>
                       @else
-                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"> <br/>Naziv Tvrtke: {{$name}}<br><br>
+                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"> <br/>Company Name : {{$name}}<br><br>
                       @endif
-                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"><br/>Veza resetiranja vaše lozinke : {{$link}}<br/>
+                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"><br/>Please use this credential to login your dashboard. Dont forget to change your password in your profile settings.<br/>
+                        <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"><br/>Email : {{$email_add}}<br/>
+                        <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"><br/>Password : {{$password}}<br/><br/><br/>
+                      <p style="color:#5b5f65; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif"><br/>Click this link {{$link}} or click the login button below.<br/>
                       <!-- START BUTTON -->
                       
                       <center>
@@ -307,7 +310,7 @@ table[class=hide], img[class=hide], td[class=hide] {
                                   <tr>
                                     <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
                                         <tr>
-                                          <td width="250" height="60" align="center" bgcolor="#1f3ca6"><a href="{{$link}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: #ffffff; background:#1f3ca6" class="button_link">Kliknite Ovdje</a></td>
+                                          <td width="250" height="60" align="center" bgcolor="#1f3ca6"><a href="{{$link}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: #ffffff; background:#1f3ca6" class="button_link">LOGIN</a></td>
                                         </tr>
                                       </table></td>
                                   </tr>

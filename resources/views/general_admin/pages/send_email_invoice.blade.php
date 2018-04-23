@@ -263,13 +263,13 @@
                       <p><font color="red"> {{$remarks}}</font></p>
                       <br>
                       Nakon što platite svoje članstvo.
-                      <center>{{$link}}<br>or<br> Samo kliknite gumb UPLOAD</center><br>
+                      <center>{{$link}}<br></center>
                     </p>
                     
                     
-                    <br />On behalf of the company <br />
+                    <br />On behalf of our company <br />
                     <img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/_compresseds/da24cf15-10e5-4af3-b8f7-56013fdde0e0.jpg" width="312" height="61" alt="" border="0"/><br />
-                  Croatia Invoice Support </p>
+                  Yellow Pages Invoice Support </p>
                   <center>
                   <table cellpadding="0" cellspacing="0" border="0" width="100%">
                     <tr>
@@ -278,68 +278,15 @@
                           <td height="20" width="100%" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
                         </tr>
                       </table>
-                      <table border="0" align="center" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
-                        <tbody>
-                          <tr>
-                            <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
-                              <tr>
-                                <td width="250" height="60" align="center" bgcolor="#BBB929"><a href="{{$link}}" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: black; background:#BBB929" class="button_link">UPLOAD</a></td>
-                              </tr>
-                            </table></td>
-                          </tr>
-                        </tbody>
-                      </table></td>
+                      
+                    </td>
                     </tr>
                   </table>
                   </center>
                   </td>
                 </tr>
               </table>
-              <table  bgcolor="#212A34" width="100%" border="0" cellspacing="0" cellpadding="0" >
-                <tr>
-                  <td><table width="100%" bgcolor="#BBB929" cellpadding="0" cellspacing="0" border="0"  >
-                    <tr>
-                      <td height="40"  bgcolor="#BBB929" align="center"  class="one-column">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td align="center" bgcolor="#BBB929" class="one-column" style="padding-top:0;padding-bottom:0;padding-right:10px;padding-left:10px;"><font style="font-size:13px; text-decoration:none; color:#ffffff; font-family: Verdana, Geneva, sans-serif; text-align:center">Subscribe Us!</font></td>
-                    </tr>
-                    <tr>
-                      <td align="center" bgcolor="#BBB929" class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td align="center" bgcolor="#BBB929" class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;"><table width="150" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                          <td width="33" align="center"><a href="#" target="_blank"><img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/237854a9-0a06-4f88-a9b8-c36e57e31083.png" alt="facebook" width="32" height="32" border="0"/></a></td>
-                          <td width="34" align="center"><a href="#" target="_blank"><img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/2fb3f578-f70a-41b6-9bbc-f99a174d6456.png" alt="twitter" width="32" height="32" border="0"/></a></td>
-                          <td width="33" align="center"><a href="#" target="_blank"><img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/17c02388-c25e-4eb5-a7cc-8f34458a50ad.png" alt="linkedin" width="32" height="32" border="0"/></a></td>
-                        </tr>
-                      </table></td>
-                    </tr>
-                    <tr>
-                      <td align="center" bgcolor="#BBB929" class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td align="center" bgcolor="#BBB929" class="one-column" style="padding-top:0;padding-bottom:0;padding-right:10px;padding-left:10px;"><font style="font-size:13px; text-decoration:none; color:#ffffff; font-family: Verdana, Geneva, sans-serif; text-align:center">All rights reserved. <a href="#" target="_blank" style="color:#ffffff; text-decoration:underline">2017</a></font></td>
-                    </tr>
-                    <tr>
-                      <td align="center" bgcolor="#BBB929" class="one-column" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="6" bgcolor="#BBB929" class="contents1" style="width:100%; border-bottom-left-radius:10px; border-bottom-right-radius:10px"></td>
-                    </tr>
-                  </table></td>
-                </tr>
-                <tr>
-                  <td><table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td height="6" bgcolor="#BBB929" class="contents" style="width:100%; border-bottom-left-radius:10px; border-bottom-right-radius:10px"></td>
-                    </tr>
-                    
-                  </table></td>
-                </tr>
-              </table>
-              <!-- ======= end footer ======= --></td>
+              
             </tr>
           </table>
     </div></td>

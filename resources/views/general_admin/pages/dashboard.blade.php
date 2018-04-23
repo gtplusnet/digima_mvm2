@@ -1,7 +1,8 @@
-@extends('general_admin.pages.general_admin_layout')
+@extends('layout.general_layout')
 @section('title', 'Dashboard')
 @section('description', 'Dashboard')
 @section('content')
+
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 <script src='/assets/admin/general_admin/assets/plugins/chartsjs/Chart.min.js'></script>
 <div class="page-title">

@@ -5,109 +5,109 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use App\Models\TblUserAccountModel;
+use App\Models\TblCountyModel;
+use App\Models\TblBusinessCategoryModel;
+use App\Models\TblContactUs;
+use App\Models\TblUserModel;
+
+use Crypt;
+use Session;
+use Redirect;
 
 class LoginController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public static function allow_logged_out_users_only()
     {
-        return view('mvm.front.login');
-    }
-
-    public function check_login(Request $request)
-    {
-        
-        $validate_login = TblUserAccountModel::select('status')->where('user_email','=',$request->login_email)->where('user_password','=',$request->login_password)->first();
-
-        if(count($validate_login) == 1)
+        if(session("active"))
         {
-            if($validate_login->status == 1)
+            if(session("user_access_level")=="ADMIN")
             {
-                echo 'Correct credentials.';
+              return Redirect::to('/general_admin/dashboard');
             }
-            else if($validate_login->status == 2)
+            else if(session("user_access_level")=="SUPERVISOR")
             {
-                echo 'Sorry, your account is not activated yet.';
+              return Redirect::to('/supervisor/dashboard');
+            }
+            else if(session("user_access_level")=="AGENT")
+            {
+              return Redirect::to('/agent/dashboard');
             }
             else
             {
-                echo 'Sorry, your account has been disabled.';
+              Session::flash('error', 'You are not a user.');
+              return Redirect::to('/user/login');
+            }
+        }
+    }
+    public function user_login()
+    {
+        Self::allow_logged_out_users_only();
+        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['_mob_categories']    = TblBusinessCategoryModel::all();
+        $data['contact_us']         = TblContactUs::first();
+        $data['page']               = Crypt::decrypt('eyJpdiI6IjVvMko0ZjNrSll1TkVueUlXcGFaMUE9PSIsInZhbHVlIjoibGUzU09TUzFlbjZpYzdab3ZvQ21pQT09IiwibWFjIjoiOTkwYTk5MzUzMjhlMTQ5M2Q5OTFjZGFlZmQwNmY0ZDRjNDI4MTg5NTEzZWRkYmI5YjI5N2EzYjAzOGU2YzQzOSJ9');
+        return view('front.pages.login', $data);
+    }
+    public function user_login_submit(Request $request)
+    {
+        $validate_login = TblUserModel::where('user_email',$request->user_email)->first();
+        
+        
+        if(count($validate_login)==1)
+        {
+            if(Crypt::decrypt($validate_login->user_password)==$request->user_password)
+            {
+              if($validate_login->archived==0)
+              {
+                Session::put('active','active_user_login');
+                Session::put('user_id',$validate_login->user_id);
+                Session::put('user_access_level',$validate_login->user_access_level);
+
+                if($validate_login->user_access_level=="ADMIN")
+                {
+                  return Redirect::to('/general_admin/dashboard');
+                }
+                else if($validate_login->user_access_level=="SUPERVISOR")
+                {
+                  return Redirect::to('/supervisor/dashboard');
+                }
+                else if($validate_login->user_access_level=="AGENT")
+                {
+                  return Redirect::to('/agent/dashboard');
+                }
+                else
+                {
+                  Session::flash('error', 'You are not a user.');
+                  return Redirect::to('/user/login');
+                }
+                
+              }
+              else
+              {
+                Session::flash('error', 'Your account has been deactivated.');
+                return Redirect::to('/user/login');
+              }
+              
+            }
+            else
+            {
+              Session::flash('error', 'Password you entered is incorrect.');
+              return Redirect::to('/user/login');
             }
         }
         else
         {
-            echo 'Incorrect Email/Password.';
+            $data['page']   = 'Agent Login';
+            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
         }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function user_logout()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        Session::forget('active');
+        Session::forget('user_id');
+        Session::forget('user_access_level');
+        return Redirect::to("/user/login");
     }
 }

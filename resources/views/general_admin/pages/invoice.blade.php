@@ -37,13 +37,16 @@
                                 </p>
                                 
                                 <div class="col-md-12">
-                                    <strong>NAME : {{$invoice_info->contact_first_name}} {{$invoice_info->contact_last_name}}</strong>
+                                    <h5>NAME : {{$invoice_info->contact_first_name}} {{$invoice_info->contact_last_name}}</h5>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>PHONE: {{$invoice_info->business_phone}}/{{$invoice_info->business_alt_phone}}</strong>
+                                    <h5>PRIMARY PHONE: {{$invoice_info->business_phone}}</h5>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>EMAIL: {{$invoice_info->user_email}}</strong>
+                                    <h5>PRIMARY PHONE: {{$invoice_info->business_alt_phone}}</h5>
+                                </div>
+                                <div class="col-md-12">
+                                    <h5>EMAIL: {{$invoice_info->user_email}}</h5>
                                 </div>
                             </div>
                             <div class="col-md-12" id="showHere1s">
@@ -58,10 +61,10 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Item One</td>
+                                            <td>Item</td>
                                             <td>{{$invoice_info->business_name}}</td>
                                             <td>{{$invoice_info->membership_name}}</td>
-                                            <td>$ {{$invoice_info->membership_price}}</td>
+                                            <td> {{number_format($invoice_info->membership_price)}}</td>
                                         </tr>
                                         
                                     </tbody>
@@ -75,14 +78,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="text-right">
-                                        <h4 class="no-m m-t-sm">Subtotal</h4>
-                                        <h2 class="no-m">$0</h2>
-                                        <hr>
-                                        <h4 class="no-m m-t-sm">Shipping</h4>
-                                        <h2 class="no-m">$0</h2>
                                         <hr>
                                         <h4 class="no-m m-t-md text-success">Total</h4>
-                                        <h1 class="no-m text-success">$ {{$invoice_info->membership_price}}</h1>
+                                        <h1 class="no-m text-success">  {{number_format($invoice_info->membership_price)}}</h1>
                                         
                                         <hr>
                                         
@@ -113,6 +111,4 @@
 margin:10px 10px 10px 10px;
 }
 </style>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_invoice.js"></script> --}}
 @endsection

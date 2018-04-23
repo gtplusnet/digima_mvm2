@@ -11,7 +11,7 @@ text-align: center;
 }
 </style>
 <div class="page-title">
-   <h3>{{ $page }}</h3>
+   <h3 class="transform-capitalize">{{ $page }}</h3>
    <div class="page-breadcrumb">
       <ol class="breadcrumb">
          <li><a href="/merchant/dashboard">Home</a></li>
@@ -27,12 +27,12 @@ text-align: center;
                <!-- Nav tabs -->
                <div role="tabpanel">
                   <ul class="nav nav-pills col-md-12" role="tablist">
-                     <li role="presentation" class="active tab-mobile"><a href="#MI" role="tab" data-toggle="tab" aria-expanded="true">Merchant Information</a></li>
-                     <li role="presentation" class="tab-mobile"><a href="#OI" role="tab" data-toggle="tab" aria-expanded="false">Druge Podatke</a></li>
-                     <li role="presentation" class="tab-mobile"><a href="#BH" role="tab" data-toggle="tab" aria-expanded="false">Radno Vrijeme</a></li>
-                     <li role="presentation" class="tab-mobile"><a href="#BI" role="tab" data-toggle="tab" aria-expanded="false">Poslovna Slika</a></li>
-                     <li role="presentation" class="tab-mobile"><a href="#PM" role="tab" data-toggle="tab" aria-expanded="false">Način Plačanja</a></li>
-                     <li role="presentation" class="tab-mobile"><a href="#CP" role="tab" data-toggle="tab" aria-expanded="false">Promijeni Lozinku</a></li>
+                     <li role="presentation" class="active tab-mobile transform-capitalize"><a href="#MI" role="tab" data-toggle="tab" aria-expanded="true">Merchant Information</a></li>
+                     <li role="presentation" class="tab-mobile transform-capitalize"><a href="#OI" role="tab" data-toggle="tab" aria-expanded="false">Druge Podatke</a></li>
+                     <li role="presentation" class="tab-mobile transform-capitalize"><a href="#BH" role="tab" data-toggle="tab" aria-expanded="false">Radno Vrijeme</a></li>
+                     <li role="presentation" class="tab-mobile transform-capitalize"><a href="#BI" role="tab" data-toggle="tab" aria-expanded="false">Poslovna Slika</a></li>
+                     <li role="presentation" class="tab-mobile transform-capitalize"><a href="#PM" role="tab" data-toggle="tab" aria-expanded="false">Način Plačanja</a></li>
+                     <li role="presentation" class="tab-mobile transform-capitalize"><a href="#CP" role="tab" data-toggle="tab" aria-expanded="false">Promijeni Lozinku</a></li>
                   </ul>
                   <style>
                   @media screen and (max-width: 480px)
@@ -162,13 +162,13 @@ text-align: center;
                            <div class="col-sm-3 searchfields-format">
                               @if($business_hours->act == 'yes')
                               <select class="form-control" name="disable[]">
-                                 <option value="yes">Da</option>
-                                 <option value="no">Ne</option>
+                                 <option value="yes">Onesposobiti</option>
+                                 <option value="no">Omogućiti</option>
                               </select>
                               @else
                               <select class="form-control" name="disable[]">
-                                 <option value="no">Ne</option>
-                                 <option value="yes">Da</option>
+                                 <option value="no">Omogućiti</option>
+                                 <option value="yes">Onesposobiti</option>
                               </select>
                               @endif
                            </div>

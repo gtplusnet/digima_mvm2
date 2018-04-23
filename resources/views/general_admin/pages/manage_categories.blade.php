@@ -2,7 +2,6 @@
 @section('title', 'manage categories')
 @section('description', 'manage categories')
 @section('content')
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <style type="text/css">
 .form-select
 {
@@ -82,145 +81,145 @@
 	</div>
 </div>
 {{-- MOdal --}}
-<div style="margin-top: 150px;" class="modal fade" id="myModal" role="dialog">
-<div class="modal-dialog modal-md">
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Add Category</h4>
-		</div>
-		<div class="modal-body" style="margin-bottom: 150px;" >
-			<div id="showHere1">
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add Category</h4>
 			</div>
-			<div class="col-sm-12">
-				<div class="form-group col-md-3">
-					<label for="business_name" >Category Name</label>
+			<div class="modal-body row"  >
+				<div id="showHere1">
 				</div>
-				<div class="form-group col-md-9">
-					<input type="text" class="form-control" name="cat_name" id="cat_name"  style="width:100%;margin-bottom: 20px;"/>
+				<div class="col-sm-12">
+					<div class="form-group col-md-3">
+						<label for="business_name" >Category Name</label>
+					</div>
+					<div class="form-group col-md-9">
+						<input type="text" class="form-control" name="cat_name" id="cat_name"  style="width:100%;margin-bottom: 20px;"/>
+					</div>
 				</div>
-			</div>
-			<div class="col-sm-12">
-				<div class="form-group col-md-3">
-					<label for="business_name" >Category Information</label>
+				<div class="col-sm-12">
+					<div class="form-group col-md-3">
+						<label for="business_name" >Category Information</label>
+					</div>
+					<div class="form-group col-md-9">
+						<input type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%"/>
+					</div>
 				</div>
-				<div class="form-group col-md-9">
-					<input type="text" class="form-control" name="cat_info" id="cat_info" style="width:100%"/>
+				<div class="col-sm-12">
+					<center>
+					<button type="submit" class="save_category btn btn-primary" name="save_category" id="save_category">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</center>
 				</div>
+				
+				
 			</div>
-			<div class="col-sm-12">
-				<center>
-				<button type="submit" class="save_category btn btn-primary" name="save_category" id="save_category">Save</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</center>
-			</div>
-			
-			
-		</div>
-		<div class="modal-footer" style="border:0px;">
-			
-		</div>
-	</div>
-</div>
-</div>
-<div style="margin-top: 150px;" class="modal fade" id="categoryEdit" role="dialog">
-<div class="modal-dialog modal-md">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h4 class="modal-title">Edit Category</h4>
-		</div>
-		<div class="modal-body" style="margin-bottom: 150px;" >
-			<div id="showHere2">
-			</div>
-			<div class="col-sm-12">
-				<div class="form-group col-md-3">
-					<label for="business_name" >Category Name</label>
-				</div>
-				<div class="form-group col-md-9">
-					<input  type="text" class="form-control" name="cat_name" id="cat_name_edit"  style="width:100%;margin-bottom: 20px;"/>
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<div class="form-group col-md-3">
-					<label for="business_name" >Category Information</label>
-				</div>
-				<div class="form-group col-md-9">
-					<input  type="text" class="form-control" name="cat_info" id="cat_info_edit" style="width:100%"/>
-					<input  type="hidden" id="id_to_edit"/>
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<center><button type="submit" class="update_category btn btn-primary" name="update_category" id="update_category">Update</button>
-				<button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
-				</center>
-			</div>
-		</div>
-		<div class="modal-footer" style="border:0px;">
-			
-		</div>
-	</div>
-</div>
-</div>
-<div class="modal fade" id="subCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-md" role="document">
-	<div class="modal-content">
-		<div class="modal-header">
-			<p class="modal-title" id="cat_name_head" style="font-size:25px;font-weight:  bold;"></p>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="modal-body">
-			<div class="pull-left" style="margin:20px 0px 20px 20px">
-				<button type="button"  id="addSubCategoryBtn"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
-			</div>
-			<div id="get_sub_category_result">
+			<div class="modal-footer" style="border:0px;">
 				
 			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		</div>
 	</div>
 </div>
-</div>
-<div style="margin-top:80px;" class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm" role="document">
-	<div class="modal-content">
-		<div class="modal-body" style="margin-bottom:30%;">
-			<div class="col-sm-12">
-				<h4 class="modal-title">Are You sure You want to delete this Item?</h4>
+<div class="modal fade" id="categoryEdit" role="dialog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Edit Category</h4>
 			</div>
-			<div class="col-sm-12">
-				<center>
-				<input type="hidden" id="delete_id" value=""/>
-				<input type="hidden" id="delete_link" value=""/>
-				<button type="button" class=" btn btn-danger" id="actionDelete">Delete</button>
-				<button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
-				</center>
+			<div class="modal-body row" >
+				<div id="showHere2">
+				</div>
+				<div class="col-sm-12">
+					<div class="form-group col-md-3">
+						<label for="business_name" >Category Name</label>
+					</div>
+					<div class="form-group col-md-9">
+						<input  type="text" class="form-control" name="cat_name" id="cat_name_edit"  style="width:100%;margin-bottom: 20px;"/>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="form-group col-md-3">
+						<label for="business_name" >Category Information</label>
+					</div>
+					<div class="form-group col-md-9">
+						<input  type="text" class="form-control" name="cat_info" id="cat_info_edit" style="width:100%"/>
+						<input  type="hidden" id="id_to_edit"/>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<center><button type="submit" class="update_category btn btn-primary" name="update_category" id="update_category">Update</button>
+					<button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
+					</center>
+				</div>
 			</div>
-		</div>
-		
-	</div>
-</div>
-</div>
-<div style="margin-top:80px;" class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm" role="document">
-	<div class="modal-content">
-		<div class="modal-body" id="show_user" style="margin-bottom: 160px;" >
-			<div class="col-sm-12" id="success_alert">
+			<div class="modal-footer" style="border:0px;">
 				
 			</div>
-			<div class="col-sm-12">
-				<center>
-				<button type="button" class="btn btn-success" onClick="window.location.reload();"  data-dismiss="modal">OKAY</button>
-				</center>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="subCategory" role="dialog" >
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<p class="modal-title" id="cat_name_head" style="font-size:25px;font-weight:  bold;"></p>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pull-left" style="margin:20px 0px 20px 20px">
+					<button type="button"  id="addSubCategoryBtn"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
+				</div>
+				<div id="get_sub_category_result">
+					
+				</div>
+			</div>
+			<div class="row modal-footer" style="border:none;">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-body row">
+				<div class="col-sm-12">
+					<h4 class="modal-title">Are You sure You want to delete this Item?</h4>
+				</div>
+				<div class="col-sm-12">
+					<center>
+					<input type="hidden" id="delete_id" value=""/>
+					<input type="hidden" id="delete_link" value=""/>
+					<button type="button" class=" btn btn-danger" id="actionDelete">Delete</button>
+					<button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+					</center>
+				</div>
+			</div>
+			
+		</div>
+	</div>
 </div>
-<div style="margin-top: 150px;" class="modal fade" id="addSubCategory" role="dialog">
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-body row" id="show_user" >
+				<div class="col-sm-12" id="success_alert">
+					
+				</div>
+				<div class="col-sm-12">
+					<center>
+					<button type="button" class="btn btn-success" onClick="window.location.reload();"  data-dismiss="modal">OKAY</button>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="addSubCategory" role="dialog">
 <div class="modal-dialog modal-md">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -228,7 +227,7 @@
 			<h4 class="modal-title">Add Sub-Category</h4>
 		</div>
 		<div id="addSubCategory_alert">
-			<div class="modal-body" style="margin-bottom: 150px;" >
+			<div class="modal-body row">
 				
 				
 				<div class="col-sm-12">
@@ -269,10 +268,10 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Edit Sub-Category22</h4>
+			<h4 class="modal-title">Edit Sub-Category</h4>
 		</div>
 		<div id="addSubCategory_alert">
-			<div class="modal-body" style="margin-bottom: 150px;" >
+			<div class="modal-body row" >
 				
 				
 				<div class="col-sm-12">
@@ -307,7 +306,5 @@
 	</div>
 </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_categories.js"></script>
-{{-- <script src="/assets/js/global.ajax.js"></script> --}}
+<script src="/assets/general_admin/general_admin_manage_categories.js"></script>
 @endsection

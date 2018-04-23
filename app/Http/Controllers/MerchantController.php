@@ -42,8 +42,7 @@ class MerchantController extends Controller
 	{
 		if(session("merchant_login") != true)
 		{
-
-			return Redirect::to("/login")->send();
+      return Redirect::to("/login")->send();
 		}
 	}
 
@@ -57,210 +56,208 @@ class MerchantController extends Controller
 
   public function truncate($table_name)
   {
-      DB::table($table_name)->truncate();
-      echo "success truncate" . $table_name;
+    DB::table($table_name)->truncate();
+    echo "success truncate" . $table_name;
   }
-
-
-	public function login()
-    {
-      	Self::allow_logged_out_users_only();
-
-        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
-        $data['_mob_categories']    = TblBusinessCategoryModel::all();
-        $data['contact_us']         = TblContactUs::first();
-        $data['page']   = 'login';
-        return view('front.pages.login', $data);
-    }
+  public function login()
+  {
+  	Self::allow_logged_out_users_only();
+    $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
+    $data['_mob_categories']    = TblBusinessCategoryModel::all();
+    $data['contact_us']         = TblContactUs::first();
+    $data['page']   = 'login';
+    return view('front.pages.login', $data);
+  }
   public function login_submit(Request $request)
+  {
+    $validate_login = TblUserAccountModel::where('user_email',$request->email)->first();
+    if($validate_login)
     {
-        $validate_login = TblUserAccountModel::where('user_email',$request->email)->first();
-                       
-        if($validate_login)
+      if (Crypt::decrypt($validate_login->user_password)==$request->password)
+      {
+        if($validate_login->status=="Activated"||$validate_login->status=="activated")
         {
-            if (password_verify($request->password, $validate_login->user_password)) 
-                {
-                   if($validate_login->status=="Activated"||$validate_login->status=="activated")
-                   {
-                    $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
-                                ->first();
-                    Session::put("merchant_login",true);
-                    Session::put("business_id",$user_info->business_id);
-                    Session::put("business_banner",$validate_login->business_banner);
-                    Session::put("email",$validate_login->user_email);
-                    Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
-                    $data['page']   = 'Dashboard';
-                    return Redirect::to('/merchant/dashboard');
-                   }
-                   elseif($validate_login->status=="registered"||$validate_login->status=="Registered")
-                   {
-                    $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
-                                          ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-                                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                          ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                          ->first();
-                    Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
-                    Session::put("email",$user_info->user_email);
-                    Session::put("business_name",$user_info->business_name);
-                    Session::put("business_id",$user_info->business_id);
-                    Session::put("business_contact_person_id",$user_info->business_contact_person_id);
-                    Session::put("business_address",$user_info->business_complete_address);
-                    Session::put("city_state",$user_info->city_name.", ".$user_info->county_name);
-                    Session::put("zip_code",$user_info->postal_code);
-                   
-                    $data['page']   = 'Redirect';
-
-                    return Redirect::to('/merchant/redirect');
-                   }
-                   elseif($validate_login->status=="deactivated"||$validate_login->status=="Deactivated")
-                   {
-                     $data['page']   = 'Merchant Login';
-                     return Redirect::to('/redirect');
-                   }
-                }
-            else
-            {
-                $data['page']   = 'Merchant Login';
-                return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-            }
+          $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
+                      ->first();
+          Session::put("merchant_login",true);
+          Session::put("business_id",$user_info->business_id);
+          Session::put("business_banner",$validate_login->business_banner);
+          Session::put("email",$validate_login->user_email);
+          Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
+          $data['page']   = 'Dashboard';
+          return Redirect::to('/merchant/dashboard');
         }
-        else
+        elseif($validate_login->status=="registered"||$validate_login->status=="Registered")
         {
-            $data['page']   = 'Merchant Login';
-            return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+          $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
+                                ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
+                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                                ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
+                                ->first();
+          Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
+          Session::put("email",$user_info->user_email);
+          Session::put("business_name",$user_info->business_name);
+          Session::put("business_id",$user_info->business_id);
+          Session::put("business_contact_person_id",$user_info->business_contact_person_id);
+          Session::put("business_address",$user_info->business_complete_address);
+          Session::put("city_state",$user_info->city_name.", ".$user_info->county_name);
+          Session::put("zip_code",$user_info->postal_code);
+          $data['page']   = 'Redirect';
+          return Redirect::to('/merchant/redirect');
+        }
+        elseif($validate_login->status=="deactivated"||$validate_login->status=="Deactivated")
+        {
+          $data['page']   = 'Merchant Login';
+          return Redirect::to('/redirect');
+        }
       }
-   }
-
+      else
+      {
+        $data['page']   = 'Merchant Login';
+        return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+      }
+    }
+    else
+    {
+      $data['page']   = 'Merchant Login';
+      return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
+    }
+  }
   public function logout()
-	 {
-		  Session::forget("merchant_login");
-      return Redirect::to("/login");
-	 }
+	{
+	  Session::forget("merchant_login");
+    return Redirect::to("/login");
+	}
 
 	public function index()
-	 {	
-		Self::allow_logged_in_users_only();
-
-        $data['page'] = 'Dashboard';
-        $views = TblReportsModel::where('business_id',session('business_id'))->count();
-        $data['guest_messages'] = TblGuestMessages::where('business_id',session('business_id'))->count();
-        $fb = TblBusinessModel::where("business_id",session('business_id'))->first();
-        if($fb->facebook_url==""||$fb->facebook_url==null)
-        {
-          $data['fb']         = "0";
-          if($views==0)
-          {
-            $data['page_view']  ="0";
-          }
-          else
-          {
-            $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
-            $data['page_view'] = $business_views->business_views;
-          }
-        }
-        else
-        {
-          $fb_page      = $fb->facebook_url;
-          $access_token = 'EAAD6rZBdEZBzABAFQIyH9AYydJUw1MlR7gVTCjqKLG7rVFQZBNTgFcVPE1UHfbGtCsHY12R5pdRIoDPp4i6BSy5gU9rUGZBnC3snzuj2VU7ZBZA4csIYLSGPGnovoayRhZBb3qUTKIXvkyMdH5TFWyo2IoArQ8oTj4g6sZC4l3tJ0QZDZD';
-          $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
-          $curl         = curl_init($url);
-          curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
-          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-          $result       = curl_exec($curl);  
-          curl_close($curl);
-          $details      = json_decode($result,true);
-          
-          if(isset($details['fan_count']) == null)
-          {
-            $data['fb']   = '0';
-          }
-          else
-          {
-            $data['fb']   = $details['fan_count'];
-          }
-          if($views==0)
-          {
-            $data['page_view']  ="0";
-          }
-          else
-          {
-            $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
-            $data['page_view'] = $business_views->business_views;
-          }
-        }
+	{	
+  	Self::allow_logged_in_users_only();
+    $data['page']           = 'Dashboard';
+    $views                  = TblReportsModel::where('business_id',session('business_id'))->count();
+    $data['guest_messages'] = TblGuestMessages::where('business_id',session('business_id'))->count();
+    $fb                     = TblBusinessModel::where("business_id",session('business_id'))->first();
+    if($views==0)
+    {
+      $data['page_view']  ="0";
+    }
+    else
+    {
+      $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
+      $data['page_view'] = $business_views->business_views;
+    }
+    if($fb->facebook_url==""||$fb->facebook_url==null)
+    {
+      $data['fb']         = "0";
+    }
+    else
+    {
+      $fb_page      = $fb->facebook_url;
+      $access_token = 'EAACEdEose0cBACxMxDhnbwMJyAkZBnIR6zXhQe3ffBcj0fxRYIoG23DufKZCps6ZC5C4KOmlMZAZCUQ5PvlNczBE0AydOm1EgleLSyP8X6JTgs3AJkvCpksoek0mRZAOsrVtLagIQ0LWyO9LJIZC6i63qo1NomHpAL6Twvyk666ZBs5gMKQif6rQfqCAzVzzTvaejHZCOb9KgSAZDZD';
+      $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
+      $curl         = curl_init($url);
+                      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
+                      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+      $result       = curl_exec($curl);  
+                      curl_close($curl);
+      $details      = json_decode($result,true);
+      if(isset($details['fan_count']) == null)
+      {
+        $data['fb']   = '0';
+      }
+      else
+      {
+        $data['fb']   = $details['fan_count'];
+      }
+    }
     return view ('merchant.pages.dashboard', $data);	
-		
-	  }
-    public function merchant_redirect()
+	}
+  public function merchant_redirect()
+  {
+    $data['index']            = "unpaid";
+    $data['_mob_categories']  = TblBusinessCategoryModel::all();
+    $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+    $data['contact_us']       = TblContactUs::first();
+    return view ('front.pages.success',$data);
+  }
+
+  public function merchant_redirect_exist()
+  {
+    $data['index'] = 'redirect_exist';
+    $data['_mob_categories']  = TblBusinessCategoryModel::all();
+    $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+    return view('front.pages.success',$data);
+  }
+
+  public function payment()
+  {
+    $data['page']             = 'payment';
+    $data['_mob_categories']  = TblBusinessCategoryModel::all();
+    $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+    $data['method']           = TblPaymentMethod::where('archived',0)->get();
+    $check                    = TblPaymentModel::where('business_id',session('business_id'))->first();
+    if($check)
     {
-
-      $data['index']            = "unpaid";
-      $data['_mob_categories']  = TblBusinessCategoryModel::all();
-      $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
-      $data['contact_us']       = TblContactUs::first();
-      return view ('front.pages.success',$data);
-
+        return Redirect::to('/merchant/redirect/exist');
     }
-
-    public function merchant_redirect_exist()
+    else
     {
-
-      $data['index'] = 'redirect_exist';
-      $data['_mob_categories']  = TblBusinessCategoryModel::all();
-      $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
-      return view('front.pages.success',$data);
-
-    }
-
-    public function payment()
-    {
-      $data['page']             = 'payment';
-      $data['_mob_categories']  = TblBusinessCategoryModel::all();
-      $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
       $data['method']           = TblPaymentMethod::where('archived',0)->get();
-      $check                    = TblPaymentModel::where('business_id',session('business_id'))->first();
-        if($check)
-        {
-            return Redirect::to('/merchant/redirect/exist');
-        }
-        else
-        {
-          $data['method']           = TblPaymentMethod::where('archived',0)->get();
-          $data['_mob_categories']  = TblBusinessCategoryModel::all();
-          $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
-          $data["merchant_info"]    = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
-                                    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                                    ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
-                                    ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                    ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                                    ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
-                                    ->first();  
-          return view('front.pages.payment_merchant', $data);
-        }
+      $data['_mob_categories']  = TblBusinessCategoryModel::all();
+      $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+      $data["merchant_info"]    = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
+                                ->BusinessAdmin()
+                                ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->first();  
+      return view('front.pages.payment_merchant', $data);
     }
-    public function upload_payment(Request $request)
+  }
+  public function upload_payment(Request $request)
+  {
+    $file = $request->file('payment_file_name');
+    $link = $request->link;
+    if($file==null||$file=='')
     {
-        $file = $request->file('payment_file_name');
-        $link = $request->link;
-        
-
-        if($file==null||$file=='')
+      $data['payment_reference_number']   = $request->payment_reference_number;
+      $data['payment_amount']             = $request->payment_amount;
+      $data['payment_method']             = $request->payment_method;
+      $data['payment_file_name']          = 'Image Not Available';
+      $data['business_contact_person_id'] = $request->contact_id;
+      $data['business_id']                = $request->business_id;
+      $data['payment_status']             = 'submitted';
+      $check_insert = TblPaymentModel::insert($data);
+      if($check_insert)
+      {
+        Session::flash('sucess_payment',$link );
+        return Redirect::to('/merchant/redirect/exist');
+      }
+       else
+      {
+        echo "Failed to Upload";
+      }
+    }
+    else
+    {
+      $filename         = '/payment_upload/'.uniqid().$file->getClientOriginalName();
+      $file_ext         = $file->getClientOriginalExtension();
+      $destinationPath  = public_path('/payment_upload');
+      $check            = $file->move($destinationPath, $filename);   
+        if($check)
         {
           $data['payment_reference_number']   = $request->payment_reference_number;
           $data['payment_amount']             = $request->payment_amount;
           $data['payment_method']             = $request->payment_method;
-          $data['payment_file_name']          = 'Image Not Available';
+          $data['payment_file_name']          = $filename;
           $data['business_contact_person_id'] = $request->contact_id;
           $data['business_id']                = $request->business_id;
           $data['payment_status']             = 'submitted';
           $check_insert = TblPaymentModel::insert($data);
           if($check_insert)
           {
-            Session::flash('sucess_payment',$link );
+            Session::flash('sucess_payment',$link);
             return Redirect::to('/merchant/redirect/exist');
           }
            else
@@ -268,93 +265,50 @@ class MerchantController extends Controller
             echo "Failed to Upload";
           }
         }
-    
-        else
-        {
-          $filename='/payment_upload/'.uniqid().$file->getClientOriginalName();
-          $file_ext = $file->getClientOriginalExtension();
-          $destinationPath = public_path('/payment_upload');
-          $check=$file->move($destinationPath, $filename);   
-            if($check)
-            {
-              $data['payment_reference_number']   = $request->payment_reference_number;
-              $data['payment_amount']             = $request->payment_amount;
-              $data['payment_method']             = $request->payment_method;
-              $data['payment_file_name']          = $filename;
-              $data['business_contact_person_id'] = $request->contact_id;
-              $data['business_id']                = $request->business_id;
-              $data['payment_status']             = 'submitted';
-              $check_insert = TblPaymentModel::insert($data);
-              if($check_insert)
-              {
-                Session::flash('sucess_payment',$link);
-                return Redirect::to('/merchant/redirect/exist');
-              }
-               else
-              {
-                echo "Failed to Upload";
-              }
-            }
-        }
     }
+  }
 
-    public function payment_merchant(Request $request,$id)
-    {
-      $data['method']           = TblPaymentMethod::where('archived',0)->get();
-      $data['_mob_categories']  = TblBusinessCategoryModel::all();
-        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
-      $data["merchant_info"] = TblBusinessModel::where('tbl_business.business_id', $id)
-                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->join('tbl_agent','tbl_agent.agent_id','=','tbl_business.agent_id')
+  public function payment_merchant(Request $request,$id)
+  {
+    $data['method']         = TblPaymentMethod::where('archived',0)->get();
+    $data['_mob_categories']= TblBusinessCategoryModel::all();
+    $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
+    $data["merchant_info"]  = TblBusinessModel::where('tbl_business.business_id', $id)
+                            ->BusinessAdmin()
                             ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
                             ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
                             ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                            ->join('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')
                             ->where('tbl_invoice.invoice_status','!=','paid')
                             ->first();
-
     return view('front.pages.payment_merchant', $data);
+  }
+  public function profile()
+  {
+    Self::allow_logged_in_users_only();
+    $data['page']             = 'Profile';
+    $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))
+                              ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                              ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
+                              ->first();
+
+
+	  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(10);
+    $data['other_info']       = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
+    $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
+    $images                   = TblBusinessImages::where('business_id',session('business_id'))->count();
+    if($images==0)
+    {
+      $data['images']  = 0;
     }
-
-
-	  public function profile()
+    else
     {
-      Self::allow_logged_in_users_only();
-      $data['page']             = 'Profile';
-      $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))
-                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
-                                ->first();
-
-
-		  $data['_payment_method']  = TblABusinessPaymentMethodModel::where('business_id',session('business_id'))->paginate(10);
-      $data['other_info']       = TblBusinessOtherInfoModel::where('business_id',session('business_id'))->first();
-      $data['_business_hours']  = TblBusinessHoursmodels::where('business_id',session('business_id'))->get();
-      $images                   = TblBusinessImages::where('business_id',session('business_id'))->count();
-      if($images==0)
-      {
-        $data['images']  = 0;
-      }
-      else
-      {
-        $data['images']  = 1;
-        $data['_images'] = TblBusinessImages::where('business_id',session('business_id'))->first();
-      }
-      return view ('merchant.pages.profile', $data);		
-	  }
-
-
-	  public function view_info()
-	  {
-		  Self::allow_logged_in_users_only();
-		  $data['page']			        	= 'Profile';
-	 	  return view ('merchant.pages.view_info', $data);		
-	  }
-
-    public function update_merchant_info(Request $request)//
-    {
-
+      $data['images']  = 1;
+      $data['_images'] = TblBusinessImages::where('business_id',session('business_id'))->first();
+    }
+    return view ('merchant.pages.profile', $data);		
+  }
+  public function update_merchant_info(Request $request)//
+  {
     $data['transaction']      = 'profile';
     $data['county_list']      = TblCountyModel::get();
     $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))
@@ -362,13 +316,10 @@ class MerchantController extends Controller
                                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
                                 ->first();     
     return view('merchant.pages.update_merchant_info',$data); 
-    
-     
-   }
+  }
 
    public function saving_merchant_info(Request $request)
    {
-
     $data['city_id']        = $request->city_id;
     $data['county_id']      = $request->county_id;
     $data['twitter_url']    = $request->twitter_url;
@@ -487,26 +438,24 @@ class MerchantController extends Controller
 
     public function merchant_change_password(Request $request)
     {
-
-        $merchant_password = TblUserAccountModel::where('business_id',session('business_id'))->first();             
-        if(password_verify($request->current_password,$merchant_password->user_password))
-        {
-              if($request->new_password == $request->confirm_password) 
-                {
-                  $data['user_password'] = password_hash($request->new_password, PASSWORD_DEFAULT);
-                  TblUserAccountModel::where('business_id',session('business_id'))->update($data);
-                  return "<div class='alert alert-success'><strong>Success!</strong>  Password Changed</div>";
-                 }
-              else
-              {
-                return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
-              }
-        }
+      $merchant_password = TblUserAccountModel::where('business_id',session('business_id'))->first();             
+      if(Crypt::decrypt($merchant_password->user_password)==$request->current_password)
+      {
+        if($request->new_password == $request->confirm_password) 
+          {
+            $data['user_password'] = password_hash($request->new_password, PASSWORD_DEFAULT);
+            TblUserAccountModel::where('business_id',session('business_id'))->update($data);
+            return "<div class='alert alert-success'><strong>Success!</strong>  Password Changed</div>";
+           }
         else
         {
           return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
         }
-
+      }
+      else
+      {
+        return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
+      }
     }
 
     public function add_business_category(Request $request)

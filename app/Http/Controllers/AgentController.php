@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ActiveAuthController;
+
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -19,50 +22,32 @@ use App\Models\TblTeamModel;
 use App\Models\TblContactUs;
 use Carbon\Carbon;
 use App\Models\TblBusinessCategoryModel;
+
+use App\Models\TblUserInfoModel;
+use App\Models\TblUserTeamModel;
+use App\Models\TblUserModel;
+
+
 use Input;
 use Mail;
 use Session;
 use Redirect;
+use Crypt;
 
 
-class AgentController extends Controller
+class AgentController extends ActiveAuthController
 {
 
-	public static function allow_logged_in_users_only()
+	public static function global()
 	{
-		if(session("agent_login") != true)
-		{
-			return Redirect::to("/agent")->send();
-		}
+	    $user_info = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+	                ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+	                ->first();
+	    return $user_info;
 	}
-	public static function allow_logged_out_users_only()
-	{
-		if(session("agent_login") )
-		{
-			return Redirect::to("/agent/dashboard")->send();
-		}
-	}
-
-	// public function index()
-	// {
-	// 	Self::allow_logged_in_users_only();
-	// 	$data['page']	= 'Dashboard';
-	// 	return view('agent.pages.dashboard',$data);
-	// }
-
-	public function login()
-	{
-		Self::allow_logged_out_users_only();
-
-        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
-        $data['_mob_categories']    = TblBusinessCategoryModel::all();
-        $data['contact_us']         = TblContactUs::first();
-        $data['page']   = 'login';
-        return view('front.pages.login', $data);
-	}
-
 	public function dashboard()
     {
+    	$data['user']                   = Self::global();
     	$data['page']	          		= 'Dashboard';
      	$count_merchant_signup    		= TblBusinessModel::get();
     	$count_merchant_signup    		= TblBusinessModel::where('business_status',1)->get();
@@ -99,128 +84,57 @@ class AgentController extends Controller
 	    $data['total_r'] 		= $monr+$tuer+$wedr+$thur+$frir+$satr+$sunr;
 	    $data['total_c'] 		= $monc +$tuec+$wedc+$thuc+$fric+$satc+$sunc;
 
-	    $data['count_jan']  	= TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_feb']  	= TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_mar']  	= TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_apr']  	= TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_may']  	= TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_jun']  	= TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_jul']  	= TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_aug']  	= TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_sep']  	= TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_oct']  	= TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_nov']  	= TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
-        $data['count_dec']  	= TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->where('agent_id',session('agent_id'))->count();
+	    $data['count_jan']  	= TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_feb']  	= TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_mar']  	= TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_apr']  	= TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_may']  	= TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_jun']  	= TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_jul']  	= TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_aug']  	= TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_sep']  	= TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_oct']  	= TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_nov']  	= TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
+        $data['count_dec']  	= TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->where('user_id',session('user_id'))->count();
 
-        $data['counts_jan']  	= TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_feb']  	= TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_mar']  	= TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_apr']  	= TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_may']  	= TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_jun']  	= TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_jul']  	= TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_aug']  	= TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_sep']  	= TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_oct']  	= TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_nov']  	= TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
-        $data['counts_dec']  	= TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->where('agent_id',session('agent_id'))->count();
+        $data['counts_jan']  	= TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_feb']  	= TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_mar']  	= TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_apr']  	= TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_may']  	= TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_jun']  	= TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_jul']  	= TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_aug']  	= TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_sep']  	= TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_oct']  	= TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_nov']  	= TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->where('user_id',session('user_id'))->count();
+        $data['counts_dec']  	= TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->where('user_id',session('user_id'))->count();
         
 	    return view ('agent.pages.dashboard', $data);	
 	}
-
-
-	public function agent_login(Request $request)
-	{
-		$validate_login = TblAgentModel::where('email',$request->email)->first();
-		
-		
-		if($validate_login)
-		{
-			if (password_verify($request->password, $validate_login->password)) 
-				{
-
-					if($validate_login->archived==0)
-			          {
-			            Session::put("agent_login",true);
-	    				Session::put("agent_id",$validate_login->agent_id);
-	    				Session::put("profile",$validate_login->profile);
-	    				Session::put("full_name_agent",$validate_login->first_name." ".$validate_login->last_name);
-	    				Session::put("email",$validate_login->email);
-	    				Session::put("position",$validate_login->position);
-					    $data['page']	= 'Dashboard';
-
-					    return Redirect::to('/agent/dashboard');
-			          }
-			          else
-			          {
-			            return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
-			          }
-			    }
-			else
-			{
-				$data['page']	= 'Agent Login';
-				return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-			}
-		}
-		else
-		{
-			$data['page']	= 'Agent Login';
-			return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-		}
-	}
-
 	public function profile()
 	{	
-		Self::allow_logged_in_users_only();
+		$data['user']       = Self::global();
 		$data['page']		= 'Profile';
-		$data['profile']    = TblAgentModel::get();
-		$data['agent_info'] = TblAgentModel::where('agent_id',session('agent_id'))->first();
-		$data['team']	    = TblAgentModel::where('agent_id',session('agent_id'))
-		                    ->join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+		$data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+		                    ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+		                    ->first();
+		$data['team']	    = TblUserTeamModel::where('user_id',session('user_id'))
+		                    ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
 		                    ->first();		
 		return view ('agent.pages.profile', $data);		
 	}
 	public function update_profile(Request $request)
 	{
 		$data['transaction'] = 'profile';
-		$data['agent_info']  = TblAgentModel::where('agent_id',session('agent_id'))->first();			
+		$data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+		                    ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+		                    ->first();			
 		return view('agent.pages.update_profile',$data); 
-	}
-	public function update_password(Request $request)
-	{   
-		$data['transaction'] = 'password';
-		return  view('agent.pages.update_profile',$data);
-	}
-
-
-
-	
-	public function checking_password(Request $request )
-	{
-		$user = TblAgentModel::where('agent_id',session('agent_id'))->first();
-		if(password_verify($request->currentPassword,$user->password))
-		{
-            
-            if($request->newPassword == $request->confirmPassword)
-            {
-            	$data['password'] = password_hash($request->newPassword, PASSWORD_DEFAULT);
-            	TblAgentModel::where('agent_id',session('agent_id'))->update($data);
-            	return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
-            }
-            else
-            {
-            	return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
-            }
-		}
-		else
-		{
-			return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
-		}
 	}
 	public function saving_profile(Request $request)
 	{
-		Self::allow_logged_in_users_only();
-	  	if($request->ajax())
+		if($request->ajax())
 	  	{
 	  		if($request->stats=='null')
 	    	{	
@@ -246,21 +160,48 @@ class AgentController extends Controller
 	          $fileConvo = $request->file("file");
 	          $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
 	          $fileConvo->move('business_images', $file_name);
-	          $data['profile'] 			= $file_name;
-	          $data['primary_phone']	= $request->primaryPhone;
-			  $data['secondary_phone']	= $request->secondaryPhone;
-			  $data['other_info']		= $request->otherInfo;
-			  $data['address']			= $request->address;
-	          TblAgentModel::where('agent_id',session('agent_id'))->update($data);
+	          $data['user_profile'] 			= $file_name;
+	          $data['user_phone_number']		= $request->user_phone_number;
+			  $data['user_address']				= $request->user_address;
+			  
+	          TblUserInfoModel::where('user_id',session('user_id'))->update($data);
+
+	          $datas['user_email'] 				= $request->user_email;
+
+	          TblUserModel::where('user_id',session('user_id'))->update($datas);
 	        }
 		}
 	}
-		  
-	public function client()
+	public function update_password(Request $request)
+	{   
+		$data['transaction'] = 'password';
+		return  view('agent.pages.update_profile',$data);
+	}
+	public function checking_password(Request $request )
 	{
-		Self::allow_logged_in_users_only();
-		$data['page']	 = 'Client';
-
+		$user = TblUserModel::where('user_id',session('user_id'))->first();
+		if(Crypt::decrypt($user->password)==$request->currentPassword)
+		{
+			if($request->newPassword == $request->confirmPassword)
+            {
+            	$data['user_password'] = Crypt::encrypt($request->newPassword);
+            	TblUserModel::where('user_id',session('user_id'))->update($data);
+            	return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+            }
+            else
+            {
+            	return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+            }
+		}
+		else
+		{
+			return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
+		}
+	}
+	public function merchant()
+	{
+		$data['user']       = Self::global();
+		$data['page']	 = 'Merchant';
 		$data['clients'] = TblBusinessModel::where('business_status',1)
 							->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
 	                        ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
@@ -269,7 +210,7 @@ class AgentController extends Controller
 	                        ->orderBy('tbl_business.date_created',"asc")
 	                        ->paginate(10);
         
-        $data['clients_pending'] = TblBusinessModel::where("agent_id", session("agent_id"))
+        $data['clients_pending'] = TblBusinessModel::where("user_id", session("user_id"))
         					->where(function($query)
 						       {
 						        $query->where('tbl_business.business_status', 4);
@@ -282,18 +223,17 @@ class AgentController extends Controller
 						    ->orderBy('tbl_business.date_created',"DESC")
                             ->paginate(10);
 
-        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)->where("agent_id", session("agent_id"))
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)->where("user_id", session("user_id"))
                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                            ->orderBy('tbl_business.date_created',"DESC")
                            ->paginate(10);
 
-    	return view ('agent.pages.client', $data);	
+    	return view ('agent.pages.merchant', $data);	
 	}
 
 	public function get_client(Request $request)
 	{
-		Self::allow_logged_in_users_only();
 		$s_date          = $request->date_start;
 		$e_date          = $request->date_end;
 		$data['clients'] = TblBusinessModel::Where('business_status',1)
@@ -306,7 +246,6 @@ class AgentController extends Controller
 	}
 	public function get_client1(Request $request)
 	{
-		Self::allow_logged_in_users_only();
 		$s_date = $request->date_start1;
 		$e_date = $request->date_end1;
 		$data['clients_pending'] = TblBusinessModel::where('business_status', 4)
@@ -335,10 +274,9 @@ class AgentController extends Controller
 
 	public function get_client_transaction(Request $request)
 	{
-		Self::allow_logged_in_users_only();
 		$trans_id                     = $request->transaction_id;
 		$update['transaction_status'] = 'call in progress'; 
-		$update['agent_id']           = session('agent_id'); 
+		$update['user_id']           = session('user_id'); 
 		$update['date_transact']      = date("Y/m/d"); 
 		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 		$data['client'] = TblBusinessModel::Where('tbl_business.business_id',$trans_id)
@@ -353,7 +291,6 @@ class AgentController extends Controller
 
 	public function get_client_transaction_reload(Request $request)
 	{
-		Self::allow_logged_in_users_only();
 		$trans_id 	= $request->transaction_id;
 		$status 	= $request->status;
 
@@ -361,7 +298,7 @@ class AgentController extends Controller
 		{
 			$update['transaction_status'] 	= 'called'; 
 			$update['date_transact']      	= date("Y/m/d");
-			$update['agent_call_date']		= date("Y/m/d"); 
+			$update['user_call_date']		= date("Y/m/d"); 
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
 
 			return '';	
@@ -378,16 +315,25 @@ class AgentController extends Controller
 			$update['transaction_status'] 	= 'called'; 
 			$update['business_status'] 		= '2';
 			$update['date_transact'] 		= date("Y/m/d");
-			$update['agent_call_date']		= date("Y/m/d");  
+			$update['user_call_date']		= date("Y/m/d");  
 			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-			$count_call = TblAgentModel::where('agent_id',session('agent_id'))->first();
-			$agent['agent_call'] = $count_call->agent_call + 1;
-	        TblAgentModel::where('agent_id',session('agent_id'))->update($agent);
+			$count_call = TblUserTeamModel::where('user_id',session('user_id'))->first();
+			$agent['user_calls'] = $count_call->user_calls + 1;
+	        TblUserTeamModel::where('user_id',session('user_id'))->update($agent);
 			return '';
 		}
 		
 	}
 
+	
+	public function add_merchant()
+	{
+		$data['user']       		= Self::global();
+		$data['county_list'] 		= TblCountyModel::get();
+		$data['membership_list'] 	= TblMembeshipModel::get();
+		$data['page']	            = 'Add Merchant';
+		return view ('agent.pages.add_merchant', $data);		
+	}
 	public function add_client_submit(Request $request)
 	{
 		
@@ -396,52 +342,53 @@ class AgentController extends Controller
         if(count($check_email_availability) == 1)
         {
            Session::flash('add_merchant', "Sorry!, Email Exist");
-           return Redirect::to('/agent/add/client');
+           return Redirect::to('/agent/add/merchant');
         }
         elseif(count($phoneAvailability) !=0)
         {
            Session::flash('add_merchant', "Sorry!, Phone Exist");
-           return Redirect::to('/agent/add/client');
+           return Redirect::to('/agent/add/merchant');
         }
         else
         {
-	        $business_data = new TblBusinessModel;
-	        $business_data->business_id = '';
-	        $business_data->business_name = $request->business_name;
-	        $business_data->city_id = $request->city_list;
-	        $business_data->county_id = $request->county_id;
-	        $business_data->business_complete_address = $request->business_address;
-	        $business_data->business_phone = $request->primary_business_phone;
-	        $business_data->business_alt_phone = $request->secondary_business_phone;
-	        $business_data->business_fax = $request->fax_number;
-	        $business_data->facebook_url = $request->facebook_url;
-	        $business_data->twitter_url = $request->twitter_username;
-            $business_data->transaction_status = 'Added';
-            $business_data->membership = $request->membership;
+        	$password   = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz1234567890"), 0,8);
 
+	        $business_data = new TblBusinessModel;
+	        $business_data->business_id 	= '';
+	        $business_data->business_name 	= $request->business_name;
+	        $business_data->city_id 		= $request->city_list;
+	        $business_data->county_id 		= $request->county_id;
+	        $business_data->business_complete_address = $request->business_address;
+	        $business_data->business_phone 	= $request->primary_business_phone;
+	        $business_data->business_alt_phone = $request->secondary_business_phone;
+	        $business_data->business_fax 	= $request->fax_number;
+	        $business_data->facebook_url 	= $request->facebook_url;
+	        $business_data->twitter_url 	= $request->twitter_username;
+            $business_data->transaction_status = 'Added';
+            $business_data->membership 		= $request->membership;
             $business_data->business_status = '20';
-            $business_data->agent_id = session('agent_id');
-            $business_data->date_transact = date("Y/m/d");
-            $business_data->date_created = date("Y/m/d");
-            $business_data->agent_call_date = date("Y/m/d");
+            $business_data->user_id 		= session('user_id');
+            $business_data->date_transact 	= date("Y/m/d");
+            $business_data->date_created 	= date("Y/m/d");
+            $business_data->user_call_date 	= date("Y/m/d");
             $business_data->save();
 
 	        $contactData = new TblBusinessContactPersonModel;
-            $contactData->business_contact_person_id = '';
-            $contactData->contact_prefix = $request->prefix;
-            $contactData->contact_first_name = $request->first_name;
-            $contactData->contact_last_name = $request->last_name;
-            $contactData->business_id = $business_data->business_id;
+            $contactData->business_contact_person_id 	= '';
+            $contactData->contact_prefix 				= $request->prefix;
+            $contactData->contact_first_name 			= $request->first_name;
+            $contactData->contact_last_name 			= $request->last_name;
+            $contactData->business_id 					= $business_data->business_id;
             $contactData->save();
 
             $accountData = new TblUserAccountModel;
-            $accountData->user_email = $request->email_address;
-            $accountData->user_password =  password_hash('habagat', PASSWORD_DEFAULT);
-            $accountData->user_category = 'merchant';
-            $accountData->status = 'registered';
-            $accountData->string_password = 'none';
-            $accountData->business_id = $business_data->business_id;
-            $accountData->business_contact_person_id = $contactData->business_contact_person_id;
+            $accountData->user_email 				= $request->email_address;
+            $accountData->user_password 			= Crypt::encrypt($password);
+            $accountData->user_category 			= 'merchant';
+            $accountData->status 					= 'registered';
+            $accountData->string_password 			= 'none';
+            $accountData->business_id 				= $business_data->business_id;
+            $accountData->business_contact_person_id= $contactData->business_contact_person_id;
             $accountData->save();
 
             $otherData = new TblBusinessOtherInfoModel;
@@ -471,17 +418,10 @@ class AgentController extends Controller
                 array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id)
             ));
+
            Session::flash('add_merchant', "New Merchant Added");
-           return Redirect::to('/agent/add/client');
+           return Redirect::to('/agent/add/merchant');
         }
-	}
-	public function add_client()
-	{
-		Self::allow_logged_in_users_only();
-		$data['county_list'] = TblCountyModel::get();
-		$data['membership_list'] = TblMembeshipModel::get();
-		$data['page']	= 'Add Client';
-		return view ('agent.pages.add_client', $data);		
 	}
 
 	public function search_client(Request $request)

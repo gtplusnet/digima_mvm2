@@ -2,7 +2,7 @@
 @section('title', 'Payment Monitoring')
 @section('description', 'Payment Monitoring')
 @section('content')
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
 <div class="page-title">
 	<h3>Payment Monitoring</h3>
 	<div class="page-breadcrumb">
@@ -54,7 +54,7 @@
 									<td>{{ $business_item->business_name }}</td>
 									<td>{{ $business_item->business_complete_address }}</td>
 									<td>{{ $business_item->membership_name }}</td>
-									<td>{{ $business_item->payment_reference_number }}</td>
+									<td>{{ $business_item->payment_reference_number}}</td>
 									<td>₱ {{ $business_item->payment_amount }}</td>
 									<td>{{ $business_item->date_created }}</td>
 									<td>
@@ -114,10 +114,10 @@
 		</form>
 	</div>
 </div>
-<div style="margin-top: 150px;" class="modal fade" id="declinedUser" role="dialog">
+<div class="modal fade" id="declinedUser" role="dialog">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-body" style="margin-bottom: 150px;" >
+			<div class="modal-body row" >
 				<div class="col-sm-12">
 					<h4 class="modal-title">Are You sure You want to DECLINED this payment and DEACTIVATE this user's account?</h4>
 				</div>
@@ -132,10 +132,10 @@
 		</div>
 	</div>
 </div>
-<div style="margin-top: 150px;" class="modal fade" id="success" role="dialog">
+<div class="modal fade" id="success" role="dialog">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-body" style="margin-bottom: 150px;" >
+			<div class="modal-body row"  >
 				<div class="col-sm-12" id="success_message">
 					
 				</div>
@@ -148,8 +148,5 @@
 		</div>
 	</div>
 </div>
-{{-- Modal --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_payment_monitoring.js"></script>
-<script src="/assets/js/global.ajax.js"></script>
+<script src="/assets/general_admin/general_admin_payment_monitoring.js"></script>
 @endsection

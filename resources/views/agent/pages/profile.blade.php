@@ -1,4 +1,4 @@
-@extends('agent.layout.layout')
+@extends('layout.general_layout')
 @section('content')
 <div class="page-title">
     <h3>{{ $page }}</h3>
@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-3 profile-image">
                     <div class="profile-image-container">
-                         <img src="{{$agent_info->profile}}" alt="" style="min-width: 200px;min-height: 200px;max-height: 200px;max-width: 200px;">
+                         <img src="{{$agent_info->user_profile}}" alt="" style="min-width: 200px;min-height: 200px;max-height: 200px;max-width: 200px;">
                     </div>
                 </div>
             </div>
@@ -25,14 +25,6 @@
                 <div class="col-md-3 user-profile">
                     <br>
                     <hr>
-                    <h3 class="text-center">{{session('full_name_agent')}}</h3>
-                    <p class="text-center">{{$agent_info->email}}</p>
-                    <hr>
-                    <ul class="list-unstyled text-center">
-                        <li><p><i class="fa fa-map-marker m-r-xs"></i>{{$agent_info->address}}</p></li>
-                         <li><p><i class="fa fa fa-phone m-r-xs"></i>{{$agent_info->primary_phone}} / {{$agent_info->secondary_phone}} </p></li>
-                        <li><p><i class="fa fa-envelope m-r-xs"></i><a href="#">{{$agent_info->email}}</a></p></li>
-                    </ul>
                     <hr>
                     <button id="updateProfile" class="btn btn-primary btn-block"><i class="fa fa-pencil m-r-xs"></i>Update Profile</button>
                     <button id="updatePassword" class="btn btn-primary btn-block"><i class="fa fa-pencil m-r-xs"></i>Update Password</button>
@@ -47,35 +39,23 @@
                                 <h4>Personal Information</h4>
                                 <form class="form-horizontal">
                                     <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Prefix</label>
-                                        <div class="col-sm-2">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->prefix}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">First Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->first_name}}" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->user_first_name}}" readonly>
                                         </div>
                                         <label for="input-Default" class="col-sm-2 control-label">Last Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->last_name}}" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->user_last_name}}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="input-rounded-Default" class="col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->email}}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="input-Default" class="col-sm-2 control-label">Primary Phone/label>
+                                        <label for="input-Default" class="col-sm-2 control-label">Primary Phone</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->primary_phone}}" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->user_phone_number}}" readonly>
                                         </div>
-                                        <label for="input-Default" class="col-sm-2 control-label">Secondary Phone</label>
+                                        <label for="input-Default" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->secondary_phone}}" readonly>
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->user_email}}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -83,11 +63,15 @@
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$team->team_name}}" readonly>
                                         </div>
+                                        <label for="input-Default" class="col-sm-2 control-label">Gender</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$agent_info->user_gender}}" readonly>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="input-Default" class="col-sm-2 control-label">Other Info</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$agent_info->other_info}}</textarea>
+                                            <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$agent_info->user_address}}</textarea>
                                         </div>
                                     </div>
                                     
@@ -101,6 +85,5 @@
         </div>
     </div>
 </div>
-<script src="/assets/js/global.ajax.js" ></script>
 <script src="/assets/js/agent/agent_profile.js" ></script>
 @endsection

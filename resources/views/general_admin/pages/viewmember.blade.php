@@ -1,15 +1,8 @@
 
-@foreach($_supervisor as $supervisor)
-<div style="text-align:center,font-size:20px;font-weight: bold;margin:20px;">
-	@if($supervisor->archived==0)
-		Supervisor : {{$supervisor->prefix}} {{$supervisor->first_name}} {{$supervisor->last_name}}
-    @else
-		SUPERVISOR : <font color="red">{{$supervisor->prefix}} {{$supervisor->first_name}} {{$supervisor->last_name}} - DELETED</font>
-	@endif
-	
-</div>
-@endforeach
 
+<div style="text-align:center,font-size:20px;font-weight: bold;margin:20px;">
+	SUPERVISOR : {{$supervisor->user_first_name.' '.$supervisor->user_last_name}}
+</div>
 <table class="display table agent_container table table-bordered" style="background-color: #FFFFFF; cellspacing: 0;">
 	<thead>
 		<tr>
@@ -24,11 +17,11 @@
 	<tbody>
 		@foreach($_data_agent as $data_agent)
 		<tr>
-			<td>{{$data_agent->agent_id}}</td>
-			<td>{{$data_agent->first_name}}</td>
-			<td>{{$data_agent->last_name}}</td>
-			<td>{{$data_agent->email}}</td>
-			<td>{{$data_agent->primary_phone}}</td>
+			<td>{{$data_agent->user_id}}</td>
+			<td>{{$data_agent->user_first_name}}</td>
+			<td>{{$data_agent->user_last_name}}</td>
+			<td>{{$data_agent->user_email}}</td>
+			<td>{{$data_agent->user_phone_number}}</td>
 			
 		</tr>
 		@endforeach

@@ -2,7 +2,6 @@
 @section('title', 'Manage Invoice')
 @section('description', 'manage_invoice')
 @section('content')
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <div class="page-title">
 	<h3>Manage Invoice</h3>
 	<div class="page-breadcrumb">
@@ -82,14 +81,14 @@
 	</div>
 
 
-	<div style="margin-top: 150px;" class="modal fade" id="resendModal" role="dialog">
+	<div class="modal fade" id="resendModal" role="dialog">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Resend Invoice</h4>
 				</div>
-				<div class="modal-body" style="margin-bottom: 190px;" id="resendSuccess">
+				<div class="modal-body row"  id="resendSuccess">
 					<div id="ajax-loader" style="display: none; text-align: center; margin-top: 70px;">
 						<img src="/assets/img/loading.gif"/>
 					</div>
@@ -130,6 +129,5 @@
 		</div>
 	</div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_invoice.js"></script>
+<script src="/assets/general_admin/general_admin_invoice.js"></script>
 @endsection

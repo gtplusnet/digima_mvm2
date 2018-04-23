@@ -72,7 +72,7 @@ width:100%;
 			<div class="col-md-3">
 				<div class="category-filter-holder" >
 					<div class="category-title-holder" id="show_category">
-						<p class="categorylist-title">Filter Kategorije</p>
+						<p class="categorylist-title transform-capitalize">Filter Kategorije</p>
 					</div>
 					<div class="categorylist-container">
 						<ul class="list-group" >
@@ -84,7 +84,7 @@ width:100%;
 				</div>
 				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
-						<p class="featuredlist-title">Istaknuti Popis</p>
+						<p class="featuredlist-title transform-capitalize">Istaknuti Popis</p>
 					</div>
 					<div class="featuredlist-container side-list-padding">
 						<div id="carousel-pager" class="carousel slide featured-carousel" data-ride="carousel" data-interval="3000">
@@ -131,7 +131,7 @@ width:100%;
 				</div>
 				<div class="featuredlist-holder">
 					<div class="featuredlist-title-holder">
-						<p class="featuredlist-title">Najgledanije</p>
+						<p class="featuredlist-title transform-capitalize">Najgledanije</p>
 					</div>
 					<div class="featuredlist-container side-list-padding">
 						<div  class="featured-carousel" >
@@ -206,7 +206,7 @@ width:100%;
 					</div>
 				</div>
 				<div class="payment-containers" style="margin-bottom:50px;">
-					<div class="payment-title">
+					<div class="payment-title transform-uppercase">
 						PREDAJTE VAŠE POSLOVNE DJELE U NAJVEĆE PONUDE
 						<br>
 					</div>

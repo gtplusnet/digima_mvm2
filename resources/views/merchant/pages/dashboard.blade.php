@@ -15,7 +15,7 @@
 <div id="main-wrapper">
   
    <div class="row">
-      <div class="col-lg-3 col-md-6">
+      <div class="col-lg-4 col-md-6">
          <div class="panel info-box">
             <div class="panel-body">
                <div class="info-box-stats">
@@ -38,7 +38,7 @@
       </div>
       <!--   Facebook
          -->
-      <div class="col-lg-3 col-md-6">
+      <div class="col-lg-4 col-md-6">
          <div class="panel info-box panel-white">
             <div class="panel-body">
                <div class="info-box-icon">
@@ -57,28 +57,8 @@
             </div>
          </div>
       </div>
-      <!--   TWITTER-->
-      <div class="col-lg-3 col-md-6">
-         <div class="panel info-box panel-white">
-            <div class="panel-body">
-               <div class="info-box-stats">
-                  <p class="counter">680</p>
-                  <span class="info-box-title">Stranica Tweet</span>
-               </div>
-               <div class="info-box-icon">
-                  <i style="color:#00aced;" class="fa fa-twitter"></i>
-               </div>
-               <div class="info-box-progress">
-                  <div class="progress progress-xs progress-squared bs-n">
-                     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
       <!--   Others-->
-      <div class="col-lg-3 col-md-6">
+      <div class="col-lg-4 col-md-6">
          <div class="panel info-box panel-white">
             <div class="panel-body">
                <div class="info-box-stats">

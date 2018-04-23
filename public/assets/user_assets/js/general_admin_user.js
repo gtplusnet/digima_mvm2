@@ -23,13 +23,12 @@ function manage_user()
 			add_user();
 			edit_user();
 			add_team();
-			
-			
-			assigned_agent();
-			assigned_super();
-			action_box();
+			user_action_box();
+			team_action_box();
+
+
 			update_info();
-			update_user_login();
+			
 			add_payment_method();
 			delete_payment_method();
 			view_members();
@@ -40,7 +39,7 @@ function manage_user()
 	function decline_and_deactivate()
 	{
 		
-		$(document).on("click","#deleteMerchants",function(){
+		$('body').on("click","#deleteMerchants",function(){
 
 			var business_id 	= $('.deleteMerchant').val();
 			alert(business_id);
@@ -52,17 +51,19 @@ function manage_user()
 					
 					},
 				dataType:'text',
-			}).done(function(data){
-				$('#showSuccesss').html(data);
+				success: function(data)
+				{
+					$('#showSuccesss').html(data);
 					setTimeout(function(){
 					   location.reload();
 					}, 1000);
-			    });
+				}
+			});
 		});
 	}
 	function add_payment_method()
 	{
-		$(document).on("click","#savePayment",function(){
+		$('body').on("click","#savePayment",function(){
 
 			var paymentMethodName 	= $('#paymentMethodName').val();
 			var businessId 			= $('#businessId').val();
@@ -75,17 +76,18 @@ function manage_user()
 					
 					},
 				dataType:'text',
-			}).done(function(data){
-				$('#adding_payment_method_success').html(data);
+				success: function(data)
+				{
 					setTimeout(function(){
 					   location.reload();
 					}, 1000);
-			    });
+				}
+			});
 		});
 	}
 	function delete_payment_method()
 	{
-		$(document).on("click",".deletePaymentss",function(){
+		$('body').on("click",".deletePaymentss",function(){
 			var paymentMethodId = $(this).data("id");
 			$.ajax({
 				type:'POST',
@@ -94,12 +96,14 @@ function manage_user()
 					paymentMethodId: paymentMethodId,
 					},
 				dataType:'text',
-			}).done(function(data){
-				$('#adding_payment_method_success').html(data);
+				success: function(data)
+				{
+					$('#adding_payment_method_success').html(data);
 					setTimeout(function(){
 					   location.reload();
 					}, 1000);
-				});
+				}
+			});
 		});
 	}
 	function update_info()
@@ -121,12 +125,15 @@ function manage_user()
 					
 					},
 				dataType:'text',
-			}).done(function(data){
-				$('#other_info_success').html(data);
-					setTimeout(function(){
+				success: function(data)
+				{
+					$('#other_info_success').html(data);
+					setTimeout(function()
+					{
 					   location.reload();
 					}, 1000);
-				});
+				}
+			});
 		});
 		
 
@@ -141,14 +148,17 @@ function manage_user()
 	            $.ajax({
 					type:'POST',
 					url:'/general_admin/manage_user/view_merchant_info',
-					data:{
+					data:
+					{
 						business_id: business_id,
-						},
+					},
 					dataType:'text',
+					success: function(data)
+					{
+						$('#show_merchant_info').html(data);
+					}
 
-				}).done(function(data){
-					    $('#show_merchant_info').html(data);
-					});
+				});
 			}
 			if($(this).val() == 'delete')
 			{
@@ -162,7 +172,7 @@ function manage_user()
 	{ 
 		$(document).on('click','#addUserBtn',function()
 		{
-		
+		    
 			if($('#team_id').val()==0)
 			{
 				globals.global_tostr('TEAM');
@@ -199,14 +209,16 @@ function manage_user()
 
 			else
 			{
-				manageUserData.team_id = $("#team_id").val();
-				manageUserData.user_first_name = $("#user_first_name").val();
-				manageUserData.user_last_name = $("#user_last_name").val();
-				manageUserData.user_email = $("#user_email").val();
-				manageUserData.user_gender = $("#user_gender").val();
-				manageUserData.user_phone_number = $("#user_phone_number").val();
-				manageUserData.user_address = $("#user_address").val();
-				manageUserData.user_access_level = $("#user_access_level").val();
+				$(this).attr('disabled',true);
+				$(this).html('<i class="fa fa-spinner fa-spin"></i>');
+				manageUserData.team_id         	= $("#team_id").val();
+				manageUserData.user_first_name 	= $("#user_first_name").val();
+				manageUserData.user_last_name 	= $("#user_last_name").val();
+				manageUserData.user_email 		= $("#user_email").val();
+				manageUserData.user_gender 		= $("#user_gender").val();
+				manageUserData.user_phone_number= $("#user_phone_number").val();
+				manageUserData.user_address 	= $("#user_address").val();
+				manageUserData.user_access_level= $("#user_access_level").val();
 				
 
 				$.ajax({
@@ -220,13 +232,20 @@ function manage_user()
 					dataType:'text',
 		            success: function(data)
 					{
+						$('#addUserBtn').removeAttr('disabled');
+						$('#addUserBtn').html('ADD USER');
 						if(data=='success')
 						{
-							toastr.success('Agent Added Successfully', 'Success', {timeOut: 3000})
+
+							toastr.success('User Added Successfully', 'Success', {timeOut: 3000})
+						}
+						else if(data=='email_exist')
+						{
+							toastr.error('Email Already Exist', 'Something went wrong!', {timeOut: 3000})
 						}
 						else
 						{
-							toastr.error('Error Adding Agent', 'Something went wrong!', {timeOut: 3000})
+							toastr.error('Error Adding User', 'Something went wrong!', {timeOut: 3000})
 						}
 					}
 				});
@@ -236,14 +255,13 @@ function manage_user()
 	}
 	function edit_user()
 	{
-		$(document).on('change','.view_user_details',function()
+		$('body').on('change','.view_user_details',function()
 		{
 			
 			if ($(this).val() == "view") 
 			{
 				var user_id 		= $(this).data("id");
-		        
-		        $.ajax({
+				$.ajax({
 					headers: {
 					      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					},
@@ -262,75 +280,169 @@ function manage_user()
 	        }
 			if ($(this).val() == "assign") 
 			{
-		        var agent_id 		= $(this).data("id");
-		        var agent_name 		= $(this).data("name");
-		        $("#agent_id_assign").val(agent_id);
-		        $("#agent_name_assign").val(agent_name);
-		        $('#assignAgent').modal('show');
+				var id 		= $(this).data("id");
+		        var name    = $(this).data("name");
+		        $("#id_assign").val(id);
+		        $("#name_assign").val(name);
+		        $('#assignUser').modal('show');
 		     }
 		    if ($(this).val() == "delete") 
 		    {
-		    	var agent_id = $(this).data("id");
-		        $("#delete_agent_id").val(agent_id);
-		        $('#deleteAgent').modal('show');
+		    	var user_id = $(this).data("id");
+		        $("#delete_user_id").val(user_id);
+		        $('#deleteUser').modal('show');
 		    }
 	    });
 	}
 	function add_team()
 	{ 
-		$(document).on('click','#add_team',function()
+		$('body').on('click','#add_team',function()
 		{
 			var team_name = $('#team_name').val();
 			var team_info = $('#team_info').val();
+			var team_super = $('#team_super').val();
+			
 			$.ajax({
 				type:'POST',
 				url:'/general_admin/manage_user/add_team',
 				data:{
 					team_name: team_name,
-					team_info: team_info
+					team_info: team_info,
+					team_super: team_super
 					},
 				dataType:'text',
-
-			}).done(function(data)
+				success: function(data)
 				{
-				    $('#team_alert').html(data);
+					$('#team_alert').html(data);
 				    setTimeout(function(){
 					   location.reload();
 					}, 1000);
-				});
+				}
+			});
 	    });
 
 	}
 	
 	
-	function update_user_login()
+	function user_action_box()
 	{
-		$(document).on('click','#updateAgent',function()
+		$('body').on('click','#updateUser',function()
 		{
-			var id 			= $("#agAgentId").val();
-	        var email 		= $("#agEmail").val();
-	        var oldEmail    = $('#agOldEmail').val();
-	        var password 	= $("#agPassword").val();
+			alert($(this).data('user_info_id'));
+			manageUserData.user_info_id     = $(this).data('user_info_id');
+			manageUserData.user_first_name 	= $("#old_first_name").val();
+			manageUserData.user_last_name 	= $("#old_last_name").val();
+			manageUserData.user_email 		= $("#old_email").val();
+			manageUserData.user_gender 		= $("#old_gender").val();
+			manageUserData.user_phone_number= $("#old_phone_number").val();
+			manageUserData.user_address 	= $("#old_address").val();
 			$.ajax({
 				type:'POST',
-				url:'/general_admin/manage_user/update_agent_login',
-				data:{
-					id 	: id,
-					email: email,
-					oldEmail: oldEmail,
-					password: password,
-				     },
+				url:'/general_admin/manage_user/update_user',
+				data: manageUserData,
 				dataType:'text',
-
-			}).done(function(data)
+				success: function(data)
 				{
-				    $('#agent_alerts').html(data);
+					$('#userUpdateAlert').html(data);
 				    setTimeout(function(){
 					   location.reload();
 					}, 1000);
-				});
+				}
+			});
 	    });
-	    $(document).on('click','#updateTeam',function()
+	    $('body').on('click','#userDeleted',function()
+	    {
+		    var delete_user_id = $('#delete_user_id').val();
+
+		 	$.ajax({
+		 		type:'POST',
+		 		url:'/general_admin/manage_user/delete_user',
+		 		data:{delete_user_id: delete_user_id},
+		 		dataType:'text',
+		 		success: function(data)
+				{
+					$('#deleteAgent').modal('hide');
+		 			$('#agent_success1').html(data);
+		 			setTimeout(function(){
+					   location.reload();
+					}, 1000);
+				}
+			});
+	    });
+	    $('body').on('click','#userAssigned',function()
+	    {
+		    var user_id = $('#id_assign').val();
+			var team_id= $('#teamAssigned').val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/manage_user/assign_user',
+				data:{
+					user_id: user_id,
+					team_id: team_id,
+					},
+				dataType:'text',
+				success: function(data)
+                {
+                	$('#assign_success').html(data);
+				    setTimeout(function()
+				    {
+					   location.reload();
+					}, 1000);
+                }
+            });
+	    });
+	    
+	    
+	}
+	function team_action_box()
+	{
+		$('body').on('change','.team_actionbox',function()
+	    {
+			if ($(this).val() == "edit") 
+			{
+				var team_id 	= $(this).data("id");
+		        var team_name 	= $(this).data("name");
+		        var team_info 	= $(this).data("info");
+		        $("#tTeam_id").val(team_id);
+		        $("#tTeam_name").val(team_name);
+		        $("#tTeam_info").val(team_info);
+		        $('#myModalTeamEdit').modal('show');
+	        }
+			if ($(this).val() == "view_agent") 
+			{
+		        var agent_id 	= $(this).data("id");
+		        var agent_name 	= $(this).data("name");
+		        $("#team_id_assign").val(team_id);
+		        $('#viewTeam').modal('show');
+		    }
+		    if ($(this).val() == "delete") 
+		    {
+		    	var agent_id = $(this).data("id");
+		        $("#delete_team_id").val(agent_id);
+		        $('#deleteTeam').modal('show');
+	        }
+	    });
+	    $('body').on('click','#teamDeleted',function()
+	    {
+		    var delete_team_id = $('#delete_team_id').val();
+
+		    $.ajax({
+
+		 		type:'POST',
+		 		url:'/general_admin/manage_user/delete_team',
+		 		data:{delete_team_id: delete_team_id},
+		 		dataType:'text',
+		 		success: function(data)
+				{
+					$('#deleteTeam').modal('hide');
+		 			$('#team_success').html(data);
+		 			setTimeout(function(){
+					   location.reload();
+					}, 1000);
+				}
+			});
+	    });
+	    $('body').on('click','#updateTeam',function()
 		{
 			
 	        var id 			= $("#tTeam_id").val();
@@ -345,321 +457,21 @@ function manage_user()
 					info: info,
 					},
 				dataType:'text',
-
-			}).done(function(data)
+				success: function(data)
 				{
-				    $('#team_alerts').html(data);
+					$('#team_alerts').html(data);
 				    setTimeout(function(){
 					   location.reload();
 					}, 1000);
-				});
+				}
+			});
 	    });
-	    $(document).on('click','#updateSupervisor',function()
-		{
-			
-	        var id 			= $("#supId").val();
-	        var email 		= $("#supEmail").val();
-	        var oldEmail    = $("#supOldEmail").val();
-	        var password 	= $("#supPassword").val();
-			$.ajax({
-				type:'POST',
-				url:'/general_admin/manage_user/update_supervisor_login',
-				data:{
-					id 	: id,
-					email: email,
-					oldEmail: oldEmail,
-					password: password,
-				     },
-				dataType:'text',
-
-			}).done(function(data)
-				{
-				    $('#supervisor_alerts').html(data);
-				    setTimeout(function(){
-					   location.reload();
-					}, 1000);
-				});
-	    });
-	    $(document).on('click','#updateAdmin',function()
-		{
-			var id 			= $("#adId").val();
-	        var email 		= $("#adEmail").val();
-	        var oldEmail    = $("#adOldEmail").val();
-	        var password 	= $("#adPassword").val();
-			$.ajax({
-				type:'POST',
-				url:'/general_admin/manage_user/update_admin_login',
-				data:{
-					id 	: id,
-					email: email,
-					oldEmail: oldEmail,
-					password: password,
-				     },
-				dataType:'text',
-
-			}).done(function(data)
-				{
-				    $('#admin_alerts').html(data);
-				    setTimeout(function(){
-					   location.reload();
-					}, 1000);
-				});
-	    });
-	}
-	function action_box()
-	{ 
-		//agent
-		$(document).on('change','.agent_actionbox',function()
-		{
-			if ($(this).val() == "view") 
-			{
-				var agent_id 		= $(this).data("id");
-		        var agent_name 		= $(this).data("name");
-		        var agent_email 	= $(this).data("email");
-		        $("#agAgentId").val(agent_id);
-		        $("#agFullname").val(agent_name);
-		        $("#agEmail").val(agent_email);
-		        $("#agOldEmail").val(agent_email);
-		        $("#agPassword").val(agent_email);
-		        $('#myModalUserView').modal('show');
-	        }
-			if ($(this).val() == "assign") 
-			{
-		        var agent_id 		= $(this).data("id");
-		        var agent_name 		= $(this).data("name");
-		        $("#agent_id_assign").val(agent_id);
-		        $("#agent_name_assign").val(agent_name);
-		        $('#assignAgent').modal('show');
-		     }
-		    if ($(this).val() == "delete") 
-		    {
-		    	var agent_id = $(this).data("id");
-		        $("#delete_agent_id").val(agent_id);
-		        $('#deleteAgent').modal('show');
-		    }
-	    });
-	    //team
-	    $(document).on('change','.team_actionbox',function()
-	    {
-			if ($(this).val() == "edit") 
-			{
-				var team_id 	= $(this).data("id");
-		        var team_name 	= $(this).data("name");
-		        var team_info 	= $(this).data("info");
-		        $("#tTeam_id").val(team_id);
-		        $("#tTeam_name").val(team_name);
-		        $("#tTeam_info").val(team_info);
-
-	        	$('#myModalTeamEdit').modal('show');
-	        }
-			if ($(this).val() == "view_agent") 
-			{
-		        var agent_id = $(this).data("id");
-		        var agent_name = $(this).data("name");
-		        $("#team_id_assign").val(team_id);
-		        $('#viewTeam').modal('show');
-		    }
-		    if ($(this).val() == "delete") 
-		    {
-		    	var agent_id = $(this).data("id");
-		        $("#delete_team_id").val(agent_id);
-		        $('#deleteTeam').modal('show');
-	        }
-	    });
-	    //supervisor
-	    $(document).on('change','.supervisor_actionbox',function()
-	    {
-			if ($(this).val() == "edit") 
-			{
-				var supervisor_id 		= $(this).data("id");
-		        var supervisor_name 	= $(this).data("name");
-		        var supervisor_email 	= $(this).data("email");
-		        $("#supId").val(supervisor_id);
-		        $("#supFullname").val(supervisor_name);
-		        $("#supEmail").val(supervisor_email);
-		        $("#supOldEmail").val(supervisor_email);
-		        $("#supPassword").val(supervisor_email);
-
-	        	$('#myModalSupervisorEdit').modal('show');
-	        }
-			if ($(this).val() == "assign") 
-			{
-		        var super_id = $(this).data("id");
-		        var super_name = $(this).data("name");
-		        // alert(super_name);
-		        $("#super_id_assign").val(super_id);
-		        $("#super_name_assign").val(super_name);
-		        $('#assignSupervisor').modal('show');
-		    }
-		    if ($(this).val() == "delete") 
-		    {
-		    	var super_id = $(this).data("id");
-		        $("#delete_supervisor_id").val(super_id);
-		        $('#deleteSupervisor').modal('show');
-	        }
-	    });
-	    //admin
-	    $(document).on('change','.admin_actionbox',function()
-	    {
-			if ($(this).val() == "edit") 
-			{
-	        	var admin_id 		= $(this).data("id");
-		        var admin_name 	= $(this).data("name");
-		        var admin_email 	= $(this).data("email");
-		        $("#adId").val(admin_id);
-		        $("#adFullname").val(admin_name);
-		        $("#adEmail").val(admin_email);
-		        $("#adOldEmail").val(admin_email);
-		        $("#adPassword").val(admin_email);
-
-		        $('#myModalAdminEdit').modal('show');
-	        }
-			if ($(this).val() == "delete") 
-			{
-
-		    	var admin_id = $(this).data("id");
-		    	$("#delete_admin_id").val(admin_id);
-		        $('#deleteAdmin').modal('show');
-	        }
-	    });
-	    //end action box
-	    //delete
-	    $(document).on('click','#agentDeleted',function()
-	    {
-		    var delete_agent_id = $('#delete_agent_id').val();
-
-		 	$.ajax({
-		 		type:'POST',
-		 		url:'/general_admin/manage_user/delete_agent',
-		 		data:{delete_agent_id: delete_agent_id},
-		 		dataType:'text',
-
-		 	}).done(function(data)
-		 		{
-		 		    $('#deleteAgent').modal('hide');
-		 			$('#agent_success1').html(data);
-		 			setTimeout(function(){
-					   location.reload();
-					}, 1000);
-		 		});
-	    });
-	    $(document).on('click','#teamDeleted',function()
-	    {
-		    var delete_team_id = $('#delete_team_id').val();
-
-		    $.ajax({
-
-		 		type:'POST',
-		 		url:'/general_admin/manage_user/delete_team',
-		 		data:{delete_team_id: delete_team_id},
-		 		dataType:'text',
-
-		 	}).done(function(data)
-		 		{
-		 		    $('#deleteTeam').modal('hide');
-		 			$('#team_success').html(data);
-		 			setTimeout(function(){
-					   location.reload();
-					}, 1000);
-		 		});
-	    });
-	    $(document).on('click','#supervisorDeleted',function()
-	    {
-		    var delete_supervisor_id = $('#delete_supervisor_id').val();
-
-		    $.ajax({
-
-		 		type:'POST',
-		 		url:'/general_admin/manage_user/delete_supervisor',
-		 		data:{delete_supervisor_id: delete_supervisor_id},
-		 		dataType:'text',
-
-		 	}).done(function(data)
-		 		{
-		 		    $('#deleteSupervisor').modal('hide');
-		 			$('#supervisor_success').html(data);
-		 			setTimeout(function(){
-					   location.reload();
-					}, 1000);
-		 		});
-	    });
-	    $(document).on('click','#adminDeleted',function()
-	    {
-		    var delete_admin_id = $('#delete_admin_id').val();
-		    $.ajax({
-
-		 		type:'POST',
-		 		url:'/general_admin/manage_user/delete_admin',
-		 		data:{delete_admin_id: delete_admin_id},
-		 		dataType:'text',
-
-		 	}).done(function(data)
-		 		{
-		 		    $('#deleteAdmin').modal('hide');
-		 			$('#admin_success').html(data);
-		 			setTimeout(function(){
-					   location.reload();
-					}, 1000);
-		 		});
-	    });
-	    
-	    //end delete
 
 	}
-	function assigned_agent()
-	{
-	   
-	    $(document).on('click','#agentAssigned',function()
-	    {
-		    var agent_id = $('#agent_id_assign').val();
-			var team_id= $('#teamAssigned').val();
-			$.ajax({
-				type:'POST',
-				url:'/general_admin/manage_user/assign_agent',
-				data:{
-					agent_id: agent_id,
-					team_id: team_id,
-					
-				     },
-				dataType:'text',
-
-			}).done(function(data)
-				{
-				    $('#assign_success').html(data);
-				    setTimeout(function(){
-					   location.reload();
-					}, 1000);
-				});
-	    });
-	}
-	function assigned_super()
-	{
-		$(document).on('click','#superAssigned',function()
-	    {
-		    var super_id = $('#super_id_assign').val();
-			var team_id= $('#teamAssign').val();
-			$.ajax({
-				type:'POST',
-				url:'/general_admin/manage_user/assign_supervisor',
-				data:{
-					super_id: super_id,
-					team_id: team_id,
-					
-				     },
-				dataType:'text',
-
-			}).done(function(data)
-				{
-				    $('#assignSuccess').html(data);
-				    setTimeout(function(){
-					   location.reload();
-					}, 1000);
-				});
-	    });
-	}
+	
 	function view_members()
 	{
-		$(document).on('click','.viewMem',function()
+		$('body').on('click','.viewMem',function()
 	    {
 	    	var team_id = $(this).data('id');
 	    	$.ajax({
@@ -669,12 +481,13 @@ function manage_user()
 					team_id: team_id,
 					},
 				dataType:'text',
-
-			}).done(function(data)
+				success: function(data)
 				{
-				    $('#viewMemHere').html(data);
+					$('#viewMemHere').html(data);
 				    $('#myModalViewMem').modal('show');
-				});
+				}
+
+			});
 	    });
 	}
 	function search_user()

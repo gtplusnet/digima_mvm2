@@ -97,11 +97,11 @@
 						<tbody>
 							@foreach($_admin as $data)
 							<tr>
-								<td>{{ $data->admin_id}}</td>
-								<td>{{ $data->full_name}}</td>
-								<td>{{ $data->email }}</td>
+								<td>{{ $data->user_id}}</td>
+								<td>{{ $data->user_first_name.' '.$data->user_last_name}}</td>
+								<td>{{ $data->user_email }}</td>
 								<td>
-									<button type="button" data-id="{{ $data->admin_id}}" class="btn btn-primary admin-restore">RESTORE</button>
+									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-primary user-restore">RESTORE</button>
 								</td>
 							</tr>
 							@endforeach
@@ -125,11 +125,11 @@
 						<tbody>
 							@foreach($_supervisor as $data)
 							<tr>
-								<td>{{ $data->supervisor_id}}</td>
-								<td>{{$data->first_name}} {{$data->last_name}}</td>
-								<td>{{ $data->email }}</td>
+								<td>{{ $data->user_id}}</td>
+								<td>{{ $data->user_first_name.' '.$data->user_last_name}}</td>
+								<td>{{ $data->user_email }}</td>
 								<td>
-									<button type="button" data-id="{{ $data->supervisor_id}}" class="btn btn-primary supervisor-restore">RESTORE</button>
+									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-primary user-restore">RESTORE</button>
 								</td>
 							</tr>
 							@endforeach
@@ -153,11 +153,11 @@
 						<tbody>
 							@foreach($_agent as $data)
 							<tr>
-								<td>{{ $data->agent_id}}</td>
-								<td>{{$data->first_name}} {{$data->last_name}}</td>
-								<td>{{ $data->email }}</td>
+								<td>{{ $data->user_id}}</td>
+								<td>{{ $data->user_first_name.' '.$data->user_last_name}}</td>
+								<td>{{ $data->user_email }}</td>
 								<td>
-									<button type="button" data-id="{{ $data->agent_id}}" class="btn btn-primary agent-restore">RESTORE</button>
+									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-primary user-restore">RESTORE</button>
 								</td>
 							</tr>
 							@endforeach
@@ -296,10 +296,10 @@
 </div>
 
 <!-- modal -->
-<div style="margin-top: 150px;" class="modal fade" id="confirmModal" role="dialog">
+<div class="modal fade" id="confirmModal" role="dialog">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content" id="showSuccesss">
-			<div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+			<div class="modal-body row" id="show_user">
 				<div class="col-sm-12">
 					<h4 class="modal-title">Are You sure?</h4>
 				</div>
@@ -316,10 +316,10 @@
 		</div>
 	</div>
 </div>
-<div style="margin-top: 150px;" class="modal fade" id="restoreSuccessModal" role="dialog">
+<div class="modal fade" id="restoreSuccessModal" role="dialog">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content" id="showSuccesss">
-			<div class="modal-body" id="show_user" style="margin-bottom: 150px;" >
+			<div class="modal-body row" id="show_user" >
 				<div class="col-sm-12" id="restoreSuccess">
 				</div>
 				<div class="col-sm-12">
@@ -331,8 +331,5 @@
 		</div>
 	</div>
 </div>
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src="/assets/js/global.ajax.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_archived.js"></script>
+<script src="/assets/general_admin/general_admin_archived.js"></script>
 @endsection

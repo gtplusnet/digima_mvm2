@@ -2,11 +2,7 @@
 @section('title', 'Merchants')
 @section('description', 'merchants')
 @section('content')
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_merchant.js"></script>
-<script src="/assets/js/global.ajax.js"></script>
+
 <style>
 .date
 {
@@ -124,7 +120,7 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$client->contact_first_name}}  {{$client->contact_last_name}}</td>
                                     <td>{{$client->business_name}}</td>
                                     <td>{{$client->membership_name}}</td>
-                                    <td>{{$client->transaction_status}} by: {{$client->first_name}} {{$client->last_name}}</td>
+                                    <td>{{$client->transaction_status}} by: {{$client->user_first_name}} {{$client->user_last_name}}</td>
                                     <td>
                                         @if($client->file_path=="not available")
                                         <p>MP3 not available</p>
@@ -193,7 +189,7 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$agentAdd->contact_first_name}}  {{$agentAdd->contact_last_name}}</td>
                                     <td>{{$agentAdd->business_name}}</td>
                                     <td>{{$agentAdd->membership_name}}</td>
-                                    <td>{{$agentAdd->transaction_status}} by: {{$agentAdd->first_name}} {{$agentAdd->last_name}}</td>
+                                    <td>{{$agentAdd->transaction_status}} by: {{$agentAdd->user_first_name.' '.$agentAdd->user_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($agentAdd->date_transact))}}</td>
                                     <td>
                                         <a target="_blank" href="/general_admin/send_invoice/{{$agentAdd->business_id}}">
@@ -257,7 +253,7 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$pendingclient->contact_first_name}}  {{$pendingclient->contact_last_name}}</td>
                                     <td>{{$pendingclient->business_name}}</td>
                                     <td>{{$pendingclient->membership_name}}</td>
-                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->first_name}} {{$pendingclient->last_name}}</td>
+                                    <td>{{$pendingclient->transaction_status}} by: {{$pendingclient->user_first_name.' '.$pendingclient->user_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($pendingclient->date_transact))}}</td>
                                     <td>
                                         <select id="resendAction" data-contact_name="{{ $pendingclient->contact_first_name}}" data-b_id="{{ $pendingclient->business_id}}" data-name="{{ $pendingclient->invoice_name }}" data-email="{{ $pendingclient->user_email }}" data-path="{{$pendingclient->invoice_path}}" class="form-control resendAction" id="sel1" style="width:90px;">
@@ -340,7 +336,7 @@ $( ".datepicker1" ).datepicker();
                                     <td>{{$registeredclients->contact_first_name}}  {{$registeredclients->contact_last_name}}</td>
                                     <td>{{$registeredclients->business_name}}</td>
                                     <td>{{$registeredclients->membership_name}}</td>
-                                    <td>{{$registeredclients->transaction_status}} by: {{$registeredclients->first_name}} {{$registeredclients->last_name}}</td>
+                                    <td>{{$registeredclients->transaction_status}} by: {{$registeredclients->user_first_name}} {{$registeredclients->user_last_name}}</td>
                                     <td>{{date("F j, Y",strtotime($registeredclients->date_transact))}}</td>
                                     @if(date("F j, Y", strtotime("+5 days"))==$registeredclients->due_date)
                                     <td style="color: #a200ff;text-decoration: underline;">{{$registeredclients->due_date}}</td>
@@ -365,10 +361,10 @@ $( ".datepicker1" ).datepicker();
                                         </select>
                                     </td>
                                 </tr>
-                                <div style="margin-top: 150px;" class="modal fade" id="confirmModal" role="dialog">
+                                <div class="modal fade" id="confirmModal" role="dialog">
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
-                                            <div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+                                            <div class="modal-body row" id="show_user"  >
                                                 <div class="col-sm-12">
                                                     <h4 class="modal-title">Are You sure You want to deactivate this merchant?</h4>
                                                 </div>
@@ -391,10 +387,10 @@ $( ".datepicker1" ).datepicker();
             </div>
         </div>
         {{-- modal --}}
-        <div style="margin-top: 150px;" class="modal fade" id="confirmModalInvoice" role="dialog">
+        <div  class="modal fade" id="confirmModalInvoice" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <div class="modal-body" id="show_user" style="margin-bottom: 80px;" >
+                    <div class="modal-body row" id="show_user"  >
                         <div class="col-sm-12">
                             <h4 class="modal-title">Are You sure?</h4>
                         </div>
@@ -411,7 +407,7 @@ $( ".datepicker1" ).datepicker();
         <div style="margin-top: 150px;" class="modal fade" id="successModals" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <div class="modal-body" style="margin-bottom: 120px;" >
+                    <div class="modal-body row" >
                         <div class="col-sm-12" id="success_alert">
                             <div id="ajax-loader" style="display: none; text-align: center;">
                                 <img src="/assets/img/loading.gif"/>
@@ -421,8 +417,8 @@ $( ".datepicker1" ).datepicker();
                 </div>
             </div>
         </div>
-        
-        {{-- modal --}}
     </div>
 </div>
+<script src="/assets/general_admin/general_admin_merchant.js"></script>
+
 @endsection

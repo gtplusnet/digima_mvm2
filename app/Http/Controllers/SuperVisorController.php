@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Controllers\ActiveAuthController;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -13,187 +14,202 @@ use App\Models\TblBusinessModel;
 use App\Models\Tbl_conversation;
 use App\Models\TblContactUs;
 use App\Models\TblBusinessCategoryModel;
+
+use App\Models\TblUserInfoModel;
+use App\Models\TblUserTeamModel;
+use App\Models\TblUserModel;
+
+
+use Input;
+use Mail;
 use Session;
 use Redirect;
+use Crypt;
 use Validator;
 use Carbon\Carbon;
 
-class SuperVisorController extends Controller
+class SuperVisorController extends ActiveAuthController
 {
-    public static function allow_logged_in_users_only()
-    {
-        if(session("supervisor_login") != true)
-        {
-            return Redirect::to("/supervisor")->send();
-        }
-    }
-    public static function allow_logged_out_users_only()
-    {
-        if(session("supervisor_login"))
-        {
-            return Redirect::to("/supervisor/dashboard")->send();
-        }
-    }
-    public function index()
-    {
-        Self::allow_logged_out_users_only();
-
-        $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
-        $data['_mob_categories']    = TblBusinessCategoryModel::all();
-        $data['contact_us']         = TblContactUs::first();
-        $data['page']   = 'login';
-        return view('front.pages.login', $data);
-    }
-    public function supervisor_logout()
-    {
-
-        Session::forget("supervisor_login");
-        return Redirect::to("/supervisor");
-    }
-    public function supervisor_login_submit(Request $request)
-    {
-        $validate_login = TblSupervisorModels::where('email',$request->email)->first();
-        if($validate_login)
-
-        {
-            if (password_verify($request->password, $validate_login->password)) 
-                {
-                  if($validate_login->archived==0)
-                      {
-                        Session::put("supervisor_login",true);
-                        Session::put("profile",$validate_login->profile);
-                        Session::put("supervisor_id",$validate_login->supervisor_id);
-                        Session::put("full_name_supervisor",$validate_login->first_name." ".$validate_login->last_name);
-
-                        Session::put("email",$validate_login->email);
-                        Session::put("position",$validate_login->position);
-                        $data['page']   = 'Dashboard';
-
-                        return Redirect::to('/supervisor/dashboard');
-                      }
-                      else
-                      {
-                        return Redirect::back()->withErrors(['You Are Restricted to this site!', 'You Are Restricted to this site!']);
-                      }
-
-                    
-                }
-            else
-            {
-                $data['page']   = 'supervisor Login';
-                return Redirect::back()->withErrors(['User Login is Incorrect!', 'User Login is Incorrect']);
-            }
-        }
-        else
-        {
-            
-            return Redirect::back()->withErrors(['User Login is Incorrect!', 'User Login is Incorect!']);
-        }
-    }
-    public function profile()
-  	{
-      Self::allow_logged_in_users_only();
-  		$data['page']	= 'Profile';
-      $data['profile'] = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();
-  		return view ('supervisor.pages.profile', $data);		
-  	}
-
-    public function update_profile(Request $request)
-    {
-      $data['transaction'] = 'profile';
-      $data['profile'] = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
-      return view('supervisor.pages.update_profile',$data); 
-    }
-    public function update_password(Request $request)
-    {   
-      $data['transaction'] = 'password';
-      return  view('supervisor.pages.update_profile',$data);
-    }
-    public function checking_password(Request $request )
-    {
-      $user = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->first();   
-      if(password_verify($request->currentPassword,$user->password))
+  public static function global()
+  {
+      $user_info = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+                  ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+                  ->first();
+      return $user_info;
+  }
+  public function dashboard()
+  {
+    $data['user']       = Self::global();
+    $count_merchant_agent = TblBusinessModel::where('business_status',1)->get();
+    $count_merchant_supervisor = TblBusinessModel::where('business_status',2)->get();
+    $count_merchant_admin = TblBusinessModel::where('business_status',3)->get();
+    $count_merchant_admin_payment = TblBusinessModel::where('business_status',4)->get();
+    $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
+    $data['countCall'] = $count_merchant_agent->count();
+    $data['countMP3'] = $count_merchant_supervisor->count();
+    $data['countInvoice'] = $count_merchant_admin->count();
+    $data['countPayment'] = $count_merchant_admin_payment->count();
+    $data['countActivated'] = $count_merchant_admin_activated->count();
+    $data['count_jan']    = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->count();
+    $data['count_feb']    = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->count();
+    $data['count_mar']    = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->count();
+    $data['count_apr']    = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->count();
+    $data['count_may']    = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->count();
+    $data['count_jun']    = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->count();
+    $data['count_jul']    = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->count();
+    $data['count_aug']    = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->count();
+    $data['count_sep']    = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->count();
+    $data['count_oct']    = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->count();
+    $data['count_nov']    = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->count();
+    $data['count_dec']    = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->count();
+    $data['counts_jan']   = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->count();
+    $data['counts_feb']   = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->count();
+    $data['counts_mar']   = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->count();
+    $data['counts_apr']   = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->count();
+    $data['counts_may']   = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->count();
+    $data['counts_jun']   = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->count();
+    $data['counts_jul']   = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->count();
+    $data['counts_aug']   = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->count();
+    $data['counts_sep']   = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->count();
+    $data['counts_oct']   = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->count();
+    $data['counts_nov']   = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->count();
+    $data['counts_dec']   = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->count();
+    $data['date_mon']     = $mon =  date('Y/m/d',strtotime('monday this week'));
+    $data['date_tue']     = $tue =  date('Y/m/d',strtotime('tuesday this week'));
+    $data['date_wed']     = $wed =  date('Y/m/d',strtotime('wednesday this week'));
+    $data['date_thu']     = $thu =  date('Y/m/d',strtotime('Thursday this week'));
+    $data['date_fri']     = $fri =  date('Y/m/d',strtotime('Friday this week'));
+    $data['date_sat']     = $sat =  date('Y/m/d',strtotime('Saturday this week'));
+    $data['date_sun']     = $sun =  date('Y/m/d',strtotime('Sunday this week'));
+    $data['mon']          = TblBusinessModel::where('user_call_date',$mon)->count();
+    $data['tue']          = TblBusinessModel::where('user_call_date',$tue)->count();
+    $data['wed']          = TblBusinessModel::where('user_call_date',$wed)->count();
+    $data['thu']          = TblBusinessModel::where('user_call_date',$thu)->count();
+    $data['fri']          = TblBusinessModel::where('user_call_date',$fri)->count();
+    $data['sat']          = TblBusinessModel::where('user_call_date',$sat)->count();
+    $data['sun']          = TblBusinessModel::where('user_call_date',$sun)->count();
+    $data['_agents']   = TblTeamModel::where('supervisor_id',session('supervisor_id'))
+                       ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+                       ->get();
+    $data['_teams']   = TblTeamModel::where('archived',0)->where('supervisor_id',session('supervisor_id'))->get();
+    $data['page'] = 'Dashboard';
+    return view ('supervisor.pages.dashboard', $data);  
+  }
+  public function profile()
+  {
+    $data['user']       = Self::global();
+    $data['page']       = 'Profile';
+    $data['supervisor_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+                        ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+                        ->first();
+    $data['team']       = TblUserTeamModel::where('user_id',session('user_id'))
+                        ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
+                        ->first();    
+    return view ('supervisor.pages.profile', $data);    
+  }
+  public function update_profile(Request $request)
+  {
+    $data['transaction'] = 'profile';
+    $data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+                        ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+                        ->first();      
+    return view('agent.pages.update_profile',$data); 
+  }
+  public function saving_profile(Request $request)
+  {
+    if($request->ajax())
       {
-        if($request->newPassword == $request->confirmPassword)
+        if($request->stats=='null')
+        { 
+        $data['primary_phone']    = $request->primaryPhone;
+        $data['secondary_phone']  = $request->secondaryPhone;
+        $data['other_info']     = $request->otherInfo;
+        $data['address']      = $request->address;
+        $data['profile']            = $request->imageText;;
+        
+        $check = TblAgentModel::where('agent_id',session('agent_id'))->update($data);
+        if($check)
         {
-          $data['password'] = password_hash($request->newPassword, PASSWORD_DEFAULT);
-          TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
-          return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+          return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
         }
         else
         {
-          return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+          return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
         }
       }
       else
-      {
-        return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
-      }
-    }
-    public function saving_profile(Request $request)
-    { 
-      Self::allow_logged_in_users_only();
-      if($request->ajax())
-      {
-          if($request->stats=='null')
-          {
-            $data['primary_phone']    = $request->primaryPhone;
-            $data['secondary_phone']  = $request->secondaryPhone;
-            $data['other_info']       = $request->otherInfo;
-            $data['address']          = $request->address;
-            $data['profile']          = $request->imageText;;
-
-            $check = TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
-            if($check)
-            {
-              return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
-            }
-            else
-            {
-              return "<div class='alert alert-waring'><strong>Sorry!</strong> Nothing has change.</div>"; 
-            }
-
-          }
-          else
           {
             $unique=uniqid();
             $fileConvo = $request->file("file");
             $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
             $fileConvo->move('business_images', $file_name);
-            $data['profile']          = $file_name; 
-            $data['primary_phone']    = $request->primaryPhone;
-            $data['secondary_phone']  = $request->secondaryPhone;
-            $data['other_info']       = $request->otherInfo;
-            $data['address']          = $request->address;
-            TblSupervisorModels::where('supervisor_id',session('supervisor_id'))->update($data);
+            $data['user_profile']       = $file_name;
+            $data['user_phone_number']    = $request->user_phone_number;
+            $data['user_address']       = $request->user_address;
+        
+            TblUserInfoModel::where('user_id',session('user_id'))->update($data);
+
+            $datas['user_email']        = $request->user_email;
+
+            TblUserModel::where('user_id',session('user_id'))->update($datas);
           }
-      }
     }
-
-  	public function client()
-  	{
-      Self::allow_logged_in_users_only();
-  		$data['page']	= 'Merchant';
-
-      $data['clients'] = TblTeamModel::where('tbl_team.supervisor_id', session('supervisor_id'))
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->where('tbl_business.business_status',2)
-                            ->orderBy('tbl_business.date_created',"asc")
-                            ->get();
-      $data['clients_activated'] = TblTeamModel::where('tbl_team.supervisor_id', session('supervisor_id'))
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')
-                            ->where('tbl_business.business_status',3)
-                            ->orderBy('tbl_business.date_created',"asc")
-                            ->get();
-      return view ('supervisor.pages.client', $data);		
-  	}
+  }
+  public function update_password(Request $request)
+  {   
+    $data['transaction'] = 'password';
+    return  view('agent.pages.update_profile',$data);
+  }
+  public function checking_password(Request $request )
+  {
+    $user = TblUserModel::where('user_id',session('user_id'))->first();
+    if(Crypt::decrypt($user->password)==$request->currentPassword)
+    {
+      if($request->newPassword == $request->confirmPassword)
+            {
+              $data['user_password'] = Crypt::encrypt($request->newPassword);
+              TblUserModel::where('user_id',session('user_id'))->update($data);
+              return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+            }
+            else
+            {
+              return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+            }
+    }
+    else
+    {
+      return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
+    }
+  }
+  public function merchant()
+	{
+    $data['user']       = Self::global();
+		$data['page']	= 'Merchant';
+    $data['merchant'] = TblTeamModel::where('tbl_team.supervisor_id', session('user_id'))->get();
+    foreach($data['merchant'] as $key=>$team)
+    {
+      $data['merchant'][$key]['clients'] = TblUserTeamModel::where('tbl_user_team.team_id', $team->team_id)
+                          ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
+                          ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->where('tbl_business.business_status',2)
+                          ->groupBy('tbl_business.business_name')
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->get();
+       $data['merchant'][$key]['clients_activated'] = TblTeamModel::where('tbl_team.supervisor_id', $team->team_id)
+                          ->join('tbl_user_team','tbl_user_team.team_id','=','tbl_user_team.team_id')
+                          ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
+                          ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                          ->where('tbl_business.business_status',3)
+                          ->orderBy('tbl_business.date_created',"asc")
+                          ->groupBy('tbl_business.business_name')
+                          ->get();
+    }
+    return view ('supervisor.pages.merchant', $data);		
+	}
     public function get_client(Request $request)
     {
         $s_date = $request->date_start;
@@ -237,86 +253,11 @@ class SuperVisorController extends Controller
         return '';
     }
     
-    public function supervisor_add_team(Request $request)
-    {
-        $data['team_name']  = $request->team_name;
-        $data['team_information']  = $request->team_des;
-        $data['supervisor_id']  = session('supervisor_id');
-        TblTeamModel::insert($data);
-        return "<div class='alert alert-success'><strong>Success!</strong>Team Added.</div>";
-    }
-    public function get_agent_info()
-    {
-      $data['james'] = 'james';
-      return $data;
-    }
-    public function supervisor_assign_agent(Request $request)
-    {
-        $agent_id          = $request->agent_id_assign;
-        $update['team_id'] = $request->teamAssigned;
-        TblAgentModel::where('agent_id',$agent_id)->update($update);
-        return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
-
-    }	
+    
+    
+    
 	   
-	  public function dashboard()
-    {
-      Self::allow_logged_in_users_only();
-      $count_merchant_agent = TblBusinessModel::where('business_status',1)->get();
-      $count_merchant_supervisor = TblBusinessModel::where('business_status',2)->get();
-      $count_merchant_admin = TblBusinessModel::where('business_status',3)->get();
-      $count_merchant_admin_payment = TblBusinessModel::where('business_status',4)->get();
-      $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
-      $data['countCall'] = $count_merchant_agent->count();
-      $data['countMP3'] = $count_merchant_supervisor->count();
-      $data['countInvoice'] = $count_merchant_admin->count();
-      $data['countPayment'] = $count_merchant_admin_payment->count();
-      $data['countActivated'] = $count_merchant_admin_activated->count();
-      $data['count_jan']    = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->count();
-      $data['count_feb']    = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->count();
-      $data['count_mar']    = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->count();
-      $data['count_apr']    = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->count();
-      $data['count_may']    = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->count();
-      $data['count_jun']    = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->count();
-      $data['count_jul']    = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->count();
-      $data['count_aug']    = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->count();
-      $data['count_sep']    = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->count();
-      $data['count_oct']    = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->count();
-      $data['count_nov']    = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->count();
-      $data['count_dec']    = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->count();
-      $data['counts_jan']   = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->count();
-      $data['counts_feb']   = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->count();
-      $data['counts_mar']   = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->count();
-      $data['counts_apr']   = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->count();
-      $data['counts_may']   = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->count();
-      $data['counts_jun']   = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->count();
-      $data['counts_jul']   = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->count();
-      $data['counts_aug']   = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->count();
-      $data['counts_sep']   = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->count();
-      $data['counts_oct']   = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->count();
-      $data['counts_nov']   = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->count();
-      $data['counts_dec']   = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->count();
-      $data['date_mon']     = $mon =  date('Y/m/d',strtotime('monday this week'));
-      $data['date_tue']     = $tue =  date('Y/m/d',strtotime('tuesday this week'));
-      $data['date_wed']     = $wed =  date('Y/m/d',strtotime('wednesday this week'));
-      $data['date_thu']     = $thu =  date('Y/m/d',strtotime('Thursday this week'));
-      $data['date_fri']     = $fri =  date('Y/m/d',strtotime('Friday this week'));
-      $data['date_sat']     = $sat =  date('Y/m/d',strtotime('Saturday this week'));
-      $data['date_sun']     = $sun =  date('Y/m/d',strtotime('Sunday this week'));
-      $data['mon']          = TblBusinessModel::where('agent_call_date',$mon)->count();
-      $data['tue']          = TblBusinessModel::where('agent_call_date',$tue)->count();
-      $data['wed']          = TblBusinessModel::where('agent_call_date',$wed)->count();
-      $data['thu']          = TblBusinessModel::where('agent_call_date',$thu)->count();
-      $data['fri']          = TblBusinessModel::where('agent_call_date',$fri)->count();
-      $data['sat']          = TblBusinessModel::where('agent_call_date',$sat)->count();
-      $data['sun']          = TblBusinessModel::where('agent_call_date',$sun)->count();
-      $data['_agents']   = TblTeamModel::where('supervisor_id',session('supervisor_id'))
-                         ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                         ->get();
-      $data['_teams']   = TblTeamModel::where('archived',0)->where('supervisor_id',session('supervisor_id'))->get();
-      $data['page']	= 'Dashboard';
-      return view ('supervisor.pages.dashboard', $data);	
-    }
+	  
     
     public function supervisor_show_agent_calls(Request $request)
     {
@@ -413,100 +354,75 @@ class SuperVisorController extends Controller
       $data['active_teams']   = TblTeamModel::where('team_id',$request->team_id)->first();                         
       return view('supervisor.pages.show_team_calls',$data);
     }
-    // supervisor_add_agent
-  	public function supervisor_add_agent(Request $request)
-  	{ 
-      $ins['prefix']        = $request->prefix;
-      $ins['first_name']    = $request->first_name;
-      $ins['last_name']     = $request->last_name;
-  		$ins['email']         = $request->email;
-  		$ins['position']      = 'agent';
-  		$ins['team_id']       = $request->team_id;
-  		$ins['primary_phone'] = $request->primary;
-  		$ins['secondary_phone'] = $request->secondary;
-  		$ins['other_info']    = $request->other_info;
-      $ins['date_created']  = date("Y/m/d");
-      $ins['agent_call']    = '0';
-
-      $ins['password'] = password_hash($request->password, PASSWORD_DEFAULT);
-      if($ins['password']=='')
-      {
-          return "<div class='alert alert-danger'><strong>Please!</strong>Input Password.</div>";
-      }
-      else if($ins['first_name']=='')
-      {
-          return "<div class='alert alert-danger'><strong>Please!</strong>Input First Name.</div>";
-      }
-      else if($ins['last_name']=='')
-      {
-          return "<div class='alert alert-danger'><strong>Please!</strong>Input Last Name.</div>";
-      }
-      else if($ins['email']=='')
-      {
-          return "<div class='alert alert-danger'><strong>Please!</strong>Input Email.</div>";
-      }
-      else if($ins['primary_phone']=='')
-      {
-          return "<div class='alert alert-danger'><strong>Please!</strong>Input Primary Phone.</div>";
-      }
-      
-      else
-      {
-          $check_insert = TblAgentModel::insert($ins);
-          if($check_insert)
-          {
-            return "<div class='alert alert-success'><strong>Success!</strong>Agent Added Successfully!</div>";  
-          }
-          else
-          {
-              return "<div class='alert alert-danger'><strong>Fail!</strong>Something went wrong!</div>";
-          }
-      }
-    }
-//Eden
+    
     public function manage_user()
     {
-        Self::allow_logged_in_users_only();
         $data['page']       = 'Manage Team/Agent';
-        $data['viewteam']   = TblTeamModel::where('supervisor_id',session('supervisor_id'))
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            -> selectRaw('sum(agent_call) as sum, tbl_team.*,tbl_team.team_id as id')
-                            ->groupBy('tbl_team.team_id')
-                            ->get();
-        $data['_agent_team']= TblTeamModel::where('archived',0)->where('supervisor_id',session('supervisor_id'))->get();
-        $data['viewagent']  = TblTeamModel::where('tbl_team.archived',0)->where('supervisor_id',session('supervisor_id'))
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->get();
+        $data['user']       = Self::global();
+        $team_id            = TblUserTeamModel::where('user_id',session('user_id'))->value('team_id');
+        $data['viewteam']   = TblTeamModel::where('tbl_team.supervisor_id',session('user_id'))->get();
+        foreach($data['viewteam'] as $key=>$team)
+        {
+          $data['viewteam'][$key]['sum_of_calls']  = TblUserTeamModel::where('team_id',$team->team_id)
+                                            ->selectRaw('sum(user_calls) as sum_of_calls')
+                                            ->where('tbl_user_team.archived',0)
+                                            ->value('sum_of_calls');
+          $data['viewteam'][$key]['viewagent']  = TblUserTeamModel::where('tbl_user_team.archived',0)
+                                            ->where('tbl_user_team.team_id',$team->team_id)
+                                            ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
+                                            ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
+                                            ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                                            ->where('tbl_user.user_access_level','AGENT')
+                                            ->get();
+        }
+        $data['_agent_team']= TblTeamModel::where('archived',0)->where('supervisor_id',session('user_id'))->get();
+        
         return view ('supervisor.pages.manage_user', $data); 
     }
+    public function supervisor_add_team(Request $request)
+    {
+        $data['team_name']          = $request->team_name;
+        $data['team_information']   = $request->team_des;
+        $data['supervisor_id']      = session('user_id');
+        TblTeamModel::insert($data);
+        return "<div class='alert alert-success'><strong>Success!</strong>Team Added.</div>";
+    }
+    public function supervisor_assign_agent(Request $request)
+    {
+        $user_id            = $request->agent_id_assign;
+        $update['team_id']  = $request->teamAssigned;
+        TblUserTeamModel::where('user_id',$user_id)->update($update);
+        return "<div class='alert alert-success'><strong>Success!</strong>Agent Assigned successfully.</div>";
+
+    } 
     public function view_all_members(Request $request)
     {
       $id = $request->team_id;
-      $data['_supervisor'] = TblTeamModel::where('tbl_team.team_id',$id)
-                            ->join('tbl_supervisor','tbl_supervisor.supervisor_id','=','tbl_team.supervisor_id')
+      $data['_supervisor'] = TblUserTeamModel::where('tbl_user_team.team_id',$id)
+                            ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
+                            ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                            ->where('tbl_user.user_access_level','SUPERVISOR')
                             ->get();
-      $data['_data_agent'] = TblTeamModel::where('tbl_team.team_id',$id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
+      $data['_data_agent'] = TblUserTeamModel::where('tbl_user_team.team_id',$id)
+                            ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
+                            ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                            ->where('tbl_user.user_access_level','AGENT')
                             ->get();
       return view('supervisor.pages.viewmember',$data);
     }
     public function supervisor_delete_team(Request $request)
     {
-      TblTeamModel:: where ('team_id',$request->delete_agent_id)->delete();
+      $archived['archived'] = 1;
+      TblTeamModel:: where ('team_id',$request->delete_team_id)->update($archived);
       return "<div class='alert alert-success'><strong>Success!</strong>Team Deleted</div>";
     }
     public function supervisor_delete_agent(Request $request)
-    {   
-
-        TblAgentModel:: where ('agent_id',$request->delete_agent_id)->delete();
-        return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted</div>";
+    { 
+      $archived['archived'] = 1;
+      TblUserModel:: where ('user_id',$request->delete_agent_id)->update(archived);
+      return "<div class='alert alert-success'><strong>Success!</strong>Agent Deleted</div>";
     }
-    public function edit_team(Request $request)
-    {
-        $data['page']   = 'View User';
-        $data['_edit']=TblTeamModel::where('team_id',$request->team_id)->first();
-        return view('supervisor.pages.edit_team', $data);
-    }
+    
     public function update_team(Request $request)
     {
         $data['page']   = 'View User';
@@ -515,58 +431,11 @@ class SuperVisorController extends Controller
         TblTeamModel::where('team_id',$request->team_id)->update($update);
         return "<div class='alert alert-success'><strong>Success!</strong>Team Updated</div>";
     }
-    public function edit_agent(Request $request,$id)
-    {
-        $data['page']   = 'View User';
-        $data['_edit']=TblAgentModel::where('agent_id', $id)->first();
-        $data['agent_list'] = TblTeamModel::get();
-        return view('supervisor.pages.edit_agent', $data);
-    }
-    public function update_agent(Request $request)
-    {
-        $ins['prefix']        = $request->prefix;
-        $ins['first_name']    = $request->first_name;
-        $ins['last_name']     = $request->last_name;
-        $ins['password']      = $request->password;
-        $ins['email']         = $request->email;
-        $ins['position']      = 'agent';
-        $ins['team_id']       = $request->team;
-        $ins['primary_phone'] = $request->primary_phone;
-        $ins['secondary_phone'] = $request->secondary_phone;
-        $ins['other_info']    = $request->other_info;
-
-        $rules['first_name']  = 'required';
-        $rules['last_name']   = 'required';
-        $rules['password']    = 'required';
-        $rules['email']       = 'email';
-        $rules['team_id']     = 'required';
-        $rules['primary_phone'] = 'required|numeric';
-        $rules['secondary_phone'] = 'required|numeric';
-
-        $validator = Validator::make($ins, $rules);
-
-        $ins['password']  = password_hash($request->password, PASSWORD_DEFAULT);
-        $return_message   = '';
-        if($validator->fails())
-        {
-            foreach ($validator->messages()->all('<li style=`list-style:none`>:message</li>')as $keys => $message)
-            {
-                $return_message .= $message;
-            }
-
-            return Redirect::to('/supervisor/add/user')->with('error_agent', $return_message);
-        }
-        else
-        {
-            TblAgentModel::where('agent_id', $request->agent_id)->update($update);
-            return Redirect::to("/supervisor/view/user")->with('warning_agent','testing');
-        }
-    }
-
+    
+    
     public function uploadConvo(Request $request) 
     {
-      Self::allow_logged_in_users_only();
-  		if($request->ajax())
+      if($request->ajax())
       {
   			$fileConvo = $request->file("file");
               $file_ref = uniqid().$fileConvo->getClientOriginalName();
@@ -585,7 +454,6 @@ class SuperVisorController extends Controller
     }
     public function changeAudioFile(Request $request)
     {
-      Self::allow_logged_in_users_only();
       if($request->ajax())
       {
         $fileConvo = $request->file("file");
@@ -604,7 +472,6 @@ class SuperVisorController extends Controller
     }
     public function force_activate(Request $request)
     {
-        Self::allow_logged_in_users_only();
         if($request->ajax()) {
             $convoInfo = new Tbl_conversation;
             $convoInfo->file_path = 'not available';

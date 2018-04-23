@@ -24,7 +24,7 @@
         </li>
 
         <li data-menu="Merchant">
-            <a href="/agent/client">
+            <a href="/agent/merchant">
                 <span>
                     <i class="fa fa-group"></i>
                 </span>

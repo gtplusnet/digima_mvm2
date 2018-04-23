@@ -16,7 +16,7 @@ width:100%;
 </style>
 <div class="banner-searchresult" style="background-image: url('/images/banner_registration.png')">
 	<div class="container">
-		<div class="title-holder-page" style="">
+		<div class="title-holder-page transform-uppercase" style="">
 			REZULTAT PRETRAGE
 		</div>
 	</div>
@@ -28,7 +28,7 @@ width:100%;
 				<div class="col-md-3 desktop">
 					<div class="category-filter-holder" >
 						<div class="category-title-holder" id="show_category">
-							<p class="categorylist-title">Filter Kategorije</p>
+							<p class="categorylist-title transform-capitalize">Filter Kategorije</p>
 						</div>
 						<div class="categorylist-container">
 							<ul class="list-group" >
@@ -40,7 +40,7 @@ width:100%;
 					</div>
 					<div class="featuredlist-holder">
 						<div class="featuredlist-title-holder">
-							<p class="featuredlist-title">Istaknuti Popis</p>
+							<p class="featuredlist-title transform-capitalize">Istaknuti Popis</p>
 						</div>
 						<div class="featuredlist-container side-list-padding">
 							<div id="carousel-pager" class="carousel slide featured-carousel" data-ride="carousel" data-interval="3000">
@@ -89,7 +89,7 @@ width:100%;
 					</div>
 					<div class="featuredlist-holder">
 						<div class="featuredlist-title-holder">
-							<p class="featuredlist-title">Nagledaniji</p>
+							<p class="featuredlist-title transform-capitalize">Najgledanije</p>
 						</div>
 						<div class="featuredlist-container side-list-padding">
 							<div  class="featured-carousel" >
@@ -121,7 +121,7 @@ width:100%;
 					<!-- DESKTOP VIEW -->
 					<div class="desktop">
 						<div class="business-list-holder">
-							<p class="business-list-title">REZULTAT PRETRAGE ZA: <a class="search-link" href="">{{ $businessKeyword }}</a></p>
+							<p class="business-list-title transform-uppercase">REZULTAT PRETRAGE ZA: <a class="search-link" href="">{{ $businessKeyword }}</a></p>
 						</div>
 						@if(count($_businessResult) == 0)
 						<div class="col-md-12">

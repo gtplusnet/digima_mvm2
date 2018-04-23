@@ -103,7 +103,7 @@
 									<input type="text" name="email" class="form-control password-textfields">
 								</div>
 								<div class="col-md-12 password-textfield-container">
-									<label for="input-username" class="password-labels">Please Input Your Primary Phone Number</label>
+									<label for="input-username" class="password-labels">Please Input Your Phone Number</label>
 									<input type="text" name="phone" class="form-control password-textfields">
 								</div>
 								<div class="col-md-12 password-textfield-container-lastpart">

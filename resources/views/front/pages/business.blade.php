@@ -1,8 +1,6 @@
 @extends('front.layout.layout')
 @section('title', 'Business Info')
 @section('content')
-
-
 <div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">
     <div class="container">
         <div class="top-detail-mob">
@@ -114,14 +112,14 @@
                         @else
                         <iframe class="facebook" src="https://www.facebook.com/plugins/like.php?href={{$business_info->facebook_url}}&width=88&layout=button_count&action=like&size=large&show_faces=false&share=false&height=21&appId=275633406278448" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
                         @endif
-                        <iframe class="twitter" src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_info->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Croatia%20Directory%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                        <iframe class="twitter"  src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url={{$business_info->twitter_url}}/&via=mvm.digimahouse.com&related=twitterapi%2Ctwitter&text=Yellow%20Pages%20Share&hashtags=TheRightPlaceForBusiness%2CSignUpNow%20https://mvm.digimahouse.com/business/1" width="88" height="40" title="Twitter Tweet Button" style="border: 0; overflow: hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
                     </div>
                    
                 </div>
             </div>
             <div class="details-container">
                 <div class="business-details-rightpart-title">
-                    <i class="fa fa-calendar icon-size"></i><p class="title-margin"> GODINA OSNIVANJA:</p>
+                    <i class="fa fa-calendar icon-size"></i><p class="title-margin transform-uppercase"> GODINA OSNIVANJA:</p>
                 </div>
                 <p class="business-details-rightpart-content">{{ $business_info->year_established }}</p>
             </div>
