@@ -47,7 +47,7 @@ class LoginController extends Controller
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['contact_us']         = TblContactUs::first();
-        $data['page']               = Crypt::decrypt('eyJpdiI6IjVvMko0ZjNrSll1TkVueUlXcGFaMUE9PSIsInZhbHVlIjoibGUzU09TUzFlbjZpYzdab3ZvQ21pQT09IiwibWFjIjoiOTkwYTk5MzUzMjhlMTQ5M2Q5OTFjZGFlZmQwNmY0ZDRjNDI4MTg5NTEzZWRkYmI5YjI5N2EzYjAzOGU2YzQzOSJ9');
+        $data['page']               = 'LOGIN';
         return view('front.pages.login', $data);
     }
     public function user_login_submit(Request $request)
