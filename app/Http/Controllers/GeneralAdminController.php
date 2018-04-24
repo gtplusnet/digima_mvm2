@@ -127,13 +127,13 @@ class GeneralAdminController extends ActiveAuthController
       $data['year6']  = $year6 = date('Y', strtotime('+2 years'));
       $data['year7']  = $year7 = date('Y', strtotime('+3 years'));
 
-      $data['count_year1']  = TblBusinessModel::whereBetween("date_transact",[$year1.'/01/01',$year1.'/12/31'])->count();
-      $data['count_year2']  = TblBusinessModel::whereBetween("date_transact",[$year2.'/01/01',$year2.'/12/31'])->count();
-      $data['count_year3']  = TblBusinessModel::whereBetween("date_transact",[$year3.'/01/01',$year3.'/12/31'])->count();
-      $data['count_year4']  = TblBusinessModel::whereBetween("date_transact",[$year4.'/01/01',$year4.'/12/31'])->count();
-      $data['count_year5']  = TblBusinessModel::whereBetween("date_transact",[$year5.'/01/01',$year5.'/12/31'])->count();
-      $data['count_year6']  = TblBusinessModel::whereBetween("date_transact",[$year6.'/01/01',$year6.'/12/31'])->count();
-      $data['count_year7']  = TblBusinessModel::whereBetween("date_transact",[$year7.'/01/01',$year7.'/12/31'])->count();
+      $data['count_year1']  = TblBusinessModel::whereBetween("date_transact",[$year1.'/01/01',$year1.'/12/31'])->where('business_status',5)->count();
+      $data['count_year2']  = TblBusinessModel::whereBetween("date_transact",[$year2.'/01/01',$year2.'/12/31'])->where('business_status',5)->count();
+      $data['count_year3']  = TblBusinessModel::whereBetween("date_transact",[$year3.'/01/01',$year3.'/12/31'])->where('business_status',5)->count();
+      $data['count_year4']  = TblBusinessModel::whereBetween("date_transact",[$year4.'/01/01',$year4.'/12/31'])->where('business_status',5)->count();
+      $data['count_year5']  = TblBusinessModel::whereBetween("date_transact",[$year5.'/01/01',$year5.'/12/31'])->where('business_status',5)->count();
+      $data['count_year6']  = TblBusinessModel::whereBetween("date_transact",[$year6.'/01/01',$year6.'/12/31'])->where('business_status',5)->count();
+      $data['count_year7']  = TblBusinessModel::whereBetween("date_transact",[$year7.'/01/01',$year7.'/12/31'])->where('business_status',5)->count();/*business status ay tanggalin pag binago*/
     return view('general_admin.pages.dashboard',$data);
   }
   public function general_admin_merchants()
@@ -558,11 +558,11 @@ class GeneralAdminController extends ActiveAuthController
   }
   public function general_admin_payment_monitoring()
   {
-    $data['user']         = Self::global();
-    $data['business_list'] = TblPaymentModel::where('payment_status','submitted')
-                        ->PaymentAdmin()
-                        ->groupBy('tbl_invoice.invoice_number')
-                        ->paginate(10);
+    $data['user']           = Self::global();
+    $data['business_list']  = TblPaymentModel::where('payment_status','submitted')
+                            ->PaymentAdmin()
+                            ->groupBy('tbl_invoice.invoice_number')
+                            ->paginate(10);
     return view('general_admin.pages.payment_monitoring',$data);
   }
   public function general_admin_view_payment_details(Request $request)
@@ -592,19 +592,7 @@ class GeneralAdminController extends ActiveAuthController
                     ->first();
     $name         = $info->contact_prefix." ".$info->contact_first_name." ".$info->contact_last_name;
     $email        = $info->user_email;
-    $checking     = TblBusinessModel::where('business_id',$business_id)->first();
-    if($checking->transaction_status=='Added')
-    {
-      $new_password         = mt_rand(100000, 99999999);
-      $up['user_password']  = Crypt::encrypt($new_password);
-      $checking             = TblUserAccountModel::where('business_id',$business_id)->update($up);
-      $password             = Crypt::decrypt($up['user_password']);
-
-    }
-    else
-    {
-      $password   = 'Use the password you entered in the registration page.';
-    }
+    $password     = Crypt::decrypt($info->user_password);
     $link         = 'http://mvm.digimahouse.com/merchant/dashboard';
     $data         = array('name'=>$name,'email'=>$email,'password'=>$password,'link'=>$link);
     $check_mail   = Mail::send('general_admin.pages.activated_merchant_notif', $data, function($message) use($data) 
@@ -961,13 +949,13 @@ class GeneralAdminController extends ActiveAuthController
   }
   public function general_admin_manage_website()
   {
-    $data['user']         = Self::global();
-    $data['_membership']          = TblMembeshipModel::where('archived',0)->paginate(5, ['*'], 'membership');
-    $data['_payment_method']      = TblPaymentMethod::where('archived',0)->paginate(5, ['*'], 'payment');
-    $data['_county']              = TblCountyModel::paginate(5, ['*'], 'county');
+    $data['user']                 = Self::global();
+    $data['_membership']          = TblMembeshipModel::where('archived',0)->paginate(10, ['*'], 'membership');
+    $data['_payment_method']      = TblPaymentMethod::where('archived',0)->paginate(10, ['*'], 'payment');
+    $data['_county']              = TblCountyModel::paginate(10, ['*'], 'county');
     $data['_county_city']         = TblCountyModel::get();
     $data['_city']                = TblCityModel::join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                  ->paginate(5, ['*'], 'city');
+                                  ->paginate(10, ['*'], 'city');
     return view('general_admin.pages.manage_website',$data);
   }
 
@@ -1828,6 +1816,19 @@ class GeneralAdminController extends ActiveAuthController
 
             DB::table('tbl_user_info')->insert($info);
             DB::table('tbl_user')->insert($insert);
+        }
+        if (DB::table('tbl_membership')->count() <= 0) 
+        {
+            $insert[0]["membership_id"]      = 1;
+            $insert[0]["membership_name"]    = "PLATINUM";
+            $insert[0]["membership_price"]   = "00.00";
+            $insert[0]["membership_info"]    = "Platinum Information";
+
+            $insert[1]["membership_id"]      = 2;
+            $insert[1]["membership_name"]    = "PREMIUM";
+            $insert[1]["membership_price"]   = '00.00';
+            $insert[1]["membership_info"]    = "Premium Information";
+            DB::table('tbl_membership')->insert($insert);
         }
     }
     

@@ -40,8 +40,27 @@
         @if((Request::segment(2) != 'profile'))
         <link href="/assets/general_assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         @endif
+        <style>
+        .waves-effect
+        {
+            text-transform:capitalize !important;
+        }
+        .page-breadcrumb
+        {
+            text-transform:capitalize !important;
+        }
+        .page-title h3
+        {
+            text-transform:uppercase !important;
+        }
+        th
+        {
+            text-transform:capitalize !important;
+        }
+        </style>
     </head>
     <body class="page-header-fixed">
+        
         @if(session('user_access_level')=='ADMIN')
             <main class="page-content content-wrap">
                 @include('layout.general_header');

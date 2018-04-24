@@ -1,8 +1,6 @@
 @extends('layout.general_layout')
 @section('content')
-<link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script type="text/javascript" src="/assets/js/global.ajax.js"></script>
+
 <script src="/assets/js/agent/agent_client.js"></script>
 <style>
 .distance

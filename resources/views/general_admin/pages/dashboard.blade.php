@@ -97,7 +97,7 @@
         <div class="col-md-7 " style="padding-left:0px;">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Registered Per Year</h4>
+                    <h4 class="title">MERCHANT ACTIVATED</h4> <!-- pag binago alisin sign up yan register lang -->
                     <p class="category">Merchant Statistic</p>
                 </div>
                 <div class="content" style="overflow-x: scroll;">
@@ -110,7 +110,7 @@
                     </div>
                     <hr>
                     <div class="stats">
-                        <i class="fa fa-clock-o"></i> Updated 3 minutes ago
+                        <i class="fa fa-clock-o"></i> Updated
                     </div>
                 </div>
             </div>
@@ -127,18 +127,18 @@
                 </div>
                 <div class="footer">
                     <div class="legend">
-                        <i class="fa fa-circle text-info"></i>Agent Task
-                        <i class="fa fa-circle text-danger"></i>Supervisor Task
-                        <i class="fa fa-circle text-warning"></i>Admin Task
+                        <i class="fa fa-circle text-info"></i>Agent
+                        <i class="fa fa-circle text-danger"></i>Supervisor
+                        <i class="fa fa-circle text-warning"></i>Admin
                     </div>
                     <hr>
                     <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                        <i class="fa fa-history"></i> Updated
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-11">
+        {{-- <div class="col-md-11">
             <div class="  card ">
                 <div class="header">
                     <h4 class="title">Registered - Activated Per Month</h4>
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     
     

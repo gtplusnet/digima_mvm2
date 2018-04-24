@@ -26,60 +26,64 @@
                                 
                             </div>
                         </div>
-                        <div class="col-md-12 distance">
+                        <div class="distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Name</label>
+                                <label for="input-Default" class="col-sm-3 control-label">Contact Name</label>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="Mr." readonly>
+                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_prefix}}" readonly>
                                 </div>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_first_name}}" readonly>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_last_name}}" readonly>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->contact_first_name." ".$client->contact_last_name}}" readonly>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 distance">
+                        <div class="distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Business NAme</label>
-                                <div class="col-sm-10">
+                                <label for="input-Default" class="col-sm-3 control-label">Business Name</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_name}}" readonly>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 distance">
+                        <div class="distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Primary Number</label>
-                                <div class="col-sm-4">
+                                <label for="input-Default" class="col-sm-3 control-label">Primary Number</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_phone}}" readonly>
                                 </div>
-                                <label for="input-Default" class="col-sm-2 control-label">Secondary Number</label>
-                                <div class="col-sm-4">
+                            </div>
+                        </div>
+                        <div class="distance">
+                            <div class="form-group">
+                                <label for="input-Default" class="col-sm-3 control-label">Secondary Number</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_alt_phone}}" readonly>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 distance">
+                        <div class="distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-2 control-label">Complete Address</label>
-                                <div class="col-sm-10">
+                                <label for="input-Default" class="col-sm-3 control-label">Complete Address</label>
+                                <div class="col-sm-9">
                                     <textarea class="form-control input-rounded" placeholder="" rows="4=6" readonly>{{$client->business_complete_address}}</textarea>
-                
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 distance">
+                        <div class="distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-1 control-label">County</label>
-                                <div class="col-sm-3">
+                                <label for="input-Default" class="col-sm-3 control-label">County</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->county_name}}" readonly>
                                 </div>
-                                <label for="input-Default" class="col-sm-1 control-label">City</label>
+                            </div>
+                        </div>
+                        <div class="distance">
+                            <div class="form-group">
+                                <label for="input-Default" class="col-sm-3 control-label">City</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->city_name}}" readonly>
                                 </div>
-                                <label for="input-Default" class="col-sm-1 control-label">Postal Code</label>
+                                <label for="input-Default" class="col-sm-3 control-label">Postal Code</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->postal_code}}" readonly>
                                 </div>
