@@ -88,11 +88,14 @@ class SuperVisorController extends ActiveAuthController
     $data['fri']          = TblBusinessModel::where('user_call_date',$fri)->count();
     $data['sat']          = TblBusinessModel::where('user_call_date',$sat)->count();
     $data['sun']          = TblBusinessModel::where('user_call_date',$sun)->count();
-    $data['_agents']   = TblTeamModel::where('supervisor_id',session('supervisor_id'))
-                       ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                       ->get();
-    $data['_teams']   = TblTeamModel::where('archived',0)->where('supervisor_id',session('supervisor_id'))->get();
-    $data['page'] = 'Dashboard';
+    $data['_agents']      = TblTeamModel::where('supervisor_id',session('user_id'))
+                          ->join('tbl_user_team','tbl_user_team.team_id','=','tbl_team.team_id')
+                          ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
+                          ->where('tbl_user.archived',0)
+                          ->where('tbl_user.user_access_level','AGENT')
+                          ->get();
+    $data['_teams']       = TblTeamModel::where('archived',0)->where('supervisor_id',session('user_id'))->get();
+    $data['page']         = 'Dashboard';
     return view ('supervisor.pages.dashboard', $data);  
   }
   public function profile()

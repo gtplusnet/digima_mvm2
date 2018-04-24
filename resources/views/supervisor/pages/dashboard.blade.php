@@ -55,7 +55,7 @@
                         <select class="form-control " id="agent_calls">
                             <option value="james">SELECT AGENT</option>
                             @foreach($_agents as $agents)
-                                <option value="{{$agents->agent_id}}">{{$agents->first_name}}</option>
+                                <option value="{{$agents->user_id}}">{{$agents->user_first_name.' '.$agents->user_last_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -169,7 +169,7 @@
                 new Chart(teams).Line(teamData);
             </script>
         </div>
-        <div class="col-md-11" >
+        {{-- <div class="col-md-11" >
             <div class="card">
                 <div class="header">
                     <h4 class="title">Registered - Activated By: Agent</h4>
@@ -191,7 +191,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
  </div>
 <script>
 
