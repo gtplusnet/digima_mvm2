@@ -171,7 +171,6 @@ class GeneralAdminController extends ActiveAuthController
     $data['contact_us']   = TblContactUs::first();
     $data['invoice_info'] = TblBusinessModel::where('tbl_business.business_id',$id)
                           ->BusinessAdmin()
-                          ->join('tbl_user_account','tbl_user_account.business_contact_person_id','=','tbl_business_contact_person.business_contact_person_id')
                           ->first();
     $data['id']           = $id;
     $data['status']       = "";
