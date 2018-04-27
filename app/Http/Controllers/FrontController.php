@@ -57,6 +57,7 @@ class FrontController extends Controller
         }
     }
     
+    
     public function index()
     {
         Self::allow_logged_out_users_only();

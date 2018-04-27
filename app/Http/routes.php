@@ -22,6 +22,8 @@ Route::any('/update_all_password',   'MerchantController@update_all_password');
 
 
 
+
+
 /*Routes for Front*/
 Route::get('/', 						'FrontController@index');
 Route::get('/home', 					'FrontController@index');

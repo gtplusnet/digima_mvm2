@@ -4,6 +4,7 @@
 @if(Request::segment(1)=="login")
 <div class="login-background">
 	<div class="container">
+
 		<div class="col-md-2"></div>
 		<div class="col-md-8 login-form-container">
 			<div class="col-md-12 login-form-holder">
@@ -73,6 +74,7 @@
 @elseif(Request::segment(1)=="user")
 <div class="login-background">
 	<div class="container">
+		{{$page}}
 		<div class="col-md-2"></div>
 		<div class="col-md-8 login-form-container">
 			<div class="col-md-12 login-form-holder">

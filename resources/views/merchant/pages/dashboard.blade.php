@@ -13,9 +13,9 @@
 </div>
 
 <div id="main-wrapper">
-  
-   <div class="row">
-      <div class="col-lg-4 col-md-6">
+ <div class="content">
+    <div class="row">
+      <div class="col-lg-4">
          <div class="panel info-box">
             <div class="panel-body">
                <div class="info-box-stats">
@@ -36,9 +36,8 @@
             </div>
          </div>
       </div>
-      <!--   Facebook
-         -->
-      <div class="col-lg-4 col-md-6">
+      <!-- Facebook-->
+      <div class="col-lg-4">
          <div class="panel info-box panel-white">
             <div class="panel-body">
                <div class="info-box-icon">
@@ -58,7 +57,7 @@
          </div>
       </div>
       <!--   Others-->
-      <div class="col-lg-4 col-md-6">
+      <div class="col-lg-4">
          <div class="panel info-box panel-white">
             <div class="panel-body">
                <div class="info-box-stats">
@@ -77,11 +76,10 @@
             </div>
          </div>
       </div>
-      {{-- mula dito james --}}
-      <div class="content">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
+    </div>
+      <!-- graph -->
+    <div class="row">
+      <div class="col-md-4">
                   <div class="card">
                      <div class="header">
                         <h4 class="title">Statistika Gostiju</h4>
@@ -101,37 +99,30 @@
                         </div>
                      </div>
                   </div>
-               </div>
-               <div class="col-md-7">
-                  <div class="card">
-                     <div class="header">
-                        <h4 class="title">Statistika Gostiju</h4>
-                        <p class="category">Lajkovi</p>
-                     </div>
-                     <div class="content">
-                        <div id="chartActivityPerMonth" class="ct-chart ct-perfect-fourth"></div>
-                        <div class="footer">
-                           <div class="legend">
-                              <i class="fa fa-circle text-info"></i>Pregledi
-                              <i class="fa fa-circle text-danger"></i>Trgovci
-                           </div>
-                           <hr>
-                           <div class="stats">
-                              <i class="fa fa-clock-o"></i>Ažurirajte prije nekoliko minuta. 
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               
-               
-            </div>
-         </div>
       </div>
-      {{-- hanggang dito nalang --}}
-   </div>
-   <!-- Row -->
-   <!-- Row -->
+      <div class="col-md-8">
+          <div class="card">
+              <div class="header">
+                <h4 class="title">Statistika Gostiju</h4>
+                <p class="category">Lajkovi</p>
+              </div>
+              <div class="content">
+                <div id="chartActivityPerMonth" class="ct-chart ct-perfect-fourth"></div>
+                 <div class="footer">
+                    <div class="legend">
+                      <i class="fa fa-circle text-info"></i>Pregledi
+                      <i class="fa fa-circle text-danger"></i>Trgovci
+                     </div>
+                    <hr>
+                    <div class="stats">
+                      <i class="fa fa-clock-o"></i>Ažurirajte prije nekoliko minuta. 
+                    </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="/assets/agent/assets1/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -175,7 +166,7 @@ function initChartist()
           }]
         ];
         
-         Chartist.Bar('#chartActivityPerMonth', data1, options1, responsiveOptions1);
+         Chartist.Line('#chartActivityPerMonth', data1, options1, responsiveOptions1);
          Chartist.Pie('#chartPreferencesPerYear', {
           labels: ['80%','20%'],
           series: [80, 20 ]
