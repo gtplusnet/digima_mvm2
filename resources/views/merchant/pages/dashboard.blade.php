@@ -162,8 +162,8 @@ return value[0];
 
 Chartist.Line('#chartActivityPerMonth', data1, options1, responsiveOptions1);
 Chartist.Pie('#chartPreferencesPerYear', {
-labels: ['{{($guest_messages+$page_view)/$page_view}}%','{{($guest_messages+$page_view)/$guest_messages}}%'],
-series: [{{($guest_messages+$page_view)/$page_view}}, {{($guest_messages+$page_view)/$guest_messages}} ]
+labels: ['10%','90%'],
+series: [10, 90 ]
 });
 }
 </script>
