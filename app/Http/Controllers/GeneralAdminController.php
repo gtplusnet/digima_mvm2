@@ -656,7 +656,12 @@ class GeneralAdminController extends ActiveAuthController
     $data['_team_select']         = TblTeamModel::where('archived',0)->get();
     $data['_teams']               = TblTeamModel::all();
     $data['agent_merchant']       = TblBusinessModel::where('business_status',5)->get();
-    $data['_data_supervisor']     = TblSupervisorModels::where('archived',0)->paginate(10, ['*'], 'supervisor');
+    $data['_data_supervisor']     = TblUserModel::where('tbl_user.archived',0)
+                                  ->where('user_access_level','SUPERVISOR')
+                                  ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                                  ->join('tbl_user_team','tbl_user_team.user_id','=','tbl_user.user_id')
+                                  ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
+                                  ->paginate(10, ['*'], 'supervisor');
     $data['_data_admin']          = TblAdminModels::where('archived',0)->paginate(10, ['*'], 'admin');
     $data['_merchant']            = TblBusinessModel::where('business_status',5)
                                   ->BusinessAdmin()

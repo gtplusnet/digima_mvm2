@@ -292,7 +292,7 @@
 										<th>ID</th>
 										<th>Supervisor Name</th>
 										<th>Email</th>
-										<th>Primary Phone</th>
+										<th> Phone</th>
 										<th>Assigned Team</th>
 										<th></th>
 									</tr>
@@ -302,10 +302,10 @@
 									<tr>
 										<td>{{$data_supervisor->user_id}}</td>
 										<td>{{$data_supervisor->user_first_name}} {{$data_supervisor->user_last_name}}</td>
-										<td>{{$data_supervisor->email}}</td>
-										<td>{{$data_supervisor->primary_phone}}</td>
+										<td>{{$data_supervisor->user_email}}</td>
+										<td>{{$data_supervisor->user_phone_number}}</td>
 										<td>
-											@foreach($_teams->where('supervisor_id',$data_supervisor->supervisor_id) as $team)
+											@foreach($_teams->where('supervisor_id',$data_supervisor->user_id) as $team)
 											{{$team->team_name}},
 											@endforeach
 										</td>
