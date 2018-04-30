@@ -32,6 +32,8 @@ use App\Models\TblAboutUs;
 use App\Models\TblContactUs;
 use App\Models\TblTerms;
 use App\Models\TblThankYou;
+use App\Models\TblPaymentModel;
+
 use Session;
 use Carbon\Carbon;
 use Redirect;
@@ -511,5 +513,115 @@ class FrontController extends Controller
             Session::flash('error', 'Žao mi je!. Pogreška mreže, transakcija nije uspjela!');
             return Redirect::to('/contact');
         }
+    }
+    public function payment()
+    {
+        $data['page']             = 'payment';
+        $data['_mob_categories']  = TblBusinessCategoryModel::all();
+        $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['method']           = TblPaymentMethod::where('archived',0)->get();
+        $check                    = TblPaymentModel::where('business_id',session('business_id'))->first();
+        if($check)
+        {
+            return Redirect::to('/merchant/redirect/exist');
+        }
+        else
+        {
+          $data['method']           = TblPaymentMethod::where('archived',0)->get();
+          $data['_mob_categories']  = TblBusinessCategoryModel::all();
+          $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+          $data["merchant_info"]    = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
+                                    ->BusinessAdmin()
+                                    ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                    ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                    ->first();  
+          return view('front.pages.payment_merchant', $data);
+        }
+    }
+    public function upload_payment(Request $request)
+    {
+        $file = $request->file('payment_file_name');
+        $link = $request->link;
+        if($file==null||$file=='')
+        {
+          $data['payment_reference_number']   = $request->payment_reference_number;
+          $data['payment_amount']             = $request->payment_amount;
+          $data['payment_method']             = $request->payment_method;
+          $data['payment_file_name']          = 'Image Not Available';
+          $data['business_contact_person_id'] = $request->contact_id;
+          $data['business_id']                = $request->business_id;
+          $data['payment_status']             = 'submitted';
+          $check_insert = TblPaymentModel::insert($data);
+          if($check_insert)
+          {
+            Session::flash('sucess_payment',$link );
+            return Redirect::to('/merchant/redirect/exist');
+          }
+           else
+          {
+            echo "Failed to Upload";
+          }
+        }
+        else
+        {
+          $filename         = '/payment_upload/'.uniqid().$file->getClientOriginalName();
+          $file_ext         = $file->getClientOriginalExtension();
+          $destinationPath  = public_path('/payment_upload');
+          $check            = $file->move($destinationPath, $filename);   
+            if($check)
+            {
+              $data['payment_reference_number']   = $request->payment_reference_number;
+              $data['payment_amount']             = $request->payment_amount;
+              $data['payment_method']             = $request->payment_method;
+              $data['payment_file_name']          = $filename;
+              $data['business_contact_person_id'] = $request->contact_id;
+              $data['business_id']                = $request->business_id;
+              $data['payment_status']             = 'submitted';
+              $check_insert = TblPaymentModel::insert($data);
+              if($check_insert)
+              {
+                Session::flash('sucess_payment',$link);
+                return Redirect::to('/merchant/redirect/exist');
+              }
+               else
+              {
+                echo "Failed to Upload";
+              }
+            }
+        }
+    }
+
+    public function payment_merchant(Request $request,$id)
+    {
+        $data['method']         = TblPaymentMethod::where('archived',0)->get();
+        $data['_mob_categories']= TblBusinessCategoryModel::all();
+        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data["merchant_info"]  = TblBusinessModel::where('tbl_business.business_id', $id)
+                                ->BusinessAdmin()
+                                ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                ->where('tbl_invoice.invoice_status','!=','paid')
+                                ->first();
+        return view('front.pages.payment_merchant', $data);
+    }
+    public function merchant_redirect()
+    {
+        $data['index']            = "unpaid";
+        $data['_mob_categories']  = TblBusinessCategoryModel::all();
+        $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']       = TblContactUs::first();
+
+        return view ('front.pages.success',$data);
+    }
+
+    public function merchant_redirect_exist()
+    {
+        $data['index'] = 'redirect_exist';
+        $data['_mob_categories']  = TblBusinessCategoryModel::all();
+        $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
+        $data['contact_us']       = TblContactUs::first();
+        return view('front.pages.success',$data);
     }
 }

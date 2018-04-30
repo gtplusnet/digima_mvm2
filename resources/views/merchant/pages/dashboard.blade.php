@@ -25,12 +25,12 @@
             <div class="info-box-icon">
               <i class="icon-eye"></i>
             </div>
-            <div class="info-box-progress">
+            {{-- <div class="info-box-progress">
               <div class="progress progress-xs progress-squared bs-n">
                 <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
@@ -44,12 +44,6 @@
             <div class="info-box-stats">
               <p class="counter">{{$fb}}</p>
               <span class="info-box-title">Facebook Stranica Lajkovi</span>
-            </div>
-            <div class="info-box-progress">
-              <div class="progress progress-xs progress-squared bs-n">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 80%">
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -65,12 +59,7 @@
             <div class="info-box-icon">
               <i class="icon-envelope"></i>
             </div>
-            <div class="info-box-progress">
-              <div class="progress progress-xs progress-squared bs-n">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -80,7 +69,7 @@
       <div class="col-md-4">
         <div class="card">
           <div class="header">
-            <h4 class="title">Statistika Gostiju</h4>
+            <h4 class="title transform-capitalize">Statistika Gostiju</h4>
             <p class="category">Pregledi</p>
           </div>
           <div class="content">
@@ -101,8 +90,8 @@
       <div class="col-md-8">
         <div class="card">
           <div class="header">
-            <h4 class="title">Statistika Gostiju</h4>
-            <p class="category">Lajkovi</p>
+            <h4 class="title transform-capitalize">Statistika Gostiju</h4>
+            <p class="category">Pregledi</p>
           </div>
           <div class="content">
             <div id="chartActivityPerMonth" class="ct-chart ct-perfect-fourth"></div>

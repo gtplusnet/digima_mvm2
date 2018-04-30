@@ -1,4 +1,4 @@
-<div class="navbar">
+ <div class="navbar">
     <div class="navbar-inner">
         <div class="sidebar-pusher">
             <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
@@ -6,18 +6,18 @@
             </a>
         </div>
         <div class="logo-box">
-            <a href="index.html" class="logo-text">{{-- <span>CROATIA</span> --}}<img class="img-circle avatar" src="/images/merchant_logo.jpg" width="200" height="80" alt=""></a>
-        </div><!-- Logo Box -->
+            <a href="/general_admin/dashboard" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
+        </div>
         <div class="topmenu-outer">
             <div class="top-menu">
                 <ul class="nav navbar-nav navbar-left">
-                    <li>
+                    <li>        
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
                     </li>
                     <li>
                         <a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>
                     </li>
-                    <li>
+                    <li>        
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
                     </li>
                     <li class="dropdown">
@@ -28,7 +28,7 @@
                             <li class="li-group">
                                 <ul class="list-unstyled">
                                     <li class="no-link" role="presentation">
-                                        Fixed Header
+                                        Fixed Header 
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right fixed-header-check" checked>
                                         </div>
@@ -38,42 +38,41 @@
                             <li class="li-group">
                                 <ul class="list-unstyled">
                                     <li class="no-link" role="presentation">
-                                        Fixed Sidebar
+                                        Fixed Sidebar 
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right fixed-sidebar-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Horizontal bar
+                                        Horizontal bar 
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right horizontal-bar-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Toggle Sidebar
+                                        Toggle Sidebar 
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right toggle-sidebar-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Compact Menu
+                                        Compact Menu 
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right compact-menu-check">
                                         </div>
                                     </li>
                                     <li class="no-link" role="presentation">
-                                        Hover Menu
+                                        Hover Menu 
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right hover-menu-check">
                                         </div>
                                     </li>
-                                    
                                 </ul>
                             </li>
                             <li class="li-group">
                                 <ul class="list-unstyled">
                                     <li class="no-link" role="presentation">
-                                        Boxed Layout
+                                        Boxed Layout 
                                         <div class="ios-switch pull-right switch-md">
                                             <input type="checkbox" class="js-switch pull-right boxed-layout-check">
                                         </div>
@@ -96,7 +95,6 @@
                                 </ul>
                             </li>
                             <li class="no-link"><button class="btn btn-default reset-options">Reset Options</button></li>
-                            
                         </ul>
                     </li>
                 </ul>
@@ -135,7 +133,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
-                            <span class="user-name">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
+                            <span class="user-name notranslate">{{session('full_name')}}<i class="fa fa-angle-down"></i></span>
                             <img class="img-circle avatar" src="/assets/admin/merchant/assets/images/avatar1.png" width="40" height="40" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
@@ -227,8 +225,17 @@
                         }
                         </style>
                     </div>
-                </ul><!-- Nav -->
-            </div><!-- Top Menu -->
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+

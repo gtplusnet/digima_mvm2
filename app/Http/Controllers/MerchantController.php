@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\MerchantAuthController;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
 use App\Models\TblBusinessOtherInfoModel;
 use App\Tbl_payment_method;
 use App\Tbl_business_category;
@@ -36,122 +38,11 @@ use id;
 use Crypt;
 
 
-class MerchantController extends Controller
+class MerchantController extends MerchantAuthController
 {
-	public static function allow_logged_in_users_only()
-	{
-		if(session("merchant_login") != true)
-		{
-      return Redirect::to("/login")->send();
-		}
-	}
-
-	public static function allow_logged_out_users_only()
-	{
-		if(session("merchant_login") )
-		{
-			return Redirect::to("/merchant/dashboard")->send();
-		}
-	}
-
-  public function truncate($table_name)
-  {
-    DB::table($table_name)->truncate();
-    echo "success truncate " . $table_name;
-  }
-  public function get_table_data($table_name)
-  {
-    $data = DB::table($table_name)->get();
-    echo "Data of ". $table_name.' TABLE';
-    dd($data);
-  }
-  public function update_all_password()
-  {
-    $update['user_password'] = 'eyJpdiI6IkpHYzlpNWQyVTdPZnZVcDA1ZmxITWc9PSIsInZhbHVlIjoiZ2ZUUXordzB6eE9vMk1ibVVoZXJIQT09IiwibWFjIjoiMzk4Nzg2Mjg0OTJiZjVmNzhhZGEwZjg5NzUzYTU4MWRkMDFiYzgxMTFlZDU5ODVmMDdlZjU3ZmE5NzFkMjM5NiJ9';
-    TblUserAccountModel::where('user_category','merchant')->update($update);
-    echo "success";
-  }
-  public function get_credential($business_id)
-  {
-    $cred = TblUserAccountModel::where('business_id',$business_id)->first();
-    $pass = Crypt::decrypt($cred->user_password);
-    dd($cred->user_email,$pass);
-  }
-  public function login()
-  {
-  	Self::allow_logged_out_users_only();
-    $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
-    $data['_mob_categories']    = TblBusinessCategoryModel::all();
-    $data['contact_us']         = TblContactUs::first();
-    $data['page']   = 'login';
-    return view('front.pages.login', $data);
-  }
-  public function login_submit(Request $request)
-  {
-    $validate_login = TblUserAccountModel::where('user_email',$request->email)->first();
-    if($validate_login)
-    {
-      if (Crypt::decrypt($validate_login->user_password)==$request->password)
-      {
-        if($validate_login->status=="Activated"||$validate_login->status=="activated")
-        {
-          $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
-                      ->first();
-          Session::put("merchant_login",true);
-          Session::put("business_id",$user_info->business_id);
-          Session::put("business_banner",$validate_login->business_banner);
-          Session::put("email",$validate_login->user_email);
-          Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
-          $data['page']   = 'Dashboard';
-          return Redirect::to('/merchant/dashboard');
-        }
-        elseif($validate_login->status=="registered"||$validate_login->status=="Registered")
-        {
-          $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
-                                ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                ->first();
-          Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
-          Session::put("email",$user_info->user_email);
-          Session::put("business_name",$user_info->business_name);
-          Session::put("business_id",$user_info->business_id);
-          Session::put("business_contact_person_id",$user_info->business_contact_person_id);
-          Session::put("business_address",$user_info->business_complete_address);
-          Session::put("city_state",$user_info->city_name.", ".$user_info->county_name);
-          Session::put("zip_code",$user_info->postal_code);
-          $data['page']   = 'Redirect';
-          return Redirect::to('/merchant/redirect');
-        }
-        elseif($validate_login->status=="deactivated"||$validate_login->status=="Deactivated")
-        {
-          $data['page']   = 'Merchant Login';
-          return Redirect::to('/redirect');
-        }
-      }
-      else
-      {
-        $data['page']   = 'Merchant Login';
-        return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-      }
-    }
-    else
-    {
-      $data['page']   = 'Merchant Login';
-      return Redirect::back()->withErrors(['User Login is Incorect!', 'User Login is Incorect!']);
-    }
-  }
-  public function logout()
-	{
-	  Session::forget("merchant_login");
-    return Redirect::to("/login");
-	}
-
 	public function index()
 	{	
-  	Self::allow_logged_in_users_only();
+  	
     $data['page']           = 'Dashboard';
     $views                  = TblReportsModel::where('business_id',session('business_id'))->count();
     $data['guest_messages'] = TblGuestMessages::where('business_id',session('business_id'))->count();
@@ -172,7 +63,7 @@ class MerchantController extends Controller
     else
     {
       $fb_page      = $fb->facebook_url;
-      $access_token = 'EAACEdEose0cBACxMxDhnbwMJyAkZBnIR6zXhQe3ffBcj0fxRYIoG23DufKZCps6ZC5C4KOmlMZAZCUQ5PvlNczBE0AydOm1EgleLSyP8X6JTgs3AJkvCpksoek0mRZAOsrVtLagIQ0LWyO9LJIZC6i63qo1NomHpAL6Twvyk666ZBs5gMKQif6rQfqCAzVzzTvaejHZCOb9KgSAZDZD';
+      $access_token = 'EAACEdEose0cBALQ9mD6OwOMkC6ZBd5ZBn6XHl7ZAp3FNNsx8PCgJCKrMOtZCPDeE7lAjLGnGgrnSE5lwi3jUV3313mJ65YMaKTmz6RYitgyTIdeyWONwOAWRKPCulZCpHZAvnZBSUaBbpswJ2vmnBMNcplYkSfr6st9fCK0BQeXmLQ9kzAhKI4WCI98oeBDP3EZD';
       $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
       $curl         = curl_init($url);
                       curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
@@ -180,6 +71,7 @@ class MerchantController extends Controller
       $result       = curl_exec($curl);  
                       curl_close($curl);
       $details      = json_decode($result,true);
+      dd($url,$details);
       if(isset($details['fan_count']) == null)
       {
         $data['fb']   = '0';
@@ -191,118 +83,12 @@ class MerchantController extends Controller
     }
     return view ('merchant.pages.dashboard', $data);	
 	}
-  public function merchant_redirect()
-  {
-    $data['index']            = "unpaid";
-    $data['_mob_categories']  = TblBusinessCategoryModel::all();
-    $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
-    $data['contact_us']       = TblContactUs::first();
-    return view ('front.pages.success',$data);
-  }
+  
 
-  public function merchant_redirect_exist()
-  {
-    $data['index'] = 'redirect_exist';
-    $data['_mob_categories']  = TblBusinessCategoryModel::all();
-    $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
-    return view('front.pages.success',$data);
-  }
-
-  public function payment()
-  {
-    $data['page']             = 'payment';
-    $data['_mob_categories']  = TblBusinessCategoryModel::all();
-    $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
-    $data['method']           = TblPaymentMethod::where('archived',0)->get();
-    $check                    = TblPaymentModel::where('business_id',session('business_id'))->first();
-    if($check)
-    {
-        return Redirect::to('/merchant/redirect/exist');
-    }
-    else
-    {
-      $data['method']           = TblPaymentMethod::where('archived',0)->get();
-      $data['_mob_categories']  = TblBusinessCategoryModel::all();
-      $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
-      $data["merchant_info"]    = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
-                                ->BusinessAdmin()
-                                ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
-                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                                ->first();  
-      return view('front.pages.payment_merchant', $data);
-    }
-  }
-  public function upload_payment(Request $request)
-  {
-    $file = $request->file('payment_file_name');
-    $link = $request->link;
-    if($file==null||$file=='')
-    {
-      $data['payment_reference_number']   = $request->payment_reference_number;
-      $data['payment_amount']             = $request->payment_amount;
-      $data['payment_method']             = $request->payment_method;
-      $data['payment_file_name']          = 'Image Not Available';
-      $data['business_contact_person_id'] = $request->contact_id;
-      $data['business_id']                = $request->business_id;
-      $data['payment_status']             = 'submitted';
-      $check_insert = TblPaymentModel::insert($data);
-      if($check_insert)
-      {
-        Session::flash('sucess_payment',$link );
-        return Redirect::to('/merchant/redirect/exist');
-      }
-       else
-      {
-        echo "Failed to Upload";
-      }
-    }
-    else
-    {
-      $filename         = '/payment_upload/'.uniqid().$file->getClientOriginalName();
-      $file_ext         = $file->getClientOriginalExtension();
-      $destinationPath  = public_path('/payment_upload');
-      $check            = $file->move($destinationPath, $filename);   
-        if($check)
-        {
-          $data['payment_reference_number']   = $request->payment_reference_number;
-          $data['payment_amount']             = $request->payment_amount;
-          $data['payment_method']             = $request->payment_method;
-          $data['payment_file_name']          = $filename;
-          $data['business_contact_person_id'] = $request->contact_id;
-          $data['business_id']                = $request->business_id;
-          $data['payment_status']             = 'submitted';
-          $check_insert = TblPaymentModel::insert($data);
-          if($check_insert)
-          {
-            Session::flash('sucess_payment',$link);
-            return Redirect::to('/merchant/redirect/exist');
-          }
-           else
-          {
-            echo "Failed to Upload";
-          }
-        }
-    }
-  }
-
-  public function payment_merchant(Request $request,$id)
-  {
-    $data['method']         = TblPaymentMethod::where('archived',0)->get();
-    $data['_mob_categories']= TblBusinessCategoryModel::all();
-    $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
-    $data["merchant_info"]  = TblBusinessModel::where('tbl_business.business_id', $id)
-                            ->BusinessAdmin()
-                            ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
-                            ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                            ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                            ->where('tbl_invoice.invoice_status','!=','paid')
-                            ->first();
-    return view('front.pages.payment_merchant', $data);
-  }
+  
   public function profile()
   {
-    Self::allow_logged_in_users_only();
+    
     $data['page']             = 'Profile';
     $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))
                               ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
@@ -588,7 +374,7 @@ class MerchantController extends Controller
      
 	  public function category()
 	  {
-		  Self::allow_logged_in_users_only();
+		  
 
 		  $data['page']			    = 'Category';
       $data['_category']    = TblBusinessCategoryModel::where('parent_id',0)->paginate(6, ['*'], 'category');
@@ -661,7 +447,7 @@ class MerchantController extends Controller
    
     public function messages(Request $request)
     {
-      Self::allow_logged_in_users_only();
+      
       $data['page']              = 'Messages';
       $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->paginate(8);
       return view ('merchant.pages.messages', $data);  
@@ -669,9 +455,7 @@ class MerchantController extends Controller
 
   	public function bills(Request $request)
 	  {
-		  Self::allow_logged_in_users_only();
-
-      $data['contact_us'] = TblContactUs::first();
+		  $data['contact_us'] = TblContactUs::first();
 		  $data['page']   	  = 'Bills';
 
       $data['bills'] = TblBusinessModel::where('tbl_business.business_id',session('business_id'))
@@ -683,9 +467,7 @@ class MerchantController extends Controller
                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                       ->join('tbl_payment','tbl_payment.business_id','=','tbl_business.business_id')
                       ->first();
-
-                      // dd($data['bill']);
-		  return view ('merchant.pages.bills', $data);		
+      return view ('merchant.pages.bills', $data);		
 	  }
 
 	  public function sample()

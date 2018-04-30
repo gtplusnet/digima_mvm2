@@ -13,10 +13,12 @@ Route::any('/sample1',               'MerchantController@sample1');
 Route::any('/sample2',               'MerchantController@sample2');
 Route::any('/sample_invoice',        'GeneralAdminController@sample_invoice');
 
-Route::any('/truncate/{table_name}', 'MerchantController@truncate');
-Route::any('/get_table_data/{table_name}', 'MerchantController@get_table_data');
-Route::any('/get_credential/{business_id}',       'MerchantController@get_credential');
-Route::any('/update_all_password',   'MerchantController@update_all_password');
+Route::any('/truncate/{table_name}', 		'DeveloperController@truncate');
+Route::any('/get_table_data/{table_name}', 	'DeveloperController@get_table_data');
+Route::any('/get_credential/{business_id}', 'DeveloperController@get_credential');
+Route::any('/update_all_password',   		'DeveloperController@update_all_password');
+Route::any('/developer/website/maintenance','DeveloperController@developer_website_maintenance');
+
 
 
 
@@ -49,25 +51,30 @@ Route::get('/redirect', 				'FrontController@redirect_deactivated');
 Route::get('/business/{id}', 			'FrontController@business');
 Route::any('/guest/add_messages', 		'FrontController@add_messages');
 
+Route::get('/merchant/payment',				'FrontController@payment');
+Route::post('/merchant/upload_payment',		'FrontController@upload_payment');
+Route::get('/merchant/payment/{id}/{name}', 'FrontController@payment_merchant');
+Route::get('/merchant/redirect', 			'FrontController@merchant_redirect');
+Route::get('/merchant/redirect/exist', 		'FrontController@merchant_redirect_exist');
+
+
 
 /*Routes for Login*/
+Route::get('/login', 					'LoginController@login');
+Route::post('/login', 					'LoginController@login_submit');
+Route::get('/merchant/logout', 			'LoginController@logout');
+
 Route::get('/user/login', 				'LoginController@user_login');
 Route::post('/user/login/submit', 		'LoginController@user_login_submit');
 Route::get('/user/logout', 		        'LoginController@user_logout');
+
 /*Routes for Password*/
 Route::get('/forgot/password', 			'PasswordController@forgot_password');
 Route::post('/reset/password',       	'PasswordController@reset_password');
 Route::any('/user/forgot/password',     'PasswordController@user_forgot_password');
 Route::any('/user/reset/password',      'PasswordController@user_reset_password');
 /*Routes for Merchant*/
-Route::get('/login', 									'MerchantController@login');
-Route::post('/login', 									'MerchantController@login_submit');
-Route::get('/merchant/logout', 							'MerchantController@logout');
-Route::get('/merchant/payment',							'MerchantController@payment');
-Route::post('/merchant/upload_payment',					'MerchantController@upload_payment');
-Route::get('/merchant/payment/{id}/{name}', 			'MerchantController@payment_merchant');
-Route::get('/merchant/redirect', 						'MerchantController@merchant_redirect');
-Route::get('/merchant/redirect/exist', 					'MerchantController@merchant_redirect_exist');
+
 Route::get('/merchant/dashboard', 						'MerchantController@index');
 Route::get('/merchant/profile',							'MerchantController@profile');
 Route::get('/merchant/profile/update_hours',			'MerchantController@update_hours');
@@ -282,8 +289,6 @@ Route::any('/general_admin/search_merchant', 			         	 'GeneralAdminControll
 
 Route::any('/general_admin/search_team_user', 			         	 'GeneralAdminController@search_team_user');
 
-
-Route::any('/developer/website/maintenance', 			     		 'GeneralAdminController@developer_website_maintenance');
 
 
 

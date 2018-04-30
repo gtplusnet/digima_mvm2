@@ -27,7 +27,7 @@
 				
 			</div>
 			<div class="about-title-container">
-				<button class="about-btn transform-capitalize"><a href="/registration">Dodajte Moju Tvrtku</button>
+				<button class="about-btn transform-capitalize"><a href="/registration">Dodajte Moju Tvrtku</a></button>
 			</div>
 			
 		</div>
