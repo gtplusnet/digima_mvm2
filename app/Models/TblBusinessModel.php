@@ -24,9 +24,6 @@ class TblBusinessModel extends Model
         $query->join('tbl_business_tag_keywords','tbl_business_tag_keywords.business_id','=','tbl_business.business_id');
         $query->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id');
         $query->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id');
-        // $query->where('tbl_business.business_name', 'like', '%'.$businessKeyword.'%');
-        // $query->orWhere('tbl_business_tag_keywords.keywords_name', 'like', '%'.$businessKeyword.'%');
-        // $query->orWhere('tbl_business_category.business_category_name', 'like', '%'.$businessKeyword.'%');
         $query->where(function($query) use ($businessKeyword)
                 {
                     $query->where('tbl_business.business_name', 'like', '%'.$businessKeyword.'%')

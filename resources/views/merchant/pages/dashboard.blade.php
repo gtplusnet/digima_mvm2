@@ -39,7 +39,7 @@
         <div class="panel info-box panel-white">
           <div class="panel-body">
             <div class="info-box-icon">
-              <i style="color: royalblue ;"" class="fa fa-facebook"></i>
+              <i style="color: royalblue;" class="fa fa-facebook"></i>
             </div>
             <div class="info-box-stats">
               <p class="counter">{{$fb}}</p>

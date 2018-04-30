@@ -301,16 +301,6 @@ class FrontController extends Controller
         }
 
 	}
-    // public static function phone_number_format($number) 
-    // {
-    //   $number   = preg_replace("/[^\d]/","",$number);
-    //   $length   = strlen($number);
-    //   $first_3  = substr($number,-9);
-    //   $first_4  = substr($number,3);
-    //   $number   = '+385-43'."-".$first_3."-".$first_4;
-    //   return $number;
-     
-    // }
     public function businessSearch(Request $request)
     {
         return Redirect::to("/search-business-result?businessKeyword=$request->businessKeyword&countyId=$request->countyDropdown&cityOrpostalCode=$request->postalCode");
@@ -319,8 +309,8 @@ class FrontController extends Controller
     public function businessSearchResult(Request $request)
     {
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
-        $data['countyID'] = $countyID = $request->countyId;
-        $data['postal_code'] = $postalCode = $request->cityOrpostalCode;
+        $data['countyID']        = $countyID = $request->countyId;
+        $data['postal_code']     = $postalCode = $request->cityOrpostalCode;
         if($postalCode=="")
         {
             

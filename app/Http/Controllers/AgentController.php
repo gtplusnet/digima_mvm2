@@ -322,10 +322,7 @@ class AgentController extends ActiveAuthController
 	        TblUserTeamModel::where('user_id',session('user_id'))->update($agent);
 			return '';
 		}
-		
 	}
-
-	
 	public function add_merchant()
 	{
 		$data['user']       		= Self::global();
@@ -336,7 +333,6 @@ class AgentController extends ActiveAuthController
 	}
 	public function add_client_submit(Request $request)
 	{
-		
 		$check_email_availability = TblUserAccountModel::select('user_email')->where('user_email','=',$request->email_address)->first();
 		$phoneAvailability = TblBusinessModel::checkPhone($request->primary_business_phone,$request->secondary_business_phone)->first();
         if(count($check_email_availability) == 1)
@@ -403,19 +399,19 @@ class AgentController extends ActiveAuthController
 
             $businessHoursData = new Tbl_business_hours;
             $businessHoursData->insert(array(
-                array('days' => 'Monday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Ponedjeljak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id),
-                array('days' => 'Tuesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Utorak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id),
-                array('days' => 'Wednesday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Srijeda', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id),
-                array('days' => 'Thursday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Četvrtak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id),
-                array('days' => 'Friday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Petak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id),
-                array('days' => 'Saturday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Subota', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id),
-                array('days' => 'Sunday', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                array('days' => 'Nedjelja', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
                 'desc' => 'none', 'business_id' => $business_data->business_id)
             ));
 
