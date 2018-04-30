@@ -75,7 +75,7 @@ class MerchantController extends Controller
   {
     $cred = TblUserAccountModel::where('business_id',$business_id)->first();
     $pass = Crypt::decrypt($cred->user_password);
-    dd($cred,$pass);
+    dd($cred->user_email,$pass);
   }
   public function login()
   {
@@ -492,7 +492,7 @@ class MerchantController extends Controller
       return Redirect::back();
     }
 
-     public function add_images(Request $request)
+    public function add_images(Request $request)
     { 
         $file = $request->file('business_banner');
         $file1 = $request->file('other_image_one');
