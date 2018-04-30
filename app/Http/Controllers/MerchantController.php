@@ -71,7 +71,6 @@ class MerchantController extends MerchantAuthController
       $result       = curl_exec($curl);  
                       curl_close($curl);
       $details      = json_decode($result,true);
-      dd($url,$details);
       if(isset($details['fan_count']) == null)
       {
         $data['fb']   = '0';
