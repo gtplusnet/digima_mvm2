@@ -15,6 +15,7 @@ use Session;
 use Redirect;
 use Input;
 use DB;
+use Crypt;
 class DeveloperController extends Controller
 {
 
