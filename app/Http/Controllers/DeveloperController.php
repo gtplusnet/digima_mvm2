@@ -32,7 +32,7 @@ class DeveloperController extends Controller
         TblUserAccountModel::where('user_category','merchant')->update($update);
 
         $updates['user_password'] = 'eyJpdiI6IkpHYzlpNWQyVTdPZnZVcDA1ZmxITWc9PSIsInZhbHVlIjoiZ2ZUUXordzB6eE9vMk1ibVVoZXJIQT09IiwibWFjIjoiMzk4Nzg2Mjg0OTJiZjVmNzhhZGEwZjg5NzUzYTU4MWRkMDFiYzgxMTFlZDU5ODVmMDdlZjU3ZmE5NzFkMjM5NiJ9';
-        TblUserModel::where('archived',0)->update($updates);
+        TblUserModel::where('user_id','!=',0)->update($updates);
         echo "success";
     }
     public function get_credential($business_id)
