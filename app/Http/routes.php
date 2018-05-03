@@ -16,6 +16,7 @@ Route::any('/sample_invoice',        'GeneralAdminController@sample_invoice');
 Route::any('/truncate/{table_name}', 		'DeveloperController@truncate');
 Route::any('/get_table_data/{table_name}', 	'DeveloperController@get_table_data');
 Route::any('/get_credential/{business_id}', 'DeveloperController@get_credential');
+Route::any('/get_user_credential/{user_id}', 'DeveloperController@get_user_credential');
 Route::any('/update_all_password',   		'DeveloperController@update_all_password');
 Route::any('/developer/website/maintenance','DeveloperController@developer_website_maintenance');
 

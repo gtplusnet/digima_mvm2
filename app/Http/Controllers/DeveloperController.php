@@ -3,14 +3,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\TblCountyModel;
-use App\Models\TblCityModel;
-use App\Models\TblAdminModels;
-use App\Models\TblSupervisorModels;
-use App\Models\TblTeamModel;
-use App\Models\TblAgentModels;
-use App\Models\TblBusinessModel;
+
 use App\Models\TblUserAccountModel;
+use App\Models\TblUserModel;
+
 use Session;
 use Redirect;
 use Input;
@@ -39,6 +35,12 @@ class DeveloperController extends Controller
     public function get_credential($business_id)
     {
         $cred = TblUserAccountModel::where('business_id',$business_id)->first();
+        $pass = Crypt::decrypt($cred->user_password);
+        dd($cred->user_email,$pass);
+    }
+    public function get_user_credential($user_id)
+    {
+        $cred = TblUserModel::where('user_id',$user_id)->first();
         $pass = Crypt::decrypt($cred->user_password);
         dd($cred->user_email,$pass);
     }
