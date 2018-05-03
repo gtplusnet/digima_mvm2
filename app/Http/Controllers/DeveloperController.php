@@ -13,7 +13,7 @@ use App\Models\TblBusinessModel;
 use Session;
 use Redirect;
 use Input;
-
+use DB;
 class DeveloperController extends Controller
 {
 
