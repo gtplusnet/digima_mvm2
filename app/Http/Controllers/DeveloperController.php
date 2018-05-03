@@ -10,6 +10,7 @@ use App\Models\TblSupervisorModels;
 use App\Models\TblTeamModel;
 use App\Models\TblAgentModels;
 use App\Models\TblBusinessModel;
+use App\Models\TblUserAccountModel;
 use Session;
 use Redirect;
 use Input;
