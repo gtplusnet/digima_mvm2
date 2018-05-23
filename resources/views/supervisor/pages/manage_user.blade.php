@@ -129,25 +129,23 @@ width:50%;
         <div  class="tab-pane fade in active " id="team">
             <div class="row">
                 <div class="panel-body">
-                    <div class="col-md-12 col-sm-12">
-                        
-                        <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
-                            <form class="form-inline" method="post"  action="/supervisor/supervisor_search_team" method="post">
-                                {{csrf_field()}}
-                                <div class="form-group col-md-6 col-xs-8 " style="padding:0px;">
-                                    <input type="text" class="form-control" name="search_key1" id="search_key1">
-                                </div>
-                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
-                                    <button type="button" class="btn btn-success" name="search_button_team" id="search_button_team">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-                            <button type="button"  data-toggle="modal" data-target="#myModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
-                        </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 pull-left" style="padding:0px;">
+                        <form class="form-inline">
+                            <input type="hidden" name="_token" value="j7ijkE1m3DC8pBCW3m9SQE3DiJeXXw8q07uxyUev">
+                            <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
+                                <input type="text" class="form-control" name="search_key1" id="search_key1">
+                            </div>
+                            <div class=" col-md-4 col-xs-4" style="padding:0px;">
+                                <button type="button" class="btn btn-success" name="search_button_team" id="search_button_team">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2 col-sm-12 col-xs-12 pull-right ">
+                        <button type="button"  data-toggle="modal" data-target="#myModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Team</button>
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="panel-body">
                     <div class="table-responsive" id="showHere_team">
@@ -190,21 +188,20 @@ width:50%;
         <div  class="tab-pane fade" id="agent">
             <div class="row">
                 <div class="panel-body">
-                    <div class="col-md-12">
-                        <div class=" col-md-4 col-sm-12 col-xs-12  pull-right" style="padding:0px;">
-                            <form class="form-inline" method="post"  action="/supervisor/supervisor_search_agent" method="post">
-                                {{csrf_field()}}
-                                <div class="form-group col-md-6 col-xs-8" style="padding:0px;">
-                                    <input type="text" class="form-control" name="search_key2" id="search_key2">
-                                 </div>
-                                <div class=" col-md-4 col-xs-4" style="padding:0px;">
-                                       <button type="button" class="btn btn-success" name="search_button_agent" id="search_button_agent">Search</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 pull-right" style="padding:0px;">
+                        <form class="form-inline">
+                            <input type="hidden" name="_token" value="j7ijkE1m3DC8pBCW3m9SQE3DiJeXXw8q07uxyUev">
+                            <div class="form-group col-md-7 col-xs-8 " style="padding:0px;padding-right:3px;">
+                                <input type="text" class="form-control" name="search_key2" id="search_key2">
+                            </div>
+                            <div class=" col-md-4 col-xs-4" style="padding:0px;">
+                                <button type="button" class="btn btn-success" name="search_button_agent" id="search_button_agent">Search</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="panel-body">
                     <div class="table-responsive" id="agent_delete_success">

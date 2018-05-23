@@ -1,4 +1,4 @@
-@extends('general_admin.pages.general_admin_layout')
+@extends('layout.general_layout')
 @section('title', 'Merchants')
 @section('description', 'merchants')
 @section('content')
@@ -36,13 +36,8 @@ width: 100%;
 cellspacing: 0;
 }
 </style>
-<script>
-$(document).ready(function()
-{
-$( ".datepicker" ).datepicker();
-$( ".datepicker1" ).datepicker();
-});
-</script>
+
+
 <div class="page-title" style="margin-bottom:20px;">
     <h3>Merchant</h3>
     <div class="page-breadcrumb">
@@ -420,5 +415,4 @@ $( ".datepicker1" ).datepicker();
     </div>
 </div>
 <script src="/assets/general_admin/general_admin_merchant.js"></script>
-
 @endsection

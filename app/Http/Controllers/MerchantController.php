@@ -42,18 +42,22 @@ class MerchantController extends MerchantAuthController
 {
 	public function index()
 	{	
-  	
+  	$TblReports             = TblReportsModel::where('business_id',session('business_id'));
     $data['page']           = 'Dashboard';
-    $views                  = TblReportsModel::where('business_id',session('business_id'))->count();
-    $data['guest_messages'] = TblGuestMessages::where('business_id',session('business_id'))->count();
+    $views                  = $TblReports->value('business_views');
+    $messages               = TblGuestMessages::where('business_id',session('business_id'))->count();
+    $data['guest_messages'] = $messages;
     $fb                     = TblBusinessModel::where("business_id",session('business_id'))->first();
+    $total_stats            = $views + $messages;
+    $data['stat_views']     = ($views/$total_stats)*100;
+    $data['stat_message']   = ($messages/$total_stats)*100;
     if($views==0)
     {
       $data['page_view']  ="0";
     }
     else
     {
-      $business_views = TblReportsModel::where('business_id',session('business_id'))->first();
+      $business_views = $TblReports->first();
       $data['page_view'] = $business_views->business_views;
     }
     if($fb->facebook_url==""||$fb->facebook_url==null)
@@ -63,7 +67,7 @@ class MerchantController extends MerchantAuthController
     else
     {
       $fb_page      = $fb->facebook_url;
-      $access_token = 'EAACEdEose0cBALQ9mD6OwOMkC6ZBd5ZBn6XHl7ZAp3FNNsx8PCgJCKrMOtZCPDeE7lAjLGnGgrnSE5lwi3jUV3313mJ65YMaKTmz6RYitgyTIdeyWONwOAWRKPCulZCpHZAvnZBSUaBbpswJ2vmnBMNcplYkSfr6st9fCK0BQeXmLQ9kzAhKI4WCI98oeBDP3EZD';
+      $access_token = 'EAANMzzmHyFEBAKoD8BJBavX3tSTq26iVlAF341XFf58nfbbP7tctBESSqaQqbtss7vUQm2HlQJeONGJ2LnZBAyMrcZAeXNgY7t5GzZBwmk5YbFojzVySNnaOkz5doG19oB84YwUaol0vPO3KknZA1dNQNNbrBS26D1q5WKPZCv4QaK0EGjhOrgu7AI69CFmUwYeSgBsRRIgZDZD';
       $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
       $curl         = curl_init($url);
                       curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
@@ -80,7 +84,7 @@ class MerchantController extends MerchantAuthController
         $data['fb']   = $details['fan_count'];
       }
     }
-    return view ('merchant.pages.dashboard', $data);	
+    return view('merchant.pages.dashboard', $data);	
 	}
   
 

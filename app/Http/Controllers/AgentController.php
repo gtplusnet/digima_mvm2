@@ -144,7 +144,7 @@ class AgentController extends ActiveAuthController
 				$data['address']			= $request->address;
 				$data['profile']          	= $request->imageText;;
 				
-				$check = TblAgentModel::where('agent_id',session('agent_id'))->update($data);
+				$check = TblUserInfoModel::where('user_id',session('user_id'))->update($data);
 				if($check)
 				{
 					return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
@@ -156,19 +156,27 @@ class AgentController extends ActiveAuthController
 			}
 			else
 	        {
-	          $unique=uniqid();
-	          $fileConvo = $request->file("file");
-	          $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
-	          $fileConvo->move('business_images', $file_name);
-	          $data['user_profile'] 			= $file_name;
-	          $data['user_phone_number']		= $request->user_phone_number;
-			  $data['user_address']				= $request->user_address;
+		        $unique=uniqid();
+		        $fileConvo = $request->file("file");
+		        $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
+	          	$fileConvo->move('business_images', $file_name);
+	          	$data['user_profile'] 			= $file_name;
+	          	$data['user_phone_number']		= $request->user_phone_number;
+			  	$data['user_address']				= $request->user_address;
 			  
-	          TblUserInfoModel::where('user_id',session('user_id'))->update($data);
+	          	$check = TblUserInfoModel::where('user_id',session('user_id'))->update($data);
 
-	          $datas['user_email'] 				= $request->user_email;
+	          	$datas['user_email'] 				= $request->user_email;
 
-	          TblUserModel::where('user_id',session('user_id'))->update($datas);
+	          	TblUserModel::where('user_id',session('user_id'))->update($datas);
+	          	if($check)
+				{
+					return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+				}
+				else
+				{
+					return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
+				}
 	        }
 		}
 	}
@@ -200,34 +208,19 @@ class AgentController extends ActiveAuthController
 	}
 	public function merchant()
 	{
-		$data['user']       = Self::global();
-		$data['page']	 = 'Merchant';
-		$data['clients'] = TblBusinessModel::where('business_status',1)
-							->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-	                        ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-	                        ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-	                        ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
-	                        ->orderBy('tbl_business.date_created',"asc")
-	                        ->paginate(10);
+		$data['user']       		= Self::global();
+		$data['page']	 			= 'Merchant';
+		$data['clients'] 			= TblBusinessModel::where('business_status',1)->BusinessInformation()->orderBy('tbl_business.date_created',"asc")->paginate(10);
         
-        $data['clients_pending'] = TblBusinessModel::where("user_id", session("user_id"))
-        					->where(function($query)
-						       {
-						        $query->where('tbl_business.business_status', 4);
-						        $query->orWhere('tbl_business.business_status', 20);
-						       })
-						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-						    ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-						    ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-	                        ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-						    ->orderBy('tbl_business.date_created',"DESC")
-                            ->paginate(10);
-
-        $data['clients_activated'] = TblBusinessModel::where('business_status', 5)->where("user_id", session("user_id"))
-                           ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                           ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                           ->orderBy('tbl_business.date_created',"DESC")
-                           ->paginate(10);
+        $data['clients_pending'] 	= TblBusinessModel::where("user_id", session("user_id"))
+                                    ->BusinessInformation()->orderBy('tbl_business.date_created',"DESC")
+		        					->where(function($query)
+								       {
+								        $query->where('tbl_business.business_status', 4);
+								        $query->orWhere('tbl_business.business_status', 20);
+								       })
+								    ->paginate(10);
+		$data['clients_activated'] 	= TblBusinessModel::where('business_status', 5)->where("user_id", session("user_id"))->BusinessInformation()->orderBy('tbl_business.date_created',"DESC")->paginate(10);
 
     	return view ('agent.pages.merchant', $data);	
 	}
@@ -236,12 +229,7 @@ class AgentController extends ActiveAuthController
 	{
 		$s_date          = $request->date_start;
 		$e_date          = $request->date_end;
-		$data['clients'] = TblBusinessModel::Where('business_status',1)
-						  ->whereBetween('date_created',[$s_date,$e_date])
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->orderBy('tbl_business.date_created',"asc")
-                           ->paginate(10);
+		$data['clients'] = TblBusinessModel::where('business_status',1)->whereBetween('date_created',[$s_date,$e_date])->BusinessInformation()->orderBy('tbl_business.date_created',"asc")->paginate(10);
 		return view('agent.pages.filtered',$data);
 	}
 	public function get_client1(Request $request)
@@ -249,11 +237,8 @@ class AgentController extends ActiveAuthController
 		$s_date = $request->date_start1;
 		$e_date = $request->date_end1;
 		$data['clients_pending'] = TblBusinessModel::where('business_status', 4)
-							->where("agent_id", session("agent_id"))
-						    ->whereBetween('date_transact',[$s_date,$e_date])
-						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                            ->orderBy('tbl_business.date_transact',"asc")
+							->where("user_id", session("user_id"))->whereBetween('date_transact',[$s_date,$e_date])
+						    ->BusinessInformation()->orderBy('tbl_business.date_transact',"asc")
                             ->paginate(10);
 		return view('agent.pages.filtered1',$data);
 	}
@@ -265,26 +250,19 @@ class AgentController extends ActiveAuthController
 		$e_date = $request->date_end2;
 		$data['clients_activated'] = TblBusinessModel::where('business_status',5)
 						    ->whereBetween('date_transact',[$s_date,$e_date])
-						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	                        ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	                        ->orderBy('tbl_business.date_transact',"asc")
+						    ->BusinessInformation()->orderBy('tbl_business.date_transact',"asc")
  	                        ->paginate(10);
 		return view('agent.pages.filtered2',$data);
 	}
 
 	public function get_client_transaction(Request $request)
 	{
-		$trans_id                     = $request->transaction_id;
-		$update['transaction_status'] = 'call in progress'; 
-		$update['user_id']           = session('user_id'); 
-		$update['date_transact']      = date("Y/m/d"); 
-		$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-		$data['client'] = TblBusinessModel::Where('tbl_business.business_id',$trans_id)
-						  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
-                          ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id') 
-                          ->first();
+		$trans_id                     	= $request->transaction_id;
+		$update['transaction_status'] 	= 'call in progress'; 
+		$update['user_id']           	= session('user_id'); 
+		$update['date_transact']      	= date("Y/m/d"); 
+		$check                      	= TblBusinessModel::where('business_id',$trans_id)->update($update);
+		$data['client']                 = TblBusinessModel::Where('tbl_business.business_id',$trans_id)->BusinessInformation()->first();
 	
 		return view('agent.pages.agent_call',$data);
 	}
@@ -316,9 +294,9 @@ class AgentController extends ActiveAuthController
 			$update['business_status'] 		= '2';
 			$update['date_transact'] 		= date("Y/m/d");
 			$update['user_call_date']		= date("Y/m/d");  
-			$check = TblBusinessModel::where('business_id',$trans_id)->update($update);
-			$count_call = TblUserTeamModel::where('user_id',session('user_id'))->first();
-			$agent['user_calls'] = $count_call->user_calls + 1;
+			$check                          = TblBusinessModel::where('business_id',$trans_id)->update($update);
+			$count_call                     = TblUserTeamModel::where('user_id',session('user_id'))->first();
+			$agent['user_calls']            = $count_call->user_calls + 1;
 	        TblUserTeamModel::where('user_id',session('user_id'))->update($agent);
 			return '';
 		}
@@ -422,46 +400,28 @@ class AgentController extends ActiveAuthController
 
 	public function search_client(Request $request)
     {
-      $search_key = $request->search_key;
-      $data['clients'] = TblBusinessModel::where('business_status',1)->where('business_name','like','%'.$search_key.'%')
-      		             ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	                     ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	                     ->paginate(10);
+      $search_key      = $request->search_key;
+      $data['clients'] = TblBusinessModel::where('business_status',1)->where('business_name','like','%'.$search_key.'%')->BusinessInformation()->paginate(10);
       return view('agent.pages.filtered',$data);
 
     }
 
     public function search_client_pending(Request $request)
     {
-      $search_key1 = $request->search_key1;
-      $data['clients_pending'] = TblBusinessModel::where('business_status',4)->where('business_name','like','%'.$search_key1.'%')
-      						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	                            ->paginate(10);
+      $search_key1             = $request->search_key1;
+      $data['clients_pending'] = TblBusinessModel::where('business_status',4)->where('business_name','like','%'.$search_key1.'%')->BusinessInformation()->paginate(10);
       return view('agent.pages.filtered1',$data);
-
     }
 
-     public function search_client_activated(Request $request)
+    public function search_client_activated(Request $request)
     {
    
      $search_key2 = $request->search_key2;
-     $data['clients_activated'] = TblBusinessModel::where('business_status',5)->where('business_name','like','%'.$search_key2.'%')
-      						    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
- 	                            ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
- 	                            ->paginate(10);
+     $data['clients_activated'] = TblBusinessModel::where('business_status',5)->where('business_name','like','%'.$search_key2.'%')->BusinessInformation()->paginate(10);
       return view('agent.pages.filtered2',$data);
 
     }
-
-	public function filter_clients(request $request) 
-	{
-	    Self::allow_logged_in_users_only();
-		$sdate = $request->start_date;
-		$edate = $request->end_date;
-	
-	}
-	public function get_city(Request $request)
+    public function get_city(Request $request)
     {
         $county_id = $request->county_id;
 

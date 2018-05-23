@@ -76,8 +76,10 @@
             <div id="chartPreferencesPerYear" class="ct-chart ct-perfect-fourth"></div>
             <div class="footer">
               <div class="legend">
-                <i class="fa fa-circle text-info"></i>Pregledi
-                <i class="fa fa-circle text-danger"></i>Trgovci
+                <i class="fa fa-circle text-info"></i>Prikazi Stranice
+
+                <i class="fa fa-circle text-danger"></i>Poruka Gostiju
+
               </div>
               <hr>
               <div class="stats">
@@ -151,8 +153,8 @@ return value[0];
 
 Chartist.Line('#chartActivityPerMonth', data1, options1, responsiveOptions1);
 Chartist.Pie('#chartPreferencesPerYear', {
-labels: ['10%','90%'],
-series: [10, 90 ]
+labels: ['{{$stat_views}}%','{{$stat_message}}%'],
+series: [{{$stat_views}},  {{$stat_message}}]
 });
 }
 </script>

@@ -67,10 +67,11 @@ $(document).ready(function(){
 					search_key: search_key,
 				},
 				dataType:'text',
-			}).done(function(data)
-				{		
+				success: function(data)
+				{
 					$('#showHere_pending').html(data);
-				});
+				}
+			});
 	    });
 
 	    $(document).on('click','#search_button1',function(){
@@ -88,18 +89,20 @@ $(document).ready(function(){
 			});
     	});
 
-    	$(document).on('change','#date_end',function(){
-		var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-		var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-		$.ajax({
-			type:'POST',
-			url:'/supervisor/get_client',
-			data:{date_start: date_start,date_end: date_end},
-			dataType:'text',
-		}).done(function(data){
-				$('#showHere_pending').html(data)
-			});
-		});
+  //   	$(document).on('change','#date_end',function()
+  //   	{
+  //   		alert();
+		// var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		// var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		// $.ajax({
+		// 	type:'POST',
+		// 	url:'/supervisor/get_client',
+		// 	data:{date_start: date_start,date_end: date_end},
+		// 	dataType:'text',
+		// }).done(function(data){
+		// 		$('#showHere_pending').html(data)
+		// 	});
+		// });
 
 		$(document).on('change','#date_end1',function(){
 		var date_start1 = $('#date_start1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();

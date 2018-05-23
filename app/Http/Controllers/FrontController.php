@@ -371,13 +371,15 @@ class FrontController extends Controller
             if(($check->business_views)%10)
             {
                 $update['business_id']      = $id;
-                $update['business_views']   = $check->business_views + 10;
+                $update['business_views']   = $check->business_views + 5;
+                $update['report_date']      = date('Y-m-d');
                 TblReportsModel::where('business_id',$id)->update($update);
             }
             else
             {
                 $update['business_id']      = $id;
                 $update['business_views']   = $check->business_views + 1;
+                $update['report_date']      = date('Y-m-d');
                 TblReportsModel::where('business_id',$id)->update($update);  
             }
         }
@@ -434,12 +436,21 @@ class FrontController extends Controller
     }
     public static function getCoordinates_location($address)
     {
+        $api                = "AIzaSyDXPWM4-ESxBF6dfMkGYm3dlp4LHZvNHRQ";
         $address            = str_replace(" ", "+", $address); 
         $url                = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
         $response           = file_get_contents($url);
         $json               = json_decode($response,TRUE); 
-        $location['lat']    = $json['results'][0]['geometry']['location']['lat'];
-        $location['long']   = $json['results'][0]['geometry']['location']['lng'];
+        if (isset($json['status']) && ($json['status'] == 'OK')) 
+        {
+            $location['lat'] = $json['results'][0]['geometry']['location']['lat']; // Latitude
+            $location['long']= $json['results'][0]['geometry']['location']['lng']; // Longitude
+        }
+        else
+        {
+            $location['lat'] = 45.815399; // Latitude
+            $location['long']= 15.966568; // Longitude
+        }
         return $location;
     }
     

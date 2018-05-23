@@ -653,6 +653,7 @@ class GeneralAdminController extends ActiveAuthController
     $data['_data_team']           = TblTeamModel::where('tbl_team.archived',0)
                                   ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_team.supervisor_id')
                                   ->paginate(10, ['*'], 'team');
+                                  // dd($data['_data_team']);
     $data['_team_select']         = TblTeamModel::where('archived',0)->get();
     $data['_teams']               = TblTeamModel::all();
     $data['agent_merchant']       = TblBusinessModel::where('business_status',5)->get();
@@ -662,7 +663,10 @@ class GeneralAdminController extends ActiveAuthController
                                   ->join('tbl_user_team','tbl_user_team.user_id','=','tbl_user.user_id')
                                   ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
                                   ->paginate(10, ['*'], 'supervisor');
-    $data['_data_admin']          = TblAdminModels::where('archived',0)->paginate(10, ['*'], 'admin');
+    $data['_data_admin']          = TblUserModel::where('tbl_user.archived',0)
+                                  ->where('user_access_level','ADMIN')
+                                  ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                                  ->paginate(10, ['*'], 'admin');
     $data['_merchant']            = TblBusinessModel::where('business_status',5)
                                   ->BusinessAdmin()
                                   ->paginate(10, ['*'], 'registered_client');
@@ -702,7 +706,7 @@ class GeneralAdminController extends ActiveAuthController
       $userInfoData->user_profile     = '/user_profile/default_profile.jpg';
       $userInfoData->user_first_name  = $request->user_first_name ;
       $userInfoData->user_last_name   = $request->user_last_name ;
-      $userInfoData->user_gender      = $request->user_gender ;
+      $userInfoData->user_gender      = $request->user_gender;
       $userInfoData->user_phone_number = $request->user_phone_number ;
       $userInfoData->user_address     = $request->user_address ;
       $userInfoData->user_created     = Carbon::now();

@@ -11,7 +11,7 @@
         <meta name="keywords" content="admin,dashboard" />
         <meta name="author" content="Steelcoders" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="/assets/general_assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
@@ -37,6 +37,17 @@
         <script src="/assets/general_assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <!-- DATEPICKER -->
+        <link  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+        <script>
+        jQuery( document ).ready(function( $ ) 
+        {
+            $( ".datepicker" ).datepicker();
+            $( ".datepicker1" ).datepicker();
+            // $(".datepicker").datepicker({format: "dd/mm/yyyy"});
+        });
+        </script>
         @if((Request::segment(2) != 'profile'))
         <link href="/assets/general_assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         @endif
@@ -57,10 +68,13 @@
         {
             text-transform:capitalize !important;
         }
+        .title
+        {
+            text-transform:uppercase !important;
+        }
         </style>
     </head>
     <body class="page-header-fixed">
-        
         @if(session('user_access_level')=='ADMIN')
             <main class="page-content content-wrap">
                 @include('layout.general_header');
@@ -98,10 +112,6 @@
             </main>
             @include('agent.include.menu')
         @endif
-
-
-        
-
         <div class="cd-overlay"></div>
     
 
@@ -148,6 +158,7 @@
             });
         </script>
         <script src="/assets/js/globals.js"></script>
+        <script src="/assets/js/global.ajax.js"></script>
         <!-- PAGES -->
         
 

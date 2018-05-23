@@ -49,7 +49,7 @@ function merchant()
 		{
 			if ($(this).val() == "resend") 
 		    {
-			   	var re end_email 			= $(this).data('email');
+			   	var resend_email 			= $(this).data('email');
 				var remarks					= "Please pay your Invoice or It will be deleted after 1 month";
 				var invoice_name_resend 	= $(this).data('name');
 				var resend_business_id 		= $(this).data('b_id');

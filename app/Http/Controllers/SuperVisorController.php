@@ -187,8 +187,8 @@ class SuperVisorController extends ActiveAuthController
   public function merchant()
 	{
     $data['user']       = Self::global();
-		$data['page']	= 'Merchant';
-    $data['merchant'] = TblTeamModel::where('tbl_team.supervisor_id', session('user_id'))->get();
+		$data['page']	      = 'Merchant';
+    $data['merchant']   = TblTeamModel::where('tbl_team.supervisor_id', session('user_id'))->get();
     foreach($data['merchant'] as $key=>$team)
     {
       $data['merchant'][$key]['clients'] = TblUserTeamModel::where('tbl_user_team.team_id', $team->team_id)

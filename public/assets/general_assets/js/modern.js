@@ -1,4 +1,5 @@
-$( document ).ready(function() {
+// $( document ).ready(function() {
+jQuery( document ).ready(function( $ ) {
     
     // Toggle Search
     $('.show-search').click(function(){
@@ -41,10 +42,10 @@ $( document ).ready(function() {
     Waves.displayEffect();
     
     // tooltips
-    $( '[data-toggle~="tooltip"]' ).tooltip({
+    $('[data-toggle~="tooltip"]').tooltip({
         container: 'body'
     });
-    
+ 
     // Switchery
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     

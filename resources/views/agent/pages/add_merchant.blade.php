@@ -131,5 +131,5 @@
 		</div>
 	</div>
 </div>
-<script src="/assets/agent/agent_add_merchant.js"></script>
+<script src="/assets/js/agent/agent_add_merchant.js"></script>
 @endsection

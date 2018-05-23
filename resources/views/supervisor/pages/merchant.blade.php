@@ -1,9 +1,8 @@
 @extends('layout.general_layout') 
 @section('content')
+
 <script src="/assets/supervisor/supervisor_client.js"></script>
 <script src="/assets/js/supervisor/upload-conversation.js"></script>
-<script src="/assets/js/supervisor/get-client-info.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
 .li_style
@@ -11,18 +10,32 @@
 width:50%;
 }
 </style>
-<script language="javascript">
+{{-- <script language="javascript">
 document.getElementById("uploadBtn").onchange = function () {
 document.getElementById("uploadFile").value = this.value;
 };
 
-</script>
-<script>
-    $(document).ready(function() {
-$( ".datepicker" ).datepicker();
-$( ".datepicker1" ).datepicker();
+</script> --}}
+<script type="text/javascript">
+    $(document).ready(function()
+    {
 
-});
+
+    $(document).on('change','#date_end',function()
+        {
+            alert();
+        var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+        var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+        $.ajax({
+            type:'POST',
+            url:'/supervisor/get_client',
+            data:{date_start: date_start,date_end: date_end},
+            dataType:'text',
+        }).done(function(data){
+                $('#showHere_pending').html(data)
+            });
+        });
+    });
 </script>
 
 <div class="page-title">
@@ -40,7 +53,7 @@ $( ".datepicker1" ).datepicker();
     <div class="tab-content">
         <div class=" panel-primary">
             <div class="panel-heading row clearfix">
-                <div class="col-md-8">
+                <div class="col-md-8">      
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
                             <li class="li_style active"><a data-toggle="tab" href="#pendingCustomer">Pending Upload</a></li>
@@ -58,10 +71,10 @@ $( ".datepicker1" ).datepicker();
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
+                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" >
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
+                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" >
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
@@ -270,5 +283,4 @@ $( ".datepicker1" ).datepicker();
         </div>
     </div>
 </div>
-
 @endsection

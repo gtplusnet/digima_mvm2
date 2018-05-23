@@ -253,8 +253,9 @@
 								@endforeach
 							</tbody>
 						</table>
+						{!! $_data_team->render() !!}
 					</div>
-					{!! $_data_team->render() !!}
+					
 				</div>
 			</div>
 		</div>
@@ -290,7 +291,7 @@
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Supervisor Name</th>
+										<th>Name</th>
 										<th>Email</th>
 										<th> Phone</th>
 										<th>Assigned Team</th>
@@ -310,9 +311,9 @@
 											@endforeach
 										</td>
 										<td>
-											<select style="height:30px;width:80px;" class="supervisor_actionbox" id="supervisor_actionbox" data-name="{{$data_supervisor->first_name}} {{$data_supervisor->last_name}}" data-email="{{$data_supervisor->email}}"  data-id="{{ $data_supervisor->supervisor_id}}">
+											<select style="height:30px;width:80px;" class="view_user_details" data-email="{{$data_supervisor->user_email}}"  data-name="{{$data_supervisor->user_first_name}} {{$data_supervisor->user_last_name}}" data-id="{{ $data_supervisor->user_id}}">
 												<option value="">Action</option>
-												<option value="edit">Edit</option>
+												<option value="view">View</option>
 												<option value="assign">Assign</option>
 												<option value="delete">Delete</option>
 											</select>
@@ -358,22 +359,25 @@
 									<th>ID</th>
 									<th>Full Name</th>
 									<th>Email</th>
-									<th></th>
+									<th>Phone</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach($_data_admin as $data_admin)
 								<tr>
-									<td>{{$data_admin->admin_id}}</td>
-									<td>{{$data_admin->full_name}}</td>
-									<td>{{$data_admin->email}}</td>
-									<td><select style="height:30px;width:80px;" class="admin_actionbox" data-email="{{$data_admin->email}}" data-name="{{$data_admin->full_name}}" id="admin_actionbox" data-name="{{$data_admin->first_name}} {{$data_admin->last_name}}" data-id="{{ $data_admin->admin_id}}">
-										<option value="">Action</option>
-										<option value="edit">Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
+									<td>{{$data_admin->user_id}}</td>
+									<td>{{$data_admin->user_first_name}} {{$data_admin->user_last_name}}</td>
+									<td>{{$data_admin->user_email}}</td>
+									<td>{{$data_admin->user_phone_number}}</td>
+									<td>
+										<select style="height:30px;width:80px;" class="view_user_details" data-email="{{$data_admin->user_email}}"  data-name="{{$data_admin->user_first_name}} {{$data_admin->user_last_name}}" data-id="{{ $data_admin->user_id}}">
+											<option value="">Action</option>
+											<option value="view">View</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
 							@endforeach
 						</tbody>
 					</table>
@@ -724,6 +728,5 @@
 		</div>
 	</div>
 </div>
-
-<script src="/assets/user_assets/js/general_admin_user.js"></script>
+<script src="/assets/general_admin/general_admin_user.js"></script>
 @endsection

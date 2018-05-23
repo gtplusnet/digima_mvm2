@@ -21,9 +21,9 @@
 	}
 
 	function initEvents() {
-		openbtn.addEventListener( 'click', toggleMenu );
+		openbtn.addEventListener('click',toggleMenu);
 		if( closebtn ) {
-			closebtn.addEventListener( 'click', toggleMenu );
+			closebtn.addEventListener('click',toggleMenu);
 		}
 
 		// close the menu element if the target it´s not the menu element or one of its descendants..
