@@ -190,10 +190,10 @@
                         <img  src="/images/croatia_directory_logo.png">
                     </div>
                     <div class="col-md-3 searchfields-format ">
-                        <input  type="text" translate="yes" class="business-name-textbox transform-capitalize" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
+                        <input  type="text" translate="yes" class="business-name-textbox transform-capitalize" name="businessKeyword"  placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
                     </div>
                     <div class="col-md-2 searchfields-format ">
-                        <select class="counties-selectbox" required="true" name="countyDropdown" id="countyDropdown" default>
+                        <select class="counties-selectbox" required="true" name="countyDropdown"  default>
                             <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
 
@@ -213,7 +213,7 @@
                         </style>
                     </div>
                     <div class="col-md-3 searchfields-format ">
-                        <input class="zipcode-textbox transform-capitalize" type="text" placeholder="grad ili poštanski broj" name="postalCode" id="postalCode">
+                        <input class="zipcode-textbox transform-capitalize" type="text" placeholder="grad ili poštanski broj" name="postalCode" >
                     </div>
                     <div class="col-md-2 searchfields-format ">
                         <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Tražilica</p></button>

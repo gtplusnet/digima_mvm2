@@ -32,7 +32,7 @@ Route::get('/', 						'FrontController@index');
 Route::get('/home', 					'FrontController@index');
 Route::any('/home/get_sub_category', 	'FrontController@get_sub_category');
 Route::get('/mob/category', 					'FrontController@mob_category');
-Route::get('/mob_category/get_sub_category', 					'FrontController@mob_category_get_sub_category');
+Route::get('/mob_category/get_sub_category', 'FrontController@mob_category_get_sub_category');
 
 
 
