@@ -216,7 +216,7 @@
                         <input class="zipcode-textbox transform-capitalize" type="text" placeholder="grad ili poštanski broj" name="postalCode" >
                     </div>
                     <div class="col-md-2 searchfields-format ">
-                        <button type="submit" class="btn btn-search" name="searchButton" id="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Tražilica</p></button>
+                        <button type="submit" class="btn btn-search" name="searchButton"><i class="fa fa-search"></i><p class="search-btn-text">Tražilica</p></button>
                     </div>
                 </form>
             </div>
