@@ -31,6 +31,10 @@ Route::any('/developer/website/maintenance','DeveloperController@developer_websi
 Route::get('/', 						'FrontController@index');
 Route::get('/home', 					'FrontController@index');
 Route::any('/home/get_sub_category', 	'FrontController@get_sub_category');
+Route::get('/mob/category', 					'FrontController@mob_category');
+Route::get('/mob_category/get_sub_category', 					'FrontController@mob_category_get_sub_category');
+
+
 
 Route::get('/about', 					'FrontController@about');
 Route::get('/contact', 					'FrontController@contact');
@@ -74,6 +78,10 @@ Route::get('/forgot/password', 			'PasswordController@forgot_password');
 Route::post('/reset/password',       	'PasswordController@reset_password');
 Route::any('/user/forgot/password',     'PasswordController@user_forgot_password');
 Route::any('/user/reset/password',      'PasswordController@user_reset_password');
+
+
+
+
 /*Routes for Merchant*/
 
 Route::get('/merchant/dashboard', 						'MerchantController@index');

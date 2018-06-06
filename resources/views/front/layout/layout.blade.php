@@ -370,65 +370,8 @@
                         <li><a href="/"><i class="icon-home"></i><span>&nbsp;&nbsp;Home</span></a></li>
                         <li><a href="/about"><i class="icon-th-list"></i><span>&nbsp;&nbsp;About Us</span></a></li>
                         <li><a href="/contact"><i class="icon-phone"></i><span>&nbsp;&nbsp;Contact Us</span></a></li>
-                        <li class="menu-title aGALIT" id="click">Category Filter</li>
-
-                        @foreach($_mob_categories->where('parent_id','=',0)->where('archived',0) as $categories)
-                        <li class="aGALIT">
-                            <a class="aGALIT">{{$categories->business_category_name}}</a>
-                            <?php
-                                $children = $_mob_categories->where('parent_id', $categories->business_category_id)->where('archived',0);
-                            ?>
-                            @if($children!=null)
-                                <ul class="dl-submenu">
-                                    <li class="menu-title">{{$categories->business_category_name}}</li>
-                                    @foreach($children->sortBy('parent_id') as $child)
-                                        <li>
-                                            <a class="parent_filtered" id="parent_filtered">{{ $child->business_category_name }}</a>
-                                            <?php
-                                                $children1 = $_mob_categories->where('parent_id', $child->business_category_id)->where('archived',0);
-                                            ?>
-                                            @if($children1!=null)
-                                                <ul class="dl-submenu">
-                                                    <li class="menu-title">{{ $child->business_category_name }}</li>
-                                                    @foreach($children1->sortBy('parent_id') as $child1)
-                                                        <li>
-                                                            <a href="#">{{ $child1->business_category_name }}</a>
-                                                            <?php
-                                                                $children2 = $_mob_categories->where('parent_id', $child1->business_category_id)->where('archived',0);
-                                                            ?>
-                                                            @if($children2!=null)
-                                                                <ul class="dl-submenu">
-                                                                    <li class="menu-title">{{ $child1->business_category_name }}</li>
-                                                                    @foreach($children2->sortBy('parent_id') as $child2)
-                                                                        <li>
-                                                                            <a href="#">{{ $child2->business_category_name }}</a>
-                                                                            <?php
-                                                                                $children2 = $_mob_categories->where('parent_id', $child1->business_category_id)->where('archived',0);
-                                                                            ?>
-                                                                            @if($children2!=null)
-                                                                            <ul class="dl-submenu">
-                                                                                <li class="menu-title">{{ $child2->business_category_name }}</li>
-                                                                                @foreach($children2->sortBy('parent_id') as $child2)
-                                                                                <li>
-                                                                                    <a href="#">{{ $child2->business_category_name }}</a>
-                                                                                </li>
-                                                                                @endforeach
-                                                                            </ul>
-                                                                            @endif
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            @endif
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                        @endforeach      
+                        <li><a href="/mob/category"><i class="icon-th-list"></i><span>&nbsp;&nbsp;Category Filter</span></a></li>
+                        
                     </ul>
                 </div>
             </div>

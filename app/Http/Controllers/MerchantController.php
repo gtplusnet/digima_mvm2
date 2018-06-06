@@ -42,49 +42,67 @@ class MerchantController extends MerchantAuthController
 {
 	public function index()
 	{	
-  	$TblReports             = TblReportsModel::where('business_id',session('business_id'));
-    $data['page']           = 'Dashboard';
-    $views                  = $TblReports->value('business_views');
-    $messages               = TblGuestMessages::where('business_id',session('business_id'))->count();
-    $data['guest_messages'] = $messages;
-    $fb                     = TblBusinessModel::where("business_id",session('business_id'))->first();
-    $total_stats            = $views + $messages;
-    $data['stat_views']     = ($views/$total_stats)*100;
-    $data['stat_message']   = ($messages/$total_stats)*100;
-    if($views==0)
-    {
-      $data['page_view']  ="0";
-    }
-    else
-    {
-      $business_views = $TblReports->first();
-      $data['page_view'] = $business_views->business_views;
-    }
-    if($fb->facebook_url==""||$fb->facebook_url==null)
-    {
-      $data['fb']         = "0";
-    }
-    else
-    {
-      $fb_page      = $fb->facebook_url;
-      $access_token = 'EAANMzzmHyFEBAKoD8BJBavX3tSTq26iVlAF341XFf58nfbbP7tctBESSqaQqbtss7vUQm2HlQJeONGJ2LnZBAyMrcZAeXNgY7t5GzZBwmk5YbFojzVySNnaOkz5doG19oB84YwUaol0vPO3KknZA1dNQNNbrBS26D1q5WKPZCv4QaK0EGjhOrgu7AI69CFmUwYeSgBsRRIgZDZD';
-      $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
-      $curl         = curl_init($url);
-                      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
-                      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-      $result       = curl_exec($curl);  
-                      curl_close($curl);
-      $details      = json_decode($result,true);
-      if(isset($details['fan_count']) == null)
-      {
-        $data['fb']   = '0';
-      }
-      else
-      {
-        $data['fb']   = $details['fan_count'];
-      }
-    }
-    return view('merchant.pages.dashboard', $data);	
+  	    $data['page']= 'Dashboard';
+
+        $data['jan'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 01)->value('business_views');
+        $data['feb'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 02)->value('business_views');
+        $data['mar'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 03)->value('business_views');
+        $data['apr'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 04)->value('business_views');
+        $data['may'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 05)->value('business_views');
+        $data['jun'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 06)->value('business_views');
+        $data['jul'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 07)->value('business_views');
+        $data['aug'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', '08')->value('business_views');
+        $data['sep'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', '09')->value('business_views');
+        $data['oct'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', '10')->value('business_views');
+        $data['nov'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 11)->value('business_views');
+        $data['dec'] = TblReportsModel::where('business_id',session('business_id'))->whereMonth('report_date', '=', 12)->value('business_views');
+   
+        $views       = TblReportsModel::where('business_id',session('business_id'))->get();
+        $sum         = 0;
+        
+        if($views==null)
+        {
+            $data['page_view']  = 0;
+        }
+        else
+        {
+            foreach($views as $view)
+            {
+                $sum = $sum + $view->business_views;
+            }
+            $data['page_view'] = $sum;
+        }
+        $data['guest_messages'] =   $messages  = TblGuestMessages::where('business_id',session('business_id'))->count();
+        $total_stats            = $data['page_view'] + $messages;
+        $data['stat_views']     = ($data['page_view']/$total_stats)*100;
+        $data['stat_message']   = ($messages/$total_stats)*100;
+
+        $facebook_url                     = TblBusinessModel::where("business_id",session('business_id'))->value('facebook_url');
+        if($facebook_url==""||$facebook_url==null)
+        {
+            $data['fb']         = "0";
+        }
+        else
+        {
+            $fb_page      = $facebook_url;
+            $access_token = 'EAANMzzmHyFEBAKoD8BJBavX3tSTq26iVlAF341XFf58nfbbP7tctBESSqaQqbtss7vUQm2HlQJeONGJ2LnZBAyMrcZAeXNgY7t5GzZBwmk5YbFojzVySNnaOkz5doG19oB84YwUaol0vPO3KknZA1dNQNNbrBS26D1q5WKPZCv4QaK0EGjhOrgu7AI69CFmUwYeSgBsRRIgZDZD';
+            $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
+            $curl         = curl_init($url);
+                          curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   
+                          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result       = curl_exec($curl);  
+                          curl_close($curl);
+            $details      = json_decode($result,true);
+            if(isset($details['fan_count']) == null)
+            {
+                $data['fb']   = '0';
+            }
+            else
+            {
+                $data['fb']   = $details['fan_count'];
+            }
+        }
+        return view('merchant.pages.dashboard', $data);	
 	}
   
 

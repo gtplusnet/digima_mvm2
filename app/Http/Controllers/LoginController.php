@@ -134,25 +134,17 @@ class LoginController extends Controller
       {
         if($validate_login->status=="Activated"||$validate_login->status=="activated")
         {
-          $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)
-                      ->first();
+          $user_info = TblBusinessContactPersonModel::where('business_contact_person_id',$validate_login->business_contact_person_id)->first();
           Session::put("merchant_login",true);
           Session::put("business_id",$user_info->business_id);
           Session::put("business_banner",$validate_login->business_banner);
           Session::put("email",$validate_login->user_email);
           Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
-          $data['page']   = 'Dashboard';
           return Redirect::to('/merchant/dashboard');
         }
         elseif($validate_login->status=="registered"||$validate_login->status=="Registered")
         {
-          $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)
-                                ->join('tbl_business','tbl_business.business_id','=','tbl_user_account.business_id')
-                                ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                ->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')
-                                ->first();
+          $user_info = TblUserAccountModel::where('user_account_id',$validate_login->user_account_id)->UserAccount()->first();
           Session::put("full_name",$user_info->contact_first_name." ".$user_info->contact_last_name);
           Session::put("email",$user_info->user_email);
           Session::put("business_name",$user_info->business_name);
@@ -161,12 +153,10 @@ class LoginController extends Controller
           Session::put("business_address",$user_info->business_complete_address);
           Session::put("city_state",$user_info->city_name.", ".$user_info->county_name);
           Session::put("zip_code",$user_info->postal_code);
-          $data['page']   = 'Redirect';
           return Redirect::to('/merchant/redirect');
         }
         elseif($validate_login->status=="deactivated"||$validate_login->status=="Deactivated")
         {
-          $data['page']   = 'Merchant Login';
           return Redirect::to('/redirect');
         }
       }

@@ -1,44 +1,33 @@
-// $(document).ready(function(){
-
-// 	$(document).on("click","#OI",function()
-// 	{
-// 		alert();
-// 		$('#show_alert_here').show();
-// 	});
-	
-// });
-
 $(document).ready(function(){
 
-	$(document).on("click","#update",function(){
-		var company_information = $('#company_information').val();
-		var business_website = $('#business_website').val();
-		var year_established = $('#year_established').val();
-		
-	
+	$('body').on("click","#update",function()
+	{
+		var company_information 	= $('#company_information').val();
+		var business_website 	= $('#business_website').val();
+		var year_established 	= $('#year_established').val();
 
 		$.ajax({
 			type:'POST',
 			url:'/merchant/add_other_info',
-			data:{
+			data:
+			{
 				company_information: company_information,
 				business_website: business_website,
 				year_established: year_established,
-				},
+			},
 			dataType:'text',
-		}).done(function(data){
-			$('#other_info_success').html(data);
+			success: function(data)
+			{
+				$('#other_info_success').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);
-			});
+			}
+		});
 	});
-	
-});
 
-$(document).ready(function(){
-
-	$(document).on("click","#savePayment",function(){
+	$(document).on("click","#savePayment",function()
+	{
 		var paymentMethodName = $('#paymentMethodName').val();
 
 		$.ajax({
@@ -49,15 +38,17 @@ $(document).ready(function(){
 				paymentMethodName: paymentMethodName,	
 			},
 			dataType:'text',
-		}).done(function(data){
-			$('#add_payment_method_success').html(data);
-				setTimeout(function()
-				{
+			success: function(data)
+			{
+				$('#add_payment_method_success').html(data);
+				setTimeout(function(){
 				   location.reload();
 				}, 1000);
-		    });
+			}
+		});
 	});
-	$(document).on("click",".deletePaymentss",function(){
+	$(document).on("click",".deletePaymentss",function()
+	{
 		var paymentMethodId = $(this).data("id");
 		$.ajax({
 			type:'POST',
@@ -67,17 +58,15 @@ $(document).ready(function(){
 				
 				},
 			dataType:'text',
-		}).done(function(data){
-			$('#delete_payment_method_success').html(data);
+			success: function(data)
+			{
+				$('#delete_payment_method_success').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);
-			});
+			}
+		});
 	});
-});
-
-
-$(document).ready(function(){
 
 	$(document).on("click","#updatePassword",function(){
 		var current_password = $('#current_password').val();
@@ -93,38 +82,18 @@ $(document).ready(function(){
 				confirm_password: confirm_password,
 				},
 			dataType:'text',
-		}).done(function(data){
-			$('#merchant_changepassword_success').html(data);
+			success: function(data)
+			{
+				$('#merchant_changepassword_success').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);
-			});
-	});
-	
-});
-
-
-$(document).ready(function()
-{
-
-	$(document).on('click','#updateprofile',function(){
-		// alert('123');
-
-		$.ajax({
-			type:'POST',
-			url:'/merchant/update_merchant_info',
-			dataType:'text',
-
-		}).done(function(data){
-
-			// alert('table');
-				$('#MI').html(data);
-			});
+			}
+		});
 	});
 
-});
-
-$(document).on('click','#saveprofile',function(){
+	$(document).on('click','#saveprofile',function()
+	{
 		var business_complete_address 	= $('#business_complete_address').val();
 		var twitter_url 				= $('#twitter_url').val();
 		var facebook_url 				= $('#facebook_url').val();
@@ -137,25 +106,37 @@ $(document).on('click','#saveprofile',function(){
 			data:
 				{ 
 					business_complete_address	:business_complete_address,
-					twitter_url					:twitter_url,
+					twitter_url				:twitter_url,
 					facebook_url				:facebook_url,
 					county_id					:county_id,
 					city_id						:city_id,
 				},
 			dataType:'text',
-			}).done(function(data){
+			success: function(data)
+			{
 				$('#showProfile1').html(data);
 				setTimeout(function(){
-					   location.reload();
-					}, 1000);
-			});
+				   location.reload();
+				}, 1000);
+			}
+		});
+	});
+	$(document).on('click','#updateprofile',function()
+	{
+		$.ajax({
+			type:'POST',
+			url:'/merchant/update_merchant_info',
+			dataType:'text',
+			success: function(data)
+			{
+				$('#MI').html(data);
+				
+			}
+		});
 	});
 
-
-
-$(document).ready(function(){
-
-	$(document).on('change','#county_id',function(){
+	$(document).on('change','#county_id',function()
+	{
 		var county_id = $('#county_id').val();
 		$('#postal_code').val("");
 		
@@ -170,16 +151,16 @@ $(document).ready(function(){
 			url:'/merchant/get_city',
 			data:{county_id: county_id},
 			dataType:'text',
-			success:function(data){
-			$('#city_list').html(data);
+			success:function(data)
+			{
+			    $('#city_list').html(data);
 			}
 		});
 	});
-
-	$('#city_list').change(function(){
+     $(document).on('change','#city_list',function()
+     {
+	
 		var city_id = $('#city_list').val();
-
-			
 		if(city_id == '')
 		{
 			$('#postal_code').val("");
@@ -190,13 +171,22 @@ $(document).ready(function(){
 			url:'/merchant/get_zip_code',
 			data:{city_id: city_id},
 			dataType:'text',
-			success:function(data){
-			$('#postal_code').val(data);
-		}
+			success:function(data)
+			{
+			    $('#postal_code').val(data);
+		     }
 		});
 		
 	});
+	
 });
+
+
+
+
+
+
+
 
 
 
