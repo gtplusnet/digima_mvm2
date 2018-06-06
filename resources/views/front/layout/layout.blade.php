@@ -184,7 +184,7 @@
         </div>
         <div class="header-nav-bottom" id="navbar">
             <div class="container searchbox-holder">
-                <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm">
+                <form action="/business-search" method="POST" name="searchRegisteredBusinessForm">
                     {{ csrf_field() }}
                     <div class="col-md-2" >
                         <img  src="/images/croatia_directory_logo.png">
