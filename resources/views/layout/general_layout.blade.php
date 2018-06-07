@@ -44,16 +44,16 @@
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <!-- DATEPICKER -->
-        <link  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+        <!-- <link  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
         <script>
-        jQuery(document).ready(function($) 
-        {
-            $( ".datepicker" ).datepicker();
-            $( ".datepicker1" ).datepicker();
-            // $(".datepicker").datepicker({format: "dd/mm/yyyy"});
-        });
-        </script>
+        // jQuery(document).ready(function($) 
+        // {
+        //     $( ".datepicker" ).datepicker();
+        //     $( ".datepicker1" ).datepicker();
+        //     // $(".datepicker").datepicker({format: "dd/mm/yyyy"});
+        // });
+        </script> -->
         @if((Request::segment(2) != 'profile'))
         <link href="/assets/general_assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         @endif

@@ -77,10 +77,10 @@ cellspacing: 0;
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close" >
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" value="">
+                                    <input type="date" class="form-control" id="date_start" placeholder="Date From" value="">
                                 </div>
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" value="">
+                                    <input type="date" class="form-control" id="date_end" placeholder="Date To" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close">
@@ -147,10 +147,10 @@ cellspacing: 0;
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close">
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
+                                    <input type="date" class="form-control " id="date_start1" placeholder="Date From" value="">
                                 </div>
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
+                                    <input type="date" class="form-control " id="date_end1" placeholder="Date To" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close">
@@ -209,10 +209,10 @@ cellspacing: 0;
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close">
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date From" value="">
+                                    <input type="date" class="form-control" id="date_start2" placeholder="Date From" value="">
                                 </div>
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date To" value="">
+                                    <input type="date" class="form-control" id="date_end2" placeholder="Date To" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close">
@@ -275,10 +275,10 @@ cellspacing: 0;
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left padding-close">
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker" id="date_start3" placeholder="Date From" value="" >
+                                    <input type="date" class="form-control " id="date_start3" placeholder="Date From" value="" >
                                 </div>
                                 <div class="col-md-6 padding-close">
-                                    <input type="text" class="form-control datepicker1" id="date_end3" placeholder="Date To" value="" >
+                                    <input type="date" class="form-control " id="date_end3" placeholder="Date To" value="" >
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right padding-close" style="padding-left:68px;">

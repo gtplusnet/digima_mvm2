@@ -16,27 +16,6 @@ document.getElementById("uploadFile").value = this.value;
 };
 
 </script> --}}
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-
-
-    $(document).on('change','#date_end',function()
-        {
-            alert();
-        var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-        var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-        $.ajax({
-            type:'POST',
-            url:'/supervisor/get_client',
-            data:{date_start: date_start,date_end: date_end},
-            dataType:'text',
-        }).done(function(data){
-                $('#showHere_pending').html(data)
-            });
-        });
-    });
-</script>
 
 <div class="page-title">
     <h3>{{ $page }}</h3>
@@ -71,10 +50,10 @@ document.getElementById("uploadFile").value = this.value;
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Date From" >
+                                    <input type="date" class="form-control " id="date_start" placeholder="Date From" >
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date To" >
+                                    <input type="date" class="form-control " id="date_end" placeholder="Date To" >
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
@@ -177,10 +156,10 @@ document.getElementById("uploadFile").value = this.value;
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date From" value="">
+                                    <input type="date" class="form-control " id="date_start1" placeholder="Date From" value="">
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date To" value="">
+                                    <input type="date" class="form-control" id="date_end1" placeholder="Date To" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">

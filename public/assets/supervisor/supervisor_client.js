@@ -89,22 +89,22 @@ $(document).ready(function(){
 			});
     	});
 
-  //   	$(document).on('change','#date_end',function()
-  //   	{
-  //   		alert();
-		// var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-		// var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-		// $.ajax({
-		// 	type:'POST',
-		// 	url:'/supervisor/get_client',
-		// 	data:{date_start: date_start,date_end: date_end},
-		// 	dataType:'text',
-		// }).done(function(data){
-		// 		$('#showHere_pending').html(data)
-		// 	});
-		// });
+        	$(document).on('change','#date_end',function()
+        	{
+	        var date_start = $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+	        var date_end = $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+	        $.ajax({
+	            type:'POST',
+	            url:'/supervisor/get_client',
+	            data:{date_start: date_start,date_end: date_end},
+	            dataType:'text',
+	        	}).done(function(data){
+                $('#showHere_pending').html(data)
+            	});
+        	});
 
-		$(document).on('change','#date_end1',function(){
+		$(document).on('change','#date_end1',function()
+		{
 		var date_start1 = $('#date_start1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		var date_end1 = $('#date_end1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({

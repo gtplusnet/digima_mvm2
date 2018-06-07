@@ -1,6 +1,5 @@
 @extends('layout.general_layout')
 @section('content')
-
 <script src="/assets/js/agent/agent_client.js"></script>
 <style>
 .distance
@@ -33,12 +32,6 @@ width:35px;
 font-size:20px;
 }
 </style>
-<script>
-$( function() {
-$( ".datepicker" ).datepicker();
-$( ".datepicker1" ).datepicker();
-});
-</script>
 <div class="page-title">
     <h3>Merchant</h3>
     <div class="page-breadcrumb">
@@ -73,10 +66,10 @@ $( ".datepicker1" ).datepicker();
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start" placeholder="Date Start" value="">
+                                    <input type="date" class="form-control datepicker" id="date_start" placeholder="Date Start" value="">
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end" placeholder="Date End" value="">
+                                    <input type="date" class="form-control datepicker1" id="date_end" placeholder="Date End" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
@@ -170,10 +163,10 @@ $( ".datepicker1" ).datepicker();
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12  pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start1" placeholder="Date Start" value="">
+                                    <input type="date" class="form-control" id="date_start1" placeholder="Date Start" value="">
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end1" placeholder="Date End" value="">
+                                    <input type="date" class="form-control" id="date_end1" placeholder="Date End" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
@@ -233,10 +226,10 @@ $( ".datepicker1" ).datepicker();
                             {{csrf_field()}}
                             <div class="col-md-5 col-sm-12 col-xs-12 pull-left">
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker" id="date_start2" placeholder="Date Start" value="">
+                                    <input type="date" class="form-control datepicker" id="date_start2" placeholder="Date Start" value="">
                                 </div>
                                 <div class="col-md-6" style="padding:0px;">
-                                    <input type="text" class="form-control datepicker1" id="date_end2" placeholder="Date End" value="">
+                                    <input type="date" class="form-control datepicker1" id="date_end2" placeholder="Date End" value="">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right">

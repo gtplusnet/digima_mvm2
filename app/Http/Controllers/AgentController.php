@@ -197,7 +197,8 @@ class AgentController extends ActiveAuthController
 		$data['clients'] 			= TblBusinessModel::where('business_status',1)->BusinessInformation()->orderBy('tbl_business.date_created',"asc")->paginate(10);
         
         $data['clients_pending'] 	= TblBusinessModel::where("user_id", session("user_id"))
-                                    ->BusinessInformation()->orderBy('tbl_business.date_created',"DESC")
+                                    ->BusinessInformation()
+                                    ->orderBy('tbl_business.date_created',"DESC")
 		        					->where(function($query)
 								       {
 								        $query->where('tbl_business.business_status', 4);
@@ -220,10 +221,19 @@ class AgentController extends ActiveAuthController
 	{
 		$s_date = $request->date_start1;
 		$e_date = $request->date_end1;
-		$data['clients_pending'] = TblBusinessModel::where('business_status', 4)
-							->where("user_id", session("user_id"))->whereBetween('date_transact',[$s_date,$e_date])
-						    ->BusinessInformation()->orderBy('tbl_business.date_transact',"asc")
-                            ->paginate(10);
+
+        $data['clients_pending'] 	= TblBusinessModel::where("user_id", session("user_id"))
+                                    ->BusinessInformation()
+                                    // ->whereBetween('date_transact',[$s_date,$e_date])
+                                    ->orderBy('tbl_business.date_created',"DESC")
+		        					->where(function($query)
+								       {
+								        $query->where('tbl_business.business_status', 4);
+								        $query->orWhere('tbl_business.business_status', 20);
+								       })
+								    ->paginate(10);
+		
+                                
 		return view('agent.pages.filtered1',$data);
 	}
 

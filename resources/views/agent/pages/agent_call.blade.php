@@ -1,14 +1,14 @@
-<div class="modal-md modal-dialog">
+<div class="modal-lg modal-dialog">
     <div class="modal-content">
         
         <div class="modal-header">
             <button type="button" class="close" data-id="{{$client->business_id}}" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Personal Information</h4>
         </div>
-        <div class="modal-body">
+        <div class="row modal-body">
             <div>
                 <div>
-                    <center><a href=""><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></a></center>
+                    <center><img src="http://www.animatedimages.org/data/media/325/animated-telephone-image-0151.gif" border="0" alt="animated-telephone-image-0151" width="100px" height="100px" /></center>
                 </div>
                 <div>
                     <p ><center>{{session('_Timer')}}</center></p>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-3 control-label">Primary Number</label>
+                                <label for="input-Default" class="col-sm-3 control-label">Phone Number 1</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_phone}}" readonly>
                                 </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="distance">
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-3 control-label">Secondary Number</label>
+                                <label for="input-Default" class="col-sm-3 control-label">Phone Number 2</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control input-rounded" id="input-rounded" value="{{$client->business_alt_phone}}" readonly>
                                 </div>

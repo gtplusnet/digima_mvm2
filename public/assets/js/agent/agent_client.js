@@ -33,9 +33,8 @@ $(document).ready(function()
 		});
 	});
 	$('body').on('change','#date_end1',function(){
-		alert();
 		var date_start1 = $('#date_start1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
-		var date_end1 = $('#date_end1').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
+		var date_end1 = $(this).datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 		$.ajax({
 			type:'POST',
 			url:'/agent/get_client1',
