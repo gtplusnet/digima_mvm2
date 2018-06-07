@@ -78,8 +78,8 @@ class MerchantController extends MerchantAuthController
         else
         {
         $fb_page      = $facebook_url;
-        $access_token = 'EAANMzzmHyFEBAKoD8BJBavX3tSTq26iVlAF341XFf58nfbbP7tctBESSqaQqbtss7vUQm2HlQJeONGJ2LnZBAyMrcZAeXNgY7t5GzZBwmk5YbFojzVySNnaOkz5doG19oB84YwUaol0vPO3KknZA1dNQNNbrBS26D1q5WKPZCv4QaK0EGjhOrgu7AI69CFmUwYeSgBsRRIgZDZD';
-        $url          = "https://graph.facebook.com/v2.10/".$fb_page.'?fields=id,name,fan_count&access_token='.$access_token;
+        $access_token = 'EAACEdEose0cBAJwdMQdkNdeWZBirBHDmft4IsR4VkrZAzieZA6o0iKp4N1iw8hftXS9bjF3nMnDa33lraHhoy1zWj6JUFDALB8BN82huVSZACBFuRQFLuzTR2SFPjr6LOi5aKH0Lvbwb22vFAFDvqlp2ZAA90MO3HWdWaR5bm3NsplKk4TzZB3i7LlD9u44KM5YNSZAfIIZAPwZDZD';
+        $url          = "https://graph.facebook.com/".$fb_page.'?fields=fan_count&access_token='.$access_token;
         $curl         = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
