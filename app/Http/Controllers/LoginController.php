@@ -60,7 +60,6 @@ class LoginController extends Controller
   {
       $validate_login = TblUserModel::where('user_email',$request->user_email)->first();
       
-      
       if(count($validate_login)==1)
       {
           if(Crypt::decrypt($validate_login->user_password)==$request->user_password)
@@ -130,7 +129,7 @@ class LoginController extends Controller
     $validate_login = TblUserAccountModel::where('user_email',$request->email)->first();
     if($validate_login)
     {
-      if (Crypt::decrypt($validate_login->user_password)==$request->password)
+      if (Crypt::decrypt($validate_login->user_password)==$request->user_password)
       {
         if($validate_login->status=="Activated"||$validate_login->status=="activated")
         {

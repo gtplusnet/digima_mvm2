@@ -11,7 +11,7 @@ use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblBusinessModel;
 use App\Models\TblBusinessContactPersonModel;
-use App\Models\TblAgentModel;
+// use App\Models\TblAgentModel;
 use App\Models\TblBusinessOtherInfoModel;
 use App\Models\Tbl_Agent;
 use App\Models\TblPaymentMethod;
@@ -172,7 +172,7 @@ class AgentController extends ActiveAuthController
 	public function checking_password(Request $request )
 	{
 		$user = TblUserModel::where('user_id',session('user_id'))->first();
-		if(Crypt::decrypt($user->password)==$request->currentPassword)
+		if(Crypt::decrypt($user->user_password)==$request->currentPassword)
 		{
 			if($request->newPassword == $request->confirmPassword)
             {

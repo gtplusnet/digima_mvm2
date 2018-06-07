@@ -12,6 +12,10 @@ use App\Models\TblPasswordResetModel;
 use App\Models\TblAgentModel;
 use App\Models\TblContactUs;
 use App\Models\TblBusinessCategoryModel;
+
+
+use App\Models\TblUserModel;
+use App\Models\TblUserInfoModel;
 use Session;
 use Mail;
 use Redirect;
@@ -34,8 +38,8 @@ class PasswordController extends Controller
         $data['page']   = 'Forgot Password';
         $email          = $request->email;
         $phone          = $request->phone;
-        $check          = TblUseModel::where('tbl_user_account.user_email',$email)
-                        ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+        $check          = TblUserInfoModel::where('tbl_user.user_email',$email)
+                        ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
                         ->first();
         if(count($check) ==1)
         {

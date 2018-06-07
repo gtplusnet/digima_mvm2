@@ -76,7 +76,7 @@
         }
         .title
         {
-            text-transform:uppercase !important;
+            text-transform:capitalize !important;
         }
         </style>
     </head>

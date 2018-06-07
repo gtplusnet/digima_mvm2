@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\TblCountyModel;
 use App\Models\TblCityModel;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentModel;
-use App\Models\TblSupervisorModels;
+// use App\Models\TblAgentModel;
+// use App\Models\TblSupervisorModels;
 use App\Models\TblBusinessModel;
 use App\Models\Tbl_conversation;
 use App\Models\TblContactUs;
@@ -227,7 +227,7 @@ class SuperVisorController extends ActiveAuthController
     public function checking_password(Request $request )
     {
         $user = TblUserModel::where('user_id',session('user_id'))->first();
-        if(Crypt::decrypt($user->password)==$request->currentPassword)
+        if(Crypt::decrypt($user->user_password)==$request->currentPassword)
         {
             if($request->newPassword == $request->confirmPassword)
             {

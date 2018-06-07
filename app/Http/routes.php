@@ -75,9 +75,9 @@ Route::get('/user/logout', 		        'LoginController@user_logout');
 
 /*Routes for Password*/
 Route::get('/forgot/password', 			'PasswordController@forgot_password');
-Route::post('/reset/password',       	'PasswordController@reset_password');
-Route::any('/user/forgot/password',     'PasswordController@user_forgot_password');
-Route::any('/user/reset/password',      'PasswordController@user_reset_password');
+Route::post('/reset/password',       	     'PasswordController@reset_password');
+Route::get('/user/forgot/password',          'PasswordController@user_forgot_password');
+Route::post('/user/reset/password',           'PasswordController@user_reset_password');
 
 
 
