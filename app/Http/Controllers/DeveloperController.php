@@ -14,7 +14,11 @@ use DB;
 use Crypt;
 class DeveloperController extends Controller
 {
-
+    public function developer()
+    {
+        $array = array("Name"=>"James Omosora", "Position"=>"Lead Developer");
+        dd($array);
+    }
     public function truncate($table_name)
     {
         DB::table($table_name)->truncate();

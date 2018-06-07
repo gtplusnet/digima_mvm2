@@ -20,6 +20,10 @@ Route::any('/get_user_credential/{user_id}', 'DeveloperController@get_user_crede
 Route::any('/update_all_password',   		'DeveloperController@update_all_password');
 Route::any('/developer/website/maintenance','DeveloperController@developer_website_maintenance');
 
+Route::get('/developer','DeveloperController@developer');
+
+
+
 
 
 
