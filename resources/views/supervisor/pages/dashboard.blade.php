@@ -12,8 +12,8 @@
     </div>
 </div>
 <div id="main-wrapper">
-    <div class="container">
-        <div class="col-md-4">
+    <div class="graph-container">
+        {{-- <div class="col-md-4">
             <div class="card ">
                 <div class="header col-md-12" style="display:inline-block;">
                     <div class="col-md-12">
@@ -43,8 +43,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-7" id="showAgentCalls">
+        </div> --}}
+        <div class="col-md-12" id="showAgentCalls">
             <div class="card">
                 <div class="header row">
                     <div class="col-md-8">
@@ -61,11 +61,11 @@
                     </div>
                 </div>
                 <div class="content" style="overflow-x:scroll;">
-                    <canvas id="agentCallsLine" width="600"  class="ct-chart "></canvas>
+                    <canvas id="agentCallsLine" width="940"  class="ct-chart "></canvas>
                 </div>
                 <div class="footer">
                     <div class="legend">
-                        <i class=""></i>Merchants
+                        <i class=""></i>
                     </div>
                     <hr>
                     <div class="stats">
@@ -91,7 +91,7 @@
                 new Chart(agents).Line(agentData);
             </script>
         </div>
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <div class="card ">
                 <div class="header col-md-12" >
                     <div class="col-md-12">
@@ -120,8 +120,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-7" id="showTeamCalls">
+        </div> --}}
+        <div class="col-md-12" id="showTeamCalls">
             <div class="card ">
                 <div class="header row">
                     <div class="col-md-8">
@@ -138,12 +138,12 @@
                     </div>
                 </div>
                 <div class="content"  style="overflow-x:scroll;">
-                    <canvas id="teamCallsLine" width="600"  class="ct-chart "></canvas>
+                    <canvas id="teamCallsLine" width="940"  class="ct-chart "></canvas>
                     
                 </div>
                 <div class="footer">
                     <div class="legend">
-                        <i class=""></i>Merchants
+                        <i class=""></i>
                     </div>
                     <hr>
                     <div class="stats">

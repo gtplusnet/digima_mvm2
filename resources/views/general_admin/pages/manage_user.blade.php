@@ -1,4 +1,4 @@
-@extends('general_admin.pages.general_admin_layout')
+@extends('layout.general_layout')
 @section('title', 'manage user')
 @section('description', 'manage user')
 @section('content')

@@ -80,7 +80,15 @@ function merchant()
 	}
 	function get_client()
 	{
-		$('body').on('change','#date_end',function(){
+		$('#date_end').datepicker({
+		  onSelect: function() 
+		  {
+		    return $(this).trigger('change');
+		  }
+		});
+
+		$('#date_end').on('change',function(){
+			alert();
 			var date_start 	= $('#date_start').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			var date_end 	= $('#date_end').datepicker( "option", "dateFormat", 'yy/mm/dd' ).val();
 			$.ajax({

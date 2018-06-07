@@ -30,160 +30,221 @@ use Carbon\Carbon;
 
 class SuperVisorController extends ActiveAuthController
 {
-  public static function global()
-  {
-      $user_info = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
-                  ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
-                  ->first();
-      return $user_info;
-  }
-  public function dashboard()
-  {
-    $data['user']       = Self::global();
-    $count_merchant_agent = TblBusinessModel::where('business_status',1)->get();
-    $count_merchant_supervisor = TblBusinessModel::where('business_status',2)->get();
-    $count_merchant_admin = TblBusinessModel::where('business_status',3)->get();
-    $count_merchant_admin_payment = TblBusinessModel::where('business_status',4)->get();
-    $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
-    $data['countCall'] = $count_merchant_agent->count();
-    $data['countMP3'] = $count_merchant_supervisor->count();
-    $data['countInvoice'] = $count_merchant_admin->count();
-    $data['countPayment'] = $count_merchant_admin_payment->count();
-    $data['countActivated'] = $count_merchant_admin_activated->count();
-    $data['count_jan']    = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->count();
-    $data['count_feb']    = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->count();
-    $data['count_mar']    = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->count();
-    $data['count_apr']    = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->count();
-    $data['count_may']    = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->count();
-    $data['count_jun']    = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->count();
-    $data['count_jul']    = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->count();
-    $data['count_aug']    = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->count();
-    $data['count_sep']    = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->count();
-    $data['count_oct']    = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->count();
-    $data['count_nov']    = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->count();
-    $data['count_dec']    = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->count();
-    $data['counts_jan']   = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->count();
-    $data['counts_feb']   = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->count();
-    $data['counts_mar']   = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->count();
-    $data['counts_apr']   = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->count();
-    $data['counts_may']   = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->count();
-    $data['counts_jun']   = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->count();
-    $data['counts_jul']   = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->count();
-    $data['counts_aug']   = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->count();
-    $data['counts_sep']   = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->count();
-    $data['counts_oct']   = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->count();
-    $data['counts_nov']   = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->count();
-    $data['counts_dec']   = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->count();
-    $data['date_mon']     = $mon =  date('Y/m/d',strtotime('monday this week'));
-    $data['date_tue']     = $tue =  date('Y/m/d',strtotime('tuesday this week'));
-    $data['date_wed']     = $wed =  date('Y/m/d',strtotime('wednesday this week'));
-    $data['date_thu']     = $thu =  date('Y/m/d',strtotime('Thursday this week'));
-    $data['date_fri']     = $fri =  date('Y/m/d',strtotime('Friday this week'));
-    $data['date_sat']     = $sat =  date('Y/m/d',strtotime('Saturday this week'));
-    $data['date_sun']     = $sun =  date('Y/m/d',strtotime('Sunday this week'));
-    $data['mon']          = TblBusinessModel::where('user_call_date',$mon)->count();
-    $data['tue']          = TblBusinessModel::where('user_call_date',$tue)->count();
-    $data['wed']          = TblBusinessModel::where('user_call_date',$wed)->count();
-    $data['thu']          = TblBusinessModel::where('user_call_date',$thu)->count();
-    $data['fri']          = TblBusinessModel::where('user_call_date',$fri)->count();
-    $data['sat']          = TblBusinessModel::where('user_call_date',$sat)->count();
-    $data['sun']          = TblBusinessModel::where('user_call_date',$sun)->count();
-    $data['_agents']      = TblTeamModel::where('supervisor_id',session('user_id'))
-                          ->join('tbl_user_team','tbl_user_team.team_id','=','tbl_team.team_id')
-                          ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
-                          ->where('tbl_user.archived',0)
-                          ->where('tbl_user.user_access_level','AGENT')
-                          ->get();
-    $data['_teams']       = TblTeamModel::where('archived',0)->where('supervisor_id',session('user_id'))->get();
-    $data['page']         = 'Dashboard';
-    return view ('supervisor.pages.dashboard', $data);  
-  }
-  public function profile()
-  {
-    $data['user']       = Self::global();
-    $data['page']       = 'Profile';
-    $data['supervisor_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
-                        ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
-                        ->first();
-    $data['team']       = TblUserTeamModel::where('user_id',session('user_id'))
-                        ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
-                        ->first();    
-    return view ('supervisor.pages.profile', $data);    
-  }
-  public function update_profile(Request $request)
-  {
-    $data['transaction'] = 'profile';
-    $data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
-                        ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
-                        ->first();      
-    return view('agent.pages.update_profile',$data); 
-  }
-  public function saving_profile(Request $request)
-  {
-    if($request->ajax())
-      {
-        if($request->stats=='null')
-        { 
-        $data['primary_phone']    = $request->primaryPhone;
-        $data['secondary_phone']  = $request->secondaryPhone;
-        $data['other_info']     = $request->otherInfo;
-        $data['address']      = $request->address;
-        $data['profile']            = $request->imageText;;
-        
-        $check = TblAgentModel::where('agent_id',session('agent_id'))->update($data);
-        if($check)
-        {
-          return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
-        }
-        else
-        {
-          return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
-        }
-      }
-      else
-          {
-            $unique=uniqid();
-            $fileConvo = $request->file("file");
-            $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
-            $fileConvo->move('business_images', $file_name);
-            $data['user_profile']       = $file_name;
-            $data['user_phone_number']    = $request->user_phone_number;
-            $data['user_address']       = $request->user_address;
-        
-            TblUserInfoModel::where('user_id',session('user_id'))->update($data);
-
-            $datas['user_email']        = $request->user_email;
-
-            TblUserModel::where('user_id',session('user_id'))->update($datas);
-          }
-    }
-  }
-  public function update_password(Request $request)
-  {   
-    $data['transaction'] = 'password';
-    return  view('agent.pages.update_profile',$data);
-  }
-  public function checking_password(Request $request )
-  {
-    $user = TblUserModel::where('user_id',session('user_id'))->first();
-    if(Crypt::decrypt($user->password)==$request->currentPassword)
+    public static function global()
     {
-      if($request->newPassword == $request->confirmPassword)
-            {
-              $data['user_password'] = Crypt::encrypt($request->newPassword);
-              TblUserModel::where('user_id',session('user_id'))->update($data);
-              return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+        $user_info = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+                    ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+                    ->first();
+        return $user_info;
+    }
+    public function dashboard()
+    {
+        $data['user']                   = Self::global();
+        $count_merchant_agent           = TblBusinessModel::where('business_status',1)->get();
+        $count_merchant_supervisor      = TblBusinessModel::where('business_status',2)->get();
+        $count_merchant_admin           = TblBusinessModel::where('business_status',3)->get();
+        $count_merchant_admin_payment   = TblBusinessModel::where('business_status',4)->get();
+        $count_merchant_admin_activated = TblBusinessModel::where('business_status',5)->get();
+
+        $data['countCall']      = $count_merchant_agent->count();
+        $data['countMP3']       = $count_merchant_supervisor->count();
+        $data['countInvoice']   = $count_merchant_admin->count();
+        $data['countPayment']   = $count_merchant_admin_payment->count();
+        $data['countActivated'] = $count_merchant_admin_activated->count();
+
+        $data['count_jan']    = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status','!=',5)->count();
+        $data['count_feb']    = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status','!=',5)->count();
+        $data['count_mar']    = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status','!=',5)->count();
+        $data['count_apr']    = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status','!=',5)->count();
+        $data['count_may']    = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status','!=',5)->count();
+        $data['count_jun']    = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status','!=',5)->count();
+        $data['count_jul']    = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status','!=',5)->count();
+        $data['count_aug']    = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status','!=',5)->count();
+        $data['count_sep']    = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status','!=',5)->count();
+        $data['count_oct']    = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status','!=',5)->count();
+        $data['count_nov']    = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status','!=',5)->count();
+        $data['count_dec']    = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status','!=',5)->count();
+        
+        $data['counts_jan']   = TblBusinessModel::whereMONTH('date_transact', '=', 01 )->where('business_status',5)->count();
+        $data['counts_feb']   = TblBusinessModel::whereMONTH('date_transact', '=', 02 )->where('business_status',5)->count();
+        $data['counts_mar']   = TblBusinessModel::whereMONTH('date_transact', '=', 03 )->where('business_status',5)->count();
+        $data['counts_apr']   = TblBusinessModel::whereMONTH('date_transact', '=', 04 )->where('business_status',5)->count();
+        $data['counts_may']   = TblBusinessModel::whereMONTH('date_transact', '=', 05 )->where('business_status',5)->count();
+        $data['counts_jun']   = TblBusinessModel::whereMONTH('date_transact', '=', 06 )->where('business_status',5)->count();
+        $data['counts_jul']   = TblBusinessModel::whereMONTH('date_transact', '=', 07 )->where('business_status',5)->count();
+        $data['counts_aug']   = TblBusinessModel::whereMONTH('date_transact', '=', '08' )->where('business_status',5)->count();
+        $data['counts_sep']   = TblBusinessModel::whereMONTH('date_transact', '=', '09' )->where('business_status',5)->count();
+        $data['counts_oct']   = TblBusinessModel::whereMONTH('date_transact', '=', '10' )->where('business_status',5)->count();
+        $data['counts_nov']   = TblBusinessModel::whereMONTH('date_transact', '=', 11 )->where('business_status',5)->count();
+        $data['counts_dec']   = TblBusinessModel::whereMONTH('date_transact', '=', 12 )->where('business_status',5)->count();
+        $data['date_mon']     = $mon =  date('Y/m/d',strtotime('monday this week'));
+        $data['date_tue']     = $tue =  date('Y/m/d',strtotime('tuesday this week'));
+        $data['date_wed']     = $wed =  date('Y/m/d',strtotime('wednesday this week'));
+        $data['date_thu']     = $thu =  date('Y/m/d',strtotime('Thursday this week'));
+        $data['date_fri']     = $fri =  date('Y/m/d',strtotime('Friday this week'));
+        $data['date_sat']     = $sat =  date('Y/m/d',strtotime('Saturday this week'));
+        $data['date_sun']     = $sun =  date('Y/m/d',strtotime('Sunday this week'));
+        $data['mon']          = TblBusinessModel::where('user_call_date',$mon)->count();
+        $data['tue']          = TblBusinessModel::where('user_call_date',$tue)->count();
+        $data['wed']          = TblBusinessModel::where('user_call_date',$wed)->count();
+        $data['thu']          = TblBusinessModel::where('user_call_date',$thu)->count();
+        $data['fri']          = TblBusinessModel::where('user_call_date',$fri)->count();
+        $data['sat']          = TblBusinessModel::where('user_call_date',$sat)->count();
+        $data['sun']          = TblBusinessModel::where('user_call_date',$sun)->count();
+        $data['_agents']      = TblTeamModel::where('supervisor_id',session('user_id'))->TeamUser()->where('tbl_user.archived',0)->where('tbl_user.user_access_level','AGENT')->get();
+        $data['_teams']       = TblTeamModel::where('archived',0)->where('supervisor_id',session('user_id'))->get();
+        $data['page']         = 'Dashboard';
+        return view ('supervisor.pages.dashboard', $data);  
+    }
+    public function supervisor_show_agent_calls(Request $request)
+    {
+      $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
+      $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
+      $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
+      $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
+      $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
+      $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
+      $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+
+      $user_id = $request->agent_id;
+      $data['mon'] = TblUserModel::where('tbl_user.user_id',$user_id)
+                    ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                    ->where('user_call_date',$mon)
+                    ->count();
+      $data['tue'] = TblUserModel::where('tbl_user.user_id',$user_id)
+                    ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                    ->where('user_call_date',$tue)
+                    ->count();
+      $data['wed'] = TblUserModel::where('tbl_user.user_id',$user_id)
+                    ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                    ->where('user_call_date',$wed)
+                    ->count();
+      $data['thu'] = TblUserModel::where('tbl_user.user_id',$user_id)
+                    ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                    ->where('user_call_date',$thu)
+                    ->count();
+      $data['fri'] = TblUserModel::where('tbl_user.user_id',$user_id)
+                    ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                    ->where('user_call_date',$fri)
+                    ->count();
+      $data['sat'] = TblUserModel::where('tbl_user.user_id',$user_id)
+                    ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                    ->where('user_call_date',$sat)
+                    ->count();
+      $data['sun'] = TblUserModel::where('tbl_user.user_id',$user_id)
+                    ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
+                    ->where('user_call_date',$sun)
+                    ->count();
+      $data['_agents']   = TblTeamModel::where('supervisor_id',session('user_id'))->TeamUser()->where('tbl_user.archived',0)->where('tbl_user.user_access_level','AGENT')->get();
+      $data['active_agent'] = TblUserInfoModel::where('user_id',$user_id)->first();
+      return view('supervisor.pages.show_agent_calls',$data);
+
+    }
+    public function supervisor_show_team_calls(Request $request)
+    {
+        $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
+        $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
+        $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
+        $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
+        $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
+        $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
+        $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
+
+        $data['mon']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)->TeamBusiness()->where('user_call_date',$mon)->count();
+        $data['tue']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)->TeamBusiness()->where('user_call_date',$tue)->count();
+        $data['wed']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)->TeamBusiness()->where('user_call_date',$wed)->count();
+        $data['thu']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)->TeamBusiness()->where('user_call_date',$thu)->count();                                                                
+        $data['fri']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)->TeamBusiness()->where('user_call_date',$fri)->count();
+        $data['sat']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)->TeamBusiness()->where('user_call_date',$sat)->count();
+        $data['sun']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)->TeamBusiness()->where('user_call_date',$sun)->count();                      
+      
+
+        $data['_teams']       = TblTeamModel::where('archived',0)->where('supervisor_id',session('user_id'))->get();
+        $data['active_teams']   = TblTeamModel::where('team_id',$request->team_id)->first();                         
+        return view('supervisor.pages.show_team_calls',$data);
+    }
+    public function profile()
+    {
+        $data['user']       = Self::global();
+        $data['page']       = 'Profile';
+        $data['supervisor_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
+                            ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
+                            ->first();
+        $data['team']       = TblUserTeamModel::where('user_id',session('user_id'))
+                            ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
+                            ->first();    
+        return view ('supervisor.pages.profile', $data);    
+    }
+    public function update_profile(Request $request)
+    {
+       $data['transaction'] = 'profile';
+        $data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')->first();            
+        return view('supervisor.pages.update_profile',$data); 
+    }
+    public function saving_profile(Request $request)
+    {
+        if($request->ajax())
+        {
+            if($request->stats=='null')
+            { 
+                $data['user_phone_number']      = $request->user_phone_number;
+                $data['user_address']            = $request->user_address;
+                
+                
+                $check = TblUserInfoModel::where('user_id',session('user_id'))->update($data);
+                if($check)
+                {
+                  return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+                }
+                else
+                {
+                  return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
+                }
             }
             else
             {
-              return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+                $unique=uniqid();
+                $fileConvo = $request->file("file");
+                $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
+                $fileConvo->move('business_images', $file_name);
+                $data['user_profile']       = $file_name;
+                $data['user_phone_number']    = $request->user_phone_number;
+                $data['user_address']       = $request->user_address;
+            
+                TblUserInfoModel::where('user_id',session('user_id'))->update($data);
+
+                $datas['user_email']        = $request->user_email;
+
+                TblUserModel::where('user_id',session('user_id'))->update($datas);
             }
+        }
     }
-    else
+    public function update_password(Request $request)
+    {   
+        $data['transaction'] = 'password';
+        return  view('agent.pages.update_profile',$data);
+    }
+    public function checking_password(Request $request )
     {
-      return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
+        $user = TblUserModel::where('user_id',session('user_id'))->first();
+        if(Crypt::decrypt($user->password)==$request->currentPassword)
+        {
+            if($request->newPassword == $request->confirmPassword)
+            {
+                $data['user_password'] = Crypt::encrypt($request->newPassword);
+                TblUserModel::where('user_id',session('user_id'))->update($data);
+                return "<div class='alert alert-success'><strong>Thank you!</strong>Password Successfully Change.</div>";
+            }
+            else
+            {
+                return "<div class='alert alert-danger'><strong>Sorry!</strong> Your new password and confirm password did'nt match.</div>";
+            }
+        }
+        else
+        {
+            return "<div class='alert alert-danger'><strong>Sorry! </strong>Password you entered did not match to your current password.</div>";
+        }
     }
-  }
   public function merchant()
 	{
     $data['user']       = Self::global();
@@ -255,109 +316,6 @@ class SuperVisorController extends ActiveAuthController
         $check = TblBusinessModel::where('business_id',$trans_id)->update($update);
         return '';
     }
-    
-    
-    
-    
-	   
-	  
-    
-    public function supervisor_show_agent_calls(Request $request)
-    {
-      $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
-      $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
-      $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
-      $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
-      $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
-      $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
-      $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
-
-      $agent_id = $request->agent_id;
-      $data['mon'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                    ->where('agent_call_date',$mon)
-                    ->count();
-      $data['tue'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                    ->where('agent_call_date',$tue)
-                    ->count();
-      $data['wed'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                    ->where('agent_call_date',$wed)
-                    ->count();
-      $data['thu'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                    ->where('agent_call_date',$thu)
-                    ->count();
-      $data['fri'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                    ->where('agent_call_date',$fri)
-                    ->count();
-      $data['sat'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                    ->where('agent_call_date',$sat)
-                    ->count();
-      $data['sun'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                    ->where('agent_call_date',$sun)
-                    ->count();
-      $data['_agents']   = TblAgentModel::get();
-      $data['active_agent'] = TblAgentModel::where('tbl_agent.agent_id',$agent_id)
-                    ->first();
-      // dd($data);
-      return view('supervisor.pages.show_agent_calls',$data);
-
-    }
-    public function supervisor_show_team_calls(Request $request)
-    {
-      $data['date_mon'] = $mon =date('Y/m/d',strtotime('monday this week'));
-      $data['date_tue'] = $tue =date('Y/m/d',strtotime('tuesday this week'));
-      $data['date_wed'] = $wed =date('Y/m/d',strtotime('wednesday this week'));
-      $data['date_thu'] = $thu =date('Y/m/d',strtotime('Thursday this week'));
-      $data['date_fri'] = $fri =date('Y/m/d',strtotime('Friday this week'));
-      $data['date_sat'] = $sat =date('Y/m/d',strtotime('Saturday this week'));
-      $data['date_sun'] = $sun =date('Y/m/d',strtotime('Sunday this week'));
-
-      $data['mon']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->where('agent_call_date',$mon)
-                            ->count();
-      $data['tue']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->where('agent_call_date',$tue)
-                            ->count();
-      $data['wed']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->where('agent_call_date',$wed)
-                            ->count();
-      $data['thu']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->where('agent_call_date',$thu)
-                            ->count();                                                                
-      $data['fri']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->where('agent_call_date',$fri)
-                            ->count();
-      $data['sat']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->where('agent_call_date',$sat)
-                            ->count();
-      $data['sun']   = TblTeamModel::where('tbl_team.team_id',$request->team_id)
-                            ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                            ->join('tbl_business','tbl_business.agent_id','=','tbl_agent.agent_id')
-                            ->where('agent_call_date',$sun)
-                            ->count();                      
-      $data['_teams']   = TblTeamModel::get(); 
-      $data['active_teams']   = TblTeamModel::where('team_id',$request->team_id)->first();                         
-      return view('supervisor.pages.show_team_calls',$data);
-    }
-    
     public function manage_user()
     {
         $data['page']       = 'Manage Team/Agent';
@@ -366,17 +324,8 @@ class SuperVisorController extends ActiveAuthController
         $data['viewteam']   = TblTeamModel::where('tbl_team.supervisor_id',session('user_id'))->get();
         foreach($data['viewteam'] as $key=>$team)
         {
-          $data['viewteam'][$key]['sum_of_calls']  = TblUserTeamModel::where('team_id',$team->team_id)
-                                            ->selectRaw('sum(user_calls) as sum_of_calls')
-                                            ->where('tbl_user_team.archived',0)
-                                            ->value('sum_of_calls');
-          $data['viewteam'][$key]['viewagent']  = TblUserTeamModel::where('tbl_user_team.archived',0)
-                                            ->where('tbl_user_team.team_id',$team->team_id)
-                                            ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
-                                            ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
-                                            ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
-                                            ->where('tbl_user.user_access_level','AGENT')
-                                            ->get();
+          $data['viewteam'][$key]['sum_of_calls']  = TblUserTeamModel::where('team_id',$team->team_id)->selectRaw('sum(user_calls) as sum_of_calls')->where('tbl_user_team.archived',0)->value('sum_of_calls');
+          $data['viewteam'][$key]['viewagent']  = TblUserTeamModel::where('tbl_user_team.archived',0)->where('tbl_user_team.team_id',$team->team_id)->where('tbl_user.user_access_level','AGENT')->TeamAgent()->get();
         }
         $data['_agent_team']= TblTeamModel::where('archived',0)->where('supervisor_id',session('user_id'))->get();
         
@@ -401,16 +350,8 @@ class SuperVisorController extends ActiveAuthController
     public function view_all_members(Request $request)
     {
       $id = $request->team_id;
-      $data['_supervisor'] = TblUserTeamModel::where('tbl_user_team.team_id',$id)
-                            ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
-                            ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
-                            ->where('tbl_user.user_access_level','SUPERVISOR')
-                            ->get();
-      $data['_data_agent'] = TblUserTeamModel::where('tbl_user_team.team_id',$id)
-                            ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
-                            ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
-                            ->where('tbl_user.user_access_level','AGENT')
-                            ->get();
+      $data['_supervisor'] = TblUserTeamModel::where('tbl_user_team.team_id',$id)->TeamAgent()->where('tbl_user.user_access_level','SUPERVISOR')->get();
+      $data['_data_agent'] = TblUserTeamModel::where('tbl_user_team.team_id',$id)->TeamAgent()->where('tbl_user.user_access_level','AGENT')->get();
       return view('supervisor.pages.viewmember',$data);
     }
     public function supervisor_delete_team(Request $request)
@@ -494,49 +435,36 @@ class SuperVisorController extends ActiveAuthController
 
     public function supervisor_search_client(Request $request)
     {
-
-    $search_key = $request->search_key;
-    $data['clients'] = TblBusinessModel::where('business_status',2)->where('business_name','like','%'.$search_key.'%')
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->get();
-      return view('supervisor.pages.filtered',$data);
-
+        $search_key = $request->search_key;
+        $data['clients'] = TblBusinessModel::where('business_status',2)->where('business_name','like','%'.$search_key.'%')->BusinessInformation()->get();
+        return view('supervisor.pages.filtered',$data);
     }
 
     public function supervisor_search_client_activated(Request $request)
     {
-
-    $search_key_act = $request->search_key_act;
-    $data['clients_activated'] = TblBusinessModel::where('business_status', 3)->where('business_name','like','%'.$search_key_act.'%')
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->get();
-      return view('supervisor.pages.filtered1',$data);
+        $search_key_act = $request->search_key_act;
+        $data['clients_activated'] = TblBusinessModel::where('business_status', 3)->where('business_name','like','%'.$search_key_act.'%')->BusinessInformation()->get();
+        return view('supervisor.pages.filtered1',$data);
     }
-
-
-
-
     public function supervisor_search_team(Request $request)
     {
-
-    $search_key_team = $request->search_key_team;
-    $data['viewteam']   = TblTeamModel:: selectRaw('sum(agent_call) as sum, tbl_team.*')
-                          ->where('team_name','like','%'.$search_key_team.'%')
-                          ->join('tbl_agent','tbl_agent.team_id','=','tbl_team.team_id')
-                          ->groupBy('team_id')->get();
-    return view('supervisor.pages.search_team_blade',$data);
+        $search_key_team = $request->search_key_team;
+        $data['viewteam']   = TblTeamModel:: selectRaw('sum(user_calls) as sum, tbl_team.*')
+                              ->where('team_name','like','%'.$search_key_team.'%')
+                              ->join('tbl_user_team','tbl_user_team.team_id','=','tbl_team.team_id')
+                              ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user_team.user_id')
+                              ->groupBy('team_id')->get();
+        return view('supervisor.pages.search_team_blade',$data);
     }
 
-     public function supervisor_search_agent(Request $request)
+    public function supervisor_search_agent(Request $request)
     {
 
-    $search_key_agent = $request->search_key_agent;
-    $data['viewagent']  = TblAgentModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
-                          ->where('email','like','%'.$search_key_agent.'%')
-                          ->get();
-    return view('supervisor.pages.search_agent_blade',$data);
+        $search_key_agent   = $request->search_key_agent;
+        $data['viewagent']  = TblUserModel::join('tbl_team','tbl_team.team_id','=','tbl_agent.team_id')
+                            ->where('email','like','%'.$search_key_agent.'%')
+                            ->get();
+        return view('supervisor.pages.search_agent_blade',$data);
    
     }
 

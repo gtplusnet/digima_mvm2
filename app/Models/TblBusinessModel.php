@@ -7,7 +7,12 @@ class TblBusinessModel extends Model
     protected $table = 'tbl_business';
     protected $primaryKey = 'business_id';
     public $timestamps = false;
-
+    public function scopeBusinessCounty($query)
+    {
+        $query  ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id');
+        return $query;
+    }
     public function scopeBusinessAdmin($query)
     {
         $query  ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')

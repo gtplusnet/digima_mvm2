@@ -27,6 +27,12 @@
         <link href="/assets/general_assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet" type="text/css"/>   
         <link href="/assets/general_assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet" type="text/css"/>  
         <link href="/assets/general_assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css"/>    
+
+
+
+            {{-- <script src="/assets/js/global.ajax.js"></script> --}}
+
+
             
         <!-- Theme Styles -->
         <link href="/assets/general_assets/css/modern.css" rel="stylesheet" type="text/css"/>
@@ -41,7 +47,7 @@
         <link  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
         <script>
-        jQuery( document ).ready(function( $ ) 
+        jQuery(document).ready(function($) 
         {
             $( ".datepicker" ).datepicker();
             $( ".datepicker1" ).datepicker();
@@ -158,7 +164,7 @@
             });
         </script>
         <script src="/assets/js/globals.js"></script>
-        <script src="/assets/js/global.ajax.js"></script>
+        {{-- <script src="/assets/js/global.ajax.js"></script> --}}
         <!-- PAGES -->
         
 

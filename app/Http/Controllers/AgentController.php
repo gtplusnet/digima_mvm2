@@ -116,69 +116,53 @@ class AgentController extends ActiveAuthController
 	{	
 		$data['user']       = Self::global();
 		$data['page']		= 'Profile';
-		$data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
-		                    ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
-		                    ->first();
-		$data['team']	    = TblUserTeamModel::where('user_id',session('user_id'))
-		                    ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')
-		                    ->first();		
+		$data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')->first();
+		$data['team']	    = TblUserTeamModel::where('user_id',session('user_id'))->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id')->first();		
 		return view ('agent.pages.profile', $data);		
 	}
 	public function update_profile(Request $request)
 	{
 		$data['transaction'] = 'profile';
-		$data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
-		                    ->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')
-		                    ->first();			
+		$data['agent_info'] = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))->join('tbl_user','tbl_user.user_id','=','tbl_user_info.user_id')->first();			
 		return view('agent.pages.update_profile',$data); 
 	}
 	public function saving_profile(Request $request)
 	{
 		if($request->ajax())
-	  	{
-	  		if($request->stats=='null')
-	    	{	
-				$data['primary_phone']		= $request->primaryPhone;
-				$data['secondary_phone']	= $request->secondaryPhone;
-				$data['other_info']			= $request->otherInfo;
-				$data['address']			= $request->address;
-				$data['profile']          	= $request->imageText;;
-				
-				$check = TblUserInfoModel::where('user_id',session('user_id'))->update($data);
-				if($check)
-				{
-					return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
-				}
-				else
-				{
-					return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
-				}
-			}
-			else
-	        {
-		        $unique=uniqid();
-		        $fileConvo = $request->file("file");
-		        $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
-	          	$fileConvo->move('business_images', $file_name);
-	          	$data['user_profile'] 			= $file_name;
-	          	$data['user_phone_number']		= $request->user_phone_number;
-			  	$data['user_address']				= $request->user_address;
-			  
-	          	$check = TblUserInfoModel::where('user_id',session('user_id'))->update($data);
+        {
+            if($request->stats=='null')
+            { 
+                $data['user_phone_number']      = $request->user_phone_number;
+                $data['user_address']            = $request->user_address;
+                
+                
+                $check = TblUserInfoModel::where('user_id',session('user_id'))->update($data);
+                if($check)
+                {
+                  return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
+                }
+                else
+                {
+                  return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
+                }
+            }
+            else
+            {
+                $unique=uniqid();
+                $fileConvo = $request->file("file");
+                $file_name = '/business_images/'.$unique."-".$fileConvo->getClientOriginalName().'';
+                $fileConvo->move('business_images', $file_name);
+                $data['user_profile']       = $file_name;
+                $data['user_phone_number']    = $request->user_phone_number;
+                $data['user_address']       = $request->user_address;
+            
+                TblUserInfoModel::where('user_id',session('user_id'))->update($data);
 
-	          	$datas['user_email'] 				= $request->user_email;
+                $datas['user_email']        = $request->user_email;
 
-	          	TblUserModel::where('user_id',session('user_id'))->update($datas);
-	          	if($check)
-				{
-					return "<div class='alert alert-success'><strong>Thank you!</strong>Profile successfully updated.</div>";
-				}
-				else
-				{
-					return "<div class='alert alert-danger'><strong>Sorry!</strong> Nothing has changed.</div>"; 
-				}
-	        }
-		}
+                TblUserModel::where('user_id',session('user_id'))->update($datas);
+            }
+        }
 	}
 	public function update_password(Request $request)
 	{   
@@ -409,7 +393,11 @@ class AgentController extends ActiveAuthController
     public function search_client_pending(Request $request)
     {
       $search_key1             = $request->search_key1;
-      $data['clients_pending'] = TblBusinessModel::where('business_status',4)->where('business_name','like','%'.$search_key1.'%')->BusinessInformation()->paginate(10);
+      $data['clients_pending'] = TblBusinessModel::where(function($query)
+						      	{
+						      		$query->where('business_status',4)->orWhere('business_status',20);
+						      	})
+      	                        ->where('business_name','like','%'.$search_key1.'%')->BusinessInformation()->paginate(10);
       return view('agent.pages.filtered1',$data);
     }
 

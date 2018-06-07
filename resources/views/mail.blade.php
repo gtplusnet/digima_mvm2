@@ -35,7 +35,7 @@ border-bottom: 1px solid #aaa;
 .table-main tbody tr td
 {
 text-align: center;
-font-size: 9px;
+font-size: 12px;
 padding: 3px;
 color: #000;
 border-right: 1px solid #aaa;
@@ -52,8 +52,8 @@ border-bottom: 1px solid #aaa;
 <div style="text-align: right; font-size: 12px;">Invoice</div>
 <div style="overflow: auto; margin: 15px 0px 20px 0px;">
     {{-- <div style="float: left; width: 80px; text-align: left;"></div> --}}
-    <div style="float: left; width: 80px; text-align: left;"><img width="50px;" src="http://digima_mvm.dev/assets/img/yellow_pages_logo.png"></div>
-    <div style="left:0px; width: 320px; font-size: 22px; font-weight: bold; ">CROATIA Directory</div>
+    {{-- <div style="float: left; width: 80px; text-align: left;"><img width="50px;" src="http://digima_mvm.dev/assets/img/yellow_pages_logo.png"></div> --}}
+    <div style="left:0px; width: 320px; font-size: 22px; font-weight: bold; ">Yellow Pages</div>
     <div class="labels" > Zagreb, Croatia, P: (123) 456-7890</div>
     <div style="float: right; width: 250px;">
         <table border="1" bordercolor="green" cellspacing="-1px" width="100%">
@@ -68,7 +68,7 @@ border-bottom: 1px solid #aaa;
         </table>
     </div>
 </div>
-<div style="font-style: italic; font-size: 11px;  margin-top:70px">NOTE: PLEASE READ INSTRUCTIONS AT THE BACK</div>
+<div style="font-style: italic; font-size: 11px;  margin-top:70px">NOTE: PLEASE PAY YOUR ORDER</div>
 <div style="border: 2px solid #000;" >
     <div>
         <div class="labels">CROTIA Directory</div>
@@ -76,23 +76,19 @@ border-bottom: 1px solid #aaa;
     </div>
     <div class="divider"></div>
     <div style="margin:100px 0px 50px 0px;">
+         
+
+
+
+
+
+
         <div class="labels" style="font-size: 14px; padding: 1px; padding-left: 5px;">Business Contact Person</div>
         <div class="sub-group" style="width: 300px;">
             <div class="labels">Name</div>
             <div class="answers">{{$invoice_info->contact_first_name}} {{$invoice_info->contact_last_name}}</div>
         </div>
-        <div class="sub-group" style="width: 300px;">
-            <div class="labels">Primary Phone</div>
-            <div class="answers">{{$invoice_info->business_phone}}</div>
-        </div>
-        <div class="sub-group" style="width: 300px;">
-            <div class="labels">Seconday Phonge</div>
-            <div class="answers">{{$invoice_info->business_alt_phone}}</div>
-        </div>
-        <div class="sub-group" style="width: 300px;">
-            <div class="labels">Seconday Phone</div>
-            <div class="answers">{{$invoice_info->business_alt_phone}}</div>
-        </div>
+        
         <div class="sub-group" style="width: 300px;float:right">
             <div class="labels">Email</div>
             <div class="answers">{{$invoice_info->user_email}}</div>
@@ -113,10 +109,10 @@ border-bottom: 1px solid #aaa;
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Item One</td>
-                        <td>{{$invoice_info->business_name}}</td>
-                        <td>{{$invoice_info->payment_method_name}}</td>
-                        <td >5000.00</td>
+                        <td class="bord">Item One</td>
+                        <td class="bord">{{$invoice_info->business_name}}</td>
+                        <td class="bord">{{$invoice_info->membership_name}}</td>
+                        <td class="bord">{{$invoice_info->membership_price}}</td>
                     </tr>
                     
                 </tbody>
@@ -125,25 +121,15 @@ border-bottom: 1px solid #aaa;
         <div class="bord" style="margin:10px 0px 100px 0px;">
             <div style="float: right; width: 100px;margin:10px 0px 100px 0px;">
                 
-                <div class="labels">Subtotal</div>
+                <div class="labels">Total</div>
                 <hr>
-                <div class="answers">$7282</div>
+                <div class="answers">{{$invoice_info->membership_price}}</div>
                 <hr>
-                <div class="labels">Subtotal</div>
-                <hr>
-                <div class="answers">$7282</div>
-                <hr>
-                <div class="labels">Subtotal</div>
-                <hr>
-                <div class="answers">$7282</div>
-                
             </div>
         </div>
         
     </div>
     <div style="margin:100px 0px 100px 0px;">
-        
-        -
     </div>
     
 </div>
@@ -152,11 +138,7 @@ border-bottom: 1px solid #aaa;
     <div style="left:0px; width: 400px; font-size: 15px; font-weight: bold; text-align: center;">
         <h3>Thank you !</h3>
         <p class="labels" align="justify">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
-        <div >
-            <img src="http://digima_mvm.dev/assets/admin/merchant/assets/images/signature.png" style="width:200px; margin-top: 10px;">
-        </div>
     </div>
     <div class="labels" > Zagreb, Croatia, P: (123) 456-7890</div>
-    
 </div>
 <div class="divider"></div>

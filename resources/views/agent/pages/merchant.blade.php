@@ -137,7 +137,8 @@ $( ".datepicker1" ).datepicker();
             </div>
         </div>
         <!-- modal !important-->
-        <div class="modal fade" id="agentCallModal" role="dialog" style="overflow-y:inherit;">
+        <div class="modal fade" id="agentCallModal" role="dialog">
+        
             
         </div>
         <div style="margin-top:80px;" class="modal fade" id="endModals" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -152,7 +153,7 @@ $( ".datepicker1" ).datepicker();
                             <input type="hidden" id="end_merchant_id" value=""/>
                             <input type="hidden" id="end_merchant_status" value=""/>
                             <button type="button" class=" btn btn-danger" id="endMerchantCall">Yes</button>
-                            <button type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default"  data-dismiss="modal">No</button>
                             </center>
                         </div>
                     </div>

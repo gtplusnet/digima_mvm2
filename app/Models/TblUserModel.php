@@ -29,5 +29,12 @@ class TblUserModel extends Model
     	$query->where('user_access_level','ADMIN');
     	return $query;
     }
+    public function scopeTeamUser($query)
+    {
+        $query  ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                ->join('tbl_user_team','tbl_user_team.user_id','=','tbl_user.user_id')
+                ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id');
+        return $query;
+    }
 
 }

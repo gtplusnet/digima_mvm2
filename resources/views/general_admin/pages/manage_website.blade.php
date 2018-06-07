@@ -1,4 +1,4 @@
-@extends('general_admin.pages.general_admin_layout')
+@extends('layout.general_layout')
 @section('title', 'manage user')
 @section('description', 'manage user')
 @section('content')
@@ -48,7 +48,6 @@ padding: 10px;
 	margin:10px 10px 10px 10px;
 	
 }
-
 </style>
 <div class="page-title">
 	<div class="page-breadcrumb">
@@ -59,179 +58,178 @@ padding: 10px;
 		</ol>
 	</div>
 </div>
-
 <div id="main-wraper">
 	<br><br>
-	<div class="container">
-	<ul class="nav nav-tabs">
-		<li class="active col-md-3"><a data-toggle="pill" href="#membershipTab">Membership</a></li>
-		<li class="col-md-3"><a data-toggle="pill" href="#paymentTab">Payment Method</a></li>
-		<li class="col-md-3"><a data-toggle="pill" href="#countyTab">County</a></li>
-		<li class="col-md-3"><a data-toggle="pill" href="#cityTab">City</a></li>
-	</ul>
-	<div class="tab-content" style="">
-		<div id="membershipTab" class=" tab-pane fade in  active">
-			<br>
-			<div class="web-content" id="membership_alert">
-			</div>
-			<div class="row" style="background-color: #fff !important;">
-				<div class="table-responsive website-content col-md-12">
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Membership Name</th>
-								<th>Membership Price</th>
-								<th>Membership Info</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_membership as $membership)
-							<tr>
-								<td>{{$membership->membership_id}}</td>
-								<td>{{$membership->membership_name}}</td>
-								<td>{{$membership->membership_price}}</td>
-								<td>{{$membership->membership_info}}</td>
-								<td>
-									<select class="form-select mem_action" data-info="{{$membership->membership_info}}" data-price="{{$membership->membership_price}}" data-name="{{$membership->membership_name}}" data-id="{{$membership->membership_id}}" id="mem_action">
-										<option >Action</option>
-										<option value="edit" >Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_membership->render() !!}
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+			<li class="active col-md-3"><a data-toggle="pill" href="#membershipTab">Membership</a></li>
+			<li class="col-md-3"><a data-toggle="pill" href="#paymentTab">Payment Method</a></li>
+			<li class="col-md-3"><a data-toggle="pill" href="#countyTab">County</a></li>
+			<li class="col-md-3"><a data-toggle="pill" href="#cityTab">City</a></li>
+		</ul>
+		<div class="tab-content" style="">
+			<div id="membershipTab" class=" tab-pane fade in  active">
+				<br>
+				<div class="web-content" id="membership_alert">
+				</div>
+				<div class="row" style="background-color: #fff !important;">
+					<div class="table-responsive website-content col-md-12">
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Membership Name</th>
+									<th>Membership Price</th>
+									<th>Membership Info</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_membership as $membership)
+								<tr>
+									<td>{{$membership->membership_id}}</td>
+									<td>{{$membership->membership_name}}</td>
+									<td>{{$membership->membership_price}}</td>
+									<td>{{$membership->membership_info}}</td>
+									<td>
+										<select class="form-select mem_action" data-info="{{$membership->membership_info}}" data-price="{{$membership->membership_price}}" data-name="{{$membership->membership_name}}" data-id="{{$membership->membership_id}}" id="mem_action">
+											<option >Action</option>
+											<option value="edit" >Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_membership->render() !!}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="paymentTab" class="tab-pane fade in">
-			<br>
-			<div class="row">
-				<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-					<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
+			<div id="paymentTab" class="tab-pane fade in">
+				<br>
+				<div class="row">
+					<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
+						<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
+					</div>
+				</div>
+				<div class="row">
+					<div id="payment_method_alert">
+					</div>
+					<div class="table-responsive col-md-12">
+						
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Payment Method Name</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_payment_method as $payment_method)
+								<tr>
+									<td>{{$payment_method->payment_method_id}}</td>
+									<td>{{$payment_method->payment_method_name}}</td>
+									<td>
+										<select class="form-select pay_action" data-name="{{$payment_method->payment_method_name}}" data-id="{{$payment_method->payment_method_id}}" id="pay_action">
+											<option >Action</option>
+											<option value="edit" >Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_payment_method->render() !!}
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div id="payment_method_alert">
+			<div id="countyTab" class="tab-pane fade in">
+				<br>
+				<div class="row">
+					<div class="col-md-2 col-sm-12 col-xs-12 pull-right" >
+						<button type="button"  data-toggle="modal" data-target="#myModalTeam"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add County</button>
+					</div>
 				</div>
-				<div class="table-responsive col-md-12">
-					
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Payment Method Name</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_payment_method as $payment_method)
-							<tr>
-								<td>{{$payment_method->payment_method_id}}</td>
-								<td>{{$payment_method->payment_method_name}}</td>
-								<td>
-									<select class="form-select pay_action" data-name="{{$payment_method->payment_method_name}}" data-id="{{$payment_method->payment_method_id}}" id="pay_action">
-										<option >Action</option>
-										<option value="edit" >Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_payment_method->render() !!}
-				</div>
-			</div>
-		</div>
-		<div id="countyTab" class="tab-pane fade in">
-			<br>
-			<div class="row">
-				<div class="col-md-2 col-sm-12 col-xs-12 pull-right" >
-					<button type="button"  data-toggle="modal" data-target="#myModalTeam"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add County</button>
-				</div>
-			</div>
-			<div class="row">
-				<div id="county_alert">
-				</div>
-				<div class="table-responsive col-md-12">
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>County Name</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_county as $county)
-							<tr>
-								<td>{{$county->county_id}}</td>
-								<td>{{$county->county_name}}</td>
-								<td>
-									<select class="form-select count_action" data-name="{{$county->county_name}}" data-id="{{$county->county_id}}" id="count_action">
-										<option >Action</option>
-										<option value="edit">Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_county->render() !!}
+				<div class="row">
+					<div id="county_alert">
+					</div>
+					<div class="table-responsive col-md-12">
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>County Name</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_county as $county)
+								<tr>
+									<td>{{$county->county_id}}</td>
+									<td>{{$county->county_name}}</td>
+									<td>
+										<select class="form-select count_action" data-name="{{$county->county_name}}" data-id="{{$county->county_id}}" id="count_action">
+											<option >Action</option>
+											<option value="edit">Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_county->render() !!}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="cityTab" class="tab-pane fade in">
-			<br>
-			<div class="row">
-				<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-					<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add City</button>
+			<div id="cityTab" class="tab-pane fade in">
+				<br>
+				<div class="row">
+					<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
+						<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add City</button>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div id="city_alert">
-				</div>
-				<div class="table-responsive  col-md-12">
-					<table class="table table-bordered" style="margin-top:10px;">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>County Name</th>
-								<th>City Name</th>
-								<th>Zip Code</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($_city as $city)
-							<tr>
-								<td>{{$city->city_id}}</td>
-								<td>{{$city->county_name}}</td>
-								<td>{{$city->city_name}}</td>
-								<td>{{$city->postal_code}}</td>
-								<td>
-									<select class="form-select city_action" data-county_name="{{$city->county_name}}" id="city_action" data-zip="{{$city->postal_code}}" data-name="{{$city->city_name}}" data-id="{{$city->city_id}}">
-										<option >Action</option>
-										<option value="edit">Edit</option>
-										<option value="delete">Delete</option>
-									</select>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					{!! $_city->render() !!}
+				<div class="row">
+					<div id="city_alert">
+					</div>
+					<div class="table-responsive  col-md-12">
+						<table class="table table-bordered" style="margin-top:10px;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>County Name</th>
+									<th>City Name</th>
+									<th>Zip Code</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_city as $city)
+								<tr>
+									<td>{{$city->city_id}}</td>
+									<td>{{$city->county_name}}</td>
+									<td>{{$city->city_name}}</td>
+									<td>{{$city->postal_code}}</td>
+									<td>
+										<select class="form-select city_action" data-county_name="{{$city->county_name}}" id="city_action" data-zip="{{$city->postal_code}}" data-name="{{$city->city_name}}" data-id="{{$city->city_id}}">
+											<option >Action</option>
+											<option value="edit">Edit</option>
+											<option value="delete">Delete</option>
+										</select>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						{!! $_city->render() !!}
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 {{-- modal --}}
 <div class="modal fade" id="editMem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">

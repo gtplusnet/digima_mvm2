@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="panel panel-primary">
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title">Agent Profile</h3>
+                                <h3 class="panel-title">Supervisor Profile</h3>
                             </div>
                             <div class="panel-body" id="showProfile">
                                 <h4>Personal Information</h4>
