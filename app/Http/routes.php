@@ -224,6 +224,13 @@ Route::any('/general_admin/manage_user', 							'GeneralAdminController@general_
 Route::any('/general_admin/manage_user/user_details', 				'GeneralAdminController@general_admin_manage_user_details');
 Route::post('/general_admin/manage_user/add_user', 				'GeneralAdminController@general_admin_add_user');
 Route::any('/general_admin/manage_user/assign_user', 				'GeneralAdminController@general_admin_assign_user');
+
+Route::any('/general_admin/manage_user/assign_supervisor', 				'GeneralAdminController@general_admin_assign_supervisor');
+
+
+
+
+
 Route::any('/general_admin/manage_user/delete_user', 				'GeneralAdminController@general_admin_delete_user');
 Route::post('/general_admin/manage_user/update_user', 		'GeneralAdminController@general_admin_update_user');
 Route::post('/general_admin/manage_user/add_team', 					'GeneralAdminController@general_admin_add_team');

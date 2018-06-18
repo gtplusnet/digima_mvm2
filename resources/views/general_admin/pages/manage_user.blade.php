@@ -311,7 +311,7 @@
 											@endforeach
 										</td>
 										<td>
-											<select style="height:30px;width:80px;" class="view_user_details" data-email="{{$data_supervisor->user_email}}"  data-name="{{$data_supervisor->user_first_name}} {{$data_supervisor->user_last_name}}" data-id="{{ $data_supervisor->user_id}}">
+											<select data-ref="supervisor" style="height:30px;width:80px;" class="view_user_details" data-email="{{$data_supervisor->user_email}}"  data-name="{{$data_supervisor->user_first_name}} {{$data_supervisor->user_last_name}}" data-id="{{ $data_supervisor->user_id}}">
 												<option value="">Action</option>
 												<option value="view">View</option>
 												<option value="assign">Assign</option>
@@ -507,8 +507,9 @@
 							<label for="business_name" >Name</label>
 						</div>
 						<div class="form-group col-md-9">
-							<input type="text" class="form-control" name="agent_name" id="name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
-							<input type="hidden" class="form-control" name="agent_id" id="id_assign"  />
+							<input type="text" class="form-control" name="name_assign" id="name_assign"  style="width:100%;margin-bottom: 20px;" readonly/>
+							<input type="hidden" class="form-control" name="id_assign" id="id_assign"  />
+							<input type="hidden" class="form-control" name="user_ref" id="user_ref"  />
 						</div>
 					</div>
 					<div class="col-sm-12">

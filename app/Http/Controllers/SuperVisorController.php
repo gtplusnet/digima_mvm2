@@ -248,20 +248,16 @@ class SuperVisorController extends ActiveAuthController
   public function merchant()
 	{
     $data['user']       = Self::global();
-		$data['page']	      = 'Merchant';
+	$data['page']	    = 'Merchant';
     $data['merchant']   = TblTeamModel::where('tbl_team.supervisor_id', session('user_id'))->get();
     foreach($data['merchant'] as $key=>$team)
     {
-      $data['merchant'][$key]['clients'] = TblUserTeamModel::where('tbl_user_team.team_id', $team->team_id)
-                          ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
-                          ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')
-                          ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                          ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
-                          ->where('tbl_business.business_status',2)
-                          ->groupBy('tbl_business.business_name')
-                          ->orderBy('tbl_business.date_created',"asc")
-                          ->get();
-       $data['merchant'][$key]['clients_activated'] = TblTeamModel::where('tbl_team.supervisor_id', $team->team_id)
+        $data['merchant'][$key]['clients'] = TblUserTeamModel::where('tbl_user_team.team_id', $team->team_id)
+                                            ->Business(2)
+                                            ->groupBy('tbl_business.business_name')
+                                            ->orderBy('tbl_business.date_created',"asc")
+                                            ->get();
+        $data['merchant'][$key]['clients_activated'] = TblTeamModel::where('tbl_team.supervisor_id', $team->team_id)
                           ->join('tbl_user_team','tbl_user_team.team_id','=','tbl_user_team.team_id')
                           ->join('tbl_user','tbl_user.user_id','=','tbl_user_team.user_id')
                           ->join('tbl_business','tbl_business.user_id','=','tbl_user.user_id')

@@ -282,7 +282,9 @@ function manage_user()
 			{
 				var id 		= $(this).data("id");
 		        var name    = $(this).data("name");
+		        var ref    = $(this).data("ref");
 		        $("#id_assign").val(id);
+		        $("#user_ref").val(ref);
 		        $("#name_assign").val(name);
 		        $('#assignUser').modal('show');
 		     }
@@ -372,10 +374,20 @@ function manage_user()
 	    $('body').on('click','#userAssigned',function()
 	    {
 		    var user_id = $('#id_assign').val();
-			var team_id= $('#teamAssigned').val();
+			var team_id = $('#teamAssigned').val();
+
+			if($('#user_ref').val()=="supervisor")
+			{
+				var link = '/general_admin/manage_user/assign_supervisor';
+			}
+			else
+			{
+				var link = '/general_admin/manage_user/assign_user';
+			}
+
 			$.ajax({
 				type:'POST',
-				url:'/general_admin/manage_user/assign_user',
+				url:link,
 				data:{
 					user_id: user_id,
 					team_id: team_id,

@@ -723,6 +723,13 @@ class GeneralAdminController extends ActiveAuthController
         TblUserTeamModel::where('user_id',$user_id)->update($update);
         return "<div class='alert alert-success'><strong>Success!</strong>User Assigned Successfully!</div>";
     }
+    public function general_admin_assign_supervisor(Request $request)
+    {
+        $team_id                    = $request->team_id;
+        $update['supervisor_id']    = $request->user_id;
+        TblTeamModel::where('team_id',$team_id)->update($update);
+        return "<div class='alert alert-success'><strong>Success!</strong>Supervsior Assigned Successfully!</div>";
+    }
   
     public function general_admin_add_team(Request $request)
     {  
