@@ -62,14 +62,22 @@ class MerchantController extends MerchantAuthController
         {
         foreach($views as $view)
         {
-        $sum = $sum + $view->business_views;
+            $sum = $sum + $view->business_views;
         }
         $data['page_view'] = $sum;
         }
         $data['guest_messages'] =   $messages  = TblGuestMessages::where('business_id',session('business_id'))->count();
         $total_stats            = $data['page_view'] + $messages;
-        $data['stat_views']     = ($data['page_view']/$total_stats)*100;
-        $data['stat_message']   = ($messages/$total_stats)*100;
+        if($total_stats==0||$total_stats=="")
+        {
+            $data['stat_views']     = 0;
+            $data['stat_message']   = 0;
+        }
+        else
+        {
+            $data['stat_views']     = ($data['page_view']/$total_stats)*100;
+            $data['stat_message']   = ($messages/$total_stats)*100;
+        }
         $facebook_url                     = TblBusinessModel::where("business_id",session('business_id'))->value('facebook_url');
         if($facebook_url==""||$facebook_url==null)
         {
