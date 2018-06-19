@@ -297,7 +297,7 @@ class AgentController extends ActiveAuthController
 	{
 		$data['user']       		= Self::global();
 		$data['county_list'] 		= TblCountyModel::get();
-		$data['membership_list'] 	= TblMembeshipModel::get();
+		$data['membership_list'] 	= TblMembeshipModel::where('archived',0)->get();
 		$data['page']	            = 'Add Merchant';
 		return view ('agent.pages.add_merchant', $data);		
 	}
