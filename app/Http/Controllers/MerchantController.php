@@ -35,6 +35,18 @@ use id;
 use Crypt;
 class MerchantController extends MerchantAuthController
 {
+    public static function alert_message($alert,$message)
+    {
+        if($alert=="success")
+        {
+            $message = '<div class="alert alert-success">'.$message.'</div>';
+        }
+        else
+        {
+            $message = '<div class="alert alert-danger">'.$message.'</div>';
+        }
+        return $message;
+    }
     public function index()
     {
         $data['page']= 'Dashboard';
@@ -56,15 +68,15 @@ class MerchantController extends MerchantAuthController
 
         if($views==null)
         {
-        $data['page_view']  = 0;
+            $data['page_view']  = 0;
         }
         else
         {
-        foreach($views as $view)
-        {
-            $sum = $sum + $view->business_views;
-        }
-        $data['page_view'] = $sum;
+            foreach($views as $view)
+            {
+                $sum = $sum + $view->business_views;
+            }
+            $data['page_view'] = $sum;
         }
         $data['guest_messages'] =   $messages  = TblGuestMessages::where('business_id',session('business_id'))->count();
         $total_stats            = $data['page_view'] + $messages;
@@ -81,27 +93,27 @@ class MerchantController extends MerchantAuthController
         $facebook_url                     = TblBusinessModel::where("business_id",session('business_id'))->value('facebook_url');
         if($facebook_url==""||$facebook_url==null)
         {
-        $data['fb']         = "0";
+            $data['fb']         = "0";
         }
         else
         {
-        $fb_page      = $facebook_url;
-        $access_token = 'EAACEdEose0cBAJwdMQdkNdeWZBirBHDmft4IsR4VkrZAzieZA6o0iKp4N1iw8hftXS9bjF3nMnDa33lraHhoy1zWj6JUFDALB8BN82huVSZACBFuRQFLuzTR2SFPjr6LOi5aKH0Lvbwb22vFAFDvqlp2ZAA90MO3HWdWaR5bm3NsplKk4TzZB3i7LlD9u44KM5YNSZAfIIZAPwZDZD';
-        $url          = "https://graph.facebook.com/".$fb_page.'?fields=fan_count&access_token='.$access_token;
-        $curl         = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $result       = curl_exec($curl);
-        curl_close($curl);
-        $details      = json_decode($result,true);
-        if(isset($details['fan_count']) == null)
-        {
-        $data['fb']   = '0';
-        }
-        else
-        {
-        $data['fb']   = $details['fan_count'];
-        }
+            $fb_page      = $facebook_url;
+            $access_token = 'EAACEdEose0cBAJwdMQdkNdeWZBirBHDmft4IsR4VkrZAzieZA6o0iKp4N1iw8hftXS9bjF3nMnDa33lraHhoy1zWj6JUFDALB8BN82huVSZACBFuRQFLuzTR2SFPjr6LOi5aKH0Lvbwb22vFAFDvqlp2ZAA90MO3HWdWaR5bm3NsplKk4TzZB3i7LlD9u44KM5YNSZAfIIZAPwZDZD';
+            $url          = "https://graph.facebook.com/".$fb_page.'?fields=fan_count&access_token='.$access_token;
+            $curl         = curl_init($url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result       = curl_exec($curl);
+            curl_close($curl);
+            $details      = json_decode($result,true);
+            if(isset($details['fan_count']) == null)
+            {
+                $data['fb']   = '0';
+            }
+            else
+            {
+                $data['fb']   = $details['fan_count'];
+            }
         }
         return view('merchant.pages.dashboard', $data);
     }
@@ -127,7 +139,7 @@ class MerchantController extends MerchantAuthController
         }
         return view ('merchant.pages.profile', $data);
     }
-    public function update_merchant_info(Request $request)//
+    public function update_merchant_info(Request $request)
     {
         $data['transaction']      = 'profile';
         $data['county_list']      = TblCountyModel::get();
@@ -152,26 +164,7 @@ class MerchantController extends MerchantAuthController
             return "<div class='alert alert-danger'><strong>Sorry!</strong>  Transaction failure.</div>";
         }
     }
-    public function get_city(Request $request)
-    {
-
-        $county_id              = $request->county_id;
-        $city_list              = TblCityModel::where('county_id','=',$county_id)->get();
-        $county_name            = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
-        $city_dropdown_output   = '';
-        $city_dropdown_output .= $county_name->county_name;
-        foreach($city_list as $city_list)
-        {
-            $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
-        }
-        return $city_dropdown_output;
-    }
-    public function get_zip_code(Request $request)
-    {
-        $city_id = $request->city_id;
-        $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
-        return $postal_code->postal_code;
-    }
+    
     public function update_other_info(Request $request)
     {
 
@@ -179,7 +172,8 @@ class MerchantController extends MerchantAuthController
         $data["business_website"]    = $request->business_website;
         $data["year_established"]    = $request->year_established;
         TblBusinessOtherInfoModel::where('business_id',session('business_id'))->update($data);
-        return "<div class='alert alert-success'><strong>Success!</strong>  Other Information Updated.</div>";
+        $message = Self::alert_message('success','Information Updated.');
+        return $message;
     }
 
     public function update_hours(Request $request)
@@ -204,19 +198,28 @@ class MerchantController extends MerchantAuthController
     }
     public function add_payment_method(Request $request)
     {
-        $data["payment_method_name"] = $request->paymentMethodName;
-        $data["payment_method_info"] = "not available";
-        $data["business_id"]         = session("business_id");
-        TblABusinessPaymentMethodModel::insert($data);
-        Session::flash('add_payment_method_success', 'success');
-        return  "<div class='alert alert-success'><strong>Success!</strong> Payment Method Added.</div>";
+        if($request->paymentMethodName=="")
+        {
+            $message = Self::alert_message('error','Payment method cannot be null');
+        }
+        else
+        {
+            $data["payment_method_name"] = $request->paymentMethodName;
+            $data["payment_method_info"] = "not available";
+            $data["business_id"]         = session("business_id");
+            TblABusinessPaymentMethodModel::insert($data);
+            $message = Self::alert_message('success','Payment Method Added.');
+        }
+        
+        
+        return  $message;
     }
     public function delete_payment_method(Request $request)
     {
         $id = $request->paymentMethodId;
         TblABusinessPaymentMethodModel::where('payment_method_id',$id)->delete();
-        Session::flash('danger', "Payment Deleted");
-        return "<div class='alert alert-danger'><strong>Success!</strong> Payment Method deleted.</div>";
+        $message = Self::alert_message('danger','Payment Method deleted.');
+        return $message;
     }
     public function delete_messages($id)
     {
@@ -241,17 +244,20 @@ class MerchantController extends MerchantAuthController
             {
                 $data['user_password'] = password_hash($request->new_password, PASSWORD_DEFAULT);
                 TblUserAccountModel::where('business_id',session('business_id'))->update($data);
-                return "<div class='alert alert-success'><strong>Success!</strong>  Password Changed</div>";
+                $message = Self::alert_message('success','Password Change.');
             }
             else
             {
-                return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
+                $message = Self::alert_message('danger','Failed to confirm password.');
             }
         }
         else
         {
-            return "<div class='alert alert-danger'><strong>Sorry!</strong> Password you entered did not match to your current password.</div>";
+            $message = Self::alert_message('danger','Password you entered did not match to your current password.');
+            
         }
+
+        return $message;
     }
     public function add_business_category(Request $request)
     {
@@ -421,7 +427,6 @@ class MerchantController extends MerchantAuthController
 
     public function messages(Request $request)
     {
-
         $data['page']              = 'Messages';
         $data['guest_messages']    = TblGuestMessages::where('business_id',session('business_id'))->paginate(8);
         return view ('merchant.pages.messages', $data);
@@ -441,18 +446,26 @@ class MerchantController extends MerchantAuthController
                                 ->first();
         return view ('merchant.pages.bills', $data);
     }
-    public function sample()
-    {
-            return view ('merchant.pages.sample');
-    }
-    public function sample2()
-    {
-    return view ('sample2');
-    }
-    public function sample1()
+
+    public function get_city(Request $request)
     {
 
-
-    return view ('merchant.pages.sample1');
+        $county_id              = $request->county_id;
+        $city_list              = TblCityModel::where('county_id','=',$county_id)->get();
+        $county_name            = TblCountyModel::select('county_name')->where('county_id','=',$county_id)->first();
+        $city_dropdown_output   = '';
+        $city_dropdown_output .= $county_name->county_name;
+        foreach($city_list as $city_list)
+        {
+            $city_dropdown_output .= '<option value="'.$city_list->city_id.'">'.$city_list->city_name.'</option>';
+        }
+        return $city_dropdown_output;
     }
+    public function get_zip_code(Request $request)
+    {
+        $city_id = $request->city_id;
+        $postal_code = TblCityModel::select('postal_code')->where('city_id','=',$city_id)->first();
+        return $postal_code->postal_code;
+    }
+    
 }

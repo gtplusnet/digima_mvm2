@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$('body').on("click","#update",function()
 	{
-		var company_information 	= $('#company_information').val();
+		var company_information = $('#company_information').val();
 		var business_website 	= $('#business_website').val();
 		var year_established 	= $('#year_established').val();
 
@@ -18,7 +18,7 @@ $(document).ready(function(){
 			dataType:'text',
 			success: function(data)
 			{
-				$('#other_info_success').html(data);
+				$('#profile_alert').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);
@@ -40,8 +40,9 @@ $(document).ready(function(){
 			dataType:'text',
 			success: function(data)
 			{
-				$('#add_payment_method_success').html(data);
-				setTimeout(function(){
+				$('#profile_alert').html(data);
+				setTimeout(function()
+				{
 				   location.reload();
 				}, 1000);
 			}
@@ -60,7 +61,7 @@ $(document).ready(function(){
 			dataType:'text',
 			success: function(data)
 			{
-				$('#delete_payment_method_success').html(data);
+				$('#profile_alert').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);
@@ -84,7 +85,7 @@ $(document).ready(function(){
 			dataType:'text',
 			success: function(data)
 			{
-				$('#merchant_changepassword_success').html(data);
+				$('#profile_alert').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);
@@ -114,7 +115,7 @@ $(document).ready(function(){
 			dataType:'text',
 			success: function(data)
 			{
-				$('#showProfile1').html(data);
+				$('#profile_alert').html(data);
 				setTimeout(function(){
 				   location.reload();
 				}, 1000);

@@ -1,7 +1,7 @@
 @if($transaction=='profile')
 <form class="form-horizontal" method="POST" action="/merchant/saving_merchant_info">
     {{csrf_field()}}
-    <div class="panel-body" id="showProfile1">
+    <div class="panel-body" >
         <div class="form-group" style="margin-top:50px;">
             <h4>Update Personal Information</h4>
             <label for="business_name" class="col-sm-2 control-label">Naziv Tvrtke</label>

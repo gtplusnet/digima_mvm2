@@ -237,7 +237,6 @@ class AgentController extends ActiveAuthController
 
 	public function get_client2(Request $request)
 	{
-		Self::allow_logged_in_users_only();
 		$s_date = $request->date_start2;
 		$e_date = $request->date_end2;
 		$data['clients_activated'] = TblBusinessModel::where('business_status',5)

@@ -478,7 +478,6 @@ class GeneralAdminController extends ActiveAuthController
   
     public function general_admin_resend_invoice(Request $request)
     {
-      // dd($request->all());
         $email            = $request->resend_email;
         $contact_name     = $request->resend_contact_name;
         $remarks          = $request->remarks;
