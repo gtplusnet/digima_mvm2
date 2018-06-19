@@ -50,7 +50,7 @@ Route::get('/get-postal-code', 			'FrontController@getPostalCode');
 Route::any('/register-business', 		'FrontController@registerBusiness');
 Route::any('/business-search', 			'FrontController@businessSearch');
 Route::any('/search-business-result',   'FrontController@businessSearchResult');
-Route::any('/business_info', 			'FrontController@business_info');
+
 
 
 Route::any('/contact_send', 			'FrontController@contact_send');

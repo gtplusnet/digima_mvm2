@@ -77,5 +77,14 @@ class TblBusinessModel extends Model
                 ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id');
         return $query;
     }
+    public function scopeBusinessFront($query,$status,$membership)
+    {
+        $query  ->where('business_status',$status)
+                ->where('membership',$membership)
+                ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                ->orderBy('tbl_business.business_name','ASC')
+                ->groupBy('tbl_business.business_id');
+        return $query;
+    }
    
 }

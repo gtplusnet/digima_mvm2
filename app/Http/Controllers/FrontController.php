@@ -68,32 +68,12 @@ class FrontController extends Controller
         $data['contact_us']         = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
-        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','ASC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->paginate(9);
-        $data["_business_count"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','ASC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->get();
-        $data["_featured_list"]     = TblBusinessModel::where('membership',1)->where('business_status',5) 
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','DESC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->get();
+        $data["_business_list"]     = TblBusinessModel::BusinessFront(5,1)->paginate(9);
+        $data["_featured_list"]     = TblBusinessModel::BusinessFront(5,1)->get();
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
 
-        $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->where('business_status',5)
-                                    ->where('membership',1)
-                                    ->orderBy('business_views','DESC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->limit(4)
-                                    ->get();
+        $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
         return view('front.pages.home',$data);
 
     }
@@ -105,32 +85,12 @@ class FrontController extends Controller
         $data['contact_us']         = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
-        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','ASC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->paginate(9);
-        $data["_business_count"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','ASC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->get();
-        $data["_featured_list"]     = TblBusinessModel::where('membership',1)->where('business_status',5) 
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','DESC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->get();
+        $data["_business_list"]     = TblBusinessModel::BusinessFront(5,1)->paginate(9);
+        $data["_featured_list"]     = TblBusinessModel::BusinessFront(5,1)->get();
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
 
-        $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->where('business_status',5)
-                                    ->where('membership',1)
-                                    ->orderBy('business_views','DESC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->limit(4)
-                                    ->get();
+        $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
         
         return view('front.pages.mob_category', $data);
     }
@@ -186,29 +146,12 @@ class FrontController extends Controller
         $data['_filtered']          = $cat;
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
         $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
-        $data["_business_list"]     = TblBusinessTagCategoryModel::where('tbl_business.membership',1)->where('business_category_id',$request->parent_id)->where('business_status',5)
-                                    ->join('tbl_business','tbl_business.business_id','=','tbl_business_tag_category.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->orderBy('tbl_business.membership',"ASC")
-                                    ->paginate(9);
+        $data["_business_list"]     = TblBusinessTagCategoryModel::BusinessFront($request->parent_id)->paginate(9);
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
-        $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)
-                                    ->where('archived',0)
-                                    ->get();
-
-        $data["_featured_list"]     = TblBusinessModel::where('tbl_business.membership',1)->where('business_status',5)  
-                                    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->get();
+        $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
+        $data["_featured_list"]     = TblBusinessModel::BusinessFront(5,1)->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
-        $data['_most_viewed']       = TblReportsModel::where('tbl_business.business_status',5)->join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_reports.business_views','DESC')
-                                    ->limit(4)
-                                    ->get();
+        $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
         
         return view("front.pages.mob_category_filtered_list",$data);
 
@@ -275,29 +218,13 @@ class FrontController extends Controller
         $data['_filtered']          = $cat;
         $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
         $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
-        $data["_business_list"]     = TblBusinessTagCategoryModel::where('tbl_business.membership',1)->where('business_category_id',$request->parent_id)->where('business_status',5)
-                                    ->join('tbl_business','tbl_business.business_id','=','tbl_business_tag_category.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->orderBy('tbl_business.membership',"ASC")
-                                    ->paginate(9);
+        $data["_business_list"]     = TblBusinessTagCategoryModel::BusinessFront($request->parent_id)->paginate(9);
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
-        $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)
-                                    ->where('archived',0)
-                                    ->get();
+        $data['_categories_list']   = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
 
-        $data["_featured_list"]     = TblBusinessModel::where('tbl_business.membership',1)->where('business_status',5)  
-                                    ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->get();
+        $data["_featured_list"]     = TblBusinessModel::BusinessFront(5,1)->get();
         $data['_categories']        = TblBusinessCategoryModel::where('parent_id',$request->parent_id)->get();
-        $data['_most_viewed']       = TblReportsModel::where('tbl_business.business_status',5)->join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_reports.business_views','DESC')
-                                    ->limit(4)
-                                    ->get();
+        $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
         
         return view("front.pages.show_list",$data);
 
@@ -449,27 +376,12 @@ class FrontController extends Controller
         $data['contact_us']         = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
         $data['_membership']        = TblMembeshipModel::where('archived',0)->get();
-        $data["_business_list"]     = TblBusinessModel:: where('business_status',5)->where('membership',1)
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','ASC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->paginate(9);
-        $data["_featured_list"]     = TblBusinessModel::where('membership',1)->where('business_status',5) 
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->orderBy('tbl_business.business_name','DESC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->get();
+        $data["_business_list"]     = TblBusinessModel::BusinessFront(5,1)->paginate(9);
+        $data["_featured_list"]     = TblBusinessModel::BusinessFront(5,1)->get();
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
         
-        $data['_categories']        = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->get();
-        $data['_most_viewed']       = TblReportsModel::join('tbl_business','tbl_business.business_id','=','tbl_reports.business_id')
-                                    ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
-                                    ->where('business_status',5)
-                                    ->where('tbl_business.membership',1)
-                                    ->orderBy('tbl_reports.business_views','ASC')
-                                    ->groupBy('tbl_business.business_id')
-                                    ->limit(4)
-                                    ->get();
+        $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
+        $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
 
         return view('front.pages.searchresult',$data); 
     }
@@ -577,18 +489,7 @@ class FrontController extends Controller
         return view('front.pages.success',$data);
     }
 
-    public function business_info(Request $request)
-    {
-        $data['_mob_categories']= TblBusinessCategoryModel::all();
-        $data['countyList']     = TblCountyModel::orderBy('county_name','ASC')->get();
-        $data['contact_us']     = TblContactUs::first();
-        $data['_mob_categories']= TblBusinessCategoryModel::all();
-        $data['business_info']  = DB::table('tbl_business')
-                                ->join('tbl_user_account', 'tbl_business.business_id', '=', 'tbl_user_account.business_id')
-                                ->where('tbl_business.business_id', '=', $request->business_id)
-                                ->get();
-        return view('front.pages.business', $data); 
-    }
+    
 
     public function about()
     {
@@ -596,7 +497,7 @@ class FrontController extends Controller
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['_about_us']          = TblAboutUs::first();
-         $data['contact_us']        = TblContactUs::first();
+        $data['contact_us']         = TblContactUs::first();
         return view('front.pages.about', $data);
     }
     public function contact()

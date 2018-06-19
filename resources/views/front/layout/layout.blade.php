@@ -8,7 +8,6 @@
     </style>
     <head>
         <!-- Title -->
-
         <title>Žute Stranice | @yield('title')</title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -54,14 +53,11 @@
         <link rel="stylesheet" type="text/css" href="/assets/fontello/css/fontello.css">
         <!-- LIGHT SLIDER -->
         <link rel="stylesheet" type="text/css" href="/assets/light-slider/css/lightslider.css">
-
-
         <!-- Toastr Plugin CSS -->
         <link href="/assets/js/toastr/build/toastr.css" rel="stylesheet"/>
     </head>
     <body>
         <!-- HEADER -->
-
         <div class="header-nav">
             <div class="container">
                 <div class="menu-bar">
@@ -81,101 +77,100 @@
                         </div>
                         <div class="language-selection" >
                             <ul class="list-unstyled list-inline ct-topbar__list">
-                              <li class="ct-language">Language <i class="fa fa-arrow-down"></i>
-                                <ul class="list-unstyled ct-language__dropdown">
-                                    <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
-                                  
-                                  <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
-                                  <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
-                                  <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
-                                  <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
-                                  <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
-                                </ul>
-                              </li>
+                                <li class="ct-language">Language <i class="fa fa-arrow-down"></i>
+                                    <ul class="list-unstyled ct-language__dropdown">
+                                        <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
+                                        
+                                        <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
+                                        <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
+                                        <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
+                                        <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
+                                        <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
+                                    </ul>
+                                </li>
                             </ul>
                             <style>
-                                .goog-te-banner-frame.skiptranslate 
-                                {
-                                    display: none !important;
-                                } 
-                                body 
-                                { 
-                                    top: 0px !important; 
-                                }
-                                .language-flag
-                                {
-                                    height:25px;
-                                    width:40px;
-                                }
-                                
-                                .ct-topbar {
-                                  text-align: right;
-                                  background: #eee;
-                                }
-                                .ct-topbar__list {
-                                  margin-bottom: 0px;
-                                }
-                                .ct-language__dropdown{
-                                    padding-top: 8px;
-                                    max-height: 0;
-                                    overflow: hidden;
-                                    position: absolute;
-                                    top: 110%;
-                                    left: -3px;
-                                    -webkit-transition: all 0.25s ease-in-out;
-                                    transition: all 0.25s ease-in-out;
-                                    width: 100px;
-                                    text-align: center;
-                                    padding-top: 0;
-                                  z-index:200;
-                                }
-                                .ct-language__dropdown li{
-                                    background: #222;
-                                    padding: 5px;
-                                }
-                                .ct-language__dropdown li a{
-                                    display: block;
-                                }
-                                .ct-language__dropdown li:first-child{
-                                    padding-top: 10px;
-                                    border-radius: 3px 3px 0 0;
-                                }
-                                .ct-language__dropdown li:last-child{
-                                    padding-bottom: 10px;
-                                    border-radius: 0 0 3px 3px;
-                                }
-                                .ct-language__dropdown li:hover{
-                                    background: #444;
-                                }
-                                .ct-language__dropdown:before{
-                                    content: '';
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    right: 0;
-                                    margin: auto;
-                                    width: 8px;
-                                    height: 0;
-                                    border: 0 solid transparent;
-                                    border-right-width: 8px;
-                                    border-left-width: 8px;
-                                    border-bottom: 8px solid #222;
-                                }
-                                .ct-language{
-                                    position: relative;
-                                  background: #3b9ccadb;
-                                  color: #fff;
-                                  padding: 5px;
-                                }
-                                .ct-language:hover .ct-language__dropdown{
-                                    max-height: 500px;
-                                    padding-top: 8px;
-                                }
-                                .list-unstyled {
-                                    padding-left: 0;
-                                    list-style: none;
-                                }
-
+                            .goog-te-banner-frame.skiptranslate
+                            {
+                            display: none !important;
+                            }
+                            body
+                            {
+                            top: 0px !important;
+                            }
+                            .language-flag
+                            {
+                            height:25px;
+                            width:40px;
+                            }
+                            
+                            .ct-topbar {
+                            text-align: right;
+                            background: #eee;
+                            }
+                            .ct-topbar__list {
+                            margin-bottom: 0px;
+                            }
+                            .ct-language__dropdown{
+                            padding-top: 8px;
+                            max-height: 0;
+                            overflow: hidden;
+                            position: absolute;
+                            top: 110%;
+                            left: -3px;
+                            -webkit-transition: all 0.25s ease-in-out;
+                            transition: all 0.25s ease-in-out;
+                            width: 100px;
+                            text-align: center;
+                            padding-top: 0;
+                            z-index:200;
+                            }
+                            .ct-language__dropdown li{
+                            background: #222;
+                            padding: 5px;
+                            }
+                            .ct-language__dropdown li a{
+                            display: block;
+                            }
+                            .ct-language__dropdown li:first-child{
+                            padding-top: 10px;
+                            border-radius: 3px 3px 0 0;
+                            }
+                            .ct-language__dropdown li:last-child{
+                            padding-bottom: 10px;
+                            border-radius: 0 0 3px 3px;
+                            }
+                            .ct-language__dropdown li:hover{
+                            background: #444;
+                            }
+                            .ct-language__dropdown:before{
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            width: 8px;
+                            height: 0;
+                            border: 0 solid transparent;
+                            border-right-width: 8px;
+                            border-left-width: 8px;
+                            border-bottom: 8px solid #222;
+                            }
+                            .ct-language{
+                            position: relative;
+                            background: #3b9ccadb;
+                            color: #fff;
+                            padding: 5px;
+                            }
+                            .ct-language:hover .ct-language__dropdown{
+                            max-height: 500px;
+                            padding-top: 8px;
+                            }
+                            .list-unstyled {
+                            padding-left: 0;
+                            list-style: none;
+                            }
                             </style>
                         </div>
                     </div>
@@ -196,20 +191,19 @@
                         <select class="counties-selectbox" required="true" name="countyDropdown"  default>
                             <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
-
                             <option class="notranslate" value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>
                             @endforeach
                         </select>
                         <style>
                         select:required:invalid {
-                              color: gray;
-                            }
-                            option[value=""][disabled] {
-                              display: none;
-                            }
-                            option {
-                              color: black;
-                            }
+                        color: gray;
+                        }
+                        option[value=""][disabled] {
+                        display: none;
+                        }
+                        option {
+                        color: black;
+                        }
                         </style>
                     </div>
                     <div class="col-md-3 searchfields-format ">
@@ -221,118 +215,116 @@
                 </form>
             </div>
         </div>
-
         <div class="header-wrapper">
             <div class="mob-top-header">
                 <div class="left-container">
                     <div class="language-selection" >
                         <ul class="list-unstyled list-inline ct-topbar__list">
-                          <li class="ct-language">Language <i class="fa fa-angle-down" aria-hidden="true"></i></i>
-                            <ul class="list-unstyled ct-language__dropdown">
-                                <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
-                                <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
-                                <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
-                                <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
-                                <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
-                                <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
-                            </ul>
-                          </li>
+                            <li class="ct-language">Language <i class="fa fa-angle-down" aria-hidden="true"></i></i>
+                                <ul class="list-unstyled ct-language__dropdown">
+                                    <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
+                                    <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
+                                    <li><a href="#googtrans(hr|es)" class="lang-es lang-select" data-lang="es"><img src="/flags/es.svg" class="language-flag" alt="MEXICO"></a></li>
+                                    <li><a href="#googtrans(hr|fr)" class="lang-fr lang-select" data-lang="fr"><img src="/flags/fr.svg" class="language-flag" alt="FRANCE"></a></li>
+                                    <li><a href="#googtrans(hr|zh-CN)" class="lang-zh-CN lang-select" data-lang="zh-CN"><img src="/flags/cn.svg" class="language-flag" alt="CHINA"></a></li>
+                                    <li><a href="#googtrans(hr|ja)" class="lang-ja lang-select" data-lang="ja"><img src="/flags/jp.svg" class="language-flag" alt="JAPAN"></a></li>
+                                </ul>
+                            </li>
                         </ul>
                         <style>
-                            .transform-uppercase
-                            {
-                                text-transform:uppercase !important;
-                            }
-                            .transform-lowercase
-                            {
-                                text-transform:lowercase !important;
-                            }
-                            .transform-capitalize
-                            {
-                                text-transform:capitalize !important;
-                            }
-                            .goog-te-banner-frame.skiptranslate 
-                            {
-                                display: none !important;
-                            } 
-                            body 
-                            { 
-                                top: 0px !important; 
-                            }
-                            .language-flag
-                            {
-                                height:25px;
-                                width:40px;
-                            }
-                            
-                            .ct-topbar {
-                              text-align: right;
-                              background: #eee;
-                            }
-                            .ct-topbar__list {
-                              margin-bottom: 0px;
-                            }
-                            .ct-language__dropdown{
-                                padding-top: 8px;
-                                max-height: 0;
-                                overflow: hidden;
-                                position: absolute;
-                                top: 110%;
-                                left: -3px;
-                                -webkit-transition: all 0.25s ease-in-out;
-                                transition: all 0.25s ease-in-out;
-                                width: 100px;
-                                text-align: center;
-                                padding-top: 0;
-                              z-index:200;
-                            }
-                            .ct-language__dropdown li{
-                                background: #222;
-                                padding: 5px;
-                            }
-                            .ct-language__dropdown li a{
-                                display: block;
-                            }
-                            .ct-language__dropdown li:first-child{
-                                padding-top: 10px;
-                                border-radius: 3px 3px 0 0;
-                            }
-                            .ct-language__dropdown li:last-child{
-                                padding-bottom: 10px;
-                                border-radius: 0 0 3px 3px;
-                            }
-                            .ct-language__dropdown li:hover{
-                                background: #444;
-                            }
-                            .ct-language__dropdown:before{
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                right: 0;
-                                margin: auto;
-                                width: 8px;
-                                height: 0;
-                                border: 0 solid transparent;
-                                border-right-width: 8px;
-                                border-left-width: 8px;
-                                border-bottom: 8px solid #222;
-                            }
-                            .ct-language{
-                                position: relative;
-                                background: #3b9ccadb;
-                                color: #fff;
-                                padding: 0 5px;
-                            }
-                            .ct-language:hover .ct-language__dropdown{
-                                max-height: 500px;
-                                padding-top: 8px;
-                            }
-                            .list-unstyled {
-                                padding-left: 0;
-                                list-style: none;
-                            }
-
+                        .transform-uppercase
+                        {
+                        text-transform:uppercase !important;
+                        }
+                        .transform-lowercase
+                        {
+                        text-transform:lowercase !important;
+                        }
+                        .transform-capitalize
+                        {
+                        text-transform:capitalize !important;
+                        }
+                        .goog-te-banner-frame.skiptranslate
+                        {
+                        display: none !important;
+                        }
+                        body
+                        {
+                        top: 0px !important;
+                        }
+                        .language-flag
+                        {
+                        height:25px;
+                        width:40px;
+                        }
+                        
+                        .ct-topbar {
+                        text-align: right;
+                        background: #eee;
+                        }
+                        .ct-topbar__list {
+                        margin-bottom: 0px;
+                        }
+                        .ct-language__dropdown{
+                        padding-top: 8px;
+                        max-height: 0;
+                        overflow: hidden;
+                        position: absolute;
+                        top: 110%;
+                        left: -3px;
+                        -webkit-transition: all 0.25s ease-in-out;
+                        transition: all 0.25s ease-in-out;
+                        width: 100px;
+                        text-align: center;
+                        padding-top: 0;
+                        z-index:200;
+                        }
+                        .ct-language__dropdown li{
+                        background: #222;
+                        padding: 5px;
+                        }
+                        .ct-language__dropdown li a{
+                        display: block;
+                        }
+                        .ct-language__dropdown li:first-child{
+                        padding-top: 10px;
+                        border-radius: 3px 3px 0 0;
+                        }
+                        .ct-language__dropdown li:last-child{
+                        padding-bottom: 10px;
+                        border-radius: 0 0 3px 3px;
+                        }
+                        .ct-language__dropdown li:hover{
+                        background: #444;
+                        }
+                        .ct-language__dropdown:before{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        width: 8px;
+                        height: 0;
+                        border: 0 solid transparent;
+                        border-right-width: 8px;
+                        border-left-width: 8px;
+                        border-bottom: 8px solid #222;
+                        }
+                        .ct-language{
+                        position: relative;
+                        background: #3b9ccadb;
+                        color: #fff;
+                        padding: 0 5px;
+                        }
+                        .ct-language:hover .ct-language__dropdown{
+                        max-height: 500px;
+                        padding-top: 8px;
+                        }
+                        .list-unstyled {
+                        padding-left: 0;
+                        list-style: none;
+                        }
                         </style>
                     </div>
                 </div>
@@ -346,7 +338,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="left-container">
                             {{-- <i id="nav_list" class="fa fa-bars hamburger" onclick="on()"></i> --}}
-                        </div>    
+                        </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <a href="/">
@@ -357,12 +349,11 @@
                     </div>
                     <div style="z-index: 9;" class="col-md-3 col-sm-3 col-xs-3">
                         <div class="right-container">
-                           <i id="show" class="fa fa-search"></i> 
-                        </div> 
+                            <i id="show" class="fa fa-search"></i>
+                        </div>
                     </div>
                 </div>
                 <!-- MOBILE PUSH MENU -->
-
                 <div id="dl-menu" class="dl-menuwrapper">
                     <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
                     <ul class="dl-menu">
@@ -387,7 +378,7 @@
                     </select>
                     <input class="search-control" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
                     <button type="submit" class="btn btn-search" name="searchButton" id="searchButton">
-                        <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Search</span>
+                    <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Search</span>
                     </button>
                 </form>
             </div>
@@ -419,8 +410,8 @@
                                 <img src="/images/mobile_icon.png">
                             </div>
                             <p class="footer-content notranslate">
-                                 @if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif
-                                </p>
+                                @if(isset($contact_us->phone_number)==null)@else {{$contact_us->phone_number}}@endif
+                            </p>
                         </div>
                         <div class="contact-content">
                             <div class="img-holder">
@@ -436,147 +427,134 @@
                     </div>
                 </div>
             </div>
-        </div><!-- footer-upper -->
-        <div class="footer-bottom">
-            <div class="container">
-                <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
+            </div><!-- footer-upper -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
+                </div>
             </div>
-        </div>
-        <!-- footer-bottom -->
-        <!-- DITO ANG SCRIPT -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- FOR FILTER -->
-        <script src="/assets/js/layout_filtering.js"></script>
-         <!-- EWAN KO DITO DI AKO GUMAWA -->
-        <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js">')</script>
-        <script src="/initializr/js/vendor/bootstrap.min.js"></script>
-        <!-- FOR GOOGLEMAP -->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
-        </script>
-        
-        <!-- Toastr Plugin JS !-->
-        <script src="/assets/js/toastr/toastr.js"></script>
-        <!-- LIGHTBOX SCRIPT -->
-        <script src="/initializr/js/lightbox.min.js"></script>
-        
-
-        <script src="/assets/js/dl-menu.js"></script>
-
-        <!-- LIGHT SLIDER -->
-        <script src="/assets/light-slider/js/lightslider.js"></script>
-        
-        <!-- HANGGANG DITO -->
-        <script>
+            <!-- footer-bottom -->
+            <!-- DITO ANG SCRIPT -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <!-- FOR FILTER -->
+            <script src="/assets/js/layout_filtering.js"></script>
+            <!-- EWAN KO DITO DI AKO GUMAWA -->
+            <script>window.jQuery || document.write('<script src="/initializr/js/vendor/jquery-1.11.2.min.js">')</script>
+            <script src="/initializr/js/vendor/bootstrap.min.js"></script>
+            <!-- FOR GOOGLEMAP -->
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDoOPN-LMZZYOB3qYn3AcQV3ITZU7tuUQ&callback=initMap">
+            </script>
+            
+            <!-- Toastr Plugin JS !-->
+            <script src="/assets/js/toastr/toastr.js"></script>
+            <!-- LIGHTBOX SCRIPT -->
+            <script src="/initializr/js/lightbox.min.js"></script>
+            
+            <script src="/assets/js/dl-menu.js"></script>
+            <!-- LIGHT SLIDER -->
+            <script src="/assets/light-slider/js/lightslider.js"></script>
+            
+            <!-- HANGGANG DITO -->
+            <script>
             $(document).ready(function()
             {
-                $(document).on('click', '.dl-menuwrapper li a:only-child', function () 
-                {
-                    alert();
-                    console.log('it works');
-                });
-
+            $(document).on('click', '.dl-menuwrapper li a:only-child', function ()
+            {
+            alert();
+            console.log('it works');
             });
-
-        </script>
-        
-        <script type="text/javascript">
-            function googleTranslateElementInit() 
+            });
+            </script>
+            
+            <script type="text/javascript">
+            function googleTranslateElementInit()
             {
-              new google.translate.TranslateElement({pageLanguage: 'hr', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
+            new google.translate.TranslateElement({pageLanguage: 'hr', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
             }
-
-            function triggerHtmlEvent(element, eventName) 
+            function triggerHtmlEvent(element, eventName)
             {
-              var event;
-              if (document.createEvent) {
-                event = document.createEvent('HTMLEvents');
-                event.initEvent(eventName, true, true);
-                element.dispatchEvent(event);
-              } else {
-                event = document.createEventObject();
-                event.eventType = eventName;
-                element.fireEvent('on' + event.eventType, event);
-              }
+            var event;
+            if (document.createEvent) {
+            event = document.createEvent('HTMLEvents');
+            event.initEvent(eventName, true, true);
+            element.dispatchEvent(event);
+            } else {
+            event = document.createEventObject();
+            event.eventType = eventName;
+            element.fireEvent('on' + event.eventType, event);
             }
-
+            }
             jQuery('.lang-select').click(function() {
-              var theLang = jQuery(this).attr('data-lang');
-              jQuery('.goog-te-combo').val(theLang);
-
-              window.location = jQuery(this).attr('href');
-              location.reload();
-
+            var theLang = jQuery(this).attr('data-lang');
+            jQuery('.goog-te-combo').val(theLang);
+            window.location = jQuery(this).attr('href');
+            location.reload();
             });
             var placeholders = document.querySelectorAll('input[placeholder]');
             if (placeholders.length) {
-                placeholders = Array.prototype.slice.call(placeholders);
-                var div = $('<div id="placeholders" style="display:none;"></div>');
-                placeholders.forEach(function(input){
-                  var text = input.placeholder;
-                  div.append('<div>' + text + '</div>');    
-                });
-                
-                $('body').append(div);
-                var originalPH = placeholders[0].placeholder;
-                setInterval(function(){
-                  if (isTranslated()) {
-                    updatePlaceholders();
-                    originalPH = placeholders[0].placeholder;
-                  }
-                }, 500);
-                function isTranslated() { 
-                   var currentPH = $($('#placeholders > div')[0]).text();
-                   return !(originalPH == currentPH);
-                }
-                function updatePlaceholders() {
-                  $('#placeholders > div').each(function(i, div){
-                    placeholders[i].placeholder = $(div).text();
-                  });
-                }
+            placeholders = Array.prototype.slice.call(placeholders);
+            var div = $('<div id="placeholders" style="display:none;"></div>');
+            placeholders.forEach(function(input){
+            var text = input.placeholder;
+            div.append('<div>' + text + '</div>');
+            });
+            
+            $('body').append(div);
+            var originalPH = placeholders[0].placeholder;
+            setInterval(function(){
+            if (isTranslated()) {
+            updatePlaceholders();
+            originalPH = placeholders[0].placeholder;
             }
-
-        </script>
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-        <!-- FOR FIXED HEADER -->
-        <script>
+            }, 500);
+            function isTranslated() {
+            var currentPH = $($('#placeholders > div')[0]).text();
+            return !(originalPH == currentPH);
+            }
+            function updatePlaceholders() {
+            $('#placeholders > div').each(function(i, div){
+            placeholders[i].placeholder = $(div).text();
+            });
+            }
+            }
+            </script>
+            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            <!-- FOR FIXED HEADER -->
+            <script>
             window.onscroll = function() {myFunction()};
             var navbar = document.getElementById("navbar");
             var sticky = navbar.offsetTop;
             function myFunction() {
-              if (window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky")
-              } else {
-                navbar.classList.remove("sticky");
-              }
+            if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+            } else {
+            navbar.classList.remove("sticky");
             }
-
-        </script>
-        <!-- SEARCH SHOW -->
-        <script type="text/javascript">
+            }
+            </script>
+            <!-- SEARCH SHOW -->
+            <script type="text/javascript">
             $(document).ready(function()
             {
-                $('#show').click(function() {
-                    $('#search_nav').toggleClass('search-mob-show');
-                });
+            $('#show').click(function() {
+            $('#search_nav').toggleClass('search-mob-show');
             });
-        </script>
-
-        <script type="text/javascript">
+            });
+            </script>
+            <script type="text/javascript">
             $(function() {
-                $( '#dl-menu' ).dlmenu();
+            $( '#dl-menu' ).dlmenu();
             });
             $('body').on('hidden.bs.modal', function (e) {
-                if($('.modal').hasClass('in')) 
-                {
-                    $('body').addClass('modal-open');
-                }
-                else
-                {
-                    $('div').removeClass('modal-backdrop');
-                }    
+            if($('.modal').hasClass('in'))
+            {
+            $('body').addClass('modal-open');
+            }
+            else
+            {
+            $('div').removeClass('modal-backdrop');
+            }
             });
-        </script>
-    </body>
-</html>
-
-
+            </script>
+        </body>
+    </html>

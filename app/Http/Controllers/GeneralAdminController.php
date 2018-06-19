@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ActiveAuthController;
 
 use App\Models\TblBusinessModel;
-use App\Models\TblAdminModels;
+
 use App\Models\TblUserAccountModel;
 use App\Models\TblPaymentModel;
 use App\Models\TblBusinessCategoryModel;
@@ -18,8 +18,8 @@ use App\Models\TblInvoiceModels;
 use App\Models\TblCityModel;
 use App\Models\TblCountyModel;
 use App\Models\TblTeamModel;
-use App\Models\TblAgentModel;
-use App\Models\TblSupervisorModels;
+
+
 use App\Models\TblMembeshipModel;
 use App\Models\TblBusinessSubCategoryModel;
 use App\Models\TblBusinessSubSubCategoryModel;
@@ -478,6 +478,7 @@ class GeneralAdminController extends ActiveAuthController
   
     public function general_admin_resend_invoice(Request $request)
     {
+      // dd($request->all());
         $email            = $request->resend_email;
         $contact_name     = $request->resend_contact_name;
         $remarks          = $request->remarks;
@@ -489,9 +490,9 @@ class GeneralAdminController extends ActiveAuthController
         $pathfile         = 'invoice/'.$invoice_name;
         $mail_send        = Mail::send('general_admin.pages.send_email_invoice', $data, function($message) use ($data,$pathfile) 
                           {
-                             $message->to($data['email'], 'Croatia Directory')->subject('Your Croatia Directory Invoice');
+                             $message->to($data['email'], 'Zute Stranice')->subject('Your Invoice');
                              $message->attach(public_path($pathfile));
-                             $message->from('guardians35836@gmail.com','Yellow Pages');
+                             $message->from('zutestranice@gmail.com','Yellow Pages');
                           });
         if($mail_send)
         {

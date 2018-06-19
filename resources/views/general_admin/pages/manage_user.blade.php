@@ -526,7 +526,7 @@
 					</div>
 					<div class="col-sm-12">
 						<center>
-						<button type="submit" class="save_category btn btn-primary" name="userAssigned" id="userAssigned">Assign Agent</button>
+						<button type="submit" class=" btn btn-primary" name="userAssigned" id="userAssigned">Assign User</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 						</center>
 					</div>
