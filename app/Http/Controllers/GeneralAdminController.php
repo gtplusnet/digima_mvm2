@@ -774,10 +774,10 @@ class GeneralAdminController extends ActiveAuthController
   
         $data['user']         = Self::global();
         $id = $request->business_id;
-        $data["company_information"] = $request->company_information;
-        $data["business_website"]    = $request->business_website;
-        $data["year_established"]    = $request->year_established;
-        TblBusinessOtherInfoModel::where('business_id',$id)->update($data);
+        $business["company_information"] = $request->company_information;
+        $business["business_website"]    = $request->business_website;
+        $business["year_established"]    = $request->year_established;
+        TblBusinessOtherInfoModel::where('business_id',$id)->update($business);
         return "<div class='alert alert-success'><strong>Success!</strong>Information Updated.</div>";
     }
     public function merchant_update_images(Request $request)
