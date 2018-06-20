@@ -20,33 +20,39 @@ function supervisor_dashboard()
 	}
 	function show_agent_calls()
 	{
-		$(document).on('change','#agent_calls',function(){
-		var agent_id = $(this).val();
-		$.ajax({
-			type:'POST',
-			url:'/supervisor/show_agent_calls',
-			data:{
-				agent_id: agent_id,
-				},
-			dataType:'text',
-		}).done(function(data){
-				$('#showAgentCalls').html(data);
+		$('body').on('change','#agent_calls',function()
+		{
+			var agent_id = $(this).val();
+			$.ajax({
+				type:'POST',
+				url:'/supervisor/show_agent_calls',
+				data:{
+					agent_id: agent_id,
+					},
+				dataType:'text',
+				success :function(data)
+				{
+					$('#showAgentCalls').html(data);
+				}
 			});
 	    });
 	}
 	function show_team_calls()
 	{
-		$(document).on('change','#team_calls',function(){
-		var team_id = $(this).val();
-		$.ajax({
-			type:'POST',
-			url:'/supervisor/show_team_calls',
-			data:{
-				team_id: team_id,
-				},
-			dataType:'text',
-		}).done(function(data){
-				$('#showTeamCalls').html(data);
+		$('body').on('change','#team_calls',function()
+		{
+			var team_id = $(this).val();
+			$.ajax({
+				type:'POST',
+				url:'/supervisor/show_team_calls',
+				data:{
+					team_id: team_id,
+					},
+				dataType:'text',
+				success : function(data)
+				{
+					$('#showTeamCalls').html(data);
+				}
 			});
 	    });
 	}

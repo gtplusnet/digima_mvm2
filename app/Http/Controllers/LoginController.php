@@ -59,7 +59,7 @@ class LoginController extends Controller
   public function user_login_submit(Request $request)
   {
       $validate_login = TblUserModel::where('user_email',$request->user_email)->first();
-      
+     
       if(count($validate_login)==1)
       {
           if(Crypt::decrypt($validate_login->user_password)==$request->user_password)
@@ -85,21 +85,21 @@ class LoginController extends Controller
               else
               {
                 Session::flash('error', 'You are not a user.');
-                return Redirect::to('/user/login');
+                return Redirect::back()->withErrors(['User Login is Incorect!', 'You are not a user!']);
               }
               
             }
             else
             {
-              Session::flash('error', 'Your account has been deactivated.');
-              return Redirect::to('/user/login');
+
+              return Redirect::back()->withErrors(['User Login is Incorect!', 'Your account has been deactivated!']);
             }
             
           }
           else
           {
-            Session::flash('error', 'Password you entered is incorrect.');
-            return Redirect::to('/user/login');
+            
+            return Redirect::back()->withErrors(['User Login is Incorect!', 'Password you entered is incorrect!']);
           }
       }
       else

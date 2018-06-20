@@ -2,7 +2,7 @@
 @section('content')
 
 <script src="/assets/supervisor/supervisor_client.js"></script>
-<script src="/assets/js/supervisor/upload-conversation.js"></script>
+
 
 <style>
 .li_style

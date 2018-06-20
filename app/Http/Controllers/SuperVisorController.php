@@ -373,22 +373,25 @@ class SuperVisorController extends ActiveAuthController
     
     public function uploadConvo(Request $request) 
     {
-      if($request->ajax())
-      {
-  			$fileConvo = $request->file("file");
-              $file_ref = uniqid().$fileConvo->getClientOriginalName();
-              $fileConvo->move('conversations',$file_ref );
-              $convoInfo = new Tbl_conversation;
-              $convoInfo->file_path = '/conversations/'.$file_ref .'';
-              $convoInfo->file_name = $fileConvo->getClientOriginalName();
-              $convoInfo->business_id = $request->input("businessId");
-              $convoInfo->business_contact_person_id = $request->input("contactId");
-              $convoInfo->save();
+        // dd($request->all(),"123");
+          if($request->ajax())
+          {
+           
+      			$fileConvo = $request->file("file");
+                $file_ref = uniqid().$fileConvo->getClientOriginalName();
+                $fileConvo->move('conversations',$file_ref);
 
-              $update['business_status'] = "3";
-              $update['date_transact'] = date("Y/m/d"); 
-              TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
-      }
+                $convoInfo = new Tbl_conversation;
+                $convoInfo->file_path = '/conversations/'.$file_ref;
+                $convoInfo->file_name = $fileConvo->getClientOriginalName();
+                $convoInfo->business_id = $request->input("businessId");
+                $convoInfo->business_contact_person_id = $request->input("contactId");
+                $convoInfo->save();
+
+                $update['business_status'] = "3";
+                $update['date_transact'] = date("Y/m/d"); 
+                TblBusinessModel::where('business_id',$request->input("businessId"))->update($update);
+          }
     }
     public function changeAudioFile(Request $request)
     {
