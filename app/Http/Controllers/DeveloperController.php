@@ -49,7 +49,7 @@ class DeveloperController extends Controller
         DB::table('tbl_supervisor')->truncate();
         DB::table('tbl_team')->truncate();
         DB::table('tbl_user')->truncate();
-        DB::table('tbl_users')->truncate();
+        
         DB::table('tbl_user_account')->truncate();
         DB::table('tbl_user_info')->truncate();
         DB::table('tbl_user_team')->truncate();
