@@ -519,7 +519,7 @@ class DeveloperController extends Controller
             $user_team[1]["team_id"]            = 1;
             $user_team[1]["user_id"]            = 2;
             $user_team[1]["user_added"]         = date('Y/m/d');
-            $user_team[0]["user_calls"]         = 0;
+            $user_team[1]["user_calls"]         = 0;
 
                         
             DB::table('tbl_user_team')->insert($user_team);
