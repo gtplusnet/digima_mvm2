@@ -238,6 +238,9 @@ function manage_user()
 						{
 
 							toastr.success('User Added Successfully', 'Success', {timeOut: 3000})
+							setTimeout(function(){
+							   location.reload();
+							}, 1000);
 						}
 						else if(data=='email_exist')
 						{
