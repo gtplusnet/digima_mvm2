@@ -13,6 +13,10 @@ Route::any('/sample1',               'MerchantController@sample1');
 Route::any('/sample2',               'MerchantController@sample2');
 Route::any('/sample_invoice',        'GeneralAdminController@sample_invoice');
 
+
+
+Route::any('/truncate_all', 		'DeveloperController@truncate_all');
+
 Route::any('/truncate/{table_name}', 		'DeveloperController@truncate');
 Route::any('/get_table_data/{table_name}', 	'DeveloperController@get_table_data');
 Route::any('/get_credential/{business_id}', 'DeveloperController@get_credential');

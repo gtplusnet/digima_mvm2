@@ -24,6 +24,36 @@ class DeveloperController extends Controller
         DB::table($table_name)->truncate();
         echo "success truncate " . $table_name;
     }
+    public function truncate_all()
+    {
+        DB::table('tbl_admin')->truncate();
+
+        DB::table('tbl_agent')->truncate();
+        DB::table('tbl_business')->truncate();
+        DB::table('tbl_business_category')->truncate();
+        DB::table('tbl_business_contact_person')->truncate();
+        DB::table('tbl_business_hours')->truncate();
+        DB::table('tbl_business_images')->truncate();
+        DB::table('tbl_business_other_info')->truncate();
+        DB::table('tbl_business_payment_method')->truncate();
+        DB::table('tbl_business_sub_category')->truncate();
+        DB::table('tbl_business_tag_category')->truncate();
+        DB::table('tbl_business_tag_keywords')->truncate();
+        DB::table('tbl_business_tag_payment_method')->truncate();
+        DB::table('tbl_conversation')->truncate();
+        DB::table('tbl_guest_messages')->truncate();
+        DB::table('tbl_invoice')->truncate();
+        DB::table('tbl_password_reset')->truncate();
+        DB::table('tbl_payment')->truncate();
+        DB::table('tbl_reports')->truncate();
+        DB::table('tbl_supervisor')->truncate();
+        DB::table('tbl_team')->truncate();
+        DB::table('tbl_user')->truncate();
+        DB::table('tbl_users')->truncate();
+        DB::table('tbl_user_account')->truncate();
+        DB::table('tbl_user_info')->truncate();
+        DB::table('tbl_user_team')->truncate();
+    }
     public function get_table_data($table_name)
     {
         $data = DB::table($table_name)->get();
@@ -476,7 +506,33 @@ class DeveloperController extends Controller
 
             DB::table('tbl_user_info')->insert($info);
             DB::table('tbl_user')->insert($insert);
+
+
+            /*TEAMS*/   
+            $user_team[0]["user_team_id"]       = 1;
+            $user_team[0]["team_id"]            = 1;
+            $user_team[0]["user_id"]            = 1;
+            $user_team[0]["user_added"]         = date('Y/m/d');
+            $user_team[0]["user_calls"]         = 0;
+
+            $user_team[1]["user_team_id"]       = 2;
+            $user_team[1]["team_id"]            = 1;
+            $user_team[1]["user_id"]            = 2;
+            $user_team[1]["user_added"]         = date('Y/m/d');
+            $user_team[0]["user_calls"]         = 0;
+
+                        
+            DB::table('tbl_user_team')->insert($user_team);
+            
+            $team[0]["team_id"]                 = 1;
+            $team[0]["team_name"]               = 'ADMIN TEAM';
+            $team[0]["team_information"]        = "DONT DELETE! THIS IS FOR ADMIN";
+            $team[0]["supervisor_id"]           = 1;
+            
+            DB::table('tbl_team')->insert($team);
         }
+        
+
         if (DB::table('tbl_membership')->count() <= 0) 
         {
             $insert[0]["membership_id"]      = 1;

@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="logo-box">
-            <a href="/general_admin/dashboard" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
+            <a href="#" class="logo-text"><img src="/images/croatia_directory_logo.jpg" style="width:150px"></a>
         </div>
         <div class="topmenu-outer">
             <div class="top-menu">
