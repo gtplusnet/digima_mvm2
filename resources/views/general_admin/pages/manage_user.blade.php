@@ -454,11 +454,10 @@
 							<label for="business_name" >Gender</label>
 						</div>
 						<div class="form-group col-md-4">
-							<select name="team_id" class='form-control' id="team_id">
+							<select name="user_gender" class='form-control' id="user_gender">
 								<option value="MALE">MALE</option>
 								<option value="FEMALE">FEMALE</option>
 							</select>
-							<input type="text" class="form-control" name="user_gender" id="user_gender" required/>
 						</div>
 						<div class="form-group col-md-2">
 							<label for="business_name" >Email</label>
