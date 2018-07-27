@@ -207,7 +207,7 @@ width:100%;
 				</div>
 				<div class="payment-containers" style="margin-bottom:50px;">
 					<div class="payment-title transform-uppercase">
-						PREDAJTE VAŠE POSLOVNE DJELE U NAJVEĆE PONUDE
+						POŠALJITE SVOJ UNOS POSLOVNE DJELATNOSTI
 						<br>
 					</div>
 					<div class="payment-content row clearfix " style="margin-bottom:100px;">
