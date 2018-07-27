@@ -110,7 +110,7 @@ padding: 10px;
 				<br>
 				<div class="row">
 					<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-						<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
+						<button type="button"  data-toggle="modal" data-target="#addPaymentMethodModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New</button>
 					</div>
 				</div>
 				<div class="row">
@@ -232,6 +232,28 @@ padding: 10px;
 	</div>
 </div>
 {{-- modal --}}
+<div class="modal fade" id="addPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content ">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">ADD PAYMENT METHOD</h4>
+		    </div>
+			<div class="modal-body row" >
+				<div class="col-md-12">
+					PAYMENT METHOD NAME
+				</div>
+				<div class="col-md-12">
+					<input type="text" class="form-control" id="paymentMethodName"/>
+				</div>
+			</div>
+			<div class="modal-footer" style="padding:10px;">
+				<button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary pull-right" id="addPaymentMethod">SUBMIT</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="editMem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content ">
@@ -263,26 +285,24 @@ padding: 10px;
 	</div>
 </div>
 <div class="modal fade" id="editPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" aria-hidden="true">
-	<div class="modal-dialog modal-md" role="document">
-		<div class="modal-content">
-			
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content ">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">EDIT PAYMENT METHOD</h4>
+		    </div>
 			<div class="modal-body row" >
-				<div class="website-title">
-					Edit Payment Method
+				<div class="col-md-12">
+					PAYMENT METHOD NAME
 				</div>
-				<div class="website-content col-md-12">
-					
-					<div class="web-content">
-						<input type="text" id="pay_name_edit" class="form-text center pay_name_edit" placeholder="Payment Method Name" required/>
-						<input type="hidden" id="pay_id_edit" />
-					</div>
-					<div class="web-content">
-						<button type="button" id="editPaymentBtn" class="form-button center" >Save Payment Method</button>
-					</div>
+				<div class="col-md-12">
+					<input type="text" id="pay_name_edit" class="form-control pay_name_edit" required/>
+					<input type="hidden" id="pay_id_edit" />
 				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<div class="modal-footer" style="padding:10px;">
+				<button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary pull-right" id="editPaymentBtn">SUBMIT</button>
 			</div>
 		</div>
 	</div>

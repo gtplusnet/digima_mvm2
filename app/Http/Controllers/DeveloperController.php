@@ -472,7 +472,7 @@ class DeveloperController extends Controller
 
             DB::table('tbl_county')->insert($insert);
         }
-        if (DB::table('tbl_user')->count() <= 0) 
+        if (DB::table('tbl_user')->count() <= 0&&DB::table('tbl_user_info')->count()<=0) 
         {
             $insert[0]["user_id"]           = 1;
             $insert[0]["user_email"]        = "croatiaadmin@gmail.com";

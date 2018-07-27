@@ -163,6 +163,6 @@
 <link href="/assets/admin/merchant/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/global.ajax.js"></script>
-<script src="/assets/admin/general_admin/assets/js/general_admin_front.js"></script>
+<script src="/assets/general_admin/general_admin_front.js"></script>
 
 @endsection

@@ -77,7 +77,7 @@
                         </div>
                         <div class="language-selection" >
                             <ul class="list-unstyled list-inline ct-topbar__list">
-                                <li class="ct-language">Language <i class="fa fa-arrow-down"></i>
+                                <li class="ct-language">JEZIK <i class="fa fa-arrow-down"></i>
                                     <ul class="list-unstyled ct-language__dropdown">
                                         <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
                                         
@@ -220,7 +220,7 @@
                 <div class="left-container">
                     <div class="language-selection" >
                         <ul class="list-unstyled list-inline ct-topbar__list">
-                            <li class="ct-language">Language <i class="fa fa-angle-down" aria-hidden="true"></i></i>
+                            <li class="ct-language">JEZIK <i class="fa fa-angle-down" aria-hidden="true"></i></i>
                                 <ul class="list-unstyled ct-language__dropdown">
                                     <li><a href="#googtrans(hr|hr)" class="lang-hr lang-select" data-lang="hr"><img src="/flags/hr.svg" class="language-flag" alt="CROATIA"></a></li>
                                     <li><a href="#googtrans(hr|en)" class="lang-en lang-select" data-lang="en"><img src="/flags/us.svg" class="language-flag" alt="USA"></a></li>
@@ -430,7 +430,7 @@
             </div><!-- footer-upper -->
             <div class="footer-bottom">
                 <div class="container">
-                    <p class="footer-text-bottom">COPYRIGHT 2017 © CROATIA DIRECTORY. ALL RIGHTS RESERVED POWERED BY DIGIMA WEB SOLUTIONS</p>
+                    <p class="footer-text-bottom">AUTORSKA PRAVA 2018 © ŽUTE STRANICE. SVA PRAVA REZERVIRANA POMOĆU DIGIMA WEB SOLUTIONS</p>
                 </div>
             </div>
             <!-- footer-bottom -->

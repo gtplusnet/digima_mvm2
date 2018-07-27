@@ -48,61 +48,62 @@ function manage_website()
 	}
 	function add_payment_method()
 	{ 
-		$('#addPaymentMethod').click(function(){
-        var paymentMethodName = $('#paymentMethodName').val();
-		$.ajax({
-			type:'POST',
-			url:'/general_admin/manage_website/add_payment_method',
-			data:{
-				paymentMethodName: paymentMethodName,
-				 },
-			dataType:'text',
-
-		}).done(function(data){
-			    $('#payment_method_alert').html(data);
-			    setTimeout(location.reload.bind(location), 1000);
+		$('#addPaymentMethod').click(function()
+		{
+		var paymentMethodName = $('#paymentMethodName').val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/manage_website/add_payment_method',
+				data:{paymentMethodName: paymentMethodName,},
+				dataType:'text',
+				success: function(data)
+				{
+					$('#payment_method_alert').html(data);
+			    	setTimeout(location.reload.bind(location), 1000);
+				}
 			});
 	    });
 	}
 	function add_county()
 	{ 
-		$('#addCounty').click(function(){
-        var countyName = $('#countyName').val();
-		$.ajax({
-			type:'POST',
-			url:'/general_admin/manage_website/add_county',
-			data:{
-				countyName: countyName,
-				},
-			dataType:'text',
-
-		}).done(function(data){
-			    $('#county_alert').html(data);
-			    setTimeout(location.reload.bind(location), 1000);
+		$('#addCounty').click(function()
+		{
+	        var countyName = $('#countyName').val();
+			$.ajax({
+				type:'POST',
+				url:'/general_admin/manage_website/add_county',
+				data:{countyName: countyName,},
+				dataType:'text',
+				success: function(data)
+				{
+					$('#county_alert').html(data);
+				    setTimeout(location.reload.bind(location), 1000);
+				}
 			});
 	    });
 	}
 	
 	function add_city()
 	{ 
-		$('#addCity').click(function(){
-			alert();
-        var countyID = $('#countyID').val();
-        var cityName = $('#cityName').val();
-        var cityZip = $('#cityZip').val();
-        $.ajax({
-			type:'POST',
-			url:'/general_admin/manage_website/add_city',
-			data:{
-				countyID: countyID,
-				cityName: cityName,
-				cityZip: cityZip,
-				},
-			dataType:'text',
-
-		}).done(function(data){
-			    $('#city_alert').html(data);
-			    setTimeout(location.reload.bind(location), 1000);
+		$('#addCity').click(function()
+		{
+			var countyID = $('#countyID').val();
+	        var cityName = $('#cityName').val();
+	        var cityZip = $('#cityZip').val();
+	        $.ajax({
+				type:'POST',
+				url:'/general_admin/manage_website/add_city',
+				data:{
+					countyID: countyID,
+					cityName: cityName,
+					cityZip: cityZip,
+					},
+				dataType:'text',
+				success: function(data)
+				{
+					$('#city_alert').html(data);
+				    setTimeout(location.reload.bind(location), 1000);
+				}
 			});
 	    });
 	}
@@ -200,19 +201,21 @@ function manage_website()
 		 			delete_id: delete_id
 		 		     },
 		 		dataType:'text',
-
-		 	}).done(function(data){
-		 		    $('#deleteModal').modal('hide');
+		 		success: function(data)
+				{
+					$('#deleteModal').modal('hide');
 		 		    $('#success_alert').html(data);
 		 		    $('#successModal').modal('show');
-		 			
-		 		});
+				}
+
+		 	});
 	    });
 	}
 	function action_submit_edit()
 	{
          
-        $('#editMemBtn').click(function(){
+        $('#editMemBtn').click(function()
+        {
 	        var mem_id = $("#mem_id_edit").val();
 	        var mem_name = $("#mem_name_edit").val();
 	        var mem_price = $("#mem_price_edit").val();
@@ -227,16 +230,17 @@ function manage_website()
 		 			mem_info:mem_info,
 		 		     },
 		 		dataType:'text',
-
-		 	}).done(function(data){
-		 		    $('#editMem').modal('hide');
+		 		success: function(data)
+				{
+					$('#editMem').modal('hide');
 		 		    $('#success_alert').html(data);
 		 		    $('#successModal').modal('show');
-		 			
-		 		});
+				}
+		 	});
 	    });
 
-        $('#editPaymentBtn').click(function(){
+        $('#editPaymentBtn').click(function()
+        {
 	        var pay_id = $("#pay_id_edit").val();
 	        var pay_name = $("#pay_name_edit").val();
 	        $.ajax({
@@ -247,16 +251,17 @@ function manage_website()
 		 			pay_name:pay_name,
 		 			},
 		 		dataType:'text',
-
-		 	}).done(function(data){
-		 		    $('#editMem').modal('hide');
+		 		success: function(data)
+				{
+					$('#editMem').modal('hide');
 		 		    $('#success_alert').html(data);
 		 		    $('#successModal').modal('show');
-		 			
-		 		});
+				}
+		 	});
 	    });
          
-         $('#editCountyBtn').click(function(){
+         $('#editCountyBtn').click(function()
+         {
          	var count_id = $("#count_id_edit").val();
 	        var count_name = $("#count_name_edit").val();
 	        $.ajax({
@@ -267,16 +272,17 @@ function manage_website()
 		 			count_name:count_name,
 		 			},
 		 		dataType:'text',
-
-		 	}).done(function(data){
-		 		    $('#editCounty').modal('hide');
+		 		success: function(data)
+				{
+					$('#editCounty').modal('hide');
 		 		    $('#success_alert').html(data);
 		 		    $('#successModal').modal('show');
-		 			
-		 		});
+				}
+		 	});
 	     });
 	     
-	     $('#editCityBtn').click(function(){
+	     $('#editCityBtn').click(function()
+	     {
 	     	
 	     	var city_id = $("#city_id_edit").val();
 	     	var count_name = $("#county_name_edit").val();
@@ -291,13 +297,13 @@ function manage_website()
 		 			city_zip:city_zip,
 		 			},
 		 		dataType:'text',
-
-		 	}).done(function(data){
-		 		    $('#editCounty').modal('hide');
+		 		success: function(data)
+				{
+					$('#editCounty').modal('hide');
 		 		    $('#success_alert').html(data);
 		 		    $('#successModal').modal('show');
-		 			
-		 		});
+				}
+		 	});
 	     });
 	}
 }

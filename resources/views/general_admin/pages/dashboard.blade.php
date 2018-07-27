@@ -4,7 +4,7 @@
 @section('content')
 
 <link href="/assets/agent/assets1/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-<script src='/assets/admin/general_admin/assets/plugins/chartsjs/Chart.min.js'></script>
+<script src='/assets/general_admin/Chart.min.js'></script>
 <div class="page-title">
     <h3>Dashboard</h3>
     <div class="page-breadcrumb">
