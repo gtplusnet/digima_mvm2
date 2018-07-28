@@ -85,5 +85,5 @@
         </div>
     </div>
 </div>
-<script src="/assets/js/agent/agent_profile.js" ></script>
+<script src="/assets/agent/agent_profile.js" ></script>
 @endsection

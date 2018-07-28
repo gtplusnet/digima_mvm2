@@ -1,6 +1,6 @@
 @extends('layout.general_layout')
 @section('content')
-<script src="/assets/js/agent/agent_client.js"></script>
+<script src="/assets/agent/agent_client.js"></script>
 <style>
 .distance
 {

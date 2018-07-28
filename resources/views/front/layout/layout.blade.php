@@ -329,8 +329,8 @@
                     </div>
                 </div>
                 <div class="right-container">
-                    <a href="/login"><span class="login">Login</span></a>
-                    <a href="/registration"><span class="reg">Register</span></a>
+                    <a href="/login"><span class="login">Prijava</span></a>
+                    <a href="/registration"><span class="reg">Registrirajte se</span></a>
                 </div>
             </div>
             <div class="mob-main-header">
@@ -358,10 +358,10 @@
                     <i class="fa fa-bars dl-trigger" style="padding-left: 5px;"></i>
                     <ul class="dl-menu">
                         <li class="menu-title">Navigation</li>
-                        <li><a href="/"><i class="icon-home"></i><span>&nbsp;&nbsp;Home</span></a></li>
-                        <li><a href="/about"><i class="icon-th-list"></i><span>&nbsp;&nbsp;About Us</span></a></li>
-                        <li><a href="/contact"><i class="icon-phone"></i><span>&nbsp;&nbsp;Contact Us</span></a></li>
-                        <li><a href="/mob/category"><i class="icon-th-list"></i><span>&nbsp;&nbsp;Category Filter</span></a></li>
+                        <li><a href="/"><i class="icon-home"></i><span>&nbsp;&nbsp;Početna</span></a></li>
+                        <li><a href="/about"><i class="icon-th-list"></i><span>&nbsp;&nbsp;O nama</span></a></li>
+                        <li><a href="/contact"><i class="icon-phone"></i><span>&nbsp;&nbsp;Kontaktirajte Nas</span></a></li>
+                        <li><a href="/mob/category"><i class="icon-th-list"></i><span>&nbsp;&nbsp;Filter Kategorije</span></a></li>
                         
                     </ul>
                 </div>
@@ -369,16 +369,16 @@
             <div id="search_nav" class="search-container">
                 <form action="/business-search" method="POST" name="searchRegisteredBusinessForm" id="searchRegisteredBusinessForm" >
                     {{csrf_field()}}
-                    <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Business, Category or Keyword..." required="true">
+                    <input  type="text" class="search-control" name="businessKeyword" id="businessKeyword" placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
                     <select class="search-control" required="true" name="countyDropdown" id="countyDropdown" default>
-                        <option value="" disabled selected><div>--County--</div></option>
+                        <option value="" disabled selected><div>--Županja--</div></option>
                         @foreach($countyList as $countyListItem)
                         <option value="{{ $countyListItem->county_id }}" class="notranslate">{{ $countyListItem->county_name }}</option>
                         @endforeach
                     </select>
-                    <input class="search-control" type="text" placeholder="City or Zip Code" name="postalCode" id="postalCode">
+                    <input class="search-control" type="text" placeholder="grad ili poštanski broj" name="postalCode" id="postalCode">
                     <button type="submit" class="btn btn-search" name="searchButton" id="searchButton">
-                    <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Search</span>
+                    <span><i class="fa fa-search"></i></span>&nbsp;&nbsp;<span>Tražilica</span>
                     </button>
                 </form>
             </div>
