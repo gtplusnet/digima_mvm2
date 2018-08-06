@@ -408,81 +408,81 @@ class DeveloperController extends Controller
             DB::table('tbl_city')->insert($insert);
         }
 
-        if (DB::table('tbl_county')->count() <= 0) 
+        if(DB::table('tbl_county')->count() <= 0) 
         {
-            $insert[0]["county_id"]    = 1;
-            $insert[0]["county_name"]  = "Zagreb";
+            $county[0]["county_id"]    = 1;
+            $county[0]["county_name"]  = "Zagreb";
 
-            $insert[1]["county_id"]    = 2;
-            $insert[1]["county_name"]  = "Dubrovnik-Neretva";
+            $county[1]["county_id"]    = 2;
+            $county[1]["county_name"]  = "Dubrovnik-Neretva";
 
-            $insert[2]["county_id"]    = 3;
-            $insert[2]["county_name"]  = "Split-Dalmatia";
+            $county[2]["county_id"]    = 3;
+            $county[2]["county_name"]  = "Split-Dalmatia";
 
-            $insert[3]["county_id"]    = 4;
-            $insert[3]["county_name"]  = "Šibenik-Knin";
+            $county[3]["county_id"]    = 4;
+            $county[3]["county_name"]  = "Šibenik-Knin";
 
-            $insert[4]["county_id"]    = 5;
-            $insert[4]["county_name"]  = "Zadar";
+            $county[4]["county_id"]    = 5;
+            $county[4]["county_name"]  = "Zadar";
 
-            $insert[5]["county_id"]    = 6;
-            $insert[5]["county_name"]  = "Osijek-Baranja";
+            $county[5]["county_id"]    = 6;
+            $county[5]["county_name"]  = "Osijek-Baranja";
 
-            $insert[6]["county_id"]    = 7;
-            $insert[6]["county_name"]  = "Vukovar-Srijem";
+            $county[6]["county_id"]    = 7;
+            $county[6]["county_name"]  = "Vukovar-Srijem";
 
-            $insert[7]["county_id"]    = 8;
-            $insert[7]["county_name"]  = "Virovitica-Podravina";
+            $county[7]["county_id"]    = 8;
+            $county[7]["county_name"]  = "Virovitica-Podravina";
 
-            $insert[8]["county_id"]    = 9;
-            $insert[8]["county_name"]  = "Požega-Slavonia";
+            $county[8]["county_id"]    = 9;
+            $county[8]["county_name"]  = "Požega-Slavonia";
 
-            $insert[9]["county_id"]    = 10;
-            $insert[9]["county_name"]  = "Brod-Posavina";
+            $county[9]["county_id"]    = 10;
+            $county[9]["county_name"]  = "Brod-Posavina";
 
-            $insert[10]["county_id"]   = 11;
-            $insert[10]["county_name"] = "Međimurje";
+            $county[10]["county_id"]   = 11;
+            $county[10]["county_name"] = "Međimurje";
 
-            $insert[11]["county_id"]   = 12;
-            $insert[11]["county_name"] = "Varaždin";
+            $county[11]["county_id"]   = 12;
+            $county[11]["county_name"] = "Varaždin";
 
-            $insert[12]["county_id"]   = 13;
-            $insert[12]["county_name"] = "Bjelovar-Bilogora";
+            $county[12]["county_id"]   = 13;
+            $county[12]["county_name"] = "Bjelovar-Bilogora";
 
-            $insert[13]["county_id"]   = 14;
-            $insert[13]["county_name"] = "Sisak-Moslavina";
+            $county[13]["county_id"]   = 14;
+            $county[13]["county_name"] = "Sisak-Moslavina";
 
-            $insert[14]["county_id"]   = 15;
-            $insert[14]["county_name"] = "Karlovac";
+            $county[14]["county_id"]   = 15;
+            $county[14]["county_name"] = "Karlovac";
 
-            $insert[15]["county_id"]   = 16;
-            $insert[15]["county_name"] = "Koprivnica-Križevci";
+            $county[15]["county_id"]   = 16;
+            $county[15]["county_name"] = "Koprivnica-Križevci";
 
-            $insert[16]["county_id"]   = 17;
-            $insert[16]["county_name"] = "Krapina-Zagorje";
+            $county[16]["county_id"]   = 17;
+            $county[16]["county_name"] = "Krapina-Zagorje";
 
-            $insert[17]["county_id"]   = 18;
-            $insert[17]["county_name"] = "Primorje-Gorski Kotar";
+            $county[17]["county_id"]   = 18;
+            $county[17]["county_name"] = "Primorje-Gorski Kotar";
 
-            $insert[18]["county_id"]   = 19;
-            $insert[18]["county_name"] = "Istria";
+            $county[18]["county_id"]   = 19;
+            $county[18]["county_name"] = "Istria";
 
-            $insert[19]["county_id"]   = 20;
-            $insert[19]["county_name"] = "Lika-Senj";
+            $county[19]["county_id"]   = 20;
+            $county[19]["county_name"] = "Lika-Senj";
 
-            DB::table('tbl_county')->insert($insert);
+            DB::table('tbl_county')->insert($county);
         }
-        if (DB::table('tbl_user')->count() <= 0&&DB::table('tbl_user_info')->count()<=0) 
+        if(DB::table('tbl_user')->count() <= 0&&DB::table('tbl_user_info')->count()<=0) 
         {
-            $insert[0]["user_id"]           = 1;
-            $insert[0]["user_email"]        = "croatiaadmin@gmail.com";
-            $insert[0]["user_password"]     = Crypt::encrypt('croatiaadmin');
-            $insert[0]["user_access_level"] = "ADMIN";
+            $user[0]["user_id"]           = 1;
+            $user[0]["user_email"]        = "croatiaadmin@gmail.com";
+            $user[0]["user_password"]     = Crypt::encrypt('croatiaadmin');
+            $user[0]["user_access_level"] = "ADMIN";
 
-            $insert[1]["user_id"]           = 2;
-            $insert[1]["user_email"]        = "croatiadeveloper@gmail.com";
-            $insert[1]["user_password"]     = Crypt::encrypt('croatiadeveloper');
-            $insert[1]["user_access_level"] = "ADMIN";
+            $user[1]["user_id"]           = 2;
+            $user[1]["user_email"]        = "croatiadeveloper@gmail.com";
+            $user[1]["user_password"]     = Crypt::encrypt('croatiadeveloper');
+            $user[1]["user_access_level"] = "ADMIN";
 
             $info[0]['user_info_id']        = 1;
             $info[0]['user_profile']        = '/user_profile/default_profile.jpg';
@@ -505,7 +505,7 @@ class DeveloperController extends Controller
             $info[1]['user_id']             = 2;
 
             DB::table('tbl_user_info')->insert($info);
-            DB::table('tbl_user')->insert($insert);
+            DB::table('tbl_user')->insert($user);
 
 
             /*TEAMS*/   
@@ -533,18 +533,18 @@ class DeveloperController extends Controller
         }
         
 
-        if (DB::table('tbl_membership')->count() <= 0) 
+        if(DB::table('tbl_membership')->count() <= 0) 
         {
-            $insert[0]["membership_id"]      = 1;
-            $insert[0]["membership_name"]    = "PLATINUM";
-            $insert[0]["membership_price"]   = "00.00";
-            $insert[0]["membership_info"]    = "Platinum Information";
+            $member_ship[0]["membership_id"]      = 1;
+            $member_ship[0]["membership_name"]    = "PLATINUM";
+            $member_ship[0]["membership_price"]   = "00.00";
+            $member_ship[0]["membership_info"]    = "Platinum Information";
 
-            $insert[1]["membership_id"]      = 2;
-            $insert[1]["membership_name"]    = "PREMIUM";
-            $insert[1]["membership_price"]   = '00.00';
-            $insert[1]["membership_info"]    = "Premium Information";
-            DB::table('tbl_membership')->insert($insert);
+            $member_ship[1]["membership_id"]      = 2;
+            $member_ship[1]["membership_name"]    = "PREMIUM";
+            $member_ship[1]["membership_price"]   = '00.00';
+            $member_ship[1]["membership_info"]    = "Premium Information";
+            DB::table('tbl_membership')->insert($member_ship);
         }
     }
 }
