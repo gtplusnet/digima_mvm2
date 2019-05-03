@@ -47,6 +47,9 @@ cellspacing: 0;
         </ol>
     </div>
 </div>
+<div id="main-wrapper" style="text-align: right">
+    <button class="btn btn-success" >Import Existing Merchant</button>
+</div>
 <div id="main-wrapper">
     <ul class="nav nav-tabs">
         <li class="active li_me"><a data-toggle="pill" href="#customer">Send Invoice</a></li>
