@@ -186,6 +186,7 @@ Route::any('/agent/get_postal_code', 				'AgentController@get_zip_code');
 Route::any('/general_admin/dashboard', 								'GeneralAdminController@general_admin_dashboard');
 
 Route::any('/general_admin/merchants', 								'GeneralAdminController@general_admin_merchants');
+Route::any('/general_admin/merchants/import', 						'GeneralAdminController@general_admin_merchants_import');
 Route::any('/general_admin/send_invoice/{id}', 						'GeneralAdminController@general_admin_send_invoice');
 Route::any('/general_admin/send_save_invoice/{id}', 				'GeneralAdminController@general_admin_send_save_invoice');
 Route::any('/general_admin/resend_invoice', 						'GeneralAdminController@general_admin_resend_invoice');

@@ -58,6 +58,12 @@ use Carbon\Carbon;
 
 class GeneralAdminController extends ActiveAuthController
 {
+
+  public function general_admin_merchants_import()
+  {
+      $data['user']               = Self::global();
+      return view('general_admin.pages.import.import_merchant', $data);
+  }
   public static function global()
   {
     $user_info = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))
