@@ -64,6 +64,14 @@ class GeneralAdminController extends ActiveAuthController
       $data['user']               = Self::global();
       return view('general_admin.pages.import.import_merchant', $data);
   }
+  public function general_admin_merchants_import_read()
+  {
+    dd(123);
+  }
+  public function general_admin_merchants_import_url()
+  {
+    /*DO NOT REMOVE*/
+  }
   public static function global()
   {
     $user_info = TblUserInfoModel::where('tbl_user_info.user_id',session('user_id'))

@@ -187,6 +187,8 @@ Route::any('/general_admin/dashboard', 								'GeneralAdminController@general_a
 
 Route::any('/general_admin/merchants', 								'GeneralAdminController@general_admin_merchants');
 Route::any('/general_admin/merchants/import', 						'GeneralAdminController@general_admin_merchants_import');
+Route::any('/general_admin/merchants/import_url', 					'GeneralAdminController@general_admin_merchants_import_url');
+Route::any('/general_admin/merchants/import-read-file', 			'GeneralAdminController@general_admin_merchants_import_read');
 Route::any('/general_admin/send_invoice/{id}', 						'GeneralAdminController@general_admin_send_invoice');
 Route::any('/general_admin/send_save_invoice/{id}', 				'GeneralAdminController@general_admin_send_save_invoice');
 Route::any('/general_admin/resend_invoice', 						'GeneralAdminController@general_admin_resend_invoice');

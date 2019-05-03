@@ -53,7 +53,7 @@
             <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
         </div>
         <div id="ImportContainer">
-            <form action="/member/item/import/url" id="myDropZoneImport" class="dropzone" method="post" enctype="multipart/form-data">
+            <form action="/general_admin/merchants/import_url" id="myDropZoneImport" class="dropzone" method="post" enctype="multipart/form-data">
                 <input type="hidden" class="token" name="_token" value="{{ csrf_token() }}">
                 <input type="file" id="files" name="files[]" style="display: none"><br>
                 <div class="dz-message">
@@ -109,4 +109,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src='/assets/merchant/dropzone/dropzone.js'></script>
+<script type="text/javascript" src="/assets/merchant/jquery-csv-master/src/jquery.csv.js"></script>
+<script type="text/javascript">
+    var url_link = '/general_admin/merchants/import-read-file';
+</script>
+<script type="text/javascript" src="/assets/merchant/import_csv.js"></script>
 @endsection
