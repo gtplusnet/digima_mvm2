@@ -134,8 +134,8 @@ class GeneralAdminController extends ActiveAuthController
          $get_country_id = DB::table('tbl_county')->where('county_name',$value['country'])->value('county_id');
          $get_city_id = DB::table('tbl_city')->where('city_name',$value['city'])->value('city_id');
 
-         $check_email = Tbl_user_account::checkEmail($request->emailAddress)->first();
-         $check_phone = TblBusinessModel::checkPhone($request->primaryPhone,$request->alternatePhone)->first();
+         $check_email = Tbl_user_account::checkEmail($value['email_address'])->first();
+         $check_phone = TblBusinessModel::checkPhone($value['main_telephone'],$value['alternative_phone'])->first();
 
          if(!$check_email)
          {
