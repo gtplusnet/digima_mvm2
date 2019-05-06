@@ -2,6 +2,14 @@
 @section('content')
 
 <style>
+    .green
+    {
+        color: green;
+    }
+    .red
+    {
+        color: red;
+    }
     .custom-upload
     {
         width: 100%;
@@ -93,7 +101,9 @@
     </div>
 </div>
 <div id="main-wrapper" style="text-align: right">
-    <a href="/general_admin/merchants/import" class="btn btn-success" >Download Template</a>
+    <a href="/general_admin/merchants/import-download-template" class="btn btn-success" >Download Template</a>
+
+    <a href="/general_admin/merchants/import-export-error" class="btn btn-custom-white pull-right import-error hidden"></a>
 </div>
 <div id="main-wrapper">
     <div class="col-md-6">
@@ -123,7 +133,7 @@
         </br>
         <form role="form" method="post" class="import-validation">
             <div class="form-group">
-                <button class="form-control btn btn-custom-primary btn-submit" disabled="disabled">Generate Import</button>
+                <button class="form-control btn btn-primary btn-submit" disabled="disabled">Generate Import</button>
             </div>
         </form>
     </div>
@@ -159,6 +169,8 @@
     </div>
 </div>
 
+@endsection
+@section('script')
 <script type="text/javascript" src='/assets/merchant/dropzone/dropzone.js'></script>
 <script type="text/javascript" src="/assets/merchant/jquery-csv-master/src/jquery.csv.js"></script>
 <script type="text/javascript">

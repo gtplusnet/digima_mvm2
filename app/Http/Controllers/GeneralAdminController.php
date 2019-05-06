@@ -40,6 +40,8 @@ use App\Models\TblUserInfoModel;
 
 
 use App\Models\TblUserTeamModel;
+use App\Models\Tbl_business_hours;
+use App\Models\Tbl_user_account;
 
 use DB;
 use Response;
@@ -50,6 +52,7 @@ use PDF;
 use Mail;
 use Excel;
 use Crypt;
+use Validator;
 use Carbon\Carbon;
 
 
@@ -64,9 +67,261 @@ class GeneralAdminController extends ActiveAuthController
       $data['user']               = Self::global();
       return view('general_admin.pages.import.import_merchant', $data);
   }
-  public function general_admin_merchants_import_read()
+  public function general_admin_merchants_import_template()
   {
-    dd(123);
+      Excel::create("CroatiaMerchantTemplate", function($excel)
+      {
+         // Set the title
+          $excel->setTitle('Croatia');
+
+          // Chain the setters
+          $excel->setCreator('DigimaWebSolutions')
+                ->setCompany('DigimaWebSolutions');
+
+          $excel->sheet('Template', function($sheet) {
+            $header = [
+                     'prefix',
+                     'first_name',
+                     'surname',
+                     'email_address',
+                     'password',
+                     'company_name',
+                     'membership',
+                     'main_telephone',
+                     'alternative_phone',
+                     'fax_number',
+                     'business_address',
+                     'county',
+                     'city',
+                     'zip_code',
+                     'facebook_url',
+                     'twitter_username'
+                     ];
+            $sheet->freezeFirstRow();
+              $sheet->row(1, $header);
+
+          });
+
+      })->download('csv');
+  }
+  public function general_admin_merchants_import_read(Request $request)
+  {
+    Session::forget("import_merchant_error");
+
+    $value     = $request->value;
+    $input     = $request->input;
+
+    $ctr        = $request->ctr;
+    $data_length  = $request->data_length;
+    $error_data   = $request->error_data;
+
+    if($ctr != $data_length)
+    {
+      $rules["email_address"]           = 'email|required';
+      $rules["password"]                = 'required';
+      $rules["company_name"]            = 'required';
+      $rules["membership"]              = 'required';
+      $rules["facebook_url"]            = 'url';
+
+      $validator = Validator::make($value, $rules);
+      if($validator->fails())
+      {
+        $json["status"]   = "error";
+        $json["message"]    = $validator->errors()->first();
+      }
+      else
+      {
+         $get_country_id = DB::table('tbl_county')->where('county_name',$value['country'])->value('county_id');
+         $get_city_id = DB::table('tbl_city')->where('city_name',$value['city'])->value('city_id');
+
+         $check_email = Tbl_user_account::checkEmail($request->emailAddress)->first();
+         $check_phone = TblBusinessModel::checkPhone($request->primaryPhone,$request->alternatePhone)->first();
+
+         if(!$check_email)
+         {
+            if(!$check_phone)
+            {
+               if($get_country_id && $get_city_id)
+               {
+                  $membership_id = DB::table('tbl_membership')->where('membership_name',$value['membership'])->value('membership_id');
+                  if($membership_id)
+                  {
+                     $ins['business_name']               = $value['company_name'];
+                     $ins['county_id']                   = $get_country_id;
+                     $ins['city_id']                     = $get_city_id;
+                     $ins['business_complete_address']   = $value['business_address'];
+                     $ins['business_phone']              = $value['main_telephone'];
+                     $ins['business_alt_phone']          = $value['alternative_phone'];
+                     $ins['business_fax']                = $value['fax_number'];
+                     $ins['facebook_url']                = $value['facebook_url'];
+                     $ins['twitter_url']                 = $value['twitter_username'];
+                     $ins['membership']                  = $membership_id;
+                     $ins['transaction_status']          = 1;
+                     $ins['business_status']             = 1;
+                     $ins['date_transact']               = date("Y/m/d");
+                     $ins['date_created']                = date("Y/m/d");
+
+                     $business_id = DB::table("tbl_business")->insertGetId($ins);
+
+                     $ins_bp['contact_prefix']           = $value['prefix'];
+                     $ins_bp['contact_first_name']       = $value['first_name'];
+                     $ins_bp['contact_last_name']        = $value['surname'];
+                     $ins_bp['business_id']              = $business_id;
+
+                     $bp_id = DB::table("tbl_business_contact_person")->insertGetId($ins_bp);
+
+                     $ins_ua['user_email']                  = $value['email_address'];
+                     $ins_ua['user_password']               = Crypt::encrypt($value['password']);
+                     $ins_ua['user_category']               = 'merchant';
+                     $ins_ua['status']                      = 'registered';
+                     $ins_ua['business_id']                 = $business_id;
+                     $ins_ua['business_contact_person_id']  = $bp_id;
+                     $ins_ua['string_password']             = 'none';
+
+                     $ua_id = DB::table("tbl_user_account")->insertGetId($ins_ua);
+
+                     $ins_oi['business_other_info_id']      = '';
+                     $ins_oi['company_information']         = 'none';
+                     $ins_oi['business_website']            = 'none';
+                     $ins_oi['year_established']            = 'none';
+                     $ins_oi['company_profile']             = '';
+                     $ins_oi['business_id']                 = $business_id;
+
+                     $oi_id = DB::table("tbl_business_other_info")->insertGetId($ins_oi);
+
+                     $businessHoursData = new Tbl_business_hours;
+                     $businessHoursData->insert(array(
+                         array('days' => 'Ponedjeljak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                         'desc' => 'none', 'business_id' => $business_id),
+                         array('days' => 'Utorak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                         'desc' => 'none', 'business_id' => $business_id),
+                         array('days' => 'Srijeda', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                         'desc' => 'none', 'business_id' => $business_id),
+                         array('days' => 'Četvrtak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                         'desc' => 'none', 'business_id' => $business_id),
+                         array('days' => 'Petak', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                         'desc' => 'none', 'business_id' => $business_id),
+                         array('days' => 'Subota', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                         'desc' => 'none', 'business_id' => $business_id),
+                         array('days' => 'Nedjelja', 'business_hours_from' => '00:00', 'business_hours_to' => '00:00', 
+                         'desc' => 'none', 'business_id' => $business_id)
+                     ));
+
+                     $json["status"]   = "success";
+                     $json["message"]  = "Success";
+                     $json["item_id"]  = 1;
+                  }
+                  else
+                  {
+                     $json["status"]   = "error";
+                     $json["message"]    = "Membership not found";
+                  }
+               }
+               else
+               {
+                  $json["status"]   = "error";
+                  $json["message"]    = "Country or city not found";
+               }
+            }
+            else
+            {
+                  $json["status"]   = "error";
+                  $json["message"]    = "Check main and alternative telephone";
+            }
+         }
+         else
+         {
+            $json["status"]   = "error";
+            $json["message"]    = "Email already exist";
+         }
+      }
+
+      $status_color     = $json["status"] == 'success' ? 'green' : 'red';
+      $json["tr_data"]  = "<tr>";
+      $json["tr_data"]   .= "<td class='$status_color'>".$json["status"]."</td>";
+      $json["tr_data"]   .= "<td nowrap>".$json["message"]."</td>";
+      $json["tr_data"]   .= "<td nowrap>".$value['prefix']."</td>";
+      $json["tr_data"]   .= "<td nowrap>".$value['first_name']."</td>";
+      $json["tr_data"]   .= "<td>".$value['surname']."</td>";
+      $json["tr_data"]   .= "<td nowrap>".$value['email_address']."</td>";
+      $json["tr_data"]   .= "<td>".$value['password']."</td>";
+      $json["tr_data"]   .= "<td>".$value['company_name']."</td>";
+      $json["tr_data"]   .= "<td nowrap>".$value['membership']."</td>";
+      $json["tr_data"]   .= "<td>".$value['main_telephone']."</td>";
+      $json["tr_data"]   .= "<td>".$value{'alternative_phone'}."</td>";
+      $json["tr_data"]   .= "<td>".$value['fax_number']."</td>";
+      $json["tr_data"]   .= "<td>".$value['business_address']."</td>";
+      $json["tr_data"]   .= "<td nowrap>".$value['country']."</td>";
+      $json["tr_data"]   .= "<td nowrap>".$value['city']."</td>";
+      $json["tr_data"]   .= "<td>".$value['zip_code']."</td>";
+      $json["tr_data"]   .= "<td>".$value['facebook_url']."</td>";
+      $json["tr_data"]   .= "<td>".$value['twitter_username']."</td>";
+      $json["tr_data"]   .= "</tr>";
+
+      $json["value_data"] = $value;
+      $length       = sizeOf($json["value_data"]);
+
+      foreach($json["value_data"] as $key=>$value)
+      {
+        $json["value_data"]['Error Description'] = $json["message"];
+      }
+    }
+   else /* DETERMINE IF LAST IN CSV */
+   {
+      Session::put("import_merchant_error", $error_data);
+      $json["status"] = "end";
+   }
+    return json_encode($json);
+  }
+  public function general_admin_merchants_import_error()
+  {
+      $_value = Session::get("import_merchant_error");
+
+      if($_value)
+      {
+         Excel::create("CroatiaMerchantTemplateError", function($excel) use($_value)
+         {
+            // Set the title
+             $excel->setTitle('Croatia');
+
+             // Chain the setters
+             $excel->setCreator('DigimaWebSolutions')
+                   ->setCompany('DigimaWebSolutions');
+
+             $excel->sheet('Template', function($sheet) use($_value) {
+               $header = [
+                           'prefix',
+                           'first_name',
+                           'surname',
+                           'email_address',
+                           'password',
+                           'company_name',
+                           'membership',
+                           'main_telephone',
+                           'alternative_phone',
+                           'fax_number',
+                           'business_address',
+                           'county',
+                           'city',
+                           'zip_code',
+                           'facebook_url',
+                           'twitter_username',
+                           'Error_Description'
+                        ];
+               $sheet->freezeFirstRow();
+                 $sheet->row(1, $header);
+                 foreach($_value as $key=>$value)
+                 {
+                  $sheet->row($key+2, $value);
+                 }
+
+             });
+         })->download('csv');
+      }
+      else
+      {
+         return Redirect::back();
+      }
   }
   public function general_admin_merchants_import_url()
   {

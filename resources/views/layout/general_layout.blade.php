@@ -157,6 +157,6 @@
         {{-- <script src="/assets/js/global.ajax.js"></script> --}}
         <!-- PAGES -->
         
-
+         @yield('script')
     </body>
 </html>
