@@ -117,15 +117,20 @@ class GeneralAdminController extends ActiveAuthController
 
     if($ctr != $data_length)
     {
-      $rules["first_name"]              = 'required';
-      $rules["surname"]                 = 'required';
-      $rules["main_telephone"]          = 'required';
-      $rules["alternative_phone"]       = 'required';
-      $rules["email_address"]           = 'email|required';
-      $rules["password"]                = 'required';
-      $rules["company_name"]            = 'required';
-      $rules["membership"]              = 'required';
-      $rules["facebook_url"]            = 'url';
+      $rules["first_name"]                = 'required';
+      $rules["surname"]                   = 'required';
+      $rules["main_telephone"]            = 'required';
+      $rules["alternative_phone"]         = 'required';
+      $rules["email_address"]             = 'email|required';
+      $rules["password"]                  = 'required';
+      $rules["company_name"]              = 'required';
+      $rules["membership"]                = 'required';
+      $rules["facebook_url"]              = 'url';
+      $rules["company_name"]              = 'required';
+      $rules["business_address"]          = 'required';
+      $rules["country"]                   = 'required';
+      $rules["city"]                      = 'required';
+      $rules["fax_number"]                = 'required';
 
       $validator = Validator::make($value, $rules);
       if($validator->fails())
