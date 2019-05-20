@@ -556,9 +556,9 @@ class FrontController extends Controller
           $data['countyList']       = TblCountyModel::orderBy('county_name','ASC')->get();
           $data["merchant_info"]    = TblBusinessModel::where('tbl_business.business_id', session('business_id'))
                                     ->BusinessAdmin()
-                                    ->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
-                                    ->join('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
-                                    ->join('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
+                                    ->leftjoin('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')
+                                    ->leftjoin('tbl_city','tbl_city.city_id','=','tbl_business.city_id')
+                                    ->leftjoin('tbl_county','tbl_county.county_id','=','tbl_business.county_id')
                                     ->first();  
           return view('front.pages.payment_merchant', $data);
         }
