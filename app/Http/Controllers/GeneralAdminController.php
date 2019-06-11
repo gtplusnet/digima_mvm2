@@ -172,6 +172,84 @@ class GeneralAdminController extends ActiveAuthController
 
                      $business_id = DB::table("tbl_business")->insertGetId($ins);
 
+                    /*CATEGORY*/ 
+                    $arr_cat_id = array();
+                    if($value['category'])
+                    {
+                        $arr_category = explode("/", $value['category']);
+                        if(count($arr_category) > 0)
+                        {
+                            foreach ($arr_category as $cat_key => $cat_val)
+                            {
+                                $sub_cat = explode("-", $cat_val);
+                                if(count($sub_cat) > 0)
+                                {
+                                    if(isset($sub_cat[0]))
+                                    {
+                                        $check = DB::table('tbl_business_category')->where("business_category_name", $sub_cat[0])->value("business_category_id");
+                                        if($check)
+                                        {
+                                            $cat_id = $check;
+                                        }
+                                        else
+                                        {
+                                            $cat_id = DB::table('tbl_business_category')->insertGetId(["business_category_name" => $sub_cat[0]]);
+                                        }
+                                        $arr_cat_id[] = $cat_id;
+                                    }
+                                    if(count($sub_cat) > 1)
+                                    {
+                                        foreach ($sub_cat as $key_sub_cat => $value_sub_cat) 
+                                        {
+                                            if($key_sub_cat != 0)
+                                            {
+                                                $check = DB::table('tbl_business_category')->where("business_category_name", $value_sub_cat)->value("business_category_id");
+                                                if($check)
+                                                {
+                                                    $subcat_id = $check;
+                                                }
+                                                else
+                                                {
+                                                    $subcat_id = DB::table('tbl_business_category')->insertGetId(["business_category_name" => $value_sub_cat,"parent_id"=> $cat_id]);
+                                                }
+                                                $arr_cat_id[] = $subcat_id;                                    
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if(count($arr_cat_id) > 0)
+                    {
+                        foreach ($arr_cat_id as $keycat => $valuecat) 
+                        {
+                            $ins_business_cat[$keycat]['business_category_id'] = $valuecat;
+                            $ins_business_cat[$keycat]['business_id'] = $business_id;
+                        }
+                        DB::table("tbl_business_tag_category")->insert($ins_business_cat);
+                    }
+                    /*END CATEGORY*/ 
+                    /*KEYWORDS*/
+                    $arr_keywords_id = array();
+                    if($value['keywords'])
+                    {
+                        $arr_keywords = explode("/", $value['keywords']);
+                        if(count($arr_keywords) > 0)
+                        {
+                            foreach ($arr_keywords as $key_words => $val_words)
+                            {
+                                $check = DB::table('tbl_business_tag_keywords')->where("keywords_name", $val_words)->where("business_id", $business_id)->first();
+                                if(!$check)
+                                {
+                                    DB::table('tbl_business_tag_keywords')->insert(["keywords_name" => $val_words,"business_id" => $business_id]);
+                                }
+                            }
+                        }
+                    }
+                    /*END KEYWORDS*/ 
+
                      $ins_bp['contact_prefix']           = $value['prefix'];
                      $ins_bp['contact_first_name']       = $value['first_name'];
                      $ins_bp['contact_last_name']        = $value['surname'];
