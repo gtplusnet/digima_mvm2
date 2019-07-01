@@ -110,11 +110,9 @@ class GeneralAdminController extends ActiveAuthController
 
     $value     = $request->value;
     $input     = $request->input;
-
     $ctr        = $request->ctr;
     $data_length  = $request->data_length;
     $error_data   = $request->error_data;
-
     if($ctr != $data_length)
     {
       $rules["first_name"]                = 'required';
@@ -130,7 +128,7 @@ class GeneralAdminController extends ActiveAuthController
       $rules["business_address"]          = 'required';
       $rules["country"]                   = 'required';
       $rules["city"]                      = 'required';
-      $rules["fax_number"]                = 'required';
+      // $rules["fax_number"]                = 'required';
 
       $validator = Validator::make($value, $rules);
       if($validator->fails())
@@ -148,8 +146,8 @@ class GeneralAdminController extends ActiveAuthController
 
          if(!$check_email)
          {
-            if(!$check_phone)
-            {
+            // if(!$check_phone)
+            // {
                if($get_country_id && $get_city_id)
                {
                   $membership_id = DB::table('tbl_membership')->where('membership_name',$value['membership'])->value('membership_id');
@@ -309,12 +307,12 @@ class GeneralAdminController extends ActiveAuthController
                   $json["status"]   = "error";
                   $json["message"]    = "Country or city not found";
                }
-            }
-            else
-            {
-                  $json["status"]   = "error";
-                  $json["message"]    = "Check main and alternative telephone";
-            }
+            // }
+            // else
+            // {
+            //       $json["status"]   = "error";
+            //       $json["message"]    = "Check main and alternative telephone";
+            // }
          }
          else
          {

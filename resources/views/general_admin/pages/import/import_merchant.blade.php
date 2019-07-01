@@ -133,7 +133,7 @@
         </br>
         <form role="form" method="post" class="import-validation">
             <div class="form-group">
-                <button class="form-control btn btn-primary btn-submit" disabled="disabled">Generate Import</button>
+                <button type="button" class="form-control btn btn-primary btn-submit-import" disabled="disabled">Generate Import</button>
             </div>
         </form>
     </div>

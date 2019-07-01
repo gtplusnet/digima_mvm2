@@ -71,15 +71,13 @@ function import_csv()
         // post the results
         $('#list').html(output);
         // enable button
-        $(".btn-submit").removeAttr("disabled");
+        $(".btn-submit-import").removeAttr("disabled");
     }
 
     function event_submit_button(evt)
     {
-        $(".btn-submit").click( function()
-        {
+        $(".btn-submit-import").click(function(){
             $(this).attr("disabled","disabled");
-
             Load_array(main_file);
         });
     }
