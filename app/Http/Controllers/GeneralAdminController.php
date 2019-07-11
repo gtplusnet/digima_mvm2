@@ -331,7 +331,7 @@ class GeneralAdminController extends ActiveAuthController
       $json["tr_data"]  = "<tr>";
       $json["tr_data"]   .= "<td class='$status_color'>".$json["status"]."</td>";
       $json["tr_data"]   .= "<td nowrap>".$json["message"]."</td>";
-      // $json["tr_data"]   .= "<td nowrap>".$value['prefix']."</td>";
+      $json["tr_data"]   .= "<td nowrap>".'-'."</td>";
       $json["tr_data"]   .= "<td nowrap>".$value['first_name']."</td>";
       $json["tr_data"]   .= "<td>".$value['surname']."</td>";
       $json["tr_data"]   .= "<td nowrap>".$value['email_address']."</td>";
