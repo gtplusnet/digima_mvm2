@@ -324,7 +324,7 @@ cellspacing: 0;
                         <table id="example" class="display table table-bordered table-design">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Name 1</th>
                                     <th>Business Name</th>
                                     <th>Membership</th>
                                     <th>Transaction</th>
