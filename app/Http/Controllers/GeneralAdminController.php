@@ -349,13 +349,13 @@ class GeneralAdminController extends ActiveAuthController
       // $json["tr_data"]   .= "<td>".$value['twitter_username']."</td>";
       $json["tr_data"]   .= "</tr>";
 
-      $json["value_data"] = $value;
+      // $json["value_data"] = $value;
       $length       = sizeOf($json["value_data"]);
 
-      foreach($json["value_data"] as $key=>$value)
-      {
-        $json["value_data"]['Error Description'] = $json["message"];
-      }
+      // foreach($json["value_data"] as $key=>$value)
+      // {
+        // $json["value_data"]['Error Description'] = $json["message"];
+      // }
     }
    else /* DETERMINE IF LAST IN CSV */
    {
