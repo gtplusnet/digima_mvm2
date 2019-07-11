@@ -60,7 +60,7 @@ cellspacing: 0;
         <li class="active li_me"><a data-toggle="pill" href="#customer">Send Invoice</a></li>
         <li class="li_me"><a data-toggle="pill" href="#agentAdded">Agent Added</a></li>
         <li class="li_me"><a data-toggle="pill" href="#pending">Pending Merchant</a></li>
-        <li class="li_me"><a data-toggle="pill" href="#registeredShow">Activated Merchant</a></li>
+        <li class="li_me"><a data-toggle="pill" href="#registered">Activated Merchant</a></li>
     </ul>
     <div class="tab-content" style="">
         <div id="customer" class="tab-pane fade in  active">
@@ -324,7 +324,7 @@ cellspacing: 0;
                         <table id="example" class="display table table-bordered table-design">
                             <thead>
                                 <tr>
-                                    <th>Name 1</th>
+                                    <th>Name</th>
                                     <th>Business Name</th>
                                     <th>Membership</th>
                                     <th>Transaction</th>
