@@ -164,7 +164,7 @@ class GeneralAdminController extends ActiveAuthController
                      $ins['twitter_url']                 = $value['twitter_username'];
                      $ins['membership']                  = $membership_id;
                      $ins['transaction_status']          = 1;
-                     $ins['business_status']             = 1;
+                     $ins['business_status']             = 3;
                      $ins['date_transact']               = date("Y/m/d");
                      $ins['date_created']                = date("Y/m/d");
 
