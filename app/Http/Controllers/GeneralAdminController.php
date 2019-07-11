@@ -292,6 +292,12 @@ class GeneralAdminController extends ActiveAuthController
                          'desc' => 'none', 'business_id' => $business_id)
                      ));
 
+                     $update_user_id = DB::table('tbl_business')->whereNull('user_id')->leftjoin('tbl_user_account','tbl_user_account.business_id','=','tbl_business.business_id')->get();
+                     foreach ($update_user_id as $key => $value) 
+                     {
+                        DB::table('tbl_business')->where("business_id", $value->business_id)->update(['user_id'=>$value->user_account_id]);
+                     }
+
                      $json["status"]   = "success";
                      $json["message"]  = "Success";
                      $json["item_id"]  = 1;
@@ -494,9 +500,9 @@ class GeneralAdminController extends ActiveAuthController
   {
       $data['user']               = Self::global();
       $data['page']               = 'Merchant';
-      $data['clients']            = TblBusinessModel::where('business_status', 3)->BusinessAdmin()->join('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'client');
+      $data['clients']            = TblBusinessModel::where('business_status', 3)->BusinessAdmin()->leftjoin('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'client');
       $data['agentAdded']         = TblBusinessModel::where('business_status', 20)->BusinessAdmin()->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'agent_added');
-      $data['pending_clients']    = TblBusinessModel::where('business_status', 4)->BusinessAdmin()->join('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'pending_client');
+      $data['pending_clients']    = TblBusinessModel::where('business_status', 4)->BusinessAdmin()->leftjoin('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'pending_client');
       $data['registered_clients'] = TblBusinessModel::where('business_status', 5)->BusinessAdmin()->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'registered_client');
       foreach ($data['registered_clients'] as $key => $registered_clients) 
       {
