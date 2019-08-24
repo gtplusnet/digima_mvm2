@@ -250,12 +250,18 @@ width:100%;
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_free_list as $free_val)
-								<tr>
-									<th>{{$free_val->business_name}}</th>
-									<th>{{$free_val->city_name}}</th>
-								</tr>
-								@endforeach
+								@if(count($_free_list) > 0)
+									@foreach($_free_list as $free_val)
+									<tr>
+										<th>{{$free_val->business_name}}</th>
+										<th>{{$free_val->city_name}}</th>
+									</tr>
+									@endforeach
+								@else
+									<tr>
+										<td colspan="2">NO DATA</td>
+									</tr>
+								@endif
 							</tbody>
 						</table>
 					</div>
