@@ -139,7 +139,11 @@ width:100%;
 							@foreach($_businessResult as $business_list)
 							<div class="col-md-4 col-sm-4 col-xs-6 per-business">
 								<div class="business-img-holder">
-									<img class="home-image" src="{{$business_list->business_banner}}">
+									@if($business_list->business_banner)
+									<img class="home-image" src="{{$business_list->business_banner ? $business_list->business_banner : 'assets/img/free-listing-business.png'}}">
+									@else
+									<img class="home-image" style="height: 190px;width: 250;object-fit: contain;" src="{{$business_list->business_banner ? $business_list->business_banner : 'assets/img/free-listing-business.png'}}">
+									@endif
 								</div>
 								<div class="business-info-holder">
 									<div class="business-list-details">
