@@ -259,7 +259,7 @@ width:100%;
 									@endforeach
 								@else
 									<tr>
-										<td colspan="2">NO DATA</td>
+										<td class="text-center" colspan="2">NO DATA</td>
 									</tr>
 								@endif
 							</tbody>
