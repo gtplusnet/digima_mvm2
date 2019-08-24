@@ -362,7 +362,7 @@ class FrontController extends Controller
         if($postalCode=="")
         {
             
-            $data['_businessResult'] = TblBusinessModel::where('tbl_business.county_id',$countyID)->Business($businessKeyword)
+            $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id')->where('tbl_business.county_id',$countyID)->Business($businessKeyword)
                                     ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_business.membership','DESC')
                                     ->paginate(9);  
@@ -370,7 +370,7 @@ class FrontController extends Controller
         else
         {
             
-            $data['_businessResult'] = TblBusinessModel::where('tbl_business.county_id',$countyID)->Businesses($businessKeyword,$postalCode)
+            $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id')->where('tbl_business.county_id',$countyID)->Businesses($businessKeyword,$postalCode)
                                     ->groupBy('tbl_business.business_id')
                                     ->orderBy('tbl_business.membership','DESC')
                                     ->paginate(9);  
@@ -385,7 +385,10 @@ class FrontController extends Controller
         
         $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
-
+        $data["_free_list"]         = TblBusinessModel::BusinessFront(6,3)
+                                                      ->leftjoin("tbl_city","tbl_city.city_id","=","tbl_business.city_id")
+                                                      ->get();
+//arcy
         return view('front.pages.searchresult',$data); 
     }
     public function business(Request $request,$id)
