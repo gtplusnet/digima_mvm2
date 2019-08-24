@@ -385,7 +385,7 @@ class FrontController extends Controller
         
         $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
         $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
-        $data["_free_list"]         = TblBusinessModel::BusinessFront(6,3)
+        $data["_free_list"]         = TblBusinessModel::BusinessFront(6,9)
                                                       ->leftjoin("tbl_city","tbl_city.city_id","=","tbl_business.city_id")
                                                       ->get();
 //arcy
