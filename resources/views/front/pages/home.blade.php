@@ -237,6 +237,29 @@ width:100%;
 						@endforeach
 					</div>
 				</div>
+				<div class="payment-containers" style="margin-bottom:50px;">
+					<div class="payment-title transform-uppercase">
+						OTHER BUSINESSES
+					</div>
+					<div class="payment-content table-responsive">
+						<table class="table table-bordered table hovered">
+							<thead>
+								<tr>
+									<th class="text-center">Business Name</th>
+									<th class="text-center">Location</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($_free_list as $free_val)
+								<tr>
+									<th>{{$free_val->business_name}}</th>
+									<th>{{$free_val->city_name}}</th>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

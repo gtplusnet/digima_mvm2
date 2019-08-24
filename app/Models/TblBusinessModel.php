@@ -81,7 +81,7 @@ class TblBusinessModel extends Model
     {
         $query  ->where('business_status',$status)
                 ->where('membership',$membership)
-                ->join('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
+                ->leftjoin('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                 ->orderBy('tbl_business.business_name','ASC')
                 ->groupBy('tbl_business.business_id');
         return $query;
