@@ -362,8 +362,11 @@ class FrontController extends Controller
         $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id');
         if($postalCode)
         {
-            
             $data['_businessResult'] = $data['_businessResult']->Business($businessKeyword, $postalCode);  
+        }
+        else
+        {
+            $data['_businessResult'] = $data['_businessResult']->Business($businessKeyword);  
         }
         if($countyID)
         {
