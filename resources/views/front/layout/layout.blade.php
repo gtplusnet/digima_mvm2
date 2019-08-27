@@ -188,7 +188,7 @@
                         <input  type="text" translate="yes" class="business-name-textbox transform-capitalize" name="businessKeyword"  placeholder="Poslovanje, kategorija ili tipkovnica.." required="true">
                     </div>
                     <div class="col-md-2 searchfields-format ">
-                        <select class="counties-selectbox" required="true" name="countyDropdown"  default>
+                        <select class="counties-selectbox" name="countyDropdown"  default>
                             <option value="" disabled selected>Županja</option>
                             @foreach($countyList as $countyListItem)
                             <option class="notranslate" value="{{ $countyListItem->county_id }}">{{ $countyListItem->county_name }}</option>

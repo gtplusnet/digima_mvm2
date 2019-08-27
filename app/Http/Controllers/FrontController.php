@@ -359,22 +359,20 @@ class FrontController extends Controller
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID']        = $countyID = $request->countyId;
         $data['postal_code']     = $postalCode = $request->cityOrpostalCode;
-        if($postalCode=="")
+        $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id');
+        if($postalCode)
         {
             
-            $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id')->where('tbl_business.county_id',$countyID)->Business($businessKeyword)
-                                    ->groupBy('tbl_business.business_id')
-                                    ->orderBy('tbl_business.membership','DESC')
-                                    ->paginate(9);  
+            $data['_businessResult'] = $data['_businessResult']->Business($businessKeyword, $postalCode);  
         }
-        else
+        if($countyID)
         {
             
-            $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id')->where('tbl_business.county_id',$countyID)->Businesses($businessKeyword,$postalCode)
-                                    ->groupBy('tbl_business.business_id')
-                                    ->orderBy('tbl_business.membership','DESC')
-                                    ->paginate(9);  
+            $data['_businessResult'] = $data['_businessResult']->where('tbl_business.county_id',$countyID);  
         }
+        $data['_businessResult'] = $data['_businessResult']->groupBy('tbl_business.business_id')
+                                                            ->orderBy('tbl_business.membership','DESC')
+                                                            ->paginate(9);
         $data['countyList']         = TblCountyModel::orderBy('county_name','ASC')->get();
         $data['contact_us']         = TblContactUs::first();
         $data['cityList']           = TblCityModel::get();
