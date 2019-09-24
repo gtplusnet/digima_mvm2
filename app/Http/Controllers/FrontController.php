@@ -72,7 +72,7 @@ class FrontController extends Controller
         $data["_featured_list"]     = TblBusinessModel::BusinessFront(5,1)->get();
         $data["_free_list"]         = TblBusinessModel::BusinessFront(6,9)
                                                       ->leftjoin("tbl_city","tbl_city.city_id","=","tbl_business.city_id")
-                                                      ->get();
+                                                      ->paginate(10);
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
 
@@ -359,7 +359,9 @@ class FrontController extends Controller
         $data['businessKeyword'] = $businessKeyword = $request->businessKeyword;
         $data['countyID']        = $countyID = $request->countyId;
         $data['postal_code']     = $postalCode = $request->cityOrpostalCode;
-        $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id');
+        $data['_businessResult'] = TblBusinessModel::selectRaw('*, tbl_business.business_id as orig_business_id')
+                                                   ->where("business_status", '!=',6)
+                                                   ->where("membership", '!=',9);
         if($postalCode)
         {
             $data['_businessResult'] = $data['_businessResult']->Business($businessKeyword, $postalCode);  
@@ -388,7 +390,7 @@ class FrontController extends Controller
         $data['_most_viewed']       = TblReportsModel::BusinessFront(5,1)->get();
         $data["_free_list"]         = TblBusinessModel::BusinessFront(6,9)
                                                       ->leftjoin("tbl_city","tbl_city.city_id","=","tbl_business.city_id")
-                                                      ->get();
+                                                      ->paginate(10);
 //arcy
         return view('front.pages.searchresult',$data); 
     }

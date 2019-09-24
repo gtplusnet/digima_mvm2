@@ -237,7 +237,7 @@ width:100%;
 						@endforeach
 					</div>
 				</div>
-				<div class="payment-containers" style="margin-bottom:50px;">
+				<div class="payment-containers hidden" style="margin-bottom:50px;">
 					<div class="payment-title transform-uppercase">
 						OTHER BUSINESSES
 					</div>
@@ -264,6 +264,9 @@ width:100%;
 								@endif
 							</tbody>
 						</table>
+					</div>
+					<div class="col-md-12 pagination">
+						{!! $_free_list->render() !!}
 					</div>
 				</div>
 			</div>

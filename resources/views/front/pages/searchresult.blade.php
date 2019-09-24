@@ -148,10 +148,14 @@ width:100%;
 								<div class="business-info-holder">
 									<div class="business-list-details">
 										<div class="business-list-name" style="height:50px;">
-											@if(strlen($business_list->business_name) <= 30)
-											<a  class="notranslate" href="/business/{{$business_list->orig_business_id}}">{{$business_list->business_name}}</a>
+											@if($business_list->business_status == 6 && $business_list->membership == 9)
+											{{$business_list->business_name}}
 											@else
-											<a  class="notranslate" href="/business/{{$business_list->orig_business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+												@if(strlen($business_list->business_name) <= 30)
+												<a  class="notranslate" href="/business/{{$business_list->orig_business_id}}">{{$business_list->business_name}}</a>
+												@else
+												<a  class="notranslate" href="/business/{{$business_list->orig_business_id}}">{{substr($business_list->business_name,0, 40)}}...</a>
+												@endif
 											@endif
 										</div>
 										<div class="business-list-phone">
@@ -234,9 +238,38 @@ width:100%;
 						</div>
 						@endif
 					</div>
-					<div class="payment-containers" style="margin-bottom:50px;">
-					
-				</div>
+					<div class="payment-containers" style="margin-bottom:20px;">
+						<div class="payment-title transform-uppercase">
+						OTHER BUSINESSES
+						</div>
+						<div class="payment-content table-responsive">
+							<table class="table table-bordered table hovered">
+								<thead>
+									<tr>
+										<th class="text-center">Business Name</th>
+										<th class="text-center">Location</th>
+									</tr>
+								</thead>
+								<tbody>
+									@if(count($_free_list) > 0)
+										@foreach($_free_list as $free_val)
+										<tr>
+											<th>{{$free_val->business_name}}</th>
+											<th>{{$free_val->city_name}}</th>
+										</tr>
+										@endforeach
+									@else
+										<tr>
+											<td class="text-center" colspan="2">NO DATA</td>
+										</tr>
+									@endif
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-12 pagination">
+							{!! $_free_list->render() !!}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
