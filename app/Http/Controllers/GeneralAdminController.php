@@ -1030,7 +1030,7 @@ class GeneralAdminController extends ActiveAuthController
             $name       = $request->user_first_name." ".$request->user_last_name;
             $email      = $userData->user_email;
             $password   = Crypt::decrypt($userData->user_password);
-            $link       = 'http://mvm.digimahouse.com/login';
+            $link       = 'http://mvm.digimahouse.com/user/login';
             $data       = array('name'=>$name,'email'=>$email,'password'=>$password,'link'=>$link);
             $check_mail = Mail::send('email.email_file', $data, function($message) use($data) 
                       {
