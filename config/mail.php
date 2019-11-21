@@ -118,7 +118,13 @@ return [
     | you may inspect the message. This is great for local development.
     |
     */
-
+    'stream' => [
+       'ssl' => [
+          'allow_self_signed' => true,
+          'verify_peer' => false,
+          'verify_peer_name' => false,
+       ],
+    ],
     'pretend' => env('MAIL_PRETEND', false),
 
 ];
