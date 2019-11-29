@@ -1056,14 +1056,17 @@ class GeneralAdminController extends ActiveAuthController
     }
     public function general_admin_update_user(Request $request)
     {
+        $userID                           = TblUserInfoModel::whereUser_info_id($request->user_info_id)->value("user_id");
         $userInfoData['user_first_name']  = $request->user_first_name;
         $userInfoData['user_last_name']   = $request->user_last_name;
         $userInfoData['user_gender']      = $request->user_gender;
         $userInfoData['user_phone_number']= $request->user_phone_number;
         $userInfoData['user_address']     = $request->user_address;
+        $user['user_email']               = $request->user_email;
 
         TblUserInfoModel::where('user_info_id',$request->user_info_id)->update($userInfoData);
-        
+        TblUserModel::whereUser_id($userID)->update($user);
+
         return "<div class='alert alert-success'><strong>Success!</strong>User Updated Successfully!</div>";  
     }
     public function general_admin_update_team_info(Request $request)
@@ -1644,9 +1647,94 @@ class GeneralAdminController extends ActiveAuthController
                                       ->join('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
                                       ->join('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
                                       ->get();
+      
+      $data['_supervisor_id']          = collect($data['_supervisor']->toArray())->pluck('user_id')->toArray();
+      $data['_agent_id']               = collect($data['_agent']->toArray())->pluck('user_id')->toArray();
+      $data['_admin_id']               = collect($data['_admin']->toArray())->pluck('user_id')->toArray();
+      $data['_team_id']                = collect($data['_team_archived']->toArray())->pluck('team_id')->toArray();
+      $data['_payment_id']             = collect($data['_payment_archived']->toArray())->pluck('payment_method_id')->toArray();
+      $data['_membership_id']          = collect($data['_membership_archived']->toArray())->pluck('membership_id')->toArray();
+      $data['_category_id']            = collect($data['_category_archived']->toArray())->pluck('business_category_id')->toArray();
+      $data['_merchant_id']            = collect($data['_merchant']->toArray())->pluck('business_id')->toArray();
 
       return view('general_admin.pages.archived',$data);
     }
+    public function delete(Request $request)
+    {
+        switch ($request->table)
+        {
+          case 'merchant':
+              if($request->type == 'one')
+              {
+                TblBusinessModel::whereBusiness_id($request->id)->delete();
+                TblUserAccountModel::whereBusiness_id($request->id)->delete();
+                return "<div class='alert alert-success' >Success! Merchant is already deleted</div>";
+              }
+              else
+              {
+                TblBusinessModel::whereIn('business_id',explode(",",$request->id))->delete();
+                TblUserAccountModel::whereIn('business_id',explode(",",$request->id))->delete();
+                return "<div class='alert alert-success' >Success! All Merchants are already deleted</div>";
+              }
+            break;
+          case 'user':
+              if($request->type == 'one')
+              {
+                TblUserModel::whereUser_id($request->id)->delete();
+                return "<div class='alert alert-success' >Success! User is already deleted</div>";
+              }
+              else
+              {
+                TblUserModel::whereIn('user_id',explode(",",$request->id))->delete();
+                return "<div class='alert alert-success' >Success! All Users are already deleted</div>";
+              }
+          case 'payment':
+              if($request->type == 'one')
+              {
+                TblPaymentMethod::wherePayment_method_id($request->id)->delete();
+                return "<div class='alert alert-success' >Success! Payment is already deleted</div>";
+              }
+              else
+              {
+                TblPaymentMethod::whereIn('payment_method_id',explode(",",$request->id))->delete();
+                return "<div class='alert alert-success' >Success! All Payments are already deleted</div>";
+              }
+          case 'membership':
+              if($request->type == 'one')
+              {
+                TblMembeshipModel::whereMembership_id($request->id)->delete();
+                return "<div class='alert alert-success' >Success! Membership is already deleted</div>";
+              }
+              else
+              {
+                TblMembeshipModel::whereIn('membership_id',explode(",",$request->id))->delete();
+                return "<div class='alert alert-success' >Success! All Memberships are already deleted</div>";
+              }
+          case 'team':
+              if($request->type == 'one')
+              {
+                 TblTeamModel::whereTeam_id($request->id)->delete();
+                 return "<div class='alert alert-success' >Success! Team is already deleted</div>";
+              }
+              else
+              {
+                TblTeamModel::whereIn('team_id',explode(",",$request->id))->delete();
+                 return "<div class='alert alert-success' >Success! All Teams are already deleted</div>";
+              }
+          case 'category':
+              if($request->type == 'one')
+              {
+                 TblBusinessCategoryModel::whereBusiness_category_id($request->id)->delete();
+                 return "<div class='alert alert-success' >Success! Category is already deleted</div>";
+              }
+              else
+              {
+                 TblBusinessCategoryModel::whereIn('business_category_id',explode(",",$request->id))->delete();
+                 return "<div class='alert alert-success' >Success! All Categories are already deleted</div>";
+              }
+        }
+    }
+
     public function archived_restore_merchant(Request $request)
     {
       $business_id  = $request->id;

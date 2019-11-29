@@ -288,12 +288,7 @@ Route::post('/general_admin/archived/restore_team', 				'GeneralAdminController@
 
 
 
-
-
-
-
-
-
+Route::any('/general_admin/archived/delete', 				'GeneralAdminController@delete');
 
 
 

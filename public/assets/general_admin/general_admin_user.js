@@ -333,7 +333,7 @@ function manage_user()
 	{
 		$('body').on('click','#updateUser',function()
 		{
-			alert($(this).data('user_info_id'));
+			console.log($("#old_email").val());
 			manageUserData.user_info_id     = $(this).data('user_info_id');
 			manageUserData.user_first_name 	= $("#old_first_name").val();
 			manageUserData.user_last_name 	= $("#old_last_name").val();

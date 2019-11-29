@@ -52,6 +52,7 @@
 			<div class="row">
 				<div id="merchantSuccess">
 				</div>
+				<input type="hidden" id="merchant_id" value="{{implode(",",$_merchant_id)}}">
 				<div class="table-responsive">
 					<table class="table table-bordered " style="background-color: #fff !important;width:100%">
 						<thead>
@@ -61,7 +62,7 @@
 								<th>Contact Person</th>
 								<th>Phone</th>
 								<th>Membership</th>
-								<th>Action</th>
+								<th>Action 	<button type="button" class="btn btn-danger merchant-delete_all" style="float:right">DELETE ALL MERCHANTS</button></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -73,6 +74,7 @@
 								<td>{{ $merchant->business_phone}}</td>
 								<td>{{ $merchant->membership_name}}</td>
 								<td>
+									<button type="button" data-status="{{ $merchant->business_status}}" data-id="{{ $merchant->business_id}}" class="btn btn-danger merchant-delete">DELETE</button>
 									<button type="button" data-status="{{ $merchant->business_status}}" data-id="{{ $merchant->business_id}}" class="btn btn-primary merchant-restore">RESTORE</button>
 								</td>
 							</tr>
@@ -80,10 +82,13 @@
 						</tbody>
 					</table>
 				</div>
+				<div>
+				</div>
 			</div>
 		</div>
 		<div id="generaladmin" class=" tab-pane fade in  ">
 			<div class="row">
+				<input type="hidden" id="genadmin" value="{{implode(",",$_admin_id)}}">
 				<div class="table-responsive">
 					<table class="table table-bordered" style="background-color: #fff !important;width:100%">
 						<thead>
@@ -91,7 +96,7 @@
 								<th>ID</th>
 								<th>Full Name</th>
 								<th>Email</th>
-								<th>Action</th>
+								<th>Action 	<button type="button" class="btn btn-danger genadmin-delete_all" style="float:right">DELETE ALL GEN. ADMIN</button></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,6 +106,7 @@
 								<td>{{ $data->user_first_name.' '.$data->user_last_name}}</td>
 								<td>{{ $data->user_email }}</td>
 								<td>
+									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-danger user-delete">DELETE</button>
 									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-primary user-restore">RESTORE</button>
 								</td>
 							</tr>
@@ -112,6 +118,7 @@
 		</div>
 		<div id="supervisor" class="tab-pane fade in">
 			<div class="row">
+				<input type="hidden" id="supvisor" value="{{implode(",",$_supervisor_id)}}">
 				<div class="table-responsive">
 					<table class="table table-bordered" style="background-color: #fff !important;width:100%">
 						<thead>
@@ -119,7 +126,7 @@
 								<th>ID</th>
 								<th>Full Name</th>
 								<th>Email</th>
-								<th>Action</th>
+								<th>Action <button type="button" class="btn btn-danger supervisor-delete_all" style="float:right">DELETE ALL SUPERVISORS</button></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -129,6 +136,7 @@
 								<td>{{ $data->user_first_name.' '.$data->user_last_name}}</td>
 								<td>{{ $data->user_email }}</td>
 								<td>
+									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-danger user-delete">DELETE</button>
 									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-primary user-restore">RESTORE</button>
 								</td>
 							</tr>
@@ -140,6 +148,7 @@
 		</div>
 		<div id="agent" class="tab-pane fade in">
 			<div class="row">
+				<input type="hidden" id="agents" value="{{implode(",",$_agent_id)}}">
 				<div class="table-responsive">
 					<table class="table table-bordered" style="background-color: #fff !important;width:100%">
 						<thead>
@@ -147,7 +156,7 @@
 								<th>ID</th>
 								<th>Full Name</th>
 								<th>Email</th>
-								<th>Action</th>
+								<th>Action<button type="button" class="btn btn-danger agent-delete_all" style="float:right">DELETE ALL AGENTS</button></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -157,6 +166,7 @@
 								<td>{{ $data->user_first_name.' '.$data->user_last_name}}</td>
 								<td>{{ $data->user_email }}</td>
 								<td>
+									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-danger user-delete">DELETE</button>
 									<button type="button" data-id="{{ $data->user_id}}" class="btn btn-primary user-restore">RESTORE</button>
 								</td>
 							</tr>
@@ -179,13 +189,14 @@
 				<div class="tab-content" style="background-color: #fcfcfc !important;">
 					<div id="Paymentmethod" class=" tab-pane fade in active">
 						<div class="row">
+							<input type="hidden" id="payment" value="{{implode(",",$_payment_id)}}">
 							<div class="table-responsive">
 								<table class="table table-bordered" style="background-color: #fff !important;width:100%; font-style: 50px" >
 									<thead>
 										<tr>
 											<th>Payment ID</th>
 											<th>Payment Name</th>
-											<th>Action</th>
+											<th>Action <button type="button" class="btn btn-danger payment-delete_all" style="float:right">DELETE ALL PAYMENTS</button></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -194,6 +205,7 @@
 											<td>{{ $payment->payment_method_id}}</td>
 											<td>{{$payment->payment_method_name}}</td>
 											<td>
+												<button type="button" data-id="{{ $payment->payment_method_id}}" class="btn btn-danger payment-delete">DELETE</button>
 												<button type="button" data-id="{{ $payment->payment_method_id}}" class="btn btn-primary payment-restore">RESTORE</button>
 											</td>
 										</tr>
@@ -205,6 +217,7 @@
 					</div>
 					<div id="membership" class=" tab-pane fade in">
 						<div class="row">
+							<input type="hidden" id="memberships" value="{{implode(",",$_membership_id)}}">
 							<div class="table-responsive">
 								<table class="table table-bordered" style="background-color: #fff !important;width:100%">
 									<thead>
@@ -213,7 +226,7 @@
 											<th>Membership Name</th>
 											<th>Price</th>
 											<th>Information</th>
-											<th>Action</th>
+											<th>Action <button type="button" class="btn btn-danger membership-delete_all" style="float:right">DELETE ALL MEMBERSHIP</button></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -224,6 +237,7 @@
 											<td>{{ $membership->membership_price}}</td>
 											<td>{{ $membership->membership_info}}</td>
 											<td>
+												<button type="button" data-id="{{ $membership->membership_id}}" class="btn btn-danger membership-delete">DELETE</button>
 												<button type="button" data-id="{{ $membership->membership_id }}" class="btn btn-primary membership-restore">RESTORE</button>
 											</td>
 										</tr>
@@ -235,6 +249,7 @@
 					</div>
 					<div id="team" class=" tab-pane fade in">
 						<div class="row">
+							<input type="hidden" id="teams" value="{{implode(",",$_team_id)}}">
 							<div class="table-responsive">
 								<table class="table table-bordered" style="background-color: #fff !important;width:100%">
 									<thead>
@@ -242,7 +257,7 @@
 											<th>Team ID</th>
 											<th>Team Name</th>
 											<th>Information</th>
-											<th>Action</th>
+											<th>Action <button type="button" class="btn btn-danger team-delete_all" style="float:right">DELETE ALL TEAMS</button></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -252,6 +267,7 @@
 											<td>{{ $team->team_name}}</td>
 											<td>{{ $team->team_information}}</td>
 											<td>
+												<button type="button" data-id="{{ $team->team_id}}" class="btn btn-danger team-delete">DELETE</button>
 												<button type="button" data-id="{{ $team->team_id }}" class="btn btn-primary team-restore">RESTORE</button>
 											</td>
 										</tr>
@@ -263,6 +279,7 @@
 					</div>
 					<div id="categories" class=" tab-pane fade in">
 						<div class="row">
+							<input type="hidden" id="category" value="{{implode(",",$_category_id)}}">
 							<div class="table-responsive">
 								<table class="table table-bordered" style="background-color: #fff !important;width:100%">
 									<thead>
@@ -270,7 +287,7 @@
 											<th>Category ID</th>
 											<th>Category Name</th>
 											<th>Information</th>
-											<th>Action</th>
+											<th>Action  <button type="button" class="btn btn-danger category-delete_all" style="float:right">DELETE ALL CATEGORIES</button></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -280,6 +297,7 @@
 											<td>{{ $category->business_category_name}}</td>
 											<td>{{ $category->business_category_information }}</td>
 											<td>
+												<button type="button" data-id="{{ $category->business_category_id}}" class="btn btn-danger category-delete">DELETE</button>
 												<button type="button" data-id="{{ $category->business_category_id }}" class="btn btn-primary category-restore">RESTORE</button>
 											</td>
 										</tr>
@@ -308,7 +326,7 @@
 						<input type="hidden" class="restore_id" id="restore_id"/>
 						<input type="hidden" class="restore_link" id="restore_link"/>
 						<input type="hidden" class="restore_status" id="restore_status"/>
-						<button type="button" class=" btn btn-danger" id="restoreBtn">Yes</button></a>
+						<button type="button" class=" btn btn-primary" id="restoreBtn">Yes</button></a>
 						<button type="button" class="btn btn-default"  data-dismiss="modal">No</button>
 					</center>
 				</div>
@@ -316,6 +334,29 @@
 		</div>
 	</div>
 </div>
+	
+<div class="modal fade" id="deleteModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content" id="showSuccesss">
+			<div class="modal-body row" id="show_user">
+				<div class="col-sm-12">
+					<h4 class="modal-title">Are You sure?</h4>
+				</div>
+				<div class="col-sm-12">
+					<center>
+						<input type="hidden" id="type">
+ 						<input type="hidden" class="delete_id" id="delete_id"/>
+						<input type="hidden" class="restore_link" id="restore_link"/>
+						<input type="hidden" class="table" id="table"/>
+						<button type="button" class=" btn btn-danger" id="deleteBtn">Yes</button></a>
+						<button type="button" class="btn btn-default"  data-dismiss="modal">No</button>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" id="restoreSuccessModal" role="dialog">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content" id="showSuccesss">
