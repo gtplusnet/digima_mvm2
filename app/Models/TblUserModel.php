@@ -31,9 +31,9 @@ class TblUserModel extends Model
     }
     public function scopeTeamUser($query)
     {
-        $query  ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
-                ->join('tbl_user_team','tbl_user_team.user_id','=','tbl_user.user_id')
-                ->join('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id');
+        $query  ->leftjoin('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')
+                ->leftjoin('tbl_user_team','tbl_user_team.user_id','=','tbl_user.user_id')
+                ->leftjoin('tbl_team','tbl_team.team_id','=','tbl_user_team.team_id');
         return $query;
     }
 

@@ -319,7 +319,7 @@ class SuperVisorController extends ActiveAuthController
         foreach($data['viewteam'] as $key=>$team)
         {
           $data['viewteam'][$key]['sum_of_calls']  = TblUserTeamModel::where('team_id',$team->team_id)->selectRaw('sum(user_calls) as sum_of_calls')->where('tbl_user_team.archived',0)->value('sum_of_calls');
-          $data['viewteam'][$key]['viewagent']  = TblUserTeamModel::where('tbl_user_team.archived',0)->where('tbl_user_team.team_id',$team->team_id)->where('tbl_user.user_access_level','AGENT')->TeamAgent()->get();
+          $data['viewteam'][$key]['viewagent']  = TblUserTeamModel::where('tbl_user_team.archived',0)->where('tbl_user_team.team_id',$team->team_id)->where('tbl_user.user_access_level','AGENT')->where('tbl_user.archived',0)->TeamAgent()->get();
         }
         $data['_agent_team']= TblTeamModel::where('archived',0)->where('supervisor_id',session('user_id'))->get();
         

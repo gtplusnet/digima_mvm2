@@ -173,7 +173,7 @@ function manage_user()
 		$(document).on('click','#addUserBtn',function()
 		{
 		    
-			if($('#team_id').val()==0)
+			if($('#team_id').val()==0 && $('.addtitle').text() == 'ADD USER')
 			{
 				globals.global_tostr('TEAM');
 			}
@@ -290,7 +290,7 @@ function manage_user()
 		        $("#user_ref").val(ref);
 		        $("#name_assign").val(name);
 		        $('#assignUser').modal('show');
-		     }
+		    }
 		    if ($(this).val() == "delete") 
 		    {
 		    	var user_id = $(this).data("id");
@@ -301,6 +301,22 @@ function manage_user()
 	}
 	function add_team()
 	{ 
+		$('body').on('click',".addsupervisor",function() 
+		{	
+			$('.addtitle').html('ADD SUPERVISOR');
+			$('.team_field').css('display','none');
+			$('.team_label').css('display','none');
+
+		});
+
+		$('body').on('click',".addagent",function() 
+		{	
+			$('.addtitle').html('ADD USER');
+			$('.team_field').css('display','');
+			$('.team_label').css('display','');
+
+		});
+
 		$('body').on('click','#add_team',function()
 		{
 			var team_name = $('#team_name').val();

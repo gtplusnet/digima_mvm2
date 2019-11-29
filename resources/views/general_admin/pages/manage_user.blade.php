@@ -144,7 +144,7 @@
 							</form>
 						</div>
 						<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-							<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New User</button>
+							<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success addagent" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New User</button>
 						</div>
 					
 				</div>
@@ -180,7 +180,7 @@
 											<option value="">Action</option>
 											<option value="view">View</option>
 											<option value="assign">Assign</option>
-											<option value="delete">Delete</option>
+											<option value="delete">Disable</option>
 										</select>
 									</td>
 								</tr>
@@ -275,7 +275,7 @@
 							</form>
 						</div>
 						<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-							<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New User</button>
+							<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success addsupervisor" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Supervisor</button>
 						</div>
 					</div>
 				</div>
@@ -315,7 +315,7 @@
 												<option value="">Action</option>
 												<option value="view">View</option>
 												<option value="assign">Assign</option>
-												<option value="delete">Delete</option>
+												<option value="delete">Disable</option>
 											</select>
 										</td>
 									</tr>
@@ -407,14 +407,14 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" onClick="window.location.reload();" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">ADD USER</h4>
+					<h4 class="modal-title addtitle">ADD USER</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="body-content">
-						<div class="form-group col-md-2">
+						<div class="form-group col-md-2 team_label">
 							<label for="business_name" >Team</label>
 						</div>
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-4 team_field">
 							<select name="team_id" class='form-control' id="team_id">
 								<option value="0">SELECT TEAM</option>
 								@foreach ($_team_select as $data_team)
