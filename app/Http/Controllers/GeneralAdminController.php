@@ -987,8 +987,9 @@ class GeneralAdminController extends ActiveAuthController
     }
     public function general_admin_manage_user_details(Request $request)
     {
-        $data['user_details'] = TblUserModel::where('tbl_user.user_id',$request->user_id)->TeamUser()->first();
-        $data['_team_select'] = TblTeamModel::where('archived',0)->get();
+        $data['user_details']  = TblUserModel::where('tbl_user.user_id',$request->user_id)->TeamUser()->first();
+        $data['_team_select']  = TblTeamModel::where('archived',0)->get();
+        $data['user_password'] = Crypt::decrypt($data['user_details']->user_password);
 
         return view('general_admin.pages.user_details', $data);
     }
@@ -1063,6 +1064,7 @@ class GeneralAdminController extends ActiveAuthController
         $userInfoData['user_phone_number']= $request->user_phone_number;
         $userInfoData['user_address']     = $request->user_address;
         $user['user_email']               = $request->user_email;
+        $user['user_password']            = Crypt::encrypt($request->user_password);
 
         TblUserInfoModel::where('user_info_id',$request->user_info_id)->update($userInfoData);
         TblUserModel::whereUser_id($userID)->update($user);

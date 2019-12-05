@@ -357,6 +357,8 @@ function manage_user()
 			manageUserData.user_gender 		= $("#old_gender").val();
 			manageUserData.user_phone_number= $("#old_phone_number").val();
 			manageUserData.user_address 	= $("#old_address").val();
+			manageUserData.user_password 	= $("#old_password").val();
+
 			$.ajax({
 				type:'POST',
 				url:'/general_admin/manage_user/update_user',

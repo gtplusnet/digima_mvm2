@@ -144,14 +144,18 @@ class MerchantController extends MerchantAuthController
         $data['transaction']      = 'profile';
         $data['county_list']      = TblCountyModel::get();
         $data['merchant_info']    = TblBusinessModel::where('business_id',session('business_id'))->BusinessCounty()->first();
+
         return view('merchant.pages.update_merchant_info',$data);
     }
     public function saving_merchant_info(Request $request)
     {
-        $data['city_id']        = $request->city_id;
-        $data['county_id']      = $request->county_id;
-        $data['twitter_url']    = $request->twitter_url;
-        $data['facebook_url']   = $request->facebook_url;
+        $data['business_name']      = $request->business_name;
+        $data['business_phone']     = $request->business_phone;
+        $data['business_alt_phone'] = $request->business_alt_phone;
+        $data['city_id']            = $request->city_id;
+        $data['county_id']          = $request->county_id;
+        $data['twitter_url']        = $request->twitter_url;
+        $data['facebook_url']       = $request->facebook_url;
         $data['business_complete_address']     = $request->business_complete_address;
 
         $check = TblBusinessModel::where('business_id',session('business_id'))->update($data);

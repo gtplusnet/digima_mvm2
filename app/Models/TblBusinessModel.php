@@ -79,7 +79,8 @@ class TblBusinessModel extends Model
     }
     public function scopeBusinessFront($query,$status,$membership)
     {
-        $query  ->where('business_status',$status)
+        $query  ->select('tbl_business.*','tbl_business_images.business_banner','tbl_business_images.other_image_one','tbl_business_images.other_image_two','tbl_business_images.other_image_three')
+                ->where('business_status',$status)
                 ->where('membership',$membership)
                 ->leftjoin('tbl_business_images','tbl_business_images.business_id','=','tbl_business.business_id')
                 ->orderBy('tbl_business.business_name','ASC')

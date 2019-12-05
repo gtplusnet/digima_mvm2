@@ -100,11 +100,14 @@ class PasswordController extends Controller
             $date                   = date("F j, Y",strtotime((new \DateTime())->format('Y-m-d')));
             $name                   = $check->business_name;
             $mail                   = $check->user_email;
-            $password               = Crypt::decrypt($check->user_password);
+            $password               = substr(md5(microtime()),rand(0,26),10);
             $link                   = 'http://mvm.digimahouse.com/login';
+            $pass['user_password']  = Crypt::encrypt($password);
             $data                   = array('name'=>$name,'password'=>$password,'email_add'=>$mail,'date'=>$date,'link'=>$link);
+            TblUserAccountModel::where('user_account_id',$check->user_account_id)->update($pass);
+
             $check_mail             = Mail::send('front.pages.send_password_reset_link', $data, function($message) use($data) {
-                                        $message->to($data['email_add'], 'Zute Stranice')->subject('PASSWORD RESET');
+                                        $message->to("johnkenneth.delara@gmail.com", 'Zute Stranice')->subject('PASSWORD RESET');
                                         $message->from('guardians35836@gmail.com','Zute Stranice');
                                     });
             if($check_mail)

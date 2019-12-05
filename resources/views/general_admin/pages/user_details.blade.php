@@ -22,6 +22,14 @@
 	</div>
 	<div class="body-content">
 		<div class="form-group col-md-2">
+			<label for="business_name" >Password</label>
+		</div>
+		<div class="form-group col-md-4">
+			<input type="text" class="form-control" value="{{$user_password}}"  name="old_password" id="old_password" required/>
+		</div>
+	</div>
+	<div class="body-content">
+		<div class="form-group col-md-2">
 			<label for="business_name" >Gender</label>
 		</div>
 		<div class="form-group col-md-4">
