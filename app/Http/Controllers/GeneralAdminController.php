@@ -500,7 +500,7 @@ class GeneralAdminController extends ActiveAuthController
   {
       $data['user']               = Self::global();
       $data['page']               = 'Merchant';
-      $data['clients']            = TblBusinessModel::where('business_status', 3)->BusinessAdmin()->leftjoin('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'client');
+      $data['clients']            = TblBusinessModel::where('business_status', 1)->BusinessAdmin()->leftjoin('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'client');
       $data['agentAdded']         = TblBusinessModel::where('business_status', 20)->BusinessAdmin()->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'agent_added');
       $data['pending_clients']    = TblBusinessModel::where('business_status', 4)->BusinessAdmin()->leftjoin('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'pending_client');
       $data['registered_clients'] = TblBusinessModel::where('business_status', 5)->BusinessAdmin()->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'registered_client');
