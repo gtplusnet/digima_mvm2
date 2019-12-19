@@ -22,6 +22,14 @@ class TblBusinessModel extends Model
         
         return $query;
     }
+    public function scopeBusinessAdmin2($query)
+    {
+        $query  ->leftjoin('tbl_business_contact_person','tbl_business_contact_person.business_id','=','tbl_business.business_id')
+                ->leftjoin('tbl_membership','tbl_membership.membership_id','=','tbl_business.membership')
+                ->leftjoin('tbl_user_info','tbl_user_info.user_id','=','tbl_business.user_id');
+        
+        return $query;
+    }
     public function scopeBusiness($query,$businessKeyword)
     {
     	$query->leftjoin('tbl_city','tbl_city.city_id','=','tbl_business.city_id');

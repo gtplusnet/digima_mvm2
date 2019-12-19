@@ -500,7 +500,9 @@ class GeneralAdminController extends ActiveAuthController
   {
       $data['user']               = Self::global();
       $data['page']               = 'Merchant';
-      $data['clients']            = TblBusinessModel::where('business_status', 3)->BusinessAdmin()->leftjoin('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'client');
+      $client                     = TblBusinessModel::where('business_status', 3)->BusinessAdmin()->leftjoin('tbl_conversation','tbl_conversation.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'client');
+      $signupOnline               = TblBusinessModel::where('business_status', 1)->orderBy('tbl_business.date_created',"asc")->BusinessAdmin2()->get();
+      $data['clients']            = $client->merge($signupOnline);
       $data['agentAdded']         = TblBusinessModel::where('business_status', 20)->BusinessAdmin()->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'agent_added');
       $data['pending_clients']    = TblBusinessModel::where('business_status', 4)->BusinessAdmin()->leftjoin('tbl_invoice','tbl_invoice.business_id','=','tbl_business.business_id')->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'pending_client');
       $data['registered_clients'] = TblBusinessModel::where('business_status', 5)->BusinessAdmin()->orderBy('tbl_business.date_created',"asc")->paginate(10, ['*'], 'registered_client');
@@ -508,7 +510,7 @@ class GeneralAdminController extends ActiveAuthController
       {
         $data['registered_clients'][$key]['due_date'] =  date("F j, Y", strtotime('+1 month', strtotime($registered_clients['date_transact'])));
       }
-    
+
       return view('general_admin.pages.merchants',$data);
   }
     public function general_admin_send_invoice($id)
