@@ -242,11 +242,12 @@ class MerchantController extends MerchantAuthController
     public function merchant_change_password(Request $request)
     {
         $merchant_password = TblUserAccountModel::where('business_id',session('business_id'))->first();
+
         if(Crypt::decrypt($merchant_password->user_password)==$request->current_password)
         {
             if($request->new_password == $request->confirm_password)
             {
-                $data['user_password'] = password_hash($request->new_password, PASSWORD_DEFAULT);
+                $data['user_password'] = Crypt::encrypt($request->new_password);
                 TblUserAccountModel::where('business_id',session('business_id'))->update($data);
                 $message = Self::alert_message('success','Password Change.');
             }

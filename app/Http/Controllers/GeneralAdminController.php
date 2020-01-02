@@ -884,7 +884,7 @@ class GeneralAdminController extends ActiveAuthController
         $data['user']           = Self::global();
         $data['business_list']  = TblPaymentModel::where('payment_status','submitted')
                                 ->PaymentAdmin()
-                                ->groupBy('tbl_invoice.invoice_number')
+                                ->groupBy('tbl_payment.payment_id')
                                 ->paginate(10);
         return view('general_admin.pages.payment_monitoring',$data);
     }

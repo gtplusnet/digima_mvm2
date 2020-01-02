@@ -1,5 +1,5 @@
 .page-content {
-    background: #3f4454;
+    background: #F25656;
 }
 
 .navbar .logo-box {
@@ -7,7 +7,7 @@
 }
 
 .navbar .logo-box a {
-    color: #fff;
+    color: #F25656;
 }
 
 .sidebar {
@@ -23,7 +23,7 @@
 }
 
 .menu {
-    background: #3f4454;
+    background: #F25656;
 }
 
 .menu.accordion-menu a {
@@ -31,13 +31,13 @@
 }
 
 .menu.accordion-menu > li > a:hover {
-	background: #363b4a;
+	background: #F25656;
     color: #fff;
 }
 
 .menu.accordion-menu > li.active > a,
 .menu.accordion-menu > li.active.open > a {
-	background: #363b4a;
+	background: #F25656;
     color: #fff;
 }
 

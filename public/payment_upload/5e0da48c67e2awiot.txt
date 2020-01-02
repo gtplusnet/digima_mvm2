@@ -1,0 +1,39 @@
+        // COMPUTE ADDITIONS
+        //Normal Day
+        if((!timeLogs.hasOwnProperty('holiday')))
+        {
+          dayIncome = computeDay(groupInfo.payrollGroupOvertime[0],groupInfo.salaryComputation,timeLogs,tempIncome,groupInfo.payrollGroupOvertime);
+        }
+        //Regular Holiday
+        if(timeLogs.hasOwnProperty('holiday') && timeLogs.holiday.filter(v => v.holidayType === "Regular Holiday").length > 0)
+        {
+          dayIncome = computeDay(groupInfo.payrollGroupOvertime[1],groupInfo.salaryComputation,timeLogs,tempIncome,groupInfo.payrollGroupOvertime,timeLogs.holiday.filter(v => v.holidayType === "Regular Holiday"));
+        }
+        // //Special Holiday
+        if(timeLogs.hasOwnProperty('holiday') && timeLogs.holiday.filter(v => v.holidayType === "Special Holiday").length > 0)
+        {
+          dayIncome = computeDay(groupInfo.payrollGroupOvertime[2],groupInfo.salaryComputation,timeLogs,tempIncome,groupInfo.payrollGroupOvertime,timeLogs.holiday.filter(v => v.holidayType === "Special Holiday"));
+        }
+        //Double Holiday
+        if(timeLogs.hasOwnProperty('holiday') && timeLogs.holiday.filter(v => v.holidayType === "Double Holiday").length > 0)
+        {
+          dayIncome = computeDay(groupInfo.payrollGroupOvertime[3],groupInfo.salaryComputation,timeLogs,tempIncome,groupInfo.payrollGroupOvertime,timeLogs.holiday.filter(v => v.holidayType === "Double Holiday"));
+        }
+
+
+  //if not absent in [special,rest day,regular holiday] or regular holiday then absent : compute premium pay
+  if((timeLogs.renderedMinutes > 0 && (timeLogs.hasOwnProperty('holiday')
+    || timeLogs.dayType === "rest day"))
+    || (timeLogs.hasOwnProperty('holiday') && timeLogs.holiday.filter(v => v.holidayType === "Regular Holiday")))
+  {
+
+    //overwrite additional percentage
+    incomeDay.additionalPercentage  = cleanPercentage(timeLogs,overtimeRate,allOvertimeRates,holidayInfo);
+
+    //compute premium pay and add to total income/addition
+    let premiumBreakdown           = computePremiumPay(incomeDay.additionalPercentage,incomeDay,timeLogs,computationType,overtimeRate,timeLogs.date);
+    incomeDay.totalAddition        += premiumBreakdown[0].rate;
+    incomeDay.totalDayIncome       += premiumBreakdown[0].rate;
+    //merge breakdownAddition to incomeDay
+    Object.assign(incomeDay, {breakdownAddition : premiumBreakdown });
+  }

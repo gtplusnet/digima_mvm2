@@ -74,8 +74,7 @@ class TblBusinessModel extends Model
 	}
     public function scopeCheckPhone($query, $userPhone,$userAltPhone)
     {
-        return $query->select('business_phone')->where('business_phone', $userPhone)->orWhere('business_phone',$userAltPhone)
-                    ->orWhere('business_alt_phone', $userPhone)->orWhere('business_alt_phone',$userAltPhone);
+        return $query->select('business_phone')->where('business_phone', $userPhone);
     }
     public function scopeBusinessInformation($query)
     {

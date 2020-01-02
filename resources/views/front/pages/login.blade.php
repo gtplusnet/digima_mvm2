@@ -38,7 +38,7 @@
 								<input type="password" name="user_password" class="form-control login-textfield">
 							</div>
 							<div class="col-md-12 login-textfield-container-lastpart">
-								<button class="login-btn">Prijavite Se</button>
+								<button class="login-btn">Prijavi Se</button>
 								<a href="/forgot/password"><p class="forgot-password-label">Zaboravili ste lozinku?</p></a>
 							</div>
 						</form>

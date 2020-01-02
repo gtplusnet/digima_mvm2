@@ -277,7 +277,7 @@ jQuery( document ).ready(function( $ ) {
                 boxedLayoutCheck.click();
             }
         
-            $(".theme-color").attr("href", 'assets/css/themes/white.css');
+            $(".theme-color").attr("href", '/assets/general_assets/css/themes/white.css');
            
             sidebarAndContentHeight();
         },
@@ -395,7 +395,7 @@ jQuery( document ).ready(function( $ ) {
     // Color changer
     $(".colorbox").click(function(){
         var color =  $(this).attr('data-css');
-        $(".theme-color").attr('href', 'assets/css/themes/' + color + '.css');
+        $(".theme-color").attr("href", '/assets/general_assets/css/themes/' + color + '.css');
         return false;
     });
     

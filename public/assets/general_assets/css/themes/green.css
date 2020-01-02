@@ -1,5 +1,5 @@
 .page-content {
-    background: #34425A;
+    background: #22baa0;
 }
 
 .navbar .logo-box {
@@ -23,21 +23,21 @@
 }
 
 .menu {
-    background: #34425A;
+    background: #22baa0;
 }
 
 .menu.accordion-menu a {
-    color: #899dc1;
+    color: #cedadd;
 }
 
 .menu.accordion-menu > li > a:hover {
-	background: #2b384e;
+	background: #22baa0;
     color: #fff;
 }
 
 .menu.accordion-menu > li.active > a,
 .menu.accordion-menu > li.active.open > a {
-	background: #2b384e;
+	background: #22baa0;
     color: #fff;
 }
 

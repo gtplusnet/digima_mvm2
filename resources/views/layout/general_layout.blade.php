@@ -37,8 +37,6 @@
         <!-- Theme Styles -->
         <link href="/assets/general_assets/css/modern.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/general_assets/css/themes/white.css" class="theme-color" rel="stylesheet" type="text/css"/>
-        <link href="/assets/general_assets/css/custom.css" rel="stylesheet" type="text/css"/>
-        
         <script src="/assets/general_assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="/assets/general_assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
         <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
