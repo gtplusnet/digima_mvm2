@@ -574,6 +574,8 @@ class FrontController extends Controller
     }
     public function upload_payment(Request $request)
     {
+        TblPaymentModel::where('business_contact_person_id',$request->contact_id)->where('business_id',$request->business_id)->where('payment_status','submitted')->delete();
+        
         $file = $request->file('payment_file_name');
         $link = $request->link;
         if($file==null||$file=='')

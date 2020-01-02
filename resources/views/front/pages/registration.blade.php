@@ -84,7 +84,7 @@
 					
 					<div class="col-md-4 form-secondpart">
 						<label for="alternatePhone" class="registration-form-label">Alternativni Telefon:</label>
-						<input type="text" class="form-control" name="alternatePhone" id="alternatePhone" required="true" placeholder="ex. 0 43 xxx xxxx">
+						<input type="text" class="form-control" name="alternatePhone" id="alternatePhone" placeholder="ex. 0 43 xxx xxxx">
 					</div>
 					<div class="col-md-4 form-thirdpart">
 						<label for="faxNumber" class="registration-form-label">Broj faksa:</label>

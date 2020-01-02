@@ -8,7 +8,7 @@
 	</div>
 </div>
 <div class="container">
-	<!-- OLD -->
+{{-- 	<!-- OLD -->
 	<div class="row clearfix" style="display: none;">
 		<div class="col-md-3"></div>
 		<div class="col-md-6 payment-container">
@@ -162,7 +162,7 @@
 			</form>
 		</div>
 		<div class="col-md-3"></div>
-	</div>
+	</div> --}}
 	<!-- NEW -->
 	<div class="payment-wrapper">
 		<form action="/merchant/upload_payment" method="post" enctype="multipart/form-data">
@@ -197,11 +197,11 @@
 							<div class="row clearfix">
 								<div class="col-md-4 col-sm-4 col-xs-4">
 									<div class="fileUpload payment-upload-holder fa fa-upload payment-upload-icon">
-										<input id="uploadBtn" name="payment_file_name" type="file" class="upload"/>
+										<input id="uploadBtn" name="payment_file_name" type="file" class="upload" required onchange="getValue(this)" />
 									</div>
 								</div>
 								<div class="col-md-8 col-sm-8 col-xs-8">
-									<input style="width: 100%;" id="uploadFile"  value="Nema Datoteke" placeholder="Odaberite Datoteku" disabled="disabled" />
+									<input style="width: 100%;" id="uploadFile" placeholder="Odaberite Datoteku" disabled="disabled" />
 								</div>
 							</div>
 						</div>
@@ -322,9 +322,10 @@ opacity: 0;
 filter: alpha(opacity=0);
 }
 </style>
-<script language="javascript">
-	document.getElementById("uploadBtn").onchange = function () {
-document.getElementById("uploadFile").value = this.value;
-};
+<script type="text/javascript">
+	function getValue(input)
+	{
+		document.getElementById("uploadFile").value = input.files[0].name;
+	}
 </script>
 @endsection
