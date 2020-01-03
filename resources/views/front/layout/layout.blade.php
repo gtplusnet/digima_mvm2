@@ -70,7 +70,7 @@
                     <div class="pull-right">
                         <!-- BUTTONS -->
                         <div class="btn-login">
-                            <a href="/login">Prijava</a>
+                            <a href="/login">Prijavi Se</a>
                         </div>
                         <div class="btn-register">
                             <a href="/registration">Registrirajte se</a>
