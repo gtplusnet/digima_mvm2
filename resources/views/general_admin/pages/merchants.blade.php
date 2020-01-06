@@ -57,13 +57,13 @@ cellspacing: 0;
 </div>
 <div id="main-wrapper">
     <ul class="nav nav-tabs">
-        <li class="active li_me"><a data-toggle="pill" href="#customer">Send Invoice</a></li>
-        <li class="li_me"><a data-toggle="pill" href="#agentAdded">Agent Added</a></li>
-        <li class="li_me"><a data-toggle="pill" href="#pending">Pending Merchant</a></li>
-        <li class="li_me"><a data-toggle="pill" href="#registered">Activated Merchant</a></li>
+        <li class="{{Request()->get('agentAdded') == '' && Request()->get('pending_clients') == '' && Request()->get('registered_client') == '' ? 'active' : ''}} li_me"><a data-toggle="pill" href="#customer">Send Invoice</a></li>
+        <li class="{{Request()->get('agentAdded') != '' ? 'active' : ''}} li_me"><a data-toggle="pill" href="#agentAdded">Agent Added</a></li>
+        <li class="{{Request()->get('pending_clients') != '' ? 'active' : ''}} li_me"><a data-toggle="pill" href="#pending">Pending Merchant</a></li>
+        <li class="{{Request()->get('registered_client') != '' ? 'active' : ''}} li_me"><a data-toggle="pill" href="#registered">Activated Merchant</a></li>
     </ul>
     <div class="tab-content" style="">
-        <div id="customer" class="tab-pane fade in  active">
+        <div id="customer" class="tab-pane fade {{Request()->get('agentAdded') == '' && Request()->get('pending_clients') == '' && Request()->get('registered_client') == '' ? 'active in' : ''}}">
             @if (session('success'))
             <div class="alert alert-success">
                 {{ Session::get('success') }}
@@ -147,7 +147,7 @@ cellspacing: 0;
                 </div>
             </div>
         </div>
-        <div id="agentAdded" class="tab-pane fade">
+        <div id="agentAdded" class="tab-pane fade {{Request()->get('agentAdded') != '' ? 'active in' : ''}}">
             <div class="row">
                 <div class="panel-body">
                     <div class="col-md-12 col-sm-12">
@@ -205,11 +205,12 @@ cellspacing: 0;
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="col-md-12">{!! $agentAdded->render() !!}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="pending" class="tab-pane fade">
+        <div id="pending" class="tab-pane fade {{Request()->get('pending_clients') != '' ? 'active in' : ''}}">
             <div class="row">
                 <div class="panel-body">
                     <div class="col-md-12 col-sm-12" >
@@ -271,11 +272,12 @@ cellspacing: 0;
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="col-md-12">{!! $pending_clients->render() !!}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="registered" class="tab-pane fade">
+        <div id="registered" class="tab-pane fade {{Request()->get('registered_client') != '' ? 'active in' : ''}}">
             <div class="row">
                 <div class="panel-body">
                     <div class="col-md-12 col-sm-12" >
@@ -385,6 +387,7 @@ cellspacing: 0;
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="col-md-12">{!! $registered_clients->render() !!}</div>
                     </div>
                 </div>
             </div>
