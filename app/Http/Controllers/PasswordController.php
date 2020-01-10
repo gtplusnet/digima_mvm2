@@ -107,7 +107,7 @@ class PasswordController extends Controller
             TblUserAccountModel::where('user_account_id',$check->user_account_id)->update($pass);
 
             $check_mail             = Mail::send('front.pages.send_password_reset_link', $data, function($message) use($data) {
-                                        $message->to("johnkenneth.delara@gmail.com", 'Zute Stranice')->subject('PASSWORD RESET');
+                                        $message->to($data["email_add"], 'Zute Stranice')->subject('PASSWORD RESET');
                                         $message->from('guardians35836@gmail.com','Zute Stranice');
                                     });
             if($check_mail)

@@ -1,6 +1,7 @@
 // $( document ).ready(function() {
 jQuery( document ).ready(function( $ ) {
-    
+    $(".theme-color").attr("href", '/assets/general_assets/css/themes/' + localStorage.getItem("color") + '.css');
+
     // Toggle Search
     $('.show-search').click(function(){
         $('.search-form').css('margin-top', '0');
@@ -396,6 +397,7 @@ jQuery( document ).ready(function( $ ) {
     $(".colorbox").click(function(){
         var color =  $(this).attr('data-css');
         $(".theme-color").attr("href", '/assets/general_assets/css/themes/' + color + '.css');
+        localStorage.setItem('color',color);
         return false;
     });
     

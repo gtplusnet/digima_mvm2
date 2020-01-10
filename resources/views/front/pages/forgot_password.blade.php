@@ -10,7 +10,7 @@
 				<div class="col-md-12 login-container-middle">
 					<div class="col-md-12 password-form" style="padding: 100px;">
 						@if(Session::has('sent'))
-						<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu kako biste poništili lozinku</div>
+						<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu da biste resetirali zaporku</div>
 						<div class="col-md-12 password-textfield-container-lastpart">
 							<a href="/"><button  class="password-btn">CONTINUE</button></a>
 						</div>
@@ -46,7 +46,7 @@
 			<div class="mob-forgot-password">
 				<div class="password-form">
 					@if(Session::has('sent'))
-					<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu kako biste poništili lozinku</div>
+					<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu da biste resetirali zaporku</div>
 					<div class="col-md-12 password-textfield-container-lastpart">
 						<a href="/"><button  class="password-btn">CONTINUE</button></a>
 					</div>
@@ -83,7 +83,7 @@
 				<div class="col-md-12 login-container-middle">
 					<div class="col-md-12 password-form" style="padding: 100px;">
 						@if(Session::has('sent'))
-						<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu kako biste poništili lozinku</div>
+						<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu da biste resetirali zaporku</div>
 						<div class="col-md-12 password-textfield-container-lastpart">
 							<a href="/"><button  class="password-btn">Nastaviti</button></a>
 						</div>
@@ -119,7 +119,7 @@
 			<div class="mob-forgot-password">
 				<div class="password-form">
 					@if(Session::has('sent'))
-					<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu kako biste poništili lozinku</div>
+					<div class='alert alert-success'><strong>Uspjeh!</strong> Provjerite svoju e-poštu da biste resetirali zaporku</div>
 					<div class="col-md-12 password-textfield-container-lastpart">
 						<a href="/"><button  class="password-btn">Nastaviti</button></a>
 					</div>
