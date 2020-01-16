@@ -71,7 +71,6 @@ class FrontController extends Controller
         $data["_business_list"]     = TblBusinessModel::BusinessFront(5,1)->paginate(9);
         $data["_featured_list"]     = TblBusinessModel::BusinessFront(5,1)->get();
         $data["_free_list"]         = TblBusinessModel::BusinessFront(6,9)
-                                                      ->leftjoin("tbl_city","tbl_city.city_id","=","tbl_business.city_id")
                                                       ->paginate(10);
         $data['_mob_categories']    = TblBusinessCategoryModel::all();
         $data['_categories']        = TblBusinessCategoryModel::where('archived',0)->where('parent_id',0)->get();
