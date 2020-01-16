@@ -7,6 +7,7 @@ var data_length = '';
 var error_data  = [];
 var ctr_success = 0;    
 var token       = $(".token").val();
+var loader = '<div class="text-center"><div class="loader-16-gray"></div><br><span>Importing data...</span></div>';
 
 function import_csv()
 {
@@ -21,6 +22,8 @@ function import_csv()
         event_bind_files();
         event_submit_button();
         csv_upload_configuration();
+        change();
+        import_file_event()
     }
 
     function event_bind_files()
@@ -29,6 +32,67 @@ function import_csv()
         {
             $(document).on('change', '#files', handleFileSelect);
         }
+    }
+
+    function import_file_event()
+    {
+        $(".btn-import").unbind("click");
+        $(".btn-import").bind("click", function()
+        {
+            var file = $("#file-201")[0].files[0];
+            // console.log(file);
+            if(file != undefined)
+            {
+                var url = "/general_admin/merchants/import_freelisting";
+                var formdata    = new FormData();
+                var ajax        = new XMLHttpRequest();
+                console.log()
+                formdata.append("_token", $("#_token").val());
+                formdata.append("file", file);
+
+
+                ajax.upload.addEventListener("progress", function(event)
+                {
+                    $(".import-status").html(loader);
+                }, false);
+                ajax.addEventListener("load", function(event)
+                {
+                    console.log(event.target.responseText);
+                    var data = JSON.parse(event.target.responseText);
+
+                    $(".import-status").html(data.message);
+                    if(data.status == 'success')
+                    {
+                        // employeelist.reload_employee_list();
+                    }
+                    
+                },false);
+
+                ajax.addEventListener("error", function(event){
+
+                    toastr.error("Error, something went wrong.");
+                    $(".import-status").html("");
+                }, false);
+
+                ajax.open("POST", url);
+                ajax.send(formdata);
+            }
+            else
+            {
+                toastr.error("Please choose a file first.");
+            }
+        });
+    }
+
+
+    function change()
+    {
+        $("#file-201").unbind("change");
+        $("#file-201").bind("change", function()
+        {
+            var file_name = $(this)[0].files[0].name;
+            $(".file_name").html(file_name);
+        });
     }
 
     function isAPIAvailable() 

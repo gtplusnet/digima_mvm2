@@ -10,7 +10,7 @@
         <meta name="description" content="Admin Dashboard Template" />
         <meta name="keywords" content="admin,dashboard" />
         <meta name="author" content="Steelcoders" />
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" class="token"/>
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>

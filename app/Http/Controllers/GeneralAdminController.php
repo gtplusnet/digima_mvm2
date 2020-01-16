@@ -54,6 +54,7 @@ use Excel;
 use Crypt;
 use Validator;
 use Carbon\Carbon;
+use Input;
 
 
 
@@ -66,6 +67,11 @@ class GeneralAdminController extends ActiveAuthController
   {
       $data['user']               = Self::global();
       return view('general_admin.pages.import.import_merchant', $data);
+  }
+  public function import_free_list()
+  {
+      $data['user']               = Self::global();
+      return view('general_admin.pages.import.import_freelisting', $data);
   }
   public function general_admin_merchants_import_template()
   {
@@ -91,7 +97,7 @@ class GeneralAdminController extends ActiveAuthController
                      'alternative_phone',
                      'fax_number',
                      'business_address',
-                     'county',
+                     'country',
                      'city',
                      'zip_code',
                      'facebook_url',
@@ -104,6 +110,127 @@ class GeneralAdminController extends ActiveAuthController
 
       })->download('csv');
   }
+  public function general_admin_merchants_import_freelist()
+  {
+
+      $excels['data'][0] = ['Business Name*','City*'];
+        // dd($excels);
+      Excel::create('CroatiaFreeListingTemplate', function($excel) use ($excels) {
+
+            $data = $excels['data'];
+            $excel->setTitle('Payroll');
+            $excel->setCreator('Laravel')->setCompany('DIGIMA');
+            $excel->setDescription('payroll file');
+
+            $excel->sheet("Free Listing", function($sheet) use ($data) 
+            {
+                $sheet->fromArray($data, null, 'A1', false, false);
+
+                  $number_of_rows = 1000;
+
+                  for($row = 1, $rowcell = 2; $row <= $number_of_rows; $row++, $rowcell++)
+                  {
+                    $city_cell = $sheet->getCell('B'.$rowcell)->getDataValidation();
+                    $city_cell->setType(\PHPExcel_Cell_DataValidation::TYPE_LIST);
+                    $city_cell->setErrorStyle(\PHPExcel_Cell_DataValidation::STYLE_INFORMATION);
+                    $city_cell->setAllowBlank(false);
+                    $city_cell->setShowInputMessage(true);
+                    $city_cell->setShowErrorMessage(true);
+                    $city_cell->setShowDropDown(true);
+                    $city_cell->setErrorTitle('Input error');
+                    $city_cell->setError('Value is not in list.');
+                    $city_cell->setFormula1('City');
+                  }
+            });
+
+
+            $excel->sheet('reference', function($sheet) {
+              $cities          = DB::table('tbl_city')->join('tbl_county','tbl_county.county_id','=','tbl_city.county_id')->get();
+
+              /* PROJECT REFERENCE */
+              $sheet->SetCellValue("B1", "City");
+              $city_count = 2;
+
+
+              foreach($cities as $city)
+              {
+                $sheet->SetCellValue("B".$city_count, $city->city_name);
+                $city_count++;
+              }
+              $city_count--;
+
+              $sheet->_parent->addNamedRange(
+                  new \PHPExcel_NamedRange(
+                  'city', $sheet, 'B2:B'.$city_count
+                  )
+              );
+            });
+        })->download('xlsx');
+  }
+  public function import_freelisting()
+  {
+    $file = Input::file('file');
+    $_data = Excel::selectSheetsByIndex(0)->load($file, function($reader){})->all();
+    $report = array();
+
+    foreach ($_data as $key => $data) 
+    {
+        $city_info = DB::table('tbl_city')->where('city_name',$data['city'])->first();
+        $count = DB::table('tbl_business')->where('business_name',$data['business_name'])->count();
+
+        if($count == 0)
+        {
+          $ins['business_name']               = $data['business_name'];
+          $ins['county_id']                   = $city_info->county_id;
+          $ins['city_id']                     = $city_info->city_id;
+          $ins['business_complete_address']   = 'NA';
+          $ins['business_phone']              = 'NA';
+          $ins['business_alt_phone']          = 'NA';
+          $ins['business_fax']                = 'NA';
+          $ins['facebook_url']                = 'NA';
+          $ins['twitter_url']                 = 'NA';
+          $ins['membership']                  = 9;
+          $ins['transaction_status']          = 1;
+          $ins['business_status']             = 6;
+          $ins['date_transact']               = date("Y/m/d");
+          $ins['date_created']                = date("Y/m/d");
+
+          $business_id = DB::table("tbl_business")->insertGetId($ins);
+          array_push($report, ["business_name" => $data['business_name'],"city" => $data['city'],"status" => "Inserted"]);
+        }
+        else
+        {
+          array_push($report, ["business_name" => $data['business_name'],"city" => $data['city'],"status" => "Exist"]);
+        }
+    }
+
+      $return['status']   = 'success';
+      $return['message']  = '<table class="table table-bordered" style="background-color: #FFFFFF;margin-top:20px;">
+      <thead>
+        <tr>
+          <th>Business Name</th>
+          <th>City</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>';
+
+      foreach ($report as $key => $value) {
+        $return['message'] .= '<tr>
+          <td>'.$value["business_name"].'</td>
+          <td>'.$value["city"].'</td>
+          <td>'.$value["status"].'</td>
+        </tr>';
+      }
+
+      
+      $return['message'] .= '</tbody>
+      </table>';
+
+      return $return;
+
+  }
+
   public function general_admin_merchants_import_read(Request $request)
   {
     Session::forget("import_merchant_error");

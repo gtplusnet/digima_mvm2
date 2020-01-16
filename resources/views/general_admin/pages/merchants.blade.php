@@ -54,6 +54,7 @@ cellspacing: 0;
 </div>
 <div id="main-wrapper" style="text-align: right">
     <a href="/general_admin/merchants/import" class="btn btn-success" >Import Existing Merchant</a>
+    <a href="/general_admin/merchants/import_free_list" class="btn btn-success" >Import Free Listing</a>
 </div>
 <div id="main-wrapper">
     <ul class="nav nav-tabs">

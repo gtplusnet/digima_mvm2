@@ -187,7 +187,10 @@ Route::any('/general_admin/dashboard', 								'GeneralAdminController@general_a
 
 Route::any('/general_admin/merchants', 								'GeneralAdminController@general_admin_merchants');
 Route::any('/general_admin/merchants/import', 						'GeneralAdminController@general_admin_merchants_import');
+Route::any('/general_admin/merchants/import_free_list', 			'GeneralAdminController@import_free_list');
+Route::any('/general_admin/merchants/import_freelisting',           'GeneralAdminController@import_freelisting');
 Route::any('/general_admin/merchants/import-download-template',		'GeneralAdminController@general_admin_merchants_import_template');
+Route::any('/general_admin/merchants/import-download-freelist',     'GeneralAdminController@general_admin_merchants_import_freelist');
 Route::any('/general_admin/merchants/import_url', 					'GeneralAdminController@general_admin_merchants_import_url');
 Route::any('/general_admin/merchants/import-read-file', 			'GeneralAdminController@general_admin_merchants_import_read');
 Route::any('/general_admin/merchants/import-export-error', 			'GeneralAdminController@general_admin_merchants_import_error');
