@@ -1,7 +1,7 @@
 @extends('front.layout.layout')
 @section('title', 'Business Info')
 @section('content')
-<div class="banner-business-searchresult" style="background-image: url('/images/banner_arabiannights_hotel.png')">
+<div class="banner-business-searchresult" style="background-image: url('{{$business_info->business_banner}}')">
     <div class="container">
         <div class="top-detail-mob">
             <p class="search-text">Tražilica ><a class="search-link  notranslate" href=""> {{ $business_info->business_name }}</a></p>
@@ -85,7 +85,7 @@
                       center: uluru
                     });
                     var marker = new google.maps.Marker({
-                      position: uluru,
+                      position: "Maria Clara St. Sta. Cruz Manila",
                       map: map
                     });
                 }

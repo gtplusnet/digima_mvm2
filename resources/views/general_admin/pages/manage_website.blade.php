@@ -62,14 +62,19 @@ padding: 10px;
 	<br><br>
 	<div class="col-md-12">
 		<ul class="nav nav-tabs">
-			<li class="active col-md-3"><a data-toggle="pill" href="#membershipTab">Membership</a></li>
-			<li class="col-md-3"><a data-toggle="pill" href="#paymentTab">Payment Method</a></li>
-			<li class="col-md-3"><a data-toggle="pill" href="#countyTab">County</a></li>
-			<li class="col-md-3"><a data-toggle="pill" href="#cityTab">City</a></li>
+			<li class="{{Request()->get('payment') == '' && Request()->get('county') == '' && Request()->get('city') == '' ? 'active' : ''}} col-md-3"><a data-toggle="pill" href="#membershipTab">Membership</a></li>
+			<li class="col-md-3 {{Request()->get('payment') != '' ? 'active' : ''}}"><a data-toggle="pill" href="#paymentTab">Payment Method</a></li>
+			<li class="col-md-3 {{Request()->get('county') != '' ? 'active' : ''}}"><a data-toggle="pill" href="#countyTab" >County</a></li>
+			<li class="col-md-3 {{Request()->get('city') != '' ? 'active' : ''}}"><a data-toggle="pill" href="#cityTab">City</a></li>
 		</ul>
 		<div class="tab-content" style="">
-			<div id="membershipTab" class=" tab-pane fade in  active">
+			<div id="membershipTab" class=" tab-pane fade {{Request()->get('payment') == '' && Request()->get('county') == '' && Request()->get('city') == '' ? 'active in' : ''}}">
 				<br>
+				<div class="row">
+					<div class="col-md-2 col-sm-12 col-xs-12 pull-right" >
+						<button type="button"  data-toggle="modal" data-target="#addMembershipModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add Membership</button>
+					</div>
+				</div>
 				<div class="web-content" id="membership_alert">
 				</div>
 				<div class="row" style="background-color: #fff !important;">
@@ -106,7 +111,7 @@ padding: 10px;
 					</div>
 				</div>
 			</div>
-			<div id="paymentTab" class="tab-pane fade in">
+			<div id="paymentTab" class="tab-pane fade {{Request()->get('payment') != '' ? 'active in' : ''}}">
 				<br>
 				<div class="row">
 					<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
@@ -146,11 +151,11 @@ padding: 10px;
 					</div>
 				</div>
 			</div>
-			<div id="countyTab" class="tab-pane fade in">
+			<div id="countyTab" class="tab-pane fade {{Request()->get('county') != '' ? 'active in' : ''}}">
 				<br>
 				<div class="row">
 					<div class="col-md-2 col-sm-12 col-xs-12 pull-right" >
-						<button type="button"  data-toggle="modal" data-target="#myModalTeam"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add County</button>
+						<button type="button"  data-toggle="modal" data-target="#addCountyModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add County</button>
 					</div>
 				</div>
 				<div class="row">
@@ -185,11 +190,11 @@ padding: 10px;
 					</div>
 				</div>
 			</div>
-			<div id="cityTab" class="tab-pane fade in">
+			<div id="cityTab" class="tab-pane fade {{Request()->get('city') != '' ? 'active in' : ''}}">
 				<br>
 				<div class="row">
 					<div class="col-md-2 col-sm-12 col-xs-12 pull-right " >
-						<button type="button"  data-toggle="modal" data-target="#myModalUser"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add City</button>
+						<button type="button"  data-toggle="modal" data-target="#addCityModal"  class="btn btn-success" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add City</button>
 					</div>
 				</div>
 				<div class="row">
@@ -232,6 +237,100 @@ padding: 10px;
 	</div>
 </div>
 {{-- modal --}}
+<div class="modal fade" id="addMembershipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content ">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">ADD MEMBERSHIP</h4>
+		    </div>
+			<div class="modal-body row" >
+				<div class="col-md-12">
+					Membership Name
+				</div>
+				<div class="col-md-12">
+					<input type="text" class="form-control" id="membershipName"/>
+				</div>
+				<div class="col-md-12">
+					Membership Price
+				</div>
+				<div class="col-md-12">
+					<input type="number" class="form-control" id="membershipPrice"/>
+				</div>
+				<div class="col-md-12">
+					Membership Info
+				</div>
+				<div class="col-md-12">
+					<input type="text" class="form-control" id="membershipInfo"/>
+				</div>
+			</div>
+			<div class="modal-footer" style="padding:10px;">
+				<button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary pull-right" id="addMembership">SUBMIT</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="addCityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content ">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">ADD CITY</h4>
+		    </div>
+			<div class="modal-body row" >
+				<div class="col-md-12">
+					Country
+				</div>
+				<div class="col-md-12">
+					<select id="countyID" class="form-control">
+						@foreach($_county_city as $country)
+						<option value="{{$country->county_id}}">{{$country->county_name}}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-md-12">
+					City Name
+				</div>
+				<div class="col-md-12">
+					<input type="text" class="form-control" id="cityName"/>
+				</div>
+				<div class="col-md-12">
+					City Zip
+				</div>
+				<div class="col-md-12">
+					<input type="text" class="form-control" id="cityZip"/>
+				</div>
+			</div>
+			<div class="modal-footer" style="padding:10px;">
+				<button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary pull-right" id="addCity">SUBMIT</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="addCountyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content ">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">ADD COUNTRY</h4>
+		    </div>
+			<div class="modal-body row" >
+				<div class="col-md-12">
+					Country Name
+				</div>
+				<div class="col-md-12">
+					<input type="text" class="form-control" id="countyName"/>
+				</div>
+			</div>
+			<div class="modal-footer" style="padding:10px;">
+				<button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary pull-right" id="addCounty">SUBMIT</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="addPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content ">
