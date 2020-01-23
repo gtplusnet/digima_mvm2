@@ -58,8 +58,6 @@ use Input;
 
 
 
-
-
 class GeneralAdminController extends ActiveAuthController
 {
 
@@ -178,7 +176,7 @@ class GeneralAdminController extends ActiveAuthController
         $city_info = DB::table('tbl_city')->where('city_name',$data['city'])->first();
         $count = DB::table('tbl_business')->where('business_name',$data['business_name'])->count();
 
-        if($count == 0)
+        if($count == 0 && $city_info != null)
         {
           $ins['business_name']               = $data['business_name'];
           $ins['county_id']                   = $city_info->county_id;
@@ -198,6 +196,10 @@ class GeneralAdminController extends ActiveAuthController
           $business_id = DB::table("tbl_business")->insertGetId($ins);
           array_push($report, ["business_name" => $data['business_name'],"city" => $data['city'],"status" => "Inserted"]);
         }
+        else if($city_info == null)
+        {
+          array_push($report, ["business_name" => $data['business_name'],"city" => $data['city'],"status" => "City Doesn't Exist"]);
+        } 
         else
         {
           array_push($report, ["business_name" => $data['business_name'],"city" => $data['city'],"status" => "Exist"]);
@@ -555,15 +557,13 @@ class GeneralAdminController extends ActiveAuthController
   public function general_admin_dashboard()
   {
     $data['user']         = Self::global();
-    $count_merchant       = TblUserAccountModel::get();
-    $count_agent          = TblUserModel::where('archived',0)->where('user_access_level','AGENT')->get();
-    $count_supervisor     = TblUserModel::where('archived',0)->where('user_access_level','SUPERVISOR')->get();
-    $count_admin          = TblUserModel::where('archived',0)->where('user_access_level','ADMIN')->get();
-     
-    $data['resultCountM'] = $resM = $count_merchant->count();
-    $data['resultCountA'] = $resA = $count_agent->count();
-    $data['resultCountS'] = $resS = $count_supervisor->count();
-    $data['resultCountAd'] = $resAd =$count_admin->count();
+
+    $data['resultCountM'] = $resM = TblBusinessModel::where('business_status',5)->BusinessAdmin()->count();
+    $data['resultCountA'] = $resA = TblUserModel::where('tbl_user.archived',0)->where('user_access_level','AGENT')->TeamUser()->count();
+    $data['resultCountS'] = $resS = TblUserModel::where('tbl_user.archived',0)->where('user_access_level','SUPERVISOR')->TeamUser()->count();
+    $data['resultCountAd'] = $resAd =TblUserModel::where('tbl_user.archived',0)
+                                   ->where('user_access_level','ADMIN')
+                                   ->join('tbl_user_info','tbl_user_info.user_id','=','tbl_user.user_id')->count();
 
       $data['sum'] =$sum= $resM +$resA +$resS +$resAd;
       $data['sumP1'] = ($resM/$sum)*100;
@@ -1577,7 +1577,8 @@ class GeneralAdminController extends ActiveAuthController
     }
 
     return "<div class='alert alert-success'><strong>Success!</strong> Terms of Offers updated.</div>";
-  }public function general_admin_manage_categories()
+  }
+  public function general_admin_manage_categories()
   {
     $data['user']         = Self::global();
     $data['category']     = TblBusinessCategoryModel::where('parent_id',0)->where('archived',0)->paginate(10, ['*'], 'category');

@@ -46,9 +46,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($_invoice as $invoice)
+							@foreach($_invoice as $key => $invoice)
 							<tr>
-								<td>{{ $invoice->business_id}}</td>
+								<td>{{ $_invoice->firstItem() + $key}}</td>
 								<td>{{ $invoice->business_name }}</td>
 								<td>{{ $invoice->contact_first_name }} {{ $invoice->contact_last_name }}</td>
 								<td><a target="blank" href="{{$invoice->invoice_path}}" >{{ $invoice->invoice_number }}</a></td>

@@ -48,9 +48,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($business_list as $business_item)
+								@foreach($business_list as $key => $business_item)
 								<tr>
-									<td>{{ $business_item->payment_id}}</td>
+									<td>{{ $business_list->firstItem() + $key}}</td>
 									<td>{{ $business_item->business_name }}</td>
 									<td>{{ $business_item->business_complete_address }}</td>
 									<td>{{ $business_item->membership_name }}</td>

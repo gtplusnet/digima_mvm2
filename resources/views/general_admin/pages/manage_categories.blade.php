@@ -56,9 +56,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($category as $categories)
+							@foreach($category as $key => $categories)
 							<tr class="count">
-								<td>{{$categories->business_category_id}}</td>
+								<td>{{$category->firstItem() + $key}}</td>
 								<td>{{$categories->business_category_name}}</td>
 								<td>{{$categories->business_category_information}}</td>
 								<td >

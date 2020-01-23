@@ -90,9 +90,9 @@ padding: 10px;
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_membership as $membership)
+								@foreach($_membership as $key => $membership)
 								<tr>
-									<td>{{$membership->membership_id}}</td>
+									<td>{{$_membership->firstItem() + $key}}</td>
 									<td>{{$membership->membership_name}}</td>
 									<td>{{$membership->membership_price}}</td>
 									<td>{{$membership->membership_info}}</td>
@@ -132,9 +132,9 @@ padding: 10px;
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_payment_method as $payment_method)
+								@foreach($_payment_method as $key => $payment_method)
 								<tr>
-									<td>{{$payment_method->payment_method_id}}</td>
+									<td>{{$_payment_method->firstItem() + $key}}</td>
 									<td>{{$payment_method->payment_method_name}}</td>
 									<td>
 										<select class="form-select pay_action" data-name="{{$payment_method->payment_method_name}}" data-id="{{$payment_method->payment_method_id}}" id="pay_action">
@@ -171,9 +171,9 @@ padding: 10px;
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_county as $county)
+								@foreach($_county as $key => $county)
 								<tr>
-									<td>{{$county->county_id}}</td>
+									<td>{{$_county->firstItem() + $key}}</td>
 									<td>{{$county->county_name}}</td>
 									<td>
 										<select class="form-select count_action" data-name="{{$county->county_name}}" data-id="{{$county->county_id}}" id="count_action">
@@ -212,9 +212,9 @@ padding: 10px;
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_city as $city)
+								@foreach($_city as $key => $city)
 								<tr>
-									<td>{{$city->city_id}}</td>
+									<td>{{$_city->firstItem() + $key}}</td>
 									<td>{{$city->county_name}}</td>
 									<td>{{$city->city_name}}</td>
 									<td>{{$city->postal_code}}</td>

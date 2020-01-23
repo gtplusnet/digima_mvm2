@@ -85,9 +85,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_merchant as $merchant)
+								@foreach($_merchant as $key => $merchant)
 								<tr>
-									<td>{{$merchant->business_id}}</td>
+									<td>{{$_merchant->firstItem() + $key}}</td>
 									<td>{{$merchant->business_name}}</td>
 									<td>{{$merchant->contact_first_name}} {{$merchant->contact_last_name}}</td>
 									<td>{{$merchant->user_email}}</td>
@@ -167,9 +167,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_data_agent as $data_agent)
+								@foreach($_data_agent as $key => $data_agent)
 								<tr>
-									<td>{{$data_agent->user_id}}</td>
+									<td>{{$_data_agent->firstItem() + $key}}</td>
 									<td>{{$data_agent->user_first_name}} {{$data_agent->user_last_name}}</td>
 									<td>{{$data_agent->user_email}}</td>
 									<td>{{$data_agent->user_phone_number}}</td>
@@ -229,9 +229,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_data_team as $data_team)
+								@foreach($_data_team as $key => $data_team)
 								<tr>
-									<td>{{ $data_team->team_id}}</td>
+									<td>{{ $_data_team->firstItem() + $key}}</td>
 									<td>{{ $data_team->team_name}}</td>
 									<td>{{ $data_team->team_information}}</td>
 									<td><i data-id="{{ $data_team->team_id}}" class="viewMem" style="cursor: pointer;color:blue;">View All Members</i></td>
@@ -299,9 +299,9 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($_data_supervisor as  $data_supervisor)
+									@foreach($_data_supervisor as $key => $data_supervisor)
 									<tr>
-										<td>{{$data_supervisor->user_id}}</td>
+										<td>{{$_data_supervisor->firstItem() + $key}}</td>
 										<td>{{$data_supervisor->user_first_name}} {{$data_supervisor->user_last_name}}</td>
 										<td>{{$data_supervisor->user_email}}</td>
 										<td>{{$data_supervisor->user_phone_number}}</td>
@@ -364,9 +364,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($_data_admin as $data_admin)
+								@foreach($_data_admin as $key => $data_admin)
 								<tr>
-									<td>{{$data_admin->user_id}}</td>
+									<td>{{$_data_admin->firstItem() + $key}}</td>
 									<td>{{$data_admin->user_first_name}} {{$data_admin->user_last_name}}</td>
 									<td>{{$data_admin->user_email}}</td>
 									<td>{{$data_admin->user_phone_number}}</td>
