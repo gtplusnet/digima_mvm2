@@ -425,7 +425,7 @@ class FrontController extends Controller
         $data["business_info"] = TblBusinessModel::where('tbl_business.business_id', $id)->BusinessInfo()->first();
 
         $address = $data['business_info']->postal_code." ".$data['business_info']->city_name." ".$data['business_info']->county_name;
-        $location                       = Self::getCoordinates_location($address);
+        $location                       = Self::getCoordinates_location($data["business_info"]->business_complete_address);
         $data['coordinates']            = $location['long'];
         $data['coordinates1']           = $location['lat'];
 
@@ -433,26 +433,27 @@ class FrontController extends Controller
                                         ->join('tbl_business_category','tbl_business_category.business_category_id','=','tbl_business_tag_category.business_category_id')
                                         ->get();
         $images                         = TblBusinessImages::where('business_id',$id)->count();
-            if($images==0)
-            {
-                $data['images']         = 0;
-            }
-            else
-            {
-                $data['images']         = 1;
-                $data['_images']        = TblBusinessImages::where('business_id',$id)->first();
-            }
-            $data['_business_hours']    = TblBusinessHoursmodels::where('act','!=','yes')->where('business_id',$id)->get();
-            $check_payment              = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
+        if($images==0)
+        {
+            $data['images']         = 0;
+        }
+        else
+        {
+            $data['images']         = 1;
+            $data['_images']        = TblBusinessImages::where('business_id',$id)->first();
+        }
+        $data['_business_hours']    = TblBusinessHoursmodels::where('act','!=','yes')->where('business_id',$id)->get();
+        $check_payment              = TblABusinessPaymentMethodModel::where('business_id',$id)->get();
 
-            if($check_payment)
-            {
-                $data['_payment_method']=$check_payment;
-            }
-            else
-            {
-                $data['_payment_method']="";
-            }
+        if($check_payment)
+        {
+            $data['_payment_method']=$check_payment;
+        }
+        else
+        {
+            $data['_payment_method']="";
+        }
+
         return view('front.pages.business', $data);
     }
     public function add_messages(Request $request)
@@ -467,11 +468,12 @@ class FrontController extends Controller
     }
     public static function getCoordinates_location($address)
     {
-        $api                = "AIzaSyDXPWM4-ESxBF6dfMkGYm3dlp4LHZvNHRQ";
+        $api                = "AIzaSyCP2EwPxHUeJWibOlD1dUH8iShXjtW6aco";
         $address            = str_replace(" ", "+", $address); 
-        $url                = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address;
+        $url                = "https://maps.google.com/maps/api/geocode/json?sensor=false&address=".$address."&key=".$api;
         $response           = file_get_contents($url);
         $json               = json_decode($response,TRUE); 
+   
         if (isset($json['status']) && ($json['status'] == 'OK')) 
         {
             $location['lat'] = $json['results'][0]['geometry']['location']['lat']; // Latitude

@@ -53,8 +53,7 @@ border-bottom: 1px solid #aaa;
 <div style="overflow: auto; margin: 15px 0px 20px 0px;">
     {{-- <div style="float: left; width: 80px; text-align: left;"></div> --}}
     {{-- <div style="float: left; width: 80px; text-align: left;"><img width="50px;" src="http://digima_mvm.dev/assets/img/yellow_pages_logo.png"></div> --}}
-    <div style="left:0px; width: 320px; font-size: 22px; font-weight: bold; ">Yellow Pages</div>
-    <div class="labels" > Zagreb, Croatia, P: (123) 456-7890</div>
+    <center><div style="font-size: 22px; font-weight: bold;margin-bottom: 20px;">Zute stranice</div></center>
     <div style="float: right; width: 250px;">
         <table border="1" bordercolor="green" cellspacing="-1px" width="100%">
             <tr>
@@ -83,9 +82,9 @@ border-bottom: 1px solid #aaa;
 
 
 
-        <div class="labels" style="font-size: 14px; padding: 1px; padding-left: 5px;">Business Contact Person</div>
+        <div class="labels" style="font-size: 14px; padding: 1px; padding-left: 5px;">Osoba za kontakt</div>
         <div class="sub-group" style="width: 300px;">
-            <div class="labels">Name</div>
+            <div class="labels">Naziv</div>
             <div class="answers">{{$invoice_info->contact_first_name}} {{$invoice_info->contact_last_name}}</div>
         </div>
         
@@ -101,10 +100,10 @@ border-bottom: 1px solid #aaa;
             <table class="table-main" cellspacing="0" cellpadding="0" width="100%">
                 <thead>
                     <tr>
-                        <th class="bord">Item</th>
-                        <th class="bord">Business Name</th>
-                        <th class="bord">Membership</th>
-                        <th class="bord" style="border-right: none;">Price</th>
+                        <th class="bord">Artikal</th>
+                        <th class="bord">Naziv tvrtke</th>
+                        <th class="bord">Clanstvo</th>
+                        <th class="bord" style="border-right: none;">Cijena</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,7 +120,7 @@ border-bottom: 1px solid #aaa;
         <div class="bord" style="margin:10px 0px 100px 0px;">
             <div style="float: right; width: 100px;margin:10px 0px 100px 0px;">
                 
-                <div class="labels">Total</div>
+                <div class="labels">Ukupan Iznos</div>
                 <hr>
                 <div class="answers">{{$invoice_info->membership_price}}</div>
                 <hr>
@@ -137,7 +136,7 @@ border-bottom: 1px solid #aaa;
 <div style="overflow: auto; margin: 15px 0px 20px 0px;">
     <div style="left:0px; width: 400px; font-size: 15px; font-weight: bold; text-align: center;">
         <h3>Thank you !</h3>
-        <p class="labels" align="justify">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
+        <p class="labels" align="justify">Ocekujte da će vas stvarni racun biti dostavljen mjesecno </p>
     </div>
     <div class="labels" > Zagreb, Croatia, P: (123) 456-7890</div>
 </div>
